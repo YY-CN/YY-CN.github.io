@@ -4079,10 +4079,10 @@ figure.highlight pre .javascript .function {
 }
 #footer > * {
   position: relative;
-  color: var(--light-grey);
+  color: var(--black-grey);
 }
 #footer a {
-  color: var(--light-grey);
+  color: var(--black-grey);
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
