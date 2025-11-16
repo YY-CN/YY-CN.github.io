@@ -1,0 +1,254 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Hyacinth</title><meta name="author" content="Hyacinth"><meta name="copyright" content="Hyacinth"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="君子慎独,不欺暗室">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hyacinth">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="Hyacinth">
+<meta property="og:description" content="君子慎独,不欺暗室">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/media/avatar.jpg">
+<meta property="article:author" content="Hyacinth">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/media/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Hyacinth",
+  "alternateName": [
+    "example.com"
+  ],
+  "url": "http://example.com/"
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Hyacinth',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@4.5.12/index.min.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      if ($loadingBox.classList.contains('loaded')) return
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+
+  if (document.readyState === 'complete') {
+    preloader.endLoading()
+  } else {
+    window.addEventListener('load', preloader.endLoading)
+    document.addEventListener('DOMContentLoaded', preloader.endLoading)
+    // Add timeout protection: force end after 7 seconds
+    setTimeout(preloader.endLoading, 7000)
+  }
+
+  if (false) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="web_bg" style="background-image: url(/media/%E8%9C%A1%E7%AC%94%E5%B0%8F%E6%96%B0_%E7%A6%81%E6%AD%A2%E7%84%A6%E8%99%91.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/media/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-comment-alt"></i><span> 说说</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background: transparent;"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hyacinth</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-comment-alt"></i><span> 说说</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">Hyacinth</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/17/%E5%BC%80%E9%A2%98%E6%B1%87%E6%8A%A5%E6%BC%94%E8%AE%B2%E7%A8%BF/" title="开题汇报演讲稿">开题汇报演讲稿</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-16T19:36:11.000Z" title="发表于 2025-11-17 03:36:11">2025-11-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a></span></div><div class="content">开题汇报演讲稿 一、开场 &amp; 题目介绍（约 0:00–0:40） 各位老师上午好，我是XXX，我的课题是 《基于微表情和心理学特征的测谎关键技术研究与应用》。 今天的汇报主要分为六个部分：研究背景与意义、国内外研究现状、研究内容、研究方法、已有工作和进度安排。 下面我先从研究背景和意义开始介绍。  （说完这里，切到 Part 1 背景与意义）  二、Part 1 研究背景与意义（约 0:40–2:30）1. 背景（约 0:40–1:40） 在司法审讯、国家安全、边检以及一些关键岗位的人员筛查中，怎么判断一个人是不是在说真话，一直是非常重要但又非常难的问题。 传统上主要有两条路：  一条是生理测谎仪，去监测心率、血压、皮电等自主神经反应； 另一条是经验型的行为观察，比如看他的语气、姿态、目光等等。  这两类方法都有明显问题：生理测谎其实测的是“紧张、应激”，不是“说谎”本身，很容易受个体差异和反测试技巧影响；而纯靠人的经验去看表情和行为，又主观性很强，很难标准化和大规模应用。   心理学研究发现，当一个人撒谎的时候，内心真实情绪和外在表达之间往往是冲突的，这种冲突会在很短时...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/14/%E7%BC%96%E7%A8%8B%E6%B5%8B%E8%AF%95%E6%A8%A1%E6%8B%9F%E9%A2%98/" title="深度学习编程测试模拟题">深度学习编程测试模拟题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-14T07:04:52.000Z" title="发表于 2025-11-14 15:04:52">2025-11-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></span></div><div class="content">深度学习编程测试模拟题 一、Python 编程部分 题1（20分）—— 函数式编程与高阶函数 编写 process_texts(texts, keyword)：  用 lambda + filter&#x2F;map&#x2F;reduce 过滤掉不包含 keyword 的字符串 对剩下的字符串，算它们的长度（字符数），最后求总和 禁止使用 for 循环   1. 标准答案代码123456789101112131415161718192021from functools import reducedef process_texts(texts, keyword):    # 1. 使用 filter 过滤：只保留包含 keyword 的字符串    filtered_texts = list(filter(lambda s: keyword in s, texts))        # 2. 使用 map 得到每个字符串的长度    lengths = list(map(lambda s: len(s), filtered_texts))        # 3. 使用 reduc...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/14/Conda%20%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5%E5%A4%A7%E5%85%A8/" title="Conda基本操作命令速查">Conda基本操作命令速查</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-14T03:56:27.000Z" title="发表于 2025-11-14 11:56:27">2025-11-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9D%82%E9%A1%B9/">杂项</a></span></div><div class="content">Conda 命令速查大全适用平台：Windows &#x2F; macOS &#x2F; Linux（PowerShell、bash、zsh 等）。  0. 基础与自检1234conda --version                 # 查看 conda 版本conda info                      # 运行环境与配置概览conda config --show             # 展示所有配置项conda config --show-sources     # 配置文件来源（.condarc 位置）  初始化 shell（只需一次）： 123456# 任选或多选：bash / zsh / fish / powershell / cmd.execonda init bashconda init zshconda init fishconda init powershellconda init cmd.exe  看到 “No action taken.” 说明已初始化；重开终端即可。   1. 环境（env）管理1.1 创建 &#x2F; 激活 &...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/12/%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE%E7%9A%84%E8%AE%BE%E8%AE%A1/" title="文章的分类和标签设计和查询">文章的分类和标签设计和查询</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-12T09:30:48.000Z" title="发表于 2025-11-12 17:30:48">2025-11-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9D%82%E9%A1%B9/">杂项</a></span></div><div class="content">文章的分类和标签设计和查询分类（Categories）技术类 编程语言（programming-languages） 算法与数据结构（algorithms-and-data-structures） 计算机系统（computer-systems） 网络与安全（networks-and-security） 数据库与数据（databases-and-data） 人工智能&#x2F;机器学习（machine-learning） 前端开发（frontend） 后端与分布式（backend-and-distributed） 移动与客户端（mobile-and-client） 运维与DevOps（devops） 软件工程与工具（software-engineering） 图形学与多媒体（graphics-and-media） 人机交互与可用性（hci-and-ux） 数学基础（math-foundations） 课程与作业（courses-and-assignments） 项目与实习（projects-and-internships） 读书与论文笔记（reading-and-papers） 比...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/12/Git%E5%91%BD%E4%BB%A4%E5%90%88%E9%9B%86/" title="Git基本操作命令速查">Git基本操作命令速查</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-12T03:56:27.000Z" title="发表于 2025-11-12 11:56:27">2025-11-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9D%82%E9%A1%B9/">杂项</a></span></div><div class="content">Git 操作命令大全适用平台：Windows &#x2F; macOS &#x2F; Linux。覆盖安装后常用到的配置 &#x2F; 新建与克隆 &#x2F; 提交与撤销 &#x2F; 分支与合并 &#x2F; Rebase &#x2F; 远端 &#x2F; 标签 &#x2F; 记录 &#x2F; 暂存 &#x2F; 子模块 &#x2F; 工作树 &#x2F; 稀疏检出 &#x2F; 清理 &#x2F; 排错等。  0. 基础配置（一次性&#x2F;全局）12345678910111213git --versiongit config --global user.name &quot;Your Name&quot;git config --global user.email &quot;you@example.com&quot;git config --global init.defaultBranch main           # 默认主分支名git config --global core.autocrlf input              # macOS/Linu...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/11/%E5%BE%AE%E8%A1%A8%E6%83%85%E5%92%8C%E5%BF%83%E7%90%86%E7%89%B9%E5%BE%81%E4%B8%80%E8%87%B4%E6%80%A7%E8%9E%8D%E5%90%88%E7%9A%84%E6%B5%8B%E8%B0%8E%E6%A8%A1%E5%9E%8B%E7%A0%94%E7%A9%B6/" title="微表情和心理特征一致性融合的测谎模型研究">微表情和心理特征一致性融合的测谎模型研究</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-10T21:04:52.000Z" title="发表于 2025-11-11 05:04:52">2025-11-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a></span></div><div class="content">微表情和心理特征一致性融合的测谎模型研究 一句话：就是做一个“看脸+听声音+看说话内容”的多模态测谎模型，核心不是简单把特征拼在一起，而是专门抓“微表情”和“心理特征”之间的不一致，把“言不由衷”“认知超载”这种心理机制用算法形式表达出来。   一、在整个课题中的位置 研究内容一：解决“有啥数据”的问题（数据集分析与构建）。 研究内容二：解决“怎么判断谎言”的核心算法问题。 研究内容三：把算法做成一个可用的平台系统。  所以，研究内容二就是：基于微表情和心理特征一致性融合的测谎模型研究——是整篇论文里最“算法”和“创新点”集中的部分。  二、这个模型整体在做什么？从流程上看，可以概括成三层：  原始输入： 视频：包含被试脸部的连续帧（微表情信号） 音频：说话的声音（语速、停顿、音高等） 文本：把说话内容转成文字（语义、情感、复杂度等）   中间特征层： 视觉通道 → 提取微表情时空特征 语音&#x2F;文本通道 → 计算认知负荷分数序列、情绪矛盾分数序列等“心理学特征”，再编码成一个心理特征向量（+基本声学与文本特征）   决策层： 通过一个一致性融合模块（交叉注意力 + 不一致...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/11/10/Chartgpt%E7%94%9F%E6%88%90%E7%9A%84%E5%8F%82%E8%80%83%E9%97%AE%E9%A2%98/" title="神经网络编程测试题">神经网络编程测试题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-09T18:50:48.000Z" title="发表于 2025-11-10 02:50:48">2025-11-10</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></span></div><div class="content">综合测试：题目与参考答案（Markdown 版） 环境按题面用 Python ≥3.8、PyTorch ≥2.0。 一、目录与通用脚手架1234567deep_test/├─ q1_oop.py├─ q2_perceptron_logreg.py├─ q3_cnn.py├─ q4_lstm.py├─ q5_hybrid.py└─ utils.py  # 复用：seed、metrics、train/eval loop、toy data  utils.py（可复用） 1234567891011121314# utils.pyimport torch, random, numpy as npdef set_seed(sd=42):    random.seed(sd); np.random.seed(sd); torch.manual_seed(sd); torch.cuda.manual_seed_all(sd)def count_params(m): return sum(p.numel() for p in m.parameters() if p.requires_grad)de...</div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/media/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Hyacinth</div><div class="author-info-description">君子慎独,不欺暗室</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/YY-CN"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/17/%E5%BC%80%E9%A2%98%E6%B1%87%E6%8A%A5%E6%BC%94%E8%AE%B2%E7%A8%BF/" title="开题汇报演讲稿">开题汇报演讲稿</a><time datetime="2025-11-16T19:36:11.000Z" title="发表于 2025-11-17 03:36:11">2025-11-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/14/%E7%BC%96%E7%A8%8B%E6%B5%8B%E8%AF%95%E6%A8%A1%E6%8B%9F%E9%A2%98/" title="深度学习编程测试模拟题">深度学习编程测试模拟题</a><time datetime="2025-11-14T07:04:52.000Z" title="发表于 2025-11-14 15:04:52">2025-11-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/14/Conda%20%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5%E5%A4%A7%E5%85%A8/" title="Conda基本操作命令速查">Conda基本操作命令速查</a><time datetime="2025-11-14T03:56:27.000Z" title="发表于 2025-11-14 11:56:27">2025-11-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE%E7%9A%84%E8%AE%BE%E8%AE%A1/" title="文章的分类和标签设计和查询">文章的分类和标签设计和查询</a><time datetime="2025-11-12T09:30:48.000Z" title="发表于 2025-11-12 17:30:48">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/Git%E5%91%BD%E4%BB%A4%E5%90%88%E9%9B%86/" title="Git基本操作命令速查">Git基本操作命令速查</a><time datetime="2025-11-12T03:56:27.000Z" title="发表于 2025-11-12 11:56:27">2025-11-12</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%9D%82%E9%A1%B9/"><span class="card-category-list-name">杂项</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"><span class="card-category-list-name">深度学习</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/"><span class="card-category-list-name">编程</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">论文笔记</span><span class="card-category-list-count">2</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/pytorch/" style="font-size: 1.1em; color: #999">pytorch</a> <a href="/tags/paper/" style="font-size: 1.1em; color: #999">paper</a> <a href="/tags/%E6%9D%82%E9%A1%B9/" style="font-size: 1.5em; color: #99a9bf">杂项</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/11/">
+            <span class="card-archive-list-date">
+              十一月 2025
+            </span>
+            <span class="card-archive-list-count">7</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">7</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-11-16T21:48:36.618Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By Hyacinth</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.2</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.2"></script><script src="/js/main.js?v=5.5.2"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: str => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: subtitleType => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  },
+  processSubtitle: (content, extraContents = []) => {
+    if (true) {
+      const sub = ["我见青山多妩媚，料青山见我应如是","人生如逆旅，我亦是行人"].slice()
+
+      if (extraContents.length > 0) {
+        sub.unshift(...extraContents)
+      }
+
+      if (typeof content === 'string') {
+        sub.unshift(content)
+      } else if (Array.isArray(content)) {
+        sub.unshift(...content)
+      }
+
+      sub.length > 0 && typedJSFn.init(sub)
+    } else {
+      document.getElementById('subtitle').textContent = typeof content === 'string' ? content :
+        (Array.isArray(content) && content.length > 0 ? content[0] : '')
+    }
+  }
+}
+btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')
+</script><script>function subtitleType () {
+  typedJSFn.processSubtitle(["我见青山多妩媚，料青山见我应如是","人生如逆旅，我亦是行人"])
+}
+typedJSFn.run(subtitleType)</script></div><script async data-pjax src="/"></script></div></body></html>

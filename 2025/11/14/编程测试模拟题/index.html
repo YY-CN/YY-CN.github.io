@@ -1,0 +1,540 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>深度学习编程测试模拟题 | Hyacinth</title><meta name="author" content="Hyacinth"><meta name="copyright" content="Hyacinth"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="深度学习编程测试模拟题 一、Python 编程部分 题1（20分）—— 函数式编程与高阶函数 编写 process_texts(texts, keyword)：  用 lambda + filter&#x2F;map&#x2F;reduce 过滤掉不包含 keyword 的字符串 对剩下的字符串，算它们的长度（字符数），最后求总和 禁止使用 for 循环   1. 标准答案代码1234567891">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习编程测试模拟题">
+<meta property="og:url" content="http://example.com/2025/11/14/%E7%BC%96%E7%A8%8B%E6%B5%8B%E8%AF%95%E6%A8%A1%E6%8B%9F%E9%A2%98/index.html">
+<meta property="og:site_name" content="Hyacinth">
+<meta property="og:description" content="深度学习编程测试模拟题 一、Python 编程部分 题1（20分）—— 函数式编程与高阶函数 编写 process_texts(texts, keyword)：  用 lambda + filter&#x2F;map&#x2F;reduce 过滤掉不包含 keyword 的字符串 对剩下的字符串，算它们的长度（字符数），最后求总和 禁止使用 for 循环   1. 标准答案代码1234567891">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/media/avatar.jpg">
+<meta property="article:published_time" content="2025-11-14T07:04:52.000Z">
+<meta property="article:modified_time" content="2025-11-14T08:22:56.044Z">
+<meta property="article:author" content="Hyacinth">
+<meta property="article:tag" content="pytorch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/media/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "深度学习编程测试模拟题",
+  "url": "http://example.com/2025/11/14/%E7%BC%96%E7%A8%8B%E6%B5%8B%E8%AF%95%E6%A8%A1%E6%8B%9F%E9%A2%98/",
+  "image": "http://example.com/media/avatar.jpg",
+  "datePublished": "2025-11-14T07:04:52.000Z",
+  "dateModified": "2025-11-14T08:22:56.044Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Hyacinth",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/11/14/%E7%BC%96%E7%A8%8B%E6%B5%8B%E8%AF%95%E6%A8%A1%E6%8B%9F%E9%A2%98/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '深度学习编程测试模拟题',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@4.5.12/index.min.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      if ($loadingBox.classList.contains('loaded')) return
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+
+  if (document.readyState === 'complete') {
+    preloader.endLoading()
+  } else {
+    window.addEventListener('load', preloader.endLoading)
+    document.addEventListener('DOMContentLoaded', preloader.endLoading)
+    // Add timeout protection: force end after 7 seconds
+    setTimeout(preloader.endLoading, 7000)
+  }
+
+  if (false) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="web_bg" style="background-image: url(/media/%E8%9C%A1%E7%AC%94%E5%B0%8F%E6%96%B0_%E7%A6%81%E6%AD%A2%E7%84%A6%E8%99%91.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/media/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-comment-alt"></i><span> 说说</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background: transparent;"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hyacinth</span></a><a class="nav-page-title" href="/"><span class="site-name">深度学习编程测试模拟题</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-comment-alt"></i><span> 说说</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">深度学习编程测试模拟题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-11-14T07:04:52.000Z" title="发表于 2025-11-14 15:04:52">2025-11-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-11-14T08:22:56.044Z" title="更新于 2025-11-14 16:22:56">2025-11-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="深度学习编程测试模拟题"><a href="#深度学习编程测试模拟题" class="headerlink" title="深度学习编程测试模拟题"></a>深度学习编程测试模拟题</h1><hr>
+<h2 id="一、Python-编程部分"><a href="#一、Python-编程部分" class="headerlink" title="一、Python 编程部分"></a>一、Python 编程部分</h2><hr>
+<h3 id="题1（20分）——-函数式编程与高阶函数"><a href="#题1（20分）——-函数式编程与高阶函数" class="headerlink" title="题1（20分）—— 函数式编程与高阶函数"></a>题1（20分）—— 函数式编程与高阶函数</h3><blockquote>
+<p>编写 <code>process_texts(texts, keyword)</code>：</p>
+<ul>
+<li>用 <strong>lambda + filter&#x2F;map&#x2F;reduce</strong></li>
+<li>过滤掉不包含 keyword 的字符串</li>
+<li>对剩下的字符串，算它们的长度（字符数），最后<strong>求总和</strong></li>
+<li>禁止使用 <code>for</code> 循环</li>
+</ul>
+</blockquote>
+<h4 id="1-标准答案代码"><a href="#1-标准答案代码" class="headerlink" title="1. 标准答案代码"></a>1. 标准答案代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">process_texts</span>(<span class="params">texts, keyword</span>):</span><br><span class="line">    <span class="comment"># 1. 使用 filter 过滤：只保留包含 keyword 的字符串</span></span><br><span class="line">    filtered_texts = <span class="built_in">list</span>(<span class="built_in">filter</span>(<span class="keyword">lambda</span> s: keyword <span class="keyword">in</span> s, texts))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 2. 使用 map 得到每个字符串的长度</span></span><br><span class="line">    lengths = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="keyword">lambda</span> s: <span class="built_in">len</span>(s), filtered_texts))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 3. 使用 reduce 求长度之和</span></span><br><span class="line">    total_length = reduce(<span class="keyword">lambda</span> x, y: x + y, lengths, <span class="number">0</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Total length = <span class="subst">&#123;total_length&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> total_length</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    texts = [<span class="string">&quot;deep learning is amazing&quot;</span>, <span class="string">&quot;transformers are powerful&quot;</span>, <span class="string">&quot;hello world&quot;</span>]</span><br><span class="line">    keyword = <span class="string">&quot;a&quot;</span></span><br><span class="line">    process_texts(texts, keyword)  <span class="comment"># 期望输出：Total length = 44</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-详细讲解"><a href="#2-详细讲解" class="headerlink" title="2. 详细讲解"></a>2. 详细讲解</h4><ol>
+<li><p><code>lambda</code>：匿名函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lambda</span> s: keyword <span class="keyword">in</span> s</span><br></pre></td></tr></table></figure>
+
+<p>等价于：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">fun</span>(<span class="params">s</span>):</span><br><span class="line">    <span class="keyword">return</span> keyword <span class="keyword">in</span> s</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>filter(函数, 可迭代对象)</code>：保留让函数返回 <code>True</code> 的元素</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filtered_texts = <span class="built_in">list</span>(<span class="built_in">filter</span>(<span class="keyword">lambda</span> s: keyword <span class="keyword">in</span> s, texts))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>keyword in s</code> 表示：某个子串 <code>keyword</code> 是否出现在字符串 <code>s</code> 中</li>
+<li>只留下包含 <code>keyword</code> 的那几句文本</li>
+</ul>
+</li>
+<li><p><code>map(函数, 可迭代对象)</code>：对每个元素做相同的操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lengths = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="keyword">lambda</span> s: <span class="built_in">len</span>(s), filtered_texts))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>len(s)</code> 得到字符串长度</li>
+<li>比如 <code>[&quot;abc&quot;, &quot;hello&quot;]</code> 会变成 <code>[3, 5]</code></li>
+</ul>
+</li>
+<li><p><code>reduce(函数, 序列, 初始值)</code>：把序列“折叠”成一个值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">total_length = reduce(<span class="keyword">lambda</span> x, y: x + y, lengths, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>0</code> 是初始值</li>
+<li>相当于：<code>0 + lengths[0] + lengths[1] + ...</code></li>
+<li>最后得到总长度</li>
+</ul>
+</li>
+<li><p>打印结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Total length = <span class="subst">&#123;total_length&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<h4 id="3-类似示例题-1"><a href="#3-类似示例题-1" class="headerlink" title="3. 类似示例题 1"></a>3. 类似示例题 1</h4><p><strong>题目 A1：</strong></p>
+<p>编写函数 <code>sum_even_squares(nums)</code>：</p>
+<ul>
+<li>输入：整数列表 <code>nums</code></li>
+<li>使用 <code>lambda + filter + map + reduce</code></li>
+<li>保留所有 <strong>偶数</strong></li>
+<li>计算这些偶数的 <strong>平方</strong></li>
+<li>返回所有平方之和</li>
+<li>禁止使用 <code>for</code> 循环</li>
+</ul>
+<p><strong>参考答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">sum_even_squares</span>(<span class="params">nums</span>):</span><br><span class="line">    <span class="comment"># 1. 过滤偶数</span></span><br><span class="line">    evens = <span class="built_in">list</span>(<span class="built_in">filter</span>(<span class="keyword">lambda</span> x: x % <span class="number">2</span> == <span class="number">0</span>, nums))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 2. 计算平方</span></span><br><span class="line">    squares = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="keyword">lambda</span> x: x ** <span class="number">2</span>, evens))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 3. 求和</span></span><br><span class="line">    total = reduce(<span class="keyword">lambda</span> a, b: a + b, squares, <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> total</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    nums = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line">    <span class="built_in">print</span>(sum_even_squares(nums))  <span class="comment"># 2^2 + 4^2 + 6^2 = 4 + 16 + 36 = 56</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>讲解（要点）：</strong></p>
+<ul>
+<li><code>x % 2 == 0</code>：判断是否为偶数</li>
+<li><code>x ** 2</code>：求平方</li>
+<li><code>reduce(lambda a, b: a + b, squares, 0)</code>：不断累加</li>
+</ul>
+<hr>
+<h4 id="4-类似示例题-2"><a href="#4-类似示例题-2" class="headerlink" title="4. 类似示例题 2"></a>4. 类似示例题 2</h4><p><strong>题目 A2：</strong></p>
+<p>编写函数 <code>concat_long_words(words, min_len)</code>：</p>
+<ul>
+<li>输入：单词列表 <code>words</code> 和最小长度 <code>min_len</code></li>
+<li>使用 <code>lambda + filter + reduce</code></li>
+<li>过滤出长度 <strong>大于等于</strong> <code>min_len</code> 的单词</li>
+<li>用 <code>reduce</code> 把这些单词拼接成一个大字符串（中间用空格隔开）</li>
+<li>禁止使用 <code>for</code> 循环</li>
+</ul>
+<p><strong>参考答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">concat_long_words</span>(<span class="params">words, min_len</span>):</span><br><span class="line">    <span class="comment"># 1. 过滤较长的单词</span></span><br><span class="line">    long_words = <span class="built_in">list</span>(<span class="built_in">filter</span>(<span class="keyword">lambda</span> w: <span class="built_in">len</span>(w) &gt;= min_len, words))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> long_words:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 2. 用 reduce 拼接，中间加空格</span></span><br><span class="line">    result = reduce(<span class="keyword">lambda</span> a, b: a + <span class="string">&quot; &quot;</span> + b, long_words)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    words = [<span class="string">&quot;deep&quot;</span>, <span class="string">&quot;learning&quot;</span>, <span class="string">&quot;is&quot;</span>, <span class="string">&quot;fun&quot;</span>]</span><br><span class="line">    <span class="built_in">print</span>(concat_long_words(words, <span class="number">4</span>))  <span class="comment"># &quot;deep learning&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>讲解：</strong></p>
+<ul>
+<li><code>len(w) &gt;= min_len</code>：筛选较长单词</li>
+<li><code>reduce(lambda a, b: a + &quot; &quot; + b, long_words)</code>：<ul>
+<li>第一次：<code>a = &quot;deep&quot;</code>, <code>b = &quot;learning&quot;</code> → <code>&quot;deep learning&quot;</code></li>
+<li>第二次：再和后面的拼接……</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="题2（20分）——-装饰器与类的结合使用"><a href="#题2（20分）——-装饰器与类的结合使用" class="headerlink" title="题2（20分）—— 装饰器与类的结合使用"></a>题2（20分）—— 装饰器与类的结合使用</h3><blockquote>
+<p>定义类 <code>ModelLogger</code>，内有方法装饰器 <code>@log_time</code>：</p>
+<ul>
+<li>记录函数运行时间</li>
+<li>结束后打印：函数名 + 执行时间</li>
+<li>用它装饰函数 <code>simulate_train()</code>，里面 <code>time.sleep(1)</code></li>
+</ul>
+</blockquote>
+<h4 id="1-标准答案代码-1"><a href="#1-标准答案代码-1" class="headerlink" title="1. 标准答案代码"></a>1. 标准答案代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> wraps</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ModelLogger</span>:</span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">log_time</span>(<span class="params">func</span>):</span><br><span class="line"><span class="meta">        @wraps(<span class="params">func</span>)</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">wrapper</span>(<span class="params">*args, **kwargs</span>):</span><br><span class="line">            start = time.time()</span><br><span class="line">            result = func(*args, **kwargs)</span><br><span class="line">            end = time.time()</span><br><span class="line">            elapsed = end - start</span><br><span class="line">            <span class="comment"># func.__name__ 就是函数名</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;func.__name__&#125;</span> executed in <span class="subst">&#123;elapsed:<span class="number">.3</span>f&#125;</span>s&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span> result</span><br><span class="line">        <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@ModelLogger.log_time</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">simulate_train</span>():</span><br><span class="line">    <span class="comment"># 模拟训练过程</span></span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    <span class="comment"># 这里可以想象是训练代码</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;training done&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    simulate_train()</span><br></pre></td></tr></table></figure>
+
+<p>一个可能的输出：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">simulate_train executed in 1.001s</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-详细讲解-1"><a href="#2-详细讲解-1" class="headerlink" title="2. 详细讲解"></a>2. 详细讲解</h4><ol>
+<li><p><code>@staticmethod</code></p>
+<ul>
+<li><code>log_time</code> 不需要访问 <code>self</code> 或类属性，所以可写成静态方法，调用时 <code>ModelLogger.log_time</code>。</li>
+</ul>
+</li>
+<li><p>装饰器结构：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">log_time</span>(<span class="params">func</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">wrapper</span>(<span class="params">*args, **kwargs</span>):</span><br><span class="line">        <span class="comment"># 前置逻辑</span></span><br><span class="line">        result = func(*args, **kwargs)  <span class="comment"># 执行原函数</span></span><br><span class="line">        <span class="comment"># 后置逻辑</span></span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>@wraps(func)</code>：</p>
+<ul>
+<li>保持被装饰函数的元信息（如函数名），否则 <code>func.__name__</code> 会变成 <code>&#39;wrapper&#39;</code>。</li>
+</ul>
+</li>
+<li><p>计时逻辑：</p>
+<ul>
+<li><code>start = time.time()</code> 记录当前时间（秒）</li>
+<li><code>end = time.time()</code></li>
+<li><code>elapsed = end - start</code> 就是运行耗时</li>
+<li><code>elapsed:.3f</code> 保留三位小数</li>
+</ul>
+</li>
+<li><p>使用装饰器：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ModelLogger.log_time</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">simulate_train</span>():</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>等价于：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">simulate_train</span>():</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">simulate_train = ModelLogger.log_time(simulate_train)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<h4 id="3-类似示例题-1-1"><a href="#3-类似示例题-1-1" class="headerlink" title="3. 类似示例题 1"></a>3. 类似示例题 1</h4><p><strong>题目 B1：</strong></p>
+<p>编写类 <code>CallCounter</code>：</p>
+<ul>
+<li>有一个静态方法装饰器 <code>@count_calls</code></li>
+<li>统计某个函数被调用了多少次</li>
+<li>每次调用后打印：<code>function_name called N times</code></li>
+</ul>
+<p><strong>参考答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> wraps</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CallCounter</span>:</span><br><span class="line">    call_counts = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">count_calls</span>(<span class="params">func</span>):</span><br><span class="line"><span class="meta">        @wraps(<span class="params">func</span>)</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">wrapper</span>(<span class="params">*args, **kwargs</span>):</span><br><span class="line">            name = func.__name__</span><br><span class="line">            CallCounter.call_counts[name] = CallCounter.call_counts.get(name, <span class="number">0</span>) + <span class="number">1</span></span><br><span class="line">            result = func(*args, **kwargs)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;name&#125;</span> called <span class="subst">&#123;CallCounter.call_counts[name]&#125;</span> times&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span> result</span><br><span class="line">        <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@CallCounter.count_calls</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">say_hello</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Hello!&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    say_hello()</span><br><span class="line">    say_hello()</span><br><span class="line">    say_hello()</span><br></pre></td></tr></table></figure>
+
+<p><strong>讲解要点：</strong></p>
+<ul>
+<li><code>CallCounter.call_counts</code> 是类变量，用字典记录每个函数名字的调用次数</li>
+<li><code>get(name, 0)</code>：如果之前没调用过，就从 0 开始</li>
+<li>每次 <code>say_hello()</code> 被调用时，都会先经过 <code>wrapper</code> 来增加计数和打印信息</li>
+</ul>
+<hr>
+<h4 id="4-类似示例题-2-1"><a href="#4-类似示例题-2-1" class="headerlink" title="4. 类似示例题 2"></a>4. 类似示例题 2</h4><p><strong>题目 B2：</strong></p>
+<p>编写类 <code>ResultLogger</code>：</p>
+<ul>
+<li>有静态方法装饰器 <code>@log_result</code></li>
+<li>被装饰的函数执行完后：打印函数名和返回值</li>
+</ul>
+<p><strong>参考答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> wraps</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ResultLogger</span>:</span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">log_result</span>(<span class="params">func</span>):</span><br><span class="line"><span class="meta">        @wraps(<span class="params">func</span>)</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">wrapper</span>(<span class="params">*args, **kwargs</span>):</span><br><span class="line">            result = func(*args, **kwargs)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;func.__name__&#125;</span> returned: <span class="subst">&#123;result&#125;</span>&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span> result</span><br><span class="line">        <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@ResultLogger.log_result</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">a, b</span>):</span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    add(<span class="number">2</span>, <span class="number">3</span>)   <span class="comment"># 打印：add returned: 5</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>讲解：</strong></p>
+<ul>
+<li>装饰器的核心是：<ol>
+<li>执行原来的函数</li>
+<li>把返回值拿出来</li>
+<li>打印信息，然后再把结果返回出去</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h2 id="二、PyTorch-编程部分"><a href="#二、PyTorch-编程部分" class="headerlink" title="二、PyTorch 编程部分"></a>二、PyTorch 编程部分</h2><p>下面三题都用 <strong>PyTorch 2.x</strong> 的写法，但其实和 1.x 几乎一样。<br> 小提示：如果你对 PyTorch 不熟，先把它当成“张量 + 神经网络模块的拼装库”。</p>
+<hr>
+<h3 id="题3（20分）——-CNN-图像分类（MNIST）"><a href="#题3（20分）——-CNN-图像分类（MNIST）" class="headerlink" title="题3（20分）—— CNN 图像分类（MNIST）"></a>题3（20分）—— CNN 图像分类（MNIST）</h3><blockquote>
+<p>要求：</p>
+<ul>
+<li>输入：(batch_size, 1, 28, 28)</li>
+<li>两层卷积 + 一层全连接</li>
+<li>用 ReLU</li>
+<li>输出：(batch_size, 10)</li>
+</ul>
+</blockquote>
+<h4 id="1-标准答案代码-2"><a href="#1-标准答案代码-2" class="headerlink" title="1. 标准答案代码"></a>1. 标准答案代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SimpleCNN</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(SimpleCNN, <span class="variable language_">self</span>).__init__()</span><br><span class="line">        <span class="comment"># 输入通道 1（灰度），输出通道 32，卷积核大小 3x3，padding=1 保持宽高不变</span></span><br><span class="line">        <span class="variable language_">self</span>.conv1 = nn.Conv2d(in_channels=<span class="number">1</span>, out_channels=<span class="number">32</span>, kernel_size=<span class="number">3</span>, padding=<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># 第二层卷积：输入 32 通道，输出 64 通道</span></span><br><span class="line">        <span class="variable language_">self</span>.conv2 = nn.Conv2d(<span class="number">32</span>, <span class="number">64</span>, kernel_size=<span class="number">3</span>, padding=<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># 池化层：2x2，尺寸减半</span></span><br><span class="line">        <span class="variable language_">self</span>.pool = nn.MaxPool2d(kernel_size=<span class="number">2</span>, stride=<span class="number">2</span>)</span><br><span class="line">        <span class="comment"># 全连接层：输入特征数要根据前面卷积+池化后的尺寸计算</span></span><br><span class="line">        <span class="comment"># MNIST: 28x28 -&gt; 池化两次：28-&gt;14-&gt;7，所以 7*7</span></span><br><span class="line">        <span class="variable language_">self</span>.fc = nn.Linear(<span class="number">64</span> * <span class="number">7</span> * <span class="number">7</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        <span class="comment"># x: (batch_size, 1, 28, 28)</span></span><br><span class="line">        x = <span class="variable language_">self</span>.conv1(x)          <span class="comment"># (batch, 32, 28, 28)</span></span><br><span class="line">        x = F.relu(x)</span><br><span class="line">        x = <span class="variable language_">self</span>.pool(x)           <span class="comment"># (batch, 32, 14, 14)</span></span><br><span class="line"></span><br><span class="line">        x = <span class="variable language_">self</span>.conv2(x)          <span class="comment"># (batch, 64, 14, 14)</span></span><br><span class="line">        x = F.relu(x)</span><br><span class="line">        x = <span class="variable language_">self</span>.pool(x)           <span class="comment"># (batch, 64, 7, 7)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 展平：把 (64, 7, 7) 展平成一维向量</span></span><br><span class="line">        x = x.view(x.size(<span class="number">0</span>), -<span class="number">1</span>)  <span class="comment"># (batch, 64*7*7)</span></span><br><span class="line">        x = <span class="variable language_">self</span>.fc(x)             <span class="comment"># (batch, 10)</span></span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="comment"># 模拟一个 batch，大小为 16</span></span><br><span class="line">    batch_size = <span class="number">16</span></span><br><span class="line">    dummy_input = torch.randn(batch_size, <span class="number">1</span>, <span class="number">28</span>, <span class="number">28</span>)</span><br><span class="line">    model = SimpleCNN()</span><br><span class="line">    output = model(dummy_input)</span><br><span class="line">    <span class="built_in">print</span>(output.shape)  <span class="comment"># 期望：torch.Size([16, 10])</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-详细讲解-2"><a href="#2-详细讲解-2" class="headerlink" title="2. 详细讲解"></a>2. 详细讲解</h4><ol>
+<li><strong>卷积层尺寸推导：</strong><ul>
+<li>输入：<code>(1, 28, 28)</code></li>
+<li><code>conv1</code>：<code>padding=1, kernel_size=3, stride=1</code> → 高宽仍为 28<ul>
+<li>输出 <code>(32, 28, 28)</code></li>
+</ul>
+</li>
+<li>池化 <code>MaxPool2d(2, 2)</code> → 高宽减半：28→14<ul>
+<li>输出 <code>(32, 14, 14)</code></li>
+</ul>
+</li>
+<li><code>conv2</code>：同理 → <code>(64, 14, 14)</code></li>
+<li>再池化 → <code>(64, 7, 7)</code></li>
+</ul>
+</li>
+<li><strong>全连接层输入维度：</strong><ul>
+<li>每个样本展平后长度： <code>64 * 7 * 7</code></li>
+<li>所以 <code>nn.Linear(64*7*7, 10)</code></li>
+</ul>
+</li>
+<li><strong>ReLU：</strong><ul>
+<li><code>F.relu(x)</code> 是常见激活函数，保持正数不变，负数变为 0，增加非线性表达能力。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h4 id="3-类似示例题-1-2"><a href="#3-类似示例题-1-2" class="headerlink" title="3. 类似示例题 1"></a>3. 类似示例题 1</h4><p><strong>题目 C1：</strong></p>
+<p>实现一个 CNN 模型 <code>SimpleCIFAR10CNN</code> 用于 CIFAR-10（输入 <code>(batch, 3, 32, 32)</code>）：</p>
+<ul>
+<li>两层卷积+池化，最终接一个全连接层输出 10 类</li>
+</ul>
+<p><strong>参考答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SimpleCIFAR10CNN</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(SimpleCIFAR10CNN, <span class="variable language_">self</span>).__init__()</span><br><span class="line">        <span class="comment"># 输入通道 3（RGB）</span></span><br><span class="line">        <span class="variable language_">self</span>.conv1 = nn.Conv2d(<span class="number">3</span>, <span class="number">32</span>, kernel_size=<span class="number">3</span>, padding=<span class="number">1</span>)</span><br><span class="line">        <span class="variable language_">self</span>.conv2 = nn.Conv2d(<span class="number">32</span>, <span class="number">64</span>, kernel_size=<span class="number">3</span>, padding=<span class="number">1</span>)</span><br><span class="line">        <span class="variable language_">self</span>.pool = nn.MaxPool2d(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">        <span class="comment"># 尺寸：32x32 -&gt; pool -&gt; 16x16 -&gt; conv2 -&gt; 16x16 -&gt; pool -&gt; 8x8</span></span><br><span class="line">        <span class="variable language_">self</span>.fc = nn.Linear(<span class="number">64</span> * <span class="number">8</span> * <span class="number">8</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        x = <span class="variable language_">self</span>.pool(F.relu(<span class="variable language_">self</span>.conv1(x)))  <span class="comment"># (batch, 32, 16, 16)</span></span><br><span class="line">        x = <span class="variable language_">self</span>.pool(F.relu(<span class="variable language_">self</span>.conv2(x)))  <span class="comment"># (batch, 64, 8, 8)</span></span><br><span class="line">        x = x.view(x.size(<span class="number">0</span>), -<span class="number">1</span>)             <span class="comment"># (batch, 64*8*8)</span></span><br><span class="line">        x = <span class="variable language_">self</span>.fc(x)                        <span class="comment"># (batch, 10)</span></span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    dummy_input = torch.randn(<span class="number">32</span>, <span class="number">3</span>, <span class="number">32</span>, <span class="number">32</span>)</span><br><span class="line">    model = SimpleCIFAR10CNN()</span><br><span class="line">    out = model(dummy_input)</span><br><span class="line">    <span class="built_in">print</span>(out.shape)  <span class="comment"># torch.Size([32, 10])</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="4-类似示例题-2-2"><a href="#4-类似示例题-2-2" class="headerlink" title="4. 类似示例题 2"></a>4. 类似示例题 2</h4><p><strong>题目 C2：</strong></p>
+<p>在 MNIST CNN 中增加一个额外的全连接隐藏层：</p>
+<ul>
+<li>结构：<code>conv1 -&gt; pool -&gt; conv2 -&gt; pool -&gt; fc1 -&gt; ReLU -&gt; fc2</code></li>
+<li><code>fc1</code> 输出 128 维，<code>fc2</code> 输出 10 维</li>
+</ul>
+<p><strong>参考答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DeeperCNN</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(DeeperCNN, <span class="variable language_">self</span>).__init__()</span><br><span class="line">        <span class="variable language_">self</span>.conv1 = nn.Conv2d(<span class="number">1</span>, <span class="number">32</span>, <span class="number">3</span>, padding=<span class="number">1</span>)</span><br><span class="line">        <span class="variable language_">self</span>.conv2 = nn.Conv2d(<span class="number">32</span>, <span class="number">64</span>, <span class="number">3</span>, padding=<span class="number">1</span>)</span><br><span class="line">        <span class="variable language_">self</span>.pool = nn.MaxPool2d(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">        <span class="variable language_">self</span>.fc1 = nn.Linear(<span class="number">64</span> * <span class="number">7</span> * <span class="number">7</span>, <span class="number">128</span>)</span><br><span class="line">        <span class="variable language_">self</span>.fc2 = nn.Linear(<span class="number">128</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        x = <span class="variable language_">self</span>.pool(F.relu(<span class="variable language_">self</span>.conv1(x)))</span><br><span class="line">        x = <span class="variable language_">self</span>.pool(F.relu(<span class="variable language_">self</span>.conv2(x)))</span><br><span class="line">        x = x.view(x.size(<span class="number">0</span>), -<span class="number">1</span>)</span><br><span class="line">        x = F.relu(<span class="variable language_">self</span>.fc1(x))</span><br><span class="line">        x = <span class="variable language_">self</span>.fc2(x)</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    dummy_input = torch.randn(<span class="number">8</span>, <span class="number">1</span>, <span class="number">28</span>, <span class="number">28</span>)</span><br><span class="line">    model = DeeperCNN()</span><br><span class="line">    out = model(dummy_input)</span><br><span class="line">    <span class="built_in">print</span>(out.shape)  <span class="comment"># torch.Size([8, 10])</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="题4（20分）——-LSTM-文本分类模型"><a href="#题4（20分）——-LSTM-文本分类模型" class="headerlink" title="题4（20分）—— LSTM 文本分类模型"></a>题4（20分）—— LSTM 文本分类模型</h3><blockquote>
+<p>模型 <code>TextLSTM</code>：</p>
+<ul>
+<li>输入：<code>(batch, seq_len, embed_dim)</code> 的词向量</li>
+<li>构造：单层 LSTM + Linear</li>
+<li>输出：<code>(batch, num_classes)</code></li>
+</ul>
+</blockquote>
+<h4 id="1-标准答案代码-3"><a href="#1-标准答案代码-3" class="headerlink" title="1. 标准答案代码"></a>1. 标准答案代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TextLSTM</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, embed_dim, hidden_dim, num_classes</span>):</span><br><span class="line">        <span class="built_in">super</span>(TextLSTM, <span class="variable language_">self</span>).__init__()</span><br><span class="line">        <span class="comment"># batch_first=True：输入输出的第一个维度是 batch</span></span><br><span class="line">        <span class="variable language_">self</span>.lstm = nn.LSTM(input_size=embed_dim,</span><br><span class="line">                            hidden_size=hidden_dim,</span><br><span class="line">                            batch_first=<span class="literal">True</span>)</span><br><span class="line">        <span class="variable language_">self</span>.fc = nn.Linear(hidden_dim, num_classes)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        <span class="comment"># x: (batch, seq_len, embed_dim)</span></span><br><span class="line">        output, (h_n, c_n) = <span class="variable language_">self</span>.lstm(x)</span><br><span class="line">        <span class="comment"># h_n: (num_layers * num_directions, batch, hidden_dim)</span></span><br><span class="line">        <span class="comment"># 单层单向： (1, batch, hidden_dim)</span></span><br><span class="line">        last_hidden = h_n[-<span class="number">1</span>]             <span class="comment"># (batch, hidden_dim)</span></span><br><span class="line">        logits = <span class="variable language_">self</span>.fc(last_hidden)     <span class="comment"># (batch, num_classes)</span></span><br><span class="line">        <span class="keyword">return</span> logits</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    batch_size = <span class="number">4</span></span><br><span class="line">    seq_len = <span class="number">10</span></span><br><span class="line">    embed_dim = <span class="number">100</span></span><br><span class="line">    hidden_dim = <span class="number">64</span></span><br><span class="line">    num_classes = <span class="number">3</span></span><br><span class="line"></span><br><span class="line">    model = TextLSTM(embed_dim, hidden_dim, num_classes)</span><br><span class="line">    dummy_input = torch.randn(batch_size, seq_len, embed_dim)</span><br><span class="line">    out = model(dummy_input)</span><br><span class="line">    <span class="built_in">print</span>(out.shape)  <span class="comment"># torch.Size([4, 3])</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-详细讲解-3"><a href="#2-详细讲解-3" class="headerlink" title="2. 详细讲解"></a>2. 详细讲解</h4><ol>
+<li><code>nn.LSTM</code> 的关键参数：<ul>
+<li><code>input_size=embed_dim</code>：每个时间步输入向量维度</li>
+<li><code>hidden_size=hidden_dim</code>：隐藏状态维度</li>
+<li><code>batch_first=True</code>：张量形状是 <code>(batch, seq_len, feature)</code></li>
+</ul>
+</li>
+<li><code>lstm(x)</code> 返回：<ul>
+<li><code>output</code>: 所有时间步的输出，形状 <code>(batch, seq_len, hidden_dim)</code></li>
+<li><code>(h_n, c_n)</code>: 最后一个时间步的隐藏状态和值，形状 <code>(num_layers * num_directions, batch, hidden_dim)</code></li>
+</ul>
+</li>
+<li>分类常用做法：<ul>
+<li>取 <code>h_n[-1]</code> 作为句子表示（最后一层、最后一个方向的隐藏状态）</li>
+<li>传入 <code>Linear</code> 变成 <code>num_classes</code> 维的 logits</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h4 id="3-类似示例题-1-3"><a href="#3-类似示例题-1-3" class="headerlink" title="3. 类似示例题 1"></a>3. 类似示例题 1</h4><p><strong>题目 D1：</strong></p>
+<p>改写成 <strong>双向 LSTM</strong> 文本分类：</p>
+<ul>
+<li>使用 <code>bidirectional=True</code></li>
+<li>LSTM 输出维度是 <code>2 * hidden_dim</code>（前向 + 后向）</li>
+<li>全连接层输入 <code>2 * hidden_dim</code></li>
+</ul>
+<p><strong>参考答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BiTextLSTM</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, embed_dim, hidden_dim, num_classes</span>):</span><br><span class="line">        <span class="built_in">super</span>(BiTextLSTM, <span class="variable language_">self</span>).__init__()</span><br><span class="line">        <span class="variable language_">self</span>.lstm = nn.LSTM(input_size=embed_dim,</span><br><span class="line">                            hidden_size=hidden_dim,</span><br><span class="line">                            batch_first=<span class="literal">True</span>,</span><br><span class="line">                            bidirectional=<span class="literal">True</span>)</span><br><span class="line">        <span class="comment"># 双向 -&gt; hidden_dim * 2</span></span><br><span class="line">        <span class="variable language_">self</span>.fc = nn.Linear(hidden_dim * <span class="number">2</span>, num_classes)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        output, (h_n, c_n) = <span class="variable language_">self</span>.lstm(x)</span><br><span class="line">        <span class="comment"># h_n: (num_layers*2, batch, hidden_dim)</span></span><br><span class="line">        <span class="comment"># 单层双向 -&gt; (2, batch, hidden_dim)</span></span><br><span class="line">        <span class="comment"># h_n[-2]：最后一层前向，h_n[-1]：最后一层后向</span></span><br><span class="line">        forward_last = h_n[-<span class="number">2</span>]</span><br><span class="line">        backward_last = h_n[-<span class="number">1</span>]</span><br><span class="line">        last_hidden = torch.cat([forward_last, backward_last], dim=<span class="number">1</span>)  <span class="comment"># (batch, 2*hidden_dim)</span></span><br><span class="line">        logits = <span class="variable language_">self</span>.fc(last_hidden)</span><br><span class="line">        <span class="keyword">return</span> logits</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    model = BiTextLSTM(embed_dim=<span class="number">100</span>, hidden_dim=<span class="number">64</span>, num_classes=<span class="number">5</span>)</span><br><span class="line">    dummy_input = torch.randn(<span class="number">2</span>, <span class="number">7</span>, <span class="number">100</span>)</span><br><span class="line">    out = model(dummy_input)</span><br><span class="line">    <span class="built_in">print</span>(out.shape)  <span class="comment"># torch.Size([2, 5])</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="4-类似示例题-2-3"><a href="#4-类似示例题-2-3" class="headerlink" title="4. 类似示例题 2"></a>4. 类似示例题 2</h4><p><strong>题目 D2：</strong></p>
+<p>在 <code>TextLSTM</code> 之前加一个 <strong>嵌入层</strong>：</p>
+<ul>
+<li>输入是词 ID（<code>(batch, seq_len)</code> 的长整型）</li>
+<li>先通过 <code>nn.Embedding</code> 得到词向量，再送入 LSTM</li>
+</ul>
+<p><strong>参考答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TextLSTMWithEmbedding</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, vocab_size, embed_dim, hidden_dim, num_classes</span>):</span><br><span class="line">        <span class="built_in">super</span>(TextLSTMWithEmbedding, <span class="variable language_">self</span>).__init__()</span><br><span class="line">        <span class="variable language_">self</span>.embedding = nn.Embedding(vocab_size, embed_dim)</span><br><span class="line">        <span class="variable language_">self</span>.lstm = nn.LSTM(embed_dim, hidden_dim, batch_first=<span class="literal">True</span>)</span><br><span class="line">        <span class="variable language_">self</span>.fc = nn.Linear(hidden_dim, num_classes)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        <span class="comment"># x: (batch, seq_len) -&gt; 词 ID</span></span><br><span class="line">        embedded = <span class="variable language_">self</span>.embedding(x)   <span class="comment"># (batch, seq_len, embed_dim)</span></span><br><span class="line">        output, (h_n, c_n) = <span class="variable language_">self</span>.lstm(embedded)</span><br><span class="line">        last_hidden = h_n[-<span class="number">1</span>]          <span class="comment"># (batch, hidden_dim)</span></span><br><span class="line">        logits = <span class="variable language_">self</span>.fc(last_hidden)</span><br><span class="line">        <span class="keyword">return</span> logits</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    vocab_size = <span class="number">5000</span></span><br><span class="line">    model = TextLSTMWithEmbedding(vocab_size, <span class="number">128</span>, <span class="number">64</span>, <span class="number">4</span>)</span><br><span class="line">    dummy_input = torch.randint(<span class="number">0</span>, vocab_size, (<span class="number">3</span>, <span class="number">6</span>))  <span class="comment"># 3 个句子，每句 6 个词</span></span><br><span class="line">    out = model(dummy_input)</span><br><span class="line">    <span class="built_in">print</span>(out.shape)  <span class="comment"># torch.Size([3, 4])</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="题5（20分）——-Transformer-编码器层"><a href="#题5（20分）——-Transformer-编码器层" class="headerlink" title="题5（20分）—— Transformer 编码器层"></a>题5（20分）—— Transformer 编码器层</h3><blockquote>
+<p>实现简化版 Transformer Encoder Layer：</p>
+<ul>
+<li>使用 <code>nn.MultiheadAttention</code></li>
+<li>残差连接 + LayerNorm</li>
+<li>输入 <code>(seq_len, batch_size, d_model)</code>，输出同形状</li>
+</ul>
+</blockquote>
+<h4 id="1-标准答案代码-4"><a href="#1-标准答案代码-4" class="headerlink" title="1. 标准答案代码"></a>1. 标准答案代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SimpleTransformerEncoder</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, d_model, nhead, dim_feedforward=<span class="number">2048</span>, dropout=<span class="number">0.1</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(SimpleTransformerEncoder, <span class="variable language_">self</span>).__init__()</span><br><span class="line">        <span class="comment"># 多头注意力</span></span><br><span class="line">        <span class="variable language_">self</span>.self_attn = nn.MultiheadAttention(embed_dim=d_model,</span><br><span class="line">                                               num_heads=nhead,</span><br><span class="line">                                               dropout=dropout,</span><br><span class="line">                                               batch_first=<span class="literal">False</span>)  <span class="comment"># (seq_len, batch, d_model)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 前馈网络</span></span><br><span class="line">        <span class="variable language_">self</span>.linear1 = nn.Linear(d_model, dim_feedforward)</span><br><span class="line">        <span class="variable language_">self</span>.linear2 = nn.Linear(dim_feedforward, d_model)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># LayerNorm</span></span><br><span class="line">        <span class="variable language_">self</span>.norm1 = nn.LayerNorm(d_model)</span><br><span class="line">        <span class="variable language_">self</span>.norm2 = nn.LayerNorm(d_model)</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.dropout = nn.Dropout(dropout)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, src</span>):</span><br><span class="line">        <span class="comment"># src: (seq_len, batch, d_model)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 1. 自注意力 + 残差 + LayerNorm</span></span><br><span class="line">        attn_output, attn_weights = <span class="variable language_">self</span>.self_attn(src, src, src)</span><br><span class="line">        src2 = <span class="variable language_">self</span>.dropout(attn_output)</span><br><span class="line">        src = <span class="variable language_">self</span>.norm1(src + src2)  <span class="comment"># 残差连接</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 2. 前馈网络 + 残差 + LayerNorm</span></span><br><span class="line">        ff = <span class="variable language_">self</span>.linear2(F.relu(<span class="variable language_">self</span>.linear1(src)))</span><br><span class="line">        ff = <span class="variable language_">self</span>.dropout(ff)</span><br><span class="line">        src = <span class="variable language_">self</span>.norm2(src + ff)    <span class="comment"># 再次残差</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> src</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    seq_len = <span class="number">5</span></span><br><span class="line">    batch_size = <span class="number">2</span></span><br><span class="line">    d_model = <span class="number">16</span></span><br><span class="line">    nhead = <span class="number">4</span></span><br><span class="line"></span><br><span class="line">    model = SimpleTransformerEncoder(d_model=d_model, nhead=nhead, dim_feedforward=<span class="number">64</span>)</span><br><span class="line">    dummy_input = torch.randn(seq_len, batch_size, d_model)</span><br><span class="line">    out = model(dummy_input)</span><br><span class="line">    <span class="built_in">print</span>(out.shape)  <span class="comment"># torch.Size([5, 2, 16])</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-详细讲解-4"><a href="#2-详细讲解-4" class="headerlink" title="2. 详细讲解"></a>2. 详细讲解</h4><ol>
+<li><p><strong>MultiheadAttention 输入输出形状：</strong></p>
+<ul>
+<li>这里设定 <code>batch_first=False</code>，所以输入&#x2F;输出都是 <code>(seq_len, batch, d_model)</code></li>
+<li><code>self.self_attn(src, src, src)</code> 表示<strong>自注意力</strong>：<ul>
+<li>query &#x3D; key &#x3D; value &#x3D; <code>src</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>残差连接：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">src = <span class="variable language_">self</span>.norm1(src + src2)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>原始输入 <code>src</code> 加上注意力输出 <code>src2</code></li>
+<li>再做 LayerNorm，稳定训练</li>
+</ul>
+</li>
+<li><p><strong>前馈网络（FFN）：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ff = <span class="variable language_">self</span>.linear2(F.relu(<span class="variable language_">self</span>.linear1(src)))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>维度变换：<code>d_model → dim_ff → d_model</code></li>
+<li>中间用 ReLU 激活</li>
+</ul>
+</li>
+<li><p><strong>第二个残差：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">src = <span class="variable language_">self</span>.norm2(src + ff)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>FFN 输出加回原来的 <code>src</code> 再做 LayerNorm</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h4 id="3-类似示例题-1-4"><a href="#3-类似示例题-1-4" class="headerlink" title="3. 类似示例题 1"></a>3. 类似示例题 1</h4><p><strong>题目 E1：</strong></p>
+<p>在 <code>SimpleTransformerEncoder</code> 基础上，加入 <strong>可选的 attention mask</strong>：</p>
+<ul>
+<li><code>forward(self, src, src_mask=None)</code></li>
+<li>调用 <code>self.self_attn</code> 时把 <code>attn_mask=src_mask</code> 传进去</li>
+</ul>
+<p><strong>参考答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MaskedTransformerEncoder</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, d_model, nhead, dim_feedforward=<span class="number">2048</span>, dropout=<span class="number">0.1</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(MaskedTransformerEncoder, <span class="variable language_">self</span>).__init__()</span><br><span class="line">        <span class="variable language_">self</span>.self_attn = nn.MultiheadAttention(d_model, nhead, dropout=dropout, batch_first=<span class="literal">False</span>)</span><br><span class="line">        <span class="variable language_">self</span>.linear1 = nn.Linear(d_model, dim_feedforward)</span><br><span class="line">        <span class="variable language_">self</span>.linear2 = nn.Linear(dim_feedforward, d_model)</span><br><span class="line">        <span class="variable language_">self</span>.norm1 = nn.LayerNorm(d_model)</span><br><span class="line">        <span class="variable language_">self</span>.norm2 = nn.LayerNorm(d_model)</span><br><span class="line">        <span class="variable language_">self</span>.dropout = nn.Dropout(dropout)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, src, src_mask=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="comment"># src_mask: (seq_len, seq_len)</span></span><br><span class="line">        attn_output, _ = <span class="variable language_">self</span>.self_attn(src, src, src, attn_mask=src_mask)</span><br><span class="line">        src = <span class="variable language_">self</span>.norm1(src + <span class="variable language_">self</span>.dropout(attn_output))</span><br><span class="line">        ff = <span class="variable language_">self</span>.linear2(F.relu(<span class="variable language_">self</span>.linear1(src)))</span><br><span class="line">        src = <span class="variable language_">self</span>.norm2(src + <span class="variable language_">self</span>.dropout(ff))</span><br><span class="line">        <span class="keyword">return</span> src</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    seq_len, batch, d_model = <span class="number">6</span>, <span class="number">2</span>, <span class="number">32</span></span><br><span class="line">    model = MaskedTransformerEncoder(d_model, nhead=<span class="number">4</span>, dim_feedforward=<span class="number">64</span>)</span><br><span class="line">    src = torch.randn(seq_len, batch, d_model)</span><br><span class="line">    <span class="comment"># 举例：简单的上三角 mask（不看未来）</span></span><br><span class="line">    mask = torch.triu(torch.ones(seq_len, seq_len) * <span class="built_in">float</span>(<span class="string">&#x27;-inf&#x27;</span>), diagonal=<span class="number">1</span>)</span><br><span class="line">    out = model(src, src_mask=mask)</span><br><span class="line">    <span class="built_in">print</span>(out.shape)  <span class="comment"># torch.Size([6, 2, 32])</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="4-类似示例题-2-4"><a href="#4-类似示例题-2-4" class="headerlink" title="4. 类似示例题 2"></a>4. 类似示例题 2</h4><p><strong>题目 E2：</strong></p>
+<p>写一个由 <strong>2 层 Transformer Encoder 堆叠</strong> 的小网络：</p>
+<ul>
+<li>利用刚才的 <code>SimpleTransformerEncoder</code></li>
+<li>类名 <code>TwoLayerEncoder</code>，<code>forward</code> 里依次通过两层</li>
+</ul>
+<p><strong>参考答案：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TwoLayerEncoder</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, d_model, nhead, dim_feedforward=<span class="number">128</span>, dropout=<span class="number">0.1</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(TwoLayerEncoder, <span class="variable language_">self</span>).__init__()</span><br><span class="line">        <span class="variable language_">self</span>.layer1 = SimpleTransformerEncoder(d_model, nhead, dim_feedforward, dropout)</span><br><span class="line">        <span class="variable language_">self</span>.layer2 = SimpleTransformerEncoder(d_model, nhead, dim_feedforward, dropout)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, src</span>):</span><br><span class="line">        x = <span class="variable language_">self</span>.layer1(src)</span><br><span class="line">        x = <span class="variable language_">self</span>.layer2(x)</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    seq_len, batch, d_model = <span class="number">4</span>, <span class="number">3</span>, <span class="number">32</span></span><br><span class="line">    src = torch.randn(seq_len, batch, d_model)</span><br><span class="line">    model = TwoLayerEncoder(d_model, nhead=<span class="number">4</span>)</span><br><span class="line">    out = model(src)</span><br><span class="line">    <span class="built_in">print</span>(out.shape)  <span class="comment"># torch.Size([4, 3, 32])</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>如果你愿意，下一步我可以帮你把这 5 题整理成“考试专用模板”：</p>
+<ul>
+<li>每题一个 <code>.py</code> 文件</li>
+<li>带中文注释版（考试前快速复习用）</li>
+<li>再加一份“空白模板版”（只写函数&#x2F;类框架，留空实现）方便自己练习。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Hyacinth</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/11/14/%E7%BC%96%E7%A8%8B%E6%B5%8B%E8%AF%95%E6%A8%A1%E6%8B%9F%E9%A2%98/">http://example.com/2025/11/14/%E7%BC%96%E7%A8%8B%E6%B5%8B%E8%AF%95%E6%A8%A1%E6%8B%9F%E9%A2%98/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Hyacinth</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/pytorch/">pytorch</a></div><div class="post-share"><div class="social-share" data-image="/media/avatar.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/11/17/%E5%BC%80%E9%A2%98%E6%B1%87%E6%8A%A5%E6%BC%94%E8%AE%B2%E7%A8%BF/" title="开题汇报演讲稿"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">开题汇报演讲稿</div></div><div class="info-2"><div class="info-item-1">开题汇报演讲稿 一、开场 &amp; 题目介绍（约 0:00–0:40） 各位老师上午好，我是XXX，我的课题是 《基于微表情和心理学特征的测谎关键技术研究与应用》。 今天的汇报主要分为六个部分：研究背景与意义、国内外研究现状、研究内容、研究方法、已有工作和进度安排。 下面我先从研究背景和意义开始介绍。  （说完这里，切到 Part 1 背景与意义）  二、Part 1 研究背景与意义（约 0:40–2:30）1. 背景（约 0:40–1:40） 在司法审讯、国家安全、边检以及一些关键岗位的人员筛查中，怎么判断一个人是不是在说真话，一直是非常重要但又非常难的问题。 传统上主要有两条路：  一条是生理测谎仪，去监测心率、血压、皮电等自主神经反应； 另一条是经验型的行为观察，比如看他的语气、姿态、目光等等。  这两类方法都有明显问题：生理测谎其实测的是“紧张、应激”，不是“说谎”本身，很容易受个体差异和反测试技巧影响；而纯靠人的经验去看表情和行为，又主观性很强，很难标准化和大规模应用。   心理学研究发现，当一个人撒谎的时候，内心真实情绪和外在表达之间往往是冲突的，这种冲突会在很短时...</div></div></div></a><a class="pagination-related" href="/2025/11/14/Conda%20%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5%E5%A4%A7%E5%85%A8/" title="Conda基本操作命令速查"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Conda基本操作命令速查</div></div><div class="info-2"><div class="info-item-1">Conda 命令速查大全适用平台：Windows &#x2F; macOS &#x2F; Linux（PowerShell、bash、zsh 等）。  0. 基础与自检1234conda --version                 # 查看 conda 版本conda info                      # 运行环境与配置概览conda config --show             # 展示所有配置项conda config --show-sources     # 配置文件来源（.condarc 位置）  初始化 shell（只需一次）： 123456# 任选或多选：bash / zsh / fish / powershell / cmd.execonda init bashconda init zshconda init fishconda init powershellconda init cmd.exe  看到 “No action taken.” 说明已初始化；重开终端即可。   1. 环境（env）管理1.1 创建 &#x2F; 激活 &...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/11/10/Chartgpt%E7%94%9F%E6%88%90%E7%9A%84%E5%8F%82%E8%80%83%E9%97%AE%E9%A2%98/" title="神经网络编程测试题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-10</div><div class="info-item-2">神经网络编程测试题</div></div><div class="info-2"><div class="info-item-1">综合测试：题目与参考答案（Markdown 版） 环境按题面用 Python ≥3.8、PyTorch ≥2.0。 一、目录与通用脚手架1234567deep_test/├─ q1_oop.py├─ q2_perceptron_logreg.py├─ q3_cnn.py├─ q4_lstm.py├─ q5_hybrid.py└─ utils.py  # 复用：seed、metrics、train/eval loop、toy data  utils.py（可复用） 1234567891011121314# utils.pyimport torch, random, numpy as npdef set_seed(sd=42):    random.seed(sd); np.random.seed(sd); torch.manual_seed(sd); torch.cuda.manual_seed_all(sd)def count_params(m): return sum(p.numel() for p in m.parameters() if p.requires_grad)de...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/media/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Hyacinth</div><div class="author-info-description">君子慎独,不欺暗室</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/YY-CN"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%BC%96%E7%A8%8B%E6%B5%8B%E8%AF%95%E6%A8%A1%E6%8B%9F%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">深度学习编程测试模拟题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81Python-%E7%BC%96%E7%A8%8B%E9%83%A8%E5%88%86"><span class="toc-number">1.1.</span> <span class="toc-text">一、Python 编程部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%981%EF%BC%8820%E5%88%86%EF%BC%89%E2%80%94%E2%80%94-%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E4%B8%8E%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.1.</span> <span class="toc-text">题1（20分）—— 函数式编程与高阶函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%A0%87%E5%87%86%E7%AD%94%E6%A1%88%E4%BB%A3%E7%A0%81"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">1. 标准答案代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E8%AF%A6%E7%BB%86%E8%AE%B2%E8%A7%A3"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">2. 详细讲解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E7%B1%BB%E4%BC%BC%E7%A4%BA%E4%BE%8B%E9%A2%98-1"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">3. 类似示例题 1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E7%B1%BB%E4%BC%BC%E7%A4%BA%E4%BE%8B%E9%A2%98-2"><span class="toc-number">1.1.1.4.</span> <span class="toc-text">4. 类似示例题 2</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%982%EF%BC%8820%E5%88%86%EF%BC%89%E2%80%94%E2%80%94-%E8%A3%85%E9%A5%B0%E5%99%A8%E4%B8%8E%E7%B1%BB%E7%9A%84%E7%BB%93%E5%90%88%E4%BD%BF%E7%94%A8"><span class="toc-number">1.1.2.</span> <span class="toc-text">题2（20分）—— 装饰器与类的结合使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%A0%87%E5%87%86%E7%AD%94%E6%A1%88%E4%BB%A3%E7%A0%81-1"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">1. 标准答案代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E8%AF%A6%E7%BB%86%E8%AE%B2%E8%A7%A3-1"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">2. 详细讲解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E7%B1%BB%E4%BC%BC%E7%A4%BA%E4%BE%8B%E9%A2%98-1-1"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">3. 类似示例题 1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E7%B1%BB%E4%BC%BC%E7%A4%BA%E4%BE%8B%E9%A2%98-2-1"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">4. 类似示例题 2</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81PyTorch-%E7%BC%96%E7%A8%8B%E9%83%A8%E5%88%86"><span class="toc-number">1.2.</span> <span class="toc-text">二、PyTorch 编程部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%983%EF%BC%8820%E5%88%86%EF%BC%89%E2%80%94%E2%80%94-CNN-%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB%EF%BC%88MNIST%EF%BC%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">题3（20分）—— CNN 图像分类（MNIST）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%A0%87%E5%87%86%E7%AD%94%E6%A1%88%E4%BB%A3%E7%A0%81-2"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">1. 标准答案代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E8%AF%A6%E7%BB%86%E8%AE%B2%E8%A7%A3-2"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">2. 详细讲解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E7%B1%BB%E4%BC%BC%E7%A4%BA%E4%BE%8B%E9%A2%98-1-2"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">3. 类似示例题 1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E7%B1%BB%E4%BC%BC%E7%A4%BA%E4%BE%8B%E9%A2%98-2-2"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">4. 类似示例题 2</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%984%EF%BC%8820%E5%88%86%EF%BC%89%E2%80%94%E2%80%94-LSTM-%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.2.</span> <span class="toc-text">题4（20分）—— LSTM 文本分类模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%A0%87%E5%87%86%E7%AD%94%E6%A1%88%E4%BB%A3%E7%A0%81-3"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">1. 标准答案代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E8%AF%A6%E7%BB%86%E8%AE%B2%E8%A7%A3-3"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">2. 详细讲解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E7%B1%BB%E4%BC%BC%E7%A4%BA%E4%BE%8B%E9%A2%98-1-3"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">3. 类似示例题 1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E7%B1%BB%E4%BC%BC%E7%A4%BA%E4%BE%8B%E9%A2%98-2-3"><span class="toc-number">1.2.2.4.</span> <span class="toc-text">4. 类似示例题 2</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%985%EF%BC%8820%E5%88%86%EF%BC%89%E2%80%94%E2%80%94-Transformer-%E7%BC%96%E7%A0%81%E5%99%A8%E5%B1%82"><span class="toc-number">1.2.3.</span> <span class="toc-text">题5（20分）—— Transformer 编码器层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%A0%87%E5%87%86%E7%AD%94%E6%A1%88%E4%BB%A3%E7%A0%81-4"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">1. 标准答案代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E8%AF%A6%E7%BB%86%E8%AE%B2%E8%A7%A3-4"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">2. 详细讲解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E7%B1%BB%E4%BC%BC%E7%A4%BA%E4%BE%8B%E9%A2%98-1-4"><span class="toc-number">1.2.3.3.</span> <span class="toc-text">3. 类似示例题 1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E7%B1%BB%E4%BC%BC%E7%A4%BA%E4%BE%8B%E9%A2%98-2-4"><span class="toc-number">1.2.3.4.</span> <span class="toc-text">4. 类似示例题 2</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/17/%E5%BC%80%E9%A2%98%E6%B1%87%E6%8A%A5%E6%BC%94%E8%AE%B2%E7%A8%BF/" title="开题汇报演讲稿">开题汇报演讲稿</a><time datetime="2025-11-16T19:36:11.000Z" title="发表于 2025-11-17 03:36:11">2025-11-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/14/%E7%BC%96%E7%A8%8B%E6%B5%8B%E8%AF%95%E6%A8%A1%E6%8B%9F%E9%A2%98/" title="深度学习编程测试模拟题">深度学习编程测试模拟题</a><time datetime="2025-11-14T07:04:52.000Z" title="发表于 2025-11-14 15:04:52">2025-11-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/14/Conda%20%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5%E5%A4%A7%E5%85%A8/" title="Conda基本操作命令速查">Conda基本操作命令速查</a><time datetime="2025-11-14T03:56:27.000Z" title="发表于 2025-11-14 11:56:27">2025-11-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE%E7%9A%84%E8%AE%BE%E8%AE%A1/" title="文章的分类和标签设计和查询">文章的分类和标签设计和查询</a><time datetime="2025-11-12T09:30:48.000Z" title="发表于 2025-11-12 17:30:48">2025-11-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/12/Git%E5%91%BD%E4%BB%A4%E5%90%88%E9%9B%86/" title="Git基本操作命令速查">Git基本操作命令速查</a><time datetime="2025-11-12T03:56:27.000Z" title="发表于 2025-11-12 11:56:27">2025-11-12</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By Hyacinth</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.2</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.2"></script><script src="/js/main.js?v=5.5.2"></script><div class="js-pjax"></div><script async data-pjax src="/"></script></div></body></html>
