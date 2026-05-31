@@ -1,0 +1,314 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>music | Hyacinth</title><meta name="author" content="Hyacinth"><meta name="copyright" content="Hyacinth"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="MY MUSIC SPACE       音乐收藏馆                这里收藏我喜欢的专辑、歌单和单曲。音乐有时候像一段记忆，也像某个阶段的情绪切片。                                  24           收藏专辑                             86           喜欢单曲">
+<meta property="og:type" content="website">
+<meta property="og:title" content="music">
+<meta property="og:url" content="https://hyacinth.xin/music/index.html">
+<meta property="og:site_name" content="Hyacinth">
+<meta property="og:description" content="MY MUSIC SPACE       音乐收藏馆                这里收藏我喜欢的专辑、歌单和单曲。音乐有时候像一段记忆，也像某个阶段的情绪切片。                                  24           收藏专辑                             86           喜欢单曲">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
+<meta property="article:published_time" content="2026-05-31T09:26:06.000Z">
+<meta property="article:modified_time" content="2026-05-31T14:20:28.490Z">
+<meta property="article:author" content="Hyacinth">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/sakura.png"><link rel="canonical" href="https://hyacinth.xin/music/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'music',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'page'
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@4.5.12/index.min.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      if ($loadingBox.classList.contains('loaded')) return
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+
+  if (document.readyState === 'complete') {
+    preloader.endLoading()
+  } else {
+    window.addEventListener('load', preloader.endLoading)
+    document.addEventListener('DOMContentLoaded', preloader.endLoading)
+    // Add timeout protection: force end after 7 seconds
+    setTimeout(preloader.endLoading, 7000)
+  }
+
+  if (false) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="web_bg" style="background-image: url(/media/%E8%9C%A1%E7%AC%94%E5%B0%8F%E6%96%B0_%E7%A6%81%E6%AD%A2%E7%84%A6%E8%99%91.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&amp;spec=640&amp;img_type=jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-comment-alt"></i><span> 说说</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background: transparent;"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hyacinth</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-comment-alt"></i><span> 说说</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="page-site-info"><h1 id="site-title">music</h1></div></header><main class="layout hide-aside" id="content-inner"><div id="page"><div class="container" id="article-container"><link rel="stylesheet" href="/css/music.css">
+
+<div class="music-page">
+  <section class="music-hero">
+    <div class="music-hero-content">
+      <p class="music-label">MY MUSIC SPACE</p>
+      <h1>音乐收藏馆</h1>
+      <p class="music-desc">
+        这里收藏我喜欢的专辑、歌单和单曲。音乐有时候像一段记忆，也像某个阶段的情绪切片。
+      </p>
+      <div class="music-stats">
+        <div>
+          <strong>24</strong>
+          <span>收藏专辑</span>
+        </div>
+        <div>
+          <strong>86</strong>
+          <span>喜欢单曲</span>
+        </div>
+        <div>
+          <strong>12</strong>
+          <span>推荐歌单</span>
+        </div>
+      </div>
+    </div>
+    <div class="music-hero-cover">
+      <!-- <img src="/img/music/cover-main.jpg" alt="音乐封面"> -->
+      <img src="https://picsum.photos/seed/21/800/400" alt="音乐封面">
+    </div>
+  </section>
+
+  <section class="music-section">
+    <div class="section-title">
+      <h2>推荐专辑</h2>
+      <p>一些最近常听，或者一直很喜欢的专辑。</p>
+    </div>
+    <div class="album-grid">
+      <div class="album-card">
+        <img src="https://picsum.photos/seed/22/800/400" alt="专辑封面">
+        <div class="album-info">
+          <h3>专辑名称 1</h3>
+          <p>歌手名称 1</p>
+          <span>流行 / 2024</span>
+        </div>
+      </div>
+      <div class="album-card">
+        <img src="https://picsum.photos/seed/23/800/400" alt="专辑封面">
+        <div class="album-info">
+          <h3>专辑名称 2</h3>
+          <p>歌手名称 2</p>
+          <span>独立 / 2023</span>
+        </div>
+      </div>
+      <div class="album-card">
+        <img src="https://picsum.photos/seed/24/800/400" alt="专辑封面">
+        <div class="album-info">
+          <h3>专辑名称 3</h3>
+          <p>歌手名称 3</p>
+          <span>电子 / 2022</span>
+        </div>
+      </div>
+      <div class="album-card">
+        <img src="https://picsum.photos/seed/25/800/400" alt="专辑封面">
+        <div class="album-info">
+          <h3>专辑名称 4</h3>
+          <p>歌手名称 4</p>
+          <span>民谣 / 2021</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="music-section">
+    <div class="section-title">
+      <h2>我的歌单</h2>
+      <p>按照不同心情和场景整理的音乐列表。</p>
+    </div>
+    <div class="playlist-grid">
+      <div class="playlist-card">
+        <div class="playlist-icon">☁️</div>
+        <h3>夜晚循环</h3>
+        <p>适合晚上写东西、看书或者发呆时听。</p>
+        <span>32 首歌曲</span>
+      </div>
+      <div class="playlist-card">
+        <div class="playlist-icon">🌧️</div>
+        <h3>雨天歌单</h3>
+        <p>适合阴天、下雨、一个人坐车的时候。</p>
+        <span>18 首歌曲</span>
+      </div>
+      <div class="playlist-card">
+        <div class="playlist-icon">🌙</div>
+        <h3>安静入眠</h3>
+        <p>轻柔、舒缓、适合睡前慢慢听。</p>
+        <span>25 首歌曲</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="music-section">
+    <div class="section-title">
+      <h2>喜欢的单曲</h2>
+      <p>这里先用静态内容，后面可以替换成网易云或 QQ 音乐 API 数据。</p>
+    </div>
+    <div class="song-toolbar">
+      <input id="song-search" type="text" placeholder="搜索歌曲、歌手或专辑">
+    </div>
+    <div class="song-list" id="song-list">
+      <!-- 歌曲列表由 /js/music.js 生成 -->
+    </div>
+  </section>
+
+  <section class="music-section">
+    <div class="section-title">
+      <h2>音乐播放器</h2>
+      <p>这里预留播放器区域，后续可以接 APlayer、MetingJS、网易云或 QQ 音乐接口。</p>
+    </div>
+    <div class="player-card">
+      <div class="player-cover">
+        <img src="/img/music/player-cover.jpg" alt="播放器封面">
+      </div>
+      <div class="player-info">
+        <p class="playing-label">NOW PLAYING</p>
+        <h3 id="current-song-name">暂未播放</h3>
+        <p id="current-song-artist">点击上方歌曲列表中的“播放”按钮</p>
+        <div class="fake-progress">
+          <span></span>
+        </div>
+        <div class="player-buttons">
+          <button>上一首</button>
+          <button class="main-btn">播放</button>
+          <button>下一首</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="/js/music.js"></script></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Hyacinth</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.2</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.2"></script><script src="/js/main.js?v=5.5.2"></script><div class="js-pjax"></div><script async data-pjax src="/"></script></div></body></html>

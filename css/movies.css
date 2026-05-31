@@ -1,0 +1,135 @@
+.movies-page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 10px 10px 45px;
+}
+
+.movies-hero {
+  margin-bottom: 42px;
+  padding: 40px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, rgba(255, 170, 120, 0.18), rgba(120, 119, 198, 0.12));
+  box-shadow: var(--card-box-shadow);
+}
+
+.movies-label {
+  margin: 0 0 12px;
+  font-size: 13px;
+  letter-spacing: 4px;
+  opacity: 0.62;
+}
+
+.movies-hero h1 {
+  margin: 0;
+  font-size: 42px;
+  line-height: 1.2;
+}
+
+.movies-desc {
+  max-width: 720px;
+  margin: 18px 0 0;
+  line-height: 1.9;
+  opacity: 0.76;
+}
+
+.movies-section {
+  margin-bottom: 44px;
+}
+
+.section-title {
+  margin-bottom: 20px;
+}
+
+.section-title h2 {
+  margin: 0 0 8px;
+  font-size: 27px;
+}
+
+.section-title p {
+  margin: 0;
+  line-height: 1.8;
+  opacity: 0.68;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.movie-card {
+  overflow: hidden;
+  border-radius: 22px;
+  background: var(--card-bg);
+  box-shadow: var(--card-box-shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.movie-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.16);
+}
+
+.movie-card img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.movie-info {
+  padding: 14px 15px 16px;
+}
+
+.movie-info h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.movie-info span {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  background: rgba(128, 128, 128, 0.14);
+  opacity: 0.78;
+}
+
+.movies-loading,
+.movies-empty,
+.movies-error {
+  grid-column: 1 / -1;
+  padding: 28px;
+  border-radius: 22px;
+  background: var(--card-bg);
+  box-shadow: var(--card-box-shadow);
+  text-align: center;
+  opacity: 0.75;
+}
+
+@media screen and (max-width: 1100px) {
+  .movie-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .movie-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .movies-hero {
+    padding: 28px;
+  }
+
+  .movies-hero h1 {
+    font-size: 34px;
+  }
+
+  .movie-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
