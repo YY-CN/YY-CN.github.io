@@ -1,28 +1,28 @@
 const songs = [
   {
-    name: '歌曲名称 1',
-    artist: '歌手 A',
-    album: '专辑名称 1'
+    name: 'Love Forever (永恒的爱)',
+    artist: '加藤ミリヤ/清水翔太',
+    album: 'Love Forever'
   },
   {
-    name: '歌曲名称 2',
-    artist: '歌手 B',
-    album: '专辑名称 2'
+    name: '好きだから。 (因为我喜欢你。)',
+    artist: '『ユイカ』/れん (Ren)',
+    album: '好きだから。'
   },
   {
-    name: '歌曲名称 3',
-    artist: '歌手 C',
-    album: '专辑名称 3'
+    name: '须尽欢',
+    artist: '浅影阿',
+    album: '浅影的翻唱合集'
   },
   {
-    name: '歌曲名称 4',
-    artist: '歌手 D',
-    album: '专辑名称 4'
+    name: 'You(=I)',
+    artist: '脸红的思春期 (볼빨간사춘기)',
+    album: 'RED PLANET (JAPAN EDITION)'
   },
   {
-    name: '歌曲名称 5',
-    artist: '歌手 E',
-    album: '夜晚循环'
+    name: '忘れてください (还请忘却)',
+    artist: '『ユイカ』/れん (Ren)',
+    album: '忘れてください (还请忘却)'
   }
 ]
 
