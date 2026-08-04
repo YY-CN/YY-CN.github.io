@@ -1,282 +1,1487 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Hyacinth</title><meta name="author" content="Hyacinth"><meta name="copyright" content="Hyacinth"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="君子慎独,不欺暗室">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="君子慎独,不欺暗室">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Hyacinth">
 <meta property="og:url" content="https://hyacinth.xin/page/4/index.html">
 <meta property="og:site_name" content="Hyacinth">
 <meta property="og:description" content="君子慎独,不欺暗室">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
 <meta property="article:author" content="Hyacinth">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/sakura.png"><link rel="canonical" href="https://hyacinth.xin/page/4/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
-    (() => {
-      
-    const saveToLocal = {
-      set: (key, value, ttl) => {
-        if (!ttl) return
-        const expiry = Date.now() + ttl * 86400000
-        localStorage.setItem(key, JSON.stringify({ value, expiry }))
-      },
-      get: key => {
-        const itemStr = localStorage.getItem(key)
-        if (!itemStr) return undefined
-        const { value, expiry } = JSON.parse(itemStr)
-        if (Date.now() > expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return value
-      }
-    }
 
-    window.btf = {
-      saveToLocal,
-      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = url
-        script.async = true
-        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
-        script.onload = script.onreadystatechange = () => {
-          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
-        }
-        script.onerror = reject
-        document.head.appendChild(script)
-      }),
-      getCSS: (url, id) => new Promise((resolve, reject) => {
-        const link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.href = url
-        if (id) link.id = id
-        link.onload = link.onreadystatechange = () => {
-          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
-        }
-        link.onerror = reject
-        document.head.appendChild(link)
-      }),
-      addGlobalFn: (key, fn, name = false, parent = window) => {
-        if (!false && key.startsWith('pjax')) return
-        const globalFn = parent.globalFn || {}
-        globalFn[key] = globalFn[key] || {}
-        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
-        parent.globalFn = globalFn
-      }
-    }
+<link rel="canonical" href="https://hyacinth.xin/page/4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Hyacinth</title>
   
-      
-      const activateDarkMode = () => {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
-        }
-      }
-      const activateLightMode = () => {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
-        }
-      }
 
-      btf.activateDarkMode = activateDarkMode
-      btf.activateLightMode = activateLightMode
 
-      const theme = saveToLocal.get('theme')
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hyacinth</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
     
-          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
-        
-      
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
-      }
-    
-      
-    const detectApple = () => {
-      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
-  
-    })()
-  </script><script>const GLOBAL_CONFIG = {
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
-  copy: {
-    success: '复制成功',
-    error: '复制失败',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  dateSuffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: undefined,
-  lightbox: 'null',
-  Snackbar: undefined,
-  infinitegrid: {
-    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
-    buttonText: '加载更多'
-  },
-  isPhotoFigcaption: false,
-  islazyloadPlugin: false,
-  isAnchor: false,
-  percent: {
-    toc: true,
-    rightside: false,
-  },
-  autoDarkmode: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: 'Hyacinth',
-  isHighlightShrink: false,
-  isToc: false,
-  pageType: 'home'
-}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@4.5.12/index.min.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
-  const $loadingBox = document.getElementById('loading-box')
-  const $body = document.body
-  const preloader = {
-    endLoading: () => {
-      if ($loadingBox.classList.contains('loaded')) return
-      $body.style.overflow = ''
-      $loadingBox.classList.add('loaded')
-    },
-    initLoading: () => {
-      $body.style.overflow = 'hidden'
-      $loadingBox.classList.remove('loaded')
-    }
-  }
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
 
-  preloader.initLoading()
 
-  if (document.readyState === 'complete') {
-    preloader.endLoading()
-  } else {
-    window.addEventListener('load', preloader.endLoading)
-    document.addEventListener('DOMContentLoaded', preloader.endLoading)
-    // Add timeout protection: force end after 7 seconds
-    setTimeout(preloader.endLoading, 7000)
-  }
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
 
-  if (false) {
-    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
-    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
-  }
-})()</script><div id="web_bg" style="background-image: url(https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/%E8%9C%A1%E7%AC%94%E5%B0%8F%E6%96%B0_%E7%A6%81%E6%AD%A2%E7%84%A6%E8%99%91.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&amp;spec=640&amp;img_type=jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-comment-alt"></i><span> 说说</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background: transparent;"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hyacinth</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-comment-alt"></i><span> 说说</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">Hyacinth</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="post_cover left"><a href="/2026/05/30/%E6%A2%85%E8%8A%B1%E6%98%93%E6%95%B0%E8%B5%B7%E5%8D%A6/" title="梅花易数起卦"><img class="post-bg" src="https://picsum.photos/seed/meihualearn/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="梅花易数起卦"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/05/30/%E6%A2%85%E8%8A%B1%E6%98%93%E6%95%B0%E8%B5%B7%E5%8D%A6/" title="梅花易数起卦">梅花易数起卦</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-05-29T16:22:27.000Z" title="发表于 2026-05-30 00:22:27">2026-05-30</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%98%93%E5%AD%A6/">易学</a></span></div><div class="content">一、先天起卦（未得卦先得数）梅花易数以先天卦序“乾1、兑2、离3、震4、巽5、坎6、艮7、坤8”取数，卦以八除，爻以六除。 卦以八除：即取得数字后除8取余数对应卦，例如得数字7为艮卦；数字12除8余4为震卦。 爻以六除：即取变爻时，以重卦总数除6取余数做变爻，例15除6余3，则3爻变。 1、时间起卦法（年月日时起卦）直接利用起卦当下的农历时间（年、月、日、时）来推算。  适用场景： 心中突然有事想测，或者有人直接来问事，没有其他明显的外部兆头。 取数规则： 年数： 取地支排序（子1，丑2，寅3…亥12）。 月数： 取农历月份（正月为1…腊月为12）。 日数： 取农历日期（初一为1…三十为30）。 时数： 取地支排序（子1，丑2，寅3…亥12）。   推算公式： 上卦 &#x3D; (年 + 月 + 日) ÷ 8 取余数 下卦 &#x3D; (年 + 月 + 日 + 时) ÷ 8 取余数 动爻 &#x3D; (年 + 月 + 日 + 时) ÷ 6 取余数    例：2017年1月14日上午10点起卦 农历：丙申年十二月十七日巳时。 上卦：7（年数）+12（月数）+17（日数）&#x...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2026/04/30/vscode%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/" title="vscode远程连接AutoDL"><img class="post-bg" src="https://picsum.photos/seed/vscoderemotecnn/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="vscode远程连接AutoDL"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/04/30/vscode%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/" title="vscode远程连接AutoDL">vscode远程连接AutoDL</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-04-29T16:25:54.000Z" title="发表于 2026-04-30 00:25:54">2026-04-30</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9D%82%E9%A1%B9/">杂项</a></span></div><div class="content">一、准备工作1、你本地需要装什么本地至少准备这几个：  VS Code VS Code 扩展：Remote - SSH 本地终端 Windows：PowerShell &#x2F; Windows Terminal macOS &#x2F; Linux：Terminal    VS Code 官方说明，Remote - SSH 扩展可以让你直接打开远端机器上的文件夹，并像本地开发一样使用 VS Code 的功能。 2、AutoDL 实例要处于开机状态AutoDL 控制台里把实例开机，然后复制它给你的 SSH 命令。AutoDL 官方文档里就是这种形式： 1ssh -p 38076 root@region-1.autodl.com  这里面分别对应：  用户名：root 主机地址：region-1.autodl.com 端口：38076   二、测试普通 SSH 能不能连上在本地终端先试一次，不要一上来就开 VS Code。 1ssh -p 38076 root@region-1.autodl.com  如果第一次连接，终端可能会提示是否信任主机，输入： 1yes  然后输入 Au...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2025/11/14/Conda%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5/" title="Conda命令速查"><img class="post-bg" src="https://picsum.photos/seed/condacmdrefer/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Conda命令速查"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/11/14/Conda%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5/" title="Conda命令速查">Conda命令速查</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-14T03:56:27.000Z" title="发表于 2025-11-14 11:56:27">2025-11-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9D%82%E9%A1%B9/">杂项</a></span></div><div class="content">Conda 命令速查适用平台：Windows &#x2F; macOS &#x2F; Linux（PowerShell、bash、zsh 等）。  1. 基础与自检1234conda --version                 # 查看 conda 版本conda info                      # 运行环境与配置概览conda config --show             # 展示所有配置项conda config --show-sources     # 配置文件来源（.condarc 位置）  初始化 shell（只需一次）： 123456# 任选或多选：bash / zsh / fish / powershell / cmd.execonda init bashconda init zshconda init fishconda init powershellconda init cmd.exe  看到 “No action taken.” 说明已初始化；重开终端即可。  2. 环境（env）管理2.1 创建 &#x2F; 激活 &#x2...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2025/11/12/%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE%E7%9A%84%E8%AE%BE%E8%AE%A1/" title="文章的分类和标签设计"><img class="post-bg" src="https://picsum.photos/seed/design/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="文章的分类和标签设计"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/11/12/%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE%E7%9A%84%E8%AE%BE%E8%AE%A1/" title="文章的分类和标签设计">文章的分类和标签设计</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-12T09:30:48.000Z" title="发表于 2025-11-12 17:30:48">2025-11-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9D%82%E9%A1%B9/">杂项</a></span></div><div class="content">文章的分类和标签设计分类（Categories）技术类 编程语言（programming-languages） 算法与数据结构（algorithms-and-data-structures） 计算机系统（computer-systems） 网络与安全（networks-and-security） 数据库与数据（databases-and-data） 人工智能&#x2F;机器学习（machine-learning） 前端开发（frontend） 后端与分布式（backend-and-distributed） 移动与客户端（mobile-and-client） 运维与DevOps（devops） 软件工程与工具（software-engineering） 图形学与多媒体（graphics-and-media） 人机交互与可用性（hci-and-ux） 数学基础（math-foundations） 课程与作业（courses-and-assignments） 项目与实习（projects-and-internships） 读书与论文笔记（reading-and-papers） 比赛与刷...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2025/11/12/Git%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5/" title="Git命令速查"><img class="post-bg" src="https://picsum.photos/seed/gitcmdrefer/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git命令速查"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/11/12/Git%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5/" title="Git命令速查">Git命令速查</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-12T03:56:27.000Z" title="发表于 2025-11-12 11:56:27">2025-11-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9D%82%E9%A1%B9/">杂项</a></span></div><div class="content">Git 命令速查适用平台：Windows &#x2F; macOS &#x2F; Linux。覆盖安装后常用到的配置 &#x2F; 新建与克隆 &#x2F; 提交与撤销 &#x2F; 分支与合并 &#x2F; Rebase &#x2F; 远端 &#x2F; 标签 &#x2F; 记录 &#x2F; 暂存 &#x2F; 子模块 &#x2F; 工作树 &#x2F; 稀疏检出 &#x2F; 清理 &#x2F; 排错等。  1. 基础配置（一次性&#x2F;全局）12345678910111213git --versiongit config --global user.name &quot;Your Name&quot;git config --global user.email &quot;you@example.com&quot;git config --global init.defaultBranch main           # 默认主分支名git config --global core.autocrlf input              # macOS/Linux ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2025/11/11/%E5%BE%AE%E8%A1%A8%E6%83%85%E5%92%8C%E5%BF%83%E7%90%86%E7%89%B9%E5%BE%81%E4%B8%80%E8%87%B4%E6%80%A7%E8%9E%8D%E5%90%88%E7%9A%84%E6%B5%8B%E8%B0%8E%E6%A8%A1%E5%9E%8B%E7%A0%94%E7%A9%B6/" title="微表情和心理特征一致性融合的测谎模型研究"><img class="post-bg" src="https://picsum.photos/seed/mirorec/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="微表情和心理特征一致性融合的测谎模型研究"></a></div><div class="recent-post-info"><a class="article-title" href="/2025/11/11/%E5%BE%AE%E8%A1%A8%E6%83%85%E5%92%8C%E5%BF%83%E7%90%86%E7%89%B9%E5%BE%81%E4%B8%80%E8%87%B4%E6%80%A7%E8%9E%8D%E5%90%88%E7%9A%84%E6%B5%8B%E8%B0%8E%E6%A8%A1%E5%9E%8B%E7%A0%94%E7%A9%B6/" title="微表情和心理特征一致性融合的测谎模型研究">微表情和心理特征一致性融合的测谎模型研究</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-11-10T21:04:52.000Z" title="发表于 2025-11-11 05:04:52">2025-11-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a></span></div><div class="content">微表情和心理特征一致性融合的测谎模型研究 一句话：就是做一个“看脸+听声音+看说话内容”的多模态测谎模型，核心不是简单把特征拼在一起，而是专门抓“微表情”和“心理特征”之间的不一致，把“言不由衷”“认知超载”这种心理机制用算法形式表达出来。  一、在整个课题中的位置 研究内容一：解决“有啥数据”的问题（数据集分析与构建）。 研究内容二：解决“怎么判断谎言”的核心算法问题。 研究内容三：把算法做成一个可用的平台系统。  所以，研究内容二就是：基于微表情和心理特征一致性融合的测谎模型研究——是整篇论文里最“算法”和“创新点”集中的部分。 二、这个模型整体在做什么？从流程上看，可以概括成三层：  原始输入： 视频：包含被试脸部的连续帧（微表情信号） 音频：说话的声音（语速、停顿、音高等） 文本：把说话内容转成文字（语义、情感、复杂度等）   中间特征层： 视觉通道 → 提取微表情时空特征 语音&#x2F;文本通道 → 计算认知负荷分数序列、情绪矛盾分数序列等“心理学特征”，再编码成一个心理特征向量（+基本声学与文本特征）   决策层： 通过一个一致性融合模块（交叉注意力 + 不一致性加...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/3/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="page-number current">4</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&amp;spec=640&amp;img_type=jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Hyacinth</div><div class="author-info-description">君子慎独,不欺暗室</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/YY-CN"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">嘻嘻，我一定要活下去！</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/07/03/%E9%9B%B7%E5%9C%B0%E8%B1%AB/" title="雷地豫"><img src="https://picsum.photos/seed/leidiyu/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="雷地豫"/></a><div class="content"><a class="title" href="/2026/07/03/%E9%9B%B7%E5%9C%B0%E8%B1%AB/" title="雷地豫">雷地豫</a><time datetime="2026-07-03T07:45:00.000Z" title="发表于 2026-07-03 15:45:00">2026-07-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/07/03/%E5%9C%B0%E5%B1%B1%E8%B0%A6/" title="地山谦"><img src="https://picsum.photos/seed/dishanqian/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="地山谦"/></a><div class="content"><a class="title" href="/2026/07/03/%E5%9C%B0%E5%B1%B1%E8%B0%A6/" title="地山谦">地山谦</a><time datetime="2026-07-03T07:41:55.000Z" title="发表于 2026-07-03 15:41:55">2026-07-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/07/03/%E7%81%AB%E5%A4%A9%E5%A4%A7%E6%9C%89/" title="火天大有"><img src="https://picsum.photos/seed/huotiandayou/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="火天大有"/></a><div class="content"><a class="title" href="/2026/07/03/%E7%81%AB%E5%A4%A9%E5%A4%A7%E6%9C%89/" title="火天大有">火天大有</a><time datetime="2026-07-03T07:39:42.000Z" title="发表于 2026-07-03 15:39:42">2026-07-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/07/03/%E5%A4%A9%E7%81%AB%E5%90%8C%E4%BA%BA/" title="天火同人"><img src="https://picsum.photos/seed/tianhuotongren/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="天火同人"/></a><div class="content"><a class="title" href="/2026/07/03/%E5%A4%A9%E7%81%AB%E5%90%8C%E4%BA%BA/" title="天火同人">天火同人</a><time datetime="2026-07-03T07:37:45.000Z" title="发表于 2026-07-03 15:37:45">2026-07-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/07/03/%E5%A4%A9%E5%9C%B0%E5%90%A6/" title="天地否"><img src="https://picsum.photos/seed/tiandipi/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="天地否"/></a><div class="content"><a class="title" href="/2026/07/03/%E5%A4%A9%E5%9C%B0%E5%90%A6/" title="天地否">天地否</a><time datetime="2026-07-03T07:34:40.000Z" title="发表于 2026-07-03 15:34:40">2026-07-03</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
-            <i class="fas fa-folder-open"></i>
-            <span>分类</span>
+          <div class="content index posts-expand">
             
-          </div>
-          <ul class="card-category-list" id="aside-cat-list">
-            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">学习笔记</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%98%93%E5%AD%A6/"><span class="card-category-list-name">易学</span><span class="card-category-list-count">26</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%9D%82%E9%A1%B9/"><span class="card-category-list-name">杂项</span><span class="card-category-list-count">8</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">论文笔记</span><span class="card-category-list-count">1</span></a></li>
-          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/paper/" style="font-size: 1.1em; color: #999">paper</a> <a href="/tags/%E6%9D%82%E9%A1%B9/" style="font-size: 1.34em; color: #99a3b0">杂项</a> <a href="/tags/%E5%85%AD%E7%88%BB/" style="font-size: 1.18em; color: #999ca1">六爻</a> <a href="/tags/%E5%85%AD%E5%8D%81%E5%9B%9B%E5%8D%A6/" style="font-size: 1.42em; color: #99a6b7">六十四卦</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 1.5em; color: #99a9bf">学习笔记</a> <a href="/tags/%E6%A2%85%E8%8A%B1%E6%98%93%E6%95%B0/" style="font-size: 1.26em; color: #999fa8">梅花易数</a> <a href="/tags/%E5%91%A8%E6%98%93/" style="font-size: 1.42em; color: #99a6b7">周易</a> <a href="/tags/Linux/" style="font-size: 1.1em; color: #999">Linux</a></div></div><div class="card-widget card-archives">
-    <div class="item-headline">
-      <i class="fas fa-archive"></i>
-      <span>归档</span>
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2026/05/30/%E6%A2%85%E8%8A%B1%E6%98%93%E6%95%B0%E8%B5%B7%E5%8D%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/05/30/%E6%A2%85%E8%8A%B1%E6%98%93%E6%95%B0%E8%B5%B7%E5%8D%A6/" class="post-title-link" itemprop="url">梅花易数起卦</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-05-30 00:22:27" itemprop="dateCreated datePublished" datetime="2026-05-30T00:22:27+08:00">2026-05-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-06-03 21:38:42" itemprop="dateModified" datetime="2026-06-03T21:38:42+08:00">2026-06-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%98%93%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">易学</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="一、先天起卦（未得卦先得数）"><a href="#一、先天起卦（未得卦先得数）" class="headerlink" title="一、先天起卦（未得卦先得数）"></a>一、先天起卦（未得卦先得数）</h1><p>梅花易数以先天卦序“乾1、兑2、离3、震4、巽5、坎6、艮7、坤8”取数，卦以八除，爻以六除。</p>
+<p>卦以八除：即取得数字后除8取余数对应卦，例如得数字7为艮卦；数字12除8余4为震卦。</p>
+<p>爻以六除：即取变爻时，以重卦总数除6取余数做变爻，例15除6余3，则3爻变。</p>
+<h2 id="1、时间起卦法（年月日时起卦）"><a href="#1、时间起卦法（年月日时起卦）" class="headerlink" title="1、时间起卦法（年月日时起卦）"></a>1、时间起卦法（年月日时起卦）</h2><p>直接利用起卦当下的农历时间（年、月、日、时）来推算。</p>
+<ul>
+<li><strong>适用场景：</strong> 心中突然有事想测，或者有人直接来问事，没有其他明显的外部兆头。</li>
+<li><strong>取数规则：</strong><ul>
+<li><strong>年数：</strong> 取地支排序（子1，丑2，寅3…亥12）。</li>
+<li><strong>月数：</strong> 取农历月份（正月为1…腊月为12）。</li>
+<li><strong>日数：</strong> 取农历日期（初一为1…三十为30）。</li>
+<li><strong>时数：</strong> 取地支排序（子1，丑2，寅3…亥12）。</li>
+</ul>
+</li>
+<li><strong>推算公式：</strong><ul>
+<li>上卦 &#x3D; (年 + 月 + 日) ÷ 8 取余数</li>
+<li>下卦 &#x3D; (年 + 月 + 日 + 时) ÷ 8 取余数</li>
+<li>动爻 &#x3D; (年 + 月 + 日 + 时) ÷ 6 取余数</li>
+</ul>
+</li>
+</ul>
+<p><strong>例：2017年1月14日上午10点起卦</strong></p>
+<p>农历：丙申年十二月十七日巳时。</p>
+<p>上卦：7（年数）+12（月数）+17（日数）&#x3D;36÷8余4，为震；</p>
+<p>下卦：7（年数）+12（月数）+17（日数）+6（时数）&#x3D;42÷8余2，为兑卦；</p>
+<p>变卦：7（年数）+12（月数）+17（日数）+6（时数）&#x3D;42÷6正好除尽，没有余数，就按6算，6爻动；</p>
+<p>卦象：雷泽归妹（下兑上震）卦变火泽睽（下兑上离）卦。</p>
+<h2 id="2、物数（声音）起卦（数字起卦）"><a href="#2、物数（声音）起卦（数字起卦）" class="headerlink" title="2、物数（声音）起卦（数字起卦）"></a>2、物数（声音）起卦（数字起卦）</h2><ul>
+<li>求测人给出三个数，则分别作为上卦，下卦和动爻。</li>
+<li>看到几个或者数到几个物数，以此为上卦，以当下时辰作为下卦，上卦数+下卦数除六取动爻。</li>
+<li>听到几个声音，则以此声音数起上卦，以当下实诚为下卦，上卦数+下卦数除六取动爻。</li>
+</ul>
+<p><strong>例：</strong></p>
+<p>五个物品，则上卦为5对应巽卦，当下未时为8对应坤卦，则主卦风地观；（5+8）÷6&#x3D;2余1，则1爻变，变卦为风雷益。</p>
+<h2 id="3、字占"><a href="#3、字占" class="headerlink" title="3、字占"></a>3、字占</h2><p><strong>一字起卦：</strong></p>
+<p>将字分阴阳，例左右结构左阳右阴，上下结构上阳下阴，阳为上卦，阴为下卦。以字之笔画总和取变爻（“一”字为太极未判。如草书，混沌不明，不可得卦）。将字拆分，左&#x2F;上部分笔画数 ÷ 8 为上卦；右&#x2F;下部分笔画数 ÷ 8 为下卦。总笔画数 ÷ 6 为动爻。</p>
+<p><strong>例：</strong>“好”字，左右结构</p>
+<p>上卦：“女”3笔为离</p>
+<p>下卦：“子”3笔为离</p>
+<p>变爻：“好”6笔，6爻变</p>
+<p>得卦为：离为火之雷火丰</p>
+<p><strong>二字起卦：</strong>二字为两仪平分，一字为上卦，一字为下卦，方法同上。 第一个字笔画数作上卦，第二个字笔画数作下卦。总笔画数 ÷ 6 为动爻。</p>
+<p><strong>三字起卦：</strong>三字为三才，以一字为上卦，二字为下卦。</p>
+<p><strong>四字</strong>为四象，平分上下为卦，四字以上不必数笔画，只以平仄声音调之，平声为一数，上声为二数，去声为三数，入声为四数。五至十字以字数分上下阴阳，以平仄之数起卦。</p>
+<p><strong>十一字以上</strong>皆可起卦，不用平仄声音调之，与数字起卦方法相同，将一段话一分为二，前半字数为上卦，后半字数为下卦，字数总和取变爻。</p>
+<h1 id="二、-后天起卦法（物象驱动：未得数先得卦）"><a href="#二、-后天起卦法（物象驱动：未得数先得卦）" class="headerlink" title="二、 后天起卦法（物象驱动：未得数先得卦）"></a>二、 后天起卦法（物象驱动：未得数先得卦）</h1><p><strong>适用场景：</strong> 看到突发异象（如铜钱掉落、树枝折断、水杯打翻、看到奇怪的人或动物）。</p>
+<p><strong>取卦规则：</strong></p>
+<ul>
+<li><strong>上卦（取象）：</strong> 直接看该人&#x2F;物的本质属性。如老人为乾，少女为兑，牛为坤，马为乾，金属为乾&#x2F;兑，火光为离。</li>
+<li><strong>下卦（取方）：</strong> 看该人&#x2F;物出现在你的哪个方位（使用后天八卦方位）。如正东为震，西北为乾，正南为离。</li>
+</ul>
+<p><strong>推算公式：</strong></p>
+<ul>
+<li>动爻 &#x3D; (上卦的先天数 + 下卦的先天数 + 突发事件时的时辰数) ÷ 6 取余数。</li>
+</ul>
+<p><strong>例：辰时，正前方有一头牛</strong></p>
+<p>牛为坤为上卦；前方为离为下卦；坤8加离3加辰5为16，除6余4为变爻。</p>
+<p>得卦为：地火明夷之雷火丰</p>
+<p><strong>八卦万物属类（并为上卦）</strong></p>
+<p>乾：天、父、老人、官贵、头、骨、马、金宝、珠玉、水果、圆物、冠、镜、刚物、大赤色、水寒。</p>
+<p>坤：地、母、老妇、土、牛、金、布帛、文章、舆辇、方物、柄、黄色、瓦器、腹、裳、黑色、黍稷、书、米、谷。</p>
+<p>震：雷、长男、足、发、龙、百虫、蹄、竹、萑苇、马鸣、馵足、的颡、稼、乐器之类、草木、青碧绿色、树、木核、柴、蛇。</p>
+<p>巽：风、长女、僧尼、鸡、股、百禽、百草、臼、香气、臭、绳、眼、羽毛、帆、扇、枝叶之类、仙道工匠、直物、工巧之器。</p>
+<p>坎：水、雨、雪、工、豕、中男、沟渎、弓轮、耳、血、月、盗、宫律、栋、丛棘、狐、蒺藜、桎梏、水族、鱼、盐、酒、醢、有核之物、黑色。</p>
+<p>离：火、雉、日、目、电、霓霞、中女、甲胄、戈兵、文书、槁木、炉、兽、鳄龟蟹蚌、凡有壳之物、红赤紫色、花纹人、干燥物。</p>
+<p>艮：山、土、少男、童子、狗、手指、径路、门阙、果、蓏、阍寺、鼠、虎、狐、黔喙之属、木生之物、藤生之物、爪、鼻。黄色。</p>
+<p>兑：泽、少女、巫、舌、妾、肺、羊、毁折之物、带口之器、属金者、废缺之物、奴仆、婢。</p>
+<p><strong>八卦方位图</strong></p>
+<p>离南坎北，震东兑西，人则介乎其中。</p>
+<p><strong>以看到的物为上卦，方位为下卦，上下卦加时数取动爻；不过梅花起卦不拘泥于方法，也可以物为上卦，时辰为下卦，上下卦相加取动爻；遵循你第一时间是想到的什么方法即可，即“天人合一，心灵感应”的感觉，以第一念为准。</strong></p>
+<h1 id="起卦心法要诀"><a href="#起卦心法要诀" class="headerlink" title="起卦心法要诀"></a>起卦心法要诀</h1><p>​	梅花易数起卦的最高境界不在于公式的熟练，而在于“触机”<strong>。秉持</strong>“不动不占，不因事不占”的原则，无论是突如其来的外应兆头，还是灵光一闪的瞬间直觉，只要抓住那一刻的“机”去套用上述规则。《梅花易数》云：”观物戏验，虽云无益，然亦可消闲居之寂寞。”梅花易数既是占卜技艺，更是修身养性、提升觉知的生活方式。</p>
+<p>​	<strong>核心理念：</strong> 梅花易数强调”心易”——心的易简之道。当心境澄明时，万物皆可为卦，无需繁复计算，自然感应成象。</p>
+<ol>
+<li><strong>心物感应：强调心与物的直接感应，不假思索</strong></li>
+<li><strong>灵活多变：起卦方法多样，不受工具限制</strong></li>
+<li><strong>直观体悟：重视直觉体悟，而非机械推算</strong></li>
+<li><strong>万物类象：天地万物皆可成卦，法无定法</strong></li>
+</ol>
+
       
     </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
   
-    <ul class="card-archive-list">
+  
+  
+
       
-        <li class="card-archive-list-item">
-          <a class="card-archive-list-link" href="/archives/2026/07/">
-            <span class="card-archive-list-date">
-              七月 2026
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2026/04/30/vscode%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/04/30/vscode%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/" class="post-title-link" itemprop="url">vscode远程连接AutoDL</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-04-30 00:25:54" itemprop="dateCreated datePublished" datetime="2026-04-30T00:25:54+08:00">2026-04-30</time>
             </span>
-            <span class="card-archive-list-count">6</span>
-          </a>
-        </li>
-      
-        <li class="card-archive-list-item">
-          <a class="card-archive-list-link" href="/archives/2026/06/">
-            <span class="card-archive-list-date">
-              六月 2026
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-05-29 21:43:10" itemprop="dateModified" datetime="2026-05-29T21:43:10+08:00">2026-05-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9D%82%E9%A1%B9/" itemprop="url" rel="index"><span itemprop="name">杂项</span></a>
+                </span>
             </span>
-            <span class="card-archive-list-count">18</span>
-          </a>
-        </li>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <li class="card-archive-list-item">
-          <a class="card-archive-list-link" href="/archives/2026/05/">
-            <span class="card-archive-list-date">
-              五月 2026
+          <h1 id="一、准备工作"><a href="#一、准备工作" class="headerlink" title="一、准备工作"></a>一、准备工作</h1><h2 id="1、你本地需要装什么"><a href="#1、你本地需要装什么" class="headerlink" title="1、你本地需要装什么"></a>1、你本地需要装什么</h2><p>本地至少准备这几个：</p>
+<ul>
+<li><strong>VS Code</strong></li>
+<li>VS Code 扩展：<strong>Remote - SSH</strong></li>
+<li>本地终端<ul>
+<li>Windows：PowerShell &#x2F; Windows Terminal</li>
+<li>macOS &#x2F; Linux：Terminal</li>
+</ul>
+</li>
+</ul>
+<p>VS Code 官方说明，Remote - SSH 扩展可以让你直接打开远端机器上的文件夹，并像本地开发一样使用 VS Code 的功能。</p>
+<h2 id="2、AutoDL-实例要处于开机状态"><a href="#2、AutoDL-实例要处于开机状态" class="headerlink" title="2、AutoDL 实例要处于开机状态"></a>2、AutoDL 实例要处于开机状态</h2><p>AutoDL 控制台里把实例开机，然后复制它给你的 SSH 命令。AutoDL 官方文档里就是这种形式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -p 38076 root@region-1.autodl.com</span><br></pre></td></tr></table></figure>
+
+<p>这里面分别对应：</p>
+<ul>
+<li>用户名：<code>root</code></li>
+<li>主机地址：<code>region-1.autodl.com</code></li>
+<li>端口：<code>38076</code></li>
+</ul>
+<hr>
+<h1 id="二、测试普通-SSH-能不能连上"><a href="#二、测试普通-SSH-能不能连上" class="headerlink" title="二、测试普通 SSH 能不能连上"></a>二、测试普通 SSH 能不能连上</h1><p>在本地终端先试一次，不要一上来就开 VS Code。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -p 38076 root@region-1.autodl.com</span><br></pre></td></tr></table></figure>
+
+<p>如果第一次连接，终端可能会提示是否信任主机，输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">yes</span></span><br></pre></td></tr></table></figure>
+
+<p>然后输入 AutoDL 实例密码。</p>
+<p>如果这一步都连不上，VS Code 基本也连不上。AutoDL 的 VS Code 连接本质上也是基于 SSH。</p>
+<h1 id="三、在-VS-Code-里配置-AutoDL-远程连接"><a href="#三、在-VS-Code-里配置-AutoDL-远程连接" class="headerlink" title="三、在 VS Code 里配置 AutoDL 远程连接"></a>三、在 VS Code 里配置 AutoDL 远程连接</h1><h2 id="方法-A：最推荐，直接配-SSH-config"><a href="#方法-A：最推荐，直接配-SSH-config" class="headerlink" title="方法 A：最推荐，直接配 SSH config"></a>方法 A：最推荐，直接配 SSH config</h2><h3 id="第-1-步：安装扩展"><a href="#第-1-步：安装扩展" class="headerlink" title="第 1 步：安装扩展"></a>第 1 步：安装扩展</h3><p>打开 VS Code 扩展市场，安装：</p>
+<p><strong>Remote - SSH</strong></p>
+<p>这个是官方远程开发套件的一部分。</p>
+<h3 id="第-2-步：编辑-SSH-配置文件"><a href="#第-2-步：编辑-SSH-配置文件" class="headerlink" title="第 2 步：编辑 SSH 配置文件"></a>第 2 步：编辑 SSH 配置文件</h3><p>在本地电脑上编辑 SSH 配置文件。</p>
+<ul>
+<li>Windows 常见路径：</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\你的用户名\.ssh\config</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>macOS &#x2F; Linux：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/.ssh/config</span><br></pre></td></tr></table></figure>
+
+<p>加入一段：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host autodl</span><br><span class="line">    HostName region-1.autodl.com</span><br><span class="line">    User root</span><br><span class="line">    Port 38076</span><br></pre></td></tr></table></figure>
+
+<p>把 <code>HostName</code> 和 <code>Port</code> 改成你自己实例里的值。</p>
+<h3 id="第-3-步：在-VS-Code-里连接"><a href="#第-3-步：在-VS-Code-里连接" class="headerlink" title="第 3 步：在 VS Code 里连接"></a>第 3 步：在 VS Code 里连接</h3><p>按：</p>
+<ul>
+<li><code>F1</code> 或 <code>Ctrl+Shift+P</code></li>
+<li>输入：<code>Remote-SSH: Connect to Host</code></li>
+<li>选择：<code>autodl</code></li>
+</ul>
+<p>第一次连接时，VS Code 会在远端安装一个 VS Code Server。Remote-SSH 官方说明就是这样工作的：本地 VS Code 通过 SSH 连接远端，并在远端启动服务端组件来支持编辑、终端和扩展能力。</p>
+<h2 id="方法-B：不改-config，直接粘-SSH-命令"><a href="#方法-B：不改-config，直接粘-SSH-命令" class="headerlink" title="方法 B：不改 config，直接粘 SSH 命令"></a>方法 B：不改 config，直接粘 SSH 命令</h2><p>如果你暂时不想改配置文件，也可以在 VS Code 命令面板里直接添加一个 host，把 AutoDL 给你的 SSH 命令填进去。<br>不过长期看，还是 <strong>config 文件方式最省心</strong>。</p>
+<h1 id="四、打开远端项目目录"><a href="#四、打开远端项目目录" class="headerlink" title="四、打开远端项目目录"></a>四、打开远端项目目录</h1><p>连接到 AutoDL 后，在 VS Code 中选择：</p>
+<p><strong>File → Open Folder</strong></p>
+<p>然后打开远端目录，例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/root/autodl-tmp/projects/my_baseline</span><br></pre></td></tr></table></figure>
+
+<p>如果目录还没有，可以先在远端终端新建：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /root/autodl-tmp/projects/my_baseline</span><br><span class="line"><span class="built_in">mkdir</span> -p /root/autodl-tmp/datasets</span><br><span class="line"><span class="built_in">mkdir</span> -p /root/autodl-tmp/outputs</span><br></pre></td></tr></table></figure>
+
+<p>建议你以后固定这样放：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/root/autodl-tmp/</span><br><span class="line">├── projects/</span><br><span class="line">│   └── my_baseline/</span><br><span class="line">├── datasets/</span><br><span class="line">│   └── your_dataset/</span><br><span class="line">└── outputs/</span><br><span class="line">    └── exp1/</span><br></pre></td></tr></table></figure>
+
+<p>这是经验性建议，不是官方强制要求，但这样最不容易混。AutoDL 文档把 SSH、VS Code、上传数据、文件存储都作为配套工作流来使用。</p>
+<h1 id="五、把代码放到远端"><a href="#五、把代码放到远端" class="headerlink" title="五、把代码放到远端"></a>五、把代码放到远端</h1><p>常用的两种方式。</p>
+<h2 id="方式-1：直接在远端-git-clone"><a href="#方式-1：直接在远端-git-clone" class="headerlink" title="方式 1：直接在远端 git clone"></a>方式 1：直接在远端 <code>git clone</code></h2><p>如果你的项目在 GitHub &#x2F; Gitee：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /root/autodl-tmp/projects</span><br><span class="line">git <span class="built_in">clone</span> 你的仓库地址</span><br></pre></td></tr></table></figure>
+
+<h2 id="方式-2：本地代码上传到远端"><a href="#方式-2：本地代码上传到远端" class="headerlink" title="方式 2：本地代码上传到远端"></a>方式 2：本地代码上传到远端</h2><p>如果你的代码只在本地，可以用 <code>scp</code> 上传：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -P 38076 -r D:\Project\DOLOS root@region-1.autodl.com:/root/autodl-tmp/projects/</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li><code>ssh</code> 用小写 <code>-p</code></li>
+<li><code>scp</code> 用大写 <code>-P</code></li>
+</ul>
+<p>AutoDL 官方的上传数据文档明确支持 <code>scp</code>，也支持文件夹上传。</p>
+<h1 id="六、在远端配置-Python-环境"><a href="#六、在远端配置-Python-环境" class="headerlink" title="六、在远端配置 Python 环境"></a>六、在远端配置 Python 环境</h1><p>进入远端终端后，先检查 GPU 和 Python：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nvidia-smi</span><br><span class="line">python -V</span><br><span class="line"><span class="built_in">which</span> python</span><br></pre></td></tr></table></figure>
+
+<p>然后创建环境。常见做法是 conda：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda create -n baseline python=3.10 -y</span><br><span class="line">conda activate baseline</span><br></pre></td></tr></table></figure>
+
+<p>安装依赖：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+
+<p>如果没有 <code>requirements.txt</code>，就按项目实际需要装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install numpy pandas scikit-learn tqdm librosa xgboost</span><br></pre></td></tr></table></figure>
+
+<p>这一步主要取决于你的项目本身；AutoDL 文档里也把环境配置列为常用操作。</p>
+<h1 id="七、在-VS-Code-里选择远端-Python-解释器"><a href="#七、在-VS-Code-里选择远端-Python-解释器" class="headerlink" title="七、在 VS Code 里选择远端 Python 解释器"></a>七、在 VS Code 里选择远端 Python 解释器</h1><p>这是很多人第一次容易漏掉的。</p>
+<p>连接远端后，在 VS Code 里：</p>
+<ol>
+<li>按 <code>Ctrl+Shift+P</code></li>
+<li>输入：<code>Python: Select Interpreter</code></li>
+<li>选择远端的 conda 环境，例如：</li>
+</ol>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/root/miniconda3/envs/baseline/bin/python</span><br></pre></td></tr></table></figure>
+
+<p>这样你在 VS Code 里点运行、代码补全、Lint、调试时，都会基于远端解释器。</p>
+<p>VS Code 的 Remote-SSH 连接后，本地界面可以直接使用远端环境和工具链。</p>
+<h1 id="八、数据集怎么上传到远端"><a href="#八、数据集怎么上传到远端" class="headerlink" title="八、数据集怎么上传到远端"></a>八、数据集怎么上传到远端</h1><h2 id="方案-1：scp-命令"><a href="#方案-1：scp-命令" class="headerlink" title="方案 1：scp 命令"></a>方案 1：<code>scp</code> 命令</h2><p>适合会用终端的人。</p>
+<h3 id="上传整个文件夹"><a href="#上传整个文件夹" class="headerlink" title="上传整个文件夹"></a>上传整个文件夹</h3><p>Windows 示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -P 38076 -r D:\Datasets\DOLOS root@region-1.autodl.com:/root/autodl-tmp/datasets/</span><br></pre></td></tr></table></figure>
+
+<p>macOS &#x2F; Linux 示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -P 38076 -r ~/Datasets/DOLOS root@region-1.autodl.com:/root/autodl-tmp/datasets/</span><br></pre></td></tr></table></figure>
+
+<p>AutoDL 官方明确写了 <code>scp</code> 支持文件和文件夹上传下载。</p>
+<h2 id="方案-2：FileZilla-Xftp"><a href="#方案-2：FileZilla-Xftp" class="headerlink" title="方案 2：FileZilla &#x2F; Xftp"></a>方案 2：FileZilla &#x2F; Xftp</h2><p>如果你不想敲命令，这个更直观。<br>AutoDL 官方也推荐这类工具，支持拖拽上传文件夹。XShell&#x2F;Xftp 尤其适合 Windows。</p>
+<p>你只需要填：</p>
+<ul>
+<li>Host：<code>region-1.autodl.com</code></li>
+<li>User：<code>root</code></li>
+<li>Port：<code>38076</code></li>
+<li>Password：实例密码</li>
+</ul>
+<h2 id="方案-3：公网网盘中转"><a href="#方案-3：公网网盘中转" class="headerlink" title="方案 3：公网网盘中转"></a>方案 3：公网网盘中转</h2><p>如果数据集比较大，AutoDL 官方是<strong>强烈推荐</strong>用公网网盘中转的，因为实例和网盘之间传输往往更快更稳，也方便备份和跨实例迁移。</p>
+<h2 id="方案-4：JupyterLab-上传"><a href="#方案-4：JupyterLab-上传" class="headerlink" title="方案 4：JupyterLab 上传"></a>方案 4：JupyterLab 上传</h2><p>只适合少量文件。<br>AutoDL 官方说明它<strong>不支持文件夹上传</strong>，所以大型数据集并不适合。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2025/11/14/Conda%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/11/14/Conda%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5/" class="post-title-link" itemprop="url">Conda命令速查</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-11-14 11:56:27" itemprop="dateCreated datePublished" datetime="2025-11-14T11:56:27+08:00">2025-11-14</time>
             </span>
-            <span class="card-archive-list-count">7</span>
-          </a>
-        </li>
-      
-        <li class="card-archive-list-item">
-          <a class="card-archive-list-link" href="/archives/2026/04/">
-            <span class="card-archive-list-date">
-              四月 2026
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-05-29 21:42:01" itemprop="dateModified" datetime="2026-05-29T21:42:01+08:00">2026-05-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9D%82%E9%A1%B9/" itemprop="url" rel="index"><span itemprop="name">杂项</span></a>
+                </span>
             </span>
-            <span class="card-archive-list-count">1</span>
-          </a>
-        </li>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <li class="card-archive-list-item">
-          <a class="card-archive-list-link" href="/archives/2025/11/">
-            <span class="card-archive-list-date">
-              十一月 2025
+          <h1 id="Conda-命令速查"><a href="#Conda-命令速查" class="headerlink" title="Conda 命令速查"></a>Conda 命令速查</h1><p>适用平台：Windows &#x2F; macOS &#x2F; Linux（PowerShell、bash、zsh 等）。</p>
+<hr>
+<h2 id="1-基础与自检"><a href="#1-基础与自检" class="headerlink" title="1. 基础与自检"></a>1. 基础与自检</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conda --version                 <span class="comment"># 查看 conda 版本</span></span><br><span class="line">conda info                      <span class="comment"># 运行环境与配置概览</span></span><br><span class="line">conda config --show             <span class="comment"># 展示所有配置项</span></span><br><span class="line">conda config --show-sources     <span class="comment"># 配置文件来源（.condarc 位置）</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>初始化 shell（只需一次）</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 任选或多选：bash / zsh / fish / powershell / cmd.exe</span></span><br><span class="line">conda init bash</span><br><span class="line">conda init zsh</span><br><span class="line">conda init fish</span><br><span class="line">conda init powershell</span><br><span class="line">conda init cmd.exe</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>看到 “No action taken.” 说明已初始化；<strong>重开终端</strong>即可。</p>
+</blockquote>
+<h2 id="2-环境（env）管理"><a href="#2-环境（env）管理" class="headerlink" title="2. 环境（env）管理"></a>2. 环境（env）管理</h2><h3 id="2-1-创建-激活-删除"><a href="#2-1-创建-激活-删除" class="headerlink" title="2.1 创建 &#x2F; 激活 &#x2F; 删除"></a>2.1 创建 &#x2F; 激活 &#x2F; 删除</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conda create -n myenv python=3.10        <span class="comment"># 新建环境并指定 Python 版本</span></span><br><span class="line">conda activate myenv                     <span class="comment"># 激活</span></span><br><span class="line">conda deactivate                         <span class="comment"># 退出当前环境</span></span><br><span class="line">conda <span class="built_in">env</span> remove -n myenv                <span class="comment"># 删除环境</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>按路径创建（无需命名）</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda create -p /abs/path/to/env python=3.11</span><br><span class="line">conda activate /abs/path/to/env</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-查看-复制-“重命名”（变通）"><a href="#2-2-查看-复制-“重命名”（变通）" class="headerlink" title="2.2 查看 &#x2F; 复制 &#x2F; “重命名”（变通）"></a>2.2 查看 &#x2F; 复制 &#x2F; “重命名”（变通）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conda <span class="built_in">env</span> list                           <span class="comment"># 列出全部环境</span></span><br><span class="line">conda list                               <span class="comment"># 查看当前环境已装包</span></span><br><span class="line">conda create -n newenv --<span class="built_in">clone</span> oldenv    <span class="comment"># 克隆环境（等价复制）</span></span><br><span class="line"><span class="comment"># “重命名”做法：clone 新名 -&gt; 测试 -&gt; 删除旧名</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-导出-复现（YAML-explicit）"><a href="#2-3-导出-复现（YAML-explicit）" class="headerlink" title="2.3 导出 &#x2F; 复现（YAML &#x2F; explicit）"></a>2.3 导出 &#x2F; 复现（YAML &#x2F; explicit）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 常用：仅记录手动安装的包（更简洁、便于跨平台）</span></span><br><span class="line">conda <span class="built_in">env</span> <span class="built_in">export</span> --from-history &gt; env.yaml</span><br><span class="line"></span><br><span class="line"><span class="comment"># 完整：含解算后所有具体版本（可更精确复现）</span></span><br><span class="line">conda <span class="built_in">env</span> <span class="built_in">export</span> &gt; env_full.yaml</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用 YAML 复现</span></span><br><span class="line">conda <span class="built_in">env</span> create -f env.yaml             <span class="comment"># 新建</span></span><br><span class="line">conda <span class="built_in">env</span> update  -f env.yaml            <span class="comment"># 覆盖更新到当前环境</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 完全可复现（explicit 方案）</span></span><br><span class="line">conda list --explicit &gt; spec.txt</span><br><span class="line">conda create --name newenv --file spec.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-环境变量（持久化到某个-env）"><a href="#2-4-环境变量（持久化到某个-env）" class="headerlink" title="2.4 环境变量（持久化到某个 env）"></a>2.4 环境变量（持久化到某个 env）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda <span class="built_in">env</span> config vars <span class="built_in">set</span> KEY1=VALUE1 KEY2=VALUE2 -n myenv</span><br><span class="line">conda <span class="built_in">env</span> config vars list -n myenv</span><br><span class="line">conda <span class="built_in">env</span> config vars <span class="built_in">unset</span> KEY1 KEY2 -n myenv</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-包（package）管理"><a href="#3-包（package）管理" class="headerlink" title="3. 包（package）管理"></a>3. 包（package）管理</h2><h3 id="3-1-安装-升级-卸载"><a href="#3-1-安装-升级-卸载" class="headerlink" title="3.1 安装 &#x2F; 升级 &#x2F; 卸载"></a>3.1 安装 &#x2F; 升级 &#x2F; 卸载</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">conda search numpy                           <span class="comment"># 搜索包</span></span><br><span class="line">conda install numpy=1.26                     <span class="comment"># 指定版本</span></span><br><span class="line">conda install scipy pandas -c conda-forge    <span class="comment"># 指定渠道安装多个包</span></span><br><span class="line">conda update numpy                           <span class="comment"># 升级单个包</span></span><br><span class="line">conda update --all                           <span class="comment"># 升级环境里所有包（慎用）</span></span><br><span class="line">conda remove pandas                          <span class="comment"># 卸载</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>离线安装（.conda &#x2F; .tar.bz2）</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install --offline /path/to/pkg.conda</span><br></pre></td></tr></table></figure>
+
+<p><strong>固定&#x2F;禁止升级某些包（pin）</strong>：在环境的 <code>conda-meta/pinned</code> 写入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pytorch 2.3.*</span><br><span class="line">numpy ==1.26.4</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-与-pip-共存（推荐顺序）"><a href="#3-2-与-pip-共存（推荐顺序）" class="headerlink" title="3.2 与 pip 共存（推荐顺序）"></a>3.2 与 pip 共存（推荐顺序）</h3><ul>
+<li>先 <code>conda install ...</code>，再 <code>pip install ...</code></li>
+<li>导出环境时常用 <code>--from-history</code>，避免把 pip 的解算结果写死</li>
+</ul>
+<p><strong>示例</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda install pytorch torchvision -c pytorch -c nvidia</span><br><span class="line">pip install some_pkg_not_in_conda</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-渠道（channel）与配置"><a href="#4-渠道（channel）与配置" class="headerlink" title="4. 渠道（channel）与配置"></a>4. 渠道（channel）与配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels conda-forge           <span class="comment"># 添加渠道</span></span><br><span class="line">conda config --remove channels conda-forge        <span class="comment"># 移除渠道</span></span><br><span class="line">conda config --<span class="built_in">set</span> channel_priority strict        <span class="comment"># 严格优先级（推荐）</span></span><br><span class="line">conda config --show channels                      <span class="comment"># 查看当前渠道顺序</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>常用全局设置</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda config --<span class="built_in">set</span> auto_activate_base <span class="literal">false</span>       <span class="comment"># 禁止启动时自动激活 base</span></span><br><span class="line">conda config --<span class="built_in">set</span> notify_outdated_conda <span class="literal">false</span>    <span class="comment"># 关闭过期提示（可选）</span></span><br><span class="line">conda config --<span class="built_in">set</span> default_channels <span class="string">&quot;https://repo.anaconda.com/pkgs/main,https://repo.anaconda.com/pkgs/r&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="5-清理与排错"><a href="#5-清理与排错" class="headerlink" title="5. 清理与排错"></a>5. 清理与排错</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">conda clean --all -y            <span class="comment"># 清理索引/包缓存/解压缓存（释放磁盘）</span></span><br><span class="line">conda clean --packages -y       <span class="comment"># 仅清理未被引用的包</span></span><br><span class="line">conda update conda              <span class="comment"># 升级 conda 自身</span></span><br><span class="line">conda info --envs               <span class="comment"># 环境路径是否异常/重复</span></span><br><span class="line">conda config --show-sources     <span class="comment"># 检查 .condarc 来源是否冲突</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>快速自检</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda run -n myenv python -V    <span class="comment"># 不激活环境，直接在 myenv 里跑命令</span></span><br><span class="line"><span class="built_in">which</span> conda                     <span class="comment"># (Unix) 定位 conda 路径</span></span><br><span class="line"><span class="built_in">where</span> conda                     <span class="comment"># (Windows) 定位 conda 路径</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="6-与-CUDA-PyTorch-的常见组合"><a href="#6-与-CUDA-PyTorch-的常见组合" class="headerlink" title="6. 与 CUDA &#x2F; PyTorch 的常见组合"></a>6. 与 CUDA &#x2F; PyTorch 的常见组合</h2><blockquote>
+<p>多数官方 PyTorch 包<strong>自带 CUDA 运行时</strong>，只要求 <strong>NVIDIA 驱动足够新</strong>。优先使用官网向导生成命令。</p>
+</blockquote>
+<p><strong>conda 安装示例</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># CUDA 11.8 版本的 PyTorch 2.3.x</span></span><br><span class="line">conda install pytorch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 \</span><br><span class="line">  pytorch-cuda=11.8 -c pytorch -c nvidia</span><br><span class="line"></span><br><span class="line"><span class="comment"># CUDA 12.1 版本的 PyTorch 2.3.x</span></span><br><span class="line">conda install pytorch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 \</span><br><span class="line">  pytorch-cuda=12.1 -c pytorch -c nvidia</span><br></pre></td></tr></table></figure>
+
+<p><strong>pip（可在 conda 环境内使用）</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 带 CUDA 的索引（示例，按需替换 cu118/cu126/cu128）</span></span><br><span class="line">pip install torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1 \</span><br><span class="line">  --index-url https://download.pytorch.org/whl/cu118</span><br><span class="line"></span><br><span class="line"><span class="comment"># 仅 CPU</span></span><br><span class="line">pip install torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1 \</span><br><span class="line">  --index-url https://download.pytorch.org/whl/cpu</span><br></pre></td></tr></table></figure>
+
+<p><strong>安装后校验</strong>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="built_in">print</span>(torch.__version__, torch.version.cuda, torch.cuda.is_available())</span><br><span class="line"><span class="built_in">print</span>(torch.cuda.get_device_name(<span class="number">0</span>) <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">&quot;CPU only&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-常见工作流模板"><a href="#7-常见工作流模板" class="headerlink" title="7. 常见工作流模板"></a>7. 常见工作流模板</h2><p><strong>A. 新项目从 0 开始</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">conda create -n proj python=3.11</span><br><span class="line">conda activate proj</span><br><span class="line">conda config --<span class="built_in">env</span> --<span class="built_in">set</span> channel_priority strict</span><br><span class="line">conda install -c conda-forge numpy pandas matplotlib</span><br><span class="line">pip install black ruff</span><br><span class="line">conda <span class="built_in">env</span> <span class="built_in">export</span> --from-history &gt; env.yaml</span><br></pre></td></tr></table></figure>
+
+<p><strong>B. 团队复现环境</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;repo&gt;</span><br><span class="line">conda <span class="built_in">env</span> create -f env.yaml</span><br><span class="line">conda activate &lt;env_name_from_yaml&gt;</span><br><span class="line">pip install -r requirements.txt   <span class="comment"># 若项目还提供了此文件</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>C. 清理磁盘</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda clean --all -y</span><br></pre></td></tr></table></figure>
+
+<p><strong>建议</strong>：</p>
+<ul>
+<li>保持 <code>channel_priority strict</code>；</li>
+<li>新环境尽量用 <code>--from-history</code> 导出；</li>
+<li>先 conda 后 pip，减少解算冲突。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2025/11/12/%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE%E7%9A%84%E8%AE%BE%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/11/12/%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE%E7%9A%84%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">文章的分类和标签设计</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-11-12 17:30:48" itemprop="dateCreated datePublished" datetime="2025-11-12T17:30:48+08:00">2025-11-12</time>
             </span>
-            <span class="card-archive-list-count">4</span>
-          </a>
-        </li>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-05-29 21:43:21" itemprop="dateModified" datetime="2026-05-29T21:43:21+08:00">2026-05-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9D%82%E9%A1%B9/" itemprop="url" rel="index"><span itemprop="name">杂项</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-    </ul>
-  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">36</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-07-03T07:58:11.315Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Hyacinth</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.2</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.2"></script><script src="/js/main.js?v=5.5.2"></script><div class="js-pjax"><script>window.typedJSFn = {
-  init: str => {
-    window.typed = new Typed('#subtitle', Object.assign({
-      strings: str,
-      startDelay: 300,
-      typeSpeed: 150,
-      loop: true,
-      backSpeed: 50,
-    }, null))
-  },
-  run: subtitleType => {
-    if (true) {
-      if (typeof Typed === 'function') {
-        subtitleType()
-      } else {
-        btf.getScript('https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js').then(subtitleType)
-      }
-    } else {
-      subtitleType()
+          <h1 id="文章的分类和标签设计"><a href="#文章的分类和标签设计" class="headerlink" title="文章的分类和标签设计"></a>文章的分类和标签设计</h1><h1 id="分类（Categories）"><a href="#分类（Categories）" class="headerlink" title="分类（Categories）"></a>分类（Categories）</h1><h2 id="技术类"><a href="#技术类" class="headerlink" title="技术类"></a><strong>技术类</strong></h2><ul>
+<li>编程语言（programming-languages）</li>
+<li>算法与数据结构（algorithms-and-data-structures）</li>
+<li>计算机系统（computer-systems）</li>
+<li>网络与安全（networks-and-security）</li>
+<li>数据库与数据（databases-and-data）</li>
+<li>人工智能&#x2F;机器学习（machine-learning）</li>
+<li>前端开发（frontend）</li>
+<li>后端与分布式（backend-and-distributed）</li>
+<li>移动与客户端（mobile-and-client）</li>
+<li>运维与DevOps（devops）</li>
+<li>软件工程与工具（software-engineering）</li>
+<li>图形学与多媒体（graphics-and-media）</li>
+<li>人机交互与可用性（hci-and-ux）</li>
+<li>数学基础（math-foundations）</li>
+<li>课程与作业（courses-and-assignments）</li>
+<li>项目与实习（projects-and-internships）</li>
+<li>读书与论文笔记（reading-and-papers）</li>
+<li>比赛与刷题（competitions-and-oj）</li>
+<li>杂项&#x2F;随笔（misc）</li>
+</ul>
+<h2 id="生活类"><a href="#生活类" class="headerlink" title="生活类"></a><strong>生活类</strong></h2><ul>
+<li>生活记录（life-journal）</li>
+<li>旅行与出行（travel）</li>
+<li>美食与烹饪（food-and-cooking）</li>
+<li>阅读与观影（reading-and-watching）</li>
+<li>健康与运动（health-and-fitness）</li>
+<li>理财与职业（money-and-career）</li>
+<li>家居与效率（home-and-productivity）</li>
+<li>审美与创作（aesthetics-and-creative）</li>
+<li>关系与自我（relationships-and-self）</li>
+<li>数码与摄影（gadgets-and-photography）</li>
+<li>游戏与娱乐（games-and-entertainment）</li>
+<li>城市与在地（city-and-local）</li>
+<li>随笔与思考（essays-and-thoughts）</li>
+</ul>
+<h1 id="标签（Tags）"><a href="#标签（Tags）" class="headerlink" title="标签（Tags）"></a>标签（Tags）</h1><h2 id="技术主题-知识点"><a href="#技术主题-知识点" class="headerlink" title="技术主题&#x2F;知识点"></a><strong>技术主题&#x2F;知识点</strong></h2><ul>
+<li>算法&#x2F;数据结构：greedy, dp, graph, union-find, divide-and-conquer, backtracking, string, bitset, array, linked-list, stack, queue, heap, hashmap, segment-tree, trie, b-tree</li>
+<li>系统&#x2F;编译：os, process, thread, lock, scheduler, memory-management, virtual-memory, io, compiler, lexer, parser</li>
+<li>网络：tcp, udp, http, http2, http3, tls, dns, routing</li>
+<li>数据库&#x2F;分布式：sql, transaction, isolation, indexing, query-optimization, replication, sharding, consensus, raft, paxos, cap, eventual-consistency</li>
+<li>前后端&#x2F;DevOps：dom, css, responsive, ssr, csr, isomorphic, rest, grpc, authentication, authorization, middleware, docker, kubernetes, helm, terraform, prometheus, grafana, nginx</li>
+<li>AI&#x2F;ML&#x2F;数学：linear-regression, logistic-regression, svm, cnn, rnn, transformer, attention, lora, fine-tuning, feature-engineering, cross-validation, linear-algebra, calculus, probability, statistics, optimization</li>
+</ul>
+<h2 id="技术栈-生态"><a href="#技术栈-生态" class="headerlink" title="技术栈&#x2F;生态"></a><strong>技术栈&#x2F;生态</strong></h2><ul>
+<li>语言：c, cpp, java, python, go, rust, javascript, typescript, kotlin, swift</li>
+<li>框架&#x2F;库：spring-boot, django, flask, fastapi, express, nest, react, vue, svelte, vite, webpack, redux, zustand</li>
+<li>数据库&#x2F;中间件：mysql, postgresql, sqlite, mongodb, redis, kafka, rabbitmq, elasticsearch</li>
+<li>AI 框架：pytorch, tensorflow, transformers, sklearn, xgboost</li>
+<li>工具：git, github-actions, make, cmake, gdb, valgrind, clang, clang-tidy, eslint, prettier</li>
+</ul>
+<h2 id="技术属性-用途-学业"><a href="#技术属性-用途-学业" class="headerlink" title="技术属性&#x2F;用途&#x2F;学业"></a><strong>技术属性&#x2F;用途&#x2F;学业</strong></h2><ul>
+<li>tutorial, note, cheatsheet, summary, review, walkthrough, from-scratch, cookbook</li>
+<li>draft, wip, production, best-practices</li>
+<li>bugfix, performance, security, testing, refactor, benchmark</li>
+<li>csapp, os-course, db-course, algo-course, compiler-course, assignment, lab, project, exam-review</li>
+<li>crud, ecommerce, chatbot, crawler, recommendation, search, game-dev, finance, bioinformatics</li>
+<li>2025-spring, 2025-fall, reading-notes, paper-impl, reproduce</li>
+</ul>
+<h2 id="生活主题-内容"><a href="#生活主题-内容" class="headerlink" title="生活主题&#x2F;内容"></a><strong>生活主题&#x2F;内容</strong></h2><ul>
+<li>旅行：itinerary, citywalk, road-trip, island, mountain, museum, cafe-hopping</li>
+<li>美食：home-cooking, meal-prep, baking, dessert, coffee, tea, restaurant-review, budget-eats</li>
+<li>阅读&#x2F;影音：book-notes, novel, nonfiction, manga, movie-review, tv-series, playlist</li>
+<li>健康：running, cycling, yoga, hiit, strength, steps, sleep, meal-plan, weight-log</li>
+<li>理财&#x2F;职业：budget, expense-tracking, saving, index-fund, credit-card, negotiation, job-hunt, interview, workflow</li>
+<li>家居&#x2F;效率：declutter, minimalism, home-decor, cleaning, routine, time-blocking, bullet-journal</li>
+<li>审美&#x2F;创作：illustration, watercolor, calligraphy, knitting, diy, poem, photo-essay, short-video</li>
+<li>关系与自我：friendship, family, love, boundaries, mindfulness, therapy-notes, gratitude</li>
+<li>数码与摄影：mobile-photography, street, portrait, lightroom, preset, gear-notes, everyday-carry</li>
+<li>城市与在地：local-festival, neighborhood, park, market, library, hiking-trail</li>
+<li>娱乐：switch, indie-games, boardgames, concert, standup</li>
+</ul>
+<h2 id="生活活动-地点"><a href="#生活活动-地点" class="headerlink" title="生活活动&#x2F;地点"></a><strong>生活活动&#x2F;地点</strong></h2><ul>
+<li>staycation, day-trip, weekend, beach, camping, hot-spring, old-town, art-district</li>
+<li>tokyo, kyoto, taipei, singapore, bangkok（按需扩展你的常去城市）</li>
+</ul>
+<h2 id="生活形式-媒体"><a href="#生活形式-媒体" class="headerlink" title="生活形式&#x2F;媒体"></a><strong>生活形式&#x2F;媒体</strong></h2><ul>
+<li>photo-dump, photo-diary, vlog, reel, longform, listicle, how-to, guide, map, recipe, workflow, template, checklist</li>
+</ul>
+<h2 id="生活情绪-属性-时间系列"><a href="#生活情绪-属性-时间系列" class="headerlink" title="生活情绪&#x2F;属性&#x2F;时间系列"></a><strong>生活情绪&#x2F;属性&#x2F;时间系列</strong></h2><ul>
+<li>cozy, slow-living, productive, frugal, mindful, nostalgia, first-time, beginner-friendly, review, rating-4-5, challenge</li>
+<li>monthly-review, weekly-review, habit-tracker, project-365, reading-challenge-24, 2025-weekly, 2025-monthly, 2025-summer, 2025-autumn</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2025/11/12/Git%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/11/12/Git%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5/" class="post-title-link" itemprop="url">Git命令速查</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-11-12 11:56:27" itemprop="dateCreated datePublished" datetime="2025-11-12T11:56:27+08:00">2025-11-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-05-29 21:42:42" itemprop="dateModified" datetime="2026-05-29T21:42:42+08:00">2026-05-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9D%82%E9%A1%B9/" itemprop="url" rel="index"><span itemprop="name">杂项</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Git-命令速查"><a href="#Git-命令速查" class="headerlink" title="Git 命令速查"></a>Git 命令速查</h1><p>适用平台：Windows &#x2F; macOS &#x2F; Linux。覆盖安装后常用到的<strong>配置 &#x2F; 新建与克隆 &#x2F; 提交与撤销 &#x2F; 分支与合并 &#x2F; Rebase &#x2F; 远端 &#x2F; 标签 &#x2F; 记录 &#x2F; 暂存 &#x2F; 子模块 &#x2F; 工作树 &#x2F; 稀疏检出 &#x2F; 清理 &#x2F; 排错</strong>等。</p>
+<hr>
+<h2 id="1-基础配置（一次性-全局）"><a href="#1-基础配置（一次性-全局）" class="headerlink" title="1. 基础配置（一次性&#x2F;全局）"></a>1. 基础配置（一次性&#x2F;全局）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">git --version</span><br><span class="line">git config --global user.name <span class="string">&quot;Your Name&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;you@example.com&quot;</span></span><br><span class="line">git config --global init.defaultBranch main           <span class="comment"># 默认主分支名</span></span><br><span class="line">git config --global core.autocrlf input              <span class="comment"># macOS/Linux 推荐（或 false）</span></span><br><span class="line">git config --global core.autocrlf <span class="literal">true</span>               <span class="comment"># Windows 推荐</span></span><br><span class="line">git config --global pull.rebase <span class="literal">false</span>                <span class="comment"># pull 默认合并；或 true/merges</span></span><br><span class="line">git config --global fetch.prune <span class="literal">true</span>                 <span class="comment"># 拉取时清理已删除远端分支</span></span><br><span class="line">git config --global rerere.enabled <span class="literal">true</span>              <span class="comment"># 记忆冲突解决（提高效率）</span></span><br><span class="line">git config --global core.editor <span class="string">&quot;code --wait&quot;</span>        <span class="comment"># 你喜欢的编辑器</span></span><br><span class="line">git config --global alias.st <span class="string">&quot;status -sb&quot;</span>            <span class="comment"># 常用别名示例</span></span><br><span class="line">git config --global alias.lg <span class="string">&quot;log --oneline --graph --decorate --all&quot;</span></span><br><span class="line">git config --list --show-origin                      <span class="comment"># 查看配置来源</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>SSH 与签名（可选）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t ed25519 -C <span class="string">&quot;you@example.com&quot;</span>          <span class="comment"># 生成 SSH Key</span></span><br><span class="line"><span class="comment"># 将公钥添加到 Git 托管平台（GitHub/GitLab）</span></span><br><span class="line"></span><br><span class="line">git config --global commit.gpgsign <span class="literal">true</span>             <span class="comment"># 提交签名（需安装 GPG）</span></span><br><span class="line">git config --global user.signingkey &lt;KEYID&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-新建-克隆仓库"><a href="#2-新建-克隆仓库" class="headerlink" title="2. 新建 &#x2F; 克隆仓库"></a>2. 新建 &#x2F; 克隆仓库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git init                                             <span class="comment"># 在当前目录初始化</span></span><br><span class="line">git init myrepo                                      <span class="comment"># 新建目录并初始化</span></span><br><span class="line">git <span class="built_in">clone</span> &lt;url&gt;                                      <span class="comment"># 克隆（HTTP/SSH）</span></span><br><span class="line">git <span class="built_in">clone</span> --depth 1 &lt;url&gt;                            <span class="comment"># 浅克隆</span></span><br><span class="line">git <span class="built_in">clone</span> -b develop &lt;url&gt;                           <span class="comment"># 指定分支</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-查看状态-差异-忽略"><a href="#3-查看状态-差异-忽略" class="headerlink" title="3. 查看状态 &#x2F; 差异 &#x2F; 忽略"></a>3. 查看状态 &#x2F; 差异 &#x2F; 忽略</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git status -sb                                       <span class="comment"># 简洁状态</span></span><br><span class="line">git diff                                             <span class="comment"># 工作区 vs 暂存区</span></span><br><span class="line">git diff --staged                                    <span class="comment"># 暂存区 vs HEAD</span></span><br><span class="line">git add -N &lt;file&gt;                                    <span class="comment"># 仅追踪，不加入内容（intent to add）</span></span><br><span class="line">git check-ignore -v &lt;path&gt;                           <span class="comment"># 排查 .gitignore 生效原因</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>.gitignore 快速示例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 忽略所有 .log 和 temp/ 下内容</span><br><span class="line">*.log</span><br><span class="line">temp/</span><br><span class="line">!temp/keep.me</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-暂存与提交"><a href="#4-暂存与提交" class="headerlink" title="4. 暂存与提交"></a>4. 暂存与提交</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git add &lt;file&gt;                                       <span class="comment"># 加入暂存区</span></span><br><span class="line">git add .                                            <span class="comment"># 全部变更</span></span><br><span class="line">git restore --staged &lt;file&gt;                          <span class="comment"># 从暂存区移除（不丢文件）</span></span><br><span class="line">git commit -m <span class="string">&quot;feat: message&quot;</span>                        <span class="comment"># 普通提交</span></span><br><span class="line">git commit --amend                                   <span class="comment"># 修改最近一次提交（不改内容则只改信息）</span></span><br><span class="line">git commit --amend --no-edit                         <span class="comment"># 仅重写父指针（合并暂存内容）</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>多行提交信息</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit                                           <span class="comment"># 进入编辑器，填写 subject/body</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="5-撤销与回滚（工作区-暂存区-提交）"><a href="#5-撤销与回滚（工作区-暂存区-提交）" class="headerlink" title="5. 撤销与回滚（工作区&#x2F;暂存区&#x2F;提交）"></a>5. 撤销与回滚（工作区&#x2F;暂存区&#x2F;提交）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git restore &lt;file&gt;                                   <span class="comment"># 丢弃工作区修改（对比暂存区）</span></span><br><span class="line">git restore --<span class="built_in">source</span>=HEAD --staged &lt;file&gt;            <span class="comment"># 丢弃暂存区到 HEAD</span></span><br><span class="line">git reset --soft HEAD~1                              <span class="comment"># 回退 1 次提交到暂存（保留修改）</span></span><br><span class="line">git reset --mixed HEAD~1                             <span class="comment"># 默认：回退到工作区（保留修改）</span></span><br><span class="line">git reset --hard HEAD~1                              <span class="comment"># 丢弃这次提交及改动（危险）</span></span><br><span class="line">git revert &lt;commit&gt;                                  <span class="comment"># 生成“反向提交”（公共分支安全）</span></span><br><span class="line">git reflog                                           <span class="comment"># 查看 HEAD 历史移动记录（救命绳）</span></span><br><span class="line">git restore -S &lt;commit&gt;                              <span class="comment"># 将某提交的内容还原到工作区（2.23+）</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>删除误追踪的大文件</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">rm</span> --cached &lt;path&gt;                               <span class="comment"># 停止追踪但保留文件</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;&lt;path&gt;&quot;</span> &gt;&gt; .gitignore</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-分支（创建-切换-删除-重命名）"><a href="#6-分支（创建-切换-删除-重命名）" class="headerlink" title="6. 分支（创建&#x2F;切换&#x2F;删除&#x2F;重命名）"></a>6. 分支（创建&#x2F;切换&#x2F;删除&#x2F;重命名）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git branch                                           <span class="comment"># 查看本地分支</span></span><br><span class="line">git branch -vv                                       <span class="comment"># 含上游跟踪信息</span></span><br><span class="line">git switch -c feature/x                              <span class="comment"># 新建并切换（2.23+）</span></span><br><span class="line">git switch main                                      <span class="comment"># 切换</span></span><br><span class="line">git branch -m oldname newname                        <span class="comment"># 本地分支重命名</span></span><br><span class="line">git branch -d feature/x                              <span class="comment"># 删除（已合并）</span></span><br><span class="line">git branch -D feature/x                              <span class="comment"># 强删（未合并）</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>跟踪远端分支</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git fetch                                            <span class="comment"># 更新远端引用</span></span><br><span class="line">git switch -c feature/x origin/feature/x             <span class="comment"># 新建跟踪分支</span></span><br><span class="line">git branch -u origin/feature/x                       <span class="comment"># 绑定上游</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="7-合并与冲突解决"><a href="#7-合并与冲突解决" class="headerlink" title="7. 合并与冲突解决"></a>7. 合并与冲突解决</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git merge feature/x                                  <span class="comment"># 将 feature/x 合并到当前分支</span></span><br><span class="line">git merge --no-ff feature/x                          <span class="comment"># 保留合并提交</span></span><br><span class="line"><span class="comment"># 解决冲突文件后：</span></span><br><span class="line">git add &lt;conflicted-files&gt;</span><br><span class="line">git commit</span><br></pre></td></tr></table></figure>
+
+<p><strong>图形化合并工具（示例：VS Code）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --global merge.tool vscode</span><br><span class="line">git config --global mergetool.vscode.cmd <span class="string">&quot;code --wait <span class="variable">$MERGED</span>&quot;</span></span><br><span class="line">git mergetool</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-Rebase（整理提交历史）"><a href="#8-Rebase（整理提交历史）" class="headerlink" title="8. Rebase（整理提交历史）"></a>8. Rebase（整理提交历史）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git rebase main                                      <span class="comment"># 将当前分支基于 main 重新播放</span></span><br><span class="line">git rebase -i HEAD~5                                 <span class="comment"># 交互式压缩/重排/合并提交</span></span><br><span class="line">git rebase --abort                                   <span class="comment"># 放弃 rebase</span></span><br><span class="line">git rebase --<span class="built_in">continue</span>                                <span class="comment"># 解决冲突后继续</span></span><br><span class="line">git pull --rebase                                    <span class="comment"># 拉取时避免额外合并提交</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意</strong>：不要对已经公开推送、他人基于其工作的提交做 rebase&#x2F;改历史。</p>
+</blockquote>
+<h2 id="9-远端（Remote）-拉取与推送"><a href="#9-远端（Remote）-拉取与推送" class="headerlink" title="9. 远端（Remote）&#x2F; 拉取与推送"></a>9. 远端（Remote）&#x2F; 拉取与推送</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git remote -v                                        <span class="comment"># 查看远端</span></span><br><span class="line">git remote add origin &lt;url&gt;</span><br><span class="line">git remote set-url origin &lt;new-url&gt;                  <span class="comment"># 替换地址（HTTP&lt;-&gt;SSH）</span></span><br><span class="line">git fetch --all --prune                              <span class="comment"># 拉取所有并清理已删除远端分支</span></span><br><span class="line">git pull                                             <span class="comment"># 当前分支拉取并合并</span></span><br><span class="line">git pull --rebase                                    <span class="comment"># 拉取并 rebase</span></span><br><span class="line">git push -u origin main                              <span class="comment"># 首次推送并建立上游</span></span><br><span class="line">git push                                             <span class="comment"># 普通推送</span></span><br><span class="line">git push --force-with-lease                          <span class="comment"># 安全强推（避免覆盖他人）</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="10-Stash（临时保存工作现场）"><a href="#10-Stash（临时保存工作现场）" class="headerlink" title="10. Stash（临时保存工作现场）"></a>10. Stash（临时保存工作现场）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git stash push -m <span class="string">&quot;WIP: message&quot;</span>                     <span class="comment"># 保存当前改动</span></span><br><span class="line">git stash list                                       <span class="comment"># 列表</span></span><br><span class="line">git stash show -p stash@&#123;0&#125;                          <span class="comment"># 查看差异</span></span><br><span class="line">git stash apply stash@&#123;0&#125;                            <span class="comment"># 应用但保留记录</span></span><br><span class="line">git stash pop                                        <span class="comment"># 应用并删除记录</span></span><br><span class="line">git stash drop stash@&#123;0&#125;                             <span class="comment"># 删除某条</span></span><br><span class="line">git stash push -u                                    <span class="comment"># 包括未追踪文件</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="11-Tag（标签-版本）"><a href="#11-Tag（标签-版本）" class="headerlink" title="11. Tag（标签 &#x2F; 版本）"></a>11. Tag（标签 &#x2F; 版本）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git tag                                              <span class="comment"># 列出标签</span></span><br><span class="line">git tag v1.0.0                                       <span class="comment"># 轻量标签</span></span><br><span class="line">git tag -a v1.0.0 -m <span class="string">&quot;release 1.0.0&quot;</span>                 <span class="comment"># 附注标签（推荐）</span></span><br><span class="line">git show v1.0.0</span><br><span class="line">git push origin v1.0.0                               <span class="comment"># 推送单个标签</span></span><br><span class="line">git push origin --tags                               <span class="comment"># 推送全部标签</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="12-日志与定位（log-blame-grep-shortlog）"><a href="#12-日志与定位（log-blame-grep-shortlog）" class="headerlink" title="12. 日志与定位（log &#x2F; blame &#x2F; grep &#x2F; shortlog）"></a>12. 日志与定位（log &#x2F; blame &#x2F; grep &#x2F; shortlog）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> --oneline --graph --decorate --all</span><br><span class="line">git <span class="built_in">log</span> --<span class="built_in">stat</span> --patch                               <span class="comment"># 带差异</span></span><br><span class="line">git blame &lt;file&gt;                                     <span class="comment"># 查某行最后修改者</span></span><br><span class="line">git grep -n <span class="string">&quot;pattern&quot;</span>                                <span class="comment"># 在版本库中搜索</span></span><br><span class="line">git shortlog -sn --all                               <span class="comment"># 统计作者贡献</span></span><br><span class="line">git show &lt;commit&gt;                                    <span class="comment"># 查看提交内容/元数据</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>范围与选择器</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> &lt;since&gt;..&lt;<span class="keyword">until</span>&gt;                             <span class="comment"># 提交区间</span></span><br><span class="line">git <span class="built_in">log</span> -- &lt;path&gt;                                    <span class="comment"># 限定文件/目录</span></span><br><span class="line">git diff &lt;commit1&gt; &lt;commit2&gt; -- &lt;path&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="13-Cherry-pick（挑拣提交）"><a href="#13-Cherry-pick（挑拣提交）" class="headerlink" title="13. Cherry-pick（挑拣提交）"></a>13. Cherry-pick（挑拣提交）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git cherry-pick &lt;commit&gt;                             <span class="comment"># 将该提交应用到当前分支</span></span><br><span class="line">git cherry-pick &lt;c1&gt; &lt;c2&gt;                            <span class="comment"># 多个</span></span><br><span class="line">git cherry-pick --abort | --<span class="built_in">continue</span>                 <span class="comment"># 冲突处理</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="14-Submodule（子模块）"><a href="#14-Submodule（子模块）" class="headerlink" title="14. Submodule（子模块）"></a>14. Submodule（子模块）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git submodule add &lt;url&gt; path/</span><br><span class="line">git submodule update --init --recursive</span><br><span class="line">git submodule <span class="built_in">sync</span> --recursive                       <span class="comment"># URL 同步</span></span><br><span class="line"><span class="comment"># 更新子模块到最新远端提交：</span></span><br><span class="line">git submodule update --remote --merge</span><br></pre></td></tr></table></figure>
+
+<h2 id="15-Worktree（多工作树并行开发）"><a href="#15-Worktree（多工作树并行开发）" class="headerlink" title="15. Worktree（多工作树并行开发）"></a>15. Worktree（多工作树并行开发）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git worktree list</span><br><span class="line">git worktree add ../wt-feature feature/x             <span class="comment"># 在新目录检出分支</span></span><br><span class="line">git worktree remove ../wt-feature</span><br></pre></td></tr></table></figure>
+
+<h2 id="16-稀疏检出（仅拉取需要的目录）"><a href="#16-稀疏检出（仅拉取需要的目录）" class="headerlink" title="16. 稀疏检出（仅拉取需要的目录）"></a>16. 稀疏检出（仅拉取需要的目录）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git sparse-checkout init --cone</span><br><span class="line">git sparse-checkout <span class="built_in">set</span> path/another-path/</span><br><span class="line">git sparse-checkout add extras/</span><br><span class="line">git sparse-checkout list</span><br></pre></td></tr></table></figure>
+
+<h2 id="17-清理与维护"><a href="#17-清理与维护" class="headerlink" title="17. 清理与维护"></a>17. 清理与维护</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clean -fdX                                       <span class="comment"># 强制删除未追踪+忽略文件（危险）</span></span><br><span class="line">git clean -ndX                                       <span class="comment"># 先 dry-run 看看删什么</span></span><br><span class="line">git gc --aggressive --prune=now                      <span class="comment"># 垃圾回收（慎用在大型库）</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="18-重写历史（谨慎）"><a href="#18-重写历史（谨慎）" class="headerlink" title="18. 重写历史（谨慎）"></a>18. 重写历史（谨慎）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改作者信息（最近一次提交）</span></span><br><span class="line">git commit --amend --author=<span class="string">&quot;New Name &lt;new@example.com&gt;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 全局重写作者/邮箱（使用 git filter-repo，需先安装）</span></span><br><span class="line"><span class="comment"># pip install git-filter-repo</span></span><br><span class="line">git filter-repo --email-callback <span class="string">&#x27;</span></span><br><span class="line"><span class="string">return b&quot;new@example.com&quot; if email==b&quot;old@example.com&quot; else email</span></span><br><span class="line"><span class="string">&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如仓库已公开，重写历史需要<strong>强推</strong>并通知协作者重新同步。</p>
+</blockquote>
+<h2 id="19-行结尾-大文件-LFS-属性"><a href="#19-行结尾-大文件-LFS-属性" class="headerlink" title="19. 行结尾 &#x2F; 大文件 &#x2F; LFS &#x2F; 属性"></a>19. 行结尾 &#x2F; 大文件 &#x2F; LFS &#x2F; 属性</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 统一行结尾（推荐在仓库根创建 .gitattributes）</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;* text=auto&quot;</span> &gt;&gt; .gitattributes</span><br><span class="line"></span><br><span class="line"><span class="comment"># Git LFS（Large File Storage）</span></span><br><span class="line">git lfs install</span><br><span class="line">git lfs track <span class="string">&quot;*.bin&quot;</span></span><br><span class="line">git add .gitattributes</span><br><span class="line">git add &lt;large.bin&gt;</span><br><span class="line">git commit -m <span class="string">&quot;track large files via LFS&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="20-排错套路"><a href="#20-排错套路" class="headerlink" title="20. 排错套路"></a>20. 排错套路</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1) 看看我在哪、改了啥</span></span><br><span class="line">git status -sb</span><br><span class="line">git <span class="built_in">log</span> --oneline -n 10</span><br><span class="line">git reflog -n 20</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2) 远端状况</span></span><br><span class="line">git remote -v</span><br><span class="line">git fetch --all --prune</span><br><span class="line">git branch -vv</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3) 解决“我只想回到昨天”</span></span><br><span class="line">git reflog                         <span class="comment"># 找到目标哈希 X</span></span><br><span class="line">git reset --hard X                 <span class="comment"># 回到该快照（若是公共分支三思）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 4) 解决“本地乱了但不想丢”</span></span><br><span class="line">git stash push -u -m <span class="string">&quot;safety&quot;</span></span><br><span class="line">git switch -c rescue/$(<span class="built_in">date</span> +%Y%m%d-%H%M%S)</span><br><span class="line">git stash pop</span><br></pre></td></tr></table></figure>
+
+<h2 id="21-常用别名建议（-gitconfig）"><a href="#21-常用别名建议（-gitconfig）" class="headerlink" title="21. 常用别名建议（.gitconfig）"></a>21. 常用别名建议（.gitconfig）</h2><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[alias]</span></span><br><span class="line">  <span class="attr">st</span> = status -sb</span><br><span class="line">  <span class="attr">lg</span> = log --<span class="literal">on</span>eline --graph --decorate --all</span><br><span class="line">  <span class="attr">co</span> = checkout</span><br><span class="line">  <span class="attr">sw</span> = switch</span><br><span class="line">  <span class="attr">br</span> = branch -vv</span><br><span class="line">  <span class="attr">ci</span> = commit</span><br><span class="line">  <span class="attr">dc</span> = diff --cached</span><br><span class="line">  <span class="attr">rb</span> = rebase</span><br><span class="line">  <span class="attr">cp</span> = cherry-pick</span><br><span class="line">  <span class="attr">aa</span> = add -A</span><br><span class="line">  <span class="attr">undo</span> = reset --soft HEAD~<span class="number">1</span></span><br><span class="line">  <span class="attr">last</span> = show -<span class="number">1</span> --stat</span><br></pre></td></tr></table></figure>
+
+<h3 id="附：常见工作流模板"><a href="#附：常见工作流模板" class="headerlink" title="附：常见工作流模板"></a>附：常见工作流模板</h3><p><strong>A. 常规功能分支</strong>  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git switch -c feature/x</span><br><span class="line"><span class="comment"># 开发 -&gt; 提交</span></span><br><span class="line">git push -u origin feature/x</span><br><span class="line"><span class="comment"># 发起 PR（代码平台上处理）</span></span><br><span class="line"><span class="comment"># 合并后：</span></span><br><span class="line">git switch main &amp;&amp; git pull --ff-only &amp;&amp; git branch -d feature/x</span><br></pre></td></tr></table></figure>
+
+<p><strong>B. Release 切分支</strong>  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git switch -c release/1.2.0</span><br><span class="line"><span class="comment"># 冻结 &amp; 修复 -&gt; 打标签</span></span><br><span class="line">git tag -a v1.2.0 -m <span class="string">&quot;release 1.2.0&quot;</span></span><br><span class="line">git push origin release/1.2.0 v1.2.0</span><br></pre></td></tr></table></figure>
+
+<p><strong>C. 从 main 同步更新到长期分支</strong>  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git switch longrun</span><br><span class="line">git fetch origin</span><br><span class="line">git merge origin/main        <span class="comment"># 或者 git rebase origin/main</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示</strong>：</p>
+<ul>
+<li>公共分支避免 <code>--force</code>，若必须请用 <code>--force-with-lease</code>；</li>
+<li>习惯 <code>reflog</code>，关键时刻能救命；</li>
+<li>通过 PR &#x2F; MR 平台做 Code Review 与发布管理；</li>
+<li>与团队约定：分支命名、提交信息规范（如 Conventional Commits）、发布流程。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2025/11/11/%E5%BE%AE%E8%A1%A8%E6%83%85%E5%92%8C%E5%BF%83%E7%90%86%E7%89%B9%E5%BE%81%E4%B8%80%E8%87%B4%E6%80%A7%E8%9E%8D%E5%90%88%E7%9A%84%E6%B5%8B%E8%B0%8E%E6%A8%A1%E5%9E%8B%E7%A0%94%E7%A9%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/11/11/%E5%BE%AE%E8%A1%A8%E6%83%85%E5%92%8C%E5%BF%83%E7%90%86%E7%89%B9%E5%BE%81%E4%B8%80%E8%87%B4%E6%80%A7%E8%9E%8D%E5%90%88%E7%9A%84%E6%B5%8B%E8%B0%8E%E6%A8%A1%E5%9E%8B%E7%A0%94%E7%A9%B6/" class="post-title-link" itemprop="url">微表情和心理特征一致性融合的测谎模型研究</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-11-11 05:04:52" itemprop="dateCreated datePublished" datetime="2025-11-11T05:04:52+08:00">2025-11-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-05-29 21:44:06" itemprop="dateModified" datetime="2026-05-29T21:44:06+08:00">2026-05-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">论文笔记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="微表情和心理特征一致性融合的测谎模型研究"><a href="#微表情和心理特征一致性融合的测谎模型研究" class="headerlink" title="微表情和心理特征一致性融合的测谎模型研究"></a><strong><strong>微表情和心理特征一致性融合的测谎模型研究</strong></strong></h1><blockquote>
+<p><strong>一句话</strong>：就是做一个“看脸+听声音+看说话内容”的多模态测谎模型，核心不是简单把特征拼在一起，而是<strong>专门抓“微表情”和“心理特征”之间的不一致</strong>，把“言不由衷”“认知超载”这种心理机制用算法形式表达出来。</p>
+</blockquote>
+<h2 id="一、在整个课题中的位置"><a href="#一、在整个课题中的位置" class="headerlink" title="一、在整个课题中的位置"></a>一、在整个课题中的位置</h2><ul>
+<li>研究内容一：解决“有啥数据”的问题（数据集分析与构建）。</li>
+<li><strong>研究内容二：解决“怎么判断谎言”的核心算法问题</strong>。</li>
+<li>研究内容三：把算法做成一个可用的平台系统。</li>
+</ul>
+<p>所以，研究内容二就是：<strong>基于微表情和心理特征一致性融合的测谎模型研究</strong>——是整篇论文里最“算法”和“创新点”集中的部分。</p>
+<h2 id="二、这个模型整体在做什么？"><a href="#二、这个模型整体在做什么？" class="headerlink" title="二、这个模型整体在做什么？"></a>二、这个模型整体在做什么？</h2><p>从流程上看，可以概括成三层：</p>
+<ol>
+<li><strong>原始输入</strong>：<ul>
+<li>视频：包含被试脸部的连续帧（微表情信号）</li>
+<li>音频：说话的声音（语速、停顿、音高等）</li>
+<li>文本：把说话内容转成文字（语义、情感、复杂度等）</li>
+</ul>
+</li>
+<li><strong>中间特征层</strong>：<ul>
+<li>视觉通道 → 提取<strong>微表情时空特征</strong></li>
+<li>语音&#x2F;文本通道 → 计算<strong>认知负荷分数序列</strong>、<strong>情绪矛盾分数序列</strong>等“心理学特征”，再编码成一个心理特征向量（+基本声学与文本特征）</li>
+</ul>
+</li>
+<li><strong>决策层</strong>：<ul>
+<li>通过一个<strong>一致性融合模块（交叉注意力 + 不一致性加权）</strong></li>
+<li>把“微表情（情绪真相）”和“心理特征（受控表现）”进行对比、融合</li>
+<li>再用 Transformer 做时序建模，最后输出：<strong>这一段话是“真实”还是“欺骗”的概率</strong></li>
+</ul>
+</li>
+</ol>
+<h2 id="三、输入输出：从“说话一段视频”到“欺骗概率”"><a href="#三、输入输出：从“说话一段视频”到“欺骗概率”" class="headerlink" title="三、输入输出：从“说话一段视频”到“欺骗概率”"></a>三、输入输出：从“说话一段视频”到“欺骗概率”</h2><h3 id="1-输入"><a href="#1-输入" class="headerlink" title="1. 输入"></a>1. 输入</h3><p>以一次问答或陈述为单位，一段数据包括：</p>
+<ul>
+<li>一段同步采集的<strong>面部视频</strong>：<ul>
+<li>分辨率约 1080p，帧率 ≥60 fps</li>
+<li>记录了从提问开始到回答结束的表情变化</li>
+</ul>
+</li>
+<li>一段对应的<strong>音频</strong>：<ul>
+<li>包含声学信息（音高、能量、停顿等）</li>
+</ul>
+</li>
+<li>从音频里通过 ASR 得到的<strong>文本转录</strong>：<ul>
+<li>某人说了什么，句子内容</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-输出"><a href="#2-输出" class="headerlink" title="2. 输出"></a>2. 输出</h3><ul>
+<li>一个二分类结果：<ul>
+<li>标签：<strong>真实 &#x2F; 欺骗</strong></li>
+<li>同时给出一个<strong>概率值 p(欺骗)</strong></li>
+</ul>
+</li>
+<li>在可解释性分析阶段，还会输出：<ul>
+<li>哪些<strong>时刻&#x2F;特征</strong>（例如某个 AU 的激活、某个时间点的语音停顿、某一段话的情感矛盾）对“欺骗”判断贡献最大</li>
+</ul>
+</li>
+</ul>
+<h2 id="四、第一层：特征提取-心理特征计算"><a href="#四、第一层：特征提取-心理特征计算" class="headerlink" title="四、第一层：特征提取 &amp; 心理特征计算"></a>四、第一层：特征提取 &amp; 心理特征计算</h2><h3 id="4-1-视觉通道：微表情时空特征"><a href="#4-1-视觉通道：微表情时空特征" class="headerlink" title="4.1 视觉通道：微表情时空特征"></a>4.1 视觉通道：微表情时空特征</h3><ol>
+<li><p><strong>视频预处理</strong></p>
+<ul>
+<li>人脸检测 + 关键点定位（如 MTCNN、MediaPipe）</li>
+<li>对齐、裁剪 ROI，保证不同帧的脸位置统一</li>
+</ul>
+</li>
+<li><p><strong>I3D 或类似 3D-CNN &#x2F; ViT 模型</strong></p>
+<ul>
+<li>把一段视频切成若干短 clip 输入 I3D</li>
+<li>3D 卷积提取<strong>时空特征</strong>：既看“哪里动”（空间），也看“动得多快、多突然”（时间）</li>
+<li>重点捕捉：微弱、短暂、局部的表情变化（微表情）</li>
+</ul>
+</li>
+<li><p><strong>输出</strong></p>
+<ul>
+<li><p>一个时间序列的特征表示：<br>$$<br>\mathbf{F}^{me} &#x3D; [f^{me}_1, f^{me}_2, \dots, f^{me}_T]<br>$$</p>
+</li>
+<li><p>这个序列就是后面“一致性融合模块”里的<strong>Query（Q）</strong></p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="4-2-语音-文本通道：隐式心理特征计算"><a href="#4-2-语音-文本通道：隐式心理特征计算" class="headerlink" title="4.2 语音 + 文本通道：隐式心理特征计算"></a>4.2 语音 + 文本通道：隐式心理特征计算</h3><p><strong>目标</strong>：不用让被试填量表，而是从声学、语言自动计算出心理学构念：</p>
+<ul>
+<li>认知负荷（Cognitive Load）</li>
+<li>情绪矛盾（Emotional Incongruity）</li>
+</ul>
+<h4 id="（1）语音特征"><a href="#（1）语音特征" class="headerlink" title="（1）语音特征"></a>（1）语音特征</h4><p>提取如：</p>
+<ul>
+<li>基频 F0（高低抖动反映紧张&#x2F;唤醒）</li>
+<li>能量（说话用力程度）</li>
+<li>HNR、抖动度等（声音质量变化）</li>
+<li>语速、停顿次数&#x2F;时长（认知负荷上来时，通常<strong>停顿变多、语速不稳定</strong>）</li>
+</ul>
+<h4 id="（2）文本特征"><a href="#（2）文本特征" class="headerlink" title="（2）文本特征"></a>（2）文本特征</h4><p>ASR 转录后做 NLP 分析：</p>
+<ul>
+<li>语言复杂度（句子长短、嵌套深度）</li>
+<li>信息密度（具体细节 vs 模糊表达）</li>
+<li>自我指涉频率（“我”“我们”等）</li>
+<li>情感倾向：利用 LIWC 等情绪词典统计<ul>
+<li>正负面情绪词比例</li>
+<li>与情境预期的一致性&#x2F;偏离程度</li>
+</ul>
+</li>
+</ul>
+<h4 id="（3）认知负荷分数序列"><a href="#（3）认知负荷分数序列" class="headerlink" title="（3）认知负荷分数序列"></a>（3）认知负荷分数序列</h4><ul>
+<li><p>设计一个小型回归网络 &#x2F; MLP：</p>
+<ul>
+<li><p>输入：语速变化、停顿特征、语言复杂度等</p>
+</li>
+<li><p>输出：每个时间段的<strong>认知负荷分数</strong>：<br>$$<br>\mathbf{c} &#x3D; [c_1, c_2, …, c_T]<br>$$</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="（4）情绪矛盾分数序列"><a href="#（4）情绪矛盾分数序列" class="headerlink" title="（4）情绪矛盾分数序列"></a>（4）情绪矛盾分数序列</h4><ul>
+<li><p>比如：当前语境应该是“被指控”，客观上容易引发紧张、愤怒等情绪</p>
+</li>
+<li><p>但文本表现“特别轻松、积极”</p>
+</li>
+<li><p>通过对比<strong>语境&#x2F;内容情绪</strong>和<strong>“合理预期情绪”</strong>，算一个“矛盾度”：<br>$$<br>\mathbf{e} &#x3D; [e_1, e_2, …, e_T]<br>$$</p>
+</li>
+</ul>
+<h4 id="（5）心理特征编码器"><a href="#（5）心理特征编码器" class="headerlink" title="（5）心理特征编码器"></a>（5）心理特征编码器</h4><ul>
+<li><p>把上述：</p>
+<ul>
+<li>语音低阶特征（F0、能量…）</li>
+<li>认知负荷序列 c</li>
+<li>情绪矛盾序列 e<br> 一起输入一个<strong>心理特征编码器</strong>（1D-CNN 或 Transformer）</li>
+</ul>
+</li>
+<li><p>输出一个与时间对齐的心理特征序列：<br>$$<br>\mathbf{F}^{psy} &#x3D; [f^{psy}_1, f^{psy}_2, …, f^{psy}_T]<br>$$</p>
+</li>
+<li><p>这就是后面一致性融合模块里的 <strong>Key（K）和 Value（V）</strong></p>
+</li>
+</ul>
+<h2 id="五、第二层：微表情–心理特征一致性融合模块（核心创新）"><a href="#五、第二层：微表情–心理特征一致性融合模块（核心创新）" class="headerlink" title="五、第二层：微表情–心理特征一致性融合模块（核心创新）"></a>五、第二层：微表情–心理特征一致性融合模块（核心创新）</h2><p>这里是研究内容二<strong>最核心的算法创新点</strong>。</p>
+<h3 id="5-1-思路"><a href="#5-1-思路" class="headerlink" title="5.1 思路"></a>5.1 思路</h3><ul>
+<li>微表情：更接近<strong>真实情绪</strong>，难以伪装</li>
+<li>心理特征（语音+文本）：是<strong>受控的表现</strong>，容易被伪装、调整</li>
+</ul>
+<blockquote>
+<p>核心理念：<strong>“谎言 &#x3D; 情绪泄露（微表情） 与 受控表达（语音&#x2F;语言） 不一致”</strong> 的概率变高。</p>
+</blockquote>
+<p>所以我们不用简单地拼接 <code>[F_me; F_psy]</code>，而是要设计一种机制，<strong>专门放大“不一致”的时刻</strong>。</p>
+<h3 id="5-2-交叉注意力结构"><a href="#5-2-交叉注意力结构" class="headerlink" title="5.2 交叉注意力结构"></a>5.2 交叉注意力结构</h3><ul>
+<li><p>设：</p>
+<ul>
+<li>Q &#x3D; 微表情特征 (\mathbf{F}^{me})</li>
+<li>K, V &#x3D; 心理特征 (\mathbf{F}^{psy})</li>
+</ul>
+</li>
+<li><p>标准缩放点积注意力：<br>$$<br>\text{Attn}(Q, K, V) &#x3D; \text{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V<br>$$</p>
+</li>
+<li><p>你的报告里在此基础上加入了一个<strong>不一致性项</strong>，计算“微表情和心理特征平均状态的差异”，用欧氏距离表示，并乘上一个可学习参数 λ，融合进注意力权重里。<br> 这样一来：</p>
+<ul>
+<li>当微表情和心理特征“很一致” → 不一致性项小 → 权重偏正常</li>
+<li>当它们“很不一致” → 不一致性项大 → 注意力会更加聚焦这些时间点</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>换句话说：<strong>模型在训练中被鼓励去“盯着”那些表情和心理特征打架的瞬间。</strong></p>
+</blockquote>
+<h3 id="5-3-时序建模与分类"><a href="#5-3-时序建模与分类" class="headerlink" title="5.3 时序建模与分类"></a>5.3 时序建模与分类</h3><ul>
+<li>一致性融合后的特征序列送入 <strong>Transformer 编码器</strong>：<ul>
+<li>多头自注意力 + FFN</li>
+<li>捕获长程时序依赖（整段话的动态变化）</li>
+</ul>
+</li>
+<li>再做：<ul>
+<li>全局平均池化（把 T 个时间步压成一个全局向量）</li>
+<li>全连接层 + Sigmoid 输出欺骗概率</li>
+</ul>
+</li>
+</ul>
+<h2 id="六、第三层：损失函数与可解释性"><a href="#六、第三层：损失函数与可解释性" class="headerlink" title="六、第三层：损失函数与可解释性"></a>六、第三层：损失函数与可解释性</h2><h3 id="6-1-损失函数：加权-Focal-Loss"><a href="#6-1-损失函数：加权-Focal-Loss" class="headerlink" title="6.1 损失函数：加权 Focal Loss"></a>6.1 损失函数：加权 Focal Loss</h3><ul>
+<li>现实中：<strong>真实样本往往远多于欺骗样本</strong> → 类别不平衡</li>
+<li>你采用的是<strong>加权 Focal Loss</strong>：<ul>
+<li>用 α 调整正负样本的权重</li>
+<li>用 γ 减小“容易分类样本”的损失，让模型更关注“难样本”</li>
+</ul>
+</li>
+<li>好处：<ul>
+<li>更好地学习“少数类”（欺骗）的特征</li>
+<li>避免只学会“老实人很多，所以都判成真实”</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-2-可解释性：SHAP-等"><a href="#6-2-可解释性：SHAP-等" class="headerlink" title="6.2 可解释性：SHAP 等"></a>6.2 可解释性：SHAP 等</h3><ul>
+<li>训练好模型之后，用 <strong>SHAP</strong> 来做特征归因：<ul>
+<li>可以回答：<ul>
+<li>“模型是因为哪个 AU、哪一段停顿、哪一段情绪矛盾而判定为‘说谎’？”</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>这部分一方面服务于论文：<ul>
+<li>验证模型是否真的在利用“心理学上合理的线索”</li>
+<li>例如确实在关键“微表情 + 高认知负荷 + 情绪矛盾”时刻权重很高</li>
+</ul>
+</li>
+<li>另一方面，也提高系统在司法&#x2F;安防场景中的<strong>可解释性与可信度</strong></li>
+</ul>
+<h2 id="七、这一部分到底解决了什么问题？有什么创新？"><a href="#七、这一部分到底解决了什么问题？有什么创新？" class="headerlink" title="七、这一部分到底解决了什么问题？有什么创新？"></a>七、这一部分到底解决了什么问题？有什么创新？</h2><h3 id="7-1-要解决的问题"><a href="#7-1-要解决的问题" class="headerlink" title="7.1 要解决的问题"></a>7.1 要解决的问题</h3><ol>
+<li><strong>单一微表情或单一心理指标不可靠</strong><ul>
+<li>只看表情：可能是个性、习惯问题</li>
+<li>只看语音&#x2F;文本：对高情商&#x2F;反侦察者不敏感</li>
+</ul>
+</li>
+<li><strong>传统多模态往往是“简单拼接”，没有突出心理机制</strong></li>
+<li><strong>缺乏可解释、心理学驱动的融合方式</strong></li>
+</ol>
+<h3 id="7-2-本研究的创新点"><a href="#7-2-本研究的创新点" class="headerlink" title="7.2 本研究的创新点"></a>7.2 本研究的创新点</h3><ol>
+<li><strong>心理特征“无感计算”</strong><ul>
+<li>不靠问卷，而是从语音+文本自动估计<strong>认知负荷</strong>、<strong>情绪矛盾</strong>等心理构念</li>
+<li>更接近真实场景（审讯、安检中不会给你先发量表）</li>
+</ul>
+</li>
+<li><strong>一致性&#x2F;不一致性导向的融合方式</strong><ul>
+<li>微表情 &#x3D; 情绪真相通道</li>
+<li>心理特征 &#x3D; 认知控制通道</li>
+<li>利用<strong>交叉注意力 + 不一致性加权</strong>，专门强调“不一致”的证据<br> → 把心理学里的“言不由衷”“情绪泄漏”做成了一个<strong>可计算的机制</strong></li>
+</ul>
+</li>
+<li><strong>强可解释性</strong><ul>
+<li>用 SHAP 等方法，把模型的“注意点”映射回：<ul>
+<li>哪个 AU</li>
+<li>哪段停顿、哪句矛盾的话</li>
+</ul>
+</li>
+<li>既符合心理学理论，又方便在论文和平台中展示</li>
+</ul>
+</li>
+</ol>
+<h2 id="八、如果你要在脑子里有一张“简图”，可以这样记："><a href="#八、如果你要在脑子里有一张“简图”，可以这样记：" class="headerlink" title="八、如果你要在脑子里有一张“简图”，可以这样记："></a>八、如果你要在脑子里有一张“简图”，可以这样记：</h2><ol>
+<li><strong>输入</strong>：视频 + 音频 → （视频→微表情；音频→语音特征；ASR→文本→情绪&amp;复杂度）</li>
+<li><strong>心理特征模块</strong>：算出“认知负荷曲线 + 情绪矛盾曲线”</li>
+<li><strong>两条通道编码</strong>：<ul>
+<li>视觉编码器：得到微表情时序特征</li>
+<li>心理编码器：得到心理特征时序向量</li>
+</ul>
+</li>
+<li><strong>一致性融合模块</strong>：<ul>
+<li>微表情做 Q</li>
+<li>心理特征做 K,V</li>
+<li>注意力里加“微表情 vs 心理特征的不一致性”</li>
+</ul>
+</li>
+<li><strong>Transformer + 分类器</strong>：输出欺骗概率</li>
+<li><strong>Focal Loss + SHAP</strong>：解决样本不平衡 + 提高可解释性</li>
+</ol>
+<h2 id="整个研究流程的通俗解释"><a href="#整个研究流程的通俗解释" class="headerlink" title="整个研究流程的通俗解释"></a><strong>整个研究流程的通俗解释</strong></h2><p><strong>这个研究就是要造一个更准的“测谎仪”，它不光看你的“面部微表情”，还结合你的“心理状态”，让机器像一位既懂察言观色又懂心理学的侦探一样，综合判断你是否在说谎。</strong></p>
+<h4 id="1-输入（喂给机器什么数据？）"><a href="#1-输入（喂给机器什么数据？）" class="headerlink" title="1. 输入（喂给机器什么数据？）"></a><strong>1. 输入（喂给机器什么数据？）</strong></h4><p>我们给机器看两种信息：</p>
+<ul>
+<li><strong>你的脸：</strong> 一段高清视频，记录你回答问题时的面部变化。</li>
+<li><strong>你的“心”：</strong><ul>
+<li><strong>问卷答案：</strong> 让你填一些关于“紧不紧张”、“费不费脑”的表格。</li>
+<li><strong>你的声音：</strong> 录下你回答问题的声音。</li>
+</ul>
+</li>
+</ul>
+<p><strong>好比侦探的线索：</strong> 面部视频是“视觉线索”，问卷和声音是“心理线索”。</p>
+<h4 id="2-特征提取（机器如何看懂这些数据？）"><a href="#2-特征提取（机器如何看懂这些数据？）" class="headerlink" title="2. 特征提取（机器如何看懂这些数据？）"></a><strong>2. 特征提取（机器如何看懂这些数据？）</strong></h4><p>机器需要从原始数据中提炼出有用的“信号”。</p>
+<ul>
+<li><p><strong>从脸上提取“微表情”信号：</strong></p>
+<ul>
+<li><strong>技术：</strong> 使用一种叫<strong>深度学习模型（如3D-CNN）</strong> 的“放大镜”和“慢放镜”，来捕捉脸上极其快速、细微的肌肉抽动（比如瞬间的皱眉、嘴角一撇）。</li>
+<li><strong>得到：</strong> 一系列<strong>微表情事件</strong>的描述，例如：“第5秒，眉毛轻微上扬0.2秒”。</li>
+</ul>
+</li>
+<li><p><strong>文本和声音中提取“心理”信号：</strong></p>
+<ul>
+<li><strong>技术：</strong> 用<strong>音频分析工具</strong>分析声音的颤抖、语速快慢。</li>
+<li><strong>得到：</strong> 一组<strong>心理状态数值</strong>，例如：“紧张度：75分”、“认知负荷：80分”。</li>
+</ul>
+</li>
+</ul>
+<p><strong>好比侦探分析线索：</strong> 从视频里找到“嫌疑人眼神闪烁”的瞬间；从问询中感觉到“嫌疑人声音发抖，逻辑混乱”。</p>
+<h4 id="3-核心创新：一致性融合（机器如何当侦探做推理？）"><a href="#3-核心创新：一致性融合（机器如何当侦探做推理？）" class="headerlink" title="3. 核心创新：一致性融合（机器如何当侦探做推理？）"></a><strong>3. 核心创新：一致性融合（机器如何当侦探做推理？）</strong></h4><p>这是最关键的一步！机器不是简单地把两个结果平均一下，而是进行智能融合。</p>
+<ul>
+<li><strong>技术：</strong> 采用一种叫<strong>注意力机制</strong>的“大脑”。这个大脑会动态思考：<ul>
+<li><strong>场景A：</strong> 如果机器检测到“否认”的微表情（比如嘴角下压），但同时发现你的“紧张度”数值极高。这时大脑会想：“<strong>表情上装作镇定，但身体很诚实，非常紧张，这种‘不一致’很可疑！</strong>” 于是会给这个组合<strong>打高分</strong>，倾向于判断为“说谎”。</li>
+<li><strong>场景B：</strong> 如果机器没有检测到明显的微表情，同时你的“认知负荷”数值也很低。大脑会想：“<strong>表情自然，回答问题也不费劲，状态很松弛。</strong>” 于是倾向于判断为“真实”。</li>
+</ul>
+</li>
+</ul>
+<p><strong>好比侦探的推理：</strong> 将“视觉线索”和“心理线索”联系起来，发现其中的矛盾或一致之处，从而做出更可靠的判断。</p>
+<h4 id="4-得到什么结果？（流水线的产品是什么？）"><a href="#4-得到什么结果？（流水线的产品是什么？）" class="headerlink" title="4. 得到什么结果？（流水线的产品是什么？）"></a><strong>4. 得到什么结果？（流水线的产品是什么？）</strong></h4><ul>
+<li><strong>直接产品：</strong> 一个训练好的<strong>测谎算法模型</strong>。你输入一个人的视频和声音，它能输出一个概率值，比如 <strong>“说谎概率：92%”</strong>。</li>
+<li><strong>验证结果：</strong> 通过大量实验证明，我们这个 <strong>“微表情+心理特征”融合的模型</strong>，其<strong>准确率（如F1分数）</strong> 比只用微表情的模型或只用心理特征的模型都要<strong>高</strong>。</li>
+</ul>
+<h4 id="5-最终目的是什么？（我们为什么要做这个？）"><a href="#5-最终目的是什么？（我们为什么要做这个？）" class="headerlink" title="5. 最终目的是什么？（我们为什么要做这个？）"></a><strong>5. 最终目的是什么？（我们为什么要做这个？）</strong></h4><ol>
+<li><strong>理论目的：</strong> 探索并验证“微表情”和“心理状态”在说谎时是如何相互作用的，建立起一套新的、更强大的测谎理论。</li>
+<li><strong>应用目的：</strong> 为开发下一代高精度、自动化的测谎系统打下核心基础，未来可以应用于<strong>司法审讯辅助、安全筛查、商业谈判</strong>等重要领域。</li>
+</ol>
+<h3 id="总结流程图"><a href="#总结流程图" class="headerlink" title="总结流程图"></a><strong>总结流程图</strong></h3><p><strong>输入</strong> （视频 + 问卷 + 音频）<br>　　↓<br><strong>特征提取</strong> （深度学习模型抓微表情 + 统计分析算心理分数）<br>　　↓<br><strong>一致性融合</strong> （“注意力机制”大脑分析微表情与心理是否一致）<br>　　↓<br><strong>结果</strong> （一个更准确的测谎概率值）<br>　　↓<br><strong>最终目的</strong> （打造一个更聪明的AI侦探，推动测谎技术发展）</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
     }
-  },
-  processSubtitle: (content, extraContents = []) => {
-    if (true) {
-      const sub = ["我见青山多妩媚，料青山见我应如是","人生如逆旅，我亦是行人"].slice()
-
-      if (extraContents.length > 0) {
-        sub.unshift(...extraContents)
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
       }
-
-      if (typeof content === 'string') {
-        sub.unshift(content)
-      } else if (Array.isArray(content)) {
-        sub.unshift(...content)
-      }
-
-      sub.length > 0 && typedJSFn.init(sub)
-    } else {
-      document.getElementById('subtitle').textContent = typeof content === 'string' ? content :
-        (Array.isArray(content) && content.length > 0 ? content[0] : '')
     }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
   }
-}
-btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')
-</script><script>function subtitleType () {
-  typedJSFn.processSubtitle(["我见青山多妩媚，料青山见我应如是","人生如逆旅，我亦是行人"])
-}
-typedJSFn.run(subtitleType)</script></div><script async data-pjax src="/"></script></div></body></html>
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Hyacinth</p>
+  <div class="site-description" itemprop="description">君子慎独,不欺暗室</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hyacinth</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

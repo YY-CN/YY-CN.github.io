@@ -1,282 +1,1543 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Hyacinth</title><meta name="author" content="Hyacinth"><meta name="copyright" content="Hyacinth"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="君子慎独,不欺暗室">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="君子慎独,不欺暗室">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Hyacinth">
 <meta property="og:url" content="https://hyacinth.xin/page/2/index.html">
 <meta property="og:site_name" content="Hyacinth">
 <meta property="og:description" content="君子慎独,不欺暗室">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
 <meta property="article:author" content="Hyacinth">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/sakura.png"><link rel="canonical" href="https://hyacinth.xin/page/2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
-    (() => {
-      
-    const saveToLocal = {
-      set: (key, value, ttl) => {
-        if (!ttl) return
-        const expiry = Date.now() + ttl * 86400000
-        localStorage.setItem(key, JSON.stringify({ value, expiry }))
-      },
-      get: key => {
-        const itemStr = localStorage.getItem(key)
-        if (!itemStr) return undefined
-        const { value, expiry } = JSON.parse(itemStr)
-        if (Date.now() > expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return value
-      }
-    }
 
-    window.btf = {
-      saveToLocal,
-      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = url
-        script.async = true
-        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
-        script.onload = script.onreadystatechange = () => {
-          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
-        }
-        script.onerror = reject
-        document.head.appendChild(script)
-      }),
-      getCSS: (url, id) => new Promise((resolve, reject) => {
-        const link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.href = url
-        if (id) link.id = id
-        link.onload = link.onreadystatechange = () => {
-          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
-        }
-        link.onerror = reject
-        document.head.appendChild(link)
-      }),
-      addGlobalFn: (key, fn, name = false, parent = window) => {
-        if (!false && key.startsWith('pjax')) return
-        const globalFn = parent.globalFn || {}
-        globalFn[key] = globalFn[key] || {}
-        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
-        parent.globalFn = globalFn
-      }
-    }
+<link rel="canonical" href="https://hyacinth.xin/page/2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Hyacinth</title>
   
-      
-      const activateDarkMode = () => {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
-        }
-      }
-      const activateLightMode = () => {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
-        }
-      }
 
-      btf.activateDarkMode = activateDarkMode
-      btf.activateLightMode = activateLightMode
 
-      const theme = saveToLocal.get('theme')
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hyacinth</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
     
-          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2026/06/11/%E6%B0%B4%E5%9C%B0%E6%AF%94/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/11/%E6%B0%B4%E5%9C%B0%E6%AF%94/" class="post-title-link" itemprop="url">水地比</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-06-11 08:30:00" itemprop="dateCreated datePublished" datetime="2026-06-11T08:30:00+08:00">2026-06-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-06-10 23:21:08" itemprop="dateModified" datetime="2026-06-10T23:21:08+08:00">2026-06-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%98%93%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">易学</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>地上有水，比。先王以建万国，亲诸侯。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/06/11/%E6%B0%B4%E5%9C%B0%E6%AF%94/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
         
       
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
-      }
+    </div>
+
     
-      
-    const detectApple = () => {
-      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
   
-    })()
-  </script><script>const GLOBAL_CONFIG = {
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
-  copy: {
-    success: '复制成功',
-    error: '复制失败',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  dateSuffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: undefined,
-  lightbox: 'null',
-  Snackbar: undefined,
-  infinitegrid: {
-    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
-    buttonText: '加载更多'
-  },
-  isPhotoFigcaption: false,
-  islazyloadPlugin: false,
-  isAnchor: false,
-  percent: {
-    toc: true,
-    rightside: false,
-  },
-  autoDarkmode: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: 'Hyacinth',
-  isHighlightShrink: false,
-  isToc: false,
-  pageType: 'home'
-}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@4.5.12/index.min.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
-  const $loadingBox = document.getElementById('loading-box')
-  const $body = document.body
-  const preloader = {
-    endLoading: () => {
-      if ($loadingBox.classList.contains('loaded')) return
-      $body.style.overflow = ''
-      $loadingBox.classList.add('loaded')
-    },
-    initLoading: () => {
-      $body.style.overflow = 'hidden'
-      $loadingBox.classList.remove('loaded')
-    }
-  }
+  
+  
 
-  preloader.initLoading()
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2026/06/10/%E5%9C%B0%E6%B0%B4%E5%B8%88/">
 
-  if (document.readyState === 'complete') {
-    preloader.endLoading()
-  } else {
-    window.addEventListener('load', preloader.endLoading)
-    document.addEventListener('DOMContentLoaded', preloader.endLoading)
-    // Add timeout protection: force end after 7 seconds
-    setTimeout(preloader.endLoading, 7000)
-  }
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
 
-  if (false) {
-    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
-    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
-  }
-})()</script><div id="web_bg" style="background-image: url(https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/%E8%9C%A1%E7%AC%94%E5%B0%8F%E6%96%B0_%E7%A6%81%E6%AD%A2%E7%84%A6%E8%99%91.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&amp;spec=640&amp;img_type=jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-comment-alt"></i><span> 说说</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background: transparent;"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hyacinth</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-comment-alt"></i><span> 说说</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">Hyacinth</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="post_cover left"><a href="/2026/06/11/%E6%B0%B4%E5%9C%B0%E6%AF%94/" title="水地比"><img class="post-bg" src="https://picsum.photos/seed/shuidibi/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="水地比"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/06/11/%E6%B0%B4%E5%9C%B0%E6%AF%94/" title="水地比">水地比</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-06-11T00:30:00.000Z" title="发表于 2026-06-11 08:30:00">2026-06-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%98%93%E5%AD%A6/">易学</a></span></div><div class="content">地上有水，比。先王以建万国，亲诸侯。</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2026/06/10/%E5%9C%B0%E6%B0%B4%E5%B8%88/" title="地水师"><img class="post-bg" src="https://picsum.photos/seed/dishuishi/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="地水师"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/06/10/%E5%9C%B0%E6%B0%B4%E5%B8%88/" title="地水师">地水师</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-06-10T02:00:00.000Z" title="发表于 2026-06-10 10:00:00">2026-06-10</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%98%93%E5%AD%A6/">易学</a></span></div><div class="content">地中有水，师。君子以容民畜众。</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2026/06/09/%E5%A4%A9%E6%B0%B4%E8%AE%BC/" title="天水讼"><img class="post-bg" src="https://picsum.photos/seed/tianshuisong/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="天水讼"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/06/09/%E5%A4%A9%E6%B0%B4%E8%AE%BC/" title="天水讼">天水讼</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-06-09T02:00:00.000Z" title="发表于 2026-06-09 10:00:00">2026-06-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%98%93%E5%AD%A6/">易学</a></span></div><div class="content">天与水违行，讼。君子以作事谋始。</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2026/06/07/%E6%B0%B4%E5%A4%A9%E9%9C%80/" title="水天需"><img class="post-bg" src="https://picsum.photos/seed/shuitianxu/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="水天需"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/06/07/%E6%B0%B4%E5%A4%A9%E9%9C%80/" title="水天需">水天需</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-06-07T15:15:43.000Z" title="发表于 2026-06-07 23:15:43">2026-06-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%98%93%E5%AD%A6/">易学</a></span></div><div class="content">云上于天，需。君子以饮食宴乐。</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2026/06/07/Linux%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5/" title="Linux命令速查"><img class="post-bg" src="https://picsum.photos/seed/linuxcmdrefer/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux命令速查"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/06/07/Linux%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5/" title="Linux命令速查">Linux命令速查</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-06-07T09:15:17.000Z" title="发表于 2026-06-07 17:15:17">2026-06-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9D%82%E9%A1%B9/">杂项</a></span></div><div class="content">Linux 命令速查适用平台：Linux (Ubuntu &#x2F; CentOS 等) &#x2F; macOS &#x2F; WSL。 1. 目录与文件操作123456pwd                             # 查看当前绝对路径ls -lah                         # 列表显示所有文件及详细信息（含隐藏文件、人类可读大小）mkdir -p /path/to/dir           # 递归创建多级目录rm -rf mydir/                   # 强制递归删除目录及内容（危险操作，需谨慎）cp -r src_dir dest_dir          # 递归复制整个目录mv oldname newname              # 重命名文件，或移动文件到新路径  2. 文件查看与文本搜索123456cat file.txt                    # 打印文件全部内容到终端less file.txt                   # 分页查看长文件（使用方向键上下滚动，按 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2026/06/06/%E5%85%AD%E7%88%BB%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%89/" title="六爻基础知识三"><img class="post-bg" src="https://picsum.photos/seed/liuyaojczss/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="六爻基础知识三"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/06/06/%E5%85%AD%E7%88%BB%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%89/" title="六爻基础知识三">六爻基础知识三</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-06-06T15:35:31.000Z" title="发表于 2026-06-06 23:35:31">2026-06-06</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="content">三合局三合局：申子辰三合水局、寅午戌三合火局、巳酉丑三合金局、亥卯未三合木局 。 指由三个地支所组成的一个整体，代表汇聚，集聚，合力，合作，众多等含义。 形成三合局的条件：  在主卦中三个地支全动也包括暗动之爻。  下卦一、三爻动，连同他们的变爻组成三合局。  上卦四、六爻动，连同他们的变爻组成三合局。  含中神地支在内的两个动爻与月建或日建组成的三合局。  卦中中神地支发动，与日、月一起刚好组成三合局。   爻位、爻象预测房屋 初爻为地基、水井、下水道、邻居、太庙。 二爻为家、院子、厨房。 三爻为卧室、门、床、佛龛。 四爻为入户门、厕所、大门、窗户。 五爻为道路。 六爻为屋顶、祖坟、神位、邻居、高处、远方。  预测人体 初爻为脚。 二爻为小腿、腹部、肠道。 三爻为大腿、腰部、股、肚子。 四爻为乳房、胸口、肺部。 五爻为喉咙、嘴巴、脖子。 六爻为头发、头、脸面。  预测官职 初爻代表平民百姓、下属、职工、群众、无职权的人。 二爻为班长、科长。 三爻为处长。 四爻为部长、部门经理 五爻为父亲、领导、上司、总经理。 六爻为退休的人员、远方的人。  归魂卦、游魂卦游魂卦每个宫位第七卦叫...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2026/06/06/%E5%B1%B1%E6%B0%B4%E8%92%99/" title="山水蒙"><img class="post-bg" src="https://picsum.photos/seed/shanshuimeng/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="山水蒙"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/06/06/%E5%B1%B1%E6%B0%B4%E8%92%99/" title="山水蒙">山水蒙</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-06-06T15:28:06.000Z" title="发表于 2026-06-06 23:28:06">2026-06-06</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%98%93%E5%AD%A6/">易学</a></span></div><div class="content">山下出泉，蒙。君子以果行育德。</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2026/06/06/%E6%B0%B4%E9%9B%B7%E5%B1%AF/" title="水雷屯"><img class="post-bg" src="https://picsum.photos/seed/shuileitun/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="水雷屯"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/06/06/%E6%B0%B4%E9%9B%B7%E5%B1%AF/" title="水雷屯">水雷屯</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-06-05T16:46:04.000Z" title="发表于 2026-06-06 00:46:04">2026-06-06</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%98%93%E5%AD%A6/">易学</a></span></div><div class="content">云雷屯，君子以经纶。</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2026/06/04/%E5%9D%A4%E4%B8%BA%E5%9C%B0/" title="坤为地"><img class="post-bg" src="https://picsum.photos/seed/kunweidi/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="坤为地"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/06/04/%E5%9D%A4%E4%B8%BA%E5%9C%B0/" title="坤为地">坤为地</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-06-04T13:18:35.000Z" title="发表于 2026-06-04 21:18:35">2026-06-04</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%98%93%E5%AD%A6/">易学</a></span></div><div class="content">地势坤，君子以厚德载物。</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2026/06/03/%E5%85%AD%E4%BA%B2%E5%92%8C%E5%85%AD%E7%A5%9E/" title="六亲和六神"><img class="post-bg" src="https://picsum.photos/seed/liuyaolqandls/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="六亲和六神"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/06/03/%E5%85%AD%E4%BA%B2%E5%92%8C%E5%85%AD%E7%A5%9E/" title="六亲和六神">六亲和六神</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-06-03T15:55:55.000Z" title="发表于 2026-06-03 23:55:55">2026-06-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%98%93%E5%AD%A6/">易学</a></span></div><div class="content">六亲象意 一、六亲六亲定义和生克关系六亲是指父母 、 兄弟 、 子孙 、 妻财、 官鬼，还包括我 （ 起卦的人,在卦中是没有“我”这个六神直接存在的，只有世爻来对应， 世爻临哪个六亲，世爻就具备哪个六亲的特性。）统称为六亲。六亲并不是单单指这六种亲属关系，而是利用这六种关系来模拟事物之间的相互作用。因此，六亲只是一种符号，它可以代表很多意思。 六亲的排法不是固定不变的，而是根据主卦的卦宫来决定的。具体方法是,以主卦卦宫的五行属性为 “我” ， 与我相同的用兄弟表示，生我的用父母表示，我生的用子孙表示，我克的用妻财表示，克我的用官鬼表示。 相生：子孙—妻财—官鬼—父母—兄弟—子孙 相克：子孙—官鬼—兄弟—妻财—父母—子孙 六亲象意父母爻：生我者为父母  其代表的人物为父母、叔伯、祖父母、师长、等扶助我的德高望重者，与父母同辈者，以及亲近的老人等。 庇护我之物，也为父母，如：家宅、房屋、居住处、城市、车、船、飞机、衣服、雨具等。 父母爻又主文章、学业、功课、考试、文件、合同、档案、护照等。 父母爻又代表辛苦、操劳之类，如：勤劳、艰辛劳苦、劳累、操心、费心、工作量大等。 场所代表工厂、...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#content-inner">3</a><a class="page-number" href="/page/4/#content-inner">4</a><a class="extend next" rel="next" href="/page/3/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&amp;spec=640&amp;img_type=jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Hyacinth</div><div class="author-info-description">君子慎独,不欺暗室</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/YY-CN"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">嘻嘻，我一定要活下去！</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/07/03/%E9%9B%B7%E5%9C%B0%E8%B1%AB/" title="雷地豫"><img src="https://picsum.photos/seed/leidiyu/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="雷地豫"/></a><div class="content"><a class="title" href="/2026/07/03/%E9%9B%B7%E5%9C%B0%E8%B1%AB/" title="雷地豫">雷地豫</a><time datetime="2026-07-03T07:45:00.000Z" title="发表于 2026-07-03 15:45:00">2026-07-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/07/03/%E5%9C%B0%E5%B1%B1%E8%B0%A6/" title="地山谦"><img src="https://picsum.photos/seed/dishanqian/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="地山谦"/></a><div class="content"><a class="title" href="/2026/07/03/%E5%9C%B0%E5%B1%B1%E8%B0%A6/" title="地山谦">地山谦</a><time datetime="2026-07-03T07:41:55.000Z" title="发表于 2026-07-03 15:41:55">2026-07-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/07/03/%E7%81%AB%E5%A4%A9%E5%A4%A7%E6%9C%89/" title="火天大有"><img src="https://picsum.photos/seed/huotiandayou/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="火天大有"/></a><div class="content"><a class="title" href="/2026/07/03/%E7%81%AB%E5%A4%A9%E5%A4%A7%E6%9C%89/" title="火天大有">火天大有</a><time datetime="2026-07-03T07:39:42.000Z" title="发表于 2026-07-03 15:39:42">2026-07-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/07/03/%E5%A4%A9%E7%81%AB%E5%90%8C%E4%BA%BA/" title="天火同人"><img src="https://picsum.photos/seed/tianhuotongren/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="天火同人"/></a><div class="content"><a class="title" href="/2026/07/03/%E5%A4%A9%E7%81%AB%E5%90%8C%E4%BA%BA/" title="天火同人">天火同人</a><time datetime="2026-07-03T07:37:45.000Z" title="发表于 2026-07-03 15:37:45">2026-07-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/07/03/%E5%A4%A9%E5%9C%B0%E5%90%A6/" title="天地否"><img src="https://picsum.photos/seed/tiandipi/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="天地否"/></a><div class="content"><a class="title" href="/2026/07/03/%E5%A4%A9%E5%9C%B0%E5%90%A6/" title="天地否">天地否</a><time datetime="2026-07-03T07:34:40.000Z" title="发表于 2026-07-03 15:34:40">2026-07-03</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
-            <i class="fas fa-folder-open"></i>
-            <span>分类</span>
-            
-          </div>
-          <ul class="card-category-list" id="aside-cat-list">
-            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">学习笔记</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%98%93%E5%AD%A6/"><span class="card-category-list-name">易学</span><span class="card-category-list-count">26</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%9D%82%E9%A1%B9/"><span class="card-category-list-name">杂项</span><span class="card-category-list-count">8</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">论文笔记</span><span class="card-category-list-count">1</span></a></li>
-          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/paper/" style="font-size: 1.1em; color: #999">paper</a> <a href="/tags/%E6%9D%82%E9%A1%B9/" style="font-size: 1.34em; color: #99a3b0">杂项</a> <a href="/tags/%E5%85%AD%E7%88%BB/" style="font-size: 1.18em; color: #999ca1">六爻</a> <a href="/tags/%E5%85%AD%E5%8D%81%E5%9B%9B%E5%8D%A6/" style="font-size: 1.42em; color: #99a6b7">六十四卦</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 1.5em; color: #99a9bf">学习笔记</a> <a href="/tags/%E6%A2%85%E8%8A%B1%E6%98%93%E6%95%B0/" style="font-size: 1.26em; color: #999fa8">梅花易数</a> <a href="/tags/%E5%91%A8%E6%98%93/" style="font-size: 1.42em; color: #99a6b7">周易</a> <a href="/tags/Linux/" style="font-size: 1.1em; color: #999">Linux</a></div></div><div class="card-widget card-archives">
-    <div class="item-headline">
-      <i class="fas fa-archive"></i>
-      <span>归档</span>
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/10/%E5%9C%B0%E6%B0%B4%E5%B8%88/" class="post-title-link" itemprop="url">地水师</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-06-10 10:00:00 / 修改时间：00:36:19" itemprop="dateCreated datePublished" datetime="2026-06-10T10:00:00+08:00">2026-06-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%98%93%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">易学</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>地中有水，师。君子以容民畜众。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/06/10/%E5%9C%B0%E6%B0%B4%E5%B8%88/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
   
-    <ul class="card-archive-list">
+  
+  
+
       
-        <li class="card-archive-list-item">
-          <a class="card-archive-list-link" href="/archives/2026/07/">
-            <span class="card-archive-list-date">
-              七月 2026
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2026/06/09/%E5%A4%A9%E6%B0%B4%E8%AE%BC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/09/%E5%A4%A9%E6%B0%B4%E8%AE%BC/" class="post-title-link" itemprop="url">天水讼</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-06-09 10:00:00 / 修改时间：00:11:35" itemprop="dateCreated datePublished" datetime="2026-06-09T10:00:00+08:00">2026-06-09</time>
             </span>
-            <span class="card-archive-list-count">6</span>
-          </a>
-        </li>
-      
-        <li class="card-archive-list-item">
-          <a class="card-archive-list-link" href="/archives/2026/06/">
-            <span class="card-archive-list-date">
-              六月 2026
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%98%93%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">易学</span></a>
+                </span>
             </span>
-            <span class="card-archive-list-count">18</span>
-          </a>
-        </li>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <li class="card-archive-list-item">
-          <a class="card-archive-list-link" href="/archives/2026/05/">
-            <span class="card-archive-list-date">
-              五月 2026
+          <p>天与水违行，讼。君子以作事谋始。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/06/09/%E5%A4%A9%E6%B0%B4%E8%AE%BC/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2026/06/07/%E6%B0%B4%E5%A4%A9%E9%9C%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/07/%E6%B0%B4%E5%A4%A9%E9%9C%80/" class="post-title-link" itemprop="url">水天需</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-06-07 23:15:43 / 修改时间：23:40:16" itemprop="dateCreated datePublished" datetime="2026-06-07T23:15:43+08:00">2026-06-07</time>
             </span>
-            <span class="card-archive-list-count">7</span>
-          </a>
-        </li>
-      
-        <li class="card-archive-list-item">
-          <a class="card-archive-list-link" href="/archives/2026/04/">
-            <span class="card-archive-list-date">
-              四月 2026
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%98%93%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">易学</span></a>
+                </span>
             </span>
-            <span class="card-archive-list-count">1</span>
-          </a>
-        </li>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <li class="card-archive-list-item">
-          <a class="card-archive-list-link" href="/archives/2025/11/">
-            <span class="card-archive-list-date">
-              十一月 2025
+          <p>云上于天，需。君子以饮食宴乐。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/06/07/%E6%B0%B4%E5%A4%A9%E9%9C%80/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2026/06/07/Linux%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/07/Linux%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5/" class="post-title-link" itemprop="url">Linux命令速查</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-06-07 17:15:17 / 修改时间：17:46:49" itemprop="dateCreated datePublished" datetime="2026-06-07T17:15:17+08:00">2026-06-07</time>
             </span>
-            <span class="card-archive-list-count">4</span>
-          </a>
-        </li>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9D%82%E9%A1%B9/" itemprop="url" rel="index"><span itemprop="name">杂项</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-    </ul>
-  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">36</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-07-03T07:58:11.315Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Hyacinth</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.2</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.2"></script><script src="/js/main.js?v=5.5.2"></script><div class="js-pjax"><script>window.typedJSFn = {
-  init: str => {
-    window.typed = new Typed('#subtitle', Object.assign({
-      strings: str,
-      startDelay: 300,
-      typeSpeed: 150,
-      loop: true,
-      backSpeed: 50,
-    }, null))
-  },
-  run: subtitleType => {
-    if (true) {
-      if (typeof Typed === 'function') {
-        subtitleType()
-      } else {
-        btf.getScript('https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js').then(subtitleType)
-      }
-    } else {
-      subtitleType()
+          <h1 id="Linux-命令速查"><a href="#Linux-命令速查" class="headerlink" title="Linux 命令速查"></a>Linux 命令速查</h1><p>适用平台：Linux (Ubuntu &#x2F; CentOS 等) &#x2F; macOS &#x2F; WSL。</p>
+<h2 id="1-目录与文件操作"><a href="#1-目录与文件操作" class="headerlink" title="1. 目录与文件操作"></a>1. 目录与文件操作</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pwd</span>                             <span class="comment"># 查看当前绝对路径</span></span><br><span class="line"><span class="built_in">ls</span> -lah                         <span class="comment"># 列表显示所有文件及详细信息（含隐藏文件、人类可读大小）</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /path/to/dir           <span class="comment"># 递归创建多级目录</span></span><br><span class="line"><span class="built_in">rm</span> -rf mydir/                   <span class="comment"># 强制递归删除目录及内容（危险操作，需谨慎）</span></span><br><span class="line"><span class="built_in">cp</span> -r src_dir dest_dir          <span class="comment"># 递归复制整个目录</span></span><br><span class="line"><span class="built_in">mv</span> oldname newname              <span class="comment"># 重命名文件，或移动文件到新路径</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-文件查看与文本搜索"><a href="#2-文件查看与文本搜索" class="headerlink" title="2. 文件查看与文本搜索"></a>2. 文件查看与文本搜索</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> file.txt                    <span class="comment"># 打印文件全部内容到终端</span></span><br><span class="line">less file.txt                   <span class="comment"># 分页查看长文件（使用方向键上下滚动，按 q 退出）</span></span><br><span class="line"><span class="built_in">head</span> -n 20 file.txt             <span class="comment"># 查看文件的前 20 行</span></span><br><span class="line"><span class="built_in">tail</span> -f app.log                 <span class="comment"># 实时滚动查看动态更新的文件（常用于看日志）</span></span><br><span class="line">grep -rn <span class="string">&quot;keyword&quot;</span> ./           <span class="comment"># 在当前目录下递归搜索包含关键词的文件并显示行号</span></span><br><span class="line">find /path -name <span class="string">&quot;*.py&quot;</span>         <span class="comment"># 在指定路径下按文件名查找特定后缀的文件</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-实验进程与系统监控"><a href="#3-实验进程与系统监控" class="headerlink" title="3. 实验进程与系统监控"></a>3. 实验进程与系统监控</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">nvidia-smi                      <span class="comment"># 查看当前 GPU 使用状态及显存占用</span></span><br><span class="line">watch -n 1 nvidia-smi           <span class="comment"># 每 1 秒自动刷新一次 GPU 状态</span></span><br><span class="line">top                             <span class="comment"># 实时监控 CPU、内存及活跃进程 (推荐安装 htop，更直观)</span></span><br><span class="line">free -h                         <span class="comment"># 查看系统内存 (RAM) 及 Swap 交换空间使用情况</span></span><br><span class="line"><span class="built_in">df</span> -h                           <span class="comment"># 查看各个挂载点的磁盘空间使用情况</span></span><br><span class="line">ps aux | grep python            <span class="comment"># 查找当前所有与 python 相关的后台进程</span></span><br><span class="line"><span class="built_in">kill</span> -9 &lt;PID&gt;                   <span class="comment"># 强制终止指定 PID (进程号) 的进程</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>后台跑实验常用（防止断网或关掉终端导致任务中断）</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">nohup</span> python train.py &gt; output.log 2&gt;&amp;1 &amp;  <span class="comment"># 将任务挂后台运行，标准输出和错误全写入日志</span></span><br><span class="line"><span class="built_in">tail</span> -f output.log                         <span class="comment"># 配合上一条，实时盯着后台日志</span></span><br><span class="line"><span class="built_in">jobs</span>                                       <span class="comment"># 查看当前终端的后台任务</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 推荐进阶方案：使用 tmux 或 screen 进行持久化会话管理</span></span><br><span class="line">tmux new -s myexp               <span class="comment"># 创建名为 myexp 的持久化终端会话</span></span><br><span class="line">tmux attach -t myexp            <span class="comment"># 重新连接到后台持续运行的 myexp 会话</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-远程连接与网络排错"><a href="#4-远程连接与网络排错" class="headerlink" title="4. 远程连接与网络排错"></a>4. 远程连接与网络排错</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ssh user@ip_address             <span class="comment"># 通过 SSH 连接远程服务器</span></span><br><span class="line">scp file.zip user@ip:/path/     <span class="comment"># 上传本地文件到服务器指定目录</span></span><br><span class="line">scp user@ip:/path/file ./       <span class="comment"># 从远程服务器下载文件到本地当前目录</span></span><br><span class="line">ping github.com                 <span class="comment"># 测试目标域名的网络连通性</span></span><br><span class="line">netstat -tuln                   <span class="comment"># 查看当前系统正在监听的端口状态</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>GitHub SSH 连接超时 (Port 22 Timeout) 变通方案</strong>：</p>
+<p>如果在某些网络环境下 22 端口被屏蔽导致无法拉取代码，可通过 443 端口复用 SSH。在 <code>~/.ssh/config</code> 文件中追加以下配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">  Hostname ssh.github.com</span><br><span class="line">  Port 443</span><br><span class="line">  User git</span><br></pre></td></tr></table></figure>
+
+<p>配置完成后，可通过以下命令测试连接是否恢复正常：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-权限与打包解压"><a href="#5-权限与打包解压" class="headerlink" title="5. 权限与打包解压"></a>5. 权限与打包解压</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 权限与用户管理</span></span><br><span class="line"><span class="built_in">chmod</span> +x script.sh              <span class="comment"># 赋予脚本可执行 (x) 权限</span></span><br><span class="line"><span class="built_in">chmod</span> 755 -R mydir/             <span class="comment"># 递归修改目录权限为 755 (所有者全权，其他读+执行)</span></span><br><span class="line"><span class="built_in">chown</span> -R user:group mydir/      <span class="comment"># 递归更改目录的所有者和所属用户组</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 压缩与解压 (.tar.gz)</span></span><br><span class="line">tar -czvf archive.tar.gz <span class="built_in">dir</span>/   <span class="comment"># 将 dir 目录打包并压缩为 .tar.gz</span></span><br><span class="line">tar -xzvf archive.tar.gz        <span class="comment"># 将 .tar.gz 解压到当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 压缩与解压 (.zip)</span></span><br><span class="line">zip -r data.zip <span class="built_in">dir</span>/            <span class="comment"># 将 dir 目录递归压缩为 .zip</span></span><br><span class="line">unzip data.zip -d /dest/        <span class="comment"># 将 .zip 解压到指定的 /dest/ 目录下</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2026/06/06/%E5%85%AD%E7%88%BB%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/06/%E5%85%AD%E7%88%BB%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%89/" class="post-title-link" itemprop="url">六爻基础知识三</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-06-06 23:35:31" itemprop="dateCreated datePublished" datetime="2026-06-06T23:35:31+08:00">2026-06-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-06-08 00:36:15" itemprop="dateModified" datetime="2026-06-08T00:36:15+08:00">2026-06-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="三合局"><a href="#三合局" class="headerlink" title="三合局"></a>三合局</h2><p>三合局：申子辰三合水局、寅午戌三合火局、巳酉丑三合金局、亥卯未三合木局 。</p>
+<p>指由三个地支所组成的一个整体，代表汇聚，集聚，合力，合作，众多等含义。</p>
+<p><strong>形成三合局的条件：</strong></p>
+<ol>
+<li><p>在主卦中三个地支全动也包括暗动之爻。</p>
+</li>
+<li><p>下卦一、三爻动，连同他们的变爻组成三合局。</p>
+</li>
+<li><p>上卦四、六爻动，连同他们的变爻组成三合局。</p>
+</li>
+<li><p>含中神地支在内的两个动爻与月建或日建组成的三合局。</p>
+</li>
+<li><p>卦中中神地支发动，与日、月一起刚好组成三合局。</p>
+</li>
+</ol>
+<h2 id="爻位、爻象"><a href="#爻位、爻象" class="headerlink" title="爻位、爻象"></a>爻位、爻象</h2><h3 id="预测房屋"><a href="#预测房屋" class="headerlink" title="预测房屋"></a>预测房屋</h3><ul>
+<li>初爻为地基、水井、下水道、邻居、太庙。</li>
+<li>二爻为家、院子、厨房。</li>
+<li>三爻为卧室、门、床、佛龛。</li>
+<li>四爻为入户门、厕所、大门、窗户。</li>
+<li>五爻为道路。</li>
+<li>六爻为屋顶、祖坟、神位、邻居、高处、远方。</li>
+</ul>
+<h3 id="预测人体"><a href="#预测人体" class="headerlink" title="预测人体"></a>预测人体</h3><ul>
+<li>初爻为脚。</li>
+<li>二爻为小腿、腹部、肠道。</li>
+<li>三爻为大腿、腰部、股、肚子。</li>
+<li>四爻为乳房、胸口、肺部。</li>
+<li>五爻为喉咙、嘴巴、脖子。</li>
+<li>六爻为头发、头、脸面。</li>
+</ul>
+<h3 id="预测官职"><a href="#预测官职" class="headerlink" title="预测官职"></a>预测官职</h3><ul>
+<li>初爻代表平民百姓、下属、职工、群众、无职权的人。</li>
+<li>二爻为班长、科长。</li>
+<li>三爻为处长。</li>
+<li>四爻为部长、部门经理</li>
+<li>五爻为父亲、领导、上司、总经理。</li>
+<li>六爻为退休的人员、远方的人。</li>
+</ul>
+<h2 id="归魂卦、游魂卦"><a href="#归魂卦、游魂卦" class="headerlink" title="归魂卦、游魂卦"></a>归魂卦、游魂卦</h2><h3 id="游魂卦"><a href="#游魂卦" class="headerlink" title="游魂卦"></a>游魂卦</h3><p>每个宫位第七卦叫做游魂卦。</p>
+<p>游魂卦，火地晋、雷山小过、天水讼、泽风大过、山雷颐、地火明夷、风泽中孚、水天需共八个。代表外出、出去、乐不思蜀、变化多端、叛逆等含义。</p>
+<h3 id="归魂卦"><a href="#归魂卦" class="headerlink" title="归魂卦"></a>归魂卦</h3><p>每个宫位第八卦叫归魂卦。</p>
+<p>归魂卦：火天大有、水地比、泽雷随、山风蛊、地水师、天火同人、风山渐、雷泽归妹代表回来、回家、返回、回心转意等含义。</p>
+<h2 id="六冲卦、六合卦"><a href="#六冲卦、六合卦" class="headerlink" title="六冲卦、六合卦"></a>六冲卦、六合卦</h2><p>六合卦是卦中纳甲的地支两两相合的卦，六冲卦就是地支两两相冲的卦。</p>
+<p><strong>六合卦：</strong>天地否、地天泰、泽水困、水泽节、火山旅、山火贲、雷地豫、地雷复共八个卦。</p>
+<p>代表着和好、融洽、长久、缠绵、拖延等含义。</p>
+<p><strong>六冲卦：</strong>乾为天、兑为泽、离为火、震为雷、巽为风、坎为水、艮为山、坤为地、雷天大壮、天雷无妄共十个。</p>
+<p>代表冲突、冲散、突然、近期、不长久、冲击、变动等含义。</p>
+<h2 id="三刑"><a href="#三刑" class="headerlink" title="三刑"></a>三刑</h2><p>地支三刑，有子卯无礼刑、丑戌未恃势刑、寅巳申为无恩刑、辰午酉亥自刑。三刑只是用来取象，不主吉凶。</p>
+<p>子卯刑叫无礼之刑、主无礼而触犯刑法。</p>
+<p>寅巳申三刑，寅刑巳，巳刑申、申刑寅，叫无恩之刑，知恩不报、反而陷害恩人，而招致法律制裁、或生灾祸。</p>
+<p>丑未戌三刑，丑刑戌、戌刑未、未刑丑、恃势之刑，主倚仗权胡作非为、导致法律制裁，因此生灾。</p>
+<p>辰午酉亥自刑，因自己招来灾祸而触犯法律，有自杀倾向、自闭症。辰辰自刑、午午自刑、酉酉自刑、亥亥自刑。</p>
+<p>一般刑用来取象，主事情有点磕绊，测人时有病灾，严重时主牢狱之灾。</p>
+<h2 id="六神加六亲取象"><a href="#六神加六亲取象" class="headerlink" title="六神加六亲取象"></a>六神加六亲取象</h2><h3 id="一、-青龙"><a href="#一、-青龙" class="headerlink" title="一、 青龙"></a>一、 青龙</h3><p>青龙+官鬼爻：代表法律，官方，正直的神灵，鬼神，原配的丈夫，占家宅风水代表神位，法官，公检法人员，新病，性病。</p>
+<p>青龙+父母：文凭、文书、证件，法律条文，官方的档案，经书，亲生父母，国家企事业单位，学校，新房，新车。</p>
+<p>青龙+兄弟：亲兄弟，正义的朋友，非常正直的兄弟，正当的花费，酒色朋友。</p>
+<p>青龙+妻财：正财，结发的妻子，喜庆之财。</p>
+<p>青龙+子孙爻：清闲，高雅的气质，不求虚名，新的财源，因为子孙爻是财源，怀孕，发大财。</p>
+<h3 id="二、朱雀"><a href="#二、朱雀" class="headerlink" title="二、朱雀"></a>二、朱雀</h3><p>朱雀+官鬼：官非，报案，通过语言表达的工作。</p>
+<p>朱雀+父母爻：书信，老师，教师，文化事业单位，合同文书，朗读经书。</p>
+<p>朱雀+兄弟：口舌争吵，生气，搬弄是非口舌争端，炎症，因为炎症而破了财。</p>
+<p>朱雀+妻财：存折，支票，能言善辩，因口舌是非而破财。</p>
+<p>朱雀+子孙：音乐歌曲，娱乐场所。</p>
+<h3 id="三、勾陈"><a href="#三、勾陈" class="headerlink" title="三、勾陈"></a>三、勾陈</h3><p>勾陈+官鬼：占生意时为熟客，老顾客。女占婚姻的时为情人，男测婚为情敌，测病时为慢性病，土建工作，拘留所。</p>
+<p>勾陈+父母；跌倒摔跤，文书迟至，老房子，拖累停留，二手车，测病为久病，旧病复发。</p>
+<p>勾陈+兄弟：相好的朋友，同事、熟人，拉帮结派，团伙。</p>
+<p>勾陈+妻财：男测婚时为情人，女测婚时为情敌。土地，代表房地产，房地产之财，房款。</p>
+<p>勾陈+子孙：技术，手艺赚的钱，小孩反应慢，如果这个爻受克代表小孩儿会有跌打损伤，因为勾陈就代表摔跤的意思。</p>
+<h3 id="四、螣蛇"><a href="#四、螣蛇" class="headerlink" title="四、螣蛇"></a>四、螣蛇</h3><p>螣蛇+官鬼：虚职，虚名，有名无权，测梦时为怪异的梦。测家宅时为有怪异作祟，占病的时为虚病，并代表了一些不干净的东西缠身。</p>
+<p>螣蛇+父母：无效合同，虚假证件，测病为父母虚病，神经不正常，代表怪病。</p>
+<p>螣蛇+兄弟爻：被骗、破财，欺诈行为，虚情假意的朋友。</p>
+<p>螣蛇+财爻：靠手腕得财，因为螣蛇就是八面玲珑的，命中注定的妻子，也代表妻子虚情假意的。</p>
+<p>螣蛇+子孙：积阴德，行善事，花言巧语，测货物时为假货，虚假宣传。</p>
+<h3 id="五、白虎"><a href="#五、白虎" class="headerlink" title="五、白虎"></a>五、白虎</h3><p>白虎+官鬼：血光之灾，开刀动手术，测工作时为公检法，武职行业。测婚姻时丈夫性格非常的暴躁，测风水时，如果在初爻为白虎加官鬼爻就代表了地基下面可能会有尸骨。</p>
+<p>白虎+父母，跌打损伤，长辈的疾病，披麻戴孝的孝衣，大房子大单位，白虎主大。</p>
+<p>白虎+兄弟：朋友或兄弟疾病缠身，有疼痛，有血光灾，争吵。</p>
+<p>白虎+妻财：自身的富裕而得疾病，比如富贵病，富而吝啬，为富不仁。从事危险性的操作得财，妻子或者是女友的身体有病。</p>
+<p>白虎+子孙：小辈有疾病，小孩儿比较顽皮，不服管，测财运时一般为大的财源，代表风险性的产品。</p>
+<h3 id="六、玄武"><a href="#六、玄武" class="headerlink" title="六、玄武"></a>六、玄武</h3><p>玄武+官鬼：小偷儿，黑道儿的上的人，走私贩毒违法的人，测病时为性病肾病。贪官，玄武有贪婪的象意，丈夫，有暧昧不明的事儿，或者是难言之隐的病，这个都是用的特别多的，一定要牢记。</p>
+<p>玄武+父母爻：文书有虚假，长辈有隐情相伴，家中容易漏水。</p>
+<p>玄武+兄弟：欺骗，骗财，骗局。</p>
+<p>玄武+妻财：因欺骗而得的财，行为不正，淫邪的女友苟且不正，情妇，非法的财，贪污受贿得来的财，风流，偷情。</p>
+<p>玄武+子孙：小辈谈恋爱了，早恋，不正当的性行为，风月场所。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>青龙</strong></th>
+<th><strong>朱雀</strong></th>
+<th><strong>勾陈</strong></th>
+<th><strong>螣蛇</strong></th>
+<th><strong>白虎</strong></th>
+<th><strong>玄武</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>官鬼</strong></td>
+<td>官职、领导、贵人、官场喜事、酒色之灾。</td>
+<td>官非口舌、辩驳、报案、咒咀、火灾、爆炸。</td>
+<td>官司、忧虑、纠缠、勾引、车祸、跌倒。</td>
+<td>怪异、惊恐、纠缠、主梦、占病为鬼魅缠身、吊死鬼、狡猾之夫、注定之夫。</td>
+<td>疾病、血光之灾、开刀手术、暴雪。</td>
+<td>盗贼、女测为情人、水灾、淹死鬼、淫乱、狡诈。</td>
+</tr>
+<tr>
+<td><strong>父母</strong></td>
+<td>文书、文凭、证件、法律条文、契约、官方档案、登记簿册、经文、学业佳。</td>
+<td>文书、书信、邮寄、电报、教师、文书、档案、证件、电话、电脑、文职工作、电影电视。</td>
+<td>房产、文书阻滞、劳碌牵挂、难产、房地产工作、执法工作、厂房、车站。</td>
+<td>惊异的消息、细长物品、父母有惊。</td>
+<td>跌打损伤、长辈有病、军职工作、车、雪、金属物品。</td>
+<td>文书有伪、长辈有伪情相瞒、假的文书资料、雨。</td>
+</tr>
+<tr>
+<td><strong>兄弟</strong></td>
+<td>胞兄弟、正义朋友、朋友临喜、因喜事花钱。</td>
+<td>口舌是非、争吵、搬弄是非、善谈之兄弟。</td>
+<td>诚实之兄弟朋友、阻隔。</td>
+<td>受阴谋暗害骗财、吝啬。</td>
+<td>朋友疾病缠身、义气、破大财。</td>
+<td>欺骗、赌博破财、股票破财、好赌。</td>
+</tr>
+<tr>
+<td><strong>妻财</strong></td>
+<td>正义之财、发妻、喜财、美女、豪华酒店。</td>
+<td>汇款、善言之妻、公关之妻、碎嘴婆、工资。</td>
+<td>诚实之妻、诚实之女人、房地产之财、死工资。</td>
+<td>注定之财、注定之妻、妻子神经质、歇斯底里、怪异、吝啬、妻瘦。</td>
+<td>富而带疾、妻子有病、金属之财、大财、妻子厉害、妻子白、西餐厅、银行、钱柜。</td>
+<td>伪骗之才、情人、三陪女、赌博之才、股票之财、狡猾之妻、内向之妻、小金库。</td>
+</tr>
+<tr>
+<td><strong>子孙</strong></td>
+<td>气质清闲高雅、事业为清闲、婚吉、不药而愈、休闲游乐、豪华饭店。</td>
+<td>音乐歌曲、宠物雀鸟、念诵佛咒、游乐场所、歌厅。</td>
+<td>公检法人员、房地产生意、继承人。</td>
+<td>公检法人员、房地产生意、继承人。</td>
+<td>子女有疾、医生、游戏机、西医或针灸。</td>
+<td>偏门享乐、多物欲心理享受。</td>
+</tr>
+</tbody></table>
+<h2 id="纳音取象"><a href="#纳音取象" class="headerlink" title="纳音取象"></a>纳音取象</h2><p>甲子乙丑海中金：石油、珍珠、海矿、金库、海底沉船等等。</p>
+<p>丙寅丁卯炉中火：煤炉、厨房、灶台、柴草、炼钢炉、枯死植物、饭馆、火锅等等。</p>
+<p>戊辰己巳大林木：森林、山野、树木、花草、电线杆、木材批发部、林场、花园等等。</p>
+<p>庚午辛未路旁土：道路、马路、清洁工、建筑工、干土、土堆、建筑工、垃圾堆等等。</p>
+<p>壬申癸酉剑锋金：宝剑、凶器、兵器、椎盘、古董店、军队、晨练者、武术家等等。</p>
+<p>甲戌乙亥山头火：夕阳、热气、烽火台、火山、霓虹灯、信息战、发电厂、机房等等。</p>
+<p>丙子丁丑涧下水：云、自来水、灯油、喷泉、酒店、池塘、山涧、水源、水厂等等。</p>
+<p>戊寅己卯城头土：城郭、山岳、城墙、住宅、高楼大厦、八达岭、长城、碉堡等等。  </p>
+<p>庚辰辛巳白腊金：蜡、玉、宝石、矿石、首饰、护肤品、化妆品、熔化等等。</p>
+<p>壬午癸未杨柳木：杨柳、柔木、花草、灌木丛、花柳巷、牙签、公园、无立场等等。</p>
+<p>甲申乙酉泉中水：水井、溪沟、山泉、喷泉、矿泉水、油井、矿井、泉州、湿润等等。</p>
+<p>丙戌丁亥屋上土：瓦片、飞贼、墙壁、房子、砖瓦、烂尾楼、坟墓、装修业等等。</p>
+<p>戊子己丑霹雳火：雷、烟火、闪电、电焊、火车、火箭、闪电、发电厂、变压器、高压线等。</p>
+<p>庚寅辛卯松柏木：松树、柏树、电杆、铁塔、烈士陵园、不朽、刚直、纪念碑、栋梁之才等。</p>
+<p>壬辰癸巳长流水：河流、溪水、水沟、工厂流水线、口水等等。</p>
+<p>甲午乙未沙中金：钻石、纯金、合金、小首饰、沙漠、金属、人才等等。</p>
+<p>丙申丁酉山下火：野火、路灯、萤火、香火、土窑、砖瓦窑、热电厂、炉灶等等。</p>
+<p>戊戌己亥平地木：栋梁、树木、建材、枕木、木桥等等。</p>
+<p>庚子辛丑壁上土：屋宇、洞壁、墙壁、挂历、飞贼、招牌、玻璃窗、涂料等等。</p>
+<p>壬寅癸卯金箔金：金饰、描金、镀金、首饰、纸钱、表面风光等等。</p>
+<p>甲辰乙巳佛灯火：灯烛、灯光、电筒、佛堂、寺庙、路灯、电筒等等。</p>
+<p>丙午丁未天河水：月轮、雨、水光、瀑布、水塔、牛郎织女等等。</p>
+<p>戊申己酉大驿土：稻田、大路、坦途、空旷之地、高速公路、操场、国道等等。</p>
+<p>庚戌辛亥钗钏金：钗钏、首饰、珠宝、文物、古董、钟鼎、首饰加工店等等。</p>
+<p>壬子癸丑桑柘木：湿木、树木、假山、养蚕业、丝绸、高档面料，故乡（桑梓地）等等。</p>
+<p>甲寅乙卯大溪水：雨水、河流、露珠、洪水、大江、郊游、水运、淋浴等等。</p>
+<p>丙辰丁巳沙中土：河谷、平原、湿泥、沙浴、紫砂壶、沙漠、堤岸、海滩等等。</p>
+<p>戊午己未天上火：太阳、月亮、桂花、闪电、空难、流星、陨石、火箭等等。</p>
+<p>庚申辛酉石榴木：石榴、结石、牙齿、水果店、肿瘤、青春痘、卵子等等。</p>
+<p>壬戌癸亥大海水：海洋、浊水、渊海、清水、远洋轮、海量、上海、百川、出海口等等。</p>
+<h2 id="动变取象"><a href="#动变取象" class="headerlink" title="动变取象"></a>动变取象</h2><p>主卦六亲是当前状态，先看主卦取象，定人，事，物，以六亲象意表现人，事，物的内容。变卦六亲是以后的状态，变化以后的象意，以及吉凶，对主卦补充说明。</p>
+<h3 id="一、兄弟爻"><a href="#一、兄弟爻" class="headerlink" title="一、兄弟爻"></a>一、兄弟爻</h3><p><strong>兄弟爻→兄弟爻</strong></p>
+<p><strong>化进</strong> 兄弟人事上代表同辈</p>
+<p>性格代表：动态，竞争，好争斗，人缘好，喜欢帮助人；争斗；攻击；是非随身</p>
+<p>在世爻：个性冲动，容易招惹是非口舌；竞争力强；缺乏理财观念（取兄弟破财），爱浪费</p>
+<p>行业：中介，业务员，推销员，运输，靠体力挣钱</p>
+<p>感情：不论男女都是婚姻不吉利</p>
+<p>男：粗鲁，少柔情，缺乏浪漫情趣；想控制别人</p>
+<p>女：不想受婚姻的约束</p>
+<p><strong>化退</strong> 职场：兄弟爻为同事竞争者，同事中有人对这个工作失去了热情，想辞职不干了</p>
+<p>合伙：人数众多，中途有人提出不干退出，合伙的生意散伙了</p>
+<p>人际关系：兄弟本来代表朋友多，化退则是越来越疏远；有困难的时候，朋友纷纷躲避，没有人来帮忙</p>
+<p>感情：兄弟代表自由，自由恋爱</p>
+<p>持世：代表想约束对方，爱吃醋</p>
+<p>化退：恋爱的热情在慢慢减退，对于对方的热度减少了</p>
+<p>婚姻：不宜兄弟持世发动，表示男的嫌弃老婆，老婆则是不想继续，不想承担老婆的责任</p>
+<p><strong>兄弟爻→父母爻（回头生）</strong></p>
+<p>工作：持世，世兄同位，同事跟我做一样的工作，需要团队完成工作</p>
+<p>感情：先以朋友的角色来主动追求，感情加深后，就想安定下来给对方承诺（父母爻为承诺，保护）</p>
+<p>小孩：女占：很想生小孩（兄生子孙），化父母表示想成为父母</p>
+<p>出行：参加旅行团，多人一起旅行，公司（父母的意向）组织的旅游</p>
+<p>身体健康：食欲不佳（克妻财），原因是太操劳太累（父母回头生）</p>
+<p><strong>兄弟爻→子孙爻</strong></p>
+<p>好动，好面子（兄弟），敏锐，乐观，纯真（子孙）</p>
+<p>性格：好面子同时也乐观向上</p>
+<p>财务：不善于理财（兄弟），子孙生财；常常在想求财的门路，赚钱的方法</p>
+<p>感情：主动追求异性（子孙表达），浪漫情怀（子孙）</p>
+<p>工作：对工资不满意，指挥新来的员工（子孙代表的人物），自己偷懒（子孙为悠闲）</p>
+<p>身体：身体好，体力好（动象），身体健康免疫力强（子孙克官鬼的象）</p>
+<p><strong>兄弟爻→妻财爻</strong></p>
+<p>持世：劳动（兄弟的动）之后得的财，如果其他爻动合世爻，表示因朋友得财</p>
+<p>职场：兄弟为同事多，化妻财表示女同事多</p>
+<p>感情：女性的朋友</p>
+<p>持世：自己的朋友大部分为女性</p>
+<p>子孙：想生小孩，期望成为母亲</p>
+<p><strong>兄弟爻→官鬼爻</strong></p>
+<p>职场：同事被领导批评</p>
+<p>持世：自己工作有压力，来自于上司</p>
+<p>合伙：合伙人掌握经营大权，别人是法人</p>
+<p>感情：女占则不愿意当普通朋友，想进一步发展成为男友&#x2F;老公</p>
+<p>财运：破财</p>
+<p>压力：没钱带来的压力</p>
+<h3 id="二、妻财爻"><a href="#二、妻财爻" class="headerlink" title="二、妻财爻"></a>二、妻财爻</h3><p><strong>妻财爻→妻财爻</strong></p>
+<p><strong>化进</strong>：妻财爻是我所拥有，我掌握，使用，支配，如钱财，珠宝首饰，食物等</p>
+<p>性情上，表现欲望浓厚，重视利益，追求物质享受，爱攀附权贵</p>
+<p>行业：经商，金融业，会计，餐饮业</p>
+<p>感情：感情不专一，化进为有强烈占有欲</p>
+<p>财运：有理财观念，赚钱能力强，来财方向不止一处</p>
+<p>身体：财为饮食，化进表示食欲旺盛，能吃，大多都胖</p>
+<p><strong>化退</strong>：代表工资福利，代表钱越来越少了，慢慢对工作失去了信心和热情，妻财爻代表女生，代表感情失望，想放弃感情。</p>
+<p>身体：不想吃东西，可能脾胃不好</p>
+<p>钱财：有压力，收入越来越少了</p>
+<p><strong>妻财爻→官鬼爻</strong></p>
+<p>工作：主卦为工资化出官鬼，我赚的钱来自于工作所得</p>
+<p>职场：在五爻领导是女性</p>
+<p>合伙事业：如财在应爻表示对方出资金，化出官鬼，表示经济权由对方掌控</p>
+<p>感情：无论男女，感情有依靠</p>
+<p>婚姻：夫妻恩爱婚姻美满</p>
+<p>身体健康：世爻所持，妻财为饮食，官鬼化为疾病，因饮食不当造成的疾病</p>
+<p><strong>妻财爻→子孙爻</strong></p>
+<p>行业：适合经商金融业</p>
+<p>感情：女年轻，活泼，充满风情，浪漫多情</p>
+<p>孕产：女占持世在二爻已怀胎或有机会怀胎</p>
+<p>身体健康：妻财主饮食，再化回头生，饮食正常且食欲佳，同时身体的免疫抗体越来越强</p>
+<p>出行：如在应爻，又在世爻相生相合，是去该地方与女性朋友相聚，化出子孙为外出游玩</p>
+<p><strong>妻财爻→父母爻</strong></p>
+<p>父母为工作单位，代表钱的收入是工作所得，父母为房子车子，代表拿钱去买了房、车，如果是父母临了土爻，马星（驿马）是买了车子</p>
+<p>感情：她想成家，比较慎重，保守，想谈一个可以结婚的人</p>
+<p>婚姻：表示自己赚钱都是为了供这个家</p>
+<p>职场：表示公司都是女员工居多。化父母，年龄大资历深，学历高</p>
+<p><strong>妻财爻→兄弟爻（回头克）</strong></p>
+<p>世持财，如旺表示有钱，化回头克，自我的控制是有钱但是吝啬，一毛不拔</p>
+<p>工作：世持财为我再工作赚钱，化回头克，我的工资不理想</p>
+<p>感情：男占，想求心中暗恋的对象，回头克，缺乏勇气，只能以朋友的角色与对方交往</p>
+<p>身体健康：饮食良好能正常吸收营养，化回头克，饮食减少，越来越没胃口，将会有肠胃的不舒服</p>
+<p>家庭：在二爻，财表示家中的生活开销，化回头克，所赚的钱不足以应对生活开销</p>
+<h3 id="三、子孙爻"><a href="#三、子孙爻" class="headerlink" title="三、子孙爻"></a>三、子孙爻</h3><p><strong>子孙爻→子孙爻</strong></p>
+<p><strong>化进</strong>：代表前进，增力</p>
+<p>子孙的性质是聪明，敏锐，乐观，好奇心强，创业，善于策划，不受约束，重感觉，情绪化，叛逆，梦想，前景</p>
+<p>行业：文学创作，艺术，发明，律师，医生，宗教</p>
+<p><strong>子孙爻→父母爻（回头克）</strong></p>
+<p>子孙爻代表乐观，风趣，幽默，变爻父母为传统，保守，按部就班，从个性而言，此人有双重性格，矛盾性格</p>
+<p>工作：持世表示不喜欢受约束，能自由发挥专长的工作，但爻变父母回头克，表示难以如愿或者世爻自信心不足，仍然会屈服于现实</p>
+<p>感情：子孙为感情丰富，浪漫多情，较感性，收到父母理性回头克，是自然感性易受环境影响，但会保持一份理性而自我克制</p>
+<p><strong>子孙爻→兄弟爻</strong></p>
+<p>子孙表示感情丰富，发动是自己主动去争取，化出兄弟，对象不止一个</p>
+<p>工作：有专业技能，轻松，难管理，化出兄弟是成群结党，偷懒之象</p>
+<p>持世爻，想要小孩，再化出兄弟回头生，兄弟为众，所以想要多生几个</p>
+<p>身体：子孙为免疫力强，化回头生，身体越来越健康，是因为爱运动</p>
+<p><strong>子孙爻→妻财爻</strong></p>
+<p>求财：子孙为创意，投资，求财心态，发动为实质的行动力，化财是以创意，专业技能来谋财</p>
+<p>感情：女占持世是自己主动表白，希望能成为对方的女友</p>
+<p>婚姻：已婚卦不宜子孙动，动则必克官鬼，如女占持世表示嫌弃老公，诸多埋怨，但又不愿放弃当老婆这个角色</p>
+<p>孕妇在二爻持世，子孙为胎儿，妻财是孕母，世用同位，表示卦主已怀孕之象</p>
+<p>出行在应爻，子孙为景点，游乐区，妻财表示当地有名的小吃，饮食</p>
+<p><strong>子孙爻→官鬼爻</strong></p>
+<p>子孙为技术，技能化出官鬼，是以自己的专业技术获得的职位，名声，地位。</p>
+<p>感情：男占持世，子孙为表达，浪漫多情，再化官鬼，自己虽然浪漫多情，但是对感情非常认真。</p>
+<p>孕产：胎儿容易早产，流产。</p>
+<p>疾病：子孙发动表示治疗及用药，化出官鬼，治疗或者吃药之后又产生新的不适或者后遗症，也表示药物不对症</p>
+<p>官司：子孙为律师，动克官鬼表示解决官司之意，再化出官鬼，是二审，或身缠另一官司之象</p>
+<h3 id="四、官鬼爻"><a href="#四、官鬼爻" class="headerlink" title="四、官鬼爻"></a>四、官鬼爻</h3><p><strong>官鬼爻→官鬼爻</strong></p>
+<p><strong>化进</strong>：领导，管理，自律，严谨，化进神，适合从政，公职，管理</p>
+<p>感情：男占持世，以事业心为重，对于感情较严谨认真对待，但缺乏情趣。女占持世，有二次婚姻的象</p>
+<p>疾病：官鬼动表示疾病发作，化出进神，病情加重也有并发症，多种疾病</p>
+<p><strong>化退</strong>：事业经营衰败之象，走下坡路了。男方对感情有退缩，反悔之意</p>
+<p>家庭：男占持世官鬼，主对家庭负责，但是化退神，表示对感情有退缩，反悔之意</p>
+<p>疾病：发动，疾病发作，化退神，主疾病逐渐消退而身体逐渐康复之象</p>
+<p>考试：世持官鬼，有求取功名的想法，逐渐懈怠，失去信心</p>
+<p><strong>官鬼爻→父母爻</strong></p>
+<p>工作：持世，官鬼代表我的工作是管理职位，化父母指示为部门主管，同时也代表工作忙碌</p>
+<p>感情：对于感情之事认真看待，化父母表示不善于情感表达</p>
+<p>婚姻：男占持世，自己尽责，化父母，为家庭辛劳为重。女占持世，以老公为依靠，化父母是辛苦，家庭，稳定</p>
+<p>身体：官鬼动是疾病，不舒服，化父母是因过度的操劳所导致</p>
+<p><strong>官鬼爻→兄弟爻</strong></p>
+<p>工作：有正直的工作，化兄弟是工作不理想，或是属于体力劳动的工作</p>
+<p>感情：男友变成朋友。已婚则凶，兄弟是克妻子的，也主自由</p>
+<p>身体：官鬼动为病显现出征兆，化出兄弟指示为手脚的毛病或是饮食问题而导致消化不良</p>
+<p>子嗣：老公喜欢小孩因为兄弟生子孙</p>
+<p><strong>官鬼爻→子孙爻（回头克）</strong></p>
+<p>工作：官鬼表工作，化出子孙，表示工作性质属于策划，设计，技术等，回头克，因压力大想辞职</p>
+<p>婚姻：官鬼为老公，化子孙想自由。回头克，不想承担自己的责任</p>
+<p>身体：疾病发作，化子孙是吃药</p>
+<p><strong>官鬼爻→妻财爻</strong></p>
+<p>感情：不论男女代表两情相悦，婚姻，爱情坚定，家庭和谐</p>
+<p>事业工作：官鬼主领导力，管理阶层，化出妻财，赚钱能力强</p>
+<p>身体：病是因饮食不当而得的，必须改善饮食习惯及忌口</p>
+<p>升迁：官鬼主上司，权力，职务，动化妻财，想花钱公关获得升迁</p>
+<h3 id="五、父母爻"><a href="#五、父母爻" class="headerlink" title="五、父母爻"></a>五、父母爻</h3><p><strong>父母爻→父母爻</strong></p>
+<p><strong>化进</strong>：保守→更保守；固执→固执；劳累→更劳累；辛劳→更辛劳</p>
+<p>工作事业：更忙碌；更进修；订单增加；业绩增加；</p>
+<p>感情：保守→过度保守；忙碌→过度忙碌没空谈感情</p>
+<p>考试：学习→再学习；不只是一次考试，需要靠多门</p>
+<p>家庭：忙碌→更忙碌：如果在二爻（家宅），为家庭操劳，搬家更换住所</p>
+<p><strong>化退</strong>：力量减弱，减力，后退</p>
+<p>考试：学习→再学习：不只是一次考试，需要靠多门</p>
+<p>家庭：忙碌→更忙碌：如果在二爻（家宅），为家庭操劳，搬家更换住所</p>
+<p>事业：对工作失去兴趣；年龄大的人想退休了；对当下工作没兴趣，想换工作；</p>
+<p>身体健康：年轻人则代表体力透支，身体衰退：</p>
+<p>求职面试：父母代表工作单位，一次面试不好，必须面两次以上</p>
+<p>公司经营：公司爻改编，缩编，裁员</p>
+<p>阳宅：二爻发动，搬家，大房子搬到小屋，或者房子变小了</p>
+<p><strong>父母爻→兄弟爻</strong></p>
+<p>父母爻主人稳重，包容，关怀，照顾保护，仁慈；兄弟动态，自由不约束，冲动，劫财，竞争</p>
+<p>工作：竞争性的工作，中介，推销员，销售（兄弟象意补充说明父母）</p>
+<p>二爻：家里兄弟姐妹多，非常热闹，爱争执</p>
+<p><strong>父母爻→子孙爻</strong></p>
+<p>父母主传统，保守，稳重，子孙聪明，敏锐，独立</p>
+<p>父母定位长辈，长辈外表老成稳重，但是爱开玩笑，有赤子之心，童心未泯</p>
+<p>工作：内容琐碎（世爻）；如果世爻，则工作有忙碌变轻松，忙里偷闲</p>
+<p>感情：对态度保守，但是鼓起勇气向对方表白</p>
+<p>健康：父母克子孙，本人很讨厌医生，但是化了子孙，生病了还是的去看医生；</p>
+<p>体力是靠营养品（子孙），保健品，注意保养；</p>
+<p>在二爻，希望家中可以有小孩子</p>
+<p><strong>父母爻→妻财爻</strong></p>
+<p>持世：人的行为反复多变，做事虎头蛇尾</p>
+<p>工作：忙碌的工作得财，工薪一族</p>
+<p>感情：传统保守的女生；婚姻通过长辈的介绍，撮合而成的婚姻；非常想变成 别人的妻子；</p>
+<p>在二爻持世：自己非常有经济上的压力；</p>
+<p>家人关系：财克印代表老婆跟妈妈关系不好</p>
+<p><strong>父母爻→官鬼爻</strong></p>
+<p>持世：父母代表保守，守旧，官鬼为自律；代表这个人非常负责任，行为做事</p>
+<p>工作：非常忙碌，自己是管理人员</p>
+<p>男测感情：保守守旧不浪漫，官鬼回头生，想成为别人的老公：婚姻是经过长：婚姻是经过长辈撮合介绍；</p>
+<p>二爻为家宅：家全靠男的撑起来，家里顶梁柱；如果家中有长辈，男的非常孝顺，对长辈照顾无微不至；</p>
+<p>测考试：父母爻代表成绩，考的非常好，名列前茅</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2026/06/06/%E5%B1%B1%E6%B0%B4%E8%92%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/06/%E5%B1%B1%E6%B0%B4%E8%92%99/" class="post-title-link" itemprop="url">山水蒙</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-06-06 23:28:06" itemprop="dateCreated datePublished" datetime="2026-06-06T23:28:06+08:00">2026-06-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-06-07 23:40:47" itemprop="dateModified" datetime="2026-06-07T23:40:47+08:00">2026-06-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%98%93%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">易学</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>山下出泉，蒙。君子以果行育德。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/06/06/%E5%B1%B1%E6%B0%B4%E8%92%99/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2026/06/06/%E6%B0%B4%E9%9B%B7%E5%B1%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/06/%E6%B0%B4%E9%9B%B7%E5%B1%AF/" class="post-title-link" itemprop="url">水雷屯</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-06-06 00:46:04" itemprop="dateCreated datePublished" datetime="2026-06-06T00:46:04+08:00">2026-06-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-06-07 23:40:56" itemprop="dateModified" datetime="2026-06-07T23:40:56+08:00">2026-06-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%98%93%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">易学</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>云雷屯，君子以经纶。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/06/06/%E6%B0%B4%E9%9B%B7%E5%B1%AF/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2026/06/04/%E5%9D%A4%E4%B8%BA%E5%9C%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/04/%E5%9D%A4%E4%B8%BA%E5%9C%B0/" class="post-title-link" itemprop="url">坤为地</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-06-04 21:18:35" itemprop="dateCreated datePublished" datetime="2026-06-04T21:18:35+08:00">2026-06-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-06-05 00:00:37" itemprop="dateModified" datetime="2026-06-05T00:00:37+08:00">2026-06-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%98%93%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">易学</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>地势坤，君子以厚德载物。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/06/04/%E5%9D%A4%E4%B8%BA%E5%9C%B0/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2026/06/03/%E5%85%AD%E4%BA%B2%E5%92%8C%E5%85%AD%E7%A5%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/03/%E5%85%AD%E4%BA%B2%E5%92%8C%E5%85%AD%E7%A5%9E/" class="post-title-link" itemprop="url">六亲和六神</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-06-03 23:55:55" itemprop="dateCreated datePublished" datetime="2026-06-03T23:55:55+08:00">2026-06-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-06-04 00:50:05" itemprop="dateModified" datetime="2026-06-04T00:50:05+08:00">2026-06-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%98%93%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">易学</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>六亲象意</p>
+<h1 id="一、六亲"><a href="#一、六亲" class="headerlink" title="一、六亲"></a>一、六亲</h1><h2 id="六亲定义和生克关系"><a href="#六亲定义和生克关系" class="headerlink" title="六亲定义和生克关系"></a>六亲定义和生克关系</h2><p>六亲是指父母 、 兄弟 、 子孙 、 妻财、 官鬼，还包括我 （ 起卦的人,在卦中是没有“我”这个六神直接存在的，只有世爻来对应，</p>
+<p>世爻临哪个六亲，世爻就具备哪个六亲的特性。）统称为六亲。六亲并不是单单指这六种亲属关系，而是利用这六种关系来模拟事物之间的相互作用。因此，六亲只是一种符号，它可以代表很多意思。</p>
+<p>六亲的排法不是固定不变的，而是根据主卦的卦宫来决定的。具体方法是,以主卦卦宫的五行属性为 “我” ， 与我相同的用兄弟表示，生我的用父母表示，我生的用子孙表示，我克的用妻财表示，克我的用官鬼表示。</p>
+<p>相生：子孙—妻财—官鬼—父母—兄弟—子孙</p>
+<p>相克：子孙—官鬼—兄弟—妻财—父母—子孙</p>
+<h2 id="六亲象意"><a href="#六亲象意" class="headerlink" title="六亲象意"></a>六亲象意</h2><p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">父母爻：生我者为父母</span></p>
+<ol>
+<li>其代表的人物为父母、叔伯、祖父母、师长、等扶助我的德高望重者，与父母同辈者，以及亲近的老人等。</li>
+<li>庇护我之物，也为父母，如：家宅、房屋、居住处、城市、车、船、飞机、衣服、雨具等。</li>
+<li>父母爻又主文章、学业、功课、考试、文件、合同、档案、护照等。</li>
+<li>父母爻又代表辛苦、操劳之类，如：勤劳、艰辛劳苦、劳累、操心、费心、工作量大等。</li>
+<li>场所代表工厂、单位、学校等。</li>
+<li>性情方面代表大义、长着风度、有学识等。</li>
+<li>在人体方面代表头、面、胸、腹、背等。</li>
+<li>预测自然代表下雨。</li>
+</ol>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">兄弟爻：与我同类者为兄弟</span></p>
+<ol>
+<li>代表的人物有兄弟姐妹、同辈、亲朋好友、同学、战友、伙伴、竞争者、想取代我者。</li>
+<li>兄弟爻又表示花钱、破财，谋我财或破费我财、破耗、消耗、投资等。</li>
+<li>代表阻力、阻隔、阻滞。</li>
+<li>兄弟爻又表示口舌、是非、争吵等现象。</li>
+<li>表示虚诈、讹诈、欺骗。</li>
+<li>性情方面代表吝啬、仗义、好交友、争强好胜等。</li>
+<li>场所代表赌场、收费站、居家的门户、卫生间、墙壁等。</li>
+</ol>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">官鬼爻：制约我者为官鬼</span></p>
+<ol>
+<li>人物方面有长官、官方、领导、上司、管理者、贵人、公务员、制约兄弟者，女人的丈夫和丈夫的弟兄、情夫、男友以及小人、害我者、与我不利者、盗贼、地痞、罪犯、男人等。</li>
+<li>代表官职、工作、职位、事业、心机、伎俩等。</li>
+<li>代表疾病、疼痛、忧虑、麻烦、痛苦、灾祸、惊吓、鬼怪、邪祟、死人、尸体等。</li>
+<li>性情方面代表刚强、霸道、有能力、善组织、多谋略、有男性魅力等。</li>
+<li>场所代表政府、法院、检察院、人大、政协、居家的客厅等。</li>
+<li>在人体方面代表大脑、心脏、男性器等。</li>
+<li>预测自然代表坏天气、雷电、暴风雨、水灾、地震、干旱、火灾、爆炸等。</li>
+</ol>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">妻财爻：我克者为妻财</span></p>
+<ol>
+<li>在人物方面代表妻子、兄弟之妻、对象、情人、第三者、下属、秘书、女人等。</li>
+<li>代表钱财、资金、俸禄、财产、金银珠宝。</li>
+<li>代表粮食、食物、农作物、饮食、饮水、酒席以及和餐饮有关的器具。</li>
+<li>场所代表饭店、酒店、食堂、居家的厨房、仓库、银行、加油站。</li>
+<li>性情方面代表柔弱、善于理家。</li>
+<li>在人体方面代表口、发、胡须、乳房、女性器、腰、肛门、血液等。</li>
+<li>预测自然代表有云天气，阴雨转晴天气、轻雾。</li>
+</ol>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">子孙爻：我生者为子孙</span></p>
+<ol>
+<li>人物方面有儿女、孙辈、晚辈、徒弟、部下、警察、军人、僧道、术士、演员、歌星、医生及为我解忧难者等。</li>
+<li>代表财源、生财之道、生意、买卖。</li>
+<li>为福神、解忧之神、主消解灾难、平息事端争讼、消除忧愁、医药、无忧无虑、享乐、游玩、玩耍等。</li>
+<li>场所代表医院、寺庙、网吧、游乐场、风景区等。</li>
+<li>性情方面代表心地善良、慈悲、快乐、信佛等。</li>
+<li>人体上代表耳、眼、鼻、口、乳房、男性器等。</li>
+<li>代表宠物六畜。</li>
+<li>预测自然代表晴天、彩虹、顺风。</li>
+</ol>
+<h1 id="二、六神"><a href="#二、六神" class="headerlink" title="二、六神"></a>二、六神</h1><h2 id="六神定义和五行属性"><a href="#六神定义和五行属性" class="headerlink" title="六神定义和五行属性"></a>六神定义和五行属性</h2><p>六神，俗称六兽，即：青龙、朱雀、勾陈、螣蛇、白虎、玄武。</p>
+<p>六神也具有五行属性，每种六神都可配一种五行，其对应关系如下：</p>
+<p>青龙 五行：木 朱雀 五行：火<br>勾陈 五行：土 滕蛇 五行：土<br>白虎 五行：金 玄武 五行：水</p>
+<h2 id="六神象意"><a href="#六神象意" class="headerlink" title="六神象意"></a>六神象意</h2><p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">青龙</span></p>
+<p>青龙方位为东方，五行属木，青龙主喜庆之事也主酒色；青龙代表的物：蛇、蟒、粗而直之物，代表大树、柱子、大雨、河流；测人的性格、职业时，青龙临世用，此人从事公职，在国家企事业单位工作。性格上主为人耿直、正义、光明磊落，如休囚主人固执己见，为人死板等等。</p>
+<p><strong>青龙临不同的六亲也就组合成不同的事物类象：</strong></p>
+<p>1．青龙临官鬼爻：代表法律、官级；女测婚为正夫；代表警察、法官、公安人员等公检法之类人员，代表酒色，代表神位、仙位等等。</p>
+<p>2．青龙临父爻：代表文书、证件、法律条文、治安条例、为合同、契约、发票、字据、帐目，代表经书、经文、代表亲生父母、代表国家企事业单位、代表学校等等。</p>
+<p>3．青龙临兄弟爻，为同胞兄弟姐妹，正义的朋友、正直的兄弟、伙伴、朋友等。</p>
+<p>4．青龙临财爻，为正道之财，男占婚为结发之妻、正妻、正房。占运程为福禄之财，为福气等。</p>
+<p>5．青龙临子孙爻，为亲生子女，嫡系晚辈，为酒色、娱乐，为著作、演示，为宣传材料，为广告、广播，为享乐、开心等等。</p>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">朱雀</span></p>
+<p>朱雀方位为南方，五行属火，朱雀主口舌是非、文书、信息、通讯、文化之类事物。朱雀代表的事物为鸟、雀，能发声之类事物，如汽笛、音乐歌声、说话、电话、演讲、靠口靠声音表达之事物，测工作为翻译、教师、律师、传教士、预测师等等。朱雀主文印、口舌、世临朱雀表明此人性格象火一样急切，热情多礼，为人爱说，口才好，善演讲、表达，好说好笑，其职业适于教师、宣传、推销、广播、并靠口或文化事业工作。</p>
+<p><strong>朱雀临不同六亲，组合成不同的信息之象：</strong></p>
+<p>1．朱雀临官爻：主口舌官非；测灾情，若火官临朱雀为火灾，水官临朱雀为水灾。测风水，朱雀临官克世用为火形煞为火灾，为声煞主官非。</p>
+<p>2．朱雀临父爻：代表书信、邮寄、电报、电话、诉状、供词、唱片、磁带、光盘、录音带；测工作为：教师、演说家、文人墨客、演艺界、录音师、通讯工作文化事业、邮递工作，靠口、靠文化、文字之类的行业。</p>
+<p>3．朱雀临兄弟爻，发动主有口舌争端，主吵架、辩论、演说等，主多是非争斗。</p>
+<p>4．朱雀临财爻，代表汇款、存折、支票；工作是动嘴的，靠口挣钱的营生；男测婚，很可能对方有小孩或女方好说、好歌唱、口无遮挡，能畜善辩。若财爻为世爻之原神或合世爻，主对方能说会道，对男方来讲，说话就象百灵鸟般地动听，若财爻为世之忌神，冲克世爻，那女方所说的话对男方来说就象乌鸦嘴般难听。</p>
+<p>5、朱雀临子孙爻：代表音乐、歌曲场所、为歌舞厅、酒吧、娱乐场。工作方面：为广播员、解说员、歌星、笑星、说书、唱戏的、算命、吃口食之类职业。代表宠物如小狗、小猪、鸟儿等等。也主念佛、诵经、宣传、叫声、喊声、鸣笛等等。</p>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">勾陈</span></p>
+<p>勾陈方位代表中央，五行属土，勾陈主田土、文章、契约之事，勾陈主慢、主牵连、有多人参与之象。测风水，勾陈主中间地带、为转变抹角。勾陈主陈旧、老的，引申为熟人、旧事。测职业，勾陈临世用主田土之类工作，如房地产、农民、为专业技术，主合作伙伴，占性格休囚主为人处事死板，不够圆滑，自我约束力强，旺相主诚实老练，成熟稳重。</p>
+<p><strong>勾陈临不同六亲组合而成信息之象：</strong></p>
+<p>1．勾陈临官爻：占生意为熟客，女占测婚主男方有脚踏两只船之象，其男友与其它女人有勾连相好之象；男占婚，为情敌；占官司，主纠葛，官司没完没了，没头没绪，纠缠不休；占忧郁主苦恼时间长、难脱身；测职位、职业，种类为房地产工作，为房地产之官，刑警，为拘留所、看守所、监狱之类职业、官位。</p>
+<p>2．勾陈临父爻：占申请为迟滞，很长时间办不下来；占出行主劳苦，有拖累、有停留、耽搁；占生产为难产；占手续为房地产合同、契约、文书。</p>
+<p>3．勾陈临兄爻，为朋友、同事、老熟人，为合伙人，同伙，主拉帮结派，团伙；测求财、兄弟临勾陈发动，说明是因同事、朋友或熟人引起的破财。</p>
+<p>4．勾陈临财爻；男占婚主女方有脚踏两只船之象；女占婚，为情敌，为男方的旧情人；占求财为土财，房地产之财，为技艺得来之财。测运气世爻休囚财爻临勾陈旺动克世，主受女人之害，受自己熟悉的女人牵连而招祸。</p>
+<p>5．勾陈临子孙爻：占工作为靠技术、手艺挣钱，为牵来领去随人走的宠物，如小狗等。</p>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">螣蛇</span></p>
+<p>惊蛇方位为中央，五行属土。螣蛇主虚惊怪异之事，也主牢狱之灾。蝼蛇代表的事物：蛇、蟒、神鬼、仙妖、怪事、奇事，代表细而长之物，如绳子、线、软水管、能缠绕之物、代表小雨、小河。在风水学上代表路。螣蛇主捆绑、环绕、困挠、缠绕，有带手拷之象，也引申出拘留审查之意。</p>
+<p><strong>螣蛇临不同六亲组合而成的信息之象：</strong></p>
+<p>1．螣蛇临官爻：占官司灾凶，若发动克世爻用神，主有牢狱之灾；占梦主有恶梦、怪梦，令人惊恐、怪异之梦；占宅，主有怪异之事发生，有妖、仙、鬼、神怍祟，有异常声音、动静；占病，为虚病、怪痫，医院盘不出之病症，神经之类症症；女占婚，官爻临螣蛇，为命中注定之丈夫，很难离婚。</p>
+<p>2．螣蛇临父爻；克世主受文书，契约所束缚，受合同所牵制；测父母，主父母有怪病怪事或神经不正常，有虚病，思虑过重多疑；测合同，若父爻临螣蛇克世爻主所签合同内容上，对方巧设圈套坑害自己或为无效合同、凭征，为虚假证件等；测平安，螣蛇临父发动世爻，用神主有车祸之灾。</p>
+<p>3．螣蛇临兄爻：占官司克世，主有牢狱之灾，测合伙生意，防对方故意巧设圈套坑害自己。</p>
+<p>4．螣蛇临财爻：男占婚，为命中之妻，不易离婚；占生意，为应得之财，为巧取，靠手段、靠机智得来之财。</p>
+<p>5．螣蛇临子孙爻：占有无子女，为注定有子女，子孙持世临蝼蛇主人心机多，言语狡诈，虚夸不实。</p>
+<p>6．螣蛇主人手段高明，为人八面玲珑，处事图滑，适于外交、接待之类交际工作。</p>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">白虎</span></p>
+<p>自虎，代表西方，五行属金，主凶灾，横祸，主伤病灾、牢狱之灾，血光之灾，来势凶猛之事。白虎持世主人性格沉稳，城府深，善于心计；职业为医生、律师、屠夫等。白虎代表坚硬之物，金属物，为猛兽、凶器。白虎主孝服、丧事，主风波，测人体临世、用主肥大、体胖、面恶。</p>
+<p><strong>白虎临不同六亲组合而成的信息之象：</strong></p>
+<p>1．白虎临官爻：发动克世用，测运气主有血光之灾，病伤之灾、牢狱之灾，严重者有死亡之灾；测风水，二爻值白虎临官爻旺为喜，主有家中出掌生大权之人，休囚主家有暴死、凶死之人。</p>
+<p>2．白虎临父爻：主跌打损伤；测长辈主长辈有病伤之灾；测家宅，主有丧事孝服。白虎临父爻值申酉金，测职业为屠夫。</p>
+<p>3．白虎临兄爻：占平辈主有病伤缠身或有灾难，有血光之灾、争夺、争斗之事。</p>
+<p>4．白虎临财：占平安，为有钱但有病；男占婚，主女方有病，旺相主女方体态丰满，较胖或长得白；白虎临财生世主暴发，得横财或得丧事白事之财，得从事危险性操作之财。</p>
+<p>5．白虎临子孙爻：主女子小辈有病，死、伤、亡之象，主小孩玩皮，不服管。</p>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">玄武</span></p>
+<p>玄武代表北方。五行属水，玄武主暖昧不明、隐私、盗窃、不能光明正大去做之事，主暗地里、心里、主隐性之事物，不易被察觉之事物。玄武持世，主人轻浮，说话华而不实，做事没有信用，明一套暗一套。</p>
+<p><strong>玄武临各六亲组合成不同信息之象：</strong></p>
+<p>1．玄武临父爻：克世用，测文书，主文书有伪，证件有伪，不实之象；测长辈，主长辈有难言之隐，不难公开之事困扰。</p>
+<p>2．玄武临兄弟爻：主欺诈、欺骗、蒙蔽、测赌博必输。</p>
+<p>3．玄武临财爻：主非正道之财、骗来之财、暧昧之财，赌博之财、黑道之财、贫污受贿、行贿之财、走私、贩毒、偷漏税等非法之财；测婚主妻或对象风流，有偷情之事。世爻临玄武主自己有隐私之事。</p>
+<p>4．玄武临子孙爻：代表享乐，寻欢作乐，不正当性行为，代表心情舒畅；测小辈主小辈走失，或小辈有暖昧之事。</p>
+<p>5．玄武临官鬼：为盗贼，克世有被盗之象：世爻官鬼临玄武主自己为梁上君子(小偷)或黑道人，走私、贩毒违法之人；女测婚主夫不正、风流；测风水，主受水害，易有性病、肾病。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
     }
-  },
-  processSubtitle: (content, extraContents = []) => {
-    if (true) {
-      const sub = ["我见青山多妩媚，料青山见我应如是","人生如逆旅，我亦是行人"].slice()
-
-      if (extraContents.length > 0) {
-        sub.unshift(...extraContents)
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
       }
-
-      if (typeof content === 'string') {
-        sub.unshift(content)
-      } else if (Array.isArray(content)) {
-        sub.unshift(...content)
-      }
-
-      sub.length > 0 && typedJSFn.init(sub)
-    } else {
-      document.getElementById('subtitle').textContent = typeof content === 'string' ? content :
-        (Array.isArray(content) && content.length > 0 ? content[0] : '')
     }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
   }
-}
-btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')
-</script><script>function subtitleType () {
-  typedJSFn.processSubtitle(["我见青山多妩媚，料青山见我应如是","人生如逆旅，我亦是行人"])
-}
-typedJSFn.run(subtitleType)</script></div><script async data-pjax src="/"></script></div></body></html>
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Hyacinth</p>
+  <div class="site-description" itemprop="description">君子慎独,不欺暗室</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hyacinth</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

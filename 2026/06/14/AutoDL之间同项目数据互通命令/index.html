@@ -1,195 +1,204 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>autodl互通简单数据 | Hyacinth</title><meta name="author" content="Hyacinth"><meta name="copyright" content="Hyacinth"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="命令从B实例的数据拷贝到A实例，即B的实例数据是对的 1rsync -avzP -e &quot;ssh -p B实例端口&quot; root@B实例域名:B实例数据绝对路径&#x2F; A实例数据绝对路径&#x2F;  📋 实战命令模版假设你的项目和数据存放在 &#x2F;root&#x2F;autodl-tmp&#x2F;my_project&#x2F;： Bash 1234rsync -avzP -e &quot;ssh -p 32145&amp;quo">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="命令从B实例的数据拷贝到A实例，即B的实例数据是对的 1rsync -avzP -e &quot;ssh -p B实例端口&quot; root@B实例域名:B实例数据绝对路径&#x2F; A实例数据绝对路径&#x2F;  📋 实战命令模版假设你的项目和数据存放在 &#x2F;root&#x2F;autodl-tmp&#x2F;my_project&#x2F;： Bash 1234rsync -avzP -e &quot;ssh -p 32145&amp;quo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="autodl互通简单数据">
 <meta property="og:url" content="https://hyacinth.xin/2026/06/14/AutoDL%E4%B9%8B%E9%97%B4%E5%90%8C%E9%A1%B9%E7%9B%AE%E6%95%B0%E6%8D%AE%E4%BA%92%E9%80%9A%E5%91%BD%E4%BB%A4/index.html">
 <meta property="og:site_name" content="Hyacinth">
 <meta property="og:description" content="命令从B实例的数据拷贝到A实例，即B的实例数据是对的 1rsync -avzP -e &quot;ssh -p B实例端口&quot; root@B实例域名:B实例数据绝对路径&#x2F; A实例数据绝对路径&#x2F;  📋 实战命令模版假设你的项目和数据存放在 &#x2F;root&#x2F;autodl-tmp&#x2F;my_project&#x2F;： Bash 1234rsync -avzP -e &quot;ssh -p 32145&amp;quo">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://picsum.photos/seed/autodlht/800/400">
 <meta property="article:published_time" content="2026-06-14T12:40:58.000Z">
 <meta property="article:modified_time" content="2026-06-14T13:16:48.701Z">
 <meta property="article:author" content="Hyacinth">
 <meta property="article:tag" content="杂项">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://picsum.photos/seed/autodlht/800/400"><script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "autodl互通简单数据",
-  "url": "https://hyacinth.xin/2026/06/14/AutoDL%E4%B9%8B%E9%97%B4%E5%90%8C%E9%A1%B9%E7%9B%AE%E6%95%B0%E6%8D%AE%E4%BA%92%E9%80%9A%E5%91%BD%E4%BB%A4/",
-  "image": "https://picsum.photos/seed/autodlht/800/400",
-  "datePublished": "2026-06-14T12:40:58.000Z",
-  "dateModified": "2026-06-14T13:16:48.701Z",
-  "author": [
-    {
-      "@type": "Person",
-      "name": "Hyacinth",
-      "url": "https://hyacinth.xin"
-    }
-  ]
-}</script><link rel="shortcut icon" href="/img/sakura.png"><link rel="canonical" href="https://hyacinth.xin/2026/06/14/AutoDL%E4%B9%8B%E9%97%B4%E5%90%8C%E9%A1%B9%E7%9B%AE%E6%95%B0%E6%8D%AE%E4%BA%92%E9%80%9A%E5%91%BD%E4%BB%A4/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
-    (() => {
-      
-    const saveToLocal = {
-      set: (key, value, ttl) => {
-        if (!ttl) return
-        const expiry = Date.now() + ttl * 86400000
-        localStorage.setItem(key, JSON.stringify({ value, expiry }))
-      },
-      get: key => {
-        const itemStr = localStorage.getItem(key)
-        if (!itemStr) return undefined
-        const { value, expiry } = JSON.parse(itemStr)
-        if (Date.now() > expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return value
-      }
-    }
 
-    window.btf = {
-      saveToLocal,
-      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = url
-        script.async = true
-        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
-        script.onload = script.onreadystatechange = () => {
-          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
-        }
-        script.onerror = reject
-        document.head.appendChild(script)
-      }),
-      getCSS: (url, id) => new Promise((resolve, reject) => {
-        const link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.href = url
-        if (id) link.id = id
-        link.onload = link.onreadystatechange = () => {
-          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
-        }
-        link.onerror = reject
-        document.head.appendChild(link)
-      }),
-      addGlobalFn: (key, fn, name = false, parent = window) => {
-        if (!false && key.startsWith('pjax')) return
-        const globalFn = parent.globalFn || {}
-        globalFn[key] = globalFn[key] || {}
-        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
-        parent.globalFn = globalFn
-      }
-    }
+<link rel="canonical" href="https://hyacinth.xin/2026/06/14/AutoDL%E4%B9%8B%E9%97%B4%E5%90%8C%E9%A1%B9%E7%9B%AE%E6%95%B0%E6%8D%AE%E4%BA%92%E9%80%9A%E5%91%BD%E4%BB%A4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>autodl互通简单数据 | Hyacinth</title>
   
-      
-      const activateDarkMode = () => {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
-        }
-      }
-      const activateLightMode = () => {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
-        }
-      }
 
-      btf.activateDarkMode = activateDarkMode
-      btf.activateLightMode = activateLightMode
 
-      const theme = saveToLocal.get('theme')
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hyacinth</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
     
-          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
-        
-      
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
-      }
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
     
-      
-    const detectApple = () => {
-      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
   
-    })()
-  </script><script>const GLOBAL_CONFIG = {
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
-  copy: {
-    success: '复制成功',
-    error: '复制失败',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  dateSuffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: undefined,
-  lightbox: 'null',
-  Snackbar: undefined,
-  infinitegrid: {
-    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
-    buttonText: '加载更多'
-  },
-  isPhotoFigcaption: false,
-  islazyloadPlugin: false,
-  isAnchor: false,
-  percent: {
-    toc: true,
-    rightside: false,
-  },
-  autoDarkmode: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: 'autodl互通简单数据',
-  isHighlightShrink: false,
-  isToc: true,
-  pageType: 'post'
-}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@4.5.12/index.min.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
-  const $loadingBox = document.getElementById('loading-box')
-  const $body = document.body
-  const preloader = {
-    endLoading: () => {
-      if ($loadingBox.classList.contains('loaded')) return
-      $body.style.overflow = ''
-      $loadingBox.classList.add('loaded')
-    },
-    initLoading: () => {
-      $body.style.overflow = 'hidden'
-      $loadingBox.classList.remove('loaded')
-    }
-  }
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2026/06/14/AutoDL%E4%B9%8B%E9%97%B4%E5%90%8C%E9%A1%B9%E7%9B%AE%E6%95%B0%E6%8D%AE%E4%BA%92%E9%80%9A%E5%91%BD%E4%BB%A4/">
 
-  preloader.initLoading()
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
 
-  if (document.readyState === 'complete') {
-    preloader.endLoading()
-  } else {
-    window.addEventListener('load', preloader.endLoading)
-    document.addEventListener('DOMContentLoaded', preloader.endLoading)
-    // Add timeout protection: force end after 7 seconds
-    setTimeout(preloader.endLoading, 7000)
-  }
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          autodl互通简单数据
+        </h1>
 
-  if (false) {
-    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
-    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
-  }
-})()</script><div id="web_bg" style="background-image: url(https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/%E8%9C%A1%E7%AC%94%E5%B0%8F%E6%96%B0_%E7%A6%81%E6%AD%A2%E7%84%A6%E8%99%91.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&amp;spec=640&amp;img_type=jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-comment-alt"></i><span> 说说</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background: transparent;"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hyacinth</span></a><a class="nav-page-title" href="/"><span class="site-name">autodl互通简单数据</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-comment-alt"></i><span> 说说</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">autodl互通简单数据</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-06-14T12:40:58.000Z" title="发表于 2026-06-14 20:40:58">2026-06-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-06-14T13:16:48.701Z" title="更新于 2026-06-14 21:16:48">2026-06-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9D%82%E9%A1%B9/">杂项</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><p>从B实例的数据拷贝到A实例，即B的实例数据是对的</p>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-06-14 20:40:58 / 修改时间：21:16:48" itemprop="dateCreated datePublished" datetime="2026-06-14T20:40:58+08:00">2026-06-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9D%82%E9%A1%B9/" itemprop="url" rel="index"><span itemprop="name">杂项</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><p>从B实例的数据拷贝到A实例，即B的实例数据是对的</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -avzP -e <span class="string">&quot;ssh -p B实例端口&quot;</span> root@B实例域名:B实例数据绝对路径/ A实例数据绝对路径/</span><br></pre></td></tr></table></figure>
 
 <h3 id="📋-实战命令模版"><a href="#📋-实战命令模版" class="headerlink" title="📋 实战命令模版"></a>📋 实战命令模版</h3><p>假设你的项目和数据存放在 <code>/root/autodl-tmp/my_project/</code>：</p>
@@ -253,4 +262,200 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 自动生成的 AutoDL 增量同步脚本</span></span><br><span class="line"></span><br><span class="line">B_PORT=<span class="string">&quot;32145&quot;</span></span><br><span class="line">B_HOST=<span class="string">&quot;region-1.autodl.com&quot;</span></span><br><span class="line">SRC_DIR=<span class="string">&quot;/root/autodl-tmp/my_project/&quot;</span></span><br><span class="line">DST_DIR=<span class="string">&quot;/root/autodl-tmp/my_project/&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;开始从实例 B (<span class="variable">$&#123;B_HOST&#125;</span>:<span class="variable">$&#123;B_PORT&#125;</span>) 增量同步数据...&quot;</span></span><br><span class="line">rsync -avzP -e <span class="string">&quot;ssh -p <span class="variable">$&#123;B_PORT&#125;</span>&quot;</span> root@<span class="variable">$&#123;B_HOST&#125;</span>:<span class="variable">$&#123;SRC_DIR&#125;</span> <span class="variable">$&#123;DST_DIR&#125;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;同步完成！&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>给脚本赋予执行权限：<code>chmod +x sync_from_b.sh</code>。下次直接运行 <code>./sync_from_b.sh</code> 即可。</p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://hyacinth.xin">Hyacinth</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://hyacinth.xin/2026/06/14/AutoDL%E4%B9%8B%E9%97%B4%E5%90%8C%E9%A1%B9%E7%9B%AE%E6%95%B0%E6%8D%AE%E4%BA%92%E9%80%9A%E5%91%BD%E4%BB%A4/">https://hyacinth.xin/2026/06/14/AutoDL%E4%B9%8B%E9%97%B4%E5%90%8C%E9%A1%B9%E7%9B%AE%E6%95%B0%E6%8D%AE%E4%BA%92%E9%80%9A%E5%91%BD%E4%BB%A4/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://hyacinth.xin" target="_blank">Hyacinth</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9D%82%E9%A1%B9/">杂项</a></div><div class="post-share"><div class="social-share" data-image="https://picsum.photos/seed/autodlht/800/400" data-sites="facebook,X,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/06/14/tmux%20%E7%BB%88%E7%AB%AF%E4%BD%BF%E7%94%A8/" title="tmux 终端使用"><img class="cover" src="https://picsum.photos/seed/tmuxlearn/800/400" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">tmux 终端使用</div></div><div class="info-2"><div class="info-item-1">tmux 终端使用在 AutoDL 等云服务器上跑实验时，最崩溃的莫过于本地网络突然闪断，导致跑了一半的脚本直接被终止。tmux (Terminal Multiplexer) 就是为了解决这个问题而生的。它可以让你的任务在后台持续运行，随时随地重新连接查看进度。 核心概念：为什么需要 tmux？当你通过 SSH 或 Jupyter 终端连接到 AutoDL 时，你启动的进程是依附于当前终端会话的。终端一关，进程就死。tmux 可以在服务器端创建一个持久化的虚拟终端。即使你的电脑关机、断网，tmux 里的实验依然在服务器上稳稳地跑着。 安装 tmux在 AutoDL 服务器里运行： 123apt updateapt install -y tmuxtmux -V  看到类似： 1tmux 3.2a  就说明安装成功。 🚀 极简工作流 (只需记住这 4 条命令)日常使用只需掌握以下四步，就能应付 99% 的场景： 1. 新建并进入会话 (Session)强烈建议给会话起个有意义的名字，方便后续区分不同的实验。 1tmux new -s dolos_exp 此时你已经进入了 tmux ...</div></div></div></a><a class="pagination-related" href="/2026/06/17/%E5%A4%A9%E6%B3%BD%E5%B1%A5/" title="天泽履"><img class="cover" src="https://picsum.photos/seed/tianzelu/800/400" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">天泽履</div></div><div class="info-2"><div class="info-item-1">上天下泽，履。君子以辨上下，定民志。</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/06/14/tmux%20%E7%BB%88%E7%AB%AF%E4%BD%BF%E7%94%A8/" title="tmux 终端使用"><img class="cover" src="https://picsum.photos/seed/tmuxlearn/800/400" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-06-14</div><div class="info-item-2">tmux 终端使用</div></div><div class="info-2"><div class="info-item-1">tmux 终端使用在 AutoDL 等云服务器上跑实验时，最崩溃的莫过于本地网络突然闪断，导致跑了一半的脚本直接被终止。tmux (Terminal Multiplexer) 就是为了解决这个问题而生的。它可以让你的任务在后台持续运行，随时随地重新连接查看进度。 核心概念：为什么需要 tmux？当你通过 SSH 或 Jupyter 终端连接到 AutoDL 时，你启动的进程是依附于当前终端会话的。终端一关，进程就死。tmux 可以在服务器端创建一个持久化的虚拟终端。即使你的电脑关机、断网，tmux 里的实验依然在服务器上稳稳地跑着。 安装 tmux在 AutoDL 服务器里运行： 123apt updateapt install -y tmuxtmux -V  看到类似： 1tmux 3.2a  就说明安装成功。 🚀 极简工作流 (只需记住这 4 条命令)日常使用只需掌握以下四步，就能应付 99% 的场景： 1. 新建并进入会话 (Session)强烈建议给会话起个有意义的名字，方便后续区分不同的实验。 1tmux new -s dolos_exp 此时你已经进入了 tmux ...</div></div></div></a><a class="pagination-related" href="/2025/11/12/Git%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5/" title="Git命令速查"><img class="cover" src="https://picsum.photos/seed/gitcmdrefer/800/400" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-12</div><div class="info-item-2">Git命令速查</div></div><div class="info-2"><div class="info-item-1">Git 命令速查适用平台：Windows &#x2F; macOS &#x2F; Linux。覆盖安装后常用到的配置 &#x2F; 新建与克隆 &#x2F; 提交与撤销 &#x2F; 分支与合并 &#x2F; Rebase &#x2F; 远端 &#x2F; 标签 &#x2F; 记录 &#x2F; 暂存 &#x2F; 子模块 &#x2F; 工作树 &#x2F; 稀疏检出 &#x2F; 清理 &#x2F; 排错等。  1. 基础配置（一次性&#x2F;全局）12345678910111213git --versiongit config --global user.name &quot;Your Name&quot;git config --global user.email &quot;you@example.com&quot;git config --global init.defaultBranch main           # 默认主分支名git config --global core.autocrlf input              # macOS/Linux ...</div></div></div></a><a class="pagination-related" href="/2025/11/14/Conda%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5/" title="Conda命令速查"><img class="cover" src="https://picsum.photos/seed/condacmdrefer/800/400" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-14</div><div class="info-item-2">Conda命令速查</div></div><div class="info-2"><div class="info-item-1">Conda 命令速查适用平台：Windows &#x2F; macOS &#x2F; Linux（PowerShell、bash、zsh 等）。  1. 基础与自检1234conda --version                 # 查看 conda 版本conda info                      # 运行环境与配置概览conda config --show             # 展示所有配置项conda config --show-sources     # 配置文件来源（.condarc 位置）  初始化 shell（只需一次）： 123456# 任选或多选：bash / zsh / fish / powershell / cmd.execonda init bashconda init zshconda init fishconda init powershellconda init cmd.exe  看到 “No action taken.” 说明已初始化；重开终端即可。  2. 环境（env）管理2.1 创建 &#x2F; 激活 &#x2...</div></div></div></a><a class="pagination-related" href="/2026/06/07/Linux%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5/" title="Linux命令速查"><img class="cover" src="https://picsum.photos/seed/linuxcmdrefer/800/400" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-06-07</div><div class="info-item-2">Linux命令速查</div></div><div class="info-2"><div class="info-item-1">Linux 命令速查适用平台：Linux (Ubuntu &#x2F; CentOS 等) &#x2F; macOS &#x2F; WSL。 1. 目录与文件操作123456pwd                             # 查看当前绝对路径ls -lah                         # 列表显示所有文件及详细信息（含隐藏文件、人类可读大小）mkdir -p /path/to/dir           # 递归创建多级目录rm -rf mydir/                   # 强制递归删除目录及内容（危险操作，需谨慎）cp -r src_dir dest_dir          # 递归复制整个目录mv oldname newname              # 重命名文件，或移动文件到新路径  2. 文件查看与文本搜索123456cat file.txt                    # 打印文件全部内容到终端less file.txt                   # 分页查看长文件（使用方向键上下滚动，按 ...</div></div></div></a><a class="pagination-related" href="/2026/05/31/tun%E6%A8%A1%E5%BC%8F/" title="tun模式"><img class="cover" src="https://picsum.photos/seed/tunmodel/800/400" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-05-31</div><div class="info-item-2">tun模式</div></div><div class="info-2"><div class="info-item-1">传统代理（System Proxy）的痛点Clash 的 TUN 模式是其最强大的进阶功能之一，主要用于实现真正的系统级全局流量接管。通常情况下，当你开启 Clash 的“系统代理”时，Clash 会在操作系统中设置一个 HTTP&#x2F;HTTPS 或 SOCKS5 的代理地址。  听话的软件： 绝大多数浏览器（如 Chrome, Edge）会自动读取操作系统的代理设置，乖乖把流量交给 Clash。 不听话的软件： 很多应用程序完全无视系统代理设置。例如终端命令行（Git, npm, SSH）、各种网络游戏、部分开发工具（IDE）以及 Windows 的 UWP 应用。它们的流量会直接绕过 Clash 发往真实网络，导致无法连接或暴露真实 IP。  TUN 模式是如何工作的？TUN 是 Network TUNnel（网络隧道）的缩写，它工作在 OSI 模型的网络层（Layer 3），也就是更为底层的系统级别。 当你开启 TUN 模式时，Clash 实际上执行了以下操作：  创建虚拟网卡： Clash 会在你的电脑上虚拟出一张网卡（类似于插了一根隐形的网线）。 修改路由表： 它...</div></div></div></a><a class="pagination-related" href="/2026/04/30/vscode%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/" title="vscode远程连接AutoDL"><img class="cover" src="https://picsum.photos/seed/vscoderemotecnn/800/400" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-04-30</div><div class="info-item-2">vscode远程连接AutoDL</div></div><div class="info-2"><div class="info-item-1">一、准备工作1、你本地需要装什么本地至少准备这几个：  VS Code VS Code 扩展：Remote - SSH 本地终端 Windows：PowerShell &#x2F; Windows Terminal macOS &#x2F; Linux：Terminal    VS Code 官方说明，Remote - SSH 扩展可以让你直接打开远端机器上的文件夹，并像本地开发一样使用 VS Code 的功能。 2、AutoDL 实例要处于开机状态AutoDL 控制台里把实例开机，然后复制它给你的 SSH 命令。AutoDL 官方文档里就是这种形式： 1ssh -p 38076 root@region-1.autodl.com  这里面分别对应：  用户名：root 主机地址：region-1.autodl.com 端口：38076   二、测试普通 SSH 能不能连上在本地终端先试一次，不要一上来就开 VS Code。 1ssh -p 38076 root@region-1.autodl.com  如果第一次连接，终端可能会提示是否信任主机，输入： 1yes  然后输入 Au...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&amp;spec=640&amp;img_type=jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Hyacinth</div><div class="author-info-description">君子慎独,不欺暗室</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/YY-CN"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">嘻嘻，我一定要活下去！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4"><span class="toc-number">1.</span> <span class="toc-text">命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8B-%E5%AE%9E%E6%88%98%E5%91%BD%E4%BB%A4%E6%A8%A1%E7%89%88"><span class="toc-number">1.0.1.</span> <span class="toc-text">📋 实战命令模版</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%94%8D-%E5%8F%82%E6%95%B0%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90"><span class="toc-number">1.0.2.</span> <span class="toc-text">🔍 参数深度解析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9A%A0%EF%B8%8F-%E9%81%BF%E5%9D%91%E6%8C%87%E5%8D%97%EF%BC%9A%E5%BF%85%E9%A1%BB%E6%B3%A8%E6%84%8F%E7%9A%84%E3%80%8C%E6%96%9C%E6%9D%A0-%E3%80%8D%E7%BB%86%E8%8A%82"><span class="toc-number">1.1.</span> <span class="toc-text">⚠️ 避坑指南：必须注意的「斜杠 &#x2F;」细节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9A%80-%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6%E6%8A%80%E5%B7%A7"><span class="toc-number">1.2.</span> <span class="toc-text">🚀 高级进阶技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%8E%92%E9%99%A4%E7%89%B9%E5%AE%9A%E7%9B%AE%E5%BD%95%EF%BC%88%E4%B8%8D%E5%85%A8%E9%87%8F%E5%90%8C%E6%AD%A5%EF%BC%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">1. 排除特定目录（不全量同步）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8F%8C%E5%90%91%E5%AE%8C%E5%85%A8%E5%AF%B9%E9%BD%90%EF%BC%88%E8%B0%A8%E6%85%8E%E4%BD%BF%E7%94%A8%EF%BC%89"><span class="toc-number">1.2.2.</span> <span class="toc-text">2. 双向完全对齐（谨慎使用）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%B8%80%E9%94%AE%E5%90%8C%E6%AD%A5%E8%84%9A%E6%9C%AC"><span class="toc-number">1.2.3.</span> <span class="toc-text">3. 一键同步脚本</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/07/03/%E9%9B%B7%E5%9C%B0%E8%B1%AB/" title="雷地豫"><img src="https://picsum.photos/seed/leidiyu/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="雷地豫"/></a><div class="content"><a class="title" href="/2026/07/03/%E9%9B%B7%E5%9C%B0%E8%B1%AB/" title="雷地豫">雷地豫</a><time datetime="2026-07-03T07:45:00.000Z" title="发表于 2026-07-03 15:45:00">2026-07-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/07/03/%E5%9C%B0%E5%B1%B1%E8%B0%A6/" title="地山谦"><img src="https://picsum.photos/seed/dishanqian/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="地山谦"/></a><div class="content"><a class="title" href="/2026/07/03/%E5%9C%B0%E5%B1%B1%E8%B0%A6/" title="地山谦">地山谦</a><time datetime="2026-07-03T07:41:55.000Z" title="发表于 2026-07-03 15:41:55">2026-07-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/07/03/%E7%81%AB%E5%A4%A9%E5%A4%A7%E6%9C%89/" title="火天大有"><img src="https://picsum.photos/seed/huotiandayou/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="火天大有"/></a><div class="content"><a class="title" href="/2026/07/03/%E7%81%AB%E5%A4%A9%E5%A4%A7%E6%9C%89/" title="火天大有">火天大有</a><time datetime="2026-07-03T07:39:42.000Z" title="发表于 2026-07-03 15:39:42">2026-07-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/07/03/%E5%A4%A9%E7%81%AB%E5%90%8C%E4%BA%BA/" title="天火同人"><img src="https://picsum.photos/seed/tianhuotongren/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="天火同人"/></a><div class="content"><a class="title" href="/2026/07/03/%E5%A4%A9%E7%81%AB%E5%90%8C%E4%BA%BA/" title="天火同人">天火同人</a><time datetime="2026-07-03T07:37:45.000Z" title="发表于 2026-07-03 15:37:45">2026-07-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/07/03/%E5%A4%A9%E5%9C%B0%E5%90%A6/" title="天地否"><img src="https://picsum.photos/seed/tiandipi/800/400" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="天地否"/></a><div class="content"><a class="title" href="/2026/07/03/%E5%A4%A9%E5%9C%B0%E5%90%A6/" title="天地否">天地否</a><time datetime="2026-07-03T07:34:40.000Z" title="发表于 2026-07-03 15:34:40">2026-07-03</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Hyacinth</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.2</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.2"></script><script src="/js/main.js?v=5.5.2"></script><div class="js-pjax"></div><script async data-pjax src="/"></script></div></body></html>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9D%82%E9%A1%B9/" rel="tag"># 杂项</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/06/14/tmux%20%E7%BB%88%E7%AB%AF%E4%BD%BF%E7%94%A8/" rel="prev" title="tmux 终端使用">
+      <i class="fa fa-chevron-left"></i> tmux 终端使用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/06/17/%E5%A4%A9%E6%B3%BD%E5%B1%A5/" rel="next" title="天泽履">
+      天泽履 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%8B-%E5%AE%9E%E6%88%98%E5%91%BD%E4%BB%A4%E6%A8%A1%E7%89%88"><span class="nav-number">1.0.1.</span> <span class="nav-text">📋 实战命令模版</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%94%8D-%E5%8F%82%E6%95%B0%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90"><span class="nav-number">1.0.2.</span> <span class="nav-text">🔍 参数深度解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9A%A0%EF%B8%8F-%E9%81%BF%E5%9D%91%E6%8C%87%E5%8D%97%EF%BC%9A%E5%BF%85%E9%A1%BB%E6%B3%A8%E6%84%8F%E7%9A%84%E3%80%8C%E6%96%9C%E6%9D%A0-%E3%80%8D%E7%BB%86%E8%8A%82"><span class="nav-number">1.1.</span> <span class="nav-text">⚠️ 避坑指南：必须注意的「斜杠 &#x2F;」细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%9A%80-%E9%AB%98%E7%BA%A7%E8%BF%9B%E9%98%B6%E6%8A%80%E5%B7%A7"><span class="nav-number">1.2.</span> <span class="nav-text">🚀 高级进阶技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%8E%92%E9%99%A4%E7%89%B9%E5%AE%9A%E7%9B%AE%E5%BD%95%EF%BC%88%E4%B8%8D%E5%85%A8%E9%87%8F%E5%90%8C%E6%AD%A5%EF%BC%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 排除特定目录（不全量同步）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%8F%8C%E5%90%91%E5%AE%8C%E5%85%A8%E5%AF%B9%E9%BD%90%EF%BC%88%E8%B0%A8%E6%85%8E%E4%BD%BF%E7%94%A8%EF%BC%89"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. 双向完全对齐（谨慎使用）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%B8%80%E9%94%AE%E5%90%8C%E6%AD%A5%E8%84%9A%E6%9C%AC"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. 一键同步脚本</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Hyacinth</p>
+  <div class="site-description" itemprop="description">君子慎独,不欺暗室</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hyacinth</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
