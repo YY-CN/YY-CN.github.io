@@ -1168,7 +1168,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff21ff;
+  background: #a3ff06;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2381,4 +2381,63 @@ hr {
 }
 .sub-menu .menu-item {
   display: inline-block;
+}
+body {
+  background-attachment: fixed;
+  background-color: #fff;
+  background-image: linear-gradient(rgba(255,255,255,0.82), rgba(255,255,255,0.82)), url("/images/backgrounds/三玖.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@media (max-width: 767px) {
+  body {
+    background-attachment: scroll;
+  }
+}
+.sidebar,
+.sidebar-toggle {
+  background: #f3efe7;
+  box-shadow: inset 0 2px 6px rgba(91,72,54,0.1);
+}
+.sidebar-inner,
+.sidebar a,
+.sidebar span.exturl {
+  color: #62574d;
+  border-bottom-color: #d9d0c5;
+}
+.sidebar a:hover,
+.sidebar span.exturl:hover {
+  color: #a06f48;
+  border-bottom-color: #a06f48;
+}
+.sidebar-nav li {
+  color: #8b7f73;
+}
+.sidebar-nav li:hover,
+.sidebar-nav .sidebar-nav-active {
+  color: #a06f48;
+}
+.sidebar-nav .sidebar-nav-active {
+  border-bottom-color: #a06f48;
+}
+.post-toc .nav .active > a {
+  border-bottom-color: #9a6545;
+  color: #9a6545;
+}
+.post-toc .nav .active-current > a,
+.post-toc .nav .active-current > a:hover {
+  color: #9a6545;
+}
+.site-author-name {
+  color: #403831;
+}
+.site-description {
+  color: #75695f;
+}
+.sidebar-toggle .toggle-line {
+  background: #62574d;
+}
+.sidebar-toggle:hover .toggle-line {
+  background: #a06f48;
 }
