@@ -42,6 +42,48 @@
     lang   : 'zh-CN'
   };
 </script>
+<script>
+  (function() {
+    var images = [
+      '/images/backgrounds/高木同学.jpg',
+      '/images/backgrounds/宫园薰.jpg',
+      '/images/backgrounds/黑沼爽子.png',
+      '/images/backgrounds/蕾姆.jpg',
+      '/images/backgrounds/三玖.jpg',
+      '/images/backgrounds/真昼.jpg'
+    ];
+    var image = images[Math.floor(Math.random() * images.length)];
+    var root = document.documentElement;
+    var preloader = new Image();
+    var revealed = false;
+
+    root.classList.add('background-loading');
+    root.style.setProperty('--page-background-image', 'url("' + image + '")');
+
+    function reveal() {
+      if (revealed) return;
+      revealed = true;
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          root.classList.remove('background-loading');
+          root.classList.add('background-ready');
+        });
+      });
+    }
+
+    function onLoad() {
+      if (typeof preloader.decode === 'function') {
+        preloader.decode().then(reveal, reveal);
+      } else {
+        reveal();
+      }
+    }
+
+    preloader.onload = onLoad;
+    preloader.onerror = reveal;
+    preloader.src = image;
+  })();
+</script>
 <link rel="stylesheet" href="https://fontsapi.zeoseven.com/285/main/result.css">
 
   <title>Hyacinth</title>
@@ -1502,33 +1544,6 @@
   
 
   
-<script>
-  (function() {
-    var storageKey = 'next-background-image';
-    var images = [
-      '/images/backgrounds/高木同学.jpg',
-      '/images/backgrounds/宫园薰.jpg',
-      '/images/backgrounds/黑沼爽子.png',
-      '/images/backgrounds/蕾姆.jpg',
-      '/images/backgrounds/三玖.jpg',
-      '/images/backgrounds/真昼.jpg'
-    ];
-    var image;
-
-    try {
-      image = sessionStorage.getItem(storageKey);
-      if (images.indexOf(image) === -1) {
-        image = images[Math.floor(Math.random() * images.length)];
-        sessionStorage.setItem(storageKey, image);
-      }
-    } catch (error) {
-      image = images[Math.floor(Math.random() * images.length)];
-    }
-
-    document.body.style.backgroundImage =
-      'linear-gradient(rgba(255, 255, 255, .82), rgba(255, 255, 255, .82)), url("' + image + '")';
-  })();
-</script>
 
 </body>
 </html>

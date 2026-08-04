@@ -1168,7 +1168,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #a3ff06;
+  background: #30bfcc;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2385,10 +2385,47 @@ hr {
 body {
   background-attachment: fixed;
   background-color: #fff;
-  background-image: linear-gradient(rgba(255,255,255,0.82), rgba(255,255,255,0.82)), url("/images/backgrounds/三玖.jpg");
+  background-image: linear-gradient(rgba(255,255,255,0.82), rgba(255,255,255,0.82)), var(--page-background-image, url("/images/backgrounds/三玖.jpg"));
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+html::before,
+html::after {
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  visibility: hidden;
+  z-index: 9999;
+}
+html::before {
+  background: rgba(255,255,255,0.94);
+  content: '';
+  inset: 0;
+  transition: opacity 0.35s ease, visibility 0s linear 0.35s;
+}
+html::after {
+  border: 3px solid #d9d0c5;
+  border-radius: 50%;
+  border-top-color: #9a6545;
+  content: '';
+  height: 28px;
+  left: 50%;
+  margin: -14px 0 0 -14px;
+  top: 50%;
+  transition: opacity 0.2s ease, visibility 0s linear 0.2s;
+  width: 28px;
+}
+html.background-loading {
+  overflow: hidden;
+}
+html.background-loading::before,
+html.background-loading::after {
+  opacity: 1;
+  visibility: visible;
+}
+html.background-loading::after {
+  animation: background-loader 0.7s linear infinite;
 }
 @media (max-width: 767px) {
   body {
@@ -2440,4 +2477,24 @@ body {
 }
 .sidebar-toggle:hover .toggle-line {
   background: #a06f48;
+}
+@-moz-keyframes background-loader {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes background-loader {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes background-loader {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes background-loader {
+  to {
+    transform: rotate(360deg);
+  }
 }
