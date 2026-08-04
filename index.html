@@ -732,10 +732,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-06-14 20:40:58 / 修改时间：21:16:48" itemprop="dateCreated datePublished" datetime="2026-06-14T20:40:58+08:00">2026-06-14</time>
+              <time title="创建时间：2026-06-14 20:40:58" itemprop="dateCreated datePublished" datetime="2026-06-14T20:40:58+08:00">2026-06-14</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-05 04:02:45" itemprop="dateModified" datetime="2026-08-05T04:02:45+08:00">2026-08-05</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -757,71 +763,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><p>从B实例的数据拷贝到A实例，即B的实例数据是对的</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -avzP -e <span class="string">&quot;ssh -p B实例端口&quot;</span> root@B实例域名:B实例数据绝对路径/ A实例数据绝对路径/</span><br></pre></td></tr></table></figure>
-
-<h3 id="📋-实战命令模版"><a href="#📋-实战命令模版" class="headerlink" title="📋 实战命令模版"></a>📋 实战命令模版</h3><p>假设你的项目和数据存放在 <code>/root/autodl-tmp/my_project/</code>：</p>
-<p>Bash</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rsync -avzP -e <span class="string">&quot;ssh -p 32145&quot;</span> root@region-1.autodl.com:/root/autodl-tmp/my_project/ /root/autodl-tmp/my_project/</span><br><span class="line"><span class="comment"># 如果直接拷贝autodl-tmp就目录选择到这里就行</span></span><br><span class="line"><span class="comment">#示例：若B实例的登录指令复制为：ssh -p 15407 root@connect.westb.seetacloud.com，则填为下面这样</span></span><br><span class="line">rsync -avzP -e <span class="string">&quot;ssh -p 15407&quot;</span> root@connect.westb.seetacloud.com:/root/autodl-tmp/ /root/autodl-tmp/</span><br></pre></td></tr></table></figure>
-
-<h3 id="🔍-参数深度解析"><a href="#🔍-参数深度解析" class="headerlink" title="🔍 参数深度解析"></a>🔍 参数深度解析</h3><table>
-<thead>
-<tr>
-<th><strong>参数</strong></th>
-<th><strong>作用说明</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>-a</code> (archive)</td>
-<td>归档模式。保持文件的所有属性（权限、时间戳、软链接等）不改变。</td>
-</tr>
-<tr>
-<td><code>-v</code> (verbose)</td>
-<td>详细模式。在终端打印当前正在传输的文件列表和进度。</td>
-</tr>
-<tr>
-<td><code>-z</code> (compress)</td>
-<td>传输时压缩。在网络传输过程中对数据进行压缩，节省带宽，提高传输速度。</td>
-</tr>
-<tr>
-<td><code>-P</code> (progress)</td>
-<td>显示实时传输进度条，并支持<strong>断点续传</strong>（对大文件非常重要）。</td>
-</tr>
-<tr>
-<td><code>-e &quot;ssh -p ...&quot;</code></td>
-<td>指定远程连接使用的协议和非标准端口（AutoDL 必须指定端口）。</td>
-</tr>
-</tbody></table>
-<h2 id="⚠️-避坑指南：必须注意的「斜杠-」细节"><a href="#⚠️-避坑指南：必须注意的「斜杠-」细节" class="headerlink" title="⚠️ 避坑指南：必须注意的「斜杠 &#x2F;」细节"></a>⚠️ 避坑指南：必须注意的「斜杠 &#x2F;」细节</h2><p><code>rsync</code> 对路径末尾的斜杠 <code>/</code> <strong>极其敏感</strong>，不同的写法会导致完全不同的结果：</p>
-<ol>
-<li><strong>正确写法（推荐）</strong>：源路径和目标路径末尾<strong>都带斜杠</strong><ul>
-<li>示例：<code>...:/root/project/ /root/project/</code></li>
-<li>效果：将 B 实例 <code>project</code> 目录<strong>内部的内容</strong>，同步到 A 实例的 <code>project</code> 目录内部。</li>
-</ul>
-</li>
-<li><strong>错误写法</strong>：源路径末尾<strong>不带斜杠</strong><ul>
-<li>示例：<code>...:/root/project /root/project/</code></li>
-<li>效果：会在 A 实例的 <code>project</code> 目录下再创建一个 <code>project</code> 目录，变成了 <code>/root/project/project/</code>。</li>
-</ul>
-</li>
-</ol>
-<h2 id="🚀-高级进阶技巧"><a href="#🚀-高级进阶技巧" class="headerlink" title="🚀 高级进阶技巧"></a>🚀 高级进阶技巧</h2><h3 id="1-排除特定目录（不全量同步）"><a href="#1-排除特定目录（不全量同步）" class="headerlink" title="1. 排除特定目录（不全量同步）"></a>1. 排除特定目录（不全量同步）</h3><p>如果你不想同步 <code>weights/</code>（权重文件）或 <code>dataset/</code>（原始数据集，因为已经有了），只想同步代码和日志，可以使用 <code>--exclude</code> 参数：</p>
-<p>Bash</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -avzP --exclude=<span class="string">&quot;dataset/&quot;</span> --exclude=<span class="string">&quot;*.mp4&quot;</span> -e <span class="string">&quot;ssh -p 32145&quot;</span> root@region-1.autodl.com:/root/autodl-tmp/my_project/ /root/autodl-tmp/my_project/</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-双向完全对齐（谨慎使用）"><a href="#2-双向完全对齐（谨慎使用）" class="headerlink" title="2. 双向完全对齐（谨慎使用）"></a>2. 双向完全对齐（谨慎使用）</h3><p>如果 B 实例中删除了某些没用的临时文件，你希望 A 实例也跟着删除，保持完全一致，可以加上 <code>--delete</code> 参数。</p>
-<ul>
-<li><em>警告：这会删除 A 实例中存在但 B 实例中没有的文件，执行前请务必确认！</em></li>
-</ul>
-<p>Bash</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -avzP --delete -e <span class="string">&quot;ssh -p 32145&quot;</span> root@region-1.autodl.com:/root/autodl-tmp/my_project/ /root/autodl-tmp/my_project/</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-一键同步脚本"><a href="#3-一键同步脚本" class="headerlink" title="3. 一键同步脚本"></a>3. 一键同步脚本</h3><p>为了避免每次手动输入长命令，你可以在 A 实例的根目录下创建一个脚本 <code>sync_from_b.sh</code>：</p>
-<p>Bash</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 自动生成的 AutoDL 增量同步脚本</span></span><br><span class="line"></span><br><span class="line">B_PORT=<span class="string">&quot;32145&quot;</span></span><br><span class="line">B_HOST=<span class="string">&quot;region-1.autodl.com&quot;</span></span><br><span class="line">SRC_DIR=<span class="string">&quot;/root/autodl-tmp/my_project/&quot;</span></span><br><span class="line">DST_DIR=<span class="string">&quot;/root/autodl-tmp/my_project/&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;开始从实例 B (<span class="variable">$&#123;B_HOST&#125;</span>:<span class="variable">$&#123;B_PORT&#125;</span>) 增量同步数据...&quot;</span></span><br><span class="line">rsync -avzP -e <span class="string">&quot;ssh -p <span class="variable">$&#123;B_PORT&#125;</span>&quot;</span> root@<span class="variable">$&#123;B_HOST&#125;</span>:<span class="variable">$&#123;SRC_DIR&#125;</span> <span class="variable">$&#123;DST_DIR&#125;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;同步完成！&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>给脚本赋予执行权限：<code>chmod +x sync_from_b.sh</code>。下次直接运行 <code>./sync_from_b.sh</code> 即可。</p>
-
+          <p>整理使用 rsync 在不同 AutoDL 实例之间同步同一项目数据的命令、参数与避坑技巧。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/06/14/AutoDL%E4%B9%8B%E9%97%B4%E5%90%8C%E9%A1%B9%E7%9B%AE%E6%95%B0%E6%8D%AE%E4%BA%92%E9%80%9A%E5%91%BD%E4%BB%A4/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -871,7 +821,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-08-04 19:30:49" itemprop="dateModified" datetime="2026-08-04T19:30:49+08:00">2026-08-04</time>
+                <time title="修改时间：2026-08-05 04:02:45" itemprop="dateModified" datetime="2026-08-05T04:02:45+08:00">2026-08-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -894,106 +844,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="tmux-终端使用"><a href="#tmux-终端使用" class="headerlink" title="tmux 终端使用"></a>tmux 终端使用</h1><p>在 云服务器上跑实验时，最崩溃的莫过于本地网络突然闪断，导致跑了一半的脚本直接被终止。<code>tmux</code> (Terminal Multiplexer) 就是为了解决这个问题而生的。它可以让你的任务在后台持续运行，随时随地重新连接查看进度。</p>
-<h2 id="核心概念：为什么需要-tmux？"><a href="#核心概念：为什么需要-tmux？" class="headerlink" title="核心概念：为什么需要 tmux？"></a>核心概念：为什么需要 tmux？</h2><p>当你通过 SSH 或 Jupyter 终端连接到服务器时，你启动的进程是依附于当前终端会话的。终端一关，进程就死。<br><code>tmux</code> 可以在服务器端创建一个<strong>持久化的虚拟终端</strong>。即使你的电脑关机、断网，<code>tmux</code> 里的实验依然在服务器上稳稳地跑着。</p>
-<h2 id="安装-tmux"><a href="#安装-tmux" class="headerlink" title="安装 tmux"></a>安装 tmux</h2><p>在Ubuntu服务器里运行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">apt install -y tmux</span><br><span class="line">tmux -V</span><br></pre></td></tr></table></figure>
-
-<p>看到类似：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux 3.2a</span><br></pre></td></tr></table></figure>
-
-<p>就说明安装成功。</p>
-<h2 id="🚀极简工作流"><a href="#🚀极简工作流" class="headerlink" title="🚀极简工作流"></a>🚀极简工作流</h2><p>日常使用只需掌握以下四步，就能应付 99% 的场景：</p>
-<h3 id="1-新建并进入会话-Session"><a href="#1-新建并进入会话-Session" class="headerlink" title="1. 新建并进入会话 (Session)"></a>1. 新建并进入会话 (Session)</h3><p>强烈建议给会话起个有意义的名字，方便后续区分不同的会话。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux new -s dolos_exp</span><br></pre></td></tr></table></figure>
-<p><em>此时你已经进入了 tmux 的虚拟终端，可以像平时一样激活环境、运行相关指令。</em></p>
-<p>解释：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">new = 新建会话</span><br><span class="line">-s dolos_exp = 会话名字叫 dolos_exp</span><br></pre></td></tr></table></figure>
-
-<p>进入 tmux 后，就像普通终端一样运行命令：</p>
-<h3 id="2-离开会话-Detach-让程序在后台跑"><a href="#2-离开会话-Detach-让程序在后台跑" class="headerlink" title="2. 离开会话 (Detach) - 让程序在后台跑"></a>2. 离开会话 (Detach) - 让程序在后台跑</h3><p>当你的代码开始运行后，你想关掉电脑去干别的，只需按下快捷键：<br>先按 <strong><code>Ctrl + b</code></strong> (松开)，然后按 <strong><code>d</code></strong> (detach)。<br><em>此时你会退回到原来的真实终端，提示 <code>[detached]</code>，但 tmux 里的任务仍在后台满载运行。</em></p>
-<p>在 tmux 里面按：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Ctrl + B</span><br></pre></td></tr></table></figure>
-
-<p>松开，然后按：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D</span><br></pre></td></tr></table></figure>
-
-<p>这叫 detach，意思是“退出会话但不关闭程序”。你会回到普通终端，实验仍然在后台继续跑。</p>
-<h3 id="3-查看后台有哪些会话"><a href="#3-查看后台有哪些会话" class="headerlink" title="3. 查看后台有哪些会话"></a>3. 查看后台有哪些会话</h3><p>当你重新连上服务器时，想看看有哪些任务在跑：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux <span class="built_in">ls</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="4-重新连回会话-Attach"><a href="#4-重新连回会话-Attach" class="headerlink" title="4. 重新连回会话 (Attach)"></a>4. 重新连回会话 (Attach)</h3><p>找到你想看的会话名字（例如 <code>dolos_exp</code>），将其恢复到前台：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux attach -t dolos_exp</span><br></pre></td></tr></table></figure>
-
-<p>简写</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux a -t dolos_exp</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="⌨️-进阶快捷键：多窗口与滚动查看日志"><a href="#⌨️-进阶快捷键：多窗口与滚动查看日志" class="headerlink" title="⌨️ 进阶快捷键：多窗口与滚动查看日志"></a>⌨️ 进阶快捷键：多窗口与滚动查看日志</h2><p>在 <code>tmux</code> 中，所有的快捷键操作都需要先按一个**前缀键 (Prefix)**，默认是 **<code>Ctrl + b</code>**。</p>
-<h3 id="1-查看历史输出（极其重要！）"><a href="#1-查看历史输出（极其重要！）" class="headerlink" title="1. 查看历史输出（极其重要！）"></a>1. 查看历史输出（极其重要！）</h3><p>在 <code>tmux</code> 里，默认情况下你无法直接用鼠标滚轮向上翻看历史运行日志。</p>
-<ol>
-<li><strong>进入滚动模式</strong>：按 <code>Ctrl + b</code>，松开后按 <code>[</code></li>
-<li>现在你可以用<strong>键盘的上下方向键</strong>，或者 <code>Page Up / Page Down</code> 来自由翻看历史输出了。</li>
-<li><strong>退出滚动模式</strong>：按 <code>q</code> 或 <code>Esc</code>。</li>
-</ol>
-<h3 id="2-屏幕分屏-Panes"><a href="#2-屏幕分屏-Panes" class="headerlink" title="2. 屏幕分屏 (Panes)"></a>2. 屏幕分屏 (Panes)</h3><p>想在一块屏幕上边看 GPU 占用率（<code>watch -n 1 nvidia-smi</code>），边看代码日志输出？</p>
-<ul>
-<li><strong>左右分屏</strong>：<code>Ctrl + b</code>，松开后按 <code>%</code></li>
-<li><strong>上下分屏</strong>：<code>Ctrl + b</code>，松开后按 <code>&quot;</code></li>
-<li><strong>在分屏间切换光标</strong>：<code>Ctrl + b</code>，松开后按方向键 <code>↑ ↓ ← →</code></li>
-<li><strong>关闭当前光标所在的分屏</strong>：直接输入 <code>exit</code> 或按 <code>Ctrl + d</code></li>
-</ul>
-<h2 id="🗑️-清理与退出"><a href="#🗑️-清理与退出" class="headerlink" title="🗑️ 清理与退出"></a>🗑️ 清理与退出</h2><p>在 tmux 里，想停止当前实验：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Ctrl + C</span><br></pre></td></tr></table></figure>
-
-<p>如果想关闭整个 tmux 会话：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
-
-<p>如果你在真实的终端里，想直接杀掉名为 <code>dolos_exp</code> 的后台会话：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux kill-session -t dolos_exp</span><br></pre></td></tr></table></figure>
-
-<p><em>实战小贴士：AutoDL 官方镜像默认已预装 tmux。无论是通过本地 SSH 工具（如 Xshell、Termius）还是网页版的 JupyterLab Terminal，都可以直接零配置无缝使用。</em></p>
-<p>杀掉所有 tmux 会话：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux kill-server</span><br></pre></td></tr></table></figure>
-
-<p>慎用，会把所有 tmux 里的任务都停掉。</p>
-<h2 id="开启“全能鼠标模式”-支持滚轮翻页"><a href="#开启“全能鼠标模式”-支持滚轮翻页" class="headerlink" title="开启“全能鼠标模式” (支持滚轮翻页)"></a>开启“全能鼠标模式” (支持滚轮翻页)</h2><p>开启鼠标模式后，你可以直接用<strong>鼠标滚轮上下滚动</strong>查看历史输出，也可以<strong>直接鼠标点击</strong>切换分屏、拖拽调整分屏大小。</p>
-<h3 id="临时开启（当前会话生效）"><a href="#临时开启（当前会话生效）" class="headerlink" title="临时开启（当前会话生效）"></a>临时开启（当前会话生效）</h3><ol>
-<li>在 <code>tmux</code> 会话中，按下前缀键 **<code>Ctrl + b</code>**，松开。</li>
-<li>按下 <strong><code>:</code></strong> （进入命令行模式，底部会变黄或出现提示符）。</li>
-<li>输入 <code>set -g mouse on</code>，然后回车。<br><em>现在你就可以直接滚动鼠标滚轮来翻看上方的日志了（滚动时会自动进入查看模式，按 <code>q</code> 退出回到最新输出）。</em></li>
-</ol>
-<h3 id="永久开启（推荐，一劳永逸）"><a href="#永久开启（推荐，一劳永逸）" class="headerlink" title="永久开启（推荐，一劳永逸）"></a><strong>永久开启（推荐，一劳永逸）</strong></h3><p>为了让你以后每次进 tmux 都不用重新敲命令，把它写进配置文件里：</p>
-<p>先创建配置文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> &gt; ~/.tmux.conf &lt;&lt;<span class="string">&#x27;EOF&#x27;</span></span><br><span class="line"><span class="comment"># 开启鼠标支持：鼠标滚轮、点击切换 pane、拖动选择</span></span><br><span class="line"><span class="built_in">set</span> -g mouse on</span><br><span class="line"></span><br><span class="line"><span class="comment"># 增大历史滚动行数</span></span><br><span class="line"><span class="built_in">set</span> -g history-limit 100000</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 vi 风格复制模式</span></span><br><span class="line">setw -g mode-keys vi</span><br><span class="line"></span><br><span class="line"><span class="comment"># 让状态栏更清楚</span></span><br><span class="line"><span class="built_in">set</span> -g status on</span><br><span class="line"><span class="built_in">set</span> -g status-left <span class="string">&quot;[#S] &quot;</span></span><br><span class="line"><span class="built_in">set</span> -g status-right <span class="string">&quot;%Y-%m-%d %H:%M&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解决部分终端颜色问题</span></span><br><span class="line"><span class="built_in">set</span> -g default-terminal <span class="string">&quot;screen-256color&quot;</span></span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
-
-<p>让配置生效：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux source-file ~/.tmux.conf</span><br></pre></td></tr></table></figure>
-
-<p>如果运行失败上面的tmux source-file ~&#x2F;.tmux.conf代码，出现下面报错，<br>error connecting to &#x2F;tmp&#x2F;tmux-0&#x2F;default (No such file or directory)</p>
-<p>的原因非常简单：</p>
-<p><strong>因为你当前根本没有在 tmux 会话（Session）里面。</strong></p>
-<p><code>tmux source-file</code> 命令的作用是让<strong>当前正在运行的 tmux 实例</strong>重新加载配置文件。如果你直接在普通的终端（比如 AutoDL 的标准 JupyterLab 终端或普通 SSH 窗口）里运行它，它找不到正在运行的 tmux 服务，就会报这个错。</p>
-<p>不过别担心，你的配置文件其实已经成功写入了！</p>
-<p>如果还没进入 tmux，也没关系，下一次打开 tmux 会自动生效。</p>
-<h2 id="📋复制与粘贴的终极奥义"><a href="#📋复制与粘贴的终极奥义" class="headerlink" title="📋复制与粘贴的终极奥义"></a>📋复制与粘贴的终极奥义</h2><p>在 <code>tmux</code> 中复制粘贴有两个完全不同的场景，最核心的秘诀在于 <strong><code>Shift</code> 键</strong>。</p>
-<h3 id="场景一：把服务器里的代码-报错，复制到你自己的电脑上（最常用）"><a href="#场景一：把服务器里的代码-报错，复制到你自己的电脑上（最常用）" class="headerlink" title="场景一：把服务器里的代码&#x2F;报错，复制到你自己的电脑上（最常用）"></a>场景一：把服务器里的代码&#x2F;报错，复制到你自己的电脑上（最常用）</h3><p><strong>痛点</strong>：开启了 <code>mouse on</code> 之后，你会发现直接用鼠标选中文本，一旦松手选择就消失了，根本没法 <code>Ctrl+C</code> 复制到本地。<br><strong>解决方案</strong>：<strong>按住 <code>Shift</code> 键！</strong></p>
-<ol>
-<li><strong>复制</strong>：按住键盘上的 <strong><code>Shift</code></strong> 键不放，然后用鼠标去选中文本。此时系统会绕过 tmux 的拦截，调用你本地终端的原始选中功能。选中后，直接使用本地的复制快捷键（Win: <code>Ctrl+Insert</code> 或 右键复制，Mac: <code>Cmd+C</code>）。</li>
-<li><strong>粘贴</strong>：想把本地代码粘贴到 tmux 里，同样按住 <strong><code>Shift</code></strong> 键，然后点击鼠标右键进行粘贴（或者 <code>Shift+Insert</code> &#x2F; <code>Cmd+V</code>）。</li>
-</ol>
-<h3 id="场景二：在-tmux-的不同分屏内部互相复制粘贴-纯键盘流"><a href="#场景二：在-tmux-的不同分屏内部互相复制粘贴-纯键盘流" class="headerlink" title="场景二：在 tmux 的不同分屏内部互相复制粘贴 (纯键盘流)"></a>场景二：在 tmux 的不同分屏内部互相复制粘贴 (纯键盘流)</h3><p>如果你只是想把左边分屏的一段路径，复制到右边分屏，不需要经过本地电脑的剪贴板，可以使用 tmux 内置的复制模式：</p>
-<ol>
-<li><strong>进入复制模式</strong>：按 <code>Ctrl + b</code>，松开后按 <code>[</code> （右上角会出现行号指示器）。</li>
-<li><strong>移动光标</strong>：用方向键移动到你要复制的开头位置。</li>
-<li><strong>开始选择</strong>：按下 **空格键 (Space)**，然后用方向键移动光标，选中你需要的文本（文本会高亮）。</li>
-<li><strong>确认复制</strong>：按下 **回车键 (Enter)**。高亮消失，文本已经保存在 tmux 的内部剪贴板了，同时自动退出了复制模式。</li>
-<li><strong>粘贴</strong>：切换到你想粘贴的地方，按 <code>Ctrl + b</code>，松开后按 **<code>]</code>**，内容就粘贴出来了。</li>
-</ol>
-<hr>
-<p><em>总结：开启 <code>set -g mouse on</code> 获得滚轮自由，配合 <code>Shift</code> 键实现本地与服务器的无缝复制粘贴，这两个技巧能解决 tmux 90% 的使用痛点。</em></p>
-
+          <p>整理 tmux 终端会话、分屏、滚动、鼠标及复制粘贴的常用命令与技巧。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/06/14/tmux%20%E7%BB%88%E7%AB%AF%E4%BD%BF%E7%94%A8/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1255,6 +1114,8 @@
 
 
 
+
+  
 
   
 
