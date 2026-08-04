@@ -58,35 +58,7 @@
       '/images/backgrounds/真昼.jpg'
     ];
     var image = images[Math.floor(Math.random() * images.length)];
-    var root = document.documentElement;
-    var preloader = new Image();
-    var revealed = false;
-
-    root.classList.add('background-loading');
-    root.style.setProperty('--page-background-image', 'url("' + image + '")');
-
-    function reveal() {
-      if (revealed) return;
-      revealed = true;
-      requestAnimationFrame(function() {
-        requestAnimationFrame(function() {
-          root.classList.remove('background-loading');
-          root.classList.add('background-ready');
-        });
-      });
-    }
-
-    function onLoad() {
-      if (typeof preloader.decode === 'function') {
-        preloader.decode().then(reveal, reveal);
-      } else {
-        reveal();
-      }
-    }
-
-    preloader.onload = onLoad;
-    preloader.onerror = reveal;
-    preloader.src = image;
+    document.documentElement.style.setProperty('--page-background-image', 'url("' + image + '")');
   })();
 </script>
 <link rel="stylesheet" href="https://fontsapi.zeoseven.com/285/main/result.css">
@@ -497,6 +469,42 @@
   
 
   
+<div id="loading-box">
+  <div class="loading-left-bg"></div>
+  <div class="loading-right-bg"></div>
+  <div class="spinner-box">
+    <div class="configure-border-1"><div class="configure-core"></div></div>
+    <div class="configure-border-2"><div class="configure-core"></div></div>
+    <div class="loading-word">加载中...</div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    var loadingBox = document.getElementById('loading-box');
+
+    function endLoading() {
+      if (loadingBox.classList.contains('loaded')) return;
+      document.body.style.overflow = '';
+      loadingBox.classList.add('loaded');
+    }
+
+    function initLoading() {
+      document.body.style.overflow = 'hidden';
+      loadingBox.classList.remove('loaded');
+    }
+
+    initLoading();
+
+    if (document.readyState === 'complete') {
+      endLoading();
+    } else {
+      window.addEventListener('load', endLoading);
+      document.addEventListener('DOMContentLoaded', endLoading);
+      setTimeout(endLoading, 7000);
+    }
+  })();
+</script>
 
 </body>
 </html>
