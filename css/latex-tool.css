@@ -1,0 +1,500 @@
+.latex-tool-page {
+  --lt-ink: #463a31;
+  --lt-muted: #7c6f64;
+  --lt-brown: #9a6545;
+  --lt-brown-deep: #74462e;
+  --lt-peach: #f1d9c7;
+  --lt-paper: rgba(252, 250, 246, .74);
+  --lt-line: rgba(126, 91, 65, .18);
+  --lt-shadow: 0 18px 45px rgba(91, 72, 54, .10);
+  color: var(--lt-ink);
+  margin: 8px auto 40px;
+  max-width: 1080px;
+}
+
+.latex-tool-page * {
+  box-sizing: border-box;
+}
+
+.latex-tool-hero {
+  margin: 0 auto 26px;
+  max-width: 730px;
+  padding: 32px 20px 18px;
+  text-align: center;
+}
+
+.latex-tool-kicker,
+.latex-section-kicker {
+  color: var(--lt-brown);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .15em;
+  margin: 0 0 12px;
+}
+
+.latex-tool-kicker i {
+  margin-right: 6px;
+}
+
+.latex-tool-hero h1 {
+  color: var(--lt-ink);
+  font-family: Georgia, "Noto Serif SC", serif;
+  font-size: clamp(30px, 5vw, 42px);
+  letter-spacing: .04em;
+  line-height: 1.2;
+  margin: 0 0 12px;
+}
+
+.latex-tool-hero > p {
+  color: var(--lt-muted);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 15px;
+  line-height: 1.85;
+  margin: 0;
+}
+
+.latex-workbench {
+  align-items: stretch;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: minmax(0, .98fr) 34px minmax(0, 1.02fr);
+}
+
+.latex-panel,
+.latex-quick-section,
+.latex-tool-guide {
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  background: var(--lt-paper);
+  border: 1px solid var(--lt-line);
+  box-shadow: var(--lt-shadow);
+}
+
+.latex-panel {
+  border-radius: 18px;
+  min-width: 0;
+  padding: 24px;
+}
+
+.latex-editor-panel,
+.latex-preview-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.latex-panel-heading {
+  align-items: flex-start;
+  display: flex;
+  gap: 11px;
+  margin-bottom: 18px;
+}
+
+.latex-panel-heading > div {
+  flex: 1;
+}
+
+.latex-step {
+  align-items: center;
+  background: var(--lt-brown);
+  border-radius: 50%;
+  color: #fffaf4;
+  display: inline-flex;
+  flex: 0 0 29px;
+  font-family: Georgia, serif;
+  font-size: 13px;
+  height: 29px;
+  justify-content: center;
+  margin-top: 2px;
+  width: 29px;
+}
+
+.latex-panel-heading h2,
+.latex-quick-section h2,
+.latex-guide-item h3 {
+  color: var(--lt-ink);
+  font-family: Georgia, "Noto Serif SC", serif;
+  margin: 0;
+}
+
+.latex-panel-heading h2 {
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+.latex-panel-heading p,
+.latex-quick-section > div > p,
+.latex-guide-item p {
+  color: var(--lt-muted);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 12px;
+  line-height: 1.65;
+  margin: 4px 0 0;
+}
+
+.latex-status {
+  align-items: center;
+  background: rgba(117, 137, 108, .12);
+  border-radius: 20px;
+  color: #687a5d;
+  display: inline-flex;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  gap: 5px;
+  margin-left: auto;
+  padding: 5px 8px;
+  white-space: nowrap;
+}
+
+.latex-status i {
+  color: #82966f;
+  font-size: 7px;
+}
+
+.latex-status.is-editing {
+  background: rgba(154, 101, 69, .12);
+  color: #8c5d41;
+}
+
+.latex-status.is-editing i {
+  color: #a06f48;
+}
+
+.latex-mode-switch {
+  align-self: flex-start;
+  background: rgba(130, 105, 87, .09);
+  border-radius: 8px;
+  display: inline-flex;
+  margin-bottom: 14px;
+  padding: 3px;
+}
+
+.latex-mode-switch button {
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  color: #87766a;
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 11px;
+  padding: 7px 9px;
+  transition: background .2s ease, color .2s ease;
+}
+
+.latex-mode-switch button.is-active {
+  background: rgba(255, 253, 249, .86);
+  box-shadow: 0 2px 5px rgba(91, 72, 54, .09);
+  color: var(--lt-brown-deep);
+}
+
+.latex-code-label {
+  color: #76675c;
+  display: block;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  margin-bottom: 7px;
+}
+
+#latex-output {
+  background: rgba(255, 255, 255, .56);
+  border: 1px solid rgba(126, 91, 65, .20);
+  border-radius: 9px;
+  color: #4d443e;
+  display: block;
+  flex: 1;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  min-height: 238px;
+  outline: none;
+  padding: 12px;
+  resize: vertical;
+  transition: border-color .2s ease, box-shadow .2s ease;
+  width: 100%;
+}
+
+#latex-output:focus {
+  border-color: rgba(154, 101, 69, .62);
+  box-shadow: 0 0 0 3px rgba(154, 101, 69, .10);
+}
+
+#latex-output::placeholder {
+  color: #ad9d91;
+}
+
+.latex-editor-footer {
+  align-items: center;
+  display: flex;
+  gap: 14px;
+  justify-content: space-between;
+  margin-top: 11px;
+}
+
+.latex-editor-state,
+.latex-preview-hint {
+  color: #948277;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.latex-editor-state i,
+.latex-preview-hint i {
+  color: #9a6545;
+  margin-right: 3px;
+}
+
+.latex-result-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.latex-secondary-button,
+.latex-text-button {
+  background: transparent;
+  border: 0;
+  color: var(--lt-brown);
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 11px;
+  padding: 6px 2px;
+}
+
+.latex-secondary-button {
+  border-bottom: 1px solid rgba(154, 101, 69, .5);
+}
+
+.latex-secondary-button:hover,
+.latex-text-button:hover {
+  color: var(--lt-brown-deep);
+}
+
+.latex-connector {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.latex-connector span {
+  align-items: center;
+  background: rgba(154, 101, 69, .12);
+  border-radius: 50%;
+  color: var(--lt-brown);
+  display: flex;
+  font-size: 13px;
+  height: 28px;
+  justify-content: center;
+  width: 28px;
+}
+
+.latex-render-box {
+  background: rgba(255, 255, 255, .46);
+  border: 1px solid rgba(126, 91, 65, .14);
+  border-radius: 11px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.latex-render-heading {
+  align-items: center;
+  border-bottom: 1px solid rgba(126, 91, 65, .11);
+  color: #786a60;
+  display: flex;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  justify-content: space-between;
+  letter-spacing: .04em;
+  padding: 8px 11px;
+}
+
+.latex-render-heading span:last-child {
+  color: var(--lt-brown);
+}
+
+.latex-render-content {
+  align-items: center;
+  color: var(--lt-ink);
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  min-height: 238px;
+  overflow-x: auto;
+  padding: 26px 20px;
+}
+
+.latex-render-content .MathJax,
+.latex-render-content mjx-container {
+  font-size: 126% !important;
+}
+
+.latex-render-content.is-empty {
+  color: #a59487;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 12px;
+}
+
+.latex-preview-hint {
+  margin: 11px 1px 0;
+}
+
+.latex-quick-section {
+  align-items: center;
+  border-radius: 16px;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: minmax(170px, .7fr) minmax(0, 1.3fr);
+  margin-top: 18px;
+  padding: 22px 25px;
+}
+
+.latex-quick-section h2 {
+  font-size: 20px;
+}
+
+.latex-section-kicker {
+  font-size: 10px;
+  margin-bottom: 6px;
+}
+
+.latex-template-list {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.latex-template-list button {
+  align-items: center;
+  background: rgba(255, 255, 255, .46);
+  border: 1px solid rgba(126, 91, 65, .14);
+  border-radius: 9px;
+  color: #6c5d52;
+  cursor: pointer;
+  display: flex;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 11px;
+  gap: 8px;
+  min-height: 45px;
+  padding: 7px 9px;
+  text-align: left;
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.latex-template-list button:hover {
+  background: rgba(241, 217, 199, .44);
+  border-color: rgba(154, 101, 69, .34);
+  transform: translateY(-1px);
+}
+
+.latex-template-list span {
+  background: rgba(154, 101, 69, .10);
+  border-radius: 5px;
+  color: var(--lt-brown);
+  font-family: Georgia, serif;
+  font-size: 12px;
+  min-width: 55px;
+  padding: 4px 5px;
+  text-align: center;
+}
+
+.latex-tool-guide {
+  border-radius: 14px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 18px;
+  padding: 0 20px;
+}
+
+.latex-guide-item {
+  align-items: flex-start;
+  display: flex;
+  gap: 11px;
+  padding: 19px 12px;
+}
+
+.latex-guide-item + .latex-guide-item {
+  border-left: 1px solid var(--lt-line);
+}
+
+.latex-guide-item > span {
+  color: rgba(154, 101, 69, .65);
+  font-family: Georgia, serif;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.latex-guide-item h3 {
+  font-size: 14px;
+}
+
+.latex-guide-item p {
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+@media (max-width: 767px) {
+  .latex-tool-page {
+    margin-top: 0;
+  }
+
+  .latex-tool-hero {
+    padding: 25px 5px 14px;
+  }
+
+  .latex-workbench {
+    grid-template-columns: 1fr;
+  }
+
+  .latex-connector {
+    height: 22px;
+  }
+
+  .latex-connector i {
+    transform: rotate(90deg);
+  }
+
+  .latex-panel {
+    padding: 18px;
+  }
+
+  .latex-editor-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .latex-result-actions {
+    justify-content: flex-start;
+  }
+
+  .latex-quick-section {
+    align-items: stretch;
+    grid-template-columns: 1fr;
+    padding: 19px;
+  }
+
+  .latex-tool-guide {
+    grid-template-columns: 1fr;
+    padding: 4px 17px;
+  }
+
+  .latex-guide-item + .latex-guide-item {
+    border-left: 0;
+    border-top: 1px solid var(--lt-line);
+  }
+}
+
+@media (max-width: 420px) {
+  .latex-template-list {
+    grid-template-columns: 1fr;
+  }
+
+  .latex-status {
+    display: none;
+  }
+}
