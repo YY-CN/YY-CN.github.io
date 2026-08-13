@@ -540,7 +540,7 @@
       '<div class="divination-result-actions">' +
         (postLink ? '<a href="' + postLink + '"><i class="fa fa-book"></i> 阅读对应卦文</a>' : '') +
         '<button type="button" id="divination-ai-interpret"><i class="fa fa-magic"></i> AI 解读</button>' +
-        '<button type="button" id="divination-copy-result"><i class="fa fa-copy"></i> 复制结果</button>' +
+        '<button type="button" id="divination-copy-result" hidden><i class="fa fa-copy"></i> 复制结果</button>' +
       '</div>';
     resultElement.hidden = false;
     document.getElementById('divination-ai-interpret').addEventListener('click', function () { requestAiInterpretation(result); });
@@ -603,10 +603,17 @@
   }
 
   function copyResult(result) {
-    var text = result.method === 'liuyao' ? buildLiuyaoAiText(result) : buildMeihuaAiText(result);
     var button = document.getElementById('divination-copy-result');
+    var output = document.getElementById('divination-ai-result');
+    var aiText = output && output.dataset ? output.dataset.aiText : '';
+    if (!aiText) {
+      setFormStatus('请先生成 AI 解读后再复制结果。', 'error');
+      return;
+    }
+    var divinationText = result.method === 'liuyao' ? buildLiuyaoAiText(result) : buildMeihuaAiText(result);
+    var text = divinationText + '\n\nAI 解读\n' + aiText;
     copyText(text).then(function () {
-      setFormStatus('起卦信息与排盘结果已复制。', 'success');
+      setFormStatus('起卦信息与 AI 解读结果已复制。', 'success');
       if (!button) return;
       button.innerHTML = '<i class="fa fa-check"></i> 已复制';
       window.setTimeout(function () { button.innerHTML = '<i class="fa fa-copy"></i> 复制结果'; }, 1600);
@@ -616,12 +623,15 @@
   function requestAiInterpretation(result) {
     var button = document.getElementById('divination-ai-interpret');
     var output = document.getElementById('divination-ai-result');
+    var copyButton = document.getElementById('divination-copy-result');
     var content = result.method === 'liuyao' ? buildLiuyaoAiText(result) : buildMeihuaAiText(result);
     if (!button || !output) return;
 
     button.disabled = true;
     button.innerHTML = '<i class="fa fa-spinner fa-spin"></i> 解读中';
     output.hidden = false;
+    delete output.dataset.aiText;
+    if (copyButton) copyButton.hidden = true;
     output.className = 'divination-ai-result is-loading';
     output.innerHTML = '<p><i class="fa fa-spinner fa-spin"></i> 正在整理卦象并请求解读…</p>';
 
@@ -636,7 +646,9 @@
       });
     }).then(function (text) {
       output.className = 'divination-ai-result';
+      output.dataset.aiText = text;
       output.innerHTML = '<div class="divination-ai-heading"><span>AI INTERPRETATION</span><h3><i class="fa fa-magic"></i> AI 解读</h3></div><div class="divination-ai-content">' + renderAiMarkdown(text) + '</div><p class="divination-ai-note">内容仅作传统文化参考，请结合现实情况独立判断。</p>';
+      if (copyButton) copyButton.hidden = false;
       button.innerHTML = '<i class="fa fa-refresh"></i> 重新解读';
       setFormStatus('AI 解读已生成。', 'success');
     }).catch(function (error) {
