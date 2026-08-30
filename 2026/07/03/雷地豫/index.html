@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="雷出地奋，豫。先王以作乐崇德。">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="雷出地奋，豫。先王以作乐崇德。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-07-03T07:45:00.000Z">
-<meta property="article:modified_time" content="2026-07-03T07:49:10.256Z">
+<meta property="article:modified_time" content="2026-08-23T19:20:20.215Z">
 <meta property="article:author" content="Hyacinth">
 <meta property="article:tag" content="学习笔记">
 <meta property="article:tag" content="六十四卦">
@@ -127,6 +127,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -166,11 +167,38 @@
     <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -216,10 +244,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-07-03 15:45:00 / 修改时间：15:49:10" itemprop="dateCreated datePublished" datetime="2026-07-03T15:45:00+08:00">2026-07-03</time>
+              <time title="创建时间：2026-07-03 15:45:00" itemprop="dateCreated datePublished" datetime="2026-07-03T15:45:00+08:00">2026-07-03</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-24 03:20:20" itemprop="dateModified" datetime="2026-08-24T03:20:20+08:00">2026-08-24</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -230,7 +264,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>14 分钟</span>
+            </span>
             <div class="post-description">雷出地奋，豫。先王以作乐崇德。</div>
 
         </div>
@@ -243,40 +291,104 @@
 
       
         <h2 id="一、-经典原文"><a href="#一、-经典原文" class="headerlink" title="一、 经典原文"></a>一、 经典原文</h2><blockquote>
-<p><strong>【卦辞】</strong><br>豫：利建侯行师。</p>
-<p><strong>【爻辞】</strong><br>初六：鸣豫，凶。<br>六二：介于石，不终日，贞吉。<br>六三：盱豫，悔。迟，有悔。<br>九四：由豫，大有得。勿疑。朋盍簪。<br>六五：贞疾，恒不死。<br>上六：冥豫，成有渝，无咎。</p>
-<p><strong>【大象传】</strong><br>雷出地奋，豫；先王以作乐崇德，殷荐之上帝，以配祖考。</p>
+<p><strong>【卦辞】</strong><br>豫：利建侯行師。</p>
+<p><strong>【爻辞】</strong><br>初六：鳴豫，凶。<br>六二：介于石，不終日，貞吉。<br>六三：盱豫，悔。遲有悔。<br>九四：由豫，大有得。勿疑。朋盍簪。<br>六五：貞疾，恆不死。<br>上六：冥豫，成有渝，无咎。</p>
+<p><strong>【大象传】</strong><br>象曰：雷出地奮，豫。先王以作樂崇德，殷薦之上帝，以配祖考。</p>
 </blockquote>
-<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>当一个人或一个组织做到了“谦卦”的极度谦卑，自然能够赢得天下人的归附与支持。万民顺服，就会迎来充满喜悦、安乐太平的时代。于是，我们迎来了第十六卦——豫卦。“豫”有三个层面的意思：一是喜悦、安乐；二是顺应；三是预防、准备（凡事预则立）。</p>
-<p><strong>1. 底层逻辑：雷出地奋，作乐崇德</strong><br>豫卦的上卦为震（雷&#x2F;动），下卦为坤（地&#x2F;顺）。《象传》说“雷出地奋”，春天第一声春雷从大地中破土而出，万物振奋，生机勃勃。这种“顺应规律而行动（顺以动）”的状态，就是豫卦的本质。古代帝王效法这种万物复苏、人心欢悦的景象，制作音乐来歌颂美德（作乐崇德），献给上帝和祖先，以此凝聚人心。</p>
-<p><strong>2. 大动作的底气：利建侯行师</strong><br>卦辞“豫：利建侯行师”非常霸气。在前面很多卦里，建功立业或出兵打仗都要极其谨慎。但豫卦说：在这个人心喜悦、顺应天时的时候，非常适合去分封诸侯（建立团队架构）和出兵打仗（开展重大项目）。因为在大家都心悦诚服（豫）的状态下做事，必定所向披靡。</p>
-<p><strong>3.北宋易学家邵雍解</strong><br>雷出地奋，喜悦安乐；顺时依势，切勿骄奢。<br>得此卦者，正处于顺风顺水、令人愉悦的好运期。此时人心和顺，做事容易成功，最宜借势开展大事业或团队建设。但也需谨记，生于忧患死于安乐，切忌沉溺于享乐而丧失斗志。</p>
-<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初六】"><a href="#【初六】" class="headerlink" title="【初六】"></a>【初六】</h3><p><strong>初六：鸣豫，凶。</strong><br><strong>象曰：初六鸣豫，志穷凶也。</strong></p>
-<p><strong>释义</strong><br>初六：高兴得鸣叫起来（四处炫耀自己的安乐），凶险。<br>《象辞》说：到处炫耀安乐，说明其心志极其浅薄狭隘，必然招致凶险。</p>
-<p><strong>北宋易学家邵雍解</strong><br>凶：得此爻者，刚刚得到一点好处或处于好运的开端，就得意忘形，四处张扬。这种肤浅的炫耀不仅会招来嫉妒，还会让你迅速失去前进的动力，必招灾祸。</p>
-<h3 id="【六二】"><a href="#【六二】" class="headerlink" title="【六二】"></a>【六二】</h3><p><strong>六二：介于石，不终日，贞吉。</strong><br><strong>象曰：不终日，贞吉；以中正也。</strong></p>
-<p><strong>释义</strong><br>六二：品格像石头一样坚定耿介。看清局势后，不到一天的时间就迅速做出反应，坚守正道，吉祥。<br>《象辞》说：不到一天就做出反应并吉祥，是因为六二居中得正，头脑清醒，绝不沉迷于享乐。</p>
-<p><strong>北宋易学家邵雍解</strong><br>大吉：得此爻者，拥有极高的定力与智慧。在周围人都沉醉于安逸享乐时，唯独你能保持“介于石”的清醒。洞察秋毫，当机立断，这种极度的自律与敏锐，大吉大利。</p>
-<h3 id="【六三】"><a href="#【六三】" class="headerlink" title="【六三】"></a>【六三】</h3><p><strong>六三：盱豫，悔。迟，有悔。</strong><br><strong>象曰：盱豫有悔，位不当也。</strong></p>
-<p><strong>释义</strong><br>六三：向上仰视（谄媚高位者）以求取安乐（盱，音xū，仰视），会带来悔恨。如果迟疑不决不能改过，必定会有更大的悔恨。<br>《象辞》说：谄媚求乐带来悔恨，是因为六三的位置不当（阴爻居阳位，德不配位）。</p>
-<p><strong>北宋易学家邵雍解</strong><br>凶：得此爻者，丧失了独立的人格。为了追求物质享受或职位，一味去巴结、依附权贵（九四）。这种靠乞求得来的快乐不仅虚幻，而且极易崩塌。宜迅速悬崖勒马。</p>
-<h3 id="【九四】"><a href="#【九四】" class="headerlink" title="【九四】"></a>【九四】</h3><p><strong>九四：由豫，大有得。勿疑。朋盍簪。</strong><br><strong>象曰：由豫，大有得；志大行也。</strong></p>
-<p><strong>释义</strong><br>九四：天下人的喜悦和安乐，都是由你带来的（由豫），将获得巨大的成功。不要心生疑虑，朋友和同道中人会像头发汇聚在簪子上一样（盍簪）紧密地团结在你周围。<br>《象辞》说：由此带来喜悦并大有收获，说明九四的宏大志向得以实现。</p>
-<p><strong>北宋易学家邵雍解</strong><br>大吉：得此爻者，是整个团队或局面的核心（全卦唯一阳爻）。你凭借自身的能力和担当，为大家创造了财富与安乐。此时只要胸怀坦荡、用人不疑，就能一呼百应，成就大业。</p>
-<h3 id="【六五】"><a href="#【六五】" class="headerlink" title="【六五】"></a>【六五】</h3><p><strong>六五：贞疾，恒不死。</strong><br><strong>象曰：六五贞疾，乘刚也。恒不死，中未亡也。</strong></p>
-<p><strong>释义</strong><br>六五：长久地患病，但一直不会死去。<br>《象辞》说：长久患病，是因为六五（阴柔的君主）压在刚强的权臣（九四）之上。一直不会死，是因为六五毕竟占据了中庸的君位，根基还没有彻底消亡。</p>
-<p><strong>北宋易学家邵雍解</strong><br>平：得此爻者，正处于一种“大权旁落”或“带病生存”的状态。可能受制于强悍的下属或合伙人，事情推进艰难。但好在你的名分和核心位置还在，虽难受，但能苟全保命。</p>
-<h3 id="【上六】"><a href="#【上六】" class="headerlink" title="【上六】"></a>【上六】</h3><p><strong>上六：冥豫，成有渝，无咎。</strong><br><strong>象曰：冥豫在上，何可长也。</strong></p>
-<p><strong>释义</strong><br>上六：在安乐中昏天黑地、迷失了自我（冥豫）。如果能彻底改变这种沉迷的状态（成有渝），就没有灾难。<br>《象辞》说：在最高处沉迷于享乐，这种局面怎么可能长久呢！</p>
-<p><strong>北宋易学家邵雍解</strong><br>平：得此爻者，已经沉溺于享乐或某种不良嗜好（如游戏、酒色、虚荣）中无法自拔。好在此爻留了一线生机：只要能幡然醒悟，痛下决心改过自新，仍可免于毁灭。</p>
-<h2 id="四、-个人感悟：在“娱乐至死”的时代，修一颗“介于石”的心"><a href="#四、-个人感悟：在“娱乐至死”的时代，修一颗“介于石”的心" class="headerlink" title="四、 个人感悟：在“娱乐至死”的时代，修一颗“介于石”的心"></a>四、 个人感悟：在“娱乐至死”的时代，修一颗“介于石”的心</h2><p>豫卦，是一幅描绘繁荣、安乐、歌舞升平的画卷。但在《易经》的逻辑里，<strong>最舒服的地方，往往就是最危险的地方。</strong> 当天下太平、所有人都沉浸在喜悦中时，人性的弱点（贪图安逸、骄傲自满）就会被无限放大。</p>
-<p>在当今这个充斥着短视频、奶头乐、“娱乐至死”的时代，豫卦给我们敲响了三记极为响亮的警钟：</p>
-<ol>
-<li><strong>警惕“鸣豫”，别做肤浅的炫耀者：</strong> 初六爻的“鸣豫凶”可以说是社交媒体时代最真实的写照。刚赚了点钱就买豪车发朋友圈，刚取得一点成绩就觉得天下第一。真正的狠人都是悄悄拔尖，只有半桶水才会在安乐中大呼小叫，最终招来反噬。</li>
-<li><strong>顶级的清醒，叫“介于石，不终日”：</strong> 六二爻是整本《易经》中邵雍及历代先贤最为推崇的境界之一。当周围所有人都在夜夜笙歌、纸醉金迷时，你不仅不随波逐流，还能保持像石头一样坚硬、冷静的定力。更可怕的是“不终日”——只要发现风吹草动、趋势不对，不到一天时间就果断抽身。这才是真正在盛世中保全自己的大智慧。</li>
-<li><strong>快乐的本质是“担当”：</strong> 九四爻“由豫，大有得”告诉我们，低级的快乐是靠巴结别人得来的（六三的盱豫），或者在昏暗中麻醉自己（上六的冥豫）。而高级的快乐，是你成为了那个发光发热、带领大家一起分蛋糕的“源头”。当你能为他人创造价值、带来喜悦时，“朋盍簪”（贵人与资源自然聚拢）就是水到渠成的事。</li>
+<hr>
+<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>雷地豫的现代摘要是：雷出地奋，和乐之象。利于建业行师。 这只是帮助进入文本的提要，具体判断仍要回到卦辞、爻位与上下文。</p>
+<p><strong>1. 底层逻辑：雷出地奋，和乐之象</strong></p>
+<p>程颐在释卦开头先从卦序、卦体和上下卦关系说明本卦之所以成立：</p>
+<blockquote>
+<p>豫，《序卦》：｢有大而能謙必豫，故受之以豫。｣承二卦之義而為次也，有既大而能謙，則有豫樂也。豫者，安和悅樂之義。為卦震上坤下，順動之象。動而和順，是以豫也。九四為動之主，上下群陰所共應也，坤又承之以順，是以動而上下順應，故為和豫之義。以二象言之，雷出於地上。陽始潛閉於地中，及其動而出地，奮發其聲，通暢和豫，故為豫也。</p>
+</blockquote>
+<p><strong>2. 卦辞与大象</strong></p>
+<p>卦辞给出全卦的基本处境与行动边界；大象则把卦象转化为修身、处事或治理的提示。程颐分别解释为：</p>
+<blockquote>
+<p>豫，順而動也。豫之義，所利在於建侯行師。夫建侯樹屏，所以共安天下，諸侯和順則萬民悅服，兵師之興，眾心和悅，則順從而有功，故悅豫之道，利於建侯行師也。又上動而下順，諸侯從王師，眾順令之象。君萬邦，聚大眾，非和悅不能使之服從也。</p>
+<p>雷者，陽氣奮發，陰陽相薄，而成聲也。陽始潛閉地中，及其動，則出地奮震也。始閉鬱，及奮發則通暢和豫，故為豫也。坤順震發，和順積中，而發於聲，樂之象也。先王觀雷出地而奮，和暢發於聲之象作樂，樂以褒崇功德，其殷盛至於薦之上帝，推配之以祖考。殷，盛也。禮有殷奠，謂盛也。薦上帝，配祖考，盛之至也。</p>
+</blockquote>
+<p><strong>3. 邵雍易学旁证</strong></p>
+<p>邵雍在《皇极经世·观物外篇》中说：</p>
+<blockquote>
+<p>“夫卦，各有性有体，然皆不离乾坤之门。”</p>
+<p>“君子于易，玩象、玩数、玩辞、玩意。”</p>
+</blockquote>
+<p>这两段是邵雍讨论读《易》方法的通论，并非针对雷地豫所下的吉凶断语。放在这里作为旁证，是提醒我们同时观察卦象、数位、辞义与整体意旨，不能只截取一句话作孤立判断。</p>
+<hr>
+<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初六】"><a href="#【初六】" class="headerlink" title="【初六】"></a>【初六】</h3><p><strong>初六：鳴豫，凶。</strong></p>
+<p><strong>象曰：初六鳴豫，志窮凶也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“鳴豫，凶。”作为这一阶段的核心情境；《小象》又以“初六鳴豫，志窮凶也。”点明观察角度。程颐解释此爻的切入点是：“初六以陰柔居下，四豫之主也，而應之，是不中正之小人，處豫而為上所寵，其志意滿極，不勝其豫，至發於聲音，輕淺如是，必至於凶也。鳴，發於聲也。”爻辞中出现“凶”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>初六以陰柔居下，四豫之主也，而應之，是不中正之小人，處豫而為上所寵，其志意滿極，不勝其豫，至發於聲音，輕淺如是，必至於凶也。鳴，發於聲也。</p>
+<p>云初六，謂其以陰柔處下，而志意窮極，不勝其豫，至於鳴也，必驕肆而致凶矣。</p>
+</blockquote>
+<p>从现代阅读角度看，初爻处在事情开端，适合先辨明基础、条件与时机，不宜把局部迹象过早当成最终结论。</p>
+<h3 id="【六二】"><a href="#【六二】" class="headerlink" title="【六二】"></a>【六二】</h3><p><strong>六二：介于石，不終日，貞吉。</strong></p>
+<p><strong>象曰：不終日，貞吉；以中正也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“介于石，不終日，貞吉。”作为这一阶段的核心情境；《小象》又以“不終日，貞吉；以中正也。”点明观察角度。程颐解释此爻的切入点是：“逸豫之道，放則失正，故豫之諸爻，多不得正，才與時合也。唯六二一爻處中正，又无應，為自守之象。當豫之時，獨能以中正自守，可謂特立之操，是其節介如石之堅也。介于石，其介如石也。人之於豫樂，心悅之，故遲遲遂至於耽戀不能已也。二以中正自守，其介如石，其去之速，不俟終日，故貞正而吉也。處豫不可安且久也，久則溺矣。如二，可謂見幾而作者也。夫子因二之見幾，而極言知幾之道，曰：知幾其神乎，君子上交不諂，下交不瀆，其知幾乎！幾者動之微、吉之先見者也。君子見幾而作，不俟終日。……”爻辞中出现“吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>逸豫之道，放則失正，故豫之諸爻，多不得正，才與時合也。唯六二一爻處中正，又无應，為自守之象。當豫之時，獨能以中正自守，可謂特立之操，是其節介如石之堅也。介于石，其介如石也。人之於豫樂，心悅之，故遲遲遂至於耽戀不能已也。二以中正自守，其介如石，其去之速，不俟終日，故貞正而吉也。處豫不可安且久也，久則溺矣。如二，可謂見幾而作者也。夫子因二之見幾，而極言知幾之道，曰：知幾其神乎，君子上交不諂，下交不瀆，其知幾乎！幾者動之微、吉之先見者也。君子見幾而作，不俟終日。《易》曰｢介於石，不終日，貞吉。｣介如石焉，寧用終日，斷可識矣。君子知微知彰，知柔知剛，萬夫之望。夫見事之幾微者，其神妙矣乎！君子上交不至於諂，下交不至於瀆者，蓋知幾也。不知幾，則至於過而不已。交於上以恭巽，故過則為諂；交於下以和易，故過則為瀆。君子見於幾微，故不至於過也。所謂幾者，始動之微也，吉凶之端可先見而未著者也。獨言吉者，見之於先，豈復至有凶也？君子明哲，見事之幾微，故能其介如石，其守既堅，則不惑而明，見幾而動，豈俟終日也？斷，別也。其判別可見矣。微與彰，柔與剛，相對者也。君子見微則知彰矣，見柔則知剛矣，知幾如是，眾所仰也，故讚之曰｢萬夫之望｣。</p>
+<p>能不終日而貞且吉者，以有中正之德也。中正故其守堅而能辨之早、去之速。爻言六二處豫之道，為教之意深矣。</p>
+</blockquote>
+<p>从现代阅读角度看，二爻进入落实阶段，通常要把行动放回中正、协作与可持续的尺度中衡量。</p>
+<h3 id="【六三】"><a href="#【六三】" class="headerlink" title="【六三】"></a>【六三】</h3><p><strong>六三：盱豫，悔。遲有悔。</strong></p>
+<p><strong>象曰：盱豫有悔，位不當也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“盱豫，悔。遲有悔。”作为这一阶段的核心情境；《小象》又以“盱豫有悔，位不當也。”点明观察角度。程颐解释此爻的切入点是：“六三陰而居陽，不中不正之人也。以不中正而處豫，動皆有悔。盱，上視也。上瞻望於四，則以不中正不為四所取，故有悔也。四，豫之主，與之切近，苟遲遲而不前，則見棄絕，亦有悔也。蓋處身不正，進退皆有悔吝。當如之何？在正身而已。君子處己有道，以禮制心，雖處豫時，不失中正，故无悔也。”爻辞中出现“有悔”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>六三陰而居陽，不中不正之人也。以不中正而處豫，動皆有悔。盱，上視也。上瞻望於四，則以不中正不為四所取，故有悔也。四，豫之主，與之切近，苟遲遲而不前，則見棄絕，亦有悔也。蓋處身不正，進退皆有悔吝。當如之何？在正身而已。君子處己有道，以禮制心，雖處豫時，不失中正，故无悔也。</p>
+<p>自處不當，失中正也，是以進退有悔。</p>
+</blockquote>
+<p>从现代阅读角度看，三爻处在内卦将尽的转换处，进退压力往往同时出现，尤其需要控制冒进与失位的风险。</p>
+<h3 id="【九四】"><a href="#【九四】" class="headerlink" title="【九四】"></a>【九四】</h3><p><strong>九四：由豫，大有得。勿疑。朋盍簪。</strong></p>
+<p><strong>象曰：由豫，大有得；志大行也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“由豫，大有得。勿疑。朋盍簪。”作为这一阶段的核心情境；《小象》又以“由豫，大有得；志大行也。”点明观察角度。程颐解释此爻的切入点是：“豫之所以為豫者，由九四也，為動之主，動而眾陰悅順，為豫之義。四，大臣之位，六五之君順從之，以陽剛而任上之事，豫之所由也，故云由豫。大有得，言得大行其志，以致天下之豫也。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>豫之所以為豫者，由九四也，為動之主，動而眾陰悅順，為豫之義。四，大臣之位，六五之君順從之，以陽剛而任上之事，豫之所由也，故云由豫。大有得，言得大行其志，以致天下之豫也。</p>
+<p>勿疑，朋盍簪：四居大臣之位，承柔弱之君，而當天下之任，危疑之地也，獨當上之倚任，而下无同德之助，所以疑也。唯當盡其至誠，勿有疑慮，則朋類自當盍聚。夫欲上下之信，唯至誠而已。苟盡其至誠，則何患乎其无助也？簪，聚也。簪之名簪，取聚髮也。或曰：卦唯一陽，安得同德之助？曰：居上位而至誠求助，理必得之。姤之九五曰｢有隕自天｣是也。四以陽剛，迫近君位，而專主乎豫，聖人宜為之戒，而不然者，豫和順之道也，由和順之道，不失為臣之正也。如此而專主於豫，乃是任天下之事而致時於豫者也，故唯戒以至誠勿疑。</p>
+<p>由己而致天下於樂豫，故為大有得，謂其志得大行也。</p>
+</blockquote>
+<p>从现代阅读角度看，四爻由内转外，开始接近全局事务与主事位置，行动之前宜先建立信任并审慎辨势。</p>
+<h3 id="【六五】"><a href="#【六五】" class="headerlink" title="【六五】"></a>【六五】</h3><p><strong>六五：貞疾，恆不死。</strong></p>
+<p><strong>象曰：六五貞疾，乘剛也。恆不死，中未亡也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“貞疾，恆不死。”作为这一阶段的核心情境；《小象》又以“六五貞疾，乘剛也。恆不死，中未亡也。”点明观察角度。程颐解释此爻的切入点是：“六五以陰柔居君位，當豫之時，沉溺於豫，不能自立者也。權之所主，眾之所歸，皆在於四。四之陽剛得眾，非耽惑柔弱之君所能制也，乃柔弱不能自立之君，受制於專權之臣也，居得君位，貞也，受制於下，有疾苦也。六居尊位，權雖失而位未亡也，故云｢貞疾，恒不死｣，言貞而有疾，常疾而不死，如漢、魏末世之君也。人君致危亡之道非一，而以豫為多。在四不言失正，而於五乃見其強逼者，四本无失，故於四言大臣任天下之事之義，於五則言柔弱居尊，不能自立，威權去己之義，各據爻以取義，故不同也。……”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>六五以陰柔居君位，當豫之時，沉溺於豫，不能自立者也。權之所主，眾之所歸，皆在於四。四之陽剛得眾，非耽惑柔弱之君所能制也，乃柔弱不能自立之君，受制於專權之臣也，居得君位，貞也，受制於下，有疾苦也。六居尊位，權雖失而位未亡也，故云｢貞疾，恒不死｣，言貞而有疾，常疾而不死，如漢、魏末世之君也。人君致危亡之道非一，而以豫為多。在四不言失正，而於五乃見其強逼者，四本无失，故於四言大臣任天下之事之義，於五則言柔弱居尊，不能自立，威權去己之義，各據爻以取義，故不同也。若五不失君道，而四主於豫，乃是任得其人，安享其功，如太甲、成王也。蒙亦以陰居尊位，二以陽為蒙之主，然彼吉而此疾者，時不同也。童蒙而資之於人，宜也；耽豫而失之於人，危亡之道也。故蒙相應，則倚任者也；豫相逼，則失權者也。又上下之心專歸於四也。</p>
+<p>貞而疾，由乘剛，為剛所逼也。恒不死，中之尊位未亡也。</p>
+</blockquote>
+<p>从现代阅读角度看，五爻居于全卦关键位置，重点在承担责任、守住中道，并使个人能力真正服务于整体。</p>
+<h3 id="【上六】"><a href="#【上六】" class="headerlink" title="【上六】"></a>【上六】</h3><p><strong>上六：冥豫，成有渝，无咎。</strong></p>
+<p><strong>象曰：冥豫在上，何可長也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“冥豫，成有渝，无咎。”作为这一阶段的核心情境；《小象》又以“冥豫在上，何可長也。”点明观察角度。程颐解释此爻的切入点是：“上六陰柔，非有中正之德，以陰居上，不正也。而當豫極之時，以君子居斯時，亦當戒懼，況陰柔乎？乃耽肆於豫，昏迷不知反者也。在豫之終，故為昏冥已成也。若能有渝變，則可以无咎矣。在豫之終，有變之義。人之失，苟能自變，皆可以无咎，故冥豫雖已成，能變則善也。聖人發此義，所以勸遷善也，故更不言冥之凶，專言渝之无咎。”爻辞中出现“无咎”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>上六陰柔，非有中正之德，以陰居上，不正也。而當豫極之時，以君子居斯時，亦當戒懼，況陰柔乎？乃耽肆於豫，昏迷不知反者也。在豫之終，故為昏冥已成也。若能有渝變，則可以无咎矣。在豫之終，有變之義。人之失，苟能自變，皆可以无咎，故冥豫雖已成，能變則善也。聖人發此義，所以勸遷善也，故更不言冥之凶，專言渝之无咎。</p>
+<p>昏冥於豫，至於終極，災咎行及矣。其可長然乎？當速渝也。</p>
+</blockquote>
+<p>从现代阅读角度看，上爻表示一卦发展已到极处，最需要防止过度、僵化与不知转圜，为下一阶段留下余地。</p>
+<hr>
+<h2 id="四、-个人感悟"><a href="#四、-个人感悟" class="headerlink" title="四、 个人感悟"></a>四、 个人感悟</h2><p>雷出地奋，和乐之象。利于建业行师。 对我来说，雷地豫最值得反复体会的，不是把“吉”或“凶”当作固定答案，而是看清一个处境如何随位置、关系与行动方式而变化。六爻从初到上展示了不同阶段：同一原则放在不同位置，结果可能完全不同。</p>
+<p>把它用于今天的学习、工作或关系判断时，我更愿意把卦辞当作问题框架，把爻辞当作阶段提醒：先确认自己身处哪一层，再决定进、退、守、变。这样读《易》，比直接追求一个预言式结论更稳妥。</p>
+<hr>
+<h2 id="五、-参考文献与版本说明"><a href="#五、-参考文献与版本说明" class="headerlink" title="五、 参考文献与版本说明"></a>五、 参考文献与版本说明</h2><ol>
+<li>《周易》经文及《象传》，本卦原文取自：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/wiki/%E5%91%A8%E6%98%93/%E8%B1%AB">维基文库《周易》本卦页面</a>；并参校<a target="_blank" rel="noopener" href="https://ctext.org/book-of-changes/zh">中国哲学书电子化计划《周易》</a>。</li>
+<li>北宋程颐《程氏易传》（亦称《伊川易传》），本卦参校：<a target="_blank" rel="noopener" href="https://www.taijizhidian.com/chengxu/liushisigua/1549.html">【周易上经】第16卦-豫卦䷏雷地豫卦（坤下震上）-[北宋]程颐撰《程氏易传•卷二》</a>。</li>
+<li>北宋邵雍《皇极经世·观物外篇》，旁证原文：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/zh-hans/%E7%9A%87%E6%A5%B5%E7%B6%93%E4%B8%96/%E5%8D%B7%E5%8D%81%E4%B8%89">维基文库《皇极经世》卷十三</a>。</li>
 </ol>
-<p>雷出地奋，万物复苏。愿我们在顺境与欢愉中，既有听雷赏花的雅兴，更有“介于石”的清醒定力。</p>
+<blockquote>
+<p>版本说明：经典原文与程颐文字保留底本中的繁体字、异体字及个别古字；“释义”“现代阅读角度”和“个人感悟”均为现代整理，不冒充古人原话。“邵雍易学旁证”只引用可定位的易学通论，不作逐卦、逐爻的托名断语。</p>
+</blockquote>
 
     </div>
 
@@ -362,7 +474,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E5%85%AD%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初六】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【六二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【六三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【九四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【六五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E5%85%AD%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上六】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F%EF%BC%9A%E5%9C%A8%E2%80%9C%E5%A8%B1%E4%B9%90%E8%87%B3%E6%AD%BB%E2%80%9D%E7%9A%84%E6%97%B6%E4%BB%A3%EF%BC%8C%E4%BF%AE%E4%B8%80%E9%A2%97%E2%80%9C%E4%BB%8B%E4%BA%8E%E7%9F%B3%E2%80%9D%E7%9A%84%E5%BF%83"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟：在“娱乐至死”的时代，修一颗“介于石”的心</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E5%85%AD%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初六】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【六二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【六三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【九四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【六五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E5%85%AD%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上六】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E4%B8%8E%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E"><span class="nav-number">5.</span> <span class="nav-text">五、 参考文献与版本说明</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -378,7 +490,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -463,6 +575,10 @@
 
 
 
+  
+<script src="/js/local-search.js"></script>
+
+
 
 
 
@@ -491,6 +607,15 @@
 
 <script>
   (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
     var loadingBox = document.getElementById('loading-box');
     var root = document.documentElement;
 
@@ -521,8 +646,9 @@
 
 <script src="/js/latex-tool.js?v=20260805c"></script>
 <script src="/js/translate-tool.js?v=20260805a"></script>
-<script src="/js/hexagram-index.js?v=20260806a"></script>
-<script src="/js/divination-tool.js?v=20260810a"></script>
+<script src="/js/hexagram-post-map.js?v=20260830a"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
 
 </body>
 </html>

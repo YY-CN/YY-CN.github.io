@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="火在天上，大有。君子以遏恶扬善，顺天休命。">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="火在天上，大有。君子以遏恶扬善，顺天休命。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-07-03T07:39:42.000Z">
-<meta property="article:modified_time" content="2026-07-03T07:41:29.074Z">
+<meta property="article:modified_time" content="2026-08-23T19:20:20.212Z">
 <meta property="article:author" content="Hyacinth">
 <meta property="article:tag" content="学习笔记">
 <meta property="article:tag" content="六十四卦">
@@ -127,6 +127,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -166,11 +167,38 @@
     <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -216,10 +244,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-07-03 15:39:42 / 修改时间：15:41:29" itemprop="dateCreated datePublished" datetime="2026-07-03T15:39:42+08:00">2026-07-03</time>
+              <time title="创建时间：2026-07-03 15:39:42" itemprop="dateCreated datePublished" datetime="2026-07-03T15:39:42+08:00">2026-07-03</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-24 03:20:20" itemprop="dateModified" datetime="2026-08-24T03:20:20+08:00">2026-08-24</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -230,7 +264,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
             <div class="post-description">火在天上，大有。君子以遏恶扬善，顺天休命。</div>
 
         </div>
@@ -244,39 +292,102 @@
       
         <h2 id="一、-经典原文"><a href="#一、-经典原文" class="headerlink" title="一、 经典原文"></a>一、 经典原文</h2><blockquote>
 <p><strong>【卦辞】</strong><br>大有：元亨。</p>
-<p><strong>【爻辞】</strong><br>初九：无交害，匪咎；艰则无咎。<br>九二：大车以载，有攸往，无咎。<br>九三：公用亨于天子，小人弗克。<br>九四：匪其彭，无咎。<br>六五：厥孚交如，威如，吉。<br>上九：自天祐之，吉无不利。</p>
-<p><strong>【大象传】</strong><br>火在天上，大有；君子以遏恶扬善，顺天休命。</p>
+<p><strong>【爻辞】</strong><br>初九：无交害，匪咎，艱則无咎。<br>九二：大車以載，有攸往，无咎。<br>九三：公用亨于天子，小人弗克。<br>九四：匪其彭，无咎。<br>六五：厥孚交如，威如；吉。<br>上九：自天佑之，吉无不利。</p>
+<p><strong>【大象传】</strong><br>象曰：火在天上，大有；君子以遏惡揚善，順天休命。</p>
 </blockquote>
-<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>当同人卦（第十三卦）教会了我们如何团结天下有志之士后，众人的力量汇聚在一起，必然会创造出巨大的物质与精神财富。于是，我们迎来了第十四卦——大有卦。“大有”就是大丰收、大获全胜、拥有极大的财富与资源。在《易经》的六十四卦里，它和泰卦一样，是非常罕见的大吉之卦。</p>
-<p><strong>1. 底层逻辑：火在天上，遏恶扬善</strong><br>大有卦的上卦为离（火&#x2F;日），下卦为乾（天）。《象传》说“火在天上”，就像正午的太阳高悬于天空（日丽中天），光芒普照万物，没有任何阴暗的角落能藏污纳垢。君子效法这种极其光明、强盛的气象，应该去“遏恶扬善”——抑制邪恶，发扬善行，从而顺应上天赋予的美好使命。这告诉我们，拥有巨大财富的底座，必须是极高的道德与光明磊落的心胸。</p>
-<p><strong>2. 财富的法则：元亨</strong><br>卦辞只有极简的两个字：“元亨”（大吉大利，极其通达）。越是极简，越显出此卦力量的庞大。当一个人或一个组织处于“大有”的鼎盛时期，只要心怀正道，万事皆可顺利推行。</p>
-<p><strong>3.北宋易学家邵雍解</strong><br>日丽中天，遍照万物；大获丰收，名利双收。<br>得此卦者，正当好运，犹如旭日东升到正午，事业与财富都处于巅峰状态。此时最宜积极进取，大展宏图。但也需谨记，盛极必衰，拥有财富后切忌骄奢淫逸，需多行善举方能保住福报。</p>
-<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初九】"><a href="#【初九】" class="headerlink" title="【初九】"></a>【初九】</h3><p><strong>初九：无交害，匪咎；艰则无咎。</strong><br><strong>象曰：大有初九，无交害也。</strong></p>
-<p><strong>释义</strong><br>初九：在“大有”的最初阶段，不要去与有害的人或事交往（无交害），这不是你的过错；只要保持艰难时期的谨慎和清醒，就没有灾难。<br>《象辞》说：大有卦的初九，在于一开始就不去沾染那些有害的奢靡之风。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，刚刚步入顺境或获得第一桶金。此时最容易被各种居心叵测的人盯上，或者沾染上不良嗜好。保持艰苦朴素的初心，洁身自好，方能平安。</p>
-<h3 id="【九二】"><a href="#【九二】" class="headerlink" title="【九二】"></a>【九二】</h3><p><strong>九二：大车以载，有攸往，无咎。</strong><br><strong>象曰：大车以载，积中不败也。</strong></p>
-<p><strong>释义</strong><br>九二：用大车来装载重物，有所前往，没有灾难。<br>《象辞》说：用大车载物，是因为九二居于中位，积蓄丰厚且基础稳固，所以不会倾覆失败。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，实力雄厚，资源充足（大车）。此时可以委以重任，或进行大规模的投资、行动。只要任用得力的人才（如大车载物般稳健），就能承载起巨大的事业。</p>
-<h3 id="【九三】"><a href="#【九三】" class="headerlink" title="【九三】"></a>【九三】</h3><p><strong>九三：公用亨于天子，小人弗克。</strong><br><strong>象曰：公用亨于天子，小人害也。</strong></p>
-<p><strong>释义</strong><br>九三：王公诸侯将丰厚的物产设宴敬献给天子（也有解释为天子设宴款待诸侯）。这种大有之世的盛举，小人是无法胜任的（小人得志必生祸端）。<br>《象辞》说：小人如果参与这种盛大的宴享，必然会带来祸害。</p>
-<p><strong>北宋易学家邵雍解</strong><br>平：得此爻者，事业已经做到了相当的高度，甚至可以与高层对话或合作。但此爻是一个警告：巨大的财富和权力只配君子拥有，若是德行不够的小人突然暴富，必定会因张狂而招致毁灭。</p>
-<h3 id="【九四】"><a href="#【九四】" class="headerlink" title="【九四】"></a>【九四】</h3><p><strong>九四：匪其彭，无咎。</strong><br><strong>象曰：匪其彭，无咎；明辨晰也。</strong></p>
-<p><strong>释义</strong><br>九四：不炫耀自己的盛大与富有（彭，膨胀、盛大之意），没有灾难。<br>《象辞》说：不炫耀而没有灾难，是因为九四头脑极其清醒，明辨是非（知道自己距离最高权力太近，容易惹来猜忌）。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，身居高位，财富极盛，且处于“伴君伴虎”的位置。此时最核心的生存法则就是“财不外露”、“功高不震主”。低调内敛，绝不张扬膨胀，方能保命保财。</p>
-<h3 id="【六五】"><a href="#【六五】" class="headerlink" title="【六五】"></a>【六五】</h3><p><strong>六五：厥孚交如，威如，吉。</strong><br><strong>象曰：厥孚交如，信以发志也。威如之吉，易而无备也。</strong></p>
-<p><strong>释义</strong><br>六五：以极其真诚的诚信与众人交往（厥孚交如），同时又保持着威严（威如），吉祥。<br>《象辞》说：真诚交往，是用信用去激发大家的志向；保持威严而吉祥，是因为对待众人虽然平易近人（易），但绝不能失去规矩和防备。</p>
-<p><strong>北宋易学家邵雍解</strong><br>大吉：得此爻者，处于极高位的领导者。在管理一个极其富有的庞大帝国（或企业）时，做到了“恩威并施”。用诚信聚拢人心，用威严维持秩序，这是最顶级的御人之术。</p>
-<h3 id="【上九】"><a href="#【上九】" class="headerlink" title="【上九】"></a>【上九】</h3><p><strong>上九：自天祐之，吉无不利。</strong><br><strong>象曰：大有上吉，自天祐也。</strong></p>
-<p><strong>释义</strong><br>上九：上天降下保佑，大吉大利，没有任何不顺利的。<br>《象辞》说：大有卦发展到最顶端还能大吉，是因为得到了上天的护佑。</p>
-<p><strong>北宋易学家邵雍解</strong><br>大吉：得此爻者，功德圆满，犹如神助。为什么在泰卦、小畜卦的最高一爻往往是“凶”或“悔”，而大有卦的上九却是“吉无不利”？因为当你的财富与德行完全匹配，且能顺应天道去造福苍生时，连老天爷都会来帮你。</p>
-<h2 id="四、-个人感悟：财富是一场关于“德行”的压力测试"><a href="#四、-个人感悟：财富是一场关于“德行”的压力测试" class="headerlink" title="四、 个人感悟：财富是一场关于“德行”的压力测试"></a>四、 个人感悟：财富是一场关于“德行”的压力测试</h2><p>写完大有卦的笔记，我感到一种极度通透的爽快。人们常说“富不过三代”，或者“男人有钱就变坏”，其实这都是因为人的“内存”太小，承载不了巨大的物质财富导致了系统崩溃。大有卦，就是一部关于《如何处理巨大财富与成功》的终极指南。</p>
-<p>在这个“日丽中天”的大吉卦里，古人藏了三个极度冷酷的财富密码：</p>
-<ol>
-<li><strong>暴富的第一步，是“断舍离”（无交害）：</strong> 初九爻告诉我们，当你刚赚到一笔大钱，或者项目刚拿到大额融资时，第一件事绝不是去买跑车开派对，而是要立刻屏蔽掉那些来蹭吃蹭喝、带你学坏的“有害圈子”。守住最初的艰苦（艰则无咎），财气才不会漏。</li>
-<li><strong>警惕“小人弗克”的诅咒：</strong> 为什么很多人中了大奖最后却家破人亡？九三爻一针见血：“小人弗克”。财富本质上是一种能量，如果你只有小人的狭隘心胸和自私自利，这股庞大的能量就会像烈火一样把你反噬烧死（火在天上）。厚德才能载物，这是一句大实话。</li>
-<li><strong>顶配的富豪，都懂得“匪其彭”：</strong> 看看九四爻，当你已经极其富有、位高权重时，最大的危险往往来自于外界的嫉妒和上位者的猜忌。不炫富、不膨胀（匪其彭），夹起尾巴做人，这不仅是修养，更是最实在的保命符。</li>
+<hr>
+<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>火天大有的现代摘要是：大有收获，光明普照。顺天休命。 这只是帮助进入文本的提要，具体判断仍要回到卦辞、爻位与上下文。</p>
+<p><strong>1. 底层逻辑：大有收获，光明普照</strong></p>
+<p>程颐在释卦开头先从卦序、卦体和上下卦关系说明本卦之所以成立：</p>
+<blockquote>
+<p>大有，《序卦》：與人同者物必歸焉，故受之以大有。夫與人同者，物之所歸也，大有所以次同人也。爲卦火在天上，火之處高，其明及遠，萬物之衆，无不照見，爲大有之象。又一柔居尊，眾陽並應，居尊執柔，物之所歸也。上下應之，為大有之義。大有，盛大豐有也。</p>
+</blockquote>
+<p><strong>2. 卦辞与大象</strong></p>
+<p>卦辞给出全卦的基本处境与行动边界；大象则把卦象转化为修身、处事或治理的提示。程颐分别解释为：</p>
+<blockquote>
+<p>卦之才可以元亨也。凡卦德，有卦名自有其義者，如比吉、謙亨是也；有因其卦義便為訓戒者，如師貞丈人吉、同人于野亨是也；有以其卦才而言者，大有元亨是也。由剛健文明，應天時行，故能元亨也。</p>
+<p>火髙在天上，照見萬物之衆多，故為大有。大有繁庶之義，君子觀大有之象，以遏絶衆惡、揚明善類，以奉順天休美之命。萬物衆多則有善惡之殊，君子亨，大有之盛，當代天工治養庶類，治衆之道，在遏惡揚善而已。惡懲善勸，所以順天命而安羣生也。</p>
+</blockquote>
+<p><strong>3. 邵雍易学旁证</strong></p>
+<p>邵雍在《皇极经世·观物外篇》中说：</p>
+<blockquote>
+<p>“夫卦，各有性有体，然皆不离乾坤之门。”</p>
+<p>“君子于易，玩象、玩数、玩辞、玩意。”</p>
+</blockquote>
+<p>这两段是邵雍讨论读《易》方法的通论，并非针对火天大有所下的吉凶断语。放在这里作为旁证，是提醒我们同时观察卦象、数位、辞义与整体意旨，不能只截取一句话作孤立判断。</p>
+<hr>
+<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初九】"><a href="#【初九】" class="headerlink" title="【初九】"></a>【初九】</h3><p><strong>初九：无交害，匪咎，艱則无咎。</strong></p>
+<p><strong>象曰：大有初九，无交害也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“无交害，匪咎，艱則无咎。”作为这一阶段的核心情境；《小象》又以“大有初九，无交害也。”点明观察角度。程颐解释此爻的切入点是：“九居大有之初，未至於盛，處甲无應與，未有驕盈之失，故无交害，末涉於害也。大凡富有鮮不有害，以子貢之賢，未能盡免，況其下者乎？匪咎，艱則无咎，言富有本匪有咎也，人因富有自為咎耳。若能享富有而知難處，則自无咎也。處富有而不能思艱兢畏，則驕侈之心生矣，所以有咎也。”爻辞中出现“无咎”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>九居大有之初，未至於盛，處甲无應與，未有驕盈之失，故无交害，末涉於害也。大凡富有鮮不有害，以子貢之賢，未能盡免，況其下者乎？匪咎，艱則无咎，言富有本匪有咎也，人因富有自為咎耳。若能享富有而知難處，則自无咎也。處富有而不能思艱兢畏，則驕侈之心生矣，所以有咎也。</p>
+<p>在大有之初，克念艱難，則驕溢之心无由生矣，所以不交涉於害也。</p>
+</blockquote>
+<p>从现代阅读角度看，初爻处在事情开端，适合先辨明基础、条件与时机，不宜把局部迹象过早当成最终结论。</p>
+<h3 id="【九二】"><a href="#【九二】" class="headerlink" title="【九二】"></a>【九二】</h3><p><strong>九二：大車以載，有攸往，无咎。</strong></p>
+<p><strong>象曰：大車以載，積中不敗也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“大車以載，有攸往，无咎。”作为这一阶段的核心情境；《小象》又以“大車以載，積中不敗也。”点明观察角度。程颐解释此爻的切入点是：“九以陽剛居二，為六五之君所倚任。剛健則才勝，居柔則謙順，得中則无過，其才如此，所以能勝大有之任。如大車之材強壯，能勝載重物也。可以任重行遠，故有攸往而无咎也。大有豐盛之時，有而未極，故以二之才，可往而无咎。至於盛極，則不可以往矣。”爻辞中出现“无咎”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>九以陽剛居二，為六五之君所倚任。剛健則才勝，居柔則謙順，得中則无過，其才如此，所以能勝大有之任。如大車之材強壯，能勝載重物也。可以任重行遠，故有攸往而无咎也。大有豐盛之時，有而未極，故以二之才，可往而无咎。至於盛極，則不可以往矣。</p>
+<p>壯大之車，重積載於其中而不損。敗猶九二材力之強，能勝大有之任也。</p>
+</blockquote>
+<p>从现代阅读角度看，二爻进入落实阶段，通常要把行动放回中正、协作与可持续的尺度中衡量。</p>
+<h3 id="【九三】"><a href="#【九三】" class="headerlink" title="【九三】"></a>【九三】</h3><p><strong>九三：公用亨于天子，小人弗克。</strong></p>
+<p><strong>象曰：公用亨于天子，小人害也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“公用亨于天子，小人弗克。”作为这一阶段的核心情境；《小象》又以“公用亨于天子，小人害也。”点明观察角度。程颐解释此爻的切入点是：“三居下體之上，在下而居之上，諸侯人君之象也。公侯上承天子，天子居天下之尊，率土之濱，莫非王臣，在下者伺敢專其有。凡土地之富，人民之眾，皆王者之有也，此理之正也。故三當大有之時，居諸侯之位，有其富盛，必有亨通乎天子，謂以其有爲天子之有也，乃人臣之常義也。若小人處之，則專其富有以爲私，不知公以奉上之道，故曰小人弗克也。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>三居下體之上，在下而居之上，諸侯人君之象也。公侯上承天子，天子居天下之尊，率土之濱，莫非王臣，在下者伺敢專其有。凡土地之富，人民之眾，皆王者之有也，此理之正也。故三當大有之時，居諸侯之位，有其富盛，必有亨通乎天子，謂以其有爲天子之有也，乃人臣之常義也。若小人處之，則專其富有以爲私，不知公以奉上之道，故曰小人弗克也。</p>
+<p>公當用亨於天子，若小人處之，則為害也。自古諸侯能守臣節忠順奉上者，則蕃養其衆以為王之屏翰，豐殖其財以待上之徵賦。若小人處之，則不知為臣奉上之道，以其為己之私，民衆財豐則反擅其富強益為不順。是小人大有則為害，又大有為小人之害也。</p>
+</blockquote>
+<p>从现代阅读角度看，三爻处在内卦将尽的转换处，进退压力往往同时出现，尤其需要控制冒进与失位的风险。</p>
+<h3 id="【九四】"><a href="#【九四】" class="headerlink" title="【九四】"></a>【九四】</h3><p><strong>九四：匪其彭，无咎。</strong></p>
+<p><strong>象曰：匪其彭，无咎；明辨晰也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“匪其彭，无咎。”作为这一阶段的核心情境；《小象》又以“匪其彭，无咎；明辨晰也。”点明观察角度。程颐解释此爻的切入点是：“九四居大有之時，已過中矣，是大有之盛者也，過盛則凶咎所由生也，故處之之道，匪其彭則得无咎，謂能謙損，不處其太盛則得无咎也。四近君之高位，苟處太盛則致凶咎。彭，盛多之貌。《詩•載驅》云「汶水湯湯，行人彭彭」，行人盛多之狀。《雅•大明》云「駟騵彭彭」，言武王戎馬之盛也。”爻辞中出现“无咎”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>九四居大有之時，已過中矣，是大有之盛者也，過盛則凶咎所由生也，故處之之道，匪其彭則得无咎，謂能謙損，不處其太盛則得无咎也。四近君之高位，苟處太盛則致凶咎。彭，盛多之貌。《詩•載驅》云「汶水湯湯，行人彭彭」，行人盛多之狀。《雅•大明》云「駟騵彭彭」，言武王戎馬之盛也。</p>
+<p>能不處其盛而得无咎者，蓋有明辨之智也。晳，明智也。賢智之人，明辨物理，當其方盛則知咎之將至，故能損抑不敢至於滿極也。</p>
+</blockquote>
+<p>从现代阅读角度看，四爻由内转外，开始接近全局事务与主事位置，行动之前宜先建立信任并审慎辨势。</p>
+<h3 id="【六五】"><a href="#【六五】" class="headerlink" title="【六五】"></a>【六五】</h3><p><strong>六五：厥孚交如，威如；吉。</strong></p>
+<p><strong>象曰：厥孚交如，信以發志也。威如之吉，易而无備也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“厥孚交如，威如；吉。”作为这一阶段的核心情境；《小象》又以“厥孚交如，信以發志也。威如之吉，易而无備也。”点明观察角度。程颐解释此爻的切入点是：“六五當大有之時居君位，虛中爲孚信之象。人君執柔守中，而以孚信接於下，則下亦盡其信誠以事於上。上下孚信相交也。以柔居尊位，當大有之時，人心安易，若專尚柔順，則陵慢生矣，故必威如則吉。威如，有威嚴之謂也。既以柔和孚信接於下，衆志說從，又有威嚴使之有畏，善處有者也，吉可知矣。”爻辞中出现“吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>六五當大有之時居君位，虛中爲孚信之象。人君執柔守中，而以孚信接於下，則下亦盡其信誠以事於上。上下孚信相交也。以柔居尊位，當大有之時，人心安易，若專尚柔順，則陵慢生矣，故必威如則吉。威如，有威嚴之謂也。既以柔和孚信接於下，衆志說從，又有威嚴使之有畏，善處有者也，吉可知矣。</p>
+<p>下之志，從乎上者也。上以孚信接於下，則下亦以誠信事其上，故厥孚交如。由上有孚信以發其下，孚信之志，下之從上，猶響之應聲也。威如之所以吉者，謂若无威嚴則下易慢而无戒備也，謂无恭畏備上之道。備，謂備上之求責也。</p>
+</blockquote>
+<p>从现代阅读角度看，五爻居于全卦关键位置，重点在承担责任、守住中道，并使个人能力真正服务于整体。</p>
+<h3 id="【上九】"><a href="#【上九】" class="headerlink" title="【上九】"></a>【上九】</h3><p><strong>上九：自天佑之，吉无不利。</strong></p>
+<p><strong>象曰：大有上吉，自天佑也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“自天佑之，吉无不利。”作为这一阶段的核心情境；《小象》又以“大有上吉，自天佑也。”点明观察角度。程颐解释此爻的切入点是：“上九在卦之終，居五位之地，是大有之極，而不居其有者也。處離之上，明之極也。唯至明所以不居其有，不至於過極也。有極而不處，則无盈滿之災，能順乎理者也。五之孚信而履其上，為蹈履誠信之義。五有文明之德，上能降志以應之，爲尚賢崇善之義。其處如此，合道之至也，自當享其福慶，自天佑之。行順乎天而獲天祐，故所往皆吉，无所不利也。”爻辞中出现“吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>上九在卦之終，居五位之地，是大有之極，而不居其有者也。處離之上，明之極也。唯至明所以不居其有，不至於過極也。有極而不處，則无盈滿之災，能順乎理者也。五之孚信而履其上，為蹈履誠信之義。五有文明之德，上能降志以應之，爲尚賢崇善之義。其處如此，合道之至也，自當享其福慶，自天佑之。行順乎天而獲天祐，故所往皆吉，无所不利也。</p>
+<p>大有之上，有極當變，由其所爲順天合道，故天祐助之，所以吉也。君子滿而不溢，乃天祐也。繫辭復申之云：天之所助者，順也；人之所助者，信也。履信思乎順，又以尚賢也，是以自天祐之，吉无不利也。履信，謂履五，五虛中，信也；思順，謂謙退不居；尚賢，謂志從於五。大有之世不可以盈豐，而復處盈焉，非所宜也。六爻之中，皆樂據權位，唯初、上不處其位，故初九无咎，上九无不利。上九在上，履信思順，故在上而得吉，蓋自天祐也。</p>
+</blockquote>
+<p>从现代阅读角度看，上爻表示一卦发展已到极处，最需要防止过度、僵化与不知转圜，为下一阶段留下余地。</p>
+<hr>
+<h2 id="四、-个人感悟"><a href="#四、-个人感悟" class="headerlink" title="四、 个人感悟"></a>四、 个人感悟</h2><p>大有收获，光明普照。顺天休命。 对我来说，火天大有最值得反复体会的，不是把“吉”或“凶”当作固定答案，而是看清一个处境如何随位置、关系与行动方式而变化。六爻从初到上展示了不同阶段：同一原则放在不同位置，结果可能完全不同。</p>
+<p>把它用于今天的学习、工作或关系判断时，我更愿意把卦辞当作问题框架，把爻辞当作阶段提醒：先确认自己身处哪一层，再决定进、退、守、变。这样读《易》，比直接追求一个预言式结论更稳妥。</p>
+<hr>
+<h2 id="五、-参考文献与版本说明"><a href="#五、-参考文献与版本说明" class="headerlink" title="五、 参考文献与版本说明"></a>五、 参考文献与版本说明</h2><ol>
+<li>《周易》经文及《象传》，本卦原文取自：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/wiki/%E5%91%A8%E6%98%93/%E5%A4%A7%E6%9C%89">维基文库《周易》本卦页面</a>；并参校<a target="_blank" rel="noopener" href="https://ctext.org/book-of-changes/zh">中国哲学书电子化计划《周易》</a>。</li>
+<li>北宋程颐《程氏易传》（亦称《伊川易传》），本卦参校：<a target="_blank" rel="noopener" href="https://www.taijizhidian.com/chengxu/liushisigua/1547.html">【周易上经】第14卦-大有䷍火天大有（乾下离上）-[北宋]程颐撰《程氏易传•卷一》</a>。</li>
+<li>北宋邵雍《皇极经世·观物外篇》，旁证原文：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/zh-hans/%E7%9A%87%E6%A5%B5%E7%B6%93%E4%B8%96/%E5%8D%B7%E5%8D%81%E4%B8%89">维基文库《皇极经世》卷十三</a>。</li>
 </ol>
-<p>最后，“自天祐之，吉无不利”。老天爷不会保佑贪得无厌的守财奴，天道保佑的，永远是那些像太阳（离）一样，将光明与财富普照天下（乾）的人。</p>
+<blockquote>
+<p>版本说明：经典原文与程颐文字保留底本中的繁体字、异体字及个别古字；“释义”“现代阅读角度”和“个人感悟”均为现代整理，不冒充古人原话。“邵雍易学旁证”只引用可定位的易学通论，不作逐卦、逐爻的托名断语。</p>
+</blockquote>
 
     </div>
 
@@ -362,7 +473,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E4%B9%9D%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初九】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【九二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【九三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【九四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【六五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E4%B9%9D%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上九】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F%EF%BC%9A%E8%B4%A2%E5%AF%8C%E6%98%AF%E4%B8%80%E5%9C%BA%E5%85%B3%E4%BA%8E%E2%80%9C%E5%BE%B7%E8%A1%8C%E2%80%9D%E7%9A%84%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟：财富是一场关于“德行”的压力测试</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E4%B9%9D%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初九】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【九二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【九三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【九四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【六五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E4%B9%9D%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上九】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E4%B8%8E%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E"><span class="nav-number">5.</span> <span class="nav-text">五、 参考文献与版本说明</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -378,7 +489,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -463,6 +574,10 @@
 
 
 
+  
+<script src="/js/local-search.js"></script>
+
+
 
 
 
@@ -491,6 +606,15 @@
 
 <script>
   (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
     var loadingBox = document.getElementById('loading-box');
     var root = document.documentElement;
 
@@ -521,8 +645,9 @@
 
 <script src="/js/latex-tool.js?v=20260805c"></script>
 <script src="/js/translate-tool.js?v=20260805a"></script>
-<script src="/js/hexagram-index.js?v=20260806a"></script>
-<script src="/js/divination-tool.js?v=20260810a"></script>
+<script src="/js/hexagram-post-map.js?v=20260830a"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
 
 </body>
 </html>

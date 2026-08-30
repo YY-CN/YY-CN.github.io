@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="山下有雷，颐。君子以慎言语，节饮食。">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="山下有雷，颐。君子以慎言语，节饮食。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-08-13T18:04:11.000Z">
-<meta property="article:modified_time" content="2026-08-13T17:05:23.989Z">
+<meta property="article:modified_time" content="2026-08-23T19:20:20.225Z">
 <meta property="article:author" content="Hyacinth">
 <meta property="article:tag" content="学习笔记">
 <meta property="article:tag" content="六十四卦">
@@ -127,6 +127,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -166,11 +167,38 @@
     <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -216,10 +244,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-08-14 02:04:11 / 修改时间：01:05:23" itemprop="dateCreated datePublished" datetime="2026-08-14T02:04:11+08:00">2026-08-14</time>
+              <time title="创建时间：2026-08-14 02:04:11" itemprop="dateCreated datePublished" datetime="2026-08-14T02:04:11+08:00">2026-08-14</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-24 03:20:20" itemprop="dateModified" datetime="2026-08-24T03:20:20+08:00">2026-08-24</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -230,7 +264,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>16 分钟</span>
+            </span>
             <div class="post-description">山下有雷，颐。君子以慎言语，节饮食。</div>
 
         </div>
@@ -243,44 +291,103 @@
 
       
         <h2 id="一、-经典原文"><a href="#一、-经典原文" class="headerlink" title="一、 经典原文"></a>一、 经典原文</h2><blockquote>
-<p><strong>【卦辞】</strong><br>颐：贞吉。观颐，自求口实。</p>
-<p><strong>【爻辞】</strong><br>初九：舍尔灵龟，观我朵颐，凶。<br>六二：颠颐，拂经，于丘颐，征凶。<br>六三：拂颐，贞凶，十年勿用，无攸利。<br>六四：颠颐，吉。虎视眈眈，其欲逐逐，无咎。<br>六五：拂经，居贞吉，不可涉大川。<br>上九：由颐，厉吉，大有涉川。</p>
-<p><strong>【大象传】</strong><br>山下有雷，颐；君子以慎言语，节饮食。</p>
+<p><strong>【卦辞】</strong><br>頤：貞吉。觀頤，自求口實。</p>
+<p><strong>【爻辞】</strong><br>初九：舍爾靈龜，觀我朵頤，凶。<br>六二：顛頤，拂經，于丘頤，征凶。<br>六三：拂頤，貞凶，十年勿用，无攸利。<br>六四：顛頤吉，虎視眈眈，其欲逐逐，无咎。<br>六五：拂經，居貞吉，不可涉大川。<br>上九：由頤，厲吉，利涉大川。</p>
+<p><strong>【大象传】</strong><br>象曰：山下有雷，頤；君子以慎言語，節飲食。</p>
 </blockquote>
-<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>当“大畜卦”（第二十六卦）积蓄了极其丰厚的物质与精神财富之后，接下来该如何消耗、如何保养自身呢？于是，我们迎来了第二十七卦——颐卦。“颐”的本义是面颊、腮巴骨，引申为咀嚼、饮食、颐养。这是一卦专门探讨“吃与说”、“物质给养与精神修养”的绝妙之卦。</p>
-<p><strong>1. 底层逻辑：山下有雷，慎言语节饮食</strong><br>颐卦的上卦为艮（山），下卦为震（雷&#x2F;动）。上面像稳固的上颚（山），下面像不断咀嚼活动的下颚（雷），整个卦象就像一张正在吃东西的大嘴。《象传》给出了君子效法这种意象的最高法则：“慎言语，节饮食”。嘴巴有两个功能：一是进食，二是说话。吃进去的东西关乎身体的健康，说出来的话关乎命运的祸福。管住嘴，是人一生最顶级的自律。</p>
-<p><strong>2. 颐养的法则：观颐，自求口实</strong><br>卦辞“颐：贞吉。观颐，自求口实”点明了颐养的本质：</p>
-<ul>
-<li><strong>观颐：</strong> 观察一个人是如何保养自己、以及他去保养什么人，就能看透他的品位与格局。</li>
-<li><strong>自求口实：</strong> 真正的颐养，绝不是靠别人的施舍与投喂，而是通过自己的正当努力，去谋求生存的口粮与发展的真才实学。坚守正道，自力更生，才是大吉。</li>
-</ul>
-<p><strong>3.北宋易学家邵雍解</strong><br>纯正以养，慎言节食；自力更生，切忌贪求。<br>得此卦者，正处于需要休养生息、固本培元的阶段。此时切忌心浮气躁、口无遮拦。最宜修心养性，节制欲望。凡事求诸己，不盲目羡慕他人，方能平安顺遂。</p>
-<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初九】"><a href="#【初九】" class="headerlink" title="【初九】"></a>【初九】</h3><p><strong>初九：舍尔灵龟，观我朵颐，凶。</strong><br><strong>象曰：观我朵颐，亦不足贵也。</strong></p>
-<p><strong>释义</strong><br>初九：舍弃了你自己原本像神龟一样不用吃东西也能长寿的先天资本，却眼巴巴地看着我大吃大嚼（流口水），凶险。<br>《象辞》说：看着别人大吃大嚼而流口水，这种贪婪羡慕的样子，实在是不值得尊重。</p>
-<p><strong>北宋易学家邵雍解</strong><br>凶：得此爻者，极容易陷入“精神内耗”与“嫉妒”。你明明自己手里有很好的资源或天赋（灵龟），却偏偏要去羡慕别人表面的光鲜，丧失了自我，盲目跟风，必将招致灾祸。</p>
-<h3 id="【六二】"><a href="#【六二】" class="headerlink" title="【六二】"></a>【六二】</h3><p><strong>六二：颠颐，拂经，于丘颐，征凶。</strong><br><strong>象曰：六二征凶，行失类也。</strong></p>
-<p><strong>释义</strong><br>六二：倒行逆施地去求取颐养（颠颐），违背了常理（拂经）。向高处（于丘）去祈求供养，前去必有凶险。<br>《象辞》说：六二前去有凶险，是因为这种行为丧失了同类之间的正常道义（阴柔不自立，妄求攀附）。</p>
-<p><strong>北宋易学家邵雍解</strong><br>凶：得此爻者，总想着走捷径。自身不努力，只想依附于权贵或向不该求的人去乞讨利益。这种违背原则的“攀附”，最终会让你失去尊严且一无所获。</p>
-<h3 id="【六三】"><a href="#【六三】" class="headerlink" title="【六三】"></a>【六三】</h3><p><strong>六三：拂颐，贞凶，十年勿用，无攸利。</strong><br><strong>象曰：十年勿用，道大悖也。</strong></p>
-<p><strong>释义</strong><br>六三：违背了正当的颐养之道。即便坚守也凶险，长达十年都不能有所作为，没有任何好处。<br>《象辞》说：十年都不能有所作为，是因为六三的做法与大道完全背道而驰。</p>
-<p><strong>北宋易学家邵雍解</strong><br>大凶：得此爻者，为了满足无底线的欲望，采取了极其错误甚至非法的手段。德不配位，纵欲过度，必将受到长久的严厉惩罚（十年勿用）。此时必须悬崖勒马，彻底改过。</p>
-<h3 id="【六四】"><a href="#【六四】" class="headerlink" title="【六四】"></a>【六四】</h3><p><strong>六四：颠颐，吉。虎视眈眈，其欲逐逐，无咎。</strong><br><strong>象曰：颠颐之吉，上施光也。</strong></p>
-<p><strong>释义</strong><br>六四：向下求取贤才来颐养天下（颠颐），吉祥。虽然像老虎一样目光灼灼地盯着、急切地追求（逐逐），但因为是为了大众的福祉，所以没有灾难。<br>《象辞》说：向下求养而吉祥，是因为六四能将恩泽和光明普施于下方。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，身居高位，责任重大。虽然你表现出对人才或资源极度的渴望（虎视眈眈），但这并非出于私欲，而是为了团队和大局的生存。求贤若渴，大公无私，自然无咎。</p>
-<h3 id="【六五】"><a href="#【六五】" class="headerlink" title="【六五】"></a>【六五】</h3><p><strong>六五：拂经，居贞吉，不可涉大川。</strong><br><strong>象曰：居贞之吉，顺以从上也。</strong></p>
-<p><strong>释义</strong><br>六五：违背了君王本应养育天下的常理（因为自身柔弱无力），但只要坚守正道，依靠上面的贤臣（上九）也是吉祥的。不过此时不可去冒险跨越重大的艰难险阻。<br>《象辞》说：坚守正道而吉祥，是因为能顺从并依靠在上的贤能之人。</p>
-<p><strong>北宋易学家邵雍解</strong><br>平&#x2F;吉：得此爻者，处于领导位置，但自身能力或资源不足以独当一面。此时最好的智慧就是“放权”——信任并重用真正有能力的核心骨干（上九）。守成则吉，切忌盲目开展大项目或高风险投资。</p>
-<h3 id="【上九】"><a href="#【上九】" class="headerlink" title="【上九】"></a>【上九】</h3><p><strong>上九：由颐，厉吉，大有涉川。</strong><br><strong>象曰：由颐厉吉，大有庆也。</strong></p>
-<p><strong>释义</strong><br>上九：天下万民都由你来提供颐养（由颐）。责任极其重大、充满危险，但最终吉祥。大有利于去跨越艰难险阻、建功立业。<br>《象辞》说：由你颐养天下，虽然艰险但最终吉祥，是因为天下人都将迎来重大的喜庆。</p>
-<p><strong>北宋易学家邵雍解</strong><br>大吉：得此爻者，是整个团队或家族的“衣食父母”和绝对核心。你承担着极大的压力与责任，但在克服这种高强度的艰险后，你将拥有无与伦比的威望与实力，足以成就造福一方的伟大功业。</p>
-<h2 id="四、-个人感悟：“信息饮食”时代的护身符"><a href="#四、-个人感悟：“信息饮食”时代的护身符" class="headerlink" title="四、 个人感悟：“信息饮食”时代的护身符"></a>四、 个人感悟：“信息饮食”时代的护身符</h2><p>在这个物资极大丰富、甚至产能过剩的现代社会，“没饭吃”已经不再是我们面临的主要危机。但当我们用现代的眼光再去读颐卦的“君子以慎言语，节饮食”时，会发现它的智慧简直直击当代人的痛点。</p>
-<p>读完颐卦，我看到了三种极其清晰的“现代自我修养法”：</p>
-<ol>
-<li><strong>守住你的“灵龟”，拒绝比较带来的内耗：</strong> 初九爻的“舍尔灵龟，观我朵颐”就是现代社交媒体时代的照妖镜。你明明有一份安稳的工作、一个健康的身体（灵龟），但你一打开朋友圈，看到别人开豪车、吃米其林，你瞬间就口水直流、心态失衡（观我朵颐）。为了追求那些虚荣的表象，你放弃了自己的核心竞争力，去搞盲目的投资和攀附，这就是现代人走向“凶”的开端。自求口实，专注自身的成长，才是最高级的活法。</li>
-<li><strong>“节饮食”：不仅是节胃，更是节“脑”：</strong> 嘴巴吃进了过量的垃圾食品，身体会得三高；大脑如果每天都被各种短视频、八卦撕逼、碎片化焦虑填满，精神就会严重“消化不良”。在这个信息爆炸的时代，过滤你所接收的信息（精神饮食），不看烂新闻，不交烂朋友，这就是真正的“节饮食”。</li>
-<li><strong>“慎言语”：闭嘴是最高级的风水：</strong> 祸从口出，病从口入。颐卦把“说话”和“吃饭”放在了同等重要的位置上。很多时候，你费尽心机积攒的福报（大畜），就因为你在不该说话的时候说了一句刻薄的、炫耀的、泄密的话，瞬间漏光。</li>
+<hr>
+<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>山雷颐的现代摘要是：颐养自正，修身养性。 这只是帮助进入文本的提要，具体判断仍要回到卦辞、爻位与上下文。</p>
+<p><strong>1. 底层逻辑：颐养自正，修身养性</strong></p>
+<p>程颐在释卦开头先从卦序、卦体和上下卦关系说明本卦之所以成立：</p>
+<blockquote>
+<p>頤，《序卦》：「物畜然後可養，故受之以頤。」夫物既畜聚，則必有以養之，无養則不能存息，頤所以次大畜也。卦上艮下震，上下二陽爻中含四陰，上止而下動，外實而中虛，人頤頷之象也。頤，養也。人口之所以飲食養人之身，故名為頤。聖人設卦推養之義，大至於天地養育萬物，聖人養賢以及萬民，與人之養生養形養德養人，皆頤養之道也。動息節宣以養生也，飲食衣服以養形也，威儀行義以養德也，推己及人以養人也。</p>
+</blockquote>
+<p><strong>2. 卦辞与大象</strong></p>
+<p>卦辞给出全卦的基本处境与行动边界；大象则把卦象转化为修身、处事或治理的提示。程颐分别解释为：</p>
+<blockquote>
+<p>頤之道以正則吉也。人之養身養德養人、養於人，皆以正道則吉也。天地造化養育萬物，各得其宜者，亦正而已矣。觀頤自求口實，觀人之所頤與其自求口實之道，則善惡吉凶可見矣。</p>
+<p>以二體言之，山下有雷，雷震於山下，山之生物皆動，其根荄發其萌芽，為養之象。以上下之義言之，艮止而震動，上止下動，頤頷之象。以卦形言之，上下二陽中含四陰，外實中虛，頤口之象。口所以養身也，故君子觀其象以養其身，慎言語以養其德，節飲食以養其體，不唯就口取養義。事之至近而所繫至大者，莫過於言語飲食也。在身為言語，於天下則凡命令政教出於身者皆是，慎之則必當而无失。在身為飲食於天下，則凡貨資財用養於人者，皆是節之則適宜而无傷，推養之道，養德養天下莫不然也。</p>
+</blockquote>
+<p><strong>3. 邵雍易学旁证</strong></p>
+<p>邵雍在《皇极经世·观物外篇》中说：</p>
+<blockquote>
+<p>“夫卦，各有性有体，然皆不离乾坤之门。”</p>
+<p>“君子于易，玩象、玩数、玩辞、玩意。”</p>
+</blockquote>
+<p>这两段是邵雍讨论读《易》方法的通论，并非针对山雷颐所下的吉凶断语。放在这里作为旁证，是提醒我们同时观察卦象、数位、辞义与整体意旨，不能只截取一句话作孤立判断。</p>
+<hr>
+<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初九】"><a href="#【初九】" class="headerlink" title="【初九】"></a>【初九】</h3><p><strong>初九：舍爾靈龜，觀我朵頤，凶。</strong></p>
+<p><strong>象曰：觀我朵頤，亦不足貴也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“舍爾靈龜，觀我朵頤，凶。”作为这一阶段的核心情境；《小象》又以“觀我朵頤，亦不足貴也。”点明观察角度。程颐解释此爻的切入点是：“蒙之初六，蒙者也，爻乃主發蒙而言。頤之初九亦假外而言爾，謂初也，舍爾之靈龜，乃觀我而朵頤，我對爾而設，初之所以朵頤者，四也。然非四謂之也。假設之辭爾。九陽體剛明，其才智足以養正者也。龜能咽息不食，靈龜喻其明智而可以不求養於外也。才雖如是，然以陽居動體而在頤之時，求頤人所欲也。上應於四，不能自守，志在上行，說所欲而朵頤者也。心既動，則其自失必矣。迷欲而失己，以陽而從陰，則何所不至，是以凶也。朵頤為朵動其頤頷，又人見食而欲之，則動頤垂涎，故以為象。”爻辞中出现“凶”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>蒙之初六，蒙者也，爻乃主發蒙而言。頤之初九亦假外而言爾，謂初也，舍爾之靈龜，乃觀我而朵頤，我對爾而設，初之所以朵頤者，四也。然非四謂之也。假設之辭爾。九陽體剛明，其才智足以養正者也。龜能咽息不食，靈龜喻其明智而可以不求養於外也。才雖如是，然以陽居動體而在頤之時，求頤人所欲也。上應於四，不能自守，志在上行，說所欲而朵頤者也。心既動，則其自失必矣。迷欲而失己，以陽而從陰，則何所不至，是以凶也。朵頤為朵動其頤頷，又人見食而欲之，則動頤垂涎，故以為象。</p>
+<p>九動體，朵頤謂其說陰而志動，既為欲所動，則雖有剛健明智之才，終必自失，故其才亦不足貴也。人之貴乎剛者，為其能立而不屈於欲也。貴乎明者，為其能照而不失於正也。既惑所欲而失其正，何剛明之有為可賤也。</p>
+</blockquote>
+<p>从现代阅读角度看，初爻处在事情开端，适合先辨明基础、条件与时机，不宜把局部迹象过早当成最终结论。</p>
+<h3 id="【六二】"><a href="#【六二】" class="headerlink" title="【六二】"></a>【六二】</h3><p><strong>六二：顛頤，拂經，于丘頤，征凶。</strong></p>
+<p><strong>象曰：六二征凶，行失類也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“顛頤，拂經，于丘頤，征凶。”作为这一阶段的核心情境；《小象》又以“六二征凶，行失類也。”点明观察角度。程颐解释此爻的切入点是：“女不能自處，必從男。陰不能獨立，必從陽。二陰柔不能自養，待養於人者也。天子養天下諸侯，養一國臣，食君上之祿，民賴司牧之養，皆以上養下，理之正也。二既不能自養，必求養於剛陽，若反下求於初，則為顛倒，故云顛頤。顛則拂違經常，不可行也。若求養於丘，則往必有凶。丘在外而高之物，謂上九也。卦止二陽，既不可顛頤于初，若求頤於上九，往則有凶。在頤之時，相應則相養者也。上非其應而往求養，非道妄動，是以凶也。顛頤則拂經不獲其養爾，妄求於上，往則得凶也。……”爻辞中出现“凶”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>女不能自處，必從男。陰不能獨立，必從陽。二陰柔不能自養，待養於人者也。天子養天下諸侯，養一國臣，食君上之祿，民賴司牧之養，皆以上養下，理之正也。二既不能自養，必求養於剛陽，若反下求於初，則為顛倒，故云顛頤。顛則拂違經常，不可行也。若求養於丘，則往必有凶。丘在外而高之物，謂上九也。卦止二陽，既不可顛頤于初，若求頤於上九，往則有凶。在頤之時，相應則相養者也。上非其應而往求養，非道妄動，是以凶也。顛頤則拂經不獲其養爾，妄求於上，往則得凶也。今有人，才不足以自養，見在上者勢力足以養人，非其族類，妄往求之，取辱得凶必矣。六二中正，在他卦多吉，而凶何也？曰：時然也。陰柔既不足以自養，初上二爻皆非其與，故往求則悖理而得凶也。</p>
+<p>征而從上則凶者，非其類故也。往求而失其類，得凶宜矣。行，往也。</p>
+</blockquote>
+<p>从现代阅读角度看，二爻进入落实阶段，通常要把行动放回中正、协作与可持续的尺度中衡量。</p>
+<h3 id="【六三】"><a href="#【六三】" class="headerlink" title="【六三】"></a>【六三】</h3><p><strong>六三：拂頤，貞凶，十年勿用，无攸利。</strong></p>
+<p><strong>象曰：十年勿用，道大悖也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“拂頤，貞凶，十年勿用，无攸利。”作为这一阶段的核心情境；《小象》又以“十年勿用，道大悖也。”点明观察角度。程颐解释此爻的切入点是：“頤之道，唯正則吉。三以陰柔之質而處不中正，又在動之極，是柔邪不正而動者也。其養如此，拂違於頤之正道，是以凶也。得頤之正，則所養皆吉，求養、養人則合於義，自養則成其德。三乃拂違正道，故戒以十年勿用。十，數之終，謂終不可用，无所往而利也。”爻辞中出现“凶、无攸利”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>頤之道，唯正則吉。三以陰柔之質而處不中正，又在動之極，是柔邪不正而動者也。其養如此，拂違於頤之正道，是以凶也。得頤之正，則所養皆吉，求養、養人則合於義，自養則成其德。三乃拂違正道，故戒以十年勿用。十，數之終，謂終不可用，无所往而利也。</p>
+<p>所以戒忠不可用，以其所由之道大悖義理也。</p>
+</blockquote>
+<p>从现代阅读角度看，三爻处在内卦将尽的转换处，进退压力往往同时出现，尤其需要控制冒进与失位的风险。</p>
+<h3 id="【六四】"><a href="#【六四】" class="headerlink" title="【六四】"></a>【六四】</h3><p><strong>六四：顛頤吉，虎視眈眈，其欲逐逐，无咎。</strong></p>
+<p><strong>象曰：顛頤之吉，上施光也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“顛頤吉，虎視眈眈，其欲逐逐，无咎。”作为这一阶段的核心情境；《小象》又以“顛頤之吉，上施光也。”点明观察角度。程颐解释此爻的切入点是：“四在人上，大臣之位。六以陰居之，陰柔不足以自養，況養天下乎。初九以剛陽居下，在下之賢也。與四為應，四又柔順而正，是能順於初，賴初之養也。以上養下，則為順，今反求下之養，顛倒也，故曰顛頤。然己不勝其任，求在下之賢而順從之，以濟其事，則天下得其養而已。无曠敗之咎，故為吉也。夫居上位者，必有才德威望，為下民所尊畏，則事行而眾心服從，若或下易其上，則政出而人違，刑施而怨起，輊於陵犯亂之由也。……”爻辞中出现“吉、无咎”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>四在人上，大臣之位。六以陰居之，陰柔不足以自養，況養天下乎。初九以剛陽居下，在下之賢也。與四為應，四又柔順而正，是能順於初，賴初之養也。以上養下，則為順，今反求下之養，顛倒也，故曰顛頤。然己不勝其任，求在下之賢而順從之，以濟其事，則天下得其養而已。无曠敗之咎，故為吉也。夫居上位者，必有才德威望，為下民所尊畏，則事行而眾心服從，若或下易其上，則政出而人違，刑施而怨起，輊於陵犯亂之由也。六四雖能順從剛陽，不廢厥職，然質本陰柔，賴人以濟，人之所輕，故必養其威嚴，耽耽然如虎視，則能重其體貌，下不敢易。又從於人者必有常，若間或无繼，則其政敗矣。其欲謂所須用者，必逐逐相繼而不乏，則其事可濟。若取於人而无繼，則困窮矣。既有威嚴，又所施不窮，故能无咎也。二顛頤則拂經，四則吉，何也？曰：二在上而反求養於下，下非其所應類，故為拂經。四則居上位，以貴下賤，使在下之賢由己以行其道，上下之志相應而施於民，何吉如之。自三以下，養口體者也。四以上，養德義者也。以君而資養於臣，以上位而賴養於下，皆養德也。</p>
+<p>顛倒求養而所以吉者，蓋得到剛陽之應，以濟其事，致己居上之德，施光明被于天下，吉孰大焉。</p>
+</blockquote>
+<p>从现代阅读角度看，四爻由内转外，开始接近全局事务与主事位置，行动之前宜先建立信任并审慎辨势。</p>
+<h3 id="【六五】"><a href="#【六五】" class="headerlink" title="【六五】"></a>【六五】</h3><p><strong>六五：拂經，居貞吉，不可涉大川。</strong></p>
+<p><strong>象曰：居貞之吉，順以從上也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“拂經，居貞吉，不可涉大川。”作为这一阶段的核心情境；《小象》又以“居貞之吉，順以從上也。”点明观察角度。程颐解释此爻的切入点是：“六五，頤之時，居君位，養天下者也。然其陰柔之質，才不足以養天下，上有剛陽之賢，故順從之，賴其養己以濟天下。君者養人者也，反賴人之養，是違拂於經常。既以己之不足而順從於賢師傅。上師傅之位也，必居守貞固，篤於委信，則能輔翼其身，澤及天下，故吉也。陰柔之質，无貞剛之性，故戒以能居貞則吉。以陰柔之才，雖倚賴剛賢，能持循於平時，不可處艱難變故之際，故云不可涉大川也。以成王之才，不至甚柔弱也。當管蔡之亂，幾不保於周公，況其下者乎。……”爻辞中出现“吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>六五，頤之時，居君位，養天下者也。然其陰柔之質，才不足以養天下，上有剛陽之賢，故順從之，賴其養己以濟天下。君者養人者也，反賴人之養，是違拂於經常。既以己之不足而順從於賢師傅。上師傅之位也，必居守貞固，篤於委信，則能輔翼其身，澤及天下，故吉也。陰柔之質，无貞剛之性，故戒以能居貞則吉。以陰柔之才，雖倚賴剛賢，能持循於平時，不可處艱難變故之際，故云不可涉大川也。以成王之才，不至甚柔弱也。當管蔡之亂，幾不保於周公，況其下者乎。故書曰：王亦未敢誚公，賴二公得終信，故艱險之際，非剛明之主，不可恃也，不得已而濟艱險者，則有矣。發此義者，所以深戒於為君也。於上九則據為臣，致身盡忠之道言，故不同也。</p>
+<p>居貞之吉者，謂能堅固順從於上九之賢，以養天下也。</p>
+</blockquote>
+<p>从现代阅读角度看，五爻居于全卦关键位置，重点在承担责任、守住中道，并使个人能力真正服务于整体。</p>
+<h3 id="【上九】"><a href="#【上九】" class="headerlink" title="【上九】"></a>【上九】</h3><p><strong>上九：由頤，厲吉，利涉大川。</strong></p>
+<p><strong>象曰：由頤厲吉，大有慶也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“由頤，厲吉，利涉大川。”作为这一阶段的核心情境；《小象》又以“由頤厲吉，大有慶也。”点明观察角度。程颐解释此爻的切入点是：“上九以剛陽之德居師傅之任，六五之君柔順而從於己，賴己之養，是當天下之任，天下由之以養也。以人臣而當是任，必常懷危厲則吉也。如伊尹周公，何嘗不憂勤競畏，故得終吉。夫以君之才不足而倚賴於己身，當天下大任，宜竭其才力，濟天下之艱危，成天下之治安，故曰利涉大川。得君如此之專，受任如此之重，茍不濟天下艱危，何足稱委遇而謂之賢乎。當盡誠竭力而不顧慮，然惕厲則不可忘也。”爻辞中出现“吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>上九以剛陽之德居師傅之任，六五之君柔順而從於己，賴己之養，是當天下之任，天下由之以養也。以人臣而當是任，必常懷危厲則吉也。如伊尹周公，何嘗不憂勤競畏，故得終吉。夫以君之才不足而倚賴於己身，當天下大任，宜竭其才力，濟天下之艱危，成天下之治安，故曰利涉大川。得君如此之專，受任如此之重，茍不濟天下艱危，何足稱委遇而謂之賢乎。當盡誠竭力而不顧慮，然惕厲則不可忘也。</p>
+<p>若上九之當大任如是，能競畏如是，天下被其德澤，時大有福慶也。</p>
+</blockquote>
+<p>从现代阅读角度看，上爻表示一卦发展已到极处，最需要防止过度、僵化与不知转圜，为下一阶段留下余地。</p>
+<hr>
+<h2 id="四、-个人感悟"><a href="#四、-个人感悟" class="headerlink" title="四、 个人感悟"></a>四、 个人感悟</h2><p>颐养自正，修身养性。 对我来说，山雷颐最值得反复体会的，不是把“吉”或“凶”当作固定答案，而是看清一个处境如何随位置、关系与行动方式而变化。六爻从初到上展示了不同阶段：同一原则放在不同位置，结果可能完全不同。</p>
+<p>把它用于今天的学习、工作或关系判断时，我更愿意把卦辞当作问题框架，把爻辞当作阶段提醒：先确认自己身处哪一层，再决定进、退、守、变。这样读《易》，比直接追求一个预言式结论更稳妥。</p>
+<hr>
+<h2 id="五、-参考文献与版本说明"><a href="#五、-参考文献与版本说明" class="headerlink" title="五、 参考文献与版本说明"></a>五、 参考文献与版本说明</h2><ol>
+<li>《周易》经文及《象传》，本卦原文取自：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/wiki/%E5%91%A8%E6%98%93/%E9%A0%A4">维基文库《周易》本卦页面</a>；并参校<a target="_blank" rel="noopener" href="https://ctext.org/book-of-changes/zh">中国哲学书电子化计划《周易》</a>。</li>
+<li>北宋程颐《程氏易传》（亦称《伊川易传》），本卦参校：<a target="_blank" rel="noopener" href="https://www.taijizhidian.com/chengxu/liushisigua/1560.html">【周易上经】第27卦-颐卦䷚山雷颐卦（震下艮上）-[北宋]程颐撰《程氏易传•卷二》</a>。</li>
+<li>北宋邵雍《皇极经世·观物外篇》，旁证原文：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/zh-hans/%E7%9A%87%E6%A5%B5%E7%B6%93%E4%B8%96/%E5%8D%B7%E5%8D%81%E4%B8%89">维基文库《皇极经世》卷十三</a>。</li>
 </ol>
-<p>山不动，雷在动，一张一合之间，就是我们的一生。愿我们都能管好这张嘴，吃干净的饭，说温暖的话，养浩然之气。&#96;&#96;&#96;</p>
+<blockquote>
+<p>版本说明：经典原文与程颐文字保留底本中的繁体字、异体字及个别古字；“释义”“现代阅读角度”和“个人感悟”均为现代整理，不冒充古人原话。“邵雍易学旁证”只引用可定位的易学通论，不作逐卦、逐爻的托名断语。</p>
+</blockquote>
 
     </div>
 
@@ -366,7 +473,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E4%B9%9D%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初九】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【六二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【六三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【六四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【六五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E4%B9%9D%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上九】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F%EF%BC%9A%E2%80%9C%E4%BF%A1%E6%81%AF%E9%A5%AE%E9%A3%9F%E2%80%9D%E6%97%B6%E4%BB%A3%E7%9A%84%E6%8A%A4%E8%BA%AB%E7%AC%A6"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟：“信息饮食”时代的护身符</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E4%B9%9D%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初九】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【六二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【六三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【六四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【六五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E4%B9%9D%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上九】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E4%B8%8E%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E"><span class="nav-number">5.</span> <span class="nav-text">五、 参考文献与版本说明</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -382,7 +489,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -467,6 +574,10 @@
 
 
 
+  
+<script src="/js/local-search.js"></script>
+
+
 
 
 
@@ -495,6 +606,15 @@
 
 <script>
   (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
     var loadingBox = document.getElementById('loading-box');
     var root = document.documentElement;
 
@@ -525,8 +645,9 @@
 
 <script src="/js/latex-tool.js?v=20260805c"></script>
 <script src="/js/translate-tool.js?v=20260805a"></script>
-<script src="/js/hexagram-index.js?v=20260806a"></script>
-<script src="/js/divination-tool.js?v=20260810a"></script>
+<script src="/js/hexagram-post-map.js?v=20260830a"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
 
 </body>
 </html>

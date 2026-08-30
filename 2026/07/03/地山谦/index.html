@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="地中有山，谦。君子以裒多益寡，称物平施。">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="地中有山，谦。君子以裒多益寡，称物平施。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-07-03T07:41:55.000Z">
-<meta property="article:modified_time" content="2026-07-03T07:44:53.013Z">
+<meta property="article:modified_time" content="2026-08-23T19:20:20.214Z">
 <meta property="article:author" content="Hyacinth">
 <meta property="article:tag" content="学习笔记">
 <meta property="article:tag" content="六十四卦">
@@ -127,6 +127,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -166,11 +167,38 @@
     <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -216,10 +244,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-07-03 15:41:55 / 修改时间：15:44:53" itemprop="dateCreated datePublished" datetime="2026-07-03T15:41:55+08:00">2026-07-03</time>
+              <time title="创建时间：2026-07-03 15:41:55" itemprop="dateCreated datePublished" datetime="2026-07-03T15:41:55+08:00">2026-07-03</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-24 03:20:20" itemprop="dateModified" datetime="2026-08-24T03:20:20+08:00">2026-08-24</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -230,7 +264,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
             <div class="post-description">地中有山，谦。君子以裒多益寡，称物平施。</div>
 
         </div>
@@ -243,40 +291,103 @@
 
       
         <h2 id="一、-经典原文"><a href="#一、-经典原文" class="headerlink" title="一、 经典原文"></a>一、 经典原文</h2><blockquote>
-<p><strong>【卦辞】</strong><br>谦：亨，君子有终。</p>
-<p><strong>【爻辞】</strong><br>初六：谦谦君子，用涉大川，吉。<br>六二：鸣谦，贞吉。<br>九三：劳谦君子，有终吉。<br>六四：无不利，撝谦。<br>六五：不富，以其邻，利用侵伐，无不利。<br>上六：鸣谦，利用行师，征邑国。</p>
-<p><strong>【大象传】</strong><br>地中有山，谦；君子以裒多益寡，称物平施。</p>
+<p><strong>【卦辞】</strong><br>謙：亨，君子有終。</p>
+<p><strong>【爻辞】</strong><br>初六：謙謙君子，用涉大川，吉。<br>六二：鳴謙，貞吉。<br>九三：勞謙君子，有終吉。<br>六四：无不利，撝謙。<br>六五：不富，以其鄰，利用侵伐，无不利。<br>上六：鳴謙，利用行師，征邑國。</p>
+<p><strong>【大象传】</strong><br>象曰：地中有山，謙；君子以裒多益寡，稱物平施。</p>
 </blockquote>
-<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>当一个人或一个组织通过“大有卦”获得了极大的财富与成功之后，最容易犯的毛病就是骄傲自满。为了保住这份丰硕的果实，《易经》紧接着给出了第十五卦——谦卦。在整部《易经》六十四卦、三百八十四爻中，绝大多数卦象都是吉凶参半的，唯独“谦卦”，是唯一一个六爻皆吉、没有任何负面断语的“完美之卦”。</p>
-<p><strong>1. 底层逻辑：地中有山，谦</strong><br>谦卦的上卦为坤（地），下卦为艮（山）。山本来是高耸入云的，但在这里，巍峨的高山却甘愿把自己隐藏在平缓的大地之下，这就是“谦”的极致意象——实力雄厚，却极其低调。君子效法这种精神，要做到“裒多益寡，称物平施”：把多余的减损下来，去补贴不足的，就像水往低处流一样，保持一种微妙的动态平衡。</p>
-<p><strong>2. 处世的法则：君子有终</strong><br>卦辞“谦：亨，君子有终”极其平实，却掷地有声。<br>谦虚必然带来亨通。但真正的考验不是一时半会儿的低调，而是“有终”——能够把谦虚贯穿始终。无数人成功时能装作谦虚，一旦得势便原形毕露，只有真正的君子，才能善始善终。</p>
-<p><strong>3.北宋易学家邵雍解</strong><br>谦和忍让，尊人自卑；利用虚心，万事可达。<br>得此卦者，吉利平安。为人处事只要保持谦虚低调、不张扬，就能得到众人的拥护与上天的庇佑，诸事顺遂。最忌心高气傲、自以为是。</p>
-<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初六】"><a href="#【初六】" class="headerlink" title="【初六】"></a>【初六】</h3><p><strong>初六：谦谦君子，用涉大川，吉。</strong><br><strong>象曰：谦谦君子，卑以自牧也。</strong></p>
-<p><strong>释义</strong><br>初六：谦虚而又谦虚的君子，用这种态度去跋山涉水（克服巨大困难），吉祥。<br>《象辞》说：谦虚又谦虚，是因为能用极其谦卑的态度去修养自己的品德。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，正处于事业起步或面临重大挑战（涉大川）的时期。此时没有任何资本可以炫耀，唯有把姿态放低再放低，虚心求教，才能赢得他人的帮助，顺利渡过难关。</p>
-<h3 id="【六二】"><a href="#【六二】" class="headerlink" title="【六二】"></a>【六二】</h3><p><strong>六二：鸣谦，贞吉。</strong><br><strong>象曰：鸣谦贞吉，中心得也。</strong></p>
-<p><strong>释义</strong><br>六二：名声远播却依然保持谦虚（鸣，也有共鸣之意），坚守正道，吉祥。<br>《象辞》说：声名远播且谦虚吉祥，是因为这种谦虚是发自内心的，而不是装出来的。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，已经取得了一定的成绩，甚至有了好名声。但你并没有因此膨胀，而是发自内心地保持谦和。这种表里如一的修养，会让你的人际关系极其稳固。</p>
-<h3 id="【九三】"><a href="#【九三】" class="headerlink" title="【九三】"></a>【九三】</h3><p><strong>九三：劳谦君子，有终吉。</strong><br><strong>象曰：劳谦君子，万民服也。</strong></p>
-<p><strong>释义</strong><br>九三：功劳极大却极其谦虚的君子，终究会获得好结果，吉祥。<br>《象辞》说：劳苦功高又谦虚，天下万民都会心悦诚服。</p>
-<p><strong>北宋易学家邵雍解</strong><br>大吉：得此爻者，是团队中的中流砥柱。你付出了最多的心血，立下了汗马功劳，却从不抢功，甚至把荣誉让给别人。这种大格局，不仅不会让你吃亏，反而会让所有人死心塌地追随你。</p>
-<h3 id="【六四】"><a href="#【六四】" class="headerlink" title="【六四】"></a>【六四】</h3><p><strong>六四：无不利，撝谦。</strong><br><strong>象曰：无不利，撝谦；不违则也。</strong></p>
-<p><strong>释义</strong><br>六四：没有任何不顺利，发挥（撝，音huī，发扬）谦虚的美德。<br>《象辞》说：发挥谦虚而无不利，是因为这种行为没有违背事物运行的规律。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，身居高位（近君大臣），处在极其敏感的位置。此时唯一的护身符就是“极度谦卑”。不越权、不抢风头，严格遵守规矩，就能如鱼得水，无往不利。</p>
-<h3 id="【六五】"><a href="#【六五】" class="headerlink" title="【六五】"></a>【六五】</h3><p><strong>六五：不富，以其邻，利用侵伐，无不利。</strong><br><strong>象曰：利用侵伐，征不服也。</strong></p>
-<p><strong>释义</strong><br>六五：不用财富去收买，而是用谦和去团结邻国（或同伴）；但对于那些骄横不讲理的人，也适宜用武力去征伐，没有什么不顺利的。<br>《象辞》说：适宜去征伐，是为了讨伐那些不服从正道的人。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，处于领导地位。此爻点破了“谦虚”的底线：谦虚绝不是软弱可欺！对内，你不靠金钱而是靠德行去团结众人；对外，对于不守规矩的恶势力，你同样要有雷霆手段（利用侵伐）。菩萨心肠，金刚手段。</p>
-<h3 id="【上六】"><a href="#【上六】" class="headerlink" title="【上六】"></a>【上六】</h3><p><strong>上六：鸣谦，利用行师，征邑国。</strong><br><strong>象曰：鸣谦，志未得也。可用行师，征邑国也。</strong></p>
-<p><strong>释义</strong><br>上六：名声远播的谦虚，适宜出动军队，去征伐自己的封邑国（治理内部的叛乱或纠正自身的问题）。<br>《象辞》说：名望极高，但谦虚的志向还没有完全实现。所以适宜用军队去征伐自己内部的问题。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，谦虚之道已经修到了极点。但外部的问题虽然解决了，内部（或自身）可能还存在隐患。此时的智慧是向内开刀，严厉整顿内部纪律，自我革命，方能彻底圆满。</p>
-<h2 id="四、-个人感悟：谦虚不是自卑，而是“地中有山”的实力与清醒"><a href="#四、-个人感悟：谦虚不是自卑，而是“地中有山”的实力与清醒" class="headerlink" title="四、 个人感悟：谦虚不是自卑，而是“地中有山”的实力与清醒"></a>四、 个人感悟：谦虚不是自卑，而是“地中有山”的实力与清醒</h2><p>在整部六十四卦里，没有任何一卦像“谦卦”这样，无论你抛到哪一爻，都是吉利的。古人用了六个极度温柔又充满力量的爻辞告诉我们：<strong>在这个世界上，能够无视周期、穿越牛熊的终极武器，只有“谦卑”。</strong></p>
-<p>谦卦彻底打破了现代人对“谦虚就是讨好、软弱”的误解，它教给我三个极其高级的处世逻辑：</p>
-<ol>
-<li><strong>顶级的能力，是“地中有山”：</strong> 真正的谦虚，绝不是因为你是个废柴而感到自卑。而是你明明有着巍峨如大山一般的才华和财富（艮），却依然愿意把自己放低，深深地隐藏在广袤的大地（坤）之下。没有实力的低调叫怯懦，有实力的低调才叫“谦”。</li>
-<li><strong>“劳谦”是职场与合伙的最高境界：</strong> 九三爻的“劳谦君子”太难做到了。人一旦立了功、出了力，恨不得拿个大喇叭让全世界都知道。但《易经》告诉你，你越是不去争那个功劳，大家心里越是明镜似的（万民服也）。不争，才是最大的争。</li>
-<li><strong>谦卑是有牙齿的（利用侵伐）：</strong> 六五和上六爻简直是神来之笔。很多人觉得谦虚的人就该任人拿捏，但谦卦在最后两爻直接亮出了刀剑——“利用行师”、“利用侵伐”。谦和是我的修养，但如果你得寸进尺、破坏规矩，我绝对有实力和手段把你打回原形。</li>
+<hr>
+<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>地山谦的现代摘要是：谦受益，满招损。谦虚待人，终得善终。 这只是帮助进入文本的提要，具体判断仍要回到卦辞、爻位与上下文。</p>
+<p><strong>1. 底层逻辑：谦受益，满招损</strong></p>
+<p>程颐在释卦开头先从卦序、卦体和上下卦关系说明本卦之所以成立：</p>
+<blockquote>
+<p>謙，《序卦》：｢有大者不可以盈，故受之以謙。｣其有既大，不可至於盈滿，必在謙損，故大有之後，受之以謙也。為卦坤上艮下，地中有山也。地體卑下，山高大之物，而居地之下，謙之象也。以崇高之德，而處卑之下，謙之義也。</p>
+</blockquote>
+<p><strong>2. 卦辞与大象</strong></p>
+<p>卦辞给出全卦的基本处境与行动边界；大象则把卦象转化为修身、处事或治理的提示。程颐分别解释为：</p>
+<blockquote>
+<p>謙有亨之道也。有其德而不居，謂之謙。人以謙巽自處，何往而不亨乎。君子有終，君子志存乎謙巽，達理故樂天而不競，內充故退讓而不矜。安履乎讓，終身不易，自卑而人益尊之，自晦而德益光顯，此所謂君子有終也。在小人則有欲必競，有德必伐，雖使勉慕於謙，亦不能安行而固守，不能有終也。</p>
+<p>地體卑下，山之高大而在地中，外卑下而內蘊高大之象，故為謙也。不云山在地中，而曰地中有山，言卑下之中蘊其崇高也。若言崇高蘊於卑下之中，則文理不順。諸象皆然，觀文可見。君子以裒多益寡，稱物平施，君子觀謙之象。山而在地下，是高者下之，卑者上之，見抑高舉下、損過益不及之義；以施於事，則裒取多者，增益寡者，稱物之多寡以均其施與，使得其平也。</p>
+</blockquote>
+<p><strong>3. 邵雍易学旁证</strong></p>
+<p>邵雍在《皇极经世·观物外篇》中说：</p>
+<blockquote>
+<p>“夫卦，各有性有体，然皆不离乾坤之门。”</p>
+<p>“君子于易，玩象、玩数、玩辞、玩意。”</p>
+</blockquote>
+<p>这两段是邵雍讨论读《易》方法的通论，并非针对地山谦所下的吉凶断语。放在这里作为旁证，是提醒我们同时观察卦象、数位、辞义与整体意旨，不能只截取一句话作孤立判断。</p>
+<hr>
+<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初六】"><a href="#【初六】" class="headerlink" title="【初六】"></a>【初六】</h3><p><strong>初六：謙謙君子，用涉大川，吉。</strong></p>
+<p><strong>象曰：謙謙君子，卑以自牧也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“謙謙君子，用涉大川，吉。”作为这一阶段的核心情境；《小象》又以“謙謙君子，卑以自牧也。”点明观察角度。程颐解释此爻的切入点是：“初六以柔順處謙，又居一卦之下，為自處卑下之至，謙而又謙也，故曰謙謙。能如是者，君子也。自處至謙，眾所共與也，雖用涉險難，亦无患害，況居平易乎？何所不吉也？初處謙而以柔居下，得无過於謙乎？曰：柔居下，乃其常也，但見其謙之至，故為謙謙，未見其失也。”爻辞中出现“吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>初六以柔順處謙，又居一卦之下，為自處卑下之至，謙而又謙也，故曰謙謙。能如是者，君子也。自處至謙，眾所共與也，雖用涉險難，亦无患害，況居平易乎？何所不吉也？初處謙而以柔居下，得无過於謙乎？曰：柔居下，乃其常也，但見其謙之至，故為謙謙，未見其失也。</p>
+<p>謙謙，謙之至也。謂君子以謙卑之道自牧也。自牧，自處也。《詩》云：｢自牧歸荑。｣</p>
+</blockquote>
+<p>从现代阅读角度看，初爻处在事情开端，适合先辨明基础、条件与时机，不宜把局部迹象过早当成最终结论。</p>
+<h3 id="【六二】"><a href="#【六二】" class="headerlink" title="【六二】"></a>【六二】</h3><p><strong>六二：鳴謙，貞吉。</strong></p>
+<p><strong>象曰：鳴謙貞吉，中心得也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“鳴謙，貞吉。”作为这一阶段的核心情境；《小象》又以“鳴謙貞吉，中心得也。”点明观察角度。程颐解释此爻的切入点是：“二以柔順居中，是為謙德積於中。謙德充積於中，故發於外，見於聲音顏色，故曰鳴謙。居中得正，有中正之德也，故云貞吉。凡貞吉，有為貞且吉者，有為得貞則吉者，六二之貞吉，所自有也。”爻辞中出现“吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>二以柔順居中，是為謙德積於中。謙德充積於中，故發於外，見於聲音顏色，故曰鳴謙。居中得正，有中正之德也，故云貞吉。凡貞吉，有為貞且吉者，有為得貞則吉者，六二之貞吉，所自有也。</p>
+<p>二之謙德，由至誠積於中，所以發於聲音，中心所自得也，非勉為之也。</p>
+</blockquote>
+<p>从现代阅读角度看，二爻进入落实阶段，通常要把行动放回中正、协作与可持续的尺度中衡量。</p>
+<h3 id="【九三】"><a href="#【九三】" class="headerlink" title="【九三】"></a>【九三】</h3><p><strong>九三：勞謙君子，有終吉。</strong></p>
+<p><strong>象曰：勞謙君子，萬民服也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“勞謙君子，有終吉。”作为这一阶段的核心情境；《小象》又以“勞謙君子，萬民服也。”点明观察角度。程颐解释此爻的切入点是：“三以陽剛之德而居下體，為眾陰所宗，履得其位，為下之上，是上為君所任，下為眾所從，有功勞而持謙德者也，故曰勞謙。古之人有當之者，周公是也。身當天下之大任，上奉幼弱之主，謙恭自牧，夔夔如畏然，可謂有勞而能謙矣。既能勞謙，又須君子行之有終，則吉。夫樂高喜勝，人之常情。平時能謙，固已鮮矣，況有功勞可尊乎？雖使知謙之善，勉而為之，若矜負之心不忘，則不能常久，欲其有終，不可得也。唯君子安履謙順，乃其常行，故久而不變，乃所謂有終，有終則吉也。九三以剛居正，能終者也。……”爻辞中出现“吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>三以陽剛之德而居下體，為眾陰所宗，履得其位，為下之上，是上為君所任，下為眾所從，有功勞而持謙德者也，故曰勞謙。古之人有當之者，周公是也。身當天下之大任，上奉幼弱之主，謙恭自牧，夔夔如畏然，可謂有勞而能謙矣。既能勞謙，又須君子行之有終，則吉。夫樂高喜勝，人之常情。平時能謙，固已鮮矣，況有功勞可尊乎？雖使知謙之善，勉而為之，若矜負之心不忘，則不能常久，欲其有終，不可得也。唯君子安履謙順，乃其常行，故久而不變，乃所謂有終，有終則吉也。九三以剛居正，能終者也。此爻之德最盛，故象辭特重。</p>
+<p>能勞謙之君子，萬民所尊服也。《繫辭》云：「勞而不伐，有功而不德，厚之至也。語以其功下人者也。德言盛，禮言恭。謙也者，致恭以存其位者也。」有勞而不自矜伐，有功而不自以為德，是其德弘厚之至也。言以其功勞而自謙，以下於人也。德言盛，禮言恭。以其德言之，則至盛，以其自處之禮言之，則至恭，此所謂謙也。夫謙也者，謂致恭以存其位者也。存，守也。致其恭巽以守其位，故高而不危，滿而不溢，是以能終吉也。夫君子履謙，乃其常行，非為保其位而為之也。而言存其位者，蓋能致恭，所以能存其位，言謙之道如此。如言為善有令名，君子豈為令名而為善也哉？亦言其令名者，為善之故也。</p>
+</blockquote>
+<p>从现代阅读角度看，三爻处在内卦将尽的转换处，进退压力往往同时出现，尤其需要控制冒进与失位的风险。</p>
+<h3 id="【六四】"><a href="#【六四】" class="headerlink" title="【六四】"></a>【六四】</h3><p><strong>六四：无不利，撝謙。</strong></p>
+<p><strong>象曰：无不利撝謙；不違則也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“无不利，撝謙。”作为这一阶段的核心情境；《小象》又以“无不利撝謙；不違則也。”点明观察角度。程颐解释此爻的切入点是：“四居上體，切近君位，六五之君又以謙柔自處，九三又有大功德，為上所任、眾所宗，而己居其上，當恭畏以奉謙德之君，卑巽以讓勞謙之臣，動作施為，无所不利於撝謙也。撝，施布之象，如人手之撝也。動息進退，必施其謙，蓋居多懼之地，又在賢臣之上故也。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>四居上體，切近君位，六五之君又以謙柔自處，九三又有大功德，為上所任、眾所宗，而己居其上，當恭畏以奉謙德之君，卑巽以讓勞謙之臣，動作施為，无所不利於撝謙也。撝，施布之象，如人手之撝也。動息進退，必施其謙，蓋居多懼之地，又在賢臣之上故也。</p>
+<p>凡人之謙，有所宜施，不可過其宜也。如六五或用侵伐是也。唯四以處近君之地，據勞臣之上，故凡所動作，靡不利於施謙，如是然後中於法則，故曰不違則也，謂得其宜也。</p>
+</blockquote>
+<p>从现代阅读角度看，四爻由内转外，开始接近全局事务与主事位置，行动之前宜先建立信任并审慎辨势。</p>
+<h3 id="【六五】"><a href="#【六五】" class="headerlink" title="【六五】"></a>【六五】</h3><p><strong>六五：不富，以其鄰，利用侵伐，无不利。</strong></p>
+<p><strong>象曰：利用侵伐，征不服也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“不富，以其鄰，利用侵伐，无不利。”作为这一阶段的核心情境；《小象》又以“利用侵伐，征不服也。”点明观察角度。程颐解释此爻的切入点是：“富者眾之所歸，唯財為能聚人。五以君位之尊，而執謙順以接於下，眾所歸也，故不富而能有其鄰也。鄰，近也。不富而得人之親也，為人君而持謙順，天下所歸心也。然君道不可專尚謙柔，必須威武相濟，然後能懷服天下，故利用行侵伐也。威德並著，然後盡君道之宜，而无所不利也。蓋五之謙柔，當防於過，故發此義。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>富者眾之所歸，唯財為能聚人。五以君位之尊，而執謙順以接於下，眾所歸也，故不富而能有其鄰也。鄰，近也。不富而得人之親也，為人君而持謙順，天下所歸心也。然君道不可專尚謙柔，必須威武相濟，然後能懷服天下，故利用行侵伐也。威德並著，然後盡君道之宜，而无所不利也。蓋五之謙柔，當防於過，故發此義。</p>
+<p>征其文德謙巽所不能服者也。文德所不能服，而不用威武，何以平治天下？非人君之中道，謙之過也。</p>
+</blockquote>
+<p>从现代阅读角度看，五爻居于全卦关键位置，重点在承担责任、守住中道，并使个人能力真正服务于整体。</p>
+<h3 id="【上六】"><a href="#【上六】" class="headerlink" title="【上六】"></a>【上六】</h3><p><strong>上六：鳴謙，利用行師，征邑國。</strong></p>
+<p><strong>象曰：鳴謙，志未得也。可用行師，征邑國也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“鳴謙，利用行師，征邑國。”作为这一阶段的核心情境；《小象》又以“鳴謙，志未得也。可用行師，征邑國也。”点明观察角度。程颐解释此爻的切入点是：“六以柔處柔，順之極，又處謙之極，極乎謙者也。以極謙而反居高，未得遂其謙之志，故至發於聲音；又柔處謙之極，亦必見於聲色，故曰鳴謙。雖居无位之地，非任天下之事，然人之行己，必須剛柔相濟。上，謙之極也，至於太甚，則反為過矣。故利在以剛武自治。邑國，己之私有。行師，謂用剛武。征邑國，謂自治其私。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>六以柔處柔，順之極，又處謙之極，極乎謙者也。以極謙而反居高，未得遂其謙之志，故至發於聲音；又柔處謙之極，亦必見於聲色，故曰鳴謙。雖居无位之地，非任天下之事，然人之行己，必須剛柔相濟。上，謙之極也，至於太甚，則反為過矣。故利在以剛武自治。邑國，己之私有。行師，謂用剛武。征邑國，謂自治其私。</p>
+<p>謙極而居上，欲謙之志未得，故不勝其切，至於鳴也。雖不當位，謙既過極，宜以剛武自治其私，故云利用行師征邑國也。</p>
+</blockquote>
+<p>从现代阅读角度看，上爻表示一卦发展已到极处，最需要防止过度、僵化与不知转圜，为下一阶段留下余地。</p>
+<hr>
+<h2 id="四、-个人感悟"><a href="#四、-个人感悟" class="headerlink" title="四、 个人感悟"></a>四、 个人感悟</h2><p>谦受益，满招损。谦虚待人，终得善终。 对我来说，地山谦最值得反复体会的，不是把“吉”或“凶”当作固定答案，而是看清一个处境如何随位置、关系与行动方式而变化。六爻从初到上展示了不同阶段：同一原则放在不同位置，结果可能完全不同。</p>
+<p>把它用于今天的学习、工作或关系判断时，我更愿意把卦辞当作问题框架，把爻辞当作阶段提醒：先确认自己身处哪一层，再决定进、退、守、变。这样读《易》，比直接追求一个预言式结论更稳妥。</p>
+<hr>
+<h2 id="五、-参考文献与版本说明"><a href="#五、-参考文献与版本说明" class="headerlink" title="五、 参考文献与版本说明"></a>五、 参考文献与版本说明</h2><ol>
+<li>《周易》经文及《象传》，本卦原文取自：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/wiki/%E5%91%A8%E6%98%93/%E8%AC%99">维基文库《周易》本卦页面</a>；并参校<a target="_blank" rel="noopener" href="https://ctext.org/book-of-changes/zh">中国哲学书电子化计划《周易》</a>。</li>
+<li>北宋程颐《程氏易传》（亦称《伊川易传》），本卦参校：<a target="_blank" rel="noopener" href="https://www.taijizhidian.com/chengxu/liushisigua/1548.html">【周易上经】第15卦-谦卦䷎地山谦卦（艮下坤上）-[北宋]程颐撰《程氏易传•卷二》</a>。</li>
+<li>北宋邵雍《皇极经世·观物外篇》，旁证原文：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/zh-hans/%E7%9A%87%E6%A5%B5%E7%B6%93%E4%B8%96/%E5%8D%B7%E5%8D%81%E4%B8%89">维基文库《皇极经世》卷十三</a>。</li>
 </ol>
-<p>天道亏盈而益谦，地道变盈而流谦，鬼神害盈而福谦，人道恶盈而好谦。在人生的牌桌上，当你不知道该出什么牌的时候，打出“谦”这张底牌，永远不会输。</p>
+<blockquote>
+<p>版本说明：经典原文与程颐文字保留底本中的繁体字、异体字及个别古字；“释义”“现代阅读角度”和“个人感悟”均为现代整理，不冒充古人原话。“邵雍易学旁证”只引用可定位的易学通论，不作逐卦、逐爻的托名断语。</p>
+</blockquote>
 
     </div>
 
@@ -362,7 +473,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E5%85%AD%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初六】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【六二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【九三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【六四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【六五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E5%85%AD%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上六】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F%EF%BC%9A%E8%B0%A6%E8%99%9A%E4%B8%8D%E6%98%AF%E8%87%AA%E5%8D%91%EF%BC%8C%E8%80%8C%E6%98%AF%E2%80%9C%E5%9C%B0%E4%B8%AD%E6%9C%89%E5%B1%B1%E2%80%9D%E7%9A%84%E5%AE%9E%E5%8A%9B%E4%B8%8E%E6%B8%85%E9%86%92"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟：谦虚不是自卑，而是“地中有山”的实力与清醒</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E5%85%AD%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初六】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【六二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【九三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【六四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【六五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E5%85%AD%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上六】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E4%B8%8E%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E"><span class="nav-number">5.</span> <span class="nav-text">五、 参考文献与版本说明</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -378,7 +489,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -463,6 +574,10 @@
 
 
 
+  
+<script src="/js/local-search.js"></script>
+
+
 
 
 
@@ -491,6 +606,15 @@
 
 <script>
   (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
     var loadingBox = document.getElementById('loading-box');
     var root = document.documentElement;
 
@@ -521,8 +645,9 @@
 
 <script src="/js/latex-tool.js?v=20260805c"></script>
 <script src="/js/translate-tool.js?v=20260805a"></script>
-<script src="/js/hexagram-index.js?v=20260806a"></script>
-<script src="/js/divination-tool.js?v=20260810a"></script>
+<script src="/js/hexagram-post-map.js?v=20260830a"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
 
 </body>
 </html>

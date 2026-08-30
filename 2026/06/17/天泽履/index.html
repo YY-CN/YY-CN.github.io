@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="上天下泽，履。君子以辨上下，定民志。">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="上天下泽，履。君子以辨上下，定民志。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-17T13:38:00.000Z">
-<meta property="article:modified_time" content="2026-08-04T17:00:23.498Z">
+<meta property="article:modified_time" content="2026-08-23T19:20:20.195Z">
 <meta property="article:author" content="Hyacinth">
 <meta property="article:tag" content="学习笔记">
 <meta property="article:tag" content="六十四卦">
@@ -127,6 +127,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -166,11 +167,38 @@
     <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -224,7 +252,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-08-05 01:00:23" itemprop="dateModified" datetime="2026-08-05T01:00:23+08:00">2026-08-05</time>
+                <time title="修改时间：2026-08-24 03:20:20" itemprop="dateModified" datetime="2026-08-24T03:20:20+08:00">2026-08-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -236,7 +264,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>12 分钟</span>
+            </span>
             <div class="post-description">上天下泽，履。君子以辨上下，定民志。</div>
 
         </div>
@@ -249,40 +291,103 @@
 
       
         <h2 id="一、-经典原文"><a href="#一、-经典原文" class="headerlink" title="一、 经典原文"></a>一、 经典原文</h2><blockquote>
-<p><strong>【卦辞】</strong><br>履：履虎尾，不咥人，亨。</p>
-<p><strong>【爻辞】</strong><br>初九：素履，往无咎。<br>九二：履道坦坦，幽人贞吉。<br>六三：眇能视，跛能履。履虎尾，咥人，凶。武人为于大君。<br>九四：履虎尾，愬愬，终吉。<br>九五：夬履，贞厉。<br>上九：视履考祥，其旋元吉。</p>
-<p><strong>【大象传】</strong><br>上天下泽，履；君子以辨上下，定民志。</p>
+<p><strong>【卦辞】</strong><br>履虎尾，不咥人，亨。</p>
+<p><strong>【爻辞】</strong><br>初九：素履，往无咎。<br>九二：履道坦坦，幽人貞吉。<br>六三：眇能視，跛能履，履虎尾，咥人，凶。武人為于大君。<br>九四：履虎尾，愬愬終吉。<br>九五：夬履，貞厲。<br>上九：視履考祥，其旋元吉。</p>
+<p><strong>【大象传】</strong><br>象曰：上天下澤，履；君子以辨上下，定民志。</p>
 </blockquote>
-<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>小畜卦教我们“积蓄”，但力量攒够了，终归是要向前迈步的。于是，我们来到了第十卦——履卦。“履”的本义是鞋子，引申为行走、践行、履行。在复杂的社会中，我们该如何迈出步子？履卦给出了最高级的步法：如履薄冰，懂礼守节。</p>
-<p><strong>1. 底层逻辑：君子以辨上下，定民志</strong><br>履卦的上卦为乾（天），下卦为兑（泽）。《象传》说“上天下泽”，天高高在上，沼泽在最底下，这是大自然最基本的秩序。君子效法这种天地之象，要懂得明辨上下尊卑的伦常规矩，从而安定民心。引申到今天，这就是教我们要有“边界感”，懂规矩、知进退。</p>
-<p><strong>2. 险中求胜的法则：履虎尾，不咥（dié）人</strong><br>卦辞“履虎尾，不咥人，亨”是整部易经里最惊心动魄的画面之一：你踩到了老虎的尾巴，老虎居然没有回头咬你（咥，音dié，咬），事情顺利。为什么踩了老虎尾巴还能全身而退？因为“礼”。当你心怀敬畏，行事合乎规矩和道义时，即便是面对强大的对手或极其危险的处境，也能逢凶化吉。</p>
-<p><strong>3.北宋易学家邵雍解</strong><br>履行险难，小心翼翼；安分守己，方可平顺。<br>得此卦者，犹如踩在老虎尾巴上，处境看似危险，常伴有强大的压力（或伴君如伴虎）。但只要懂得分寸，行事讲究礼节和规矩，不越雷池半步，就能化险为夷，最终顺利。</p>
-<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初九】"><a href="#【初九】" class="headerlink" title="【初九】"></a>【初九】</h3><p><strong>初九：素履，往无咎。</strong><br><strong>象曰：素履之往，独行愿也。</strong></p>
-<p><strong>释义</strong><br>初九：穿着质朴无华的鞋子（以纯洁本真的态度）去践行，前去没有灾难。<br>《象辞》说：以质朴的态度前去，是为了专心致志地实现自己内心的意愿，不被外界污染。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，初入险境或新的环境，此时最忌讳花里胡哨、好高骛远。宜保持本色，不忘初心，踏踏实实做事，必能平安无事。</p>
-<h3 id="【九二】"><a href="#【九二】" class="headerlink" title="【九二】"></a>【九二】</h3><p><strong>九二：履道坦坦，幽人贞吉。</strong><br><strong>象曰：幽人贞吉，中不自乱也。</strong></p>
-<p><strong>释义</strong><br>九二：走在平坦宽阔的大道上，像幽居的隐士一样坚守正道，吉祥。<br>《象辞》说：隐士坚守正道获得吉祥，是因为九二居中，内心坚定，不会被外界的诱惑所扰乱。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，心地坦荡，无欲则刚。即使身处复杂的名利场，也能保持内心的清静与安定（幽人），不受干扰，行事自然一帆风顺。</p>
-<h3 id="【六三】"><a href="#【六三】" class="headerlink" title="【六三】"></a>【六三】</h3><p><strong>六三：眇能视，跛能履。履虎尾，咥人，凶。武人为于大君。</strong><br><strong>象曰：眇能视，不足以有明也。跛能履，不足以与行也。咥人之凶，位不当也。武人为于大君，志刚也。</strong></p>
-<p><strong>释义</strong><br>六三：瞎了一只眼还以为自己能看清，瘸了一条腿还以为自己能健步如飞。这样去踩老虎的尾巴，老虎必将咬人，凶险。这就像一介匹夫想要去做君主的大事一样狂妄。<br>《象辞》说：被老虎咬的凶险，是因为位置不当且能力不足，却偏要逞强。</p>
-<p><strong>北宋易学家邵雍解</strong><br>凶：得此爻者，极易陷入“达克效应”（无知者无畏）。能力不足却狂妄自大，强行去做超出自己掌控范围的事，必定会触怒强者，招致极其严重的灾祸。宜极力收敛，认清现实。</p>
-<h3 id="【九四】"><a href="#【九四】" class="headerlink" title="【九四】"></a>【九四】</h3><p><strong>九四：履虎尾，愬愬，终吉。</strong><br><strong>象曰：愬愬终吉，志行也。</strong></p>
-<p><strong>释义</strong><br>九四：踩到了老虎的尾巴，感到极其恐惧、小心翼翼（愬愬，音sù），但最终吉祥。<br>《象辞》说：小心翼翼最终吉祥，是因为内心的意愿（谨慎度过危险）得以实现。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，正处于极其危险、压力巨大的境地（比如接手了烫手山芋，或在严苛的领导手下做事）。但好在你内心充满了敬畏，行事如履薄冰，这种极度的谨慎最终能保你逢凶化吉。</p>
-<h3 id="【九五】"><a href="#【九五】" class="headerlink" title="【九五】"></a>【九五】</h3><p><strong>九五：夬履，贞厉。</strong><br><strong>象曰：夬履贞厉，位正当也。</strong></p>
-<p><strong>释义</strong><br>九五：极其果断刚决地行事（夬，音guài，决断），虽然坚守正道，但也伴随着危险。<br>《象辞》说：果断行事伴随危险，是因为虽然身居正当的高位，但过于刚强易折。</p>
-<p><strong>北宋易学家邵雍解</strong><br>平：得此爻者，身居高位，大权在握。容易因为自信过头而变得刚愎自用、独断专行。此时即便你的动机和目标是正确的，若做事太绝、不留余地，也会埋下重大隐患，必须警惕。</p>
-<h3 id="【上九】"><a href="#【上九】" class="headerlink" title="【上九】"></a>【上九】</h3><p><strong>上九：视履考祥，其旋元吉。</strong><br><strong>象曰：元吉在上，大有庆也。</strong></p>
-<p><strong>释义</strong><br>上九：回头审视自己走过的路，考察吉凶祸福的得失。如果能做到圆满无缺地返回（旋），大吉大利。<br>《象辞》说：在最高处获得大吉大利，是因为有大的喜庆。</p>
-<p><strong>北宋易学家邵雍解</strong><br>大吉：得此爻者，事情已经到了收尾阶段，功德圆满。不仅做事有始有终，还懂得在事后复盘、总结经验教训。行事周全，必将迎来极大的喜庆与成功。</p>
-<h2 id="四、-个人感悟：保持敬畏，在边界中起舞"><a href="#四、-个人感悟：保持敬畏，在边界中起舞" class="headerlink" title="四、 个人感悟：保持敬畏，在边界中起舞"></a>四、 个人感悟：保持敬畏，在边界中起舞</h2><p>作为一个经常在人类浩如烟海的知识库中穿梭的AI，我在解析“履卦”时，也深深被古人的生存智慧所折服。现代社会很多人高喊“打破规则”、“拒绝内耗”，却往往在现实中碰得头破血流。履卦告诉我们，<strong>真正的自由，从来都是戴着镣铐跳舞；真正的强大，是懂得敬畏规则。</strong></p>
-<p>它给了我们三个极其现实的职场和人生指引：</p>
-<ol>
-<li><strong>“素履”是最顶级的伪装：</strong> 初九爻的“素履往无咎”告诉我们，当你刚进入一个新行业、新圈子时，最好收起所有的锋芒和花里胡哨的手段。最质朴、最听话、最本分的态度，往往能让你避开别人嫉妒的冷箭。</li>
-<li><strong>警惕致命的“达克效应”：</strong> 六三爻的“眇能视，跛能履”描绘得太绝了！生活里有太多这样的人，自己半桶水晃荡，却以为天下无敌，结果一脚踩在老虎尾巴上。承认自己的平庸和局限，不去碰自己认知以外的利益，这是保命的前提。</li>
-<li><strong>恐惧，是一种极高级的智慧：</strong> 九四爻“愬愬终吉”是最让人醍醐灌顶的。很多人觉得害怕是懦弱的表现，但易经说：当你踩在老虎尾巴上时，恐惧（愬愬）才是保护你活下去的护身符。正是因为害怕犯错，你才会三思而后行；正是因为敬畏对手，你才不会轻举妄动。</li>
+<hr>
+<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>天泽履的现代摘要是：谨慎履虎尾，不咥人亨。辨上下之分。 这只是帮助进入文本的提要，具体判断仍要回到卦辞、爻位与上下文。</p>
+<p><strong>1. 底层逻辑：谨慎履虎尾，不咥人亨</strong></p>
+<p>程颐在释卦开头先从卦序、卦体和上下卦关系说明本卦之所以成立：</p>
+<blockquote>
+<p>履《序卦》：物畜然後有禮，故受之以履。夫物之聚則有大小之别，髙下之等，美惡之分，是物畜然後有禮，履所以繼畜也。履，禮也。禮，人之所履也。為卦天上澤下，天而在上，澤而處下，上下之分，尊卑之義，理之當也，禮之本也。常履之道也，故為履。履，踐也，藉也。履物為踐，履於物為藉。以柔藉剛，故為履也。不曰剛履柔，而曰柔履剛者，剛乘柔，常理不足道。故易中唯言柔乘剛，不言剛乘柔也。言履藉於剛，乃見卑順說應之義。</p>
+</blockquote>
+<p><strong>2. 卦辞与大象</strong></p>
+<p>卦辞给出全卦的基本处境与行动边界；大象则把卦象转化为修身、处事或治理的提示。程颐分别解释为：</p>
+<blockquote>
+<p>履，人所履之道也。天在上而澤處下，以柔履藉於剛，上下各得其義，事之至順，理之至當也。人之履行如此，雖履至危之地，亦无所害，故履虎尾而不見咥嚙，所以能亨也。</p>
+<p>天在上，澤居下，上下之正理也，人之所履當如是，故取其象而為履。君子觀履之象以辯别上下之分，以定其民志。夫上下之分明，然後民志有定，民志定，然後可以言治。民志不定，天下不可得而治也。古之時，公卿大夫而下位各稱其徳，終身居之，得其分也。位未稱徳，則君舉而進之，士修其學，學至而君求之，皆非有預於己也。農工商賈，勤其事而所亨，有限故皆有定志，而天下之心可一。後世自庶士至于公卿，日志于尊榮，農工商賈，日志于富侈，億兆之心，交騖於利，天下紛然如之，何其可一也？欲其不亂，難矣。此由上下无定志也。君子觀履之象，而分辯上下，使各當其分，以定民之心志也。</p>
+</blockquote>
+<p><strong>3. 邵雍易学旁证</strong></p>
+<p>邵雍在《皇极经世·观物外篇》中说：</p>
+<blockquote>
+<p>“夫卦，各有性有体，然皆不离乾坤之门。”</p>
+<p>“君子于易，玩象、玩数、玩辞、玩意。”</p>
+</blockquote>
+<p>这两段是邵雍讨论读《易》方法的通论，并非针对天泽履所下的吉凶断语。放在这里作为旁证，是提醒我们同时观察卦象、数位、辞义与整体意旨，不能只截取一句话作孤立判断。</p>
+<hr>
+<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初九】"><a href="#【初九】" class="headerlink" title="【初九】"></a>【初九】</h3><p><strong>初九：素履，往无咎。</strong></p>
+<p><strong>象曰：素履之往，獨行願也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“素履，往无咎。”作为这一阶段的核心情境；《小象》又以“素履之往，獨行願也。”点明观察角度。程颐解释此爻的切入点是：“履不處者，行之義。初處至下，素在下者也，而陽剛之才可以上進，若安其卑下之素而往，則无咎矣。夫人不能自安於貧賤之素，則其進也乃貪躁，而動求去乎貧賤耳，非欲有為也。既得其進，驕溢必矣，故往則有咎。賢者則安履其素其處也，樂其進也，將有為也。故得其進則有為，而无不善，乃守其素履者也。”爻辞中出现“无咎”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>履不處者，行之義。初處至下，素在下者也，而陽剛之才可以上進，若安其卑下之素而往，則无咎矣。夫人不能自安於貧賤之素，則其進也乃貪躁，而動求去乎貧賤耳，非欲有為也。既得其進，驕溢必矣，故往則有咎。賢者則安履其素其處也，樂其進也，將有為也。故得其進則有為，而无不善，乃守其素履者也。</p>
+<p>安履其素而往者，非苟利也，獨行其志，願耳獨専也。若欲貴之心與行道之心交戰于中，豈能安履其素也。</p>
+</blockquote>
+<p>从现代阅读角度看，初爻处在事情开端，适合先辨明基础、条件与时机，不宜把局部迹象过早当成最终结论。</p>
+<h3 id="【九二】"><a href="#【九二】" class="headerlink" title="【九二】"></a>【九二】</h3><p><strong>九二：履道坦坦，幽人貞吉。</strong></p>
+<p><strong>象曰：幽人貞吉，中不自亂也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“履道坦坦，幽人貞吉。”作为这一阶段的核心情境；《小象》又以“幽人貞吉，中不自亂也。”点明观察角度。程颐解释此爻的切入点是：“九二居柔，寛裕得中，其所履坦坦然，平易之道也。雖所履得坦，易之道亦必幽靜安恬之人處之，則能貞固而吉也。九二陽，志上，進故有幽人之戒。”爻辞中出现“吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>九二居柔，寛裕得中，其所履坦坦然，平易之道也。雖所履得坦，易之道亦必幽靜安恬之人處之，則能貞固而吉也。九二陽，志上，進故有幽人之戒。</p>
+<p>履道在於安靜其中，恬正則所履安裕。中若躁動，豈能安其所履？故必幽人則能堅固而吉，蓋其中心安靜，不以利欲自亂也。</p>
+</blockquote>
+<p>从现代阅读角度看，二爻进入落实阶段，通常要把行动放回中正、协作与可持续的尺度中衡量。</p>
+<h3 id="【六三】"><a href="#【六三】" class="headerlink" title="【六三】"></a>【六三】</h3><p><strong>六三：眇能視，跛能履，履虎尾，咥人，凶。武人為于大君。</strong></p>
+<p><strong>象曰：眇能視，不足以有明也。跛能履，不足以與行也。咥人之凶，位不當也。武人為于大君，志剛也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“眇能視，跛能履，履虎尾，咥人，凶。武人為于大君。”作为这一阶段的核心情境；《小象》又以“眇能視，不足以有明也。跛能履，不足以與行也。咥人之凶，位不當也。武人為于大君，志剛也。”点明观察角度。程颐解释此爻的切入点是：“三以陰居陽，志欲剛而體本陰柔，安能堅其所履？故如盲眇之視，其見不明；跛躄之履，其行不逺。才既不足，而又處不得中，履非其正。以柔而務剛，其履如此，是履於危地，故曰「履虎尾」，以不善履，履危地必及禍患，故曰「咥人，凶」。武人為于大君，如武暴之人，而居人上，肆其躁率而已，非能順履而遠到也。不中正而志剛，乃為羣陽所與，是以剛躁蹈危而得凶也。”爻辞中出现“凶”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>三以陰居陽，志欲剛而體本陰柔，安能堅其所履？故如盲眇之視，其見不明；跛躄之履，其行不逺。才既不足，而又處不得中，履非其正。以柔而務剛，其履如此，是履於危地，故曰「履虎尾」，以不善履，履危地必及禍患，故曰「咥人，凶」。武人為于大君，如武暴之人，而居人上，肆其躁率而已，非能順履而遠到也。不中正而志剛，乃為羣陽所與，是以剛躁蹈危而得凶也。</p>
+<p>陰柔之人，其才不足，視不能明，行不能逺，而乃務剛，所履如此，其能免於害乎？</p>
+</blockquote>
+<p>从现代阅读角度看，三爻处在内卦将尽的转换处，进退压力往往同时出现，尤其需要控制冒进与失位的风险。</p>
+<h3 id="【九四】"><a href="#【九四】" class="headerlink" title="【九四】"></a>【九四】</h3><p><strong>九四：履虎尾，愬愬終吉。</strong></p>
+<p><strong>象曰：愬愬終吉，志行也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“履虎尾，愬愬終吉。”作为这一阶段的核心情境；《小象》又以“愬愬終吉，志行也。”点明观察角度。程颐解释此爻的切入点是：“九四陽剛而乾體，雖居四，剛勝者也。在近君多懼之地，无相得之義，五復剛决之過，故為履虎尾。愬愬，長懼之貌，若能畏懼，則當終吉。蓋九雖剛而志柔，四雖近而不處，故能兢慎畏懼，則終免於危而獲吉也。”爻辞中出现“吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>九四陽剛而乾體，雖居四，剛勝者也。在近君多懼之地，无相得之義，五復剛决之過，故為履虎尾。愬愬，長懼之貌，若能畏懼，則當終吉。蓋九雖剛而志柔，四雖近而不處，故能兢慎畏懼，則終免於危而獲吉也。</p>
+<p>能愬愬畏懼，則終得其吉者，志在於行而不處也。去危則獲吉矣。陽剛能行者也，居柔以順自處者也。</p>
+</blockquote>
+<p>从现代阅读角度看，四爻由内转外，开始接近全局事务与主事位置，行动之前宜先建立信任并审慎辨势。</p>
+<h3 id="【九五】"><a href="#【九五】" class="headerlink" title="【九五】"></a>【九五】</h3><p><strong>九五：夬履，貞厲。</strong></p>
+<p><strong>象曰：夬履貞厲，位正當也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“夬履，貞厲。”作为这一阶段的核心情境；《小象》又以“夬履貞厲，位正當也。”点明观察角度。程颐解释此爻的切入点是：“夬，剛決也。五以陽剛乾體居至尊之位，任其剛決而行者也。如此則雖得正，猶危厲也。古之聖人，居天下之尊，明足以照，剛足以決，勢足以専，然而未嘗不盡天下之議，雖蒭蕘之微必取，乃其所以為聖也，履帝位而光明者也。若自任剛明，決行不顧，雖使得正，亦危道也。可固守乎？有剛明之才，苟專自任，猶為危道，况剛明不足者乎？《易》中云「貞厲」，義各不同，隨卦可見。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>夬，剛決也。五以陽剛乾體居至尊之位，任其剛決而行者也。如此則雖得正，猶危厲也。古之聖人，居天下之尊，明足以照，剛足以決，勢足以専，然而未嘗不盡天下之議，雖蒭蕘之微必取，乃其所以為聖也，履帝位而光明者也。若自任剛明，決行不顧，雖使得正，亦危道也。可固守乎？有剛明之才，苟專自任，猶為危道，况剛明不足者乎？《易》中云「貞厲」，義各不同，隨卦可見。</p>
+<p>戒夬履者，以其正當尊位也。居至尊之位，據能專之勢而自任剛決，不復畏懼，雖使得正，亦危道也。</p>
+</blockquote>
+<p>从现代阅读角度看，五爻居于全卦关键位置，重点在承担责任、守住中道，并使个人能力真正服务于整体。</p>
+<h3 id="【上九】"><a href="#【上九】" class="headerlink" title="【上九】"></a>【上九】</h3><p><strong>上九：視履考祥，其旋元吉。</strong></p>
+<p><strong>象曰：元吉在上，大有慶也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“視履考祥，其旋元吉。”作为这一阶段的核心情境；《小象》又以“元吉在上，大有慶也。”点明观察角度。程颐解释此爻的切入点是：“上處履之終，於其終，視其所履行，以考其善惡禍福。若其旋，則善且吉也。旋謂周旋完備，无不至也。人之所履，考視其終，若終始周完无疚，善之至也，是以元吉。人之吉凶，係其所履善惡之多寡，吉凶之小大也。”爻辞中出现“元吉、吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>上處履之終，於其終，視其所履行，以考其善惡禍福。若其旋，則善且吉也。旋謂周旋完備，无不至也。人之所履，考視其終，若終始周完无疚，善之至也，是以元吉。人之吉凶，係其所履善惡之多寡，吉凶之小大也。</p>
+<p>上履之終也，人之所履善而吉，至其終，周旋无虧，乃大有福慶之人也。人之行貴乎有終。</p>
+</blockquote>
+<p>从现代阅读角度看，上爻表示一卦发展已到极处，最需要防止过度、僵化与不知转圜，为下一阶段留下余地。</p>
+<hr>
+<h2 id="四、-个人感悟"><a href="#四、-个人感悟" class="headerlink" title="四、 个人感悟"></a>四、 个人感悟</h2><p>谨慎履虎尾，不咥人亨。辨上下之分。 对我来说，天泽履最值得反复体会的，不是把“吉”或“凶”当作固定答案，而是看清一个处境如何随位置、关系与行动方式而变化。六爻从初到上展示了不同阶段：同一原则放在不同位置，结果可能完全不同。</p>
+<p>把它用于今天的学习、工作或关系判断时，我更愿意把卦辞当作问题框架，把爻辞当作阶段提醒：先确认自己身处哪一层，再决定进、退、守、变。这样读《易》，比直接追求一个预言式结论更稳妥。</p>
+<hr>
+<h2 id="五、-参考文献与版本说明"><a href="#五、-参考文献与版本说明" class="headerlink" title="五、 参考文献与版本说明"></a>五、 参考文献与版本说明</h2><ol>
+<li>《周易》经文及《象传》，本卦原文取自：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/wiki/%E5%91%A8%E6%98%93/%E5%B1%A5">维基文库《周易》本卦页面</a>；并参校<a target="_blank" rel="noopener" href="https://ctext.org/book-of-changes/zh">中国哲学书电子化计划《周易》</a>。</li>
+<li>北宋程颐《程氏易传》（亦称《伊川易传》），本卦参校：<a target="_blank" rel="noopener" href="https://www.taijizhidian.com/chengxu/liushisigua/1543.html">【周易上经】第10卦-履卦䷉天泽履卦（兑下乾上）-[北宋]程颐撰《程氏易传•卷一》</a>。</li>
+<li>北宋邵雍《皇极经世·观物外篇》，旁证原文：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/zh-hans/%E7%9A%87%E6%A5%B5%E7%B6%93%E4%B8%96/%E5%8D%B7%E5%8D%81%E4%B8%89">维基文库《皇极经世》卷十三</a>。</li>
 </ol>
-<p>不要盲目地去摸老虎的屁股。穿好“素履”，怀揣敬畏，走好脚下的每一步，人生这盘大棋，终能“其旋元吉”。</p>
+<blockquote>
+<p>版本说明：经典原文与程颐文字保留底本中的繁体字、异体字及个别古字；“释义”“现代阅读角度”和“个人感悟”均为现代整理，不冒充古人原话。“邵雍易学旁证”只引用可定位的易学通论，不作逐卦、逐爻的托名断语。</p>
+</blockquote>
 
     </div>
 
@@ -368,7 +473,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E4%B9%9D%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初九】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【九二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【六三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【九四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【九五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E4%B9%9D%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上九】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F%EF%BC%9A%E4%BF%9D%E6%8C%81%E6%95%AC%E7%95%8F%EF%BC%8C%E5%9C%A8%E8%BE%B9%E7%95%8C%E4%B8%AD%E8%B5%B7%E8%88%9E"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟：保持敬畏，在边界中起舞</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E4%B9%9D%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初九】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【九二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【六三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【九四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【九五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E4%B9%9D%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上九】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E4%B8%8E%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E"><span class="nav-number">5.</span> <span class="nav-text">五、 参考文献与版本说明</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -384,7 +489,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -469,6 +574,10 @@
 
 
 
+  
+<script src="/js/local-search.js"></script>
+
+
 
 
 
@@ -497,6 +606,15 @@
 
 <script>
   (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
     var loadingBox = document.getElementById('loading-box');
     var root = document.documentElement;
 
@@ -527,8 +645,9 @@
 
 <script src="/js/latex-tool.js?v=20260805c"></script>
 <script src="/js/translate-tool.js?v=20260805a"></script>
-<script src="/js/hexagram-index.js?v=20260806a"></script>
-<script src="/js/divination-tool.js?v=20260810a"></script>
+<script src="/js/hexagram-post-map.js?v=20260830a"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
 
 </body>
 </html>

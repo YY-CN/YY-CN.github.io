@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="风行天上，小畜。君子以懿文德。">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="风行天上，小畜。君子以懿文德。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-12T00:30:00.000Z">
-<meta property="article:modified_time" content="2026-06-11T13:43:56.638Z">
+<meta property="article:modified_time" content="2026-08-23T19:20:20.194Z">
 <meta property="article:author" content="Hyacinth">
 <meta property="article:tag" content="学习笔记">
 <meta property="article:tag" content="六十四卦">
@@ -127,6 +127,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -166,11 +167,38 @@
     <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -224,7 +252,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-06-11 21:43:56" itemprop="dateModified" datetime="2026-06-11T21:43:56+08:00">2026-06-11</time>
+                <time title="修改时间：2026-08-24 03:20:20" itemprop="dateModified" datetime="2026-08-24T03:20:20+08:00">2026-08-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -236,7 +264,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>14 分钟</span>
+            </span>
             <div class="post-description">风行天上，小畜。君子以懿文德。</div>
 
         </div>
@@ -249,45 +291,103 @@
 
       
         <h2 id="一、-经典原文"><a href="#一、-经典原文" class="headerlink" title="一、 经典原文"></a>一、 经典原文</h2><blockquote>
-<p><strong>【卦辞】</strong><br>小畜：亨。密云不雨，自我西郊。</p>
-<p><strong>【爻辞】</strong><br>初九：复自道，何其咎，吉。<br>九二：牵复，吉。<br>九三：舆说辐，夫妻反目。<br>六四：有孚，血去惕出，无咎。<br>九五：有孚挛如，富以其邻。<br>上九：既雨既处，尚德载，妇贞厉。月几望，君子征凶。</p>
-<p><strong>【大象传】</strong><br>风行天上，小畜；君子以懿文德。</p>
+<p><strong>【卦辞】</strong><br>小畜：亨。密雲不雨，自我西郊。</p>
+<p><strong>【爻辞】</strong><br>初九：復自道，何其咎，吉。<br>九二：牽復，吉。<br>九三：輿說輻，夫妻反目。<br>六四：有孚，血去惕出，无咎。<br>九五：有孚攣如，富以其鄰。<br>上九：既雨既處，尚德載，婦貞厲，月幾望，君子征凶。</p>
+<p><strong>【大象传】</strong><br>象曰：風行天上，小畜，君子以懿文德。</p>
 </blockquote>
-<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>走过了比卦的水乳交融、结盟互助，团队和个人的力量开始渐渐汇聚。于是，我们迎来了第九卦——小畜卦。“畜”有积蓄、蓄养、停顿的意思，“小畜”顾名思义，就是小小的积蓄、暂时的停顿。这是一卦关于“在时机尚未完全成熟时，如何隐忍与修身”的智慧。</p>
-<p><strong>1. 底层逻辑：君子以懿文德</strong><br>小畜卦的上卦为巽（风），下卦为乾（天）。《象传》说“风行天上”，风在天上吹拂，水汽还在汇聚，虽然满天阴云，但雨还下不来。在这样一种“万事俱备，只欠东风”的焦灼时刻，君子效法这种气象，不应该暴躁冒进，而应该“懿文德”——也就是静下心来美化自己的品德，修身养性，默默积蓄内在的力量。</p>
-<p><strong>2. 发展规律：密云不雨的积蓄期</strong><br>卦辞“小畜：亨。密云不雨，自我西郊”描绘了一个极为生动的画面：</p>
-<ul>
-<li><strong>亨：</strong> 只要懂得积蓄，事情最终是能通达的。</li>
-<li><strong>密云不雨，自我西郊：</strong> 浓云密布在西边的郊外，雨却迟迟下不来。这象征着事情还在酝酿阶段，力量还不够强大，或者外部条件还差那么一点点。此时此刻，你唯一能做的就是等待云层积厚，而不是天天对着天空大喊大叫。</li>
-</ul>
-<p><strong>3.北宋易学家邵雍解</strong><br>力量薄弱，须待发展；蓄养实力，切忌暴躁。<br>得此卦者，正处于蓄势待发的阶段。力量虽然在积聚，但还不足以成大事，常有受阻、停滞之感。此时最忌强行出头，宜积蓄实力，修身养性，耐心等待时机。</p>
-<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初九】"><a href="#【初九】" class="headerlink" title="【初九】"></a>【初九】</h3><p><strong>初九：复自道，何其咎，吉。</strong><br><strong>象曰：复自道，其义吉也。</strong></p>
-<p><strong>释义</strong><br>初九：返回到自己原本的正道上来，能有什么灾难呢？吉祥。<br>《象辞》说：返回到自己的正道上来，从道义上讲必然是吉祥的。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，在前进受阻时，能够及时清醒，不钻牛角尖，退回到自己熟悉的、正确的轨道上踏实做事。知迷途其未远，大吉。</p>
-<h3 id="【九二】"><a href="#【九二】" class="headerlink" title="【九二】"></a>【九二】</h3><p><strong>九二：牵复，吉。</strong><br><strong>象曰：牵复在中，亦不自失也。</strong></p>
-<p><strong>释义</strong><br>九二：牵引着同伴一起返回到正道上来，吉祥。<br>《象辞》说：牵引着同伴返回是因为九二居中得正，自己没有迷失方向，还能带动别人。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，不仅自己能够明辨是非、安分守己，还能在团队迷茫时，拉着大家一起稳住阵脚。有良师益友相助，不失本心。</p>
-<h3 id="【九三】"><a href="#【九三】" class="headerlink" title="【九三】"></a>【九三】</h3><p><strong>九三：舆说辐，夫妻反目。</strong><br><strong>象曰：夫妻反目，不能正室也。</strong></p>
-<p><strong>释义</strong><br>九三：车轮的车辐脱落了（车子散架无法前行），夫妻互相怒目而视，发生冲突。<br>《象辞》说：夫妻反目，是因为不能端正家庭内部的关系。</p>
-<p><strong>北宋易学家邵雍解</strong><br>凶：得此爻者，正处于小有积蓄、急于求成的阶段，因为盲目冒进导致内部产生了严重的分歧或利益冲突。合伙人之间配合失误（车脱辐），甚至决裂（夫妻反目）。</p>
-<h3 id="【六四】"><a href="#【六四】" class="headerlink" title="【六四】"></a>【六四】</h3><p><strong>六四：有孚，血去惕出，无咎。</strong><br><strong>象曰：有孚惕出，上合志也。</strong></p>
-<p><strong>释义</strong><br>六四：心怀诚信，流血的伤害得以避免，内心的恐惧得以消除，没有灾难。<br>《象辞》说：怀着诚信消除恐惧，是因为能与上位者（九五）心志相合。</p>
-<p><strong>北宋易学家邵雍解</strong><br>平：得此爻者，身处险境或压力巨大的位置，但只要待人真诚、尽职尽责，就能化解猜忌，避开灾祸，最终化险为夷。</p>
-<h3 id="【九五】"><a href="#【九五】" class="headerlink" title="【九五】"></a>【九五】</h3><p><strong>九五：有孚挛如，富以其邻。</strong><br><strong>象曰：有孚挛如，不独富也。</strong></p>
-<p><strong>释义</strong><br>九五：凭借诚信将大家紧密地联系在一起（挛如），将财富与邻居（同伴）共同分享。<br>《象辞》说：紧密团结，是因为不把财富独自霸占。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，事业或积蓄达到了一个高峰。此时最核心的智慧是“共同富裕”与“利益共享”。用诚信和慷慨凝聚人心，事业就能更上一层楼。</p>
-<h3 id="【上九】"><a href="#【上九】" class="headerlink" title="【上九】"></a>【上九】</h3><p><strong>上九：既雨既处，尚德载，妇贞厉。月几望，君子征凶。</strong><br><strong>象曰：既雨既处，德积载也。君子征凶，有所疑也。</strong></p>
-<p><strong>释义</strong><br>上九：密云终于化作了雨水并停歇下来，德行和力量已经积蓄圆满。此时女子（阴柔一方）如果强行冒进就会有危险。月亮已经快要全圆（月几望），君子如果再继续出征，必然凶险。<br>《象辞》说：雨已经下过，说明积蓄已经满载。君子继续前进会有凶险，是因为盈满则亏，会招致猜忌与危难。</p>
-<p><strong>北宋易学家邵雍解</strong><br>凶：得此爻者，积蓄的阶段已经完成，愿望已经达成。此时最忌讳的就是贪心不足、继续盲目扩张（月几望，水满则溢）。宜见好就收，安于现状，否则必有大祸。</p>
-<h2 id="四、-个人感悟：接受“密云不雨”，学会在低谷期“修系统”"><a href="#四、-个人感悟：接受“密云不雨”，学会在低谷期“修系统”" class="headerlink" title="四、 个人感悟：接受“密云不雨”，学会在低谷期“修系统”"></a>四、 个人感悟：接受“密云不雨”，学会在低谷期“修系统”</h2><p>写完小畜卦的笔记，我感到它太适合送给现代社会中每一个焦虑的年轻人了。我们总是渴望“付出立刻就有回报”，一旦努力了半个月没看到结果，就觉得自己是个废物。</p>
-<p>但小畜卦极其温柔地告诉我们：<strong>“密云不雨”才是人生的常态。</strong></p>
-<p>在云层还没有厚到可以化作甘霖的阶段，小畜卦教给了我们三个极其落地的生存策略：</p>
-<ol>
-<li><strong>别总想憋个大招，先做好“小畜”：</strong> 力量微弱的时候，不要动不动就谈“改变世界”、“实现财务自由”。从初九的“复自道”做起，先回归自己的生活轨道，每天看几页书、跑几公里步、存一点小钱。不积跬步，无以至千里，这些不起眼的“小畜”，最终会成为你翻盘的底气。</li>
-<li><strong>警惕内耗，它会拆了你的车轮：</strong> 九三爻的“舆说辐，夫妻反目”是一个极强的警示。在项目没做成、钱还没赚到的时候，最容易发生内部甩锅和互相指责。越是逆境，越要控制情绪，不要在枪林弹雨里对自己人开枪。</li>
-<li><strong>“月几望”的敬畏感：</strong> 上九爻贡献了一个中国哲学中极具美感的词——“月几望”（月亮快要圆了，但还没完全圆）。这是事物最完美的状态，一旦全圆，接下来就是残缺。在任何事情刚刚取得成功（既雨既处）的时候，一定要压制住乘胜追击的贪欲，懂得急流勇退、见好就收，这才是真正的大智慧。</li>
+<hr>
+<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>风天小畜的现代摘要是：小有蓄积，密云不雨。修文德待时。 这只是帮助进入文本的提要，具体判断仍要回到卦辞、爻位与上下文。</p>
+<p><strong>1. 底层逻辑：小有蓄积，密云不雨</strong></p>
+<p>程颐在释卦开头先从卦序、卦体和上下卦关系说明本卦之所以成立：</p>
+<blockquote>
+<p>小畜，《序卦》：比必有所畜，故受之以小畜。物相比附則為聚，聚，畜也。又相親比，則志相畜，小畜所以次比也。畜，止也，止則聚矣。為卦巽上乾下，乾在上之物，乃居巽下，夫畜止剛健，莫如巽順，為巽所畜，故為畜也。然巽陰也，其體柔順，唯能以巽順柔其剛健，非能力止之也，畜道之小者也。又四以一陰得位，為五陽所說。得位，得柔巽之道也。能畜羣陽之志，是以為畜也。小畜謂以小畜大，所畜聚者小，所畜之事小，以陰故也。彖專以六四畜諸陽，為成卦之義，不言二體，蓋舉其重者。</p>
+</blockquote>
+<p><strong>2. 卦辞与大象</strong></p>
+<p>卦辞给出全卦的基本处境与行动边界；大象则把卦象转化为修身、处事或治理的提示。程颐分别解释为：</p>
+<blockquote>
+<p>雲，陰陽之氣，二氣交而和則相畜，固而成雨。陽倡而陰和，順也，故和；若隂先陽倡，不順也，故不和，不和則不能成雨。雲之畜聚雖密，而不成雨者，自西郊故也。東北陽方，西南陰方，自陰倡故不和而不能成雨。以人觀之，雲氣之興，皆自四逺，故云郊。據四而言，故云「自我」。畜陽者，四畜之主也。</p>
+<p>乾之剛健而為巽所畜，夫剛健之性，惟柔順為能畜止之。雖可以畜止之，然非能固制其剛健也，但柔順以擾係之耳，故為小畜也。君子觀小畜之義，以懿美其文徳。畜聚為藴，畜之義。君子所藴畜者大，則道徳經綸之業，小則文章才藝。君子觀小畜之象，以懿美其文徳。文徳方之道義為小也。</p>
+</blockquote>
+<p><strong>3. 邵雍易学旁证</strong></p>
+<p>邵雍在《皇极经世·观物外篇》中说：</p>
+<blockquote>
+<p>“夫卦，各有性有体，然皆不离乾坤之门。”</p>
+<p>“君子于易，玩象、玩数、玩辞、玩意。”</p>
+</blockquote>
+<p>这两段是邵雍讨论读《易》方法的通论，并非针对风天小畜所下的吉凶断语。放在这里作为旁证，是提醒我们同时观察卦象、数位、辞义与整体意旨，不能只截取一句话作孤立判断。</p>
+<hr>
+<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初九】"><a href="#【初九】" class="headerlink" title="【初九】"></a>【初九】</h3><p><strong>初九：復自道，何其咎，吉。</strong></p>
+<p><strong>象曰：復自道，其義吉也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“復自道，何其咎，吉。”作为这一阶段的核心情境；《小象》又以“復自道，其義吉也。”点明观察角度。程颐解释此爻的切入点是：“初九，陽爻而乾體，陽在上之物，又剛健之才，足以上進。而復與在上同志，其進復於上，乃其道也。故云｢復自道｣，復既自道，何過咎之有？无咎而又有吉也。諸爻言无咎者，如是則无咎矣。故云无咎者，善補過也。雖使爻義本善，亦不害於不如是則有咎之義。初九乃由其道而行，无有過咎，故云｢何其咎｣，无咎之甚明也。”爻辞中出现“吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>初九，陽爻而乾體，陽在上之物，又剛健之才，足以上進。而復與在上同志，其進復於上，乃其道也。故云｢復自道｣，復既自道，何過咎之有？无咎而又有吉也。諸爻言无咎者，如是則无咎矣。故云无咎者，善補過也。雖使爻義本善，亦不害於不如是則有咎之義。初九乃由其道而行，无有過咎，故云｢何其咎｣，无咎之甚明也。</p>
+<p>陽剛之才，由其道而復其義，吉也。初與四為正應，在畜時乃相畜者也。</p>
+</blockquote>
+<p>从现代阅读角度看，初爻处在事情开端，适合先辨明基础、条件与时机，不宜把局部迹象过早当成最终结论。</p>
+<h3 id="【九二】"><a href="#【九二】" class="headerlink" title="【九二】"></a>【九二】</h3><p><strong>九二：牽復，吉。</strong></p>
+<p><strong>象曰：牽復在中，亦不自失也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“牽復，吉。”作为这一阶段的核心情境；《小象》又以“牽復在中，亦不自失也。”点明观察角度。程颐解释此爻的切入点是：“二以陽居下體之中，五以陽居上體之中，皆以陽剛居中，為陰所畜，俱欲上復。五雖在四上而為其所畜，則同是同志者也。夫同患相憂，二五同志，故相牽連而復。二陽並進，則隂不能勝，得遂其復矣，故吉也。曰遂其復，則離畜矣乎？曰：凡爻之辭，皆謂如是，則可以如是。若已然，則時已變矣，尚何教誡乎？五為巽體，巽畜於乾而反與二相牽，何也？曰：舉二體而言，則巽畜乎乾；全卦而言，則一陰畜五陽也。在易隨時取義，皆如此也。”爻辞中出现“吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>二以陽居下體之中，五以陽居上體之中，皆以陽剛居中，為陰所畜，俱欲上復。五雖在四上而為其所畜，則同是同志者也。夫同患相憂，二五同志，故相牽連而復。二陽並進，則隂不能勝，得遂其復矣，故吉也。曰遂其復，則離畜矣乎？曰：凡爻之辭，皆謂如是，則可以如是。若已然，則時已變矣，尚何教誡乎？五為巽體，巽畜於乾而反與二相牽，何也？曰：舉二體而言，則巽畜乎乾；全卦而言，則一陰畜五陽也。在易隨時取義，皆如此也。</p>
+<p>二居中得正者也，剛柔進退不失乎中道也。陽之復，其勢必强，二以處中，故雖强於進，亦不至於過剛，過剛乃自失也。爻止言牽復而吉之義，象復發明其在中之美。</p>
+</blockquote>
+<p>从现代阅读角度看，二爻进入落实阶段，通常要把行动放回中正、协作与可持续的尺度中衡量。</p>
+<h3 id="【九三】"><a href="#【九三】" class="headerlink" title="【九三】"></a>【九三】</h3><p><strong>九三：輿說輻，夫妻反目。</strong></p>
+<p><strong>象曰：夫妻反目，不能正室也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“輿說輻，夫妻反目。”作为这一阶段的核心情境；《小象》又以“夫妻反目，不能正室也。”点明观察角度。程颐解释此爻的切入点是：“三以陽爻居不得中，而密比於四，隂陽之情相求也。又暱比而不中，為陰畜制者也。故不能前進，猶車輿說去輪輻，言不能行也。夫妻反目，陰制於陽者也。今反制陽，如夫妻之反目也。反目謂怒目相視，不順其夫而反制之也。婦人為夫寵惑，既而遂反制其夫，未有夫不失道而妻能制之者也。故說輻、反目，三自為也。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>三以陽爻居不得中，而密比於四，隂陽之情相求也。又暱比而不中，為陰畜制者也。故不能前進，猶車輿說去輪輻，言不能行也。夫妻反目，陰制於陽者也。今反制陽，如夫妻之反目也。反目謂怒目相視，不順其夫而反制之也。婦人為夫寵惑，既而遂反制其夫，未有夫不失道而妻能制之者也。故說輻、反目，三自為也。</p>
+<p>夫妻反目，蓋由不能正其室家也。三自處不以道，故四得制之不使進。猶夫不能正其室家，故致反目也。</p>
+</blockquote>
+<p>从现代阅读角度看，三爻处在内卦将尽的转换处，进退压力往往同时出现，尤其需要控制冒进与失位的风险。</p>
+<h3 id="【六四】"><a href="#【六四】" class="headerlink" title="【六四】"></a>【六四】</h3><p><strong>六四：有孚，血去惕出，无咎。</strong></p>
+<p><strong>象曰：有孚。惕出。上合志也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“有孚，血去惕出，无咎。”作为这一阶段的核心情境；《小象》又以“有孚。惕出。上合志也。”点明观察角度。程颐解释此爻的切入点是：“四於畜時，處近君之位，畜君者也。若内有孚誠，則五志信之，從其畜也。卦獨一陰，畜衆陽者也，諸陽之志係乎四。四苟欲以力畜之，則一柔敵衆剛，必見傷害，唯盡其孚誠以應之，則可以感之矣。故其傷害逺，其危懼免也，如此則可以无咎，不然則不免乎害矣。此以柔畜剛之道也。以人君之威嚴，而微細之臣有能畜止其欲者，蓋有孚信以感之也。”爻辞中出现“无咎”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>四於畜時，處近君之位，畜君者也。若内有孚誠，則五志信之，從其畜也。卦獨一陰，畜衆陽者也，諸陽之志係乎四。四苟欲以力畜之，則一柔敵衆剛，必見傷害，唯盡其孚誠以應之，則可以感之矣。故其傷害逺，其危懼免也，如此則可以无咎，不然則不免乎害矣。此以柔畜剛之道也。以人君之威嚴，而微細之臣有能畜止其欲者，蓋有孚信以感之也。</p>
+<p>四既有孚，則五信任之，與之合志，所以得惕出而无咎也。惕出則血去，可知舉其輕者也。五既合志，衆陽皆從之矣。</p>
+</blockquote>
+<p>从现代阅读角度看，四爻由内转外，开始接近全局事务与主事位置，行动之前宜先建立信任并审慎辨势。</p>
+<h3 id="【九五】"><a href="#【九五】" class="headerlink" title="【九五】"></a>【九五】</h3><p><strong>九五：有孚攣如，富以其鄰。</strong></p>
+<p><strong>象曰：有孚攣如，不獨富也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“有孚攣如，富以其鄰。”作为这一阶段的核心情境；《小象》又以“有孚攣如，不獨富也。”点明观察角度。程颐解释此爻的切入点是：“小畜，眾陽為陰所畜之時也。五以中正居尊位而有孚信，則其類皆應之矣。故曰「攣如」，謂牽連相從也。五必援挽與之相濟，是富以其鄰也。五以居尊位之勢，如富者推其財力，與鄰比共之也。君子為小人所困，正人為羣邪所厄，則在下者必攀挽於上，期於同進。在上者必援引於下，與之戮力，非獨推己力以及人也。固資在下之助以成其力耳。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>小畜，眾陽為陰所畜之時也。五以中正居尊位而有孚信，則其類皆應之矣。故曰「攣如」，謂牽連相從也。五必援挽與之相濟，是富以其鄰也。五以居尊位之勢，如富者推其財力，與鄰比共之也。君子為小人所困，正人為羣邪所厄，則在下者必攀挽於上，期於同進。在上者必援引於下，與之戮力，非獨推己力以及人也。固資在下之助以成其力耳。</p>
+<p>有孚攣如，蓋其鄰類皆牽攣而從之。與眾同欲不獨有其富也。君子之處難厄，唯其至誠，故得眾力之助而能濟其眾也。</p>
+</blockquote>
+<p>从现代阅读角度看，五爻居于全卦关键位置，重点在承担责任、守住中道，并使个人能力真正服务于整体。</p>
+<h3 id="【上九】"><a href="#【上九】" class="headerlink" title="【上九】"></a>【上九】</h3><p><strong>上九：既雨既處，尚德載，婦貞厲，月幾望，君子征凶。</strong></p>
+<p><strong>象曰：既雨既處，德積載也。君子征凶，有所疑也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“既雨既處，尚德載，婦貞厲，月幾望，君子征凶。”作为这一阶段的核心情境；《小象》又以“既雨既處，德積載也。君子征凶，有所疑也。”点明观察角度。程颐解释此爻的切入点是：“九以巽順之極，居卦之上，處畜之終，從畜而止者也，為四所止也。既雨，和也。既處，止也。陰之畜陽，不和則不能止。既和而止，畜之道成矣。大畜，畜之大，故極而散。小畜，畜之小，故極而成。尚徳載，四用柔巽之徳積滿而至於成也。陰柔之畜剛，非一朝一夕能成，由積累而至，可不戒乎？載，積滿也。詩云「厥聲載路」。婦貞厲，婦謂隂，以陰而畜陽，以柔而制剛，婦若貞固守，此危厲之道也。安有婦制其夫，臣制其君，而能安者乎？”爻辞中出现“凶”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>九以巽順之極，居卦之上，處畜之終，從畜而止者也，為四所止也。既雨，和也。既處，止也。陰之畜陽，不和則不能止。既和而止，畜之道成矣。大畜，畜之大，故極而散。小畜，畜之小，故極而成。尚徳載，四用柔巽之徳積滿而至於成也。陰柔之畜剛，非一朝一夕能成，由積累而至，可不戒乎？載，積滿也。詩云「厥聲載路」。婦貞厲，婦謂隂，以陰而畜陽，以柔而制剛，婦若貞固守，此危厲之道也。安有婦制其夫，臣制其君，而能安者乎？</p>
+<p>既雨既處，言畜道積滿而成也。陰將盛極，君子動則有凶也。隂敵陽則必消陽，小人抗君子則必害君子，安得不疑慮乎？若前知疑慮而警懼，求所以制之，則不至於凶矣。</p>
+</blockquote>
+<p>从现代阅读角度看，上爻表示一卦发展已到极处，最需要防止过度、僵化与不知转圜，为下一阶段留下余地。</p>
+<hr>
+<h2 id="四、-个人感悟"><a href="#四、-个人感悟" class="headerlink" title="四、 个人感悟"></a>四、 个人感悟</h2><p>小有蓄积，密云不雨。修文德待时。 对我来说，风天小畜最值得反复体会的，不是把“吉”或“凶”当作固定答案，而是看清一个处境如何随位置、关系与行动方式而变化。六爻从初到上展示了不同阶段：同一原则放在不同位置，结果可能完全不同。</p>
+<p>把它用于今天的学习、工作或关系判断时，我更愿意把卦辞当作问题框架，把爻辞当作阶段提醒：先确认自己身处哪一层，再决定进、退、守、变。这样读《易》，比直接追求一个预言式结论更稳妥。</p>
+<hr>
+<h2 id="五、-参考文献与版本说明"><a href="#五、-参考文献与版本说明" class="headerlink" title="五、 参考文献与版本说明"></a>五、 参考文献与版本说明</h2><ol>
+<li>《周易》经文及《象传》，本卦原文取自：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/wiki/%E5%91%A8%E6%98%93/%E5%B0%8F%E7%95%9C">维基文库《周易》本卦页面</a>；并参校<a target="_blank" rel="noopener" href="https://ctext.org/book-of-changes/zh">中国哲学书电子化计划《周易》</a>。</li>
+<li>北宋程颐《程氏易传》（亦称《伊川易传》），本卦参校：<a target="_blank" rel="noopener" href="https://www.taijizhidian.com/chengxu/liushisigua/1542.html">【周易上经】第9卦-小畜䷈风天小畜（乾下巽上）-[北宋]程颐撰《程氏易传•卷一》</a>。</li>
+<li>北宋邵雍《皇极经世·观物外篇》，旁证原文：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/zh-hans/%E7%9A%87%E6%A5%B5%E7%B6%93%E4%B8%96/%E5%8D%B7%E5%8D%81%E4%B8%89">维基文库《皇极经世》卷十三</a>。</li>
 </ol>
-<p>风行天上，云未成雨。别急，静下来修缮你的德行与能力，属于你的那场甘霖，已经在酝酿的路上了。</p>
+<blockquote>
+<p>版本说明：经典原文与程颐文字保留底本中的繁体字、异体字及个别古字；“释义”“现代阅读角度”和“个人感悟”均为现代整理，不冒充古人原话。“邵雍易学旁证”只引用可定位的易学通论，不作逐卦、逐爻的托名断语。</p>
+</blockquote>
 
     </div>
 
@@ -373,7 +473,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E4%B9%9D%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初九】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【九二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【九三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【六四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【九五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E4%B9%9D%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上九】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F%EF%BC%9A%E6%8E%A5%E5%8F%97%E2%80%9C%E5%AF%86%E4%BA%91%E4%B8%8D%E9%9B%A8%E2%80%9D%EF%BC%8C%E5%AD%A6%E4%BC%9A%E5%9C%A8%E4%BD%8E%E8%B0%B7%E6%9C%9F%E2%80%9C%E4%BF%AE%E7%B3%BB%E7%BB%9F%E2%80%9D"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟：接受“密云不雨”，学会在低谷期“修系统”</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E4%B9%9D%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初九】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【九二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【九三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【六四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【九五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E4%B9%9D%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上九】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E4%B8%8E%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E"><span class="nav-number">5.</span> <span class="nav-text">五、 参考文献与版本说明</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -389,7 +489,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -474,6 +574,10 @@
 
 
 
+  
+<script src="/js/local-search.js"></script>
+
+
 
 
 
@@ -502,6 +606,15 @@
 
 <script>
   (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
     var loadingBox = document.getElementById('loading-box');
     var root = document.documentElement;
 
@@ -532,8 +645,9 @@
 
 <script src="/js/latex-tool.js?v=20260805c"></script>
 <script src="/js/translate-tool.js?v=20260805a"></script>
-<script src="/js/hexagram-index.js?v=20260806a"></script>
-<script src="/js/divination-tool.js?v=20260810a"></script>
+<script src="/js/hexagram-post-map.js?v=20260830a"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
 
 </body>
 </html>

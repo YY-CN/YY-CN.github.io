@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="天行健，君子以自强不息。">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="天行健，君子以自强不息。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-03T12:16:56.000Z">
-<meta property="article:modified_time" content="2026-06-03T13:32:43.515Z">
+<meta property="article:modified_time" content="2026-08-23T19:20:20.187Z">
 <meta property="article:author" content="Hyacinth">
 <meta property="article:tag" content="学习笔记">
 <meta property="article:tag" content="六十四卦">
@@ -127,6 +127,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -166,11 +167,38 @@
     <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -216,10 +244,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-06-03 20:16:56 / 修改时间：21:32:43" itemprop="dateCreated datePublished" datetime="2026-06-03T20:16:56+08:00">2026-06-03</time>
+              <time title="创建时间：2026-06-03 20:16:56" itemprop="dateCreated datePublished" datetime="2026-06-03T20:16:56+08:00">2026-06-03</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-24 03:20:20" itemprop="dateModified" datetime="2026-08-24T03:20:20+08:00">2026-08-24</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -230,7 +264,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>11 分钟</span>
+            </span>
             <div class="post-description">天行健，君子以自强不息。</div>
 
         </div>
@@ -243,48 +291,113 @@
 
       
         <h2 id="一、-经典原文"><a href="#一、-经典原文" class="headerlink" title="一、 经典原文"></a>一、 经典原文</h2><blockquote>
-<p><strong>【卦辞】</strong><br>乾：元，亨，利，贞。</p>
-<p><strong>【爻辞】</strong><br>初九：潜龙，勿用。<br>九二：见龙在田，利见大人。<br>九三：君子终日乾乾，夕惕若，厉，无咎。<br>九四：或跃在渊，无咎。<br>九五：飞龙在天，利见大人。<br>上九：亢龙，有悔。<br>用九：见群龙无首，吉。</p>
-<p><strong>【大象传】</strong><br>天行健，君子以自强不息。</p>
+<p><strong>【卦辞】</strong><br>乾：元亨。利貞。</p>
+<p><strong>【爻辞】</strong><br>初九：潛龍勿用。<br>九二：見龍在田，利見大人。<br>九三：君子終日乾乾，夕惕若；厲，无咎。<br>九四：或躍在淵，无咎。<br>九五：飛龍在天，利見大人。<br>上九：亢龍，有悔。<br>用九：見羣龍无首，吉。</p>
+<p><strong>【大象传】</strong><br>象曰：天行健，君子以自強不息。</p>
 </blockquote>
 <hr>
-<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>读完原文，我们可能会觉得字面意思有些生涩。其实，它的核心全在开头的四个字和结尾的一句话里。</p>
-<p><strong>1. 底层逻辑：天行健</strong><br>《象传》里的“天行健，君子以自强不息”是乾卦的灵魂。它告诉我们，天体的运行刚健不辍，我们做人做事也应该效法这种精神，不断进取，永不懈怠。</p>
-<p><strong>2. 发展规律：元亨利贞</strong><br>卦辞“元、亨、利、贞”，在古人的理解中，代表了事物完美发展的四个阶段，也可以对应一年的四季：</p>
-<ul>
-<li><strong>元（春）：</strong> 初始。代表万物创始，充满生命力。</li>
-<li><strong>亨（夏）：</strong> 通达。代表事物发展顺利，畅通无阻。</li>
-<li><strong>利（秋）：</strong> 适宜。代表收获，事物之间达到和谐平衡。</li>
-<li><strong>贞（冬）：</strong> 坚定。代表坚守正道，静待下一个循环。</li>
-</ul>
-<p>只要我们怀揣着刚健进取的心，并且<strong>始终坚守正道</strong>（贞），事情的发展最终就会迎来大吉大利的结果。</p>
-<p><strong>3.北宋易学家邵雍解</strong><br>刚健旺盛，发育之功；完事顺利，谨防太强。<br>得此卦者，天行刚健，自强不息，名利双收之象，宜把握机会，争取成果。女人得此卦则有过于刚直之嫌。</p>
+<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>乾为天的现代摘要是：刚健中正，自强不息。创始亨通。 这只是帮助进入文本的提要，具体判断仍要回到卦辞、爻位与上下文。</p>
+<p><strong>1. 底层逻辑：刚健中正，自强不息</strong></p>
+<p>程颐在释卦开头先从卦序、卦体和上下卦关系说明本卦之所以成立：</p>
+<blockquote>
+<p>上古聖人始畫八卦，三才之道備矣。因而重之，以盡天下之變，故六畫而成卦。重乾為《乾》。乾，天也。天者天之形體，乾者天之性情。乾，健也，健而无息之謂乾。夫天，專言之則道也，天且弗違是也；分而言之，則以形體謂之天，以主宰謂之帝，以功用謂之鬼神，以妙用謂之神，以性情謂之乾。乾者萬物之始，故為天，為陽，為父，為君。元亨利貞謂之四德。元者萬物之始，亨者萬物之長，利者萬物之遂，貞者萬物之成。惟乾坤有此四德，在他卦則隨事而變焉。故元專為善大，利主於正固，亨貞之體，各稱其事。四德之義，廣矣大矣。</p>
+</blockquote>
+<p><strong>2. 卦辞与大象</strong></p>
+<p>卦辞给出全卦的基本处境与行动边界；大象则把卦象转化为修身、处事或治理的提示。程颐分别解释为：</p>
+<blockquote>
+<p>上古聖人始畫八卦，三才之道備矣。因而重之，以盡天下之變，故六畫而成卦。重乾為《乾》。乾，天也。天者天之形體，乾者天之性情。乾，健也，健而无息之謂乾。夫天，專言之則道也，天且弗違是也；分而言之，則以形體謂之天，以主宰謂之帝，以功用謂之鬼神，以妙用謂之神，以性情謂之乾。乾者萬物之始，故為天，為陽，為父，為君。元亨利貞謂之四德。元者萬物之始，亨者萬物之長，利者萬物之遂，貞者萬物之成。惟乾坤有此四德，在他卦則隨事而變焉。故元專為善大，利主於正固，亨貞之體，各稱其事。四德之義，廣矣大矣。</p>
+<p>卦下象解一卦之象，爻下象解一爻之象。諸卦皆取象以為法。乾道覆育之象至大，非聖人莫能體，欲人皆可取法也，故取其行健而已，至健固足以見天道也。君子以自强不息，法天行之健也。</p>
+</blockquote>
+<p><strong>3. 邵雍易学旁证</strong></p>
+<p>邵雍在《皇极经世·观物外篇》中说：</p>
+<blockquote>
+<p>“夫卦，各有性有体，然皆不离乾坤之门。”</p>
+<p>“君子于易，玩象、玩数、玩辞、玩意。”</p>
+</blockquote>
+<p>这两段是邵雍讨论读《易》方法的通论，并非针对乾为天所下的吉凶断语。放在这里作为旁证，是提醒我们同时观察卦象、数位、辞义与整体意旨，不能只截取一句话作孤立判断。</p>
 <hr>
-<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初九】"><a href="#【初九】" class="headerlink" title="【初九】"></a>【初九】</h3><p><strong>初九：潜龙，勿用。</strong><br><strong>象曰：潜龙勿用，阳在下也。</strong></p>
-<p><strong>释义</strong><br>初九：巨龙潜伏在深水之中，暂时不能发挥作用。<br>《象辞》说：巨龙潜伏在水下不能发挥作用，是因为阳气还在最底下，时机尚未成熟。</p>
-<p><strong>北宋易学家邵雍解</strong><br>平：得此爻者，时机未到，宜静待时机，不宜妄动。做事宜退守，切忌盲目出头。</p>
-<h3 id="【九二】"><a href="#【九二】" class="headerlink" title="【九二】"></a>【九二】</h3><p><strong>九二：见龙在田，利见大人。</strong><br><strong>象曰：见龙在田，德施普也。</strong></p>
-<p><strong>释义</strong><br>九二：巨龙出现在田野之中，利于见到有道德、有地位的大人物。<br>《象辞》说：巨龙出现在田野之中，意味着恩德已经开始普施于天下了。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，正当好运，能得到贵人的提携。做官的会得到上司的赏识，升迁有望。</p>
-<h3 id="【九三】"><a href="#【九三】" class="headerlink" title="【九三】"></a>【九三】</h3><p><strong>九三：君子终日乾乾，夕惕若；厉，无咎。</strong><br><strong>象曰：终日乾乾，反复道也。</strong></p>
-<p><strong>释义</strong><br>九三：有才德的君子始终是白天勤奋努力，夜晚戒惧反省，虽然处境艰难，但终究没有灾难。<br>《象辞》说：君子整日里勤奋努力，意思是反复行道，坚持不舍。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，会得到贵人的提拔。做官的会遇到明主，身居要职。读书人考试能获得佳绩。经商者获利。女命逢之，则又富又贵。</p>
-<h3 id="【九四】"><a href="#【九四】" class="headerlink" title="【九四】"></a>【九四】</h3><p><strong>九四：或跃在渊，无咎。</strong><br><strong>象曰：或跃在渊，进无咎也。</strong></p>
-<p><strong>释义</strong><br>九四：巨龙有时跃起，有时潜伏在深渊，没有灾难。<br>《象辞》说：有时跃起，有时潜伏，只要懂得知机而进，就不会有灾难。</p>
-<p><strong>北宋易学家邵雍解</strong><br>平：得此爻者，正处于人生的转折点，进退维谷，宜审时度势，谨慎行事。做官的会有职位上的变动。</p>
-<h3 id="【九五】"><a href="#【九五】" class="headerlink" title="【九五】"></a>【九五】</h3><p><strong>九五：飞龙在天，利见大人。</strong><br><strong>象曰：飞龙在天，大人造也。</strong></p>
-<p><strong>释义</strong><br>九五：巨龙飞翔在广阔的天空，利于见到有才德的大人物。<br>《象辞》说：巨龙飞翔在天空，说明伟大的人物已经开始有所作为，大展宏图了。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，好运当头，做事顺利。做官的会得到重用，飞黄腾达。经商的会获大利。</p>
-<h3 id="【上九】"><a href="#【上九】" class="headerlink" title="【上九】"></a>【上九】</h3><p><strong>上九：亢龙，有悔。</strong><br><strong>象曰：亢龙有悔，盈不可久也。</strong></p>
-<p><strong>释义</strong><br>上九：飞得过高的龙，必然会有悔恨。<br>《象辞》说：飞得过高的龙必然会有悔恨，因为事物盛极必衰，盈满的状态是不能长久的。</p>
-<p><strong>北宋易学家邵雍解</strong><br>凶：得此爻者，运势衰退，物极必反。做人做事切忌居功自傲、脱离实际，宜退守，否则会有灾祸。</p>
-<h3 id="【用九】"><a href="#【用九】" class="headerlink" title="【用九】"></a>【用九】</h3><p><strong>用九：见群龙无首，吉。</strong><br><strong>象曰：用九，天德不可为首也。</strong></p>
-<p><strong>释义</strong><br>用九：出现许多巨龙，但都没有领头的，吉祥。<br>《象辞》说：乾卦六爻皆阳，顺应天道运行，不可强出头、争为首。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，顺其自然，不可强求。大家和衷共济，不争强好胜，就能大吉大利。</p>
+<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初九】"><a href="#【初九】" class="headerlink" title="【初九】"></a>【初九】</h3><p><strong>初九：潛龍勿用。</strong></p>
+<p><strong>象曰：潛龍勿用，陽在下也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“潛龍勿用。”作为这一阶段的核心情境；《小象》又以“潛龍勿用，陽在下也。”点明观察角度。程颐解释此爻的切入点是：“下爻為初。九，陽數之盛，故以名陽爻。理无形也，故假象以顯義。乾以龍為象。龍之為物，靈變不測，故以象乾道變化，陽氣消息，聖人進退。初九在一卦之下，為始物之端，陽氣方萌。聖人側微，若龍之潛隱，未可自用，當晦養以俟時。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>下爻為初。九，陽數之盛，故以名陽爻。理无形也，故假象以顯義。乾以龍為象。龍之為物，靈變不測，故以象乾道變化，陽氣消息，聖人進退。初九在一卦之下，為始物之端，陽氣方萌。聖人側微，若龍之潛隱，未可自用，當晦養以俟時。</p>
+<p>陽氣在下，君子處微，未可用也。</p>
+</blockquote>
+<p>从现代阅读角度看，初爻处在事情开端，适合先辨明基础、条件与时机，不宜把局部迹象过早当成最终结论。</p>
+<h3 id="【九二】"><a href="#【九二】" class="headerlink" title="【九二】"></a>【九二】</h3><p><strong>九二：見龍在田，利見大人。</strong></p>
+<p><strong>象曰：見龍在田，德施普也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“見龍在田，利見大人。”作为这一阶段的核心情境；《小象》又以“見龍在田，德施普也。”点明观察角度。程颐解释此爻的切入点是：“田，地上也。出見於地上，其德已著。以聖人言之，舜之田漁時也。利見大德之君，以行其道。君亦利見大德之臣，以共成其功。天下利見大德之人，以被其澤。大德之君，九五也。乾坤純體，不分剛柔，而以同德相應。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>田，地上也。出見於地上，其德已著。以聖人言之，舜之田漁時也。利見大德之君，以行其道。君亦利見大德之臣，以共成其功。天下利見大德之人，以被其澤。大德之君，九五也。乾坤純體，不分剛柔，而以同德相應。</p>
+<p>見於地上，德化及物，其施已普也。</p>
+</blockquote>
+<p>从现代阅读角度看，二爻进入落实阶段，通常要把行动放回中正、协作与可持续的尺度中衡量。</p>
+<h3 id="【九三】"><a href="#【九三】" class="headerlink" title="【九三】"></a>【九三】</h3><p><strong>九三：君子終日乾乾，夕惕若；厲，无咎。</strong></p>
+<p><strong>象曰：終日乾乾，反復道也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“君子終日乾乾，夕惕若；厲，无咎。”作为这一阶段的核心情境；《小象》又以“終日乾乾，反復道也。”点明观察角度。程颐解释此爻的切入点是：“三雖人位，已在下體之上，未離於下而尊顯者也。舜之玄德升，聞時也。日夕不懈而兢惕，則雖處危地而无咎。在下之人而君德已著，天下將歸之，其危懼可知。雖言聖人事，苟不設戒，則何以為教？作《易》之義也。”爻辞中出现“无咎”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>三雖人位，已在下體之上，未離於下而尊顯者也。舜之玄德升，聞時也。日夕不懈而兢惕，則雖處危地而无咎。在下之人而君德已著，天下將歸之，其危懼可知。雖言聖人事，苟不設戒，則何以為教？作《易》之義也。</p>
+<p>進退動息，必以道也。</p>
+</blockquote>
+<p>从现代阅读角度看，三爻处在内卦将尽的转换处，进退压力往往同时出现，尤其需要控制冒进与失位的风险。</p>
+<h3 id="【九四】"><a href="#【九四】" class="headerlink" title="【九四】"></a>【九四】</h3><p><strong>九四：或躍在淵，无咎。</strong></p>
+<p><strong>象曰：或躍在淵，進无咎也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“或躍在淵，无咎。”作为这一阶段的核心情境；《小象》又以“或躍在淵，進无咎也。”点明观察角度。程颐解释此爻的切入点是：“淵，龍之所安也。或，疑辭，謂非必也。躍不躍，惟及時以就安耳。聖人之動，无不時也。舜之歷試，時也。”爻辞中出现“无咎”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>淵，龍之所安也。或，疑辭，謂非必也。躍不躍，惟及時以就安耳。聖人之動，无不時也。舜之歷試，時也。</p>
+<p>量可而進，適其時則无咎也。</p>
+</blockquote>
+<p>从现代阅读角度看，四爻由内转外，开始接近全局事务与主事位置，行动之前宜先建立信任并审慎辨势。</p>
+<h3 id="【九五】"><a href="#【九五】" class="headerlink" title="【九五】"></a>【九五】</h3><p><strong>九五：飛龍在天，利見大人。</strong></p>
+<p><strong>象曰：飛龍在天，大人造也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“飛龍在天，利見大人。”作为这一阶段的核心情境；《小象》又以“飛龍在天，大人造也。”点明观察角度。程颐解释此爻的切入点是：“進位乎天位也。聖人既得天位，則利見在下大德之人，與共成天下之事。天下固利見夫大德之君也。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>進位乎天位也。聖人既得天位，則利見在下大德之人，與共成天下之事。天下固利見夫大德之君也。</p>
+<p>大人之為，聖人之事也。</p>
+</blockquote>
+<p>从现代阅读角度看，五爻居于全卦关键位置，重点在承担责任、守住中道，并使个人能力真正服务于整体。</p>
+<h3 id="【上九】"><a href="#【上九】" class="headerlink" title="【上九】"></a>【上九】</h3><p><strong>上九：亢龍，有悔。</strong></p>
+<p><strong>象曰：亢龍有悔，盈不可久也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“亢龍，有悔。”作为这一阶段的核心情境；《小象》又以“亢龍有悔，盈不可久也。”点明观察角度。程颐解释此爻的切入点是：“九五者，位之極中正者。得時之極，過此則亢矣。上九至於亢極，故有悔也。有過則有悔。唯聖人知進退存亡而无過，則不至於悔也。”爻辞中出现“有悔”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>九五者，位之極中正者。得時之極，過此則亢矣。上九至於亢極，故有悔也。有過則有悔。唯聖人知進退存亡而无過，則不至於悔也。</p>
+<p>盈則變，有悔也。</p>
+</blockquote>
+<p>从现代阅读角度看，上爻表示一卦发展已到极处，最需要防止过度、僵化与不知转圜，为下一阶段留下余地。</p>
+<h3 id="【用九】"><a href="#【用九】" class="headerlink" title="【用九】"></a>【用九】</h3><p><strong>用九：見羣龍无首，吉。</strong></p>
+<p><strong>象曰：用九，天德不可為首也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“見羣龍无首，吉。”作为这一阶段的核心情境；《小象》又以“用九，天德不可為首也。”点明观察角度。程颐解释此爻的切入点是：“用九者，處乾剛之道，以陽居乾體，純乎剛者也。剛柔相濟為中，而乃以純剛，是過乎剛也。見群龍，謂觀諸陽之義，无為首則吉也。以剛為天下先，凶之道也。”爻辞中出现“吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>用九者，處乾剛之道，以陽居乾體，純乎剛者也。剛柔相濟為中，而乃以純剛，是過乎剛也。見群龍，謂觀諸陽之義，无為首則吉也。以剛為天下先，凶之道也。</p>
+<p>卦下象解一卦之象，爻下象解一爻之象。諸卦皆取象以為法。乾道覆育之象至大，非聖人莫能體，欲人皆可取法也，故取其行健而已，至健固足以見天道也。君子以自强不息，法天行之健也。</p>
+</blockquote>
+<p>从现代阅读角度看，“用九”或“用六”从全卦整体变化立论，阅读时不应把它等同于普通的一条爻位。</p>
 <hr>
-<h2 id="四、-个人感悟：知进退，明得失"><a href="#四、-个人感悟：知进退，明得失" class="headerlink" title="四、 个人感悟：知进退，明得失"></a>四、 个人感悟：知进退，明得失</h2><p>写完乾卦的第一篇笔记，我最大的感触是：《易经》虽然教人“自强不息”，但它绝不是一味地灌输鸡汤，鼓励人去无脑地猛冲猛打。相反，乾卦充满着极强的<strong>辩证智慧</strong>。</p>
-<p>从“潜龙勿用”到“飞龙在天”，它告诉我们要懂得等待时机。而到了最高的“上九”阶段，它又用一句“亢龙有悔”来一锤定音，警示我们：<strong>人生的最高智慧不是永远霸占顶峰，而是懂得在最辉煌的时候保持清醒，知道什么时候该稍微收敛，什么时候该急流勇退。</strong></p>
-<p>万物皆有周期。无论是职场打拼还是个人成长，认清自己当前究竟处在哪一条“龙”的阶段，做该做的事，才是乾卦教给我们的真正法则。</p>
+<h2 id="四、-个人感悟"><a href="#四、-个人感悟" class="headerlink" title="四、 个人感悟"></a>四、 个人感悟</h2><p>刚健中正，自强不息。创始亨通。 对我来说，乾为天最值得反复体会的，不是把“吉”或“凶”当作固定答案，而是看清一个处境如何随位置、关系与行动方式而变化。六爻从初到上展示了不同阶段：同一原则放在不同位置，结果可能完全不同。</p>
+<p>把它用于今天的学习、工作或关系判断时，我更愿意把卦辞当作问题框架，把爻辞当作阶段提醒：先确认自己身处哪一层，再决定进、退、守、变。这样读《易》，比直接追求一个预言式结论更稳妥。</p>
+<hr>
+<h2 id="五、-参考文献与版本说明"><a href="#五、-参考文献与版本说明" class="headerlink" title="五、 参考文献与版本说明"></a>五、 参考文献与版本说明</h2><ol>
+<li>《周易》经文及《象传》，本卦原文取自：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/wiki/%E5%91%A8%E6%98%93/%E4%B9%BE">维基文库《周易》本卦页面</a>；并参校<a target="_blank" rel="noopener" href="https://ctext.org/book-of-changes/zh">中国哲学书电子化计划《周易》</a>。</li>
+<li>北宋程颐《程氏易传》（亦称《伊川易传》），本卦参校：<a target="_blank" rel="noopener" href="https://www.taijizhidian.com/chengxu/liushisigua/1532.html">【周易上经】第1卦-乾卦䷀乾卦为天（乾下乾上）-[北宋]程颐撰《程氏易传•卷一》</a>。</li>
+<li>北宋邵雍《皇极经世·观物外篇》，旁证原文：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/zh-hans/%E7%9A%87%E6%A5%B5%E7%B6%93%E4%B8%96/%E5%8D%B7%E5%8D%81%E4%B8%89">维基文库《皇极经世》卷十三</a>。</li>
+</ol>
+<blockquote>
+<p>版本说明：经典原文与程颐文字保留底本中的繁体字、异体字及个别古字；“释义”“现代阅读角度”和“个人感悟”均为现代整理，不冒充古人原话。“邵雍易学旁证”只引用可定位的易学通论，不作逐卦、逐爻的托名断语。</p>
+</blockquote>
 
     </div>
 
@@ -370,7 +483,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E4%B9%9D%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初九】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【九二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【九三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【九四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【九五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E4%B9%9D%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上九】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E7%94%A8%E4%B9%9D%E3%80%91"><span class="nav-number">3.7.</span> <span class="nav-text">【用九】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F%EF%BC%9A%E7%9F%A5%E8%BF%9B%E9%80%80%EF%BC%8C%E6%98%8E%E5%BE%97%E5%A4%B1"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟：知进退，明得失</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E4%B9%9D%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初九】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【九二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【九三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【九四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【九五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E4%B9%9D%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上九】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E7%94%A8%E4%B9%9D%E3%80%91"><span class="nav-number">3.7.</span> <span class="nav-text">【用九】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E4%B8%8E%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E"><span class="nav-number">5.</span> <span class="nav-text">五、 参考文献与版本说明</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -386,7 +499,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -471,6 +584,10 @@
 
 
 
+  
+<script src="/js/local-search.js"></script>
+
+
 
 
 
@@ -499,6 +616,15 @@
 
 <script>
   (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
     var loadingBox = document.getElementById('loading-box');
     var root = document.documentElement;
 
@@ -529,8 +655,9 @@
 
 <script src="/js/latex-tool.js?v=20260805c"></script>
 <script src="/js/translate-tool.js?v=20260805a"></script>
-<script src="/js/hexagram-index.js?v=20260806a"></script>
-<script src="/js/divination-tool.js?v=20260810a"></script>
+<script src="/js/hexagram-post-map.js?v=20260830a"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
 
 </body>
 </html>

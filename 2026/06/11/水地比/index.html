@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="地上有水，比。先王以建万国，亲诸侯。">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="地上有水，比。先王以建万国，亲诸侯。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-11T00:30:00.000Z">
-<meta property="article:modified_time" content="2026-06-10T15:21:08.246Z">
+<meta property="article:modified_time" content="2026-08-23T19:20:20.194Z">
 <meta property="article:author" content="Hyacinth">
 <meta property="article:tag" content="学习笔记">
 <meta property="article:tag" content="六十四卦">
@@ -127,6 +127,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -166,11 +167,38 @@
     <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -224,7 +252,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-06-10 23:21:08" itemprop="dateModified" datetime="2026-06-10T23:21:08+08:00">2026-06-10</time>
+                <time title="修改时间：2026-08-24 03:20:20" itemprop="dateModified" datetime="2026-08-24T03:20:20+08:00">2026-08-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -236,7 +264,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
             <div class="post-description">地上有水，比。先王以建万国，亲诸侯。</div>
 
         </div>
@@ -249,44 +291,103 @@
 
       
         <h2 id="一、-经典原文"><a href="#一、-经典原文" class="headerlink" title="一、 经典原文"></a>一、 经典原文</h2><blockquote>
-<p><strong>【卦辞】</strong><br>比：吉。原筮，元永贞，无咎。不宁方来，后夫凶。</p>
-<p><strong>【爻辞】</strong><br>初六：有孚比之，无咎。有孚盈缶，终来有它，吉。<br>六二：比之自内，贞吉。<br>六三：比之匪人。<br>六四：外比之，贞吉。<br>九五：显比，王用三驱，失前禽。邑人不诫，吉。<br>上六：比之无首，凶。</p>
-<p><strong>【大象传】</strong><br>地上有水，比；先王以建万国，亲诸侯。</p>
+<p><strong>【卦辞】</strong><br>比：吉。原筮元永貞，无咎。不寧方來，後夫凶。</p>
+<p><strong>【爻辞】</strong><br>初六：有孚，比之，无咎。有孚盈缶，終來有它，吉。<br>六二：比之自內，貞吉。<br>六三：比之匪人。<br>六四：外比之，貞吉。<br>九五：顯比。王用三驅，失前禽，邑人不誡，吉。<br>上六：比之无首，凶。</p>
+<p><strong>【大象传】</strong><br>象曰：地上有水，比；先王以建萬國，親諸侯。</p>
 </blockquote>
-<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>走过了师卦的兵戈相见与激烈斗争，天下终将归于和平。于是，我们迎来了第八卦——比卦。“比”的甲骨文字形，就像是两个人步调一致、比肩同行。引申开来，它代表着亲密、互助、结盟以及人际交往中的高级智慧。</p>
-<p><strong>1. 底层逻辑：先王以建万国，亲诸侯</strong><br>比卦的上卦为坎（水），下卦为坤（地）。《象传》说“地上有水”，水渗入大地，大地滋养水脉，水乳交融，毫无隔阂。先代君王效法这种“水地相亲”的意象，通过分封建国、亲近安抚诸侯，建立起稳固的同盟与和谐的国际关系。这也是我们建立高质量人际网络的底层逻辑。</p>
-<p><strong>2. 交往的法则：真诚与时机</strong><br>卦辞“比：吉。原筮，元永贞，无咎。不宁方来，后夫凶”揭示了结盟的残酷与温情：</p>
-<ul>
-<li><strong>原筮，元永贞：</strong> 在决定与人深交或结盟前，要像占卜一样去认真考察对方的初衷。只有动机纯正（元）、能够长久（永）、坚守正道（贞），才能没有灾祸。</li>
-<li><strong>不宁方来：</strong> 那些处于不安和困顿中的人，会主动前来寻求庇护和依靠。</li>
-<li><strong>后夫凶：</strong> 结交盟友讲究时机，如果犹豫不决、首鼠两端，等到别人都已经抱团取暖了你才最后赶来，必然会面临孤立无援的凶险。</li>
-</ul>
-<p><strong>3.北宋易学家邵雍解</strong><br>水附大地，相亲相依；得此卦者，贵人相助。<br>得此卦者，正处于需要团队协作、拓展人脉的关键期。此时最宜以诚待人，寻找志同道合的伙伴。孤军奋战必败，水乳交融方能成就大业。</p>
-<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初六】"><a href="#【初六】" class="headerlink" title="【初六】"></a>【初六】</h3><p><strong>初六：有孚比之，无咎。有孚盈缶，终来有它，吉。</strong><br><strong>象曰：比之初六，有它吉也。</strong></p>
-<p><strong>释义</strong><br>初六：怀着真诚的心去与人结交，没有灾难。如果这份真诚像装满了美酒的瓦罐（盈缶）一样充实，最终会带来意想不到的好运（有它吉），吉祥。<br>《象辞》说：比卦初六的结交，能带来意料之外的吉祥。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，正处于交往的最初阶段。此时不需要华丽的辞藻或利益的交换，最质朴的真诚（盈缶）就是最好的敲门砖，必得贵人青睐。</p>
-<h3 id="【六二】"><a href="#【六二】" class="headerlink" title="【六二】"></a>【六二】</h3><p><strong>六二：比之自内，贞吉。</strong><br><strong>象曰：比之自内，不自失也。</strong></p>
-<p><strong>释义</strong><br>六二：从内部（内心、宗族或核心团队）开始亲密互助，坚守正道，吉祥。<br>《象辞》说：从内部开始亲密互助，是因为坚守了自己的本分和立场，没有迷失自我。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，人际关系融洽，且能在核心圈子里得到认可。修身齐家，先搞定内部环境，自然能获得长久的安稳。</p>
-<h3 id="【六三】"><a href="#【六三】" class="headerlink" title="【六三】"></a>【六三】</h3><p><strong>六三：比之匪人。</strong><br><strong>象曰：比之匪人，不亦伤乎！</strong></p>
-<p><strong>释义</strong><br>六三：去跟行为不端、非同道中人（匪人）结交。<br>《象辞》说：与不该结交的人结交，难道不让人悲伤吗！</p>
-<p><strong>北宋易学家邵雍解</strong><br>凶：得此爻者，遇人不淑，或者站错了队伍、交错了朋友。极易受到小人的牵连与拖累，此时必须当机立断，及时切割，否则必受其害。</p>
-<h3 id="【六四】"><a href="#【六四】" class="headerlink" title="【六四】"></a>【六四】</h3><p><strong>六四：外比之，贞吉。</strong><br><strong>象曰：外比于贤，以从上也。</strong></p>
-<p><strong>释义</strong><br>六四：向外去结交贤能的人，坚守正道，吉祥。<br>《象辞》说：向外结交贤人，是为了顺从和辅佐上面的明君（九五）。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，能够认清形势，懂得向上社交或寻找优秀的合作伙伴。只要动机纯正，就能得到强有力的靠山。</p>
-<h3 id="【九五】"><a href="#【九五】" class="headerlink" title="【九五】"></a>【九五】</h3><p><strong>九五：显比，王用三驱，失前禽。邑人不诫，吉。</strong><br><strong>象曰：显比之吉，位正中也。舍逆取顺，失前禽也。邑人不诫，上使中也。</strong></p>
-<p><strong>释义</strong><br>九五：光明正大地结交天下。君王打猎时只围三面（王用三驱），网开一面，让前面逃跑的禽兽自由离去。都城里的百姓也不用互相防备警告，吉祥。<br>《象辞》说：舍弃那些背离的，接纳那些顺从的，这就是“失前禽”的智慧。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，处于领导地位，气度恢弘。对待人才和盟友，来者不拒，去者不留。这种“来去自由”的广阔胸襟，反而能凝聚最强大的人心。</p>
-<h3 id="【上六】"><a href="#【上六】" class="headerlink" title="【上六】"></a>【上六】</h3><p><strong>上六：比之无首，凶。</strong><br><strong>象曰：比之无首，无所终也。</strong></p>
-<p><strong>释义</strong><br>上六：想要结交却找不到领头人（或者错过了结交的时机，没有了开头），凶险。<br>《象辞》说：没有良好的开端，必然找不到归宿，没有好结果。</p>
-<p><strong>北宋易学家邵雍解</strong><br>凶：得此爻者，在关键时刻首鼠两端，或者为人过于孤傲，最终在群体中失去了位置，变得孤立无援，结局凶险。</p>
-<h2 id="四、-个人感悟：最高级的人脉，是“网开一面”"><a href="#四、-个人感悟：最高级的人脉，是“网开一面”" class="headerlink" title="四、 个人感悟：最高级的人脉，是“网开一面”"></a>四、 个人感悟：最高级的人脉，是“网开一面”</h2><p>写完比卦，我深深地感觉到，《易经》不仅仅是在讲哲学，它简直就是一部跨越了三千年的“社交与人脉指南”。在人人都在谈论“混圈子”和“向上社交”的今天，比卦给了我们三个非常清醒的忠告：</p>
-<ol>
-<li><strong>真诚是永远的必杀技：</strong> 初六爻的“有孚盈缶”告诉我，在没有任何资源、背景的起步阶段，不要去玩什么套路。就像一口质朴的瓦罐，里面装满最醇厚的真诚，这种没有功利心的善意，最终反而会换来“有它吉”（意想不到的回报）。</li>
-<li><strong>警惕“垃圾快乐”与“有毒圈子”：</strong> 六三爻的“比之匪人”是一记响亮的耳光。如果你发现自己身边的圈子全是在抱怨、内耗或是从事不正当的勾当，一定要赶紧跑！宁可高质量的独处，也绝不要低质量的合群。</li>
-<li><strong>领导力的最高境界是“来去自由”：</strong> 九五爻的“王用三驱，失前禽”是整卦中最绝妙的隐喻。真正的高手带团队、交朋友，绝不是靠捆绑、道德绑架或威逼利诱。而是“网开一面”：你愿意跟我走，我待你如宾；你想离开，我绝不强留。靠人格魅力和愿景吸引来的同路人，才是一支永远打不散的铁军。</li>
+<hr>
+<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>水地比的现代摘要是：亲比互助，团结他人。守正得吉。 这只是帮助进入文本的提要，具体判断仍要回到卦辞、爻位与上下文。</p>
+<p><strong>1. 底层逻辑：亲比互助，团结他人</strong></p>
+<p>程颐在释卦开头先从卦序、卦体和上下卦关系说明本卦之所以成立：</p>
+<blockquote>
+<p>比《序卦》：衆必有所比，故受之以比。比，親輔也，人之類必相親輔，然後能安。故既有衆則必有所比，比所以次師也。為卦上坎下坤，以二體言之：水在地上，物之相切比無間，莫如水之在地上，故為比也。又衆爻皆陰，獨五以陽剛居君位，衆所親附，而上亦親下，故為比也。</p>
+</blockquote>
+<p><strong>2. 卦辞与大象</strong></p>
+<p>卦辞给出全卦的基本处境与行动边界；大象则把卦象转化为修身、处事或治理的提示。程颐分别解释为：</p>
+<blockquote>
+<p>比，吉道也。人相親比，自為吉道，故雜卦云「比樂師憂」。人相親比，必有其道，苟非其道，則有悔咎，故必推原占，決其可比者。而比之筮謂，占決卜度，非謂以蓍龜也。所比得元永貞，則无咎。元謂有君長之道，永謂可以常久，貞謂得正道。上之比下，必有此三者，下之從上，必求此三者，則无咎也。</p>
+<p>夫物相親比而无間者，莫如水在地上，所以為比也。先王觀比之象以建萬國，親諸侯。建立萬國，所以比民也；親撫諸侯，所以比天下也。</p>
+</blockquote>
+<p><strong>3. 邵雍易学旁证</strong></p>
+<p>邵雍在《皇极经世·观物外篇》中说：</p>
+<blockquote>
+<p>“夫卦，各有性有体，然皆不离乾坤之门。”</p>
+<p>“君子于易，玩象、玩数、玩辞、玩意。”</p>
+</blockquote>
+<p>这两段是邵雍讨论读《易》方法的通论，并非针对水地比所下的吉凶断语。放在这里作为旁证，是提醒我们同时观察卦象、数位、辞义与整体意旨，不能只截取一句话作孤立判断。</p>
+<hr>
+<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初六】"><a href="#【初六】" class="headerlink" title="【初六】"></a>【初六】</h3><p><strong>初六：有孚，比之，无咎。有孚盈缶，終來有它，吉。</strong></p>
+<p><strong>象曰：比之初六，有它吉也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“有孚，比之，无咎。有孚盈缶，終來有它，吉。”作为这一阶段的核心情境；《小象》又以“比之初六，有它吉也。”点明观察角度。程颐解释此爻的切入点是：“初六，比之始也。相比之道以誠信為本，中心不信而親人，人誰與之？故比之始，必有孚誠乃无咎也。孚信之在中也。”爻辞中出现“吉、无咎”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>初六，比之始也。相比之道以誠信為本，中心不信而親人，人誰與之？故比之始，必有孚誠乃无咎也。孚信之在中也。</p>
+<p>言比之初六者，比之道在乎始也。始能有孚，則終致有他之吉，其始不誠，終焉得吉？上六之凶，由无首也。</p>
+</blockquote>
+<p>从现代阅读角度看，初爻处在事情开端，适合先辨明基础、条件与时机，不宜把局部迹象过早当成最终结论。</p>
+<h3 id="【六二】"><a href="#【六二】" class="headerlink" title="【六二】"></a>【六二】</h3><p><strong>六二：比之自內，貞吉。</strong></p>
+<p><strong>象曰：比之自內，不自失也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“比之自內，貞吉。”作为这一阶段的核心情境；《小象》又以“比之自內，不自失也。”点明观察角度。程颐解释此爻的切入点是：“二與五為正應，皆得中正，以中正之道相比者也。二處於内，自内謂由己也。擇才而用，雖在乎上，而以身許國，必由於己。己以得君道合而進，乃得正而吉也。以中正之道應上之求，乃自内也，不自失也。汲汲以求比者，非君子自重之道，乃自失也。”爻辞中出现“吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>二與五為正應，皆得中正，以中正之道相比者也。二處於内，自内謂由己也。擇才而用，雖在乎上，而以身許國，必由於己。己以得君道合而進，乃得正而吉也。以中正之道應上之求，乃自内也，不自失也。汲汲以求比者，非君子自重之道，乃自失也。</p>
+<p>守己中正之道，以待上之求，乃不自失也。易之為戒嚴密。二雖中正，質柔體順，故有貞吉自失之戒，戒之自守以待上之求，无乃涉後凶乎。曰：士之修己，乃求上之道，降志辱身，非自重之道也。故伊尹、武侯救天下之心非不切，必待禮至然後出也。</p>
+</blockquote>
+<p>从现代阅读角度看，二爻进入落实阶段，通常要把行动放回中正、协作与可持续的尺度中衡量。</p>
+<h3 id="【六三】"><a href="#【六三】" class="headerlink" title="【六三】"></a>【六三】</h3><p><strong>六三：比之匪人。</strong></p>
+<p><strong>象曰：比之匪人，不亦傷乎！</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“比之匪人。”作为这一阶段的核心情境；《小象》又以“比之匪人，不亦傷乎！”点明观察角度。程颐解释此爻的切入点是：“三不中正，而所比皆不中正。四陰柔而不中，二存應而比初，皆不中正，匪人也。比於匪人，其失可知，悔吝不假言也，故可傷。二之中正，而謂之匪人，隨時取義，各不同也。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>三不中正，而所比皆不中正。四陰柔而不中，二存應而比初，皆不中正，匪人也。比於匪人，其失可知，悔吝不假言也，故可傷。二之中正，而謂之匪人，隨時取義，各不同也。</p>
+<p>人之相比，求安吉也。乃比於匪人，必將反得悔吝，其亦可傷矣。深戒失所比也。</p>
+</blockquote>
+<p>从现代阅读角度看，三爻处在内卦将尽的转换处，进退压力往往同时出现，尤其需要控制冒进与失位的风险。</p>
+<h3 id="【六四】"><a href="#【六四】" class="headerlink" title="【六四】"></a>【六四】</h3><p><strong>六四：外比之，貞吉。</strong></p>
+<p><strong>象曰：外比於賢，以從上也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“外比之，貞吉。”作为这一阶段的核心情境；《小象》又以“外比於賢，以從上也。”点明观察角度。程颐解释此爻的切入点是：“四與初不相應，而五比之，外比於五，乃得貞正而吉也。君臣相比正也，相比相與宜也。五剛陽中正，賢也，居尊位在上也。親賢從上，比之正也，故為貞吉。以六居四，亦為得正之義。又陰柔不中之人，能比於剛明中正之賢，乃得正而吉也。又比賢從上，必以正道，則吉也。數說相須其義始備。”爻辞中出现“吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>四與初不相應，而五比之，外比於五，乃得貞正而吉也。君臣相比正也，相比相與宜也。五剛陽中正，賢也，居尊位在上也。親賢從上，比之正也，故為貞吉。以六居四，亦為得正之義。又陰柔不中之人，能比於剛明中正之賢，乃得正而吉也。又比賢從上，必以正道，則吉也。數說相須其義始備。</p>
+<p>外比，謂從五也。五剛明中正之賢，又居君位，四比之，是比賢且從上，所以吉也。</p>
+</blockquote>
+<p>从现代阅读角度看，四爻由内转外，开始接近全局事务与主事位置，行动之前宜先建立信任并审慎辨势。</p>
+<h3 id="【九五】"><a href="#【九五】" class="headerlink" title="【九五】"></a>【九五】</h3><p><strong>九五：顯比。王用三驅，失前禽，邑人不誡，吉。</strong></p>
+<p><strong>象曰：顯比之吉，位正中也。舍逆取順，失前禽也。邑人不誡，上使中也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“顯比。王用三驅，失前禽，邑人不誡，吉。”作为这一阶段的核心情境；《小象》又以“顯比之吉，位正中也。舍逆取順，失前禽也。邑人不誡，上使中也。”点明观察角度。程颐解释此爻的切入点是：“五居君位，處中得正，盡比道之善者也。人君比天下之道，當顯明其比道而已。如誠意以待物，恕己以及人，發政施仁，使天下蒙其惠澤，是人君親比天下之道也。如是天下孰不親比於上？若乃暴其小仁，違道干譽，欲以求下之比，其道亦狹矣。其能得天下之比乎？故聖人以九五盡比道之正，取三驅為喻曰：王用三驅，失前禽，邑人不誡，吉。先王以四時之畋不可廢也，故推其仁心為三驅之禮，乃禮所謂天子不合圍也。成湯祝網是其義也。天子之畋，圍合其三面，前開一路使之可去，不忍盡物，好生之仁也。……”爻辞中出现“吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>五居君位，處中得正，盡比道之善者也。人君比天下之道，當顯明其比道而已。如誠意以待物，恕己以及人，發政施仁，使天下蒙其惠澤，是人君親比天下之道也。如是天下孰不親比於上？若乃暴其小仁，違道干譽，欲以求下之比，其道亦狹矣。其能得天下之比乎？故聖人以九五盡比道之正，取三驅為喻曰：王用三驅，失前禽，邑人不誡，吉。先王以四時之畋不可廢也，故推其仁心為三驅之禮，乃禮所謂天子不合圍也。成湯祝網是其義也。天子之畋，圍合其三面，前開一路使之可去，不忍盡物，好生之仁也。只取其不用命者，不出而反入者也，禽獸前去者皆免矣，故曰｢失前禽｣也。王者顯明其比道，天下自然來比。來者撫之，固不煦煦然。求比於物，若田之三驅，禽之去者從而不追，來者則取之也。此王道之大，所以其民皥皥而莫知為之者也。｢邑人不誡，吉｣，言其至公不私，无逺邇親疎之别也。邑者，居邑，易中所言邑，皆同王者所都諸侯國中也。誡，期約也。待物之一不期，誡於居邑，如是則吉也。聖人以大公无私治天下，於顯比見之矣。非惟人君比天下之道如此，大率人之相比，莫不然。以臣於君言之：竭其忠誠，致其才力，乃顯其比，君之道也。用之與否在君而已，不可阿諛逢迎求其比己也。在朋友亦然，修身誠意以待之，親己與否在人而已，不可巧言令色，曲從苟合以求人之比己也。於鄉黨親戚，於衆人，莫不皆然，三驅失前禽之義也。</p>
+<p>顯比所以吉者，以其所居之位得正中也。處正中之地，乃由正中之道也。比以不偏為善，故云正中。凡言正中者，其處正得中也，比與隨是也。言中正者，得中與正也，訟與需是也。</p>
+</blockquote>
+<p>从现代阅读角度看，五爻居于全卦关键位置，重点在承担责任、守住中道，并使个人能力真正服务于整体。</p>
+<h3 id="【上六】"><a href="#【上六】" class="headerlink" title="【上六】"></a>【上六】</h3><p><strong>上六：比之无首，凶。</strong></p>
+<p><strong>象曰：比之无首，无所終也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“比之无首，凶。”作为这一阶段的核心情境；《小象》又以“比之无首，无所終也。”点明观察角度。程颐解释此爻的切入点是：“六居上，比之終也。首謂始也，凡比之道，其始善則其終善矣。有其始而无其終者，或有矣，未有无其始而有終者也，故比之无首，至終則凶也。此據比終而言，然上六隂柔不中，處險之極，固非克終者也。始比不以道，隙於終者，天下多矣。”爻辞中出现“凶”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>六居上，比之終也。首謂始也，凡比之道，其始善則其終善矣。有其始而无其終者，或有矣，未有无其始而有終者也，故比之无首，至終則凶也。此據比終而言，然上六隂柔不中，處險之極，固非克終者也。始比不以道，隙於終者，天下多矣。</p>
+<p>比既无首，何所終乎？相比有首，猶或終違始，不以道，終復何保。故曰｢无所終也｣。</p>
+</blockquote>
+<p>从现代阅读角度看，上爻表示一卦发展已到极处，最需要防止过度、僵化与不知转圜，为下一阶段留下余地。</p>
+<hr>
+<h2 id="四、-个人感悟"><a href="#四、-个人感悟" class="headerlink" title="四、 个人感悟"></a>四、 个人感悟</h2><p>亲比互助，团结他人。守正得吉。 对我来说，水地比最值得反复体会的，不是把“吉”或“凶”当作固定答案，而是看清一个处境如何随位置、关系与行动方式而变化。六爻从初到上展示了不同阶段：同一原则放在不同位置，结果可能完全不同。</p>
+<p>把它用于今天的学习、工作或关系判断时，我更愿意把卦辞当作问题框架，把爻辞当作阶段提醒：先确认自己身处哪一层，再决定进、退、守、变。这样读《易》，比直接追求一个预言式结论更稳妥。</p>
+<hr>
+<h2 id="五、-参考文献与版本说明"><a href="#五、-参考文献与版本说明" class="headerlink" title="五、 参考文献与版本说明"></a>五、 参考文献与版本说明</h2><ol>
+<li>《周易》经文及《象传》，本卦原文取自：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/wiki/%E5%91%A8%E6%98%93/%E6%AF%94">维基文库《周易》本卦页面</a>；并参校<a target="_blank" rel="noopener" href="https://ctext.org/book-of-changes/zh">中国哲学书电子化计划《周易》</a>。</li>
+<li>北宋程颐《程氏易传》（亦称《伊川易传》），本卦参校：<a target="_blank" rel="noopener" href="https://www.taijizhidian.com/chengxu/liushisigua/1541.html">【周易上经】第8卦-比卦䷇水地比卦（坤下坎上）-[北宋]程颐撰《程氏易传•卷一》</a>。</li>
+<li>北宋邵雍《皇极经世·观物外篇》，旁证原文：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/zh-hans/%E7%9A%87%E6%A5%B5%E7%B6%93%E4%B8%96/%E5%8D%B7%E5%8D%81%E4%B8%89">维基文库《皇极经世》卷十三</a>。</li>
 </ol>
-<p>愿我们在人际的海洋里，既有“盈缶”的真诚，也有识别“匪人”的利眼，最终修得“来去自由”的洒脱。</p>
+<blockquote>
+<p>版本说明：经典原文与程颐文字保留底本中的繁体字、异体字及个别古字；“释义”“现代阅读角度”和“个人感悟”均为现代整理，不冒充古人原话。“邵雍易学旁证”只引用可定位的易学通论，不作逐卦、逐爻的托名断语。</p>
+</blockquote>
 
     </div>
 
@@ -372,7 +473,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E5%85%AD%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初六】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【六二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【六三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【六四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【九五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E5%85%AD%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上六】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F%EF%BC%9A%E6%9C%80%E9%AB%98%E7%BA%A7%E7%9A%84%E4%BA%BA%E8%84%89%EF%BC%8C%E6%98%AF%E2%80%9C%E7%BD%91%E5%BC%80%E4%B8%80%E9%9D%A2%E2%80%9D"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟：最高级的人脉，是“网开一面”</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E5%85%AD%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初六】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【六二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【六三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【六四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【九五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E5%85%AD%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上六】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E4%B8%8E%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E"><span class="nav-number">5.</span> <span class="nav-text">五、 参考文献与版本说明</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -388,7 +489,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -473,6 +574,10 @@
 
 
 
+  
+<script src="/js/local-search.js"></script>
+
+
 
 
 
@@ -501,6 +606,15 @@
 
 <script>
   (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
     var loadingBox = document.getElementById('loading-box');
     var root = document.documentElement;
 
@@ -531,8 +645,9 @@
 
 <script src="/js/latex-tool.js?v=20260805c"></script>
 <script src="/js/translate-tool.js?v=20260805a"></script>
-<script src="/js/hexagram-index.js?v=20260806a"></script>
-<script src="/js/divination-tool.js?v=20260810a"></script>
+<script src="/js/hexagram-post-map.js?v=20260830a"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
 
 </body>
 </html>

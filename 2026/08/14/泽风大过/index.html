@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="泽灭木，大过。君子以独立不惧，遁世无闷。">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="泽灭木，大过。君子以独立不惧，遁世无闷。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-08-13T18:10:03.000Z">
-<meta property="article:modified_time" content="2026-08-13T17:11:43.667Z">
+<meta property="article:modified_time" content="2026-08-23T19:20:20.226Z">
 <meta property="article:author" content="Hyacinth">
 <meta property="article:tag" content="学习笔记">
 <meta property="article:tag" content="六十四卦">
@@ -127,6 +127,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -166,11 +167,38 @@
     <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -216,10 +244,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-08-14 02:10:03 / 修改时间：01:11:43" itemprop="dateCreated datePublished" datetime="2026-08-14T02:10:03+08:00">2026-08-14</time>
+              <time title="创建时间：2026-08-14 02:10:03" itemprop="dateCreated datePublished" datetime="2026-08-14T02:10:03+08:00">2026-08-14</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-24 03:20:20" itemprop="dateModified" datetime="2026-08-24T03:20:20+08:00">2026-08-24</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -230,7 +264,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>15 分钟</span>
+            </span>
             <div class="post-description">泽灭木，大过。君子以独立不惧，遁世无闷。</div>
 
         </div>
@@ -243,44 +291,103 @@
 
       
         <h2 id="一、-经典原文"><a href="#一、-经典原文" class="headerlink" title="一、 经典原文"></a>一、 经典原文</h2><blockquote>
-<p><strong>【卦辞】</strong><br>大过：栋桡，利有攸往，亨。</p>
-<p><strong>【爻辞】</strong><br>初六：藉用白茅，无咎。<br>九二：枯杨生稊，老夫得其女妻，无不利。<br>九三：栋桡，凶。<br>九四：栋隆，吉。有它吝。<br>九五：枯杨生华，老妇得其士夫，无咎无誉。<br>上六：过涉灭顶，凶，无咎。</p>
-<p><strong>【大象传】</strong><br>泽灭木，大过；君子以独立不惧，遁世无闷。</p>
+<p><strong>【卦辞】</strong><br>大過：棟橈，利有攸往，亨。</p>
+<p><strong>【爻辞】</strong><br>初六：藉用白茅，无咎。<br>九二：枯楊生稊，老夫得其女妻，无不利。<br>九三：棟橈，凶。<br>九四：棟隆，吉。有它吝。<br>九五：枯楊生華，老婦得其士夫，无咎无譽。<br>上六：過涉滅頂，凶，无咎。</p>
+<p><strong>【大象传】</strong><br>象曰：澤滅木，大過。君子以獨立不懼，遯世无悶。</p>
 </blockquote>
-<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>当“颐卦”（第二十七卦）过度地摄取和积蓄，无论物质还是精神都达到了极端的饱和时，事物就必定会超出正常的负荷。于是，我们迎来了第二十八卦——大过卦。“大过”就是非常之过、大大的过度、超出了常规的极限。这是一卦探讨在极度重压之下、面临随时可能崩塌的险局时，如何以大无畏的精神去破局的智慧。</p>
-<p><strong>1. 底层逻辑：泽灭木，独立不惧</strong><br>大过卦的上卦为兑（泽），下卦为巽（木&#x2F;风）。《象传》说“泽灭木”，大水漫过了堤岸，甚至淹没了高大的树木。这是一种极其反常、极度危险的自然灾害之象。但《易经》在这里给出了极高的精神境界要求：君子效法这种意象，应当做到“独立不惧，遁世无闷”。在面临排山倒海的压力时，能孤独地站立而不感到恐惧；即使因为超前的举动被世人误解、只能隐遁避世，内心也没有丝毫的苦闷。这是圣人才有的心性定力。</p>
-<p><strong>2. 破局的法则：栋桡，利有攸往</strong><br>卦辞“大过：栋桡（náo），利有攸往，亨”刻画了一个极具压迫感的画面：</p>
-<ul>
-<li><strong>栋桡：</strong> 房屋的主梁（栋）因为承受了太重的压力，已经开始弯曲（桡）了。这代表着组织、事业或个人的精神支柱正处于崩溃的边缘。</li>
-<li><strong>利有攸往，亨：</strong> 在这个时候，绝对不能坐以待毙，必须采取非常规的手段、大胆地前往行动，才能打破僵局，获得亨通。</li>
-</ul>
-<p><strong>3.北宋易学家邵雍解</strong><br>本末俱弱，栋梁弯曲；非常之过，独立不惧。<br>得此卦者，正处于责任极大、压力极重、甚至危机四伏的特殊时期（如接手烫手山芋、面临行业大洗牌）。此时常规手段已无效，必须有破釜沉舟的勇气和非凡的定力。若能大胆革新，则能逢凶化吉；若畏首畏尾，必将被大水吞没。</p>
-<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初六】"><a href="#【初六】" class="headerlink" title="【初六】"></a>【初六】</h3><p><strong>初六：藉用白茅，无咎。</strong><br><strong>象曰：藉用白茅，柔在下也。</strong></p>
-<p><strong>释义</strong><br>初六：在地上垫上洁白的茅草来放置祭品（表示极度的恭敬与小心），没有灾难。<br>《象辞》说：垫上白茅，是因为初六极其柔弱，处于最底层（做事极其谨慎）。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，处于大过（非常时期）的开端。此时自身力量极其微弱。唯一的生存智慧就是“极度的小心谨慎”。不张扬、不逾矩，用最恭敬、最细致的态度去对待每一件事，就能避开最初的灾祸。</p>
-<h3 id="【九二】"><a href="#【九二】" class="headerlink" title="【九二】"></a>【九二】</h3><p><strong>九二：枯杨生稊，老夫得其女妻，无不利。</strong><br><strong>象曰：老夫女妻，过以相与也。</strong></p>
-<p><strong>释义</strong><br>九二：枯萎的杨树又生出了新芽（稊，音tí，新芽），老头子娶了年轻的少女为妻，没有什么不顺利的。<br>《象辞》说：老夫娶少妻，虽然超出了常规的年龄组合（过），但两者能够互相交融、生发新的生机。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，在非常时期（大过）找到了极具反差感、但却极其互补的解决方案或合作伙伴。枯木逢春，虽然外界看来有些超乎寻常（老夫少妻），但却能产生奇效，重新焕发生机。</p>
-<h3 id="【九三】"><a href="#【九三】" class="headerlink" title="【九三】"></a>【九三】</h3><p><strong>九三：栋桡，凶。</strong><br><strong>象曰：栋桡之凶，不可以有辅也。</strong></p>
-<p><strong>释义</strong><br>九三：房屋的主梁弯曲了，凶险。<br>《象辞》说：主梁弯曲的凶险，是因为九三过于刚愎自用，不能接受别人的辅助（谁也帮不了他）。</p>
-<p><strong>北宋易学家邵雍解</strong><br>大凶：得此爻者，正处于大过卦最危险的核心位置。你可能承担着极重的责任，但却固执己见、刚愎自用。拒绝合作，拒绝听取他人意见，最终将被巨大的压力彻底压垮，导致满盘皆输。</p>
-<h3 id="【九四】"><a href="#【九四】" class="headerlink" title="【九四】"></a>【九四】</h3><p><strong>九四：栋隆，吉。有它吝。</strong><br><strong>象曰：栋隆之吉，不桡乎下也。</strong></p>
-<p><strong>释义</strong><br>九四：房屋的主梁隆起（坚固结实），吉祥。但如果有其他的异心或节外生枝（有它），就会带来麻烦和遗憾。<br>《象辞》说：主梁隆起而吉祥，是因为九四没有向下弯曲（能承受住压力）。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉&#x2F;带警示：得此爻者，你是团队中真正的中流砥柱（栋隆）。你不仅有能力承受重压，还能把事情扛起来。但此爻警告你：在这个关键时刻，必须心无旁骛，切不可分心去搞其他的事情，否则必生变故。</p>
-<h3 id="【六五】"><a href="#【六五】" class="headerlink" title="【六五】"></a>【六五】</h3><p><strong>六五：枯杨生华，老妇得其士夫，无咎无誉。</strong><br><strong>象曰：枯杨生华，何可久也。老妇士夫，亦可丑也。</strong></p>
-<p><strong>释义</strong><br>六五：枯萎的杨树开出了花（而不是发新芽），老妇人嫁给了年轻的男子，没有灾祸也没有荣誉。<br>《象辞》说：枯树开花，只是一时的回光返照，怎么可能长久呢！老妇嫁少夫，这也是一件令人感到难堪的事。</p>
-<p><strong>北宋易学家邵雍解</strong><br>平：得此爻者，虽然也想效法九二的“老夫少妻”来破局，但效果却截然相反。因为枯树开花无法结果，老妇少夫难以生育。这代表你在非常时期采取的手段只是表面文章（华而不实），治标不治本，好景不长。</p>
-<h3 id="【上六】"><a href="#【上六】" class="headerlink" title="【上六】"></a>【上六】</h3><p><strong>上六：过涉灭顶，凶，无咎。</strong><br><strong>象曰：过涉之凶，不可咎也。</strong></p>
-<p><strong>释义</strong><br>上六：在大水漫过头顶的极度危险中依然强行渡河（过涉），必定凶险（有生命危险），但（因为是出于拯救苍生的大义）没有道义上的罪咎。<br>《象辞》说：强行渡河带来的凶险，从道义上是不能去责备他的（可歌可泣）。</p>
-<p><strong>北宋易学家邵雍解</strong><br>凶&#x2F;悲壮：得此爻者，迎来了最悲壮的结局。明知不可为而为之，为了大义、理想或拯救大局，不惜牺牲自己（灭顶）。虽然在现实层面上是彻底失败甚至毁灭的，但这种“独立不惧”的精神将永垂不朽。</p>
-<h2 id="四、-个人感悟：在“非常时期”，做个“非常之人”"><a href="#四、-个人感悟：在“非常时期”，做个“非常之人”" class="headerlink" title="四、 个人感悟：在“非常时期”，做个“非常之人”"></a>四、 个人感悟：在“非常时期”，做个“非常之人”</h2><p>大过卦是整部《易经》中最具张力、最震撼人心的卦象之一。四个阳爻被困在两个阴爻之间，就像一根中间粗两头细的木梁，随时会断裂。大水淹没了树木，压迫感到达了极点。</p>
-<p>面对这种常理已经完全失效的危机时刻，大过卦给了我们三个极其颠覆的生存哲学：</p>
-<ol>
-<li><strong>非常之事，必须配上“极度的谨慎”与“极度的变通”：</strong> 看看初九的“藉用白茅”（极度谨慎）和九二的“老夫女妻”（极度变通）。在公司快要倒闭、或者人生遭遇重大变故时，千万不要再用常规思路去思考问题。哪怕是看起来很滑稽、很不般配的组合（老夫女妻），只要能“枯杨生稊”（重新活下来），就是好方法。</li>
-<li><strong>警惕“九三”式的孤胆英雄症：</strong> 为什么主梁会弯（栋桡）？大象传说是因为“不可以有辅也”。人在压力极大的时候，很容易变得像九三一样刚愎自用，觉得自己天下第一，谁的话都听不进去。真正的栋梁（九四的栋隆），是懂得借力，不乱生异心（有它吝）。</li>
-<li><strong>“无咎”的最高境界，是殉道者的荣光（过涉灭顶）：</strong> 上六爻是整本《易经》中最让人动容的句子之一。大水没过了头顶，这是现实中极其惨烈的“大凶”。但《易经》却在凶的后面，重重地加了“无咎”两个字。这告诉我们，有些事情（比如舍生取义、明知必败也要抗争到底），它的价值不能用世俗的成败来衡量。当你为了心中的大道去“过涉灭顶”时，世人没有资格责备你，连老天也会为你免去“罪咎”。</li>
+<hr>
+<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>泽风大过的现代摘要是：阳刚过甚，栋梁桡曲。特立独行。 这只是帮助进入文本的提要，具体判断仍要回到卦辞、爻位与上下文。</p>
+<p><strong>1. 底层逻辑：阳刚过甚，栋梁桡曲</strong></p>
+<p>程颐在释卦开头先从卦序、卦体和上下卦关系说明本卦之所以成立：</p>
+<blockquote>
+<p>大過，《序卦》曰：頤者養也，不養則不可動，故受之以大過。凡物養而後能成，成則能動，動則有過。大過所以次頤也。為卦上兌下巽，澤在木上，滅木也。澤者潤養於木，乃至滅沒於木，為大過之義。大過者，陽過也，故為大者過。過之大與大事過也。聖賢道德功業大過於人，凡事之大過於常者，皆是也。夫聖人盡人道，非過於理也，其制事以天下之正理矯失之用小，過於中者則有之，如行過乎恭，喪過乎哀，用過乎儉是也。蓋矯之小過而後能及於中，乃求中之用也。所謂大過者，常事之大者耳，非有過於理也。惟其大，故不常見，以其比常所見者大，故謂之大過。如堯舜之禪讓，湯武之放伐，皆由道也。道无不中，无不常，以世人所不常見，故謂之大過於常也。</p>
+</blockquote>
+<p><strong>2. 卦辞与大象</strong></p>
+<p>卦辞给出全卦的基本处境与行动边界；大象则把卦象转化为修身、处事或治理的提示。程颐分别解释为：</p>
+<blockquote>
+<p>小過，陰過於上下。大過，陽過於中。陽過於中而上下弱矣，故為棟橈之象。棟取其勝，重四陽聚於中，可謂重矣。九三九四皆取棟象，謂任重也。橈取其本末弱，中強而本末弱，是以橈也。陰弱而陽強，君子盛而小人衰，故利有攸往而亨也。棟，今人謂之檁。</p>
+<p>澤潤養於木者也，乃至滅沒於木，則過甚矣。故為大過。君子觀大過之象，以立其大過人之行，君子所以大過人者，以其能獨立不懼，遯世无悶也。天下非之而不顧，獨立不懼也。舉世不見知而不悔，遯世无悶也。如此然後能自守，所以為大過人也。</p>
+</blockquote>
+<p><strong>3. 邵雍易学旁证</strong></p>
+<p>邵雍在《皇极经世·观物外篇》中说：</p>
+<blockquote>
+<p>“夫卦，各有性有体，然皆不离乾坤之门。”</p>
+<p>“君子于易，玩象、玩数、玩辞、玩意。”</p>
+</blockquote>
+<p>这两段是邵雍讨论读《易》方法的通论，并非针对泽风大过所下的吉凶断语。放在这里作为旁证，是提醒我们同时观察卦象、数位、辞义与整体意旨，不能只截取一句话作孤立判断。</p>
+<hr>
+<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初六】"><a href="#【初六】" class="headerlink" title="【初六】"></a>【初六】</h3><p><strong>初六：藉用白茅，无咎。</strong></p>
+<p><strong>象曰：藉用白茅，柔在下也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“藉用白茅，无咎。”作为这一阶段的核心情境；《小象》又以“藉用白茅，柔在下也。”点明观察角度。程颐解释此爻的切入点是：“初以陰柔巽體而處下，過于畏慎者也。以柔在下，用茅藉物之象，不錯諸地而藉以茅，過於慎也。是以无咎。茅之為物，雖薄而用可重者，以用之能成敬慎之道也。慎守斯術而行，豈有失乎大過之用也。繫辭云：茍錯諸地而可矣。藉之用茅，何咎之有，慎之至也。夫茅之為物，薄而用可重也，慎斯術也以往，其无所失矣。言敬慎之至也。茅雖至薄之物，然用之可甚重，以之藉薦，子為重慎之道，是用之重也。人之過於敬慎，為之非難而可以保其安而无過，茍能慎斯道，推而行之於事，其无所失矣。”爻辞中出现“无咎”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>初以陰柔巽體而處下，過于畏慎者也。以柔在下，用茅藉物之象，不錯諸地而藉以茅，過於慎也。是以无咎。茅之為物，雖薄而用可重者，以用之能成敬慎之道也。慎守斯術而行，豈有失乎大過之用也。繫辭云：茍錯諸地而可矣。藉之用茅，何咎之有，慎之至也。夫茅之為物，薄而用可重也，慎斯術也以往，其无所失矣。言敬慎之至也。茅雖至薄之物，然用之可甚重，以之藉薦，子為重慎之道，是用之重也。人之過於敬慎，為之非難而可以保其安而无過，茍能慎斯道，推而行之於事，其无所失矣。</p>
+<p>以陰柔處卑下之道，惟當過於敬慎而已。以柔在下為以茅藉物之象，敬慎之道也。</p>
+</blockquote>
+<p>从现代阅读角度看，初爻处在事情开端，适合先辨明基础、条件与时机，不宜把局部迹象过早当成最终结论。</p>
+<h3 id="【九二】"><a href="#【九二】" class="headerlink" title="【九二】"></a>【九二】</h3><p><strong>九二：枯楊生稊，老夫得其女妻，无不利。</strong></p>
+<p><strong>象曰：老夫女妻，過以相與也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“枯楊生稊，老夫得其女妻，无不利。”作为这一阶段的核心情境；《小象》又以“老夫女妻，過以相與也。”点明观察角度。程颐解释此爻的切入点是：“陽之大過，比陰則合，故二與五皆有生象。有二當大過之初，得中而居柔，與初密比而相與。初既切比於二，二復无應於上，其相與可知，是剛過之人而能以中自處，用柔相濟者也。過剛則不能有所為，九三是也。得中用柔，則能成大過之功，九二是也。楊者陽氣易感之物，陽過則枯矣。楊枯而後生稊，陽過而未至於極也。九二陽過而與初，老夫得女妻之象。老夫而得女妻，則能成生育之功。二得中居柔而與初，故能復生稊而无過極之失，无所不利也。在大過，陽爻居陰則善，二與四是也。二不言吉，方言无所不利，未遽至吉也。……”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>陽之大過，比陰則合，故二與五皆有生象。有二當大過之初，得中而居柔，與初密比而相與。初既切比於二，二復无應於上，其相與可知，是剛過之人而能以中自處，用柔相濟者也。過剛則不能有所為，九三是也。得中用柔，則能成大過之功，九二是也。楊者陽氣易感之物，陽過則枯矣。楊枯而後生稊，陽過而未至於極也。九二陽過而與初，老夫得女妻之象。老夫而得女妻，則能成生育之功。二得中居柔而與初，故能復生稊而无過極之失，无所不利也。在大過，陽爻居陰則善，二與四是也。二不言吉，方言无所不利，未遽至吉也。稊，根也。劉琨勸進表云：生繁華於枯荑，謂枯根也。鄭玄易亦作荑字與稊同。</p>
+<p>老夫之說少女，少女之順老夫，其相與過於常分，謂九二初六陰陽相與之和過於常也。</p>
+</blockquote>
+<p>从现代阅读角度看，二爻进入落实阶段，通常要把行动放回中正、协作与可持续的尺度中衡量。</p>
+<h3 id="【九三】"><a href="#【九三】" class="headerlink" title="【九三】"></a>【九三】</h3><p><strong>九三：棟橈，凶。</strong></p>
+<p><strong>象曰：棟橈之凶，不可以有輔也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“棟橈，凶。”作为这一阶段的核心情境；《小象》又以“棟橈之凶，不可以有輔也。”点明观察角度。程颐解释此爻的切入点是：“夫居大過之時，興大過之功，立大過之事，非剛柔得中取於人以自輔，則不能也。既過於剛強，則不能與人同常。常之功尚不能獨立，況大過之事乎。以聖人之才，雖小事必取於人，當天下之大任，則可知矣。九三以大過之陽，復以剛自居而不得中，剛過之甚者也。以過甚之剛，動則違於中和而拂於眾心，安能當大過之任乎。故不勝其任，如棟之橈，傾敗其室，是以凶也。取棟為象者，以其无輔而不能勝重任也。或曰：三巽體而應於上，豈无用柔之象乎。……”爻辞中出现“凶”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>夫居大過之時，興大過之功，立大過之事，非剛柔得中取於人以自輔，則不能也。既過於剛強，則不能與人同常。常之功尚不能獨立，況大過之事乎。以聖人之才，雖小事必取於人，當天下之大任，則可知矣。九三以大過之陽，復以剛自居而不得中，剛過之甚者也。以過甚之剛，動則違於中和而拂於眾心，安能當大過之任乎。故不勝其任，如棟之橈，傾敗其室，是以凶也。取棟為象者，以其无輔而不能勝重任也。或曰：三巽體而應於上，豈无用柔之象乎。曰：言易者，貴乎識勢之重輕，時之變易，三居過而用剛，巽既終而且變，豈復有用柔之義。應者謂志相從也，三方遇剛上，能繫其志乎。</p>
+<p>剛強之過則不能取於人，人亦不能親輔之，如棟橈折者不可支輔也。棟當室之中，不可加助，是不可以有輔也。</p>
+</blockquote>
+<p>从现代阅读角度看，三爻处在内卦将尽的转换处，进退压力往往同时出现，尤其需要控制冒进与失位的风险。</p>
+<h3 id="【九四】"><a href="#【九四】" class="headerlink" title="【九四】"></a>【九四】</h3><p><strong>九四：棟隆，吉。有它吝。</strong></p>
+<p><strong>象曰：棟隆之吉，不橈乎下也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“棟隆，吉。有它吝。”作为这一阶段的核心情境；《小象》又以“棟隆之吉，不橈乎下也。”点明观察角度。程颐解释此爻的切入点是：“四居近君之位，當大過之任者也。居柔為能用柔相濟，既不過剛則能勝其任，如棟之隆起是以吉也。隆起取不下橈之義。大過之時，非陽剛不能濟以剛，處柔為得宜矣。若又與初六之陰相應，則過也。既剛柔得宜，而志復應陰，是有它也。有它則有累於剛，雖未至於大害，亦可吝也。蓋大過之時，動則過也，有它謂更有它志。吝為不足之義，謂可少也。或曰：二比初則无不利，四若應初，則為吝。何也？曰：二得中而比於初，為以柔相濟之義。四與初為正應，志相繫者也。九既居四，則柔得宜矣。後牽繫於陰，以害其剛，則可吝也。”爻辞中出现“吉、吝”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>四居近君之位，當大過之任者也。居柔為能用柔相濟，既不過剛則能勝其任，如棟之隆起是以吉也。隆起取不下橈之義。大過之時，非陽剛不能濟以剛，處柔為得宜矣。若又與初六之陰相應，則過也。既剛柔得宜，而志復應陰，是有它也。有它則有累於剛，雖未至於大害，亦可吝也。蓋大過之時，動則過也，有它謂更有它志。吝為不足之義，謂可少也。或曰：二比初則无不利，四若應初，則為吝。何也？曰：二得中而比於初，為以柔相濟之義。四與初為正應，志相繫者也。九既居四，則柔得宜矣。後牽繫於陰，以害其剛，則可吝也。</p>
+<p>棟隆起則吉，不橈曲以就下也。謂不下繫於初也。</p>
+</blockquote>
+<p>从现代阅读角度看，四爻由内转外，开始接近全局事务与主事位置，行动之前宜先建立信任并审慎辨势。</p>
+<h3 id="【九五】"><a href="#【九五】" class="headerlink" title="【九五】"></a>【九五】</h3><p><strong>九五：枯楊生華，老婦得其士夫，无咎无譽。</strong></p>
+<p><strong>象曰：枯楊生華，何可久也。老婦士夫，亦可丑也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“枯楊生華，老婦得其士夫，无咎无譽。”作为这一阶段的核心情境；《小象》又以“枯楊生華，何可久也。老婦士夫，亦可丑也。”点明观察角度。程颐解释此爻的切入点是：“九五當大過之時，本以中正居尊位，然下无應助，固不能成大過之功，而上比過極之陰，其所相濟者如枯楊之生華。枯楊下生根稊則能復生，如大過之陽興成事功也。生華秀雖有所發，无益於枯也。上六過極之陰，老婦也。五雖非少，比老婦則為壯矣。於五无所賴也，故反稱婦得。過極之陰，得陽之相濟，不為无益也，以士夫而得老婦，雖无罪咎，殊非羨也。故云无咎无譽。象復言，其可醜也。”爻辞中出现“无咎”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>九五當大過之時，本以中正居尊位，然下无應助，固不能成大過之功，而上比過極之陰，其所相濟者如枯楊之生華。枯楊下生根稊則能復生，如大過之陽興成事功也。生華秀雖有所發，无益於枯也。上六過極之陰，老婦也。五雖非少，比老婦則為壯矣。於五无所賴也，故反稱婦得。過極之陰，得陽之相濟，不為无益也，以士夫而得老婦，雖无罪咎，殊非羨也。故云无咎无譽。象復言，其可醜也。</p>
+<p>枯楊不生根而生華，旋復枯矣，安能久乎。老婦而得士夫，豈能成生育之功，為可醜矣。</p>
+</blockquote>
+<p>从现代阅读角度看，五爻居于全卦关键位置，重点在承担责任、守住中道，并使个人能力真正服务于整体。</p>
+<h3 id="【上六】"><a href="#【上六】" class="headerlink" title="【上六】"></a>【上六】</h3><p><strong>上六：過涉滅頂，凶，无咎。</strong></p>
+<p><strong>象曰：過涉之凶，不可咎也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“過涉滅頂，凶，无咎。”作为这一阶段的核心情境；《小象》又以“過涉之凶，不可咎也。”点明观察角度。程颐解释此爻的切入点是：“上六以陰柔處過極，是小人過常之極者也。小人之所謂大過，非能為大過人之事也。直過常越理，不恤危亡，履險蹈禍而已，如過涉於水，至滅沒其頂，其凶可知。小人狂躁以自禍，蓋其宜也，復將何尤，故曰无咎。言自為之，无所怨咎也。因澤之象而取涉義。”爻辞中出现“无咎、凶”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>上六以陰柔處過極，是小人過常之極者也。小人之所謂大過，非能為大過人之事也。直過常越理，不恤危亡，履險蹈禍而已，如過涉於水，至滅沒其頂，其凶可知。小人狂躁以自禍，蓋其宜也，復將何尤，故曰无咎。言自為之，无所怨咎也。因澤之象而取涉義。</p>
+<p>過涉至溺，乃自為之，不可以有咎也。言无所怨咎。</p>
+</blockquote>
+<p>从现代阅读角度看，上爻表示一卦发展已到极处，最需要防止过度、僵化与不知转圜，为下一阶段留下余地。</p>
+<hr>
+<h2 id="四、-个人感悟"><a href="#四、-个人感悟" class="headerlink" title="四、 个人感悟"></a>四、 个人感悟</h2><p>阳刚过甚，栋梁桡曲。特立独行。 对我来说，泽风大过最值得反复体会的，不是把“吉”或“凶”当作固定答案，而是看清一个处境如何随位置、关系与行动方式而变化。六爻从初到上展示了不同阶段：同一原则放在不同位置，结果可能完全不同。</p>
+<p>把它用于今天的学习、工作或关系判断时，我更愿意把卦辞当作问题框架，把爻辞当作阶段提醒：先确认自己身处哪一层，再决定进、退、守、变。这样读《易》，比直接追求一个预言式结论更稳妥。</p>
+<hr>
+<h2 id="五、-参考文献与版本说明"><a href="#五、-参考文献与版本说明" class="headerlink" title="五、 参考文献与版本说明"></a>五、 参考文献与版本说明</h2><ol>
+<li>《周易》经文及《象传》，本卦原文取自：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/wiki/%E5%91%A8%E6%98%93/%E5%A4%A7%E9%81%8E">维基文库《周易》本卦页面</a>；并参校<a target="_blank" rel="noopener" href="https://ctext.org/book-of-changes/zh">中国哲学书电子化计划《周易》</a>。</li>
+<li>北宋程颐《程氏易传》（亦称《伊川易传》），本卦参校：<a target="_blank" rel="noopener" href="https://www.taijizhidian.com/chengxu/liushisigua/1561.html">【周易上经】第28卦-大过䷛泽风大过（巽下兑上）-[北宋]程颐撰《程氏易传•卷二》</a>。</li>
+<li>北宋邵雍《皇极经世·观物外篇》，旁证原文：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/zh-hans/%E7%9A%87%E6%A5%B5%E7%B6%93%E4%B8%96/%E5%8D%B7%E5%8D%81%E4%B8%89">维基文库《皇极经世》卷十三</a>。</li>
 </ol>
-<p>这就是“独立不惧，遁世无闷”的终极体现。愿你在人生的顺境时懂得知足，在面临“大过”的绝境时，也能有“灭顶无咎”的豪情。&#96;&#96;&#96;</p>
+<blockquote>
+<p>版本说明：经典原文与程颐文字保留底本中的繁体字、异体字及个别古字；“释义”“现代阅读角度”和“个人感悟”均为现代整理，不冒充古人原话。“邵雍易学旁证”只引用可定位的易学通论，不作逐卦、逐爻的托名断语。</p>
+</blockquote>
 
     </div>
 
@@ -304,7 +411,10 @@
     <a href="/2026/08/14/%E5%B1%B1%E9%9B%B7%E9%A2%90/" rel="prev" title="山雷颐">
       <i class="fa fa-chevron-left"></i> 山雷颐
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2026/08/24/%E5%9D%8E%E4%B8%BA%E6%B0%B4/" rel="next" title="坎为水">
+      坎为水 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -363,7 +473,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E5%85%AD%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初六】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【九二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【九三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【九四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【六五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E5%85%AD%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上六】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F%EF%BC%9A%E5%9C%A8%E2%80%9C%E9%9D%9E%E5%B8%B8%E6%97%B6%E6%9C%9F%E2%80%9D%EF%BC%8C%E5%81%9A%E4%B8%AA%E2%80%9C%E9%9D%9E%E5%B8%B8%E4%B9%8B%E4%BA%BA%E2%80%9D"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟：在“非常时期”，做个“非常之人”</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E5%85%AD%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初六】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【九二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【九三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【九四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【九五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E5%85%AD%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上六】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E4%B8%8E%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E"><span class="nav-number">5.</span> <span class="nav-text">五、 参考文献与版本说明</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -379,7 +489,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -464,6 +574,10 @@
 
 
 
+  
+<script src="/js/local-search.js"></script>
+
+
 
 
 
@@ -492,6 +606,15 @@
 
 <script>
   (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
     var loadingBox = document.getElementById('loading-box');
     var root = document.documentElement;
 
@@ -522,8 +645,9 @@
 
 <script src="/js/latex-tool.js?v=20260805c"></script>
 <script src="/js/translate-tool.js?v=20260805a"></script>
-<script src="/js/hexagram-index.js?v=20260806a"></script>
-<script src="/js/divination-tool.js?v=20260810a"></script>
+<script src="/js/hexagram-post-map.js?v=20260830a"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
 
 </body>
 </html>

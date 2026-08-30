@@ -49,20 +49,7 @@
     '水': { generates: '木', overcomes: '火' }
   };
 
-  var POST_URLS = {
-    '111111': '/2026/06/03/乾为天/', '000000': '/2026/06/04/坤为地/',
-    '010001': '/2026/06/06/水雷屯/', '100010': '/2026/06/06/山水蒙/',
-    '010111': '/2026/06/07/水天需/', '111010': '/2026/06/09/天水讼/',
-    '000010': '/2026/06/10/地水师/', '010000': '/2026/06/11/水地比/',
-    '110111': '/2026/06/12/风天小畜/', '111011': '/2026/06/17/天泽履/',
-    '000111': '/2026/07/03/地天泰/', '111000': '/2026/07/03/天地否/',
-    '111101': '/2026/07/03/天火同人/', '101111': '/2026/07/03/火天大有/',
-    '000100': '/2026/07/03/地山谦/', '001000': '/2026/07/03/雷地豫/',
-    '011001': '/2026/08/06/泽雷随/', '100110': '/2026/08/06/山风蛊/',
-    '000011': '/2026/08/07/地泽临/', '110000': '/2026/08/06/风地观/',
-    '101001': '/2026/08/08/火雷噬嗑/', '100101': '/2026/08/09/山火贲/',
-    '100000': '/2026/08/06/山地剥/', '000001': '/2026/08/06/地雷复/'
-  };
+  var POST_URLS_BY_NAME = window.HEXAGRAM_POST_URLS_BY_NAME || {};
 
   var HEXAGRAM_ROWS = [
     '000000|坤为地|元亨，利牝马之贞。|地势坤，君子以厚德载物。|柔顺包容，厚德载物。宜静守，不宜躁进。',
@@ -104,7 +91,7 @@
     '100100|艮为山|艮其背，不获其身，无咎。|兼山，艮；君子以思不出其位。|止其所当止，不妄动。思不出位。',
     '100101|山火贲|亨，小利有攸往。|山下有火，贲；君子以明庶政。|文饰之美，小利攸往。重实质轻文饰。',
     '100110|山风蛊|元亨，利涉大川。|山下有风，蛊；君子以振民育德。|积弊已深，宜革故鼎新。',
-    '100111|天山遁|亨，小利贞。|天下有山，遁；君子以远小人。|退避隐忍，远小人。小利守正。',
+    '100111|山天大畜|利贞。不家食吉，利涉大川。|天在山中，大畜；君子以多识前言往行，以畜其德。|大有蓄积，贵在积德养贤。守正并积蓄力量，方可担当大事。',
     '101000|火地晋|康侯用锡马蕃庶，昼日三接。|明出地上，晋；君子以自昭明德。|晋升之象，光明上进。日益亲近。',
     '101001|火雷噬嗑|亨。利用狱。|雷电噬嗑；先王以明罚敕法。|明察果断，利用狱讼。明辨是非。',
     '101010|火水未济|亨，小狐汔济，濡其尾，无攸利。|火在水上，未济；君子以慎辨物居方。|事未成，需谨慎行事。小狐涉水尾濡。',
@@ -516,7 +503,8 @@
     var methodText = result.method === 'meihua' ? '梅花易数' : '周易六爻';
     var modeText = result.mode === 'coin' ? '铜钱摇卦' : result.mode === 'number' ? '数字起卦' : '时间取数';
     var movingText = result.movingLines.length ? result.movingLines.map(function (line) { return '第' + (line + 1) + '爻'; }).join('、') : '无动爻';
-    var postLink = POST_URLS[result.hex];
+    var originalPostLink = POST_URLS_BY_NAME[result.hexagram.name] || '';
+    var changedPostLink = POST_URLS_BY_NAME[result.changedHexagram.name] || '';
 
     resultElement.innerHTML =
       '<div class="divination-result-heading">' +
@@ -525,10 +513,10 @@
       '</div>' +
       (result.question ? '<p class="divination-result-question"><i class="fa fa-comment-o"></i> 所问：' + escapeHtml(result.question) + '</p>' : '') +
       '<div class="divination-hex-grid">' +
-        renderHexCard('本卦', result.hex, result.hexagram, result.movingLines, false) +
-        renderHexCard('变卦', result.changedHex, result.changedHexagram, [], true) +
+        renderHexCard('本卦', result.hex, result.hexagram, result.movingLines, false, originalPostLink) +
+        renderHexCard('变卦', result.changedHex, result.changedHexagram, [], true, changedPostLink) +
       '</div>' +
-      '<div class="divination-moving-summary"><strong>动爻</strong>' + movingText + '</div>' +
+      renderMovingSummary(result, originalPostLink, movingText) +
       (result.method === 'meihua' ? renderMeihuaAnalysis(result) : '') +
       (result.method === 'liuyao' ? renderLiuyaoPlate(result) : '') +
       '<div class="divination-interpretation-grid">' +
@@ -538,7 +526,8 @@
       '</div>' +
       '<section class="divination-ai-result" id="divination-ai-result" hidden aria-live="polite"></section>' +
       '<div class="divination-result-actions">' +
-        (postLink ? '<a href="' + postLink + '"><i class="fa fa-book"></i> 阅读对应卦文</a>' : '') +
+        (originalPostLink ? '<a href="' + originalPostLink + '"><i class="fa fa-book"></i> 阅读本卦</a>' : '') +
+        (changedPostLink && changedPostLink !== originalPostLink ? '<a href="' + changedPostLink + '"><i class="fa fa-exchange-alt"></i> 阅读变卦</a>' : '') +
         '<button type="button" id="divination-ai-interpret"><i class="fa fa-magic"></i> AI 解读</button>' +
         '<button type="button" id="divination-copy-result" hidden><i class="fa fa-copy"></i> 复制结果</button>' +
       '</div>';
@@ -547,7 +536,7 @@
     document.getElementById('divination-copy-result').addEventListener('click', function () { copyResult(result); });
   }
 
-  function renderHexCard(label, hex, data, movingLines, changed) {
+  function renderHexCard(label, hex, data, movingLines, changed, postUrl) {
     var upper = trigramFromBinary(hex.slice(0, 3));
     var lower = trigramFromBinary(hex.slice(3, 6));
     return '<article class="divination-hex-card' + (changed ? ' is-changed' : '') + '">' +
@@ -555,7 +544,33 @@
       '<h3>' + data.name + '</h3>' +
       '<p>' + upper.name + upper.symbol + '上 · ' + lower.name + lower.symbol + '下</p>' +
       renderDiagram(hex, movingLines) +
+      (postUrl ? '<a class="divination-hex-card-link" href="' + postUrl + '"><i class="fa fa-book-open"></i> 查看' + label + '卦文</a>' : '') +
     '</article>';
+  }
+
+  function movingLineLabel(hex, lineIndex) {
+    var bit = hex.charAt(5 - lineIndex);
+    var yinYang = bit === '1' ? '九' : '六';
+    if (lineIndex === 0) return '初' + yinYang;
+    if (lineIndex === 5) return '上' + yinYang;
+    return yinYang + ['一', '二', '三', '四', '五', '六'][lineIndex];
+  }
+
+  function movingLineUrl(postUrl, label) {
+    return postUrl + '#' + encodeURIComponent('【' + label + '】');
+  }
+
+  function renderMovingSummary(result, postUrl, fallbackText) {
+    if (!result.movingLines.length || !postUrl) {
+      return '<div class="divination-moving-summary"><strong>动爻</strong>' + fallbackText + '</div>';
+    }
+
+    var links = result.movingLines.map(function (lineIndex) {
+      var label = movingLineLabel(result.hex, lineIndex);
+      return '<a href="' + movingLineUrl(postUrl, label) + '">第' + (lineIndex + 1) + '爻 · ' + label + '</a>';
+    }).join('<span>、</span>');
+
+    return '<div class="divination-moving-summary"><strong>动爻</strong><span class="divination-moving-links">' + links + '</span></div>';
   }
 
   function renderDiagram(hex, movingLines) {

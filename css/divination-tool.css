@@ -634,6 +634,25 @@
   margin: 4px 0 12px;
 }
 
+.divination-hex-card-link {
+  align-items: center;
+  border-bottom: 1px solid rgba(154, 101, 69, .28);
+  color: var(--div-brown);
+  display: inline-flex;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  gap: 4px;
+  margin-top: 14px;
+  padding-bottom: 2px;
+  text-decoration: none;
+  transition: border-color .18s ease, color .18s ease;
+}
+
+.divination-hex-card-link:hover {
+  border-bottom-color: var(--div-brown-deep);
+  color: var(--div-brown-deep);
+}
+
 .divination-hexagram-symbol {
   display: flex;
   flex-direction: column;
@@ -708,6 +727,22 @@
   font-family: Georgia, "Noto Serif SC", serif;
   font-size: 14px;
   margin-right: 6px;
+}
+
+.divination-moving-links a {
+  border-bottom: 1px dashed rgba(154, 101, 69, .38);
+  color: var(--div-brown);
+  padding-bottom: 1px;
+  text-decoration: none;
+}
+
+.divination-moving-links a:hover {
+  border-bottom-color: var(--div-brown-deep);
+  color: var(--div-brown-deep);
+}
+
+.divination-moving-links > span {
+  color: #ad9b8d;
 }
 
 .divination-meihua-analysis {
@@ -936,6 +971,7 @@
 
 .divination-result-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 9px;
   justify-content: flex-end;
   margin-top: 15px;

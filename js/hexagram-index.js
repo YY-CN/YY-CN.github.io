@@ -17,30 +17,30 @@
     };
 
     var hexagrams = [
-      { number: 1, name: '乾为天', upper: '乾', lower: '乾', url: '/2026/06/03/乾为天/' },
-      { number: 2, name: '坤为地', upper: '坤', lower: '坤', url: '/2026/06/04/坤为地/' },
-      { number: 3, name: '水雷屯', upper: '坎', lower: '震', url: '/2026/06/06/水雷屯/' },
-      { number: 4, name: '山水蒙', upper: '艮', lower: '坎', url: '/2026/06/06/山水蒙/' },
-      { number: 5, name: '水天需', upper: '坎', lower: '乾', url: '/2026/06/07/水天需/' },
-      { number: 6, name: '天水讼', upper: '乾', lower: '坎', url: '/2026/06/09/天水讼/' },
-      { number: 7, name: '地水师', upper: '坤', lower: '坎', url: '/2026/06/10/地水师/' },
-      { number: 8, name: '水地比', upper: '坎', lower: '坤', url: '/2026/06/11/水地比/' },
-      { number: 9, name: '风天小畜', upper: '巽', lower: '乾', url: '/2026/06/12/风天小畜/' },
-      { number: 10, name: '天泽履', upper: '乾', lower: '兑', url: '/2026/06/17/天泽履/' },
-      { number: 11, name: '地天泰', upper: '坤', lower: '乾', url: '/2026/07/03/地天泰/' },
-      { number: 12, name: '天地否', upper: '乾', lower: '坤', url: '/2026/07/03/天地否/' },
-      { number: 13, name: '天火同人', upper: '乾', lower: '离', url: '/2026/07/03/天火同人/' },
-      { number: 14, name: '火天大有', upper: '离', lower: '乾', url: '/2026/07/03/火天大有/' },
-      { number: 15, name: '地山谦', upper: '坤', lower: '艮', url: '/2026/07/03/地山谦/' },
-      { number: 16, name: '雷地豫', upper: '震', lower: '坤', url: '/2026/07/03/雷地豫/' },
-      { number: 17, name: '泽雷随', upper: '兑', lower: '震', url: '/2026/08/06/泽雷随/' },
-      { number: 18, name: '山风蛊', upper: '艮', lower: '巽', url: '/2026/08/06/山风蛊/' },
-      { number: 19, name: '地泽临', upper: '坤', lower: '兑', url: '/2026/08/07/地泽临/' },
-      { number: 20, name: '风地观', upper: '巽', lower: '坤', url: '/2026/08/06/风地观/' },
-      { number: 21, name: '火雷噬嗑', upper: '离', lower: '震', url: '/2026/08/08/火雷噬嗑/' },
-      { number: 22, name: '山火贲', upper: '艮', lower: '离', url: '/2026/08/09/山火贲/' },
-      { number: 23, name: '山地剥', upper: '艮', lower: '坤', url: '/2026/08/06/山地剥/' },
-      { number: 24, name: '地雷复', upper: '坤', lower: '震', url: '/2026/08/06/地雷复/' },
+      { number: 1, name: '乾为天', upper: '乾', lower: '乾' },
+      { number: 2, name: '坤为地', upper: '坤', lower: '坤' },
+      { number: 3, name: '水雷屯', upper: '坎', lower: '震' },
+      { number: 4, name: '山水蒙', upper: '艮', lower: '坎' },
+      { number: 5, name: '水天需', upper: '坎', lower: '乾' },
+      { number: 6, name: '天水讼', upper: '乾', lower: '坎' },
+      { number: 7, name: '地水师', upper: '坤', lower: '坎' },
+      { number: 8, name: '水地比', upper: '坎', lower: '坤' },
+      { number: 9, name: '风天小畜', upper: '巽', lower: '乾' },
+      { number: 10, name: '天泽履', upper: '乾', lower: '兑' },
+      { number: 11, name: '地天泰', upper: '坤', lower: '乾' },
+      { number: 12, name: '天地否', upper: '乾', lower: '坤' },
+      { number: 13, name: '天火同人', upper: '乾', lower: '离' },
+      { number: 14, name: '火天大有', upper: '离', lower: '乾' },
+      { number: 15, name: '地山谦', upper: '坤', lower: '艮' },
+      { number: 16, name: '雷地豫', upper: '震', lower: '坤' },
+      { number: 17, name: '泽雷随', upper: '兑', lower: '震' },
+      { number: 18, name: '山风蛊', upper: '艮', lower: '巽' },
+      { number: 19, name: '地泽临', upper: '坤', lower: '兑' },
+      { number: 20, name: '风地观', upper: '巽', lower: '坤' },
+      { number: 21, name: '火雷噬嗑', upper: '离', lower: '震' },
+      { number: 22, name: '山火贲', upper: '艮', lower: '离' },
+      { number: 23, name: '山地剥', upper: '艮', lower: '坤' },
+      { number: 24, name: '地雷复', upper: '坤', lower: '震' },
       { number: 25, name: '天雷无妄', upper: '乾', lower: '震' },
       { number: 26, name: '山天大畜', upper: '艮', lower: '乾' },
       { number: 27, name: '山雷颐', upper: '艮', lower: '震' },
@@ -83,6 +83,8 @@
       { number: 64, name: '火水未济', upper: '离', lower: '坎' }
     ];
 
+    var postUrls = window.HEXAGRAM_POST_URLS || {};
+
     var pinyin = [
       'qián', 'kūn', 'zhūn', 'méng', 'xū', 'sòng', 'shī', 'bǐ',
       'xiǎo xù', 'lǚ', 'tài', 'pǐ', 'tóng rén', 'dà yǒu', 'qiān', 'yù',
@@ -122,13 +124,14 @@
     }
 
     function createCard(entry, romanizedName) {
-      var isPublished = Boolean(entry.url);
+      var postUrl = postUrls[String(entry.number)] || '';
+      var isPublished = Boolean(postUrl);
       var card = document.createElement(isPublished ? 'a' : 'article');
       card.className = 'hexagram-card ' + (isPublished ? 'is-published' : 'is-pending');
       card.title = '第' + entry.number + '卦：' + entry.name;
 
       if (isPublished) {
-        card.href = entry.url;
+        card.href = postUrl;
         card.setAttribute('aria-label', '第' + entry.number + '卦：' + entry.name + '，进入文章');
       } else {
         card.setAttribute('aria-label', '第' + entry.number + '卦：' + entry.name + '，待整理');

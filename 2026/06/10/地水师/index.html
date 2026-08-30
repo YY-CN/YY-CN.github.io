@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="地中有水，师。君子以容民畜众。">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="地中有水，师。君子以容民畜众。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-10T02:00:00.000Z">
-<meta property="article:modified_time" content="2026-06-09T16:36:19.301Z">
+<meta property="article:modified_time" content="2026-08-23T19:20:20.193Z">
 <meta property="article:author" content="Hyacinth">
 <meta property="article:tag" content="学习笔记">
 <meta property="article:tag" content="六十四卦">
@@ -127,6 +127,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -166,11 +167,38 @@
     <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -216,10 +244,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-06-10 10:00:00 / 修改时间：00:36:19" itemprop="dateCreated datePublished" datetime="2026-06-10T10:00:00+08:00">2026-06-10</time>
+              <time title="创建时间：2026-06-10 10:00:00" itemprop="dateCreated datePublished" datetime="2026-06-10T10:00:00+08:00">2026-06-10</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-24 03:20:20" itemprop="dateModified" datetime="2026-08-24T03:20:20+08:00">2026-08-24</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -230,7 +264,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>14 分钟</span>
+            </span>
             <div class="post-description">地中有水，师。君子以容民畜众。</div>
 
         </div>
@@ -243,44 +291,103 @@
 
       
         <h2 id="一、-经典原文"><a href="#一、-经典原文" class="headerlink" title="一、 经典原文"></a>一、 经典原文</h2><blockquote>
-<p><strong>【卦辞】</strong><br>师：贞，丈人，吉，无咎。</p>
-<p><strong>【爻辞】</strong><br>初六：师出以律，否臧，凶。<br>九二：在师中，吉无咎，王三锡命。<br>六三：师或舆尸，凶。<br>六四：师左次，无咎。<br>六五：田有禽，利执言，无咎。长子帅师，弟子舆尸，贞凶。<br>上六：大君有命，开国承家，小人勿用。</p>
-<p><strong>【大象传】</strong><br>地中有水，师；君子以容民畜众。</p>
+<p><strong>【卦辞】</strong><br>師：貞丈人吉，无咎。</p>
+<p><strong>【爻辞】</strong><br>初六：師出以律，否臧，凶。<br>九二：在師中吉，无咎；王三錫命。<br>六三：師或輿尸，凶。<br>六四：師左次，无咎。<br>六五：田有禽，利執言，无咎。長子帥師，弟子輿尸，貞凶。<br>上六：大君有命，開國承家，小人勿用。</p>
+<p><strong>【大象传】</strong><br>象曰：地中有水，師；君子以容民畜衆。</p>
 </blockquote>
-<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>走过了讼卦的纷争与冲突，当矛盾无法通过常规诉讼或调解来解决时，往往就会升级为群体的对抗。于是，我们迎来了第七卦——师卦。“师”在古代代表军队，引申到现代，它代表着团队、组织、领导力以及集体行动的法则。</p>
-<p><strong>1. 底层逻辑：君子以容民畜众</strong><br>师卦的上卦为坤（地），下卦为坎（水）。《象传》说“地中有水”，水深藏在广袤的大地之中，就像兵力隐藏在民众之中。君子效法这种大地容纳水脉的意象，要懂得“容民畜众”——也就是要有极大的包容心去接纳群众，蓄养和爱护团队。这是一切领导力的根基。</p>
-<p><strong>2. 带团队的法则：贞与丈人</strong><br>卦辞“师：贞，丈人，吉，无咎”极其精炼地概括了统帅团队的两大核心要素：</p>
-<ul>
-<li><strong>贞：</strong> 代表正道、纪律。不管是打仗还是做企业，出师必须有名，目标必须正当，内部必须有严明的纪律。</li>
-<li><strong>丈人：</strong> 指的是德高望重、经验丰富且沉稳的老将或长者。一支队伍（师）想要获得吉祥、没有灾祸，必须由这样成熟稳重的核心领袖来掌舵，绝不能交给纸上谈兵的毛头小子。</li>
-</ul>
-<p><strong>3.北宋易学家邵雍解</strong><br>养兵聚众，出师攻伐；多经坎坷，必有贵人。<br>得此卦者，正处于需要团结众人、组建团队去攻坚克难的阶段。此时面临困难与险阻，必须依靠严明的纪律和有威望的领导者，上下同心，方能扫除障碍，建功立业。</p>
-<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初六】"><a href="#【初六】" class="headerlink" title="【初六】"></a>【初六】</h3><p><strong>初六：师出以律，否臧，凶。</strong><br><strong>象曰：师出以律，失律凶也。</strong></p>
-<p><strong>释义</strong><br>初六：军队出征必须依靠严明的纪律，如果军纪不严（否臧），必有凶险。<br>《象辞》说：军队出征靠纪律，失去纪律就会带来灾祸。</p>
-<p><strong>北宋易学家邵雍解</strong><br>凶：得此爻者，做事刚刚起步。此时最重要的是“立规矩”。如果一开始就没有底线、管理涣散，那么后续的事情必将一败涂地。</p>
-<h3 id="【九二】"><a href="#【九二】" class="headerlink" title="【九二】"></a>【九二】</h3><p><strong>九二：在师中，吉无咎，王三锡命。</strong><br><strong>象曰：在师中吉，承天宠也。王三锡命，怀万邦也。</strong></p>
-<p><strong>释义</strong><br>九二：作为军中统帅（居中得正），吉祥而没有灾难，君王三次下诏赏赐他。<br>《象辞》说：在军中吉祥，是因为受到了君王的信任与恩宠；君王多次赏赐，是为了安抚和威服天下。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，正处于团队的核心位置，既有能力又有威望，且能得到上级或高层（君王）的绝对信任与放权。只要秉持公正，必能建功立业，深受嘉奖。</p>
-<h3 id="【六三】"><a href="#【六三】" class="headerlink" title="【六三】"></a>【六三】</h3><p><strong>六三：师或舆尸，凶。</strong><br><strong>象曰：师或舆尸，大无功也。</strong></p>
-<p><strong>释义</strong><br>六三：军队也许会用车载着尸体败退回来，凶险。<br>《象辞》说：载着尸体败退，说明带兵无方，遭到了彻底的失败。</p>
-<p><strong>北宋易学家邵雍解</strong><br>凶：得此爻者，德不配位，才不胜任。可能因为任用不当的人，或自身盲目指挥、越级干预，导致项目失败，团队蒙受重大损失。宜深刻反省，交出指挥权。</p>
-<h3 id="【六四】"><a href="#【六四】" class="headerlink" title="【六四】"></a>【六四】</h3><p><strong>六四：师左次，无咎。</strong><br><strong>象曰：左次无咎，未失常也。</strong></p>
-<p><strong>释义</strong><br>六四：军队向左方撤退驻扎（古人以右为尊、为进，左为退避），没有灾难。<br>《象辞》说：向后退避驻扎没有灾难，是因为这种战略撤退并没有违背用兵的常理。</p>
-<p><strong>北宋易学家邵雍解</strong><br>平：得此爻者，面临极其强大的阻力或敌手。此时切忌硬拼，懂得保存实力、战略性后退（左次）不仅不丢人，反而是极其正确的选择。</p>
-<h3 id="【六五】"><a href="#【六五】" class="headerlink" title="【六五】"></a>【六五】</h3><p><strong>六五：田有禽，利执言，无咎。长子帅师，弟子舆尸，贞凶。</strong><br><strong>象曰：长子帅师，以中行也。弟子舆尸，使不当也。</strong></p>
-<p><strong>释义</strong><br>六五：田野里有野兽侵害庄稼，利于理直气壮地去讨伐，没有灾难。必须委派德才兼备的长者（长子）统帅军队，如果让无能的小人（弟子）去指挥，即使动机是正当的，也会带来败战丧师的凶险。<br>《象辞》说：委任小人导致失败，是用人不当的结果。</p>
-<p><strong>北宋易学家邵雍解</strong><br>平：得此爻者，出师有名，正当维权或开展业务是可行的。但成败的关键在于“用人”。若任人唯亲或将项目交给能力不足的人，必定搞砸。</p>
-<h3 id="【上六】"><a href="#【上六】" class="headerlink" title="【上六】"></a>【上六】</h3><p><strong>上六：大君有命，开国承家，小人勿用。</strong><br><strong>象曰：大君有命，以正功也。小人勿用，必乱邦也。</strong></p>
-<p><strong>释义</strong><br>上六：战争胜利，伟大君王颁布诏命，封赏功臣以建国、立家。但千万不能重用那些唯利是图的小人。<br>《象辞》说：绝对不能重用小人，因为他们掌权后必定会祸乱国家（或团队）。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，事业已经取得阶段性的大成功，到了论功行赏的时候。此时可以给予物质奖励，但切记在分配核心岗位和权力时，必须排斥品德低劣的小人。</p>
-<h2 id="四、-个人感悟：带团队的核心是一门“克制”的艺术"><a href="#四、-个人感悟：带团队的核心是一门“克制”的艺术" class="headerlink" title="四、 个人感悟：带团队的核心是一门“克制”的艺术"></a>四、 个人感悟：带团队的核心是一门“克制”的艺术</h2><p>师卦可以说是中国最古老、也最经典的“组织管理学”和“领导力法则”。如果你是一个创业者、团队Leader，或者哪怕你只是负责组织一次大学里的社团活动，师卦都能给你带来极其深刻的启发。</p>
-<p>读完师卦，我总结了带团队的三个“铁律”：</p>
-<ol>
-<li><strong>没有纪律的善意，是灾难的开始（初六）：</strong> 很多新手领导喜欢和员工做朋友，讲人情，觉得一上来就立规矩会显得“冷酷”。但初六爻直接给出了警告：“师出以律，否臧，凶”。团队建立的第一天，规矩、红线和KPI如果不清晰，后面必定一地鸡毛。</li>
-<li><strong>专业的事，交给专业的人（六五）：</strong> 六五爻的“长子帅师，弟子舆尸”非常值得玩味。老板或投资人（君王）最大的智慧，就是找到那个能打仗的“长子”（丈人、九二），然后把指挥权完完整整地交给他。如果你不懂装懂瞎指挥（六三），或者任人唯亲（弟子），哪怕你占尽天时地利，最后也只能落个惨败（舆尸）的下场。</li>
-<li><strong>分蛋糕的最高境界：小人勿用（上六）：</strong> 项目做成了，大家都立功了，怎么封赏？上六爻给出了一句极其冷酷又无比清醒的断语：哪怕这个小人在打仗时出了大力，也只能给他钱财（金银），绝不能给他核心的权力或股权（开国承家）。因为小人得志，必乱大局。</li>
+<hr>
+<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>地水师的现代摘要是：行军用师，需老成持重。聚众成事。 这只是帮助进入文本的提要，具体判断仍要回到卦辞、爻位与上下文。</p>
+<p><strong>1. 底层逻辑：行军用师，需老成持重</strong></p>
+<p>程颐在释卦开头先从卦序、卦体和上下卦关系说明本卦之所以成立：</p>
+<blockquote>
+<p>師，《序卦》：訟必有眾起，故受之以師，師之興由有爭也，所以次訟也。為卦坤上坎下。以二體言之：地中有水，為眾聚之象。以二卦之義言之：内險外順，險道而以順行，師之義也。以爻言之：一陽而為眾陰之主，統眾之象也。比以一陽為眾陰之主而在上，君之象也；師以一陽為眾陰之主而在下，將帥之象也。</p>
+</blockquote>
+<p><strong>2. 卦辞与大象</strong></p>
+<p>卦辞给出全卦的基本处境与行动边界；大象则把卦象转化为修身、处事或治理的提示。程颐分别解释为：</p>
+<blockquote>
+<p>師之道，以正為本，興師動眾以毒天下而不以正，民弗從也，强驅之耳。故師以貞為主，其動雖正也，帥之者，必丈人，則吉而无咎也。蓋有吉而有咎者，有无咎而不吉者，吉且无咎，乃盡善也。丈人者，尊嚴之稱。帥師總眾，非眾所尊信畏服，則安能得人心之從？故司馬穰苴擢自微賤，授之以眾，乃以眾心未服，請莊賈為將也。所謂丈人不必素居崇貴，但其才謀徳業，眾所畏服則是也。如穰苴既誅莊賈，則眾心畏服，乃丈人矣。又如淮隂侯起於微賤，遂為大將，蓋其謀為有以使人尊畏也。</p>
+<p>地中有水，水聚於地中，為眾聚之象，故為師也。君子觀地中有水之象，以容保其民，畜聚其眾也。</p>
+</blockquote>
+<p><strong>3. 邵雍易学旁证</strong></p>
+<p>邵雍在《皇极经世·观物外篇》中说：</p>
+<blockquote>
+<p>“夫卦，各有性有体，然皆不离乾坤之门。”</p>
+<p>“君子于易，玩象、玩数、玩辞、玩意。”</p>
+</blockquote>
+<p>这两段是邵雍讨论读《易》方法的通论，并非针对地水师所下的吉凶断语。放在这里作为旁证，是提醒我们同时观察卦象、数位、辞义与整体意旨，不能只截取一句话作孤立判断。</p>
+<hr>
+<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初六】"><a href="#【初六】" class="headerlink" title="【初六】"></a>【初六】</h3><p><strong>初六：師出以律，否臧，凶。</strong></p>
+<p><strong>象曰：師出以律；失律，凶也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“師出以律，否臧，凶。”作为这一阶段的核心情境；《小象》又以“師出以律；失律，凶也。”点明观察角度。程颐解释此爻的切入点是：“初，師之始也。故言出師之義及行師之道在邦國。興師而言合義理則是以律法也。謂以禁亂誅暴而動，苟動不以義，則雖善亦凶道也。善，謂克勝，凶，謂殃民害義也。在行師而言，律謂號令節制，行師之道以號令節制為本，所以統制於眾不以律，則雖善亦凶。雖使勝，猶凶道也。制師无法，幸而不敗且勝者，時有之矣。聖人之所戒也。”爻辞中出现“凶”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>初，師之始也。故言出師之義及行師之道在邦國。興師而言合義理則是以律法也。謂以禁亂誅暴而動，苟動不以義，則雖善亦凶道也。善，謂克勝，凶，謂殃民害義也。在行師而言，律謂號令節制，行師之道以號令節制為本，所以統制於眾不以律，則雖善亦凶。雖使勝，猶凶道也。制師无法，幸而不敗且勝者，時有之矣。聖人之所戒也。</p>
+<p>師出當以律，失律則凶矣，雖幸而勝，亦凶道也。</p>
+</blockquote>
+<p>从现代阅读角度看，初爻处在事情开端，适合先辨明基础、条件与时机，不宜把局部迹象过早当成最终结论。</p>
+<h3 id="【九二】"><a href="#【九二】" class="headerlink" title="【九二】"></a>【九二】</h3><p><strong>九二：在師中吉，无咎；王三錫命。</strong></p>
+<p><strong>象曰：在師中吉，承天寵也。王三錫命，懷萬邦也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“在師中吉，无咎；王三錫命。”作为这一阶段的核心情境；《小象》又以“在師中吉，承天寵也。王三錫命，懷萬邦也。”点明观察角度。程颐解释此爻的切入点是：“師卦惟九二一陽，為眾陰所歸。五居君位，是其正應，二乃師之主，專制其事者也。居下而專制其事，唯在師則可。自古命將閫外之事，得專制之在師，專制而得中道，故吉而无咎。蓋恃專則失為下之道，不專則无成功之理，故得中為吉。凡師之道，威和並至則吉也。既處之盡其善，則能成功而安天下，故王錫寵命至于三也。凡事至于三者，極也。六五在上，既專意任，復厚其寵數，蓋禮不稱，則威不重，而下不信也。他卦九二為六五所任者有矣，唯師專主其事，而為眾陰所歸，故其義最大。……”爻辞中出现“吉、无咎”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>師卦惟九二一陽，為眾陰所歸。五居君位，是其正應，二乃師之主，專制其事者也。居下而專制其事，唯在師則可。自古命將閫外之事，得專制之在師，專制而得中道，故吉而无咎。蓋恃專則失為下之道，不專則无成功之理，故得中為吉。凡師之道，威和並至則吉也。既處之盡其善，則能成功而安天下，故王錫寵命至于三也。凡事至于三者，極也。六五在上，既專意任，復厚其寵數，蓋禮不稱，則威不重，而下不信也。他卦九二為六五所任者有矣，唯師專主其事，而為眾陰所歸，故其義最大。人臣之道，於事无所敢專，唯閫外之事則專制之。雖制之在己，然因師之力而能致者，皆君所與而職當為也。世儒有論魯祀周公以夫子禮樂。以為周公能為人臣，不能為之功，則可用人臣，不得用之禮樂，是不知人臣之道也。夫居周公之位，則為周公之事，由其位而能為者，皆所當為也。周公乃盡其職耳，子道亦然。唯孟子為知此義，故曰｢事親若曽子者，可也｣，未嘗以曽子之孝為有餘也。蓋子之身所能為者，皆所當為也。</p>
+<p>在師中吉者，以其承天之寵任也。天謂王也，人臣非君寵任之，則安得專征之權而有成功之吉？象以二專主其事，故發此義，與前所云世儒之見異矣，王三錫以恩命褒其成功，所以懐萬邦也。</p>
+</blockquote>
+<p>从现代阅读角度看，二爻进入落实阶段，通常要把行动放回中正、协作与可持续的尺度中衡量。</p>
+<h3 id="【六三】"><a href="#【六三】" class="headerlink" title="【六三】"></a>【六三】</h3><p><strong>六三：師或輿尸，凶。</strong></p>
+<p><strong>象曰：師或輿尸，大无功也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“師或輿尸，凶。”作为这一阶段的核心情境；《小象》又以“師或輿尸，大无功也。”点明观察角度。程颐解释此爻的切入点是：“三居下卦之上，居位當任者也。不唯其才陰柔不中正，師旅之事，任當專一，二既以剛中之才為上信倚，必專其事，乃有成功，若或更使眾人主之，凶之道也。輿尸，眾主也，蓋指三也，以三居下之上，故發此義。軍旅之事，任不專一，覆敗必矣。”爻辞中出现“凶”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>三居下卦之上，居位當任者也。不唯其才陰柔不中正，師旅之事，任當專一，二既以剛中之才為上信倚，必專其事，乃有成功，若或更使眾人主之，凶之道也。輿尸，眾主也，蓋指三也，以三居下之上，故發此義。軍旅之事，任不專一，覆敗必矣。</p>
+<p>倚付二，三安能成功？豈唯无功，必以致凶也。</p>
+</blockquote>
+<p>从现代阅读角度看，三爻处在内卦将尽的转换处，进退压力往往同时出现，尤其需要控制冒进与失位的风险。</p>
+<h3 id="【六四】"><a href="#【六四】" class="headerlink" title="【六四】"></a>【六四】</h3><p><strong>六四：師左次，无咎。</strong></p>
+<p><strong>象曰：左次无咎，未失常也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“師左次，无咎。”作为这一阶段的核心情境；《小象》又以“左次无咎，未失常也。”点明观察角度。程颐解释此爻的切入点是：“師之進，以强勇也，四以柔居陰，非能進而克捷者也。知不能進而退，故左次。左次，退舍也。量宜進退，乃所當也，故无咎。見可而進，知難而退，師之常也。唯取其退之得，宜不論其才之能否也。度不能進而完師以退，愈於覆敗遠矣。可進而退，乃為咎也，易之發此義以示後世，其仁深矣。”爻辞中出现“无咎”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>師之進，以强勇也，四以柔居陰，非能進而克捷者也。知不能進而退，故左次。左次，退舍也。量宜進退，乃所當也，故无咎。見可而進，知難而退，師之常也。唯取其退之得，宜不論其才之能否也。度不能進而完師以退，愈於覆敗遠矣。可進而退，乃為咎也，易之發此義以示後世，其仁深矣。</p>
+<p>行師之道，因時施宜乃其常也。故左次未必為失也，如四退次乃得其宜，是以无咎。</p>
+</blockquote>
+<p>从现代阅读角度看，四爻由内转外，开始接近全局事务与主事位置，行动之前宜先建立信任并审慎辨势。</p>
+<h3 id="【六五】"><a href="#【六五】" class="headerlink" title="【六五】"></a>【六五】</h3><p><strong>六五：田有禽，利執言，无咎。長子帥師，弟子輿尸，貞凶。</strong></p>
+<p><strong>象曰：長子帥師，以中行也。弟子輿尸，使不當也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“田有禽，利執言，无咎。長子帥師，弟子輿尸，貞凶。”作为这一阶段的核心情境；《小象》又以“長子帥師，以中行也。弟子輿尸，使不當也。”点明观察角度。程颐解释此爻的切入点是：“五，君位，興師之主也，故言興師任將之道。師之興，必以蠻夷猾夏冦賊姦宄為生民之害，不可懷來，然後奉辭以誅之。若禽獸入于田中，侵害稼穡，於義宜獵取則獵取之。如此而動，乃得无咎。若輕動以毒天下，其咎大矣。執言，奉辭也，明其罪而討之也。若秦皇漢武皆窮山林以索禽獸者也，非田有禽也。任將授師之道，當以長子帥師，二在下而為師之主，長子也。若以弟子眾主之，則所為雖正亦凶也。弟子凡非長者也，自古任將不專而致覆敗者，如晉荀林父邲之戰，唐郭子儀相州之敗是也。”爻辞中出现“无咎、凶”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>五，君位，興師之主也，故言興師任將之道。師之興，必以蠻夷猾夏冦賊姦宄為生民之害，不可懷來，然後奉辭以誅之。若禽獸入于田中，侵害稼穡，於義宜獵取則獵取之。如此而動，乃得无咎。若輕動以毒天下，其咎大矣。執言，奉辭也，明其罪而討之也。若秦皇漢武皆窮山林以索禽獸者也，非田有禽也。任將授師之道，當以長子帥師，二在下而為師之主，長子也。若以弟子眾主之，則所為雖正亦凶也。弟子凡非長者也，自古任將不專而致覆敗者，如晉荀林父邲之戰，唐郭子儀相州之敗是也。</p>
+<p>長子謂二，以中正之徳合於上，而受任以行。若復使其餘者眾尸其事，是任使之不當也，其凶宜矣。</p>
+</blockquote>
+<p>从现代阅读角度看，五爻居于全卦关键位置，重点在承担责任、守住中道，并使个人能力真正服务于整体。</p>
+<h3 id="【上六】"><a href="#【上六】" class="headerlink" title="【上六】"></a>【上六】</h3><p><strong>上六：大君有命，開國承家，小人勿用。</strong></p>
+<p><strong>象曰：大君有命，以正功也。小人勿用，必亂邦也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“大君有命，開國承家，小人勿用。”作为这一阶段的核心情境；《小象》又以“大君有命，以正功也。小人勿用，必亂邦也。”点明观察角度。程颐解释此爻的切入点是：“上，師之終也，功之成也，大君以爵命，賞有功也。開國，封之為諸侯也；承家，以為卿大夫也。承，受也。小人者雖有功不可用也，故戒使勿用。師旅之興，成功非一道，不必皆君子也，故戒以小人有功不可用也，賞之以金帛禄位可也，不可使有國家而為政也。小人平時易致驕盈，况挾其功乎？漢之英彭所以亡也，聖人之深慮遠戒也。此專言師終之義，不取爻義，蓋以其大者。若以爻言，則六以柔居順之極，師既終而在无位之地，善處而无咎者也。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>上，師之終也，功之成也，大君以爵命，賞有功也。開國，封之為諸侯也；承家，以為卿大夫也。承，受也。小人者雖有功不可用也，故戒使勿用。師旅之興，成功非一道，不必皆君子也，故戒以小人有功不可用也，賞之以金帛禄位可也，不可使有國家而為政也。小人平時易致驕盈，况挾其功乎？漢之英彭所以亡也，聖人之深慮遠戒也。此專言師終之義，不取爻義，蓋以其大者。若以爻言，則六以柔居順之極，師既終而在无位之地，善處而无咎者也。</p>
+<p>大君持恩賞之柄，以正軍旅之功，師之終也。雖賞其功，小人則不可以有功而任用之，用之必亂邦。小人恃功而亂邦者，古有之矣。</p>
+</blockquote>
+<p>从现代阅读角度看，上爻表示一卦发展已到极处，最需要防止过度、僵化与不知转圜，为下一阶段留下余地。</p>
+<hr>
+<h2 id="四、-个人感悟"><a href="#四、-个人感悟" class="headerlink" title="四、 个人感悟"></a>四、 个人感悟</h2><p>行军用师，需老成持重。聚众成事。 对我来说，地水师最值得反复体会的，不是把“吉”或“凶”当作固定答案，而是看清一个处境如何随位置、关系与行动方式而变化。六爻从初到上展示了不同阶段：同一原则放在不同位置，结果可能完全不同。</p>
+<p>把它用于今天的学习、工作或关系判断时，我更愿意把卦辞当作问题框架，把爻辞当作阶段提醒：先确认自己身处哪一层，再决定进、退、守、变。这样读《易》，比直接追求一个预言式结论更稳妥。</p>
+<hr>
+<h2 id="五、-参考文献与版本说明"><a href="#五、-参考文献与版本说明" class="headerlink" title="五、 参考文献与版本说明"></a>五、 参考文献与版本说明</h2><ol>
+<li>《周易》经文及《象传》，本卦原文取自：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/wiki/%E5%91%A8%E6%98%93/%E5%B8%AB">维基文库《周易》本卦页面</a>；并参校<a target="_blank" rel="noopener" href="https://ctext.org/book-of-changes/zh">中国哲学书电子化计划《周易》</a>。</li>
+<li>北宋程颐《程氏易传》（亦称《伊川易传》），本卦参校：<a target="_blank" rel="noopener" href="https://www.taijizhidian.com/chengxu/liushisigua/1540.html">【周易上经】第7卦-师卦䷆地水师卦（坎下坤上）-[北宋]程颐撰《程氏易传•卷一》</a>。</li>
+<li>北宋邵雍《皇极经世·观物外篇》，旁证原文：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/zh-hans/%E7%9A%87%E6%A5%B5%E7%B6%93%E4%B8%96/%E5%8D%B7%E5%8D%81%E4%B8%89">维基文库《皇极经世》卷十三</a>。</li>
 </ol>
-<p>在《易经》看来，统率众人，力量不仅来源于刚猛，更来源于如大地般藏水的“包容（容民畜众）”与如刀锋般克制的“纪律”。恩威并施，方能战无不胜。</p>
+<blockquote>
+<p>版本说明：经典原文与程颐文字保留底本中的繁体字、异体字及个别古字；“释义”“现代阅读角度”和“个人感悟”均为现代整理，不冒充古人原话。“邵雍易学旁证”只引用可定位的易学通论，不作逐卦、逐爻的托名断语。</p>
+</blockquote>
 
     </div>
 
@@ -366,7 +473,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E5%85%AD%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初六】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【九二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【六三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【六四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【六五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E5%85%AD%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上六】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F%EF%BC%9A%E5%B8%A6%E5%9B%A2%E9%98%9F%E7%9A%84%E6%A0%B8%E5%BF%83%E6%98%AF%E4%B8%80%E9%97%A8%E2%80%9C%E5%85%8B%E5%88%B6%E2%80%9D%E7%9A%84%E8%89%BA%E6%9C%AF"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟：带团队的核心是一门“克制”的艺术</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E5%85%AD%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初六】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【九二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【六三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【六四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【六五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E5%85%AD%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上六】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E4%B8%8E%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E"><span class="nav-number">5.</span> <span class="nav-text">五、 参考文献与版本说明</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -382,7 +489,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -467,6 +574,10 @@
 
 
 
+  
+<script src="/js/local-search.js"></script>
+
+
 
 
 
@@ -495,6 +606,15 @@
 
 <script>
   (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
     var loadingBox = document.getElementById('loading-box');
     var root = document.documentElement;
 
@@ -525,8 +645,9 @@
 
 <script src="/js/latex-tool.js?v=20260805c"></script>
 <script src="/js/translate-tool.js?v=20260805a"></script>
-<script src="/js/hexagram-index.js?v=20260806a"></script>
-<script src="/js/divination-tool.js?v=20260810a"></script>
+<script src="/js/hexagram-post-map.js?v=20260830a"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
 
 </body>
 </html>

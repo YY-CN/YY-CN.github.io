@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="云雷屯，君子以经纶。">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="云雷屯，君子以经纶。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-05T16:46:04.000Z">
-<meta property="article:modified_time" content="2026-06-07T15:40:56.034Z">
+<meta property="article:modified_time" content="2026-08-23T19:20:20.189Z">
 <meta property="article:author" content="Hyacinth">
 <meta property="article:tag" content="学习笔记">
 <meta property="article:tag" content="六十四卦">
@@ -127,6 +127,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -166,11 +167,38 @@
     <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -224,7 +252,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-06-07 23:40:56" itemprop="dateModified" datetime="2026-06-07T23:40:56+08:00">2026-06-07</time>
+                <time title="修改时间：2026-08-24 03:20:20" itemprop="dateModified" datetime="2026-08-24T03:20:20+08:00">2026-08-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -236,7 +264,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
             <div class="post-description">云雷屯，君子以经纶。</div>
 
         </div>
@@ -249,66 +291,104 @@
 
       
         <h2 id="一、-经典原文"><a href="#一、-经典原文" class="headerlink" title="一、 经典原文"></a>一、 经典原文</h2><blockquote>
-<p><strong>【卦辞】</strong> 屯：元，亨，利，贞。勿用，有攸往，利建侯。</p>
-<p><strong>【爻辞】</strong> </p>
-<p>初九：磐桓；利居贞，利建侯。 </p>
-<p>六二：屯如邅如，乘马班如。匪寇婚媾，女子贞不字，十年乃字。 </p>
-<p>六三：即鹿无虞，惟入于林中，君子几，不如舍，往吝。 </p>
-<p>六四：乘马班如，求婚媾，往吉，无不利。 </p>
-<p>九五：屯其膏，小贞吉，大贞凶。 </p>
-<p>上六：乘马班如，泣血涟如。</p>
-<p><strong>【大象传】</strong> 云，雷，屯；君子以经纶。</p>
+<p><strong>【卦辞】</strong><br>屯：元亨，利貞。勿用有攸往，利建侯。</p>
+<p><strong>【爻辞】</strong><br>初九：磐桓，利居貞，利建侯。<br>六二：屯如邅如，乘馬班如，匪寇婚媾，女子貞不字，十年乃字。<br>六三：即鹿无虞，惟入于林中，君子幾不如舍，往吝。<br>六四：乘馬班如，求婚媾，往，吉无不利。<br>九五：屯其膏；小貞吉，大貞凶。<br>上六：乘馬班如，泣血漣如。</p>
+<p><strong>【大象传】</strong><br>象曰：雲雷，屯；君子以經綸。</p>
 </blockquote>
-<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>读完原文，如果说乾卦是万物创始的刚健，那第三卦屯（zhūn）卦就是万物初生时的艰难与挣扎。它是易经六十四卦中的四大难卦之一，但它的“难”并不是死局，而是充满生机的“破壳之难”。</p>
-<p><strong>1. 底层逻辑：君子以经纶</strong> </p>
-<p>屯卦上卦为坎（代表水、云、险难），下卦为震（代表雷、动）。《象传》里的“云雷屯，君子以经纶”是屯卦的灵魂。它告诉我们，在天上乌云密布、雷声滚滚的混沌初开之时，君子应该效法这种气象，像整理丝线一样（经纶），耐心地去理清乱局，建立秩序。</p>
-<p><strong>2. 发展规律：万事开头难与厚积薄发</strong> </p>
-<p>卦辞“元，亨，利，贞。勿用，有攸往，利建侯。”蕴含了极强的创业与发展智慧：</p>
-<ul>
-<li><strong>元亨利贞：</strong> 同样具备这四个字，说明事情的本质是好的，最终可以大吉大利。</li>
-<li><strong>勿用，有攸往：</strong> 警告我们，在羽翼未丰的初创期，切忌盲目冒进、四处出击。</li>
-<li><strong>利建侯：</strong> 这个阶段最应该做的事，是招揽人才、稳固根基、建立基本盘（建侯），积蓄力量。</li>
-</ul>
-<p><strong>3.北宋易学家邵雍解</strong> </p>
-<p>万物始生，萌芽出土；万事起头，艰难危险。 得此卦者，身处困境，步履维艰，但只要坚忍不拔，必能冲破难关。万事开头虽难，但生机正孕育其中。做事不可急躁，宜循序渐进，建立根基。</p>
-<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初九】"><a href="#【初九】" class="headerlink" title="【初九】"></a>【初九】</h3><p><strong>初九：磐桓；利居贞，利建侯。</strong> <strong>象曰：虽磐桓，志行正也。以贵下贱，大得民也。</strong></p>
-<p><strong>释义</strong> </p>
-<p>初九：徘徊不前；利于安居守正，利于建功立业和分封诸侯。 《象辞》说：虽然徘徊不前，但动机和行为是端正的。身份高贵却能礼贤下士，能够大大地获得民心。</p>
-<p><strong>北宋易学家邵雍解</strong> </p>
-<p>吉：得此爻者，万事开头虽难，但根基正在确立。宜坚守正道，广结善缘，耐心打好基础，大吉。</p>
-<h3 id="【六二】"><a href="#【六二】" class="headerlink" title="【六二】"></a>【六二】</h3><p><strong>六二：屯如邅如，乘马班如。匪寇婚媾，女子贞不字，十年乃字。</strong> <strong>象曰：六二之难，乘刚也。十年乃字，反常也。</strong></p>
-<p><strong>释义</strong> </p>
-<p>六二：艰难行进的样子，骑着马团团打转。来者不是强盗，而是来求婚的。女子坚守贞操不答应，等了十年才答应。 《象辞》说：六二之所以遇到困难，是因为处境逼迫。等待十年才出嫁，是因为要等待局势回归正常。</p>
-<p><strong>北宋易学家邵雍解</strong> </p>
-<p>平：得此爻者，好事多磨，不可急于求成。宜守静待机，坚守底线，经得起考验，久后方能如愿。</p>
-<h3 id="【六三】"><a href="#【六三】" class="headerlink" title="【六三】"></a>【六三】</h3><p><strong>六三：即鹿无虞，惟入于林中，君子几，不如舍，往吝。</strong> <strong>象曰：即鹿无虞，以从禽也。君子舍之，往吝穷也。</strong></p>
-<p><strong>释义</strong> </p>
-<p>六三：追逐鹿却没有向导，只能盲目地进入深林之中。君子见机行事觉得不如放弃，继续前行会有遗憾和困厄。 《象辞》说：追逐鹿却没有向导，说明是因为贪图猎物而迷失。君子选择放弃，因为继续下去必然陷入绝境。</p>
-<p><strong>北宋易学家邵雍解</strong> </p>
-<p>凶：得此爻者，容易盲目行事，陷入迷局。宜当机立断，及时止损，切忌贪功冒进、德不配位。</p>
-<h3 id="【六四】"><a href="#【六四】" class="headerlink" title="【六四】"></a>【六四】</h3><p><strong>六四：乘马班如，求婚媾，往吉，无不利。</strong> <strong>象曰：求而往，明也。</strong></p>
-<p><strong>释义</strong> </p>
-<p>六四：骑着马团团打转，前进受阻，于是退回去寻求同盟（婚媾），前往吉祥，没有什么不利的。 《象辞》说：主动寻求帮助并前去，是明智的做法。</p>
-<p><strong>北宋易学家邵雍解</strong> </p>
-<p>吉：得此爻者，虽面临困难瓶颈，但能得到贵人或同伴的帮助。宜放下身段主动寻求合作，必能化险为夷。</p>
-<h3 id="【九五】"><a href="#【九五】" class="headerlink" title="【九五】"></a>【九五】</h3><p><strong>九五：屯其膏，小贞吉，大贞凶。</strong> <strong>象曰：屯其膏，施未光也。</strong></p>
-<p><strong>释义</strong> </p>
-<p>九五：恩泽被囤积、阻碍，无法广施于天下。此时在小事上坚守正道吉祥，在大事上强行推进则有凶险。 《象辞》说：恩泽被困，说明施展恩德的光芒受到了限制。</p>
-<p><strong>北宋易学家邵雍解</strong> </p>
-<p>平：得此爻者，大权旁落或资源受限，力量无法完全施展。此时只宜做小事、稳扎稳打，不可强行图谋大事。</p>
-<h3 id="【上六】"><a href="#【上六】" class="headerlink" title="【上六】"></a>【上六】</h3><p><strong>上六：乘马班如，泣血涟如。</strong> <strong>象曰：泣血涟如，何可长也。</strong></p>
-<p><strong>释义</strong> </p>
-<p>上六：骑着马团团打转，悲痛得泣血连连，泪如雨下。 《象辞》说：泣血连连的悲痛，怎么可能长久呢？（必然走向终结或穷极生变）。</p>
-<p><strong>北宋易学家邵雍解</strong> </p>
-<p>凶：得此爻者，陷入极度困境，进退维谷，充满悲哀。做事已走入死胡同，宜深刻反省，不可轻举妄动。</p>
-<h2 id="四、-个人感悟：万事开头难，在混沌中破局"><a href="#四、-个人感悟：万事开头难，在混沌中破局" class="headerlink" title="四、 个人感悟：万事开头难，在混沌中破局"></a>四、 个人感悟：万事开头难，在混沌中破局</h2><p>写完屯卦的笔记，我最大的感触是：它生动地刻画了我们在这个世界上“从零到一”的真实状态。就像一颗种子在春天要破土而出，它必须顶开压在头顶沉重的泥土，这个过程一定是痛苦、艰难、甚至伴随着迷茫的（屯如邅如，乘马班如）。</p>
-<p>但屯卦的伟大之处在于，它给了我们初创期的“生存指南”：</p>
-<ol>
-<li><strong>耐得住寂寞：</strong> 就像六二爻的“十年乃字”，在时机不成熟时，不要为了短期的诱惑而轻易妥协，要懂得蛰伏与等待。</li>
-<li><strong>懂得及时止损：</strong> 就像六三爻的“即鹿无虞”，如果进入了一个完全不熟悉的赛道，又没有内行带路，哪怕诱惑再大（鹿），最明智的选择也是“不如舍”，否则必会跌入深渊。</li>
-<li><strong>寻找合伙人：</strong> 卦辞说的“利建侯”，以及六四爻的“求婚媾”，都在提醒我们：单打独斗是走不远的，遇到瓶颈时，主动求助、建立联盟才是破局的关键。</li>
+<hr>
+<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>水雷屯的现代摘要是：万事开头难，宜筹建基业。 这只是帮助进入文本的提要，具体判断仍要回到卦辞、爻位与上下文。</p>
+<p><strong>1. 底层逻辑：万事开头难，宜筹建基业</strong></p>
+<p>程颐在释卦开头先从卦序、卦体和上下卦关系说明本卦之所以成立：</p>
+<blockquote>
+<p>屯，《序卦》曰：有天地然後萬物生焉。盈天地之間者惟萬物，故受之以屯。屯者，盈也。屯者，萬物之始生也。萬物始生，鬱結未通，故為盈。塞於天地之間，至通暢茂盛，則塞意亡矣。天地生萬物，屯，物之始生，故繼乾坤之後。以二象言之，雲雷之興，陰陽始交也。以二體言之，震始交於下，坎始交於中，陰陽相交，乃成雲雷，陰陽始交，雲雷相應，而未成澤，故爲屯。若已成澤，則為解也。又動於險中，亦屯之義。陰陽不交則為否，始交而未暢則為屯，在時則天下屯難，未亨泰之時也。</p>
+</blockquote>
+<p><strong>2. 卦辞与大象</strong></p>
+<p>卦辞给出全卦的基本处境与行动边界；大象则把卦象转化为修身、处事或治理的提示。程颐分别解释为：</p>
+<blockquote>
+<p>《屯》有大亨之道，而處之利在貞固，非貞固何以濟屯？方屯之時，未可有所往也。天下之屯，豈獨力所能濟？必廣資輔助，故「利建侯」也。</p>
+<p>不云雨而云雲者，雲爲雨而未成者也。未能成雨，所以為屯。君子觀屯之象，經綸天下之事，以濟於屯難。經緯，綸緝謂營為也。</p>
+</blockquote>
+<p><strong>3. 邵雍易学旁证</strong></p>
+<p>邵雍在《皇极经世·观物外篇》中说：</p>
+<blockquote>
+<p>“夫卦，各有性有体，然皆不离乾坤之门。”</p>
+<p>“君子于易，玩象、玩数、玩辞、玩意。”</p>
+</blockquote>
+<p>这两段是邵雍讨论读《易》方法的通论，并非针对水雷屯所下的吉凶断语。放在这里作为旁证，是提醒我们同时观察卦象、数位、辞义与整体意旨，不能只截取一句话作孤立判断。</p>
+<hr>
+<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初九】"><a href="#【初九】" class="headerlink" title="【初九】"></a>【初九】</h3><p><strong>初九：磐桓，利居貞，利建侯。</strong></p>
+<p><strong>象曰：雖磐桓，志行正也。以貴下賤，大得民也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“磐桓，利居貞，利建侯。”作为这一阶段的核心情境；《小象》又以“雖磐桓，志行正也。以貴下賤，大得民也。”点明观察角度。程颐解释此爻的切入点是：“初以陽爻在下，乃剛明之才，當屯難之世，居下位者也。未能便往濟屯，故磐桓也。方屯之初，不磐桓而遽進，則犯難矣，故宜居正而固其志。凡人處屯難，則鮮能守正。苟无貞固之守，則將失義，安能濟時之屯乎？居屯之世，方屯於下，所宜有助，乃居屯濟屯之道也。故取建侯之義，謂求輔助也。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>初以陽爻在下，乃剛明之才，當屯難之世，居下位者也。未能便往濟屯，故磐桓也。方屯之初，不磐桓而遽進，則犯難矣，故宜居正而固其志。凡人處屯難，則鮮能守正。苟无貞固之守，則將失義，安能濟時之屯乎？居屯之世，方屯於下，所宜有助，乃居屯濟屯之道也。故取建侯之義，謂求輔助也。</p>
+<p>賢人在下時，苟未利，雖盤桓，未能遂往濟時之屯，然有濟屯之志，與濟屯之用，志在行其正也。</p>
+</blockquote>
+<p>从现代阅读角度看，初爻处在事情开端，适合先辨明基础、条件与时机，不宜把局部迹象过早当成最终结论。</p>
+<h3 id="【六二】"><a href="#【六二】" class="headerlink" title="【六二】"></a>【六二】</h3><p><strong>六二：屯如邅如，乘馬班如，匪寇婚媾，女子貞不字，十年乃字。</strong></p>
+<p><strong>象曰：六二之難，乘剛也。十年乃字，反常也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“屯如邅如，乘馬班如，匪寇婚媾，女子貞不字，十年乃字。”作为这一阶段的核心情境；《小象》又以“六二之難，乘剛也。十年乃字，反常也。”点明观察角度。程颐解释此爻的切入点是：“二以陰柔居屯之世，雖正應在上，而逼於初剛，故屯難。邅，回；如，辭也。乘馬，欲行也。欲從正應而復班如，不能進也。班，分布之義。下馬爲班，與馬異處也。二當屯世，雖不能自濟，而居中得正，有應在上，不失義者也。然逼近於初，陰乃陽所求，柔者剛所陵。柔當屯時，固難自濟，又爲剛陽所逼，故爲難也。設匪逼于寇難，則往求子婚媾矣。婚媾，正應也。寇，非理而至者。二守中正，不苟合於初，所以「不字」。苟貞固不易，至於十年。屯極必通，乃獲正應而字育矣。……”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>二以陰柔居屯之世，雖正應在上，而逼於初剛，故屯難。邅，回；如，辭也。乘馬，欲行也。欲從正應而復班如，不能進也。班，分布之義。下馬爲班，與馬異處也。二當屯世，雖不能自濟，而居中得正，有應在上，不失義者也。然逼近於初，陰乃陽所求，柔者剛所陵。柔當屯時，固難自濟，又爲剛陽所逼，故爲難也。設匪逼于寇難，則往求子婚媾矣。婚媾，正應也。寇，非理而至者。二守中正，不苟合於初，所以「不字」。苟貞固不易，至於十年。屯極必通，乃獲正應而字育矣。以女子陰柔，苟能守其志節，久必獲通，况君子守道不回乎！初爲賢明剛正之人，而爲寇以侵逼於人，何也？曰：此自據二以柔近剛而爲義，更不計初之德如何也。《易》之取義如此。</p>
+<p>六二居屯之時，而又乘剛，為剛陽所逼，是其患難也。至於十年，則難久必通矣，乃得反其常，與正應合也。十，數之終也。</p>
+</blockquote>
+<p>从现代阅读角度看，二爻进入落实阶段，通常要把行动放回中正、协作与可持续的尺度中衡量。</p>
+<h3 id="【六三】"><a href="#【六三】" class="headerlink" title="【六三】"></a>【六三】</h3><p><strong>六三：即鹿无虞，惟入于林中，君子幾不如舍，往吝。</strong></p>
+<p><strong>象曰：即鹿无虞，以從禽也。君子舍之，往吝窮也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“即鹿无虞，惟入于林中，君子幾不如舍，往吝。”作为这一阶段的核心情境；《小象》又以“即鹿无虞，以從禽也。君子舍之，往吝窮也。”点明观察角度。程颐解释此爻的切入点是：“六三以柔居剛，柔既不能安屯，居剛而不中正，則妄動，雖貪于所求，既不足以自濟，又无應援，將安之乎？如即鹿而无虞人也。入山林者，必有虞人以導之者。（无導之者），則惟陷入于林莽中。君子見事之幾微，不若舍而勿逐，往則徒取窮吝而已。”爻辞中出现“吝”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>六三以柔居剛，柔既不能安屯，居剛而不中正，則妄動，雖貪于所求，既不足以自濟，又无應援，將安之乎？如即鹿而无虞人也。入山林者，必有虞人以導之者。（无導之者），則惟陷入于林莽中。君子見事之幾微，不若舍而勿逐，往則徒取窮吝而已。</p>
+<p>註：原文缺「无導之者」。</p>
+<p>事不可而妄動，以從欲也；无虞而即鹿，以貪禽也。當屯之時，不可動而動，猶无虞而即鹿，以有從禽之心也。君子則見幾而舍之不從，若往則可吝而困窮也。</p>
+</blockquote>
+<p>从现代阅读角度看，三爻处在内卦将尽的转换处，进退压力往往同时出现，尤其需要控制冒进与失位的风险。</p>
+<h3 id="【六四】"><a href="#【六四】" class="headerlink" title="【六四】"></a>【六四】</h3><p><strong>六四：乘馬班如，求婚媾，往，吉无不利。</strong></p>
+<p><strong>象曰：求而往，明也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“乘馬班如，求婚媾，往，吉无不利。”作为这一阶段的核心情境；《小象》又以“求而往，明也。”点明观察角度。程颐解释此爻的切入点是：“六四以柔順君之位，得於上者也。而其才不足以濟屯，故欲進而復止，乘馬班如也。己既不足以濟時之屯，若能求賢以自輔，則可濟矣。初陽剛之賢，乃是正應，己之婚媾也。若求此陽剛之婚媾，往與共輔陽剛中正之君，濟時之屯，則吉而无所不利也。居公卿之位，己之才雖不足以濟時之屯，若能求在下之賢，親而用之，何所不濟哉？”爻辞中出现“吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>六四以柔順君之位，得於上者也。而其才不足以濟屯，故欲進而復止，乘馬班如也。己既不足以濟時之屯，若能求賢以自輔，則可濟矣。初陽剛之賢，乃是正應，己之婚媾也。若求此陽剛之婚媾，往與共輔陽剛中正之君，濟時之屯，則吉而无所不利也。居公卿之位，己之才雖不足以濟時之屯，若能求在下之賢，親而用之，何所不濟哉？</p>
+<p>知己不足，求賢自輔而後往，可謂明矣。居得致之地，己不能而遂至暗者也。</p>
+</blockquote>
+<p>从现代阅读角度看，四爻由内转外，开始接近全局事务与主事位置，行动之前宜先建立信任并审慎辨势。</p>
+<h3 id="【九五】"><a href="#【九五】" class="headerlink" title="【九五】"></a>【九五】</h3><p><strong>九五：屯其膏；小貞吉，大貞凶。</strong></p>
+<p><strong>象曰：屯其膏，施未光也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“屯其膏；小貞吉，大貞凶。”作为这一阶段的核心情境；《小象》又以“屯其膏，施未光也。”点明观察角度。程颐解释此爻的切入点是：“五居尊得正，而當屯時，若有剛明之賢爲之輔，則能濟屯矣。以其无臣也，故屯其膏。人君之尊，雖屯難之世，於其名位非有損也，唯其施爲有所不行，德澤有所不下，是屯其膏。人君之屯也，既膏澤有所不下，是威權不在己也。威權去己而欲驟正之，求凶之道，魯昭公高貴鄉公之事是也，故小貞則吉也。小貞，則漸正之也，若盤庚周宣，修德用賢，復先王之政，諸侯復朝。謂以道馴致，爲之不暴也。又非恬然不爲，若唐之僖昭也。不爲則常屯以至于亡矣。”爻辞中出现“吉、凶”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>五居尊得正，而當屯時，若有剛明之賢爲之輔，則能濟屯矣。以其无臣也，故屯其膏。人君之尊，雖屯難之世，於其名位非有損也，唯其施爲有所不行，德澤有所不下，是屯其膏。人君之屯也，既膏澤有所不下，是威權不在己也。威權去己而欲驟正之，求凶之道，魯昭公高貴鄉公之事是也，故小貞則吉也。小貞，則漸正之也，若盤庚周宣，修德用賢，復先王之政，諸侯復朝。謂以道馴致，爲之不暴也。又非恬然不爲，若唐之僖昭也。不爲則常屯以至于亡矣。</p>
+<p>膏澤不下及，是以徳施未能光大也。人君之屯也。</p>
+</blockquote>
+<p>从现代阅读角度看，五爻居于全卦关键位置，重点在承担责任、守住中道，并使个人能力真正服务于整体。</p>
+<h3 id="【上六】"><a href="#【上六】" class="headerlink" title="【上六】"></a>【上六】</h3><p><strong>上六：乘馬班如，泣血漣如。</strong></p>
+<p><strong>象曰：泣血漣如，何可長也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“乘馬班如，泣血漣如。”作为这一阶段的核心情境；《小象》又以“泣血漣如，何可長也。”点明观察角度。程颐解释此爻的切入点是：“六以陰柔居屯之終，在險之極，而无應援，居則不安，動无所之，乘馬欲往，復班如不進，窮厄之甚，至於泣血漣如，屯之極也。若陽剛而有助，則屯既極，可濟矣。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>六以陰柔居屯之終，在險之極，而无應援，居則不安，動无所之，乘馬欲往，復班如不進，窮厄之甚，至於泣血漣如，屯之極也。若陽剛而有助，則屯既極，可濟矣。</p>
+<p>屯難窮極，莫知所為，故至泣血。顛沛如此，其能長久乎？夫卦者，事也，爻者，事之時也。分三而又兩之，足以包括衆理，引而伸之，觸類而長之，天下之能事畢矣。</p>
+</blockquote>
+<p>从现代阅读角度看，上爻表示一卦发展已到极处，最需要防止过度、僵化与不知转圜，为下一阶段留下余地。</p>
+<hr>
+<h2 id="四、-个人感悟"><a href="#四、-个人感悟" class="headerlink" title="四、 个人感悟"></a>四、 个人感悟</h2><p>万事开头难，宜筹建基业。 对我来说，水雷屯最值得反复体会的，不是把“吉”或“凶”当作固定答案，而是看清一个处境如何随位置、关系与行动方式而变化。六爻从初到上展示了不同阶段：同一原则放在不同位置，结果可能完全不同。</p>
+<p>把它用于今天的学习、工作或关系判断时，我更愿意把卦辞当作问题框架，把爻辞当作阶段提醒：先确认自己身处哪一层，再决定进、退、守、变。这样读《易》，比直接追求一个预言式结论更稳妥。</p>
+<hr>
+<h2 id="五、-参考文献与版本说明"><a href="#五、-参考文献与版本说明" class="headerlink" title="五、 参考文献与版本说明"></a>五、 参考文献与版本说明</h2><ol>
+<li>《周易》经文及《象传》，本卦原文取自：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/wiki/%E5%91%A8%E6%98%93/%E5%B1%AF">维基文库《周易》本卦页面</a>；并参校<a target="_blank" rel="noopener" href="https://ctext.org/book-of-changes/zh">中国哲学书电子化计划《周易》</a>。</li>
+<li>北宋程颐《程氏易传》（亦称《伊川易传》），本卦参校：<a target="_blank" rel="noopener" href="https://www.taijizhidian.com/chengxu/liushisigua/1536.html">【周易上经】第3卦-屯卦䷂水雷屯卦（震下坎上）-[北宋]程颐撰《程氏易传•卷一》</a>。</li>
+<li>北宋邵雍《皇极经世·观物外篇》，旁证原文：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/zh-hans/%E7%9A%87%E6%A5%B5%E7%B6%93%E4%B8%96/%E5%8D%B7%E5%8D%81%E4%B8%89">维基文库《皇极经世》卷十三</a>。</li>
 </ol>
-<p>“万事开头难”，但在雷雨交加的混沌之中，只要我们能像君子“经纶”那样理清乱局，稳住阵脚，最终一定能迎来云开雾散的新生机。</p>
+<blockquote>
+<p>版本说明：经典原文与程颐文字保留底本中的繁体字、异体字及个别古字；“释义”“现代阅读角度”和“个人感悟”均为现代整理，不冒充古人原话。“邵雍易学旁证”只引用可定位的易学通论，不作逐卦、逐爻的托名断语。</p>
+</blockquote>
 
     </div>
 
@@ -394,7 +474,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E4%B9%9D%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初九】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【六二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【六三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【六四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【九五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E5%85%AD%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上六】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F%EF%BC%9A%E4%B8%87%E4%BA%8B%E5%BC%80%E5%A4%B4%E9%9A%BE%EF%BC%8C%E5%9C%A8%E6%B7%B7%E6%B2%8C%E4%B8%AD%E7%A0%B4%E5%B1%80"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟：万事开头难，在混沌中破局</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E4%B9%9D%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初九】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【六二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【六三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【六四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【九五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E5%85%AD%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上六】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E4%B8%8E%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E"><span class="nav-number">5.</span> <span class="nav-text">五、 参考文献与版本说明</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -410,7 +490,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -495,6 +575,10 @@
 
 
 
+  
+<script src="/js/local-search.js"></script>
+
+
 
 
 
@@ -523,6 +607,15 @@
 
 <script>
   (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
     var loadingBox = document.getElementById('loading-box');
     var root = document.documentElement;
 
@@ -553,8 +646,9 @@
 
 <script src="/js/latex-tool.js?v=20260805c"></script>
 <script src="/js/translate-tool.js?v=20260805a"></script>
-<script src="/js/hexagram-index.js?v=20260806a"></script>
-<script src="/js/divination-tool.js?v=20260810a"></script>
+<script src="/js/hexagram-post-map.js?v=20260830a"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
 
 </body>
 </html>

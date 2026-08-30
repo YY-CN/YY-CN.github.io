@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="风行地上，观。先王以省方观民设教。">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="风行地上，观。先王以省方观民设教。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-08-06T14:15:00.000Z">
-<meta property="article:modified_time" content="2026-08-06T14:13:22.907Z">
+<meta property="article:modified_time" content="2026-08-23T19:20:20.219Z">
 <meta property="article:author" content="Hyacinth">
 <meta property="article:tag" content="学习笔记">
 <meta property="article:tag" content="六十四卦">
@@ -127,6 +127,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -166,11 +167,38 @@
     <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -216,10 +244,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-08-06 22:15:00 / 修改时间：22:13:22" itemprop="dateCreated datePublished" datetime="2026-08-06T22:15:00+08:00">2026-08-06</time>
+              <time title="创建时间：2026-08-06 22:15:00" itemprop="dateCreated datePublished" datetime="2026-08-06T22:15:00+08:00">2026-08-06</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-24 03:20:20" itemprop="dateModified" datetime="2026-08-24T03:20:20+08:00">2026-08-24</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -230,7 +264,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>12 分钟</span>
+            </span>
             <div class="post-description">风行地上，观。先王以省方观民设教。</div>
 
         </div>
@@ -243,44 +291,103 @@
 
       
         <h2 id="一、-经典原文"><a href="#一、-经典原文" class="headerlink" title="一、 经典原文"></a>一、 经典原文</h2><blockquote>
-<p><strong>【卦辞】</strong><br>观：盥而不荐，有孚颙若。</p>
-<p><strong>【爻辞】</strong><br>初六：童观，小人无咎，君子吝。<br>六二：窥观，利女贞。<br>六三：观我生，进退。<br>六四：观国之光，利用宾于王。<br>九五：观我生，君子无咎。<br>上九：观其生，君子无咎。</p>
-<p><strong>【大象传】</strong><br>风行地上，观；先王以省方观民设教。</p>
+<p><strong>【卦辞】</strong><br>觀：盥而不荐，有孚顒若。</p>
+<p><strong>【爻辞】</strong><br>初六：童觀，小人无咎，君子吝。<br>六二：窺觀，利女貞。<br>六三：觀我生，進退。<br>六四：觀國之光，利用賓于王。<br>九五：觀我生，君子无咎。<br>上九：觀其生，君子无咎。</p>
+<p><strong>【大象传】</strong><br>象曰：風行地上，觀；先王以省方，觀民設教。</p>
 </blockquote>
-<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>当“临卦”（第十九卦）以上临下、深入督导之后，事物就完全展现在了众人面前。于是，我们迎来了第二十卦——观卦。“观”包含了两层意思：一是主动去“观察”世界，二是被动地“展示”自己让别人来仰观。这是一卦教我们如何打开认知格局、如何建立影响力的深刻智慧。</p>
-<p><strong>1. 底层逻辑：风行地上，省方观民设教</strong><br>观卦的上卦为巽（风），下卦为坤（地）。《象传》说“风行地上”，风吹拂过广袤的大地，无处不至，体察着大地上万物的生息。古代君王效法这种气象，巡视四方、体察民情（观民），从而设立符合实际的教化规章（设教）。管理不能闭门造车，必须像风一样去深入一线“观察”。</p>
-<p><strong>2. 影响力的法则：盥而不荐，有孚颙若</strong><br>卦辞“盥而不荐，有孚颙若”描绘了一幅极具威仪的祭祀画面：</p>
-<ul>
-<li><strong>盥而不荐：</strong> 祭祀时，刚刚洗净双手（盥），但还没有把祭品敬献上去（不荐）。这是整个祭祀仪式中最庄严肃穆、最引人屏息以待的瞬间。</li>
-<li><strong>有孚颙若：</strong> 此时主祭者内心充满了极度的虔诚与诚信（有孚），容貌庄重肃穆（颙若，音yóng ruò）。<br>这告诉我们，最高级的影响力与展示（让别人来“观”你），不是靠利益的输送（不荐），而是靠你自身那份纯粹的诚意和庄重的人格魅力。</li>
-</ul>
-<p><strong>3.北宋易学家邵雍解</strong><br>风行地上，和风轻拂；观望观察，神道设教。<br>得此卦者，正处于事物发展变动的阶段，局势尚不明朗。此时切忌轻举妄动，最宜静观其变，多看少动。通过细致的观察来拓展自己的认知格局，谋定而后动方为上策。</p>
-<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初六】"><a href="#【初六】" class="headerlink" title="【初六】"></a>【初六】</h3><p><strong>初六：童观，小人无咎，君子吝。</strong><br><strong>象曰：初六童观，小人道也。</strong></p>
-<p><strong>释义</strong><br>初六：像小孩子一样去观察事物（看问题非常幼稚、肤浅）。这种情况对于普通老百姓来说没有什么灾难，但对于君子（领导者、成大事者）来说就是一种耻辱和遗憾。<br>《象辞》说：像小孩子一样观察，这是普通小人的行事法则。</p>
-<p><strong>北宋易学家邵雍解</strong><br>凶&#x2F;平：得此爻者，眼光极其短浅，只看表面现象不看本质，或者只顾眼前利益。如果你只是个普通员工可能无伤大雅，但如果你身处关键岗位，这种认知局限必将导致决策失误。</p>
-<h3 id="【六二】"><a href="#【六二】" class="headerlink" title="【六二】"></a>【六二】</h3><p><strong>六二：窥观，利女贞。</strong><br><strong>象曰：窥观女贞，亦可丑也。</strong></p>
-<p><strong>释义</strong><br>六二：从门缝里偷看（视野极其狭窄）。这种做法利于安分守己的女子坚守正道（古代女子主内），但对于要干大事业的人来说则是行不通的。<br>《象辞》说：虽然对女子坚守正道有利，但（对于君子来说）这同样是令人羞愧的局限。</p>
-<p><strong>北宋易学家邵雍解</strong><br>平：得此爻者，管中窥豹，带有极大的偏见或信息茧房。你的视线被严重遮挡，只能看到局部。此时只适宜在内部处理一些小事或家务，绝不可以此狭隘的视角去对外做重大战略决策。</p>
-<h3 id="【六三】"><a href="#【六三】" class="headerlink" title="【六三】"></a>【六三】</h3><p><strong>六三：观我生，进退。</strong><br><strong>象曰：观我生，进退；未失道也。</strong></p>
-<p><strong>释义</strong><br>六三：深刻地观察自己的所作所为和生命状态（评估自身的实力与处境），以此来决定是前进还是退却。<br>《象辞》说：观察自己的状态来决定进退，是因为这样才不会迷失正确的道路。</p>
-<p><strong>北宋易学家邵雍解</strong><br>平：得此爻者，正处于人生的转折点或十字路口。此时千万不要去管别人怎么做，而是要“向内看”——彻底盘点自己的资源、能力和缺点。有多大本领吃多少饭，审时度势，进退有度。</p>
-<h3 id="【六四】"><a href="#【六四】" class="headerlink" title="【六四】"></a>【六四】</h3><p><strong>六四：观国之光，利用宾于王。</strong><br><strong>象曰：观国之光，尚宾也。</strong></p>
-<p><strong>释义</strong><br>六四：观察到了国家繁荣、政治清明的光辉，适宜前去作为宾客辅佐君王（或加入优秀的平台）。<br>《象辞》说：观察到国家之光，说明其崇尚成为君王的座上宾（寻找明君）。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，拥有了敏锐而宏大的战略眼光。你成功捕捉到了时代红利、行业风口或者找到了一个极具潜力的优秀平台&#x2F;老板。此时主动出击，必能大展宏图，获得重用。</p>
-<h3 id="【九五】"><a href="#【九五】" class="headerlink" title="【九五】"></a>【九五】</h3><p><strong>九五：观我生，君子无咎。</strong><br><strong>象曰：观我生，观民也。</strong></p>
-<p><strong>释义</strong><br>九五：君王居高临下，审视自己一生的德政（通过观察天下苍生的生活状态来检验自己的治理成果），作为君子是没有灾难的。<br>《象辞》说：观察自己的德政，其实就是通过体察民情来实现的。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，身居高位，大权在握。但你没有被权力蒙蔽双眼，而是时刻保持清醒，通过底下人的反馈和团队的现状来反思自己的管理模式。这种高维度的自我审查，能确保基业长青。</p>
-<h3 id="【上九】"><a href="#【上九】" class="headerlink" title="【上九】"></a>【上九】</h3><p><strong>上九：观其生，君子无咎。</strong><br><strong>象曰：观其生，志未平也。</strong></p>
-<p><strong>释义</strong><br>上九：跳出名利场，以超然的态度来观察天下万民的生命状态（或自己的举止对天下的影响），君子没有灾难。<br>《象辞》说：观察天下人的状态，说明上九虽然退隐，但内心关怀天下的心志依然没有平息。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，已经到了功成身退、或者处于顾问&#x2F;智库的位置。你拥有了“上帝视角”，不再为了蝇头小利去厮杀，而是站在更高的维度去洞察社会规律，境界极高，平安无事。</p>
-<h2 id="四、-个人感悟：在信息茧房中，修习顶级的“认知能力”"><a href="#四、-个人感悟：在信息茧房中，修习顶级的“认知能力”" class="headerlink" title="四、 个人感悟：在信息茧房中，修习顶级的“认知能力”"></a>四、 个人感悟：在信息茧房中，修习顶级的“认知能力”</h2><p>在这个算法推荐、短视频泛滥的时代，我们每天都在“看（观）”大量的东西，但很多人却活得越来越像初六爻的“童观”和六二爻的“窥观”——认知被锁死在极低的维度和门缝里。</p>
-<p>观卦，其实是一部极其硬核的“人类认知升级指南”，它给了我三个极为震撼的启发：</p>
-<ol>
-<li><strong>认知层次，决定了你的命运走向：</strong> 同样是“看”，初六像小孩看热闹（童观），六二从门缝里看（窥观），六四却能看到“国之光”（大势与周期）。如果你总是关注娱乐八卦、碎片化爽文，那你就是在“童观”。只有当你把视线从门缝里拔出来，去观察宏观经济、行业周期、底层规律时，你才能遇到“利用宾于王”的泼天机遇。</li>
-<li><strong>最高级的“观”，是向内观（观我生）：</strong> 人最容易犯的毛病是拿放大镜看别人，拿美颜相机看自己。但六三爻和九五爻都点出了同一个词——“观我生”。遇到挫折，先审视自己的能力模型是否匹配；取得成功，先看看底下的人跟着你有没有吃肉。能把自己的灵魂放在显微镜下解剖的人，才知道什么时候该进，什么时候该退。</li>
-<li><strong>顶级的个人IP，是“盥而不荐”：</strong> 卦辞里的这句话是整个人际交往与建立影响力的神来之笔。很多人为了彰显实力，喜欢发红包、吹牛逼、疯狂表现自己。但《易经》说，最具震慑力的时刻，是你把手洗得干干净净、端端正正站在那里，什么都还没给的瞬间。那种由内而外散发的虔诚、专业与敬畏感（有孚颙若），才是让人真正心悦诚服的底牌。</li>
+<hr>
+<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>风地观的现代摘要是：观瞻视察，省方设教。宜观察学习。 这只是帮助进入文本的提要，具体判断仍要回到卦辞、爻位与上下文。</p>
+<p><strong>1. 底层逻辑：观瞻视察，省方设教</strong></p>
+<p>程颐在释卦开头先从卦序、卦体和上下卦关系说明本卦之所以成立：</p>
+<blockquote>
+<p>觀，《序卦》：臨者大也，物大然後可觀，故受之以觀，觀所以次臨也。凡觀視於物則為觀。為觀於下則為觀，如樓觀謂之觀者，為觀於下也。人君上觀天道，下觀民俗，則為觀。修德行政為民瞻仰，則為觀。風行地上，徧觸萬類，周觀之象也。二陽在上，四陰在下，陽剛居尊，為羣下所觀，仰觀之義也。在諸爻則惟取觀見隨時為義也。</p>
+</blockquote>
+<p><strong>2. 卦辞与大象</strong></p>
+<p>卦辞给出全卦的基本处境与行动边界；大象则把卦象转化为修身、处事或治理的提示。程颐分别解释为：</p>
+<blockquote>
+<p>予聞之胡翼之先生曰：君子居上為天下之表儀，必極其莊敬，則下觀仰而化也。故為天下之觀，當如宗廟之祭始盥之時，不可如既薦之後，則下民盡其至誠，顒然瞻仰之矣。盥，謂祭祀之始。盥手酌鬱鬯於地，求神之時也。薦，謂獻腥獻熟之時也。盥者事之始，人心方盡其精誠嚴肅之至也。至既薦之後，禮數繁縟，則人心散而精一不若始盥之時矣。居上者，正其表儀以為下民之觀，當莊嚴如始盥之初，勿使誠意少散如既薦之後，則天下之人莫不盡孚誠，顒然若瞻仰之矣。顒，仰望也。</p>
+<p>風行地上，周及庶物，為由歷周覽之象，故先王體之為省方之禮，以觀民俗而設教也。天子巡省四方，觀視民俗，設為政教，如奢則約之以儉，儉則示之以禮是也。省方，觀民也。設教，為民觀也。</p>
+</blockquote>
+<p><strong>3. 邵雍易学旁证</strong></p>
+<p>邵雍在《皇极经世·观物外篇》中说：</p>
+<blockquote>
+<p>“夫卦，各有性有体，然皆不离乾坤之门。”</p>
+<p>“君子于易，玩象、玩数、玩辞、玩意。”</p>
+</blockquote>
+<p>这两段是邵雍讨论读《易》方法的通论，并非针对风地观所下的吉凶断语。放在这里作为旁证，是提醒我们同时观察卦象、数位、辞义与整体意旨，不能只截取一句话作孤立判断。</p>
+<hr>
+<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初六】"><a href="#【初六】" class="headerlink" title="【初六】"></a>【初六】</h3><p><strong>初六：童觀，小人无咎，君子吝。</strong></p>
+<p><strong>象曰：初六童觀，小人道也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“童觀，小人无咎，君子吝。”作为这一阶段的核心情境；《小象》又以“初六童觀，小人道也。”点明观察角度。程颐解释此爻的切入点是：“六以陰柔之質，居遠於陽，是以觀見者淺近如童稚然，故曰｢童觀｣。陽剛中正在上，賢聖之君也。近之，則見其道德之盛，所觀深遠，初乃遠之，所見不明，如童蒙之觀也。小人下民也，所見昏淺，不能識君子之道，乃常分也。不足謂之過咎，若君子而如是，則可鄙吝也。”爻辞中出现“无咎、吝”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>六以陰柔之質，居遠於陽，是以觀見者淺近如童稚然，故曰｢童觀｣。陽剛中正在上，賢聖之君也。近之，則見其道德之盛，所觀深遠，初乃遠之，所見不明，如童蒙之觀也。小人下民也，所見昏淺，不能識君子之道，乃常分也。不足謂之過咎，若君子而如是，則可鄙吝也。</p>
+<p>所觀不明如童稚，乃小人之分，故曰小人道也。</p>
+</blockquote>
+<p>从现代阅读角度看，初爻处在事情开端，适合先辨明基础、条件与时机，不宜把局部迹象过早当成最终结论。</p>
+<h3 id="【六二】"><a href="#【六二】" class="headerlink" title="【六二】"></a>【六二】</h3><p><strong>六二：窺觀，利女貞。</strong></p>
+<p><strong>象曰：窺觀女貞，亦可丑也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“窺觀，利女貞。”作为这一阶段的核心情境；《小象》又以“窺觀女貞，亦可丑也。”点明观察角度。程颐解释此爻的切入点是：“二應於五，觀於五也。五剛陽中正之道，非二陰暗柔弱所能觀見也，故但如闚覘之觀，雖少見而不能甚明也。二既不能明見剛陽中正之道，則利如女子之貞，雖見之不能甚明，而能順從者，女子之道也。在女子為貞也。二既不能明見九五之道，能如女子之順從，則不失中正乃為利也。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>二應於五，觀於五也。五剛陽中正之道，非二陰暗柔弱所能觀見也，故但如闚覘之觀，雖少見而不能甚明也。二既不能明見剛陽中正之道，則利如女子之貞，雖見之不能甚明，而能順從者，女子之道也。在女子為貞也。二既不能明見九五之道，能如女子之順從，則不失中正乃為利也。</p>
+<p>君子不能觀見剛陽中正之大道，而僅闚覘其彷彿，雖能順從，乃同女子之貞，亦可羞醜也。</p>
+</blockquote>
+<p>从现代阅读角度看，二爻进入落实阶段，通常要把行动放回中正、协作与可持续的尺度中衡量。</p>
+<h3 id="【六三】"><a href="#【六三】" class="headerlink" title="【六三】"></a>【六三】</h3><p><strong>六三：觀我生，進退。</strong></p>
+<p><strong>象曰：觀我生，進退；未失道也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“觀我生，進退。”作为这一阶段的核心情境；《小象》又以“觀我生，進退；未失道也。”点明观察角度。程颐解释此爻的切入点是：“三居非其位，處順之極，能順時以進退者也。若居當其位，則无進退之義也。觀我生，我之所生，謂動作施為出於己者，觀其所生而隨宜進退，所以處雖非正，而未至失道也。隨時進退，求不失道，故无悔咎，以能順也。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>三居非其位，處順之極，能順時以進退者也。若居當其位，則无進退之義也。觀我生，我之所生，謂動作施為出於己者，觀其所生而隨宜進退，所以處雖非正，而未至失道也。隨時進退，求不失道，故无悔咎，以能順也。</p>
+<p>觀己之生而進退以順乎宜，宜故未至於失道也。</p>
+</blockquote>
+<p>从现代阅读角度看，三爻处在内卦将尽的转换处，进退压力往往同时出现，尤其需要控制冒进与失位的风险。</p>
+<h3 id="【六四】"><a href="#【六四】" class="headerlink" title="【六四】"></a>【六四】</h3><p><strong>六四：觀國之光，利用賓于王。</strong></p>
+<p><strong>象曰：觀國之光，尚賓也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“觀國之光，利用賓于王。”作为这一阶段的核心情境；《小象》又以“觀國之光，尚賓也。”点明观察角度。程颐解释此爻的切入点是：“觀莫明於近。五以剛陽中正居尊位，聖賢之君也，四切近之，觀見其道，故云觀國之光。觀見國之盛德光輝也。不指君之身，而云國者。在人君而言，豈止觀其行一身乎？當觀天下之政化，則人君之道德可見矣。四雖陰柔，而巽體居正，切近於五，觀見而能順從者也。利用賓于王，夫聖明在上，則懷抱才德之人，皆願進于朝廷輔載之，以康濟天下。四既觀見人君之德，國家之治，光華盛美，所宜賓于王朝，效其智力，上輔於君，以施澤天下，故云利用賓于王也。古者有賢德之人，則人君賓禮之，故仕進於王朝則謂之賓。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>觀莫明於近。五以剛陽中正居尊位，聖賢之君也，四切近之，觀見其道，故云觀國之光。觀見國之盛德光輝也。不指君之身，而云國者。在人君而言，豈止觀其行一身乎？當觀天下之政化，則人君之道德可見矣。四雖陰柔，而巽體居正，切近於五，觀見而能順從者也。利用賓于王，夫聖明在上，則懷抱才德之人，皆願進于朝廷輔載之，以康濟天下。四既觀見人君之德，國家之治，光華盛美，所宜賓于王朝，效其智力，上輔於君，以施澤天下，故云利用賓于王也。古者有賢德之人，則人君賓禮之，故仕進於王朝則謂之賓。</p>
+<p>君子懷負才業，志在乎兼善天下，然有卷懷自守者，蓋時无明君，莫能用其道，不得已也，豈君子之志哉。故《孟子》曰：｢中天下而立，定四海之民，君子樂之。｣既觀見國之盛德光華，古人所謂非常之遇也，所以志願登進王朝，以行其道，故云｢觀國之光，尚賓也｣。尚，謂志尚，其志意願慕賓于王朝也。</p>
+</blockquote>
+<p>从现代阅读角度看，四爻由内转外，开始接近全局事务与主事位置，行动之前宜先建立信任并审慎辨势。</p>
+<h3 id="【九五】"><a href="#【九五】" class="headerlink" title="【九五】"></a>【九五】</h3><p><strong>九五：觀我生，君子无咎。</strong></p>
+<p><strong>象曰：觀我生，觀民也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“觀我生，君子无咎。”作为这一阶段的核心情境；《小象》又以“觀我生，觀民也。”点明观察角度。程颐解释此爻的切入点是：“九五居人君之位，時之治亂，俗之美惡，繫乎己而已。觀己之生，若天下之俗皆君子矣，則是已之所為政化善也，乃无咎矣。若天下之俗未合君子之道，則是己之所為政治未善，不能免於咎也。”爻辞中出现“无咎”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>九五居人君之位，時之治亂，俗之美惡，繫乎己而已。觀己之生，若天下之俗皆君子矣，則是已之所為政化善也，乃无咎矣。若天下之俗未合君子之道，則是己之所為政治未善，不能免於咎也。</p>
+<p>我生出於己者，人君欲觀已之施為善否，當觀於民。民俗善則政化善也。王弼云：觀民以察己之道是也。</p>
+</blockquote>
+<p>从现代阅读角度看，五爻居于全卦关键位置，重点在承担责任、守住中道，并使个人能力真正服务于整体。</p>
+<h3 id="【上九】"><a href="#【上九】" class="headerlink" title="【上九】"></a>【上九】</h3><p><strong>上九：觀其生，君子无咎。</strong></p>
+<p><strong>象曰：觀其生，志未平也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“觀其生，君子无咎。”作为这一阶段的核心情境；《小象》又以“觀其生，志未平也。”点明观察角度。程颐解释此爻的切入点是：“上九以陽剛之德處於上，為下之所觀而不當位，是賢人君子不在於位，而道德為天下所觀仰者也。觀其生，觀其所生也，謂出於己者，德業行義也。既為天下所觀仰，故自觀其所生，若皆君子矣，則无過咎也。茍未君子，則何以使人觀仰矜式，是其咎也。”爻辞中出现“无咎”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>上九以陽剛之德處於上，為下之所觀而不當位，是賢人君子不在於位，而道德為天下所觀仰者也。觀其生，觀其所生也，謂出於己者，德業行義也。既為天下所觀仰，故自觀其所生，若皆君子矣，則无過咎也。茍未君子，則何以使人觀仰矜式，是其咎也。</p>
+<p>雖不在位，然以人觀其德，用為儀法，故當自慎，省觀其所生，常不失於君子，則人不失所望而化之矣。不可以不在於位，故安然放意无所事也，是其至意未得安也。故云：志未平也。平，謂安寧也。</p>
+</blockquote>
+<p>从现代阅读角度看，上爻表示一卦发展已到极处，最需要防止过度、僵化与不知转圜，为下一阶段留下余地。</p>
+<hr>
+<h2 id="四、-个人感悟"><a href="#四、-个人感悟" class="headerlink" title="四、 个人感悟"></a>四、 个人感悟</h2><p>观瞻视察，省方设教。宜观察学习。 对我来说，风地观最值得反复体会的，不是把“吉”或“凶”当作固定答案，而是看清一个处境如何随位置、关系与行动方式而变化。六爻从初到上展示了不同阶段：同一原则放在不同位置，结果可能完全不同。</p>
+<p>把它用于今天的学习、工作或关系判断时，我更愿意把卦辞当作问题框架，把爻辞当作阶段提醒：先确认自己身处哪一层，再决定进、退、守、变。这样读《易》，比直接追求一个预言式结论更稳妥。</p>
+<hr>
+<h2 id="五、-参考文献与版本说明"><a href="#五、-参考文献与版本说明" class="headerlink" title="五、 参考文献与版本说明"></a>五、 参考文献与版本说明</h2><ol>
+<li>《周易》经文及《象传》，本卦原文取自：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/wiki/%E5%91%A8%E6%98%93/%E8%A7%80">维基文库《周易》本卦页面</a>；并参校<a target="_blank" rel="noopener" href="https://ctext.org/book-of-changes/zh">中国哲学书电子化计划《周易》</a>。</li>
+<li>北宋程颐《程氏易传》（亦称《伊川易传》），本卦参校：<a target="_blank" rel="noopener" href="https://www.taijizhidian.com/chengxu/liushisigua/1553.html">【周易上经】第20卦-观卦䷓风地观卦（坤下巽上）-[北宋]程颐撰《程氏易传•卷二》</a>。</li>
+<li>北宋邵雍《皇极经世·观物外篇》，旁证原文：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/zh-hans/%E7%9A%87%E6%A5%B5%E7%B6%93%E4%B8%96/%E5%8D%B7%E5%8D%81%E4%B8%89">维基文库《皇极经世》卷十三</a>。</li>
 </ol>
-<p>打破门缝的局限，让风吹进大脑。愿我们都能在这个喧嚣的世界里，炼就一双看破虚妄的慧眼。</p>
+<blockquote>
+<p>版本说明：经典原文与程颐文字保留底本中的繁体字、异体字及个别古字；“释义”“现代阅读角度”和“个人感悟”均为现代整理，不冒充古人原话。“邵雍易学旁证”只引用可定位的易学通论，不作逐卦、逐爻的托名断语。</p>
+</blockquote>
 
     </div>
 
@@ -366,7 +473,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E5%85%AD%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初六】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【六二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【六三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【六四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【九五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E4%B9%9D%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上九】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F%EF%BC%9A%E5%9C%A8%E4%BF%A1%E6%81%AF%E8%8C%A7%E6%88%BF%E4%B8%AD%EF%BC%8C%E4%BF%AE%E4%B9%A0%E9%A1%B6%E7%BA%A7%E7%9A%84%E2%80%9C%E8%AE%A4%E7%9F%A5%E8%83%BD%E5%8A%9B%E2%80%9D"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟：在信息茧房中，修习顶级的“认知能力”</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E5%85%AD%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初六】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【六二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【六三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【六四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【九五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E4%B9%9D%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上九】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E4%B8%8E%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E"><span class="nav-number">5.</span> <span class="nav-text">五、 参考文献与版本说明</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -382,7 +489,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -467,6 +574,10 @@
 
 
 
+  
+<script src="/js/local-search.js"></script>
+
+
 
 
 
@@ -495,6 +606,15 @@
 
 <script>
   (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
     var loadingBox = document.getElementById('loading-box');
     var root = document.documentElement;
 
@@ -525,8 +645,9 @@
 
 <script src="/js/latex-tool.js?v=20260805c"></script>
 <script src="/js/translate-tool.js?v=20260805a"></script>
-<script src="/js/hexagram-index.js?v=20260806a"></script>
-<script src="/js/divination-tool.js?v=20260810a"></script>
+<script src="/js/hexagram-post-map.js?v=20260830a"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
 
 </body>
 </html>

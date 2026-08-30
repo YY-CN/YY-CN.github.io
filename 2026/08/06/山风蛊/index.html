@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="山下有风，蛊。君子以振民育德。">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="山下有风，蛊。君子以振民育德。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-08-06T14:03:00.000Z">
-<meta property="article:modified_time" content="2026-08-06T14:06:51.351Z">
+<meta property="article:modified_time" content="2026-08-23T19:20:20.217Z">
 <meta property="article:author" content="Hyacinth">
 <meta property="article:tag" content="学习笔记">
 <meta property="article:tag" content="六十四卦">
@@ -127,6 +127,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -166,11 +167,38 @@
     <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -216,10 +244,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-08-06 22:03:00 / 修改时间：22:06:51" itemprop="dateCreated datePublished" datetime="2026-08-06T22:03:00+08:00">2026-08-06</time>
+              <time title="创建时间：2026-08-06 22:03:00" itemprop="dateCreated datePublished" datetime="2026-08-06T22:03:00+08:00">2026-08-06</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-24 03:20:20" itemprop="dateModified" datetime="2026-08-24T03:20:20+08:00">2026-08-24</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -230,7 +264,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
             <div class="post-description">山下有风，蛊。君子以振民育德。</div>
 
         </div>
@@ -243,44 +291,103 @@
 
       
         <h2 id="一、-经典原文"><a href="#一、-经典原文" class="headerlink" title="一、 经典原文"></a>一、 经典原文</h2><blockquote>
-<p><strong>【卦辞】</strong><br>蛊：元亨，利涉大川。先甲三日，后甲三日。</p>
-<p><strong>【爻辞】</strong><br>初六：干父之蛊，有子，考无咎，厉终吉。<br>九二：干母之蛊，不可贞。<br>九三：干父之蛊，小有悔，无大咎。<br>六四：裕父之蛊，往见吝。<br>六五：干父之蛊，用誉。<br>上九：不事王侯，高尚其事。</p>
-<p><strong>【大象传】</strong><br>山下有风，蛊；君子以振民育德。</p>
+<p><strong>【卦辞】</strong><br>蠱：元亨。利涉大川。先甲三日，後甲三日。</p>
+<p><strong>【爻辞】</strong><br>初六：幹父之蠱，有子考，无咎，厲終吉。<br>九二：幹母之蠱，不可貞。<br>九三：幹父之蠱，小有悔，无大咎。<br>六四：裕父之蠱，往見吝。<br>六五：幹父之蠱，用譽。<br>上九：不事王侯，高尚其事。</p>
+<p><strong>【大象传】</strong><br>象曰：山下有風，蠱；君子以振民育德。</p>
 </blockquote>
-<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>当“随卦”（第十七卦）顺应时势久了，若是随波逐流、失去原则，就必然会滋生出腐败和弊端。于是，我们迎来了第十八卦——蛊（gǔ）卦。“蛊”的字形是器皿里生了虫子，代表着腐败、崩坏、积弊已久。但《易经》的伟大在于，它不教你抱怨腐败，而是教你如何去“治蛊”——也就是革除积弊、打破僵局。</p>
-<p><strong>1. 底层逻辑：山下有风，振民育德</strong><br>蛊卦的上卦为艮（山），下卦为巽（风）。《象传》说“山下有风”，风本来应该流通天下，但现在却被高山挡住，在山脚下郁结沉闷，空气不流通，东西自然就发霉生虫了。面对这种腐败闭塞的局面，君子应该怎么做？“振民育德”——振奋民众的精神，培育高尚的道德。用新鲜的空气（思想与行动）去吹散腐朽。</p>
-<p><strong>2. 破局的法则：先甲三日，后甲三日</strong><br>卦辞“蛊：元亨，利涉大川。先甲三日，后甲三日”给出了极具操作性的改革方案：</p>
-<ul>
-<li><strong>元亨，利涉大川：</strong> 治理腐败、清除积弊虽然艰难，但只要敢于去做，大吉大利，利于跨越艰难险阻（涉大川）。</li>
-<li><strong>先甲三日，后甲三日：</strong> “甲”代表新的开端、新的政令。在颁布新规、采取重大行动（甲）之前，必须深思熟虑、充分调研（先甲三日）；在行动之后，不能撒手不管，必须持续跟踪、巩固成果（后甲三日）。改革绝不能是一阵风，而必须是闭环管理。</li>
-</ul>
-<p><strong>3.北宋易学家邵雍解</strong><br>败坏之象，事业败落；革故鼎新，挽狂澜于既倒。<br>得此卦者，正处于积弊极深、危机四伏的十字路口（可能是接手了一个烂摊子，或者自身习惯极差）。此时千万不可讳疾忌医。宜痛下决心，周密计划，大刀阔斧地进行改革，方能绝处逢生。</p>
-<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初六】"><a href="#【初六】" class="headerlink" title="【初六】"></a>【初六】</h3><p><strong>初六：干父之蛊，有子，考无咎，厉终吉。</strong><br><strong>象曰：干父之蛊，意承考也。</strong></p>
-<p><strong>释义</strong><br>初六：匡救（干）父亲留下的积弊。有了能干的儿子去纠正错误，死去的父亲（考）也就没有了罪咎。过程虽然艰难危险，但最终吉祥。<br>《象辞》说：匡救父亲的积弊，是因为心里想要继承和挽回父亲的遗志与名誉。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，面临前人或上级留下的“烂摊子”。此时不应抱怨，而应勇敢承担起纠错的责任。只要你用心去修补，虽然起步艰难，但最终不仅能解决问题，还会赢得极大的赞誉。</p>
-<h3 id="【九二】"><a href="#【九二】" class="headerlink" title="【九二】"></a>【九二】</h3><p><strong>九二：干母之蛊，不可贞。</strong><br><strong>象曰：干母之蛊，得中道也。</strong></p>
-<p><strong>释义</strong><br>九二：匡救母亲留下的积弊，不可过于刚正严苛（不可贞）。<br>《象辞》说：匡救母亲的积弊，是因为九二居中得正，懂得采用中庸柔和的方式。</p>
-<p><strong>北宋易学家邵雍解</strong><br>平：得此爻者，在纠正内部（尤其是感情深厚的人、或者性格柔弱的女上司&#x2F;长辈）的错误时，切忌雷厉风行、不留情面。必须讲究方式方法，委婉劝导，刚柔并济，否则欲速则不达。</p>
-<h3 id="【九三】"><a href="#【九三】" class="headerlink" title="【九三】"></a>【九三】</h3><p><strong>九三：干父之蛊，小有悔，无大咎。</strong><br><strong>象曰：干父之蛊，终无咎也。</strong></p>
-<p><strong>释义</strong><br>九三：匡救父亲留下的积弊。因为性情过刚，做得有点过了头，稍微有些懊悔，但没有大的灾祸。<br>《象辞》说：匡救父亲的积弊，毕竟动机是好的，最终不会有灾祸。</p>
-<p><strong>北宋易学家邵雍解</strong><br>平：得此爻者，改革的决心极大，但行事作风过于强硬急躁，可能会引发一些得罪人或用力过猛的小失误。好在大方向是对的，及时复盘微调，无伤大雅。</p>
-<h3 id="【六四】"><a href="#【六四】" class="headerlink" title="【六四】"></a>【六四】</h3><p><strong>六四：裕父之蛊，往见吝。</strong><br><strong>象曰：裕父之蛊，往未当也。</strong></p>
-<p><strong>释义</strong><br>六四：对父亲留下的积弊宽容姑息（裕），不去纠正。如果继续这样下去，必然会招致羞辱和遗憾。<br>《象辞》说：宽容姑息，说明前去的做法是非常不恰当的。</p>
-<p><strong>北宋易学家邵雍解</strong><br>凶：得此爻者，性格过于软弱，或者为了当“老好人”而对明显的问题视而不见。这种和稀泥、掩耳盗铃的做法，最终只会让腐败溃烂，导致局面彻底失控。宜悬崖勒马，敢于碰硬。</p>
-<h3 id="【六五】"><a href="#【六五】" class="headerlink" title="【六五】"></a>【六五】</h3><p><strong>六五：干父之蛊，用誉。</strong><br><strong>象曰：干父用誉，承以德也。</strong></p>
-<p><strong>释义</strong><br>六五：匡救父亲留下的积弊，得到了极大的赞誉。<br>《象辞》说：匡救父亲积弊而得到赞誉，是因为六五能用美好的道德去继承事业。</p>
-<p><strong>北宋易学家邵雍解</strong><br>大吉：得此爻者，不仅成功解决了前人留下的历史遗留问题，而且手段极其高明，既照顾了前人的颜面，又迎来了全新的发展。德才兼备，名利双收，是大改革家的气象。</p>
-<h3 id="【上九】"><a href="#【上九】" class="headerlink" title="【上九】"></a>【上九】</h3><p><strong>上九：不事王侯，高尚其事。</strong><br><strong>象曰：不事王侯，志可则也。</strong></p>
-<p><strong>释义</strong><br>上九：治蛊（改革）的大业已经完成，不再去侍奉王侯将相，而是把自己的追求放在更高尚的精神境界上。<br>《象辞》说：不侍奉王侯，这种超然的志向是值得后人效法的法则。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，乱局已经平息，问题已经彻底解决。此时不宜再贪恋权力和世俗的名利，懂得功成身退，追求个人内在的精神升华或修身养性，是最高级的智慧。</p>
-<h2 id="四、-个人感悟：直面“烂摊子”，才是真正的长期主义"><a href="#四、-个人感悟：直面“烂摊子”，才是真正的长期主义" class="headerlink" title="四、 个人感悟：直面“烂摊子”，才是真正的长期主义"></a>四、 个人感悟：直面“烂摊子”，才是真正的长期主义</h2><p>读完蛊卦，相信很多在职场上“背过锅”或者接手过前任“烂摊子”的人都会深有共鸣。在大多数人的本能里，遇到“蛊”（腐烂发臭的问题）的第一反应是掩盖，或者像六四爻那样“裕父之蛊”（得过且过，和稀泥）。</p>
-<p>但《易经》不仅不教我们逃避，反而把“治蛊”视为一件“元亨利涉大川”的伟大事业。蛊卦给了我们三个直指核心的“破局方法论”：</p>
-<ol>
-<li><strong>没有“闭环”的改革，就是瞎折腾：</strong> 卦辞里的“先甲三日，后甲三日”太经典了。很多新官上任三把火，脑门一拍就出新政，不管不顾，结果怨声载道。真正的治蛊高手，事前必定做足背调（先甲），事后必定追踪落实、提供配套支持（后甲）。谋定而后动，才是真本事。</li>
-<li><strong>“纠错”是一门讲究火候的艺术：</strong> 同样是解决问题，蛊卦分得很细：遇到强硬的、原则性的错误，你要像初六那样勇敢去“干（纠正）”；但如果面对的是内部的、感情深厚的人（干母之蛊），你绝不能硬刚，而要委婉迂回；如果你性子太急（九三），可能会小有懊悔。治病救人，药方和剂量同样重要。</li>
-<li><strong>最高级的结局是“高尚其事”：</strong> 在把一个烂摊子收拾好、立下大功之后，最容易发生什么？飞鸟尽良弓藏。所以上九爻给出了终极保命符——“不事王侯”。事情办成了，不要去向老板要天大的封赏，也不要在世俗的权力里继续内耗。拍拍屁股去追寻更高的境界，把美名和传奇留给江湖。</li>
+<hr>
+<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>山风蛊的现代摘要是：积弊已深，宜革故鼎新。 这只是帮助进入文本的提要，具体判断仍要回到卦辞、爻位与上下文。</p>
+<p><strong>1. 底层逻辑：积弊已深，宜革故鼎新</strong></p>
+<p>程颐在释卦开头先从卦序、卦体和上下卦关系说明本卦之所以成立：</p>
+<blockquote>
+<p>蠱，《序卦》：｢以喜隨人者必有事，故受之以蠱。｣承二卦之義以為次也。夫喜悅以隨於人者，必有事也。无事，則何喜，何隨？蠱所以次隨也。蠱，事也。蠱非訓事，蠱乃有事也。為卦，山下有風，風在山下，遇山而回則物亂，是為蠱象。蠱之義，壞亂也。在文為蟲皿，皿之有蟲，蠱壞之義。《左氏傳》云：｢風落山，女惑男。｣以長女下於少男，亂其情也。風遇山而回，物皆撓亂，是為有事之象，故云蠱者事也。既蠱而治之，亦事也。以卦之象言之，所以成蠱也；以卦之才言之，所以治蠱也。</p>
+</blockquote>
+<p><strong>2. 卦辞与大象</strong></p>
+<p>卦辞给出全卦的基本处境与行动边界；大象则把卦象转化为修身、处事或治理的提示。程颐分别解释为：</p>
+<blockquote>
+<p>既蠱則有復治之理。自古治必因亂，亂則開治，理自然也。如卦之才以治蠱，則能致元亨也。蠱之大者，濟時之艱難險阻也，故曰利涉大川。</p>
+<p>山下有風，風遇山而回，則物皆散亂，故為有事之象。君子觀有事之象，以振濟於民，養育其德也。在己則養德，於天下則濟民，君子之所事，无大於此二者。</p>
+</blockquote>
+<p><strong>3. 邵雍易学旁证</strong></p>
+<p>邵雍在《皇极经世·观物外篇》中说：</p>
+<blockquote>
+<p>“夫卦，各有性有体，然皆不离乾坤之门。”</p>
+<p>“君子于易，玩象、玩数、玩辞、玩意。”</p>
+</blockquote>
+<p>这两段是邵雍讨论读《易》方法的通论，并非针对山风蛊所下的吉凶断语。放在这里作为旁证，是提醒我们同时观察卦象、数位、辞义与整体意旨，不能只截取一句话作孤立判断。</p>
+<hr>
+<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初六】"><a href="#【初六】" class="headerlink" title="【初六】"></a>【初六】</h3><p><strong>初六：幹父之蠱，有子考，无咎，厲終吉。</strong></p>
+<p><strong>象曰：幹父之蠱，意承考也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“幹父之蠱，有子考，无咎，厲終吉。”作为这一阶段的核心情境；《小象》又以“幹父之蠱，意承考也。”点明观察角度。程颐解释此爻的切入点是：“初六雖居最下，成卦由之，有主之義。居內在下，而為主，子幹父蠱也。子幹父蠱之道，能堪其事，則為有子而其考得无咎，不然則為父之累，故必惕厲，則得終吉也。處卑而尸尊，事自當競畏以六之才，雖能巽順，體乃陰柔，在下无應，而主幹，非有能濟之義，若以不克幹而言，則其義甚小，故專言為子幹蠱之道，必克濟，則不累其父，能厲則可以終吉。乃備見為子幹蠱之大法也。”爻辞中出现“吉、无咎”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>初六雖居最下，成卦由之，有主之義。居內在下，而為主，子幹父蠱也。子幹父蠱之道，能堪其事，則為有子而其考得无咎，不然則為父之累，故必惕厲，則得終吉也。處卑而尸尊，事自當競畏以六之才，雖能巽順，體乃陰柔，在下无應，而主幹，非有能濟之義，若以不克幹而言，則其義甚小，故專言為子幹蠱之道，必克濟，則不累其父，能厲則可以終吉。乃備見為子幹蠱之大法也。</p>
+<p>子幹父之蠱之道，意在承當於父之事也。故祇敬其事，以置父於无咎之地，常懷惕厲，則終得其吉也。盡誠於父事，吉之道也。</p>
+</blockquote>
+<p>从现代阅读角度看，初爻处在事情开端，适合先辨明基础、条件与时机，不宜把局部迹象过早当成最终结论。</p>
+<h3 id="【九二】"><a href="#【九二】" class="headerlink" title="【九二】"></a>【九二】</h3><p><strong>九二：幹母之蠱，不可貞。</strong></p>
+<p><strong>象曰：幹母之蠱，得中道也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“幹母之蠱，不可貞。”作为这一阶段的核心情境；《小象》又以“幹母之蠱，得中道也。”点明观察角度。程颐解释此爻的切入点是：“九二陽剛，為六五所應，是以陽剛之才在下，而幹夫在上，陰柔之事也。故取子幹母蠱為義，以剛陽之臣輔柔弱之君，義亦相近。二巽體而處柔順義，為多幹母之蠱之道也。夫子之於母，當以柔巽輔導之，使得於義不順，而致敗蠱，則子之罪也。從容將順，豈无道乎。以婦人言之，則陰柔可知。若伸己剛陽之道，遽然矯拂，則傷恩，所害大矣。亦安能入乎。在乎屈己下意，巽順將承，使之身正事治而已。故曰：不可貞。謂不可貞固，盡其剛直之道如是乃中道也，又安能使之為甚高之事乎。……”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>九二陽剛，為六五所應，是以陽剛之才在下，而幹夫在上，陰柔之事也。故取子幹母蠱為義，以剛陽之臣輔柔弱之君，義亦相近。二巽體而處柔順義，為多幹母之蠱之道也。夫子之於母，當以柔巽輔導之，使得於義不順，而致敗蠱，則子之罪也。從容將順，豈无道乎。以婦人言之，則陰柔可知。若伸己剛陽之道，遽然矯拂，則傷恩，所害大矣。亦安能入乎。在乎屈己下意，巽順將承，使之身正事治而已。故曰：不可貞。謂不可貞固，盡其剛直之道如是乃中道也，又安能使之為甚高之事乎。若於柔弱之君，盡誠竭忠，致之於中道，則可矣，又安能使之大有為乎。且以周公之聖輔成王，成王非甚柔弱也。然能使之為成王而已。守成不失道，則可矣。固不能使之為羲黃堯舜之事也。二巽體而得中，是能巽順而得中道，合不可貞之義，得幹母蠱之道也。</p>
+<p>二得中道而不過剛，幹母蠱之善者也</p>
+</blockquote>
+<p>从现代阅读角度看，二爻进入落实阶段，通常要把行动放回中正、协作与可持续的尺度中衡量。</p>
+<h3 id="【九三】"><a href="#【九三】" class="headerlink" title="【九三】"></a>【九三】</h3><p><strong>九三：幹父之蠱，小有悔，无大咎。</strong></p>
+<p><strong>象曰：幹父之蠱，終无咎也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“幹父之蠱，小有悔，无大咎。”作为这一阶段的核心情境；《小象》又以“幹父之蠱，終无咎也。”点明观察角度。程颐解释此爻的切入点是：“三以剛陽之才，居下之上，主幹者也。子幹父之蠱也。以陽處剛而不中，剛之過也。然而在巽體，雖剛過而不為无順，順事親之本也，又居得正，故无大過。以剛陽之才，克幹其事，雖以剛過而有小小之悔，終无大過咎也，然有小悔已，非善事親也。”爻辞中出现“有悔”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>三以剛陽之才，居下之上，主幹者也。子幹父之蠱也。以陽處剛而不中，剛之過也。然而在巽體，雖剛過而不為无順，順事親之本也，又居得正，故无大過。以剛陽之才，克幹其事，雖以剛過而有小小之悔，終无大過咎也，然有小悔已，非善事親也。</p>
+<p>以三之才幹父之蠱，雖小有悔，終无大咎也。蓋剛斷能幹，不失正而有順，所以終无咎也。</p>
+</blockquote>
+<p>从现代阅读角度看，三爻处在内卦将尽的转换处，进退压力往往同时出现，尤其需要控制冒进与失位的风险。</p>
+<h3 id="【六四】"><a href="#【六四】" class="headerlink" title="【六四】"></a>【六四】</h3><p><strong>六四：裕父之蠱，往見吝。</strong></p>
+<p><strong>象曰：裕父之蠱，往未得也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“裕父之蠱，往見吝。”作为这一阶段的核心情境；《小象》又以“裕父之蠱，往未得也。”点明观察角度。程颐解释此爻的切入点是：“四以陰居陰，柔順之才也。所處得正，故為寬裕以處其父事者也。夫柔順之才而處正，僅能循常自守而已，若往幹過常之事，則不勝而見吝也。以陰柔而无應助，往安能濟。”爻辞中出现“吝”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>四以陰居陰，柔順之才也。所處得正，故為寬裕以處其父事者也。夫柔順之才而處正，僅能循常自守而已，若往幹過常之事，則不勝而見吝也。以陰柔而无應助，往安能濟。</p>
+<p>以四之才守常，居寬裕之時，則可矣。欲有所往，則未得也。加其所任，則不勝矣。</p>
+</blockquote>
+<p>从现代阅读角度看，四爻由内转外，开始接近全局事务与主事位置，行动之前宜先建立信任并审慎辨势。</p>
+<h3 id="【六五】"><a href="#【六五】" class="headerlink" title="【六五】"></a>【六五】</h3><p><strong>六五：幹父之蠱，用譽。</strong></p>
+<p><strong>象曰：幹父用譽，承以德也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“幹父之蠱，用譽。”作为这一阶段的核心情境；《小象》又以“幹父用譽，承以德也。”点明观察角度。程颐解释此爻的切入点是：“五居尊位，以陰柔之質當人君之幹而下應於九二，是能任剛陽之臣也。雖能下應剛陽之賢而倚任之，然己實陰柔，故不能為創始開基之事，承其舊業則可矣，故為幹父之蠱。夫創業垂統之事，非剛明之才則不能繼世之君，雖柔弱之資，茍能任剛賢，則可以為善繼而成令譽也，太甲成王，皆以臣而用譽也。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>五居尊位，以陰柔之質當人君之幹而下應於九二，是能任剛陽之臣也。雖能下應剛陽之賢而倚任之，然己實陰柔，故不能為創始開基之事，承其舊業則可矣，故為幹父之蠱。夫創業垂統之事，非剛明之才則不能繼世之君，雖柔弱之資，茍能任剛賢，則可以為善繼而成令譽也，太甲成王，皆以臣而用譽也。</p>
+<p>幹父之蠱而用有令譽者，以其在下之賢承輔之以剛中之德也。</p>
+</blockquote>
+<p>从现代阅读角度看，五爻居于全卦关键位置，重点在承担责任、守住中道，并使个人能力真正服务于整体。</p>
+<h3 id="【上九】"><a href="#【上九】" class="headerlink" title="【上九】"></a>【上九】</h3><p><strong>上九：不事王侯，高尚其事。</strong></p>
+<p><strong>象曰：不事王侯，志可則也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“不事王侯，高尚其事。”作为这一阶段的核心情境；《小象》又以“不事王侯，志可則也。”点明观察角度。程颐解释此爻的切入点是：“上九居蠱之終，无繫應於下，處事之外，无所事之地也。以剛明之才，无應援而處无事之地，是賢人君子不偶於時而高潔自守，不累於世務者也，故云不事王侯，高尚其事，古之人有行之者，伊尹、太公望之始，曾子、子思之徒是也。不屈道以徇時，既不得施設於天下，則自善其身，尊高敦尚其事，守其志節而已。士之自高尚，亦非一道，有懷抱道德不偶於時而高潔自守者，有知止足之道退而自保者，有量能度分安於不求知者，有清介自使守不屑天下之事獨潔其身者，所處雖有得失小大之殊，皆自高尚其事者也。……”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>上九居蠱之終，无繫應於下，處事之外，无所事之地也。以剛明之才，无應援而處无事之地，是賢人君子不偶於時而高潔自守，不累於世務者也，故云不事王侯，高尚其事，古之人有行之者，伊尹、太公望之始，曾子、子思之徒是也。不屈道以徇時，既不得施設於天下，則自善其身，尊高敦尚其事，守其志節而已。士之自高尚，亦非一道，有懷抱道德不偶於時而高潔自守者，有知止足之道退而自保者，有量能度分安於不求知者，有清介自使守不屑天下之事獨潔其身者，所處雖有得失小大之殊，皆自高尚其事者也。象所謂志可則者，進退合道者也。</p>
+<p>如上九之處事外，不累於世務，不臣事於王侯，蓋進退以道，用舍隨時，非賢者能之乎。其所存之志，可為法則也。</p>
+</blockquote>
+<p>从现代阅读角度看，上爻表示一卦发展已到极处，最需要防止过度、僵化与不知转圜，为下一阶段留下余地。</p>
+<hr>
+<h2 id="四、-个人感悟"><a href="#四、-个人感悟" class="headerlink" title="四、 个人感悟"></a>四、 个人感悟</h2><p>积弊已深，宜革故鼎新。 对我来说，山风蛊最值得反复体会的，不是把“吉”或“凶”当作固定答案，而是看清一个处境如何随位置、关系与行动方式而变化。六爻从初到上展示了不同阶段：同一原则放在不同位置，结果可能完全不同。</p>
+<p>把它用于今天的学习、工作或关系判断时，我更愿意把卦辞当作问题框架，把爻辞当作阶段提醒：先确认自己身处哪一层，再决定进、退、守、变。这样读《易》，比直接追求一个预言式结论更稳妥。</p>
+<hr>
+<h2 id="五、-参考文献与版本说明"><a href="#五、-参考文献与版本说明" class="headerlink" title="五、 参考文献与版本说明"></a>五、 参考文献与版本说明</h2><ol>
+<li>《周易》经文及《象传》，本卦原文取自：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/wiki/%E5%91%A8%E6%98%93/%E8%A0%B1">维基文库《周易》本卦页面</a>；并参校<a target="_blank" rel="noopener" href="https://ctext.org/book-of-changes/zh">中国哲学书电子化计划《周易》</a>。</li>
+<li>北宋程颐《程氏易传》（亦称《伊川易传》），本卦参校：<a target="_blank" rel="noopener" href="https://www.taijizhidian.com/chengxu/liushisigua/1551.html">【周易上经】第18卦-蛊卦䷑山风蛊卦（巽下艮上）-[北宋]程颐撰《程氏易传•卷二》</a>。</li>
+<li>北宋邵雍《皇极经世·观物外篇》，旁证原文：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/zh-hans/%E7%9A%87%E6%A5%B5%E7%B6%93%E4%B8%96/%E5%8D%B7%E5%8D%81%E4%B8%89">维基文库《皇极经世》卷十三</a>。</li>
 </ol>
-<p>不要惧怕生活里的“蛊”。山脚下的风不吹，空气永远是臭的。敢于捅破那层窗户纸，收拾好烂摊子，你就是自己人生的“王侯”。</p>
+<blockquote>
+<p>版本说明：经典原文与程颐文字保留底本中的繁体字、异体字及个别古字；“释义”“现代阅读角度”和“个人感悟”均为现代整理，不冒充古人原话。“邵雍易学旁证”只引用可定位的易学通论，不作逐卦、逐爻的托名断语。</p>
+</blockquote>
 
     </div>
 
@@ -366,7 +473,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E5%85%AD%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初六】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【九二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【九三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【六四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【六五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E4%B9%9D%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上九】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F%EF%BC%9A%E7%9B%B4%E9%9D%A2%E2%80%9C%E7%83%82%E6%91%8A%E5%AD%90%E2%80%9D%EF%BC%8C%E6%89%8D%E6%98%AF%E7%9C%9F%E6%AD%A3%E7%9A%84%E9%95%BF%E6%9C%9F%E4%B8%BB%E4%B9%89"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟：直面“烂摊子”，才是真正的长期主义</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E5%85%AD%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初六】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【九二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【九三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【六四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【六五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E4%B9%9D%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上九】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E4%B8%8E%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E"><span class="nav-number">5.</span> <span class="nav-text">五、 参考文献与版本说明</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -382,7 +489,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -467,6 +574,10 @@
 
 
 
+  
+<script src="/js/local-search.js"></script>
+
+
 
 
 
@@ -495,6 +606,15 @@
 
 <script>
   (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
     var loadingBox = document.getElementById('loading-box');
     var root = document.documentElement;
 
@@ -525,8 +645,9 @@
 
 <script src="/js/latex-tool.js?v=20260805c"></script>
 <script src="/js/translate-tool.js?v=20260805a"></script>
-<script src="/js/hexagram-index.js?v=20260806a"></script>
-<script src="/js/divination-tool.js?v=20260810a"></script>
+<script src="/js/hexagram-post-map.js?v=20260830a"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
 
 </body>
 </html>

@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="山下有火，贲。君子以明庶政，无敢折狱。">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="山下有火，贲。君子以明庶政，无敢折狱。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-08-09T00:30:00.000Z">
-<meta property="article:modified_time" content="2026-08-06T14:18:16.549Z">
+<meta property="article:modified_time" content="2026-08-23T19:20:20.221Z">
 <meta property="article:author" content="Hyacinth">
 <meta property="article:tag" content="学习笔记">
 <meta property="article:tag" content="六十四卦">
@@ -127,6 +127,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -166,11 +167,38 @@
     <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -224,7 +252,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-08-06 22:18:16" itemprop="dateModified" datetime="2026-08-06T22:18:16+08:00">2026-08-06</time>
+                <time title="修改时间：2026-08-24 03:20:20" itemprop="dateModified" datetime="2026-08-24T03:20:20+08:00">2026-08-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -236,7 +264,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
             <div class="post-description">山下有火，贲。君子以明庶政，无敢折狱。</div>
 
         </div>
@@ -249,44 +291,103 @@
 
       
         <h2 id="一、-经典原文"><a href="#一、-经典原文" class="headerlink" title="一、 经典原文"></a>一、 经典原文</h2><blockquote>
-<p><strong>【卦辞】</strong><br>贲：亨。小利有攸往。</p>
-<p><strong>【爻辞】</strong><br>初九：贲其趾，舍车而徒。<br>六二：贲其须。<br>九三：贲如濡如，永贞吉。<br>六四：贲如皤如，白马翰如，匪寇婚媾。<br>六五：贲于丘园，束帛戋戋。吝，终吉。<br>上九：白贲，无咎。</p>
-<p><strong>【大象传】</strong><br>山下有火，贲；君子以明庶政，无敢折狱。</p>
+<p><strong>【卦辞】</strong><br>賁：亨。小利有攸往。</p>
+<p><strong>【爻辞】</strong><br>初九：賁其趾，舍車而徒。<br>六二：賁其須。<br>九三：賁如濡如，永貞吉。<br>六四：賁如皤如，白馬翰如，匪寇婚媾。<br>六五：賁於丘園，束帛戔戔，吝，終吉。<br>上九：白賁，无咎。</p>
+<p><strong>【大象传】</strong><br>象曰：山下有火，賁；君子以明庶政，无敢折獄。</p>
 </blockquote>
-<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>当“噬嗑卦”（第二十一卦）用严刑峻法扫清了障碍、建立了秩序之后，社会总不能天天只靠打打杀杀来维持。于是，天下进入了修饰、文明与礼仪的阶段，这就迎来了第二十二卦——贲（bì）卦。“贲”的本义是贝壳上的美丽斑纹，引申为装饰、文饰、包装、美化。这是一卦探讨“内容与形式”、“本质与包装”的极致美学。</p>
-<p><strong>1. 底层逻辑：山下有火，无敢折狱</strong><br>贲卦的上卦为艮（山），下卦为离（火）。《象传》说“山下有火”，山脚下燃烧着火焰，把山上的草木、岩石照耀得五彩斑斓，这就是“文饰”的意象。但《易经》极其清醒地指出：君子效法这种意象，只用来“明庶政”（把日常的政务和礼仪打理得井井有条、光鲜亮丽），但绝对“无敢折狱”（在审理重大案件、判断生死是非时，绝不敢用这种华而不实的态度）。因为真相和正义需要的是“质（本质）”，最怕被“文（包装）”所蒙蔽。</p>
-<p><strong>2. 包装的法则：小利有攸往</strong><br>卦辞“贲：亨。小利有攸往”点破了包装的价值与局限：</p>
-<ul>
-<li><strong>亨：</strong> 适当的美化和包装，确实能让人赏心悦目，让事情推行得更顺利（亨通）。</li>
-<li><strong>小利有攸往：</strong> 但是，包装带来的好处仅仅是“小利”。它只能作为辅助手段，不能作为核心战略。靠包装去谋取小事可以，去图谋大业，必然翻车。</li>
-</ul>
-<p><strong>3.北宋易学家邵雍解</strong><br>文饰包装，恰如其分；华而不实，弄巧成拙。<br>得此卦者，正处于需要注重外表、礼仪或品牌包装的阶段。此时宜修饰自身、美化环境，能带来好运。但切记“表面光鲜难掩内在空虚”，切忌过度包装、虚荣浮夸，否则必有隐患。</p>
-<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初九】"><a href="#【初九】" class="headerlink" title="【初九】"></a>【初九】</h3><p><strong>初九：贲其趾，舍车而徒。</strong><br><strong>象曰：舍车而徒，义弗乘也。</strong></p>
-<p><strong>释义</strong><br>初九：修饰自己的脚趾。宁愿舍弃华丽的马车，也选择徒步前行。<br>《象辞》说：舍弃马车而徒步，是因为从道义上讲，那是不该乘坐的（来路不明或德不配位的车）。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，拥有极高的风骨。在面对外在的虚荣诱惑（华丽的马车）时，能够守住底线，脚踏实地（修饰脚趾）走自己的路。不贪图虚荣，靠真才实学安身立命。</p>
-<h3 id="【六二】"><a href="#【六二】" class="headerlink" title="【六二】"></a>【六二】</h3><p><strong>六二：贲其须。</strong><br><strong>象曰：贲其须，与上兴也。</strong></p>
-<p><strong>释义</strong><br>六二：修饰自己的胡须（胡须是依附于下巴的，下巴动它才动）。<br>《象辞》说：修饰胡须，是为了跟着上面的下巴一起行动（指依附于九三）。</p>
-<p><strong>北宋易学家邵雍解</strong><br>平：得此爻者，自身实力尚不足以独当一面，属于“依附者”的角色。此时的生存智慧是找准真正有实力的靠山，做好配合与修饰工作，一荣俱荣，一损俱损。</p>
-<h3 id="【九三】"><a href="#【九三】" class="headerlink" title="【九三】"></a>【九三】</h3><p><strong>九三：贲如濡如，永贞吉。</strong><br><strong>象曰：永贞之吉，终莫之陵也。</strong></p>
-<p><strong>释义</strong><br>九三：被修饰得光彩照人、润泽亮丽（濡如）。在如此安逸华美的环境中，必须永远坚守正道，才能吉祥。<br>《象辞》说：永远坚守正道而吉祥，是因为这样才最终不会被人欺凌或走向堕落。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉&#x2F;带警示：得此爻者，正处于极度顺遂、甚至被鲜花和掌声包围（过度包装）的状态。这也是人最容易迷失的时刻。只要你能抵御住浮华的侵蚀，保持清醒的底线，就能长保太平。</p>
-<h3 id="【六四】"><a href="#【六四】" class="headerlink" title="【六四】"></a>【六四】</h3><p><strong>六四：贲如皤如，白马翰如，匪寇婚媾。</strong><br><strong>象曰：六四，当位疑也。匪寇婚媾，终无尤也。</strong></p>
-<p><strong>释义</strong><br>六四：洗去铅华，呈现出洁白素雅的装饰（皤如）。骑着一匹如飞鸟般迅捷的白马前来。来者不是强盗，而是来求婚的伴侣。<br>《象辞》说：六四处于阴柔之位，一开始心生疑虑。但发现对方不是强盗而是求偶者，最终没有怨咎。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，感情或事业迎来了返璞归真的转折点。你开始厌倦了社会上的虚情假意，转而追求最纯粹、最真挚的关系。放下防备，以诚相待，必得良缘。</p>
-<h3 id="【六五】"><a href="#【六五】" class="headerlink" title="【六五】"></a>【六五】</h3><p><strong>六五：贲于丘园，束帛戋戋。吝，终吉。</strong><br><strong>象曰：六五之吉，有喜也。</strong></p>
-<p><strong>释义</strong><br>六五：在质朴的山丘田园中进行修饰，拿出来的礼物只有很少的几束微薄的丝帛（戋戋，微少的样子）。虽然看起来有些寒酸羞涩（吝），但最终吉祥。<br>《象辞》说：六五的吉祥，是因为有真正的喜庆之事。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，身居高位，却能摒弃奢靡之风。在与人交往或办事时，礼轻情意重。你不靠重金砸关系，而是靠真诚和质朴打动人，这种节俭而真诚的作风，最终会带来大喜。</p>
-<h3 id="【上九】"><a href="#【上九】" class="headerlink" title="【上九】"></a>【上九】</h3><p><strong>上九：白贲，无咎。</strong><br><strong>象曰：白贲无咎，上得志也。</strong></p>
-<p><strong>释义</strong><br>上九：白色的文饰（没有任何色彩的修饰，回归本真），没有灾难。<br>《象辞》说：白贲无咎，说明上九返璞归真的高尚心志得以实现。</p>
-<p><strong>北宋易学家邵雍解</strong><br>大吉：得此爻者，达到了美学与做人的最高境界——绚烂之极归于平淡。不再需要任何外在的包装和头衔来证明自己，以最本真的面目示人，大智若愚，无咎无灾。</p>
-<h2 id="四、-个人感悟：返璞归真，修一种“白贲”的极简之美"><a href="#四、-个人感悟：返璞归真，修一种“白贲”的极简之美" class="headerlink" title="四、 个人感悟：返璞归真，修一种“白贲”的极简之美"></a>四、 个人感悟：返璞归真，修一种“白贲”的极简之美</h2><p>在这个颜值即正义、网红脸泛滥、万物皆可包装的“滤镜时代”，贲卦简直是一部可以用来洗涤灵魂的经典。它告诉我们，装饰和包装虽然能带来“小利”，但如果沉迷于形式，就会像九三爻那样被浮华困住。</p>
-<p>贲卦从下到上，为我们推演了“美”与“包装”的三个进化层次：</p>
-<ol>
-<li><strong>底层的风骨：不坐“德不配位”的车（舍车而徒）：</strong> 初九爻告诉我们，真正的体面不是你出门背什么包、开什么车，而是你有没有“义”。如果包装的代价是出卖底线，那君子宁可“贲其趾”，光着脚走路，这也是一种不可侵犯的高贵。</li>
-<li><strong>“文饰”的边界：无敢折狱：</strong> 这是《易经》极其严厉的警告。在搞营销、做公关、搞人际交往时，你可以“贲”，可以美化；但在涉及到核心产品质量、公司财务生死、以及最基本的是非对错（折狱）时，绝对不能有半点粉饰！用做公关的手段去做产品，必死无疑。</li>
-<li><strong>顶级的审美，叫“白贲”：</strong> 为什么六五爻送礼只送了可怜巴巴的几捆布（束帛戋戋），却能“终吉”？为什么上九爻什么颜色都不涂，只留下一片“白（白贲）”，却达到了贲卦的最高境界？因为<strong>“绚烂之极，归于平淡”</strong>。就像无印良品的极简，就像苹果设计的留白，当一个人的内在（质）足够强大时，任何多余的修饰（文）都是画蛇添足。</li>
+<hr>
+<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>山火贲的现代摘要是：文饰之美，小利攸往。重实质轻文饰。 这只是帮助进入文本的提要，具体判断仍要回到卦辞、爻位与上下文。</p>
+<p><strong>1. 底层逻辑：文饰之美，小利攸往</strong></p>
+<p>程颐在释卦开头先从卦序、卦体和上下卦关系说明本卦之所以成立：</p>
+<blockquote>
+<p>賁，《序卦》：嗑者，合也。物不可以茍合而已，故受之以賁。賁者，飾也。物之合則必有文，文乃飾也。如人之合聚則有威儀，上下物之合聚則有次序，行列合則必有文也，賁所以次噬嗑也。為卦山下有火。山者，草木百物之所聚也。下有火，則照見其上，草木品彙皆被其光彩，有賁飾之象，故為賁也。</p>
+</blockquote>
+<p><strong>2. 卦辞与大象</strong></p>
+<p>卦辞给出全卦的基本处境与行动边界；大象则把卦象转化为修身、处事或治理的提示。程颐分别解释为：</p>
+<blockquote>
+<p>物有飾而後能亨，故曰无本不立，无文不行，有實而加飾，則可以亨矣。文飾之道，可增其光彩，故能小利於進也。</p>
+<p>山者，草木百物之所聚生也。火在其下而上照，庶類皆披其光明，為賁飾之象也。君子觀山下有火明照之象，以修明其庶政，成文明之治，而无果敢於折獄也。折獄者，人君之所致慎也，豈可恃其明，而輕自用乎，乃聖人用心也，為戒深矣。象之所取，唯以山下有火，明照庶物以用明為戒，而賁亦自有无敢折獄之義。折獄者，專用情實，有文飾則沒其情矣，故无敢用文以折獄也。</p>
+</blockquote>
+<p><strong>3. 邵雍易学旁证</strong></p>
+<p>邵雍在《皇极经世·观物外篇》中说：</p>
+<blockquote>
+<p>“夫卦，各有性有体，然皆不离乾坤之门。”</p>
+<p>“君子于易，玩象、玩数、玩辞、玩意。”</p>
+</blockquote>
+<p>这两段是邵雍讨论读《易》方法的通论，并非针对山火贲所下的吉凶断语。放在这里作为旁证，是提醒我们同时观察卦象、数位、辞义与整体意旨，不能只截取一句话作孤立判断。</p>
+<hr>
+<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初九】"><a href="#【初九】" class="headerlink" title="【初九】"></a>【初九】</h3><p><strong>初九：賁其趾，舍車而徒。</strong></p>
+<p><strong>象曰：舍車而徒，義弗乘也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“賁其趾，舍車而徒。”作为这一阶段的核心情境；《小象》又以“舍車而徒，義弗乘也。”点明观察角度。程颐解释此爻的切入点是：“初九以剛陽居明體而處下，君子有剛明之德，而在下者也，君子在无位之地，无所施於天下，惟自賁飾其所行而已。趾，取在下而所以行也。君子修飾之道，正其所行，守節處義，其行不茍，義或不當，則舍車輿而寧徒行。眾人之所羞，而君子以為賁也。舍車而徒之義，兼於比應取之。初，比二而應四，應四正也，與二非正也。九之剛明守義，不近與於二，而遠應于四，舍易而從難，如舍車而徒行也。守節義君子之賁也。是故君子所賁，世俗所羞；世俗所貴，君子所賤。以車徒為言者，因趾與行為義也。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>初九以剛陽居明體而處下，君子有剛明之德，而在下者也，君子在无位之地，无所施於天下，惟自賁飾其所行而已。趾，取在下而所以行也。君子修飾之道，正其所行，守節處義，其行不茍，義或不當，則舍車輿而寧徒行。眾人之所羞，而君子以為賁也。舍車而徒之義，兼於比應取之。初，比二而應四，應四正也，與二非正也。九之剛明守義，不近與於二，而遠應于四，舍易而從難，如舍車而徒行也。守節義君子之賁也。是故君子所賁，世俗所羞；世俗所貴，君子所賤。以車徒為言者，因趾與行為義也。</p>
+<p>舍車而徒行者，於義不可以乘也。初應四正也，從二非正也。近舍二之易，而從四之難，舍車而徒行也，君子之賁，守其義而已。</p>
+</blockquote>
+<p>从现代阅读角度看，初爻处在事情开端，适合先辨明基础、条件与时机，不宜把局部迹象过早当成最终结论。</p>
+<h3 id="【六二】"><a href="#【六二】" class="headerlink" title="【六二】"></a>【六二】</h3><p><strong>六二：賁其須。</strong></p>
+<p><strong>象曰：賁其須，與上興也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“賁其須。”作为这一阶段的核心情境；《小象》又以“賁其須，與上興也。”点明观察角度。程颐解释此爻的切入点是：“卦之為賁，雖由兩爻之變，而文明之義為重，二，實賁之主也，故主言賁之道，飾於物者，不能大變其質也。因其質而加飾耳，故取須義。須隨頤而動者也。動止唯繫於所附，猶善惡不由于賁也。二之文明，惟為賁飾，善惡則繫其質也。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>卦之為賁，雖由兩爻之變，而文明之義為重，二，實賁之主也，故主言賁之道，飾於物者，不能大變其質也。因其質而加飾耳，故取須義。須隨頤而動者也。動止唯繫於所附，猶善惡不由于賁也。二之文明，惟為賁飾，善惡則繫其質也。</p>
+<p>以須為象者，謂其與上同興也。隨上而動，動止惟繫所附也，猶加飾于物，因其質而賁之，善惡在其質也。</p>
+</blockquote>
+<p>从现代阅读角度看，二爻进入落实阶段，通常要把行动放回中正、协作与可持续的尺度中衡量。</p>
+<h3 id="【九三】"><a href="#【九三】" class="headerlink" title="【九三】"></a>【九三】</h3><p><strong>九三：賁如濡如，永貞吉。</strong></p>
+<p><strong>象曰：永貞之吉，終莫之陵也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“賁如濡如，永貞吉。”作为这一阶段的核心情境；《小象》又以“永貞之吉，終莫之陵也。”点明观察角度。程颐解释此爻的切入点是：“三處文明之極，與二四二陰之間，處相賁，賁之盛者也，故云賁如。如，辭助也。賁飾之盛，光彩潤澤，故云濡如。光彩之盛則有潤澤，《詩》云：塵鹿濯濯。永貞吉，三與二四非正應，相比而成相賁，故戒以常永貞正。賁者，飾也。賁飾之事，難乎常也，故永貞則吉。三與四相賁，又下比於二，二柔文一剛，上下交賁，為賁之盛也。”爻辞中出现“吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>三處文明之極，與二四二陰之間，處相賁，賁之盛者也，故云賁如。如，辭助也。賁飾之盛，光彩潤澤，故云濡如。光彩之盛則有潤澤，《詩》云：塵鹿濯濯。永貞吉，三與二四非正應，相比而成相賁，故戒以常永貞正。賁者，飾也。賁飾之事，難乎常也，故永貞則吉。三與四相賁，又下比於二，二柔文一剛，上下交賁，為賁之盛也。</p>
+<p>飾而不常且非正人所陵侮也，故戒能永正則吉也。其賁既常而正，誰能陵之乎。</p>
+</blockquote>
+<p>从现代阅读角度看，三爻处在内卦将尽的转换处，进退压力往往同时出现，尤其需要控制冒进与失位的风险。</p>
+<h3 id="【六四】"><a href="#【六四】" class="headerlink" title="【六四】"></a>【六四】</h3><p><strong>六四：賁如皤如，白馬翰如，匪寇婚媾。</strong></p>
+<p><strong>象曰：六四，當位疑也。匪寇婚媾，終无尤也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“賁如皤如，白馬翰如，匪寇婚媾。”作为这一阶段的核心情境；《小象》又以“六四，當位疑也。匪寇婚媾，終无尤也。”点明观察角度。程颐解释此爻的切入点是：“四與初為正應，相賁者也，當賁如而為三所隔，故不獲相賁，而皤如。皤，白也，未獲賁也。馬在下而動者也。獲相賁，故云白馬。其從正應之志如飛，故云翰如。匪，為九三之寇讎所隔，則婚媾遂其相親矣。已之所乘，與動於下者，馬之象也。初四正應，終必獲親第，始為其間隔耳。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>四與初為正應，相賁者也，當賁如而為三所隔，故不獲相賁，而皤如。皤，白也，未獲賁也。馬在下而動者也。獲相賁，故云白馬。其從正應之志如飛，故云翰如。匪，為九三之寇讎所隔，則婚媾遂其相親矣。已之所乘，與動於下者，馬之象也。初四正應，終必獲親第，始為其間隔耳。</p>
+<p>四與初相遠，而三介於其間，是所當之位，為可疑也。雖為三寇讎所隔，未得親於婚媾，然其正應理直義勝，終必得合，故云終无尤也。尤，怨也。終得相賁，故无怨尤也。</p>
+</blockquote>
+<p>从现代阅读角度看，四爻由内转外，开始接近全局事务与主事位置，行动之前宜先建立信任并审慎辨势。</p>
+<h3 id="【六五】"><a href="#【六五】" class="headerlink" title="【六五】"></a>【六五】</h3><p><strong>六五：賁於丘園，束帛戔戔，吝，終吉。</strong></p>
+<p><strong>象曰：六五之吉，有喜也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“賁於丘園，束帛戔戔，吝，終吉。”作为这一阶段的核心情境；《小象》又以“六五之吉，有喜也。”点明观察角度。程颐解释此爻的切入点是：“六五以陰柔之質，密比于上九剛陽之賢。陰比于陽，復无所繫應從之者也，受賁於上九也。自古設險守國，故城壘多依丘坂。丘，謂在外而近且高者。園圃之地，最近城邑，亦在外而近者。丘園，謂在外而近者，指上九也。六五雖居君位，而陰柔之才不足自守，與上之剛陽相比，而志從焉，獲賁於外比之賢，賁于丘園也。若能受賁於上九，受其裁制，如求帛而戔戔，則雖其柔弱不能自為，為可吝少。然能從於人，成賁之功，終獲其吉也。戔戔，剪裁分裂之狀，帛未用則束之，故謂之束帛。及其制為衣服，必需剪裁分裂，戔戔然。……”爻辞中出现“吉、吝”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>六五以陰柔之質，密比于上九剛陽之賢。陰比于陽，復无所繫應從之者也，受賁於上九也。自古設險守國，故城壘多依丘坂。丘，謂在外而近且高者。園圃之地，最近城邑，亦在外而近者。丘園，謂在外而近者，指上九也。六五雖居君位，而陰柔之才不足自守，與上之剛陽相比，而志從焉，獲賁於外比之賢，賁于丘園也。若能受賁於上九，受其裁制，如求帛而戔戔，則雖其柔弱不能自為，為可吝少。然能從於人，成賁之功，終獲其吉也。戔戔，剪裁分裂之狀，帛未用則束之，故謂之束帛。及其制為衣服，必需剪裁分裂，戔戔然。束帛，喻六五本質。戔戔，謂受人剪裁而成用也。其資於人，與蒙同。而蒙不言吝者，蓋童蒙而賴於人，乃其宜也。非童幼而資賁於人，為可吝耳。然享其功，終為吉也。</p>
+<p>能從人以成賁之功，享其吉美，是有喜也。</p>
+</blockquote>
+<p>从现代阅读角度看，五爻居于全卦关键位置，重点在承担责任、守住中道，并使个人能力真正服务于整体。</p>
+<h3 id="【上九】"><a href="#【上九】" class="headerlink" title="【上九】"></a>【上九】</h3><p><strong>上九：白賁，无咎。</strong></p>
+<p><strong>象曰：白賁无咎，上得志也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“白賁，无咎。”作为这一阶段的核心情境；《小象》又以“白賁无咎，上得志也。”点明观察角度。程颐解释此爻的切入点是：“上九賁之極也。賁飾之極，則失於華偽，惟能質白其賁，則无過失之咎。白，素也。尚質素則不失其本真，所謂尚質素者，非无飾也，不使華沒實耳。”爻辞中出现“无咎”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>上九賁之極也。賁飾之極，則失於華偽，惟能質白其賁，則无過失之咎。白，素也。尚質素則不失其本真，所謂尚質素者，非无飾也，不使華沒實耳。</p>
+<p>白賁无咎，以其在上而得志也。上九為得志者，在上而文柔，成賁之功，六五之君又受其賁，故雖居无位之地，而實尸賁之功，為得志也，與他卦居極者異矣。既在上得志，處賁之極，將有華偽失實之咎，故戒以質素，則无咎。飾不可過也。</p>
+</blockquote>
+<p>从现代阅读角度看，上爻表示一卦发展已到极处，最需要防止过度、僵化与不知转圜，为下一阶段留下余地。</p>
+<hr>
+<h2 id="四、-个人感悟"><a href="#四、-个人感悟" class="headerlink" title="四、 个人感悟"></a>四、 个人感悟</h2><p>文饰之美，小利攸往。重实质轻文饰。 对我来说，山火贲最值得反复体会的，不是把“吉”或“凶”当作固定答案，而是看清一个处境如何随位置、关系与行动方式而变化。六爻从初到上展示了不同阶段：同一原则放在不同位置，结果可能完全不同。</p>
+<p>把它用于今天的学习、工作或关系判断时，我更愿意把卦辞当作问题框架，把爻辞当作阶段提醒：先确认自己身处哪一层，再决定进、退、守、变。这样读《易》，比直接追求一个预言式结论更稳妥。</p>
+<hr>
+<h2 id="五、-参考文献与版本说明"><a href="#五、-参考文献与版本说明" class="headerlink" title="五、 参考文献与版本说明"></a>五、 参考文献与版本说明</h2><ol>
+<li>《周易》经文及《象传》，本卦原文取自：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/wiki/%E5%91%A8%E6%98%93/%E8%B3%81">维基文库《周易》本卦页面</a>；并参校<a target="_blank" rel="noopener" href="https://ctext.org/book-of-changes/zh">中国哲学书电子化计划《周易》</a>。</li>
+<li>北宋程颐《程氏易传》（亦称《伊川易传》），本卦参校：<a target="_blank" rel="noopener" href="https://www.taijizhidian.com/chengxu/liushisigua/1555.html">【周易上经】第22卦-贲卦䷕山火贲卦（离下艮上）-[北宋]程颐撰《程氏易传•卷二》</a>。</li>
+<li>北宋邵雍《皇极经世·观物外篇》，旁证原文：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/zh-hans/%E7%9A%87%E6%A5%B5%E7%B6%93%E4%B8%96/%E5%8D%B7%E5%8D%81%E4%B8%89">维基文库《皇极经世》卷十三</a>。</li>
 </ol>
-<p>我们一生都在做加法，往身上挂满头衔、金钱与标签。但贲卦告诉我们，走到最后，那些能笑着走到终点的人，都在做减法。洗尽铅华，修一种“白贲”之美，才是人生最大的自由。</p>
+<blockquote>
+<p>版本说明：经典原文与程颐文字保留底本中的繁体字、异体字及个别古字；“释义”“现代阅读角度”和“个人感悟”均为现代整理，不冒充古人原话。“邵雍易学旁证”只引用可定位的易学通论，不作逐卦、逐爻的托名断语。</p>
+</blockquote>
 
     </div>
 
@@ -372,7 +473,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E4%B9%9D%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初九】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【六二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【九三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【六四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【六五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E4%B9%9D%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上九】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F%EF%BC%9A%E8%BF%94%E7%92%9E%E5%BD%92%E7%9C%9F%EF%BC%8C%E4%BF%AE%E4%B8%80%E7%A7%8D%E2%80%9C%E7%99%BD%E8%B4%B2%E2%80%9D%E7%9A%84%E6%9E%81%E7%AE%80%E4%B9%8B%E7%BE%8E"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟：返璞归真，修一种“白贲”的极简之美</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E4%B9%9D%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初九】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【六二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【九三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【六四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【六五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E4%B9%9D%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上九】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E4%B8%8E%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E"><span class="nav-number">5.</span> <span class="nav-text">五、 参考文献与版本说明</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -388,7 +489,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -473,6 +574,10 @@
 
 
 
+  
+<script src="/js/local-search.js"></script>
+
+
 
 
 
@@ -501,6 +606,15 @@
 
 <script>
   (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
     var loadingBox = document.getElementById('loading-box');
     var root = document.documentElement;
 
@@ -531,8 +645,9 @@
 
 <script src="/js/latex-tool.js?v=20260805c"></script>
 <script src="/js/translate-tool.js?v=20260805a"></script>
-<script src="/js/hexagram-index.js?v=20260806a"></script>
-<script src="/js/divination-tool.js?v=20260810a"></script>
+<script src="/js/hexagram-post-map.js?v=20260830a"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
 
 </body>
 </html>

@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="山下出泉，蒙。君子以果行育德。">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="山下出泉，蒙。君子以果行育德。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-06T15:28:06.000Z">
-<meta property="article:modified_time" content="2026-06-07T15:40:47.896Z">
+<meta property="article:modified_time" content="2026-08-23T19:20:20.190Z">
 <meta property="article:author" content="Hyacinth">
 <meta property="article:tag" content="学习笔记">
 <meta property="article:tag" content="六十四卦">
@@ -127,6 +127,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -166,11 +167,38 @@
     <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -224,7 +252,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-06-07 23:40:47" itemprop="dateModified" datetime="2026-06-07T23:40:47+08:00">2026-06-07</time>
+                <time title="修改时间：2026-08-24 03:20:20" itemprop="dateModified" datetime="2026-08-24T03:20:20+08:00">2026-08-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -236,7 +264,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>12 分钟</span>
+            </span>
             <div class="post-description">山下出泉，蒙。君子以果行育德。</div>
 
         </div>
@@ -249,45 +291,103 @@
 
       
         <h2 id="一、-经典原文"><a href="#一、-经典原文" class="headerlink" title="一、 经典原文"></a>一、 经典原文</h2><blockquote>
-<p><strong>【卦辞】</strong><br>蒙：亨。匪我求童蒙，童蒙求我。初噬告，再三渎，渎则不告。利贞。</p>
-<p><strong>【爻辞】</strong><br>初六：发蒙，利用刑人，用说桎梏，往吝。<br>九二：包蒙吉；纳妇吉；子克家。<br>六三：勿用取女；见金夫，不有躬，无攸利。<br>六四：困蒙，吝。<br>六五：童蒙，吉。<br>上九：击蒙；不利为寇，利御寇。</p>
-<p><strong>【大象传】</strong><br>山下出泉，蒙；君子以果行育德。</p>
+<p><strong>【卦辞】</strong><br>蒙：亨。匪我求童蒙，童蒙求我。初筮告，再三瀆，瀆則不告。利貞。</p>
+<p><strong>【爻辞】</strong><br>初六：發蒙，利用刑人，用說桎梏，以往吝。<br>九二：包蒙吉，納婦吉，子克家。<br>六三：勿用取女，見金夫，不有躬，无攸利。<br>六四：困蒙，吝。<br>六五：童蒙，吉。<br>上九：擊蒙，不利為寇，利禦寇。</p>
+<p><strong>【大象传】</strong><br>象曰：山下出泉，蒙；君子以果行育德。</p>
 </blockquote>
-<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>走过了乾卦的开创、屯卦的破土，我们迎来了第四卦——蒙卦。蒙，代表着蒙昧、幼稚、未知，就像一个刚来到世界不久的孩童，充满了困惑，也孕育着无限的潜能。它是一首关于“教育、启蒙与求知”的智慧之歌。</p>
-<p><strong>1. 底层逻辑：君子以果行育德</strong><br>蒙卦的上卦为艮（代表山、止），下卦为坎（代表水、险）。《象传》用“山下出泉”来形容这种意象：山脚下流出一股清泉，它一开始很微弱，未来却可能汇聚成江海。君子效法这种精神，以果断的行动来培养自己的品德（果行育德），在面对未知和险难时，通过不断的学习来告别蒙昧。</p>
-<p><strong>2. 求知的法则：诚心与边界</strong><br>卦辞中“匪我求童蒙，童蒙求我。初噬告，再三渎，渎则不告”是极为深刻的教育心理学：</p>
-<ul>
-<li><strong>主动求知：</strong> 不是老师去求学生学习，而是学生主动向老师请教。只有内心真正渴望知识，启蒙才有意义。</li>
-<li><strong>保持敬畏：</strong> 第一次向神明或老师请教（初噬），会得到真诚的解答；如果同样的问题不心思索地问第二、第三次（再三渎），那就是轻慢和亵渎，便不再给予解答。</li>
-<li><strong>利贞：</strong> 无论是教者还是学者，都要坚守正道，戒骄戒躁。</li>
-</ul>
-<p><strong>3.北宋易学家邵雍解</strong><br>蒙昧幼稚，常多困惑；迷茫无知，需人指引。<br>得此卦者，诸多事业初创，流于迷茫，内心疑惑重重，容易陷入坎坷。此时切忌独断专行，宜虚心向有德行的长辈、专家求教，听取建议，方能拨云见日。</p>
-<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初六】"><a href="#【初六】" class="headerlink" title="【初六】"></a>【初六】</h3><p><strong>初六：发蒙，利用刑人，用说桎梏，往吝。</strong><br><strong>象曰：利用刑人，以正法也。</strong></p>
-<p><strong>释义</strong><br>初六：启蒙的初始阶段，适度利用规矩和惩罚来规范行为是有利的，这能让人摆脱罪恶与束缚；但如果惩罚过度或一味盲目前进，就会带来麻烦。<br>《象辞》说：利用规矩和惩罚来规范行为，是为了树立正确的法度与习惯。</p>
-<p><strong>北宋易学家邵雍解</strong><br>平：得此爻者，初涉世事，容易因无知而犯错。此时需要规矩的约束（立规矩），但切忌方法过激，宜因势利导。</p>
-<h3 id="【九二】"><a href="#【九二】" class="headerlink" title="【九二】"></a>【九二】</h3><p><strong>九二：包蒙吉；纳妇吉；子克家。</strong><br><strong>象曰：子克家，刚柔接也。</strong></p>
-<p><strong>释义</strong><br>九二：具有包容蒙昧者的胸怀，吉祥；能够接纳愚钝的人（或娶媳妇），吉祥；儿孙能够支撑起家业。<br>《象辞》说：儿孙能够支撑起家业，是因为九二刚明而居中，能做到刚柔并济，妥善处理好各种关系。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，胸襟广阔，极具包容力。不仅自身能独当一面，还能得到周围人的拥护和依附，事业家庭双丰收。</p>
-<h3 id="【六三】"><a href="#【六三】" class="headerlink" title="【六三】"></a>【六三】</h3><p><strong>六三：勿用取女；见金夫，不有躬，无攸利。</strong><br><strong>象曰：勿用取女，行不顺也。</strong></p>
-<p><strong>释义</strong><br>六三：不要娶这样的女子：她看到有钱的男人（金夫）就失去了自我（不有躬），娶她没有任何好处。<br>《象辞》说：不要娶这样的女子，因为她的行为不符合正道，难以白头偕老。</p>
-<p><strong>北宋易学家邵雍解</strong><br>凶：得此爻者，意志不坚，极易受到外界物质或名利的诱惑而迷失方向。经商者谨防上当受骗，感情上易有波折。</p>
-<h3 id="【六四】"><a href="#【六四】" class="headerlink" title="【六四】"></a>【六四】</h3><p><strong>六四：困蒙，吝。</strong><br><strong>象曰：困蒙之吝，独远实也。</strong></p>
-<p><strong>释义</strong><br>六四：陷入了蒙昧和孤立的困境之中，让人感到遗憾。<br>《象辞》说：陷入蒙昧的遗憾，是因为六四周围都是阴爻，远离了真正有真才实学的明师（远实）。</p>
-<p><strong>北宋易学家邵雍解</strong><br>凶：得此爻者，思想闭塞，闭门造车，身边缺乏良师益友的指引。此时宜主动打破僵局，走出去寻找高人指点。</p>
-<h3 id="【六五】"><a href="#【六五】" class="headerlink" title="【六五】"></a>【六五】</h3><p><strong>六五：童蒙，吉。</strong><br><strong>象曰：童蒙之吉，顺以巽也。</strong></p>
-<p><strong>释义</strong><br>六五：像孩童一样保持纯真、谦逊的蒙昧状态，吉祥。<br>《象辞》说：像孩童般纯真好学之所以吉祥，是因为能顺从和尊崇有智慧的老师。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，为人谦逊，大智若愚。虽然自身可能经验不足，但因为愿意虚心求教，能得到贵人的悉心教导，万事顺利。</p>
-<h3 id="【上九】"><a href="#【上九】" class="headerlink" title="【上九】"></a>【上九】</h3><p><strong>上九：击蒙；不利为寇，利御寇。</strong><br><strong>象曰：利用御寇，上下顺也。</strong></p>
-<p><strong>释义</strong><br>上九：打击、惩戒蒙昧。不宜像强盗一样粗暴侵犯，而要像防御盗贼一样适度规范，利于防范过错。<br>《象辞》说：适度采取防御和规范的手段，能使上下关系顺畅，达到教育的目的。</p>
-<p><strong>北宋易学家邵雍解</strong><br>平：得此爻者，容易因为性格刚烈、急躁而采取过激的行为。在处理问题或教育下属时，宜以理服人，严慈相济，防微杜渐。</p>
-<h2 id="四、-个人感悟：保持空杯心态，敬畏未知"><a href="#四、-个人感悟：保持空杯心态，敬畏未知" class="headerlink" title="四、 个人感悟：保持空杯心态，敬畏未知"></a>四、 个人感悟：保持空杯心态，敬畏未知</h2><p>写完蒙卦的笔记，我感到一种久违的释怀。在这个知识爆炸、人人都在“制造焦虑”的时代，蒙卦像是一位智者，微笑着拍拍我们的肩膀说：“承认自己的无知，并不丢人。”</p>
-<p>蒙卦给我的三个核心启示是：</p>
-<ol>
-<li><strong>“空杯”才能装水：</strong> 为什么六五爻“童蒙”反而大吉？因为小孩子是不装腔作势的。在面对全新的行业、未知的领域时，放下身段，像孩子一样去提问、去吸收，才能最快打破认知壁垒。</li>
-<li><strong>拒绝“低质量的提问”：</strong> 卦辞里的“再三渎，渎则不告”太扎心了。它警示我们，不要做职场和学习里的“伸手党”。在向高人、AI或者老师请教前，自己有没有经过深思熟虑？如果只想走捷径、要现成答案，那只是在自我麻痹。</li>
-<li><strong>寻找你的“九二”贵人：</strong> 如果你正处于六四爻那样“困蒙”的焦虑中，说明你的圈子太封闭了。你需要主动去寻找像“九二”那样既有真本事、又有包容心的导师或合作伙伴。</li>
+<hr>
+<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>山水蒙的现代摘要是：启蒙教育，诚心求教。果决育德。 这只是帮助进入文本的提要，具体判断仍要回到卦辞、爻位与上下文。</p>
+<p><strong>1. 底层逻辑：启蒙教育，诚心求教</strong></p>
+<p>程颐在释卦开头先从卦序、卦体和上下卦关系说明本卦之所以成立：</p>
+<blockquote>
+<p>蒙，《序卦》：屯者盈也，屯者物之始生也，物生必蒙，故受之以蒙。蒙者蒙也，物之穉也。屯者物之始生，物始生穉小，蒙昧未發，蒙所以次屯也。為卦艮上坎下，艮為山為止，坎為水為險，山下有險，遇險而止，莫知所之，蒙之象也。水必行之物，始出未有所之，故為蒙，及其進則為亨義。</p>
+</blockquote>
+<p><strong>2. 卦辞与大象</strong></p>
+<p>卦辞给出全卦的基本处境与行动边界；大象则把卦象转化为修身、处事或治理的提示。程颐分别解释为：</p>
+<blockquote>
+<p>蒙有開發之理，亨之義也。卦才時中，乃致亨之道。六五為蒙之主，而九二發蒙者也。我謂二也，二非蒙主。五既順巽於二，二乃發蒙者也，故主二而言「匪我求童蒙，童蒙求我」。五居尊位，有柔順之徳，而方在童蒙，與二為正應，而中徳又同，能用二之道，以發其蒙也。二以剛中之徳在下為君所信嚮，當以道自守，待君至誠，求已而後應之，則能用其道，匪我求於童蒙，乃童蒙來求於我也。筮，占決也。初筮告，謂至誠一意以求已則告之，再三則瀆慢矣，故不告也。發蒙之道，利以貞正，又二雖剛中，然居陰，故宜有戒。</p>
+<p>山下出泉，出而遇險，未有所之，蒙之象也。若人蒙穉，未知所適也。君子觀蒙之象，以果行育徳，觀其出而未能通行，則以果決其所行，觀其始出而未有所向，則以養育其明徳也。</p>
+</blockquote>
+<p><strong>3. 邵雍易学旁证</strong></p>
+<p>邵雍在《皇极经世·观物外篇》中说：</p>
+<blockquote>
+<p>“夫卦，各有性有体，然皆不离乾坤之门。”</p>
+<p>“君子于易，玩象、玩数、玩辞、玩意。”</p>
+</blockquote>
+<p>这两段是邵雍讨论读《易》方法的通论，并非针对山水蒙所下的吉凶断语。放在这里作为旁证，是提醒我们同时观察卦象、数位、辞义与整体意旨，不能只截取一句话作孤立判断。</p>
+<hr>
+<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初六】"><a href="#【初六】" class="headerlink" title="【初六】"></a>【初六】</h3><p><strong>初六：發蒙，利用刑人，用說桎梏，以往吝。</strong></p>
+<p><strong>象曰：利用刑人，以正法也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“發蒙，利用刑人，用說桎梏，以往吝。”作为这一阶段的核心情境；《小象》又以“利用刑人，以正法也。”点明观察角度。程颐解释此爻的切入点是：“初以陰暗居下，下民之蒙也。爻言發之之道，發下民之蒙，當明刑禁以示之，使之知畏，然後從而教導之，自古聖王為治，設刑罰以齊其衆，明教化以善其俗，刑罰立而後教化行，雖聖人尚徳而不尚刑，未嘗偏廢也，故為政之始，立法居先，治蒙之初，威之以刑者，所以說去其昏蒙之桎梏。桎梏謂拘束也，不去其昏蒙之桎梏，則善教无由而入，既以刑禁率之，雖使心未能喻，亦當畏威以從，不敢肆其昏蒙之欲，然後漸能知善道而革其非心，則可以移風易俗矣。苟專用刑以為治，則蒙雖畏而終不能發，苟免而无耻，治化不可得而成矣。……”爻辞中出现“吝”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>初以陰暗居下，下民之蒙也。爻言發之之道，發下民之蒙，當明刑禁以示之，使之知畏，然後從而教導之，自古聖王為治，設刑罰以齊其衆，明教化以善其俗，刑罰立而後教化行，雖聖人尚徳而不尚刑，未嘗偏廢也，故為政之始，立法居先，治蒙之初，威之以刑者，所以說去其昏蒙之桎梏。桎梏謂拘束也，不去其昏蒙之桎梏，則善教无由而入，既以刑禁率之，雖使心未能喻，亦當畏威以從，不敢肆其昏蒙之欲，然後漸能知善道而革其非心，則可以移風易俗矣。苟專用刑以為治，則蒙雖畏而終不能發，苟免而无耻，治化不可得而成矣。故以往則可吝。</p>
+<p>治蒙之始，立其防限，明其罪罰，正其法也。使之由之漸至於化也，或疑發蒙之初，遽用刑人，无乃不教而誅乎，不知立法制刑，乃所以教也。蓋後之論刑者，不復知教化在其中矣。</p>
+</blockquote>
+<p>从现代阅读角度看，初爻处在事情开端，适合先辨明基础、条件与时机，不宜把局部迹象过早当成最终结论。</p>
+<h3 id="【九二】"><a href="#【九二】" class="headerlink" title="【九二】"></a>【九二】</h3><p><strong>九二：包蒙吉，納婦吉，子克家。</strong></p>
+<p><strong>象曰：子克家，剛柔接也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“包蒙吉，納婦吉，子克家。”作为这一阶段的核心情境；《小象》又以“子克家，剛柔接也。”点明观察角度。程颐解释此爻的切入点是：“包，含容也。二居蒙之世，有剛明之才，而與六五之君相應，中徳又同，當時之任者也，必廣其含容，哀矜昏愚，則能發天下之蒙，成治蒙之功，其道廣，其施博，如是則吉也。卦唯二陽爻，上九剛而過，唯九二有剛中之徳而應於五，用於時而獨明者也，苟恃其明，專於自任，則其徳不弘，故雖婦人之柔闇，尚當納其所善，則其明廣矣。又以諸爻皆陰，故云婦。堯舜之聖，天下所莫及也，尚曰清問下民，取人為善也。二能包納則克濟其君之事，猶子能治其家也。……”爻辞中出现“吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>包，含容也。二居蒙之世，有剛明之才，而與六五之君相應，中徳又同，當時之任者也，必廣其含容，哀矜昏愚，則能發天下之蒙，成治蒙之功，其道廣，其施博，如是則吉也。卦唯二陽爻，上九剛而過，唯九二有剛中之徳而應於五，用於時而獨明者也，苟恃其明，專於自任，則其徳不弘，故雖婦人之柔闇，尚當納其所善，則其明廣矣。又以諸爻皆陰，故云婦。堯舜之聖，天下所莫及也，尚曰清問下民，取人為善也。二能包納則克濟其君之事，猶子能治其家也。五既陰柔，故發蒙之功皆在於二，以家言之，五父也，二子也，二能主蒙之功，乃人子克治其家也。</p>
+<p>子而克治其家者，父之信任専也。二能主蒙之功者，五之信任専也。二與五剛柔之情相接，故得行其剛中之道，成發蒙之功。苟非上下之情相接，則二雖剛中，安能尸其事乎。</p>
+</blockquote>
+<p>从现代阅读角度看，二爻进入落实阶段，通常要把行动放回中正、协作与可持续的尺度中衡量。</p>
+<h3 id="【六三】"><a href="#【六三】" class="headerlink" title="【六三】"></a>【六三】</h3><p><strong>六三：勿用取女，見金夫，不有躬，无攸利。</strong></p>
+<p><strong>象曰：勿用取女，行不順也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“勿用取女，見金夫，不有躬，无攸利。”作为这一阶段的核心情境；《小象》又以“勿用取女，行不順也。”点明观察角度。程颐解释此爻的切入点是：“三以陰柔處蒙闇，不中不正女之妄動者也，正應在上，不能遠從，近見九二，為羣蒙所歸，得時之盛，故捨其正應而從之，是女之見金夫也。女之從人，當由正禮，乃見人之多金，說而從之，不能保有其身者也，无所往而利矣。”爻辞中出现“无攸利”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>三以陰柔處蒙闇，不中不正女之妄動者也，正應在上，不能遠從，近見九二，為羣蒙所歸，得時之盛，故捨其正應而從之，是女之見金夫也。女之從人，當由正禮，乃見人之多金，說而從之，不能保有其身者也，无所往而利矣。</p>
+<p>女之如此，其行邪僻不順，不可取也。</p>
+</blockquote>
+<p>从现代阅读角度看，三爻处在内卦将尽的转换处，进退压力往往同时出现，尤其需要控制冒进与失位的风险。</p>
+<h3 id="【六四】"><a href="#【六四】" class="headerlink" title="【六四】"></a>【六四】</h3><p><strong>六四：困蒙，吝。</strong></p>
+<p><strong>象曰：困蒙之吝，獨遠實也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“困蒙，吝。”作为这一阶段的核心情境；《小象》又以“困蒙之吝，獨遠實也。”点明观察角度。程颐解释此爻的切入点是：“四以陰柔而蒙闇，无剛明之親援，无由自發其蒙，困於昏蒙者也。其可吝甚矣。吝不足也，謂可少也。”爻辞中出现“吝”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>四以陰柔而蒙闇，无剛明之親援，无由自發其蒙，困於昏蒙者也。其可吝甚矣。吝不足也，謂可少也。</p>
+<p>蒙之時，陽剛為發蒙者，四陰柔而最遠於剛，乃愚蒙之人，而不比近賢者，无由得明矣，故困於蒙。可羞吝者，以其獨遠於賢明之人也，不能親賢以致困，可吝之甚也，實謂陽剛也。</p>
+</blockquote>
+<p>从现代阅读角度看，四爻由内转外，开始接近全局事务与主事位置，行动之前宜先建立信任并审慎辨势。</p>
+<h3 id="【六五】"><a href="#【六五】" class="headerlink" title="【六五】"></a>【六五】</h3><p><strong>六五：童蒙，吉。</strong></p>
+<p><strong>象曰：童蒙之吉，順以巽也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“童蒙，吉。”作为这一阶段的核心情境；《小象》又以“童蒙之吉，順以巽也。”点明观察角度。程颐解释此爻的切入点是：“五以柔順居君位，下應於二，以柔中之徳，任剛明之才，足以治天下之蒙，故吉也。童取未發而資於人也，為人君者，苟能至誠任賢以成其功，何異乎出於已也。”爻辞中出现“吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>五以柔順居君位，下應於二，以柔中之徳，任剛明之才，足以治天下之蒙，故吉也。童取未發而資於人也，為人君者，苟能至誠任賢以成其功，何異乎出於已也。</p>
+<p>舍已從人，順從也。降志下求，卑巽也。能如是，優於天下矣。</p>
+</blockquote>
+<p>从现代阅读角度看，五爻居于全卦关键位置，重点在承担责任、守住中道，并使个人能力真正服务于整体。</p>
+<h3 id="【上九】"><a href="#【上九】" class="headerlink" title="【上九】"></a>【上九】</h3><p><strong>上九：擊蒙，不利為寇，利禦寇。</strong></p>
+<p><strong>象曰：利禦寇，上下順也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“擊蒙，不利為寇，利禦寇。”作为这一阶段的核心情境；《小象》又以“利禦寇，上下順也。”点明观察角度。程颐解释此爻的切入点是：“九居蒙之終，是當蒙極之時，人之愚蒙既極，如苗民之不率，為宼為亂者，當擊伐之，然九居上剛極而不中，故戒不利為宼。治人之蒙，乃禦宼也，肆為剛暴，乃為宼也。若舜之征有苗，周公之誅三監，禦宼也。秦皇漢武窮兵誅伐，為宼也。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>九居蒙之終，是當蒙極之時，人之愚蒙既極，如苗民之不率，為宼為亂者，當擊伐之，然九居上剛極而不中，故戒不利為宼。治人之蒙，乃禦宼也，肆為剛暴，乃為宼也。若舜之征有苗，周公之誅三監，禦宼也。秦皇漢武窮兵誅伐，為宼也。</p>
+<p>利用禦宼，上下皆得其順也。上不為過暴，下得擊去，其蒙禦宼之義也。</p>
+</blockquote>
+<p>从现代阅读角度看，上爻表示一卦发展已到极处，最需要防止过度、僵化与不知转圜，为下一阶段留下余地。</p>
+<hr>
+<h2 id="四、-个人感悟"><a href="#四、-个人感悟" class="headerlink" title="四、 个人感悟"></a>四、 个人感悟</h2><p>启蒙教育，诚心求教。果决育德。 对我来说，山水蒙最值得反复体会的，不是把“吉”或“凶”当作固定答案，而是看清一个处境如何随位置、关系与行动方式而变化。六爻从初到上展示了不同阶段：同一原则放在不同位置，结果可能完全不同。</p>
+<p>把它用于今天的学习、工作或关系判断时，我更愿意把卦辞当作问题框架，把爻辞当作阶段提醒：先确认自己身处哪一层，再决定进、退、守、变。这样读《易》，比直接追求一个预言式结论更稳妥。</p>
+<hr>
+<h2 id="五、-参考文献与版本说明"><a href="#五、-参考文献与版本说明" class="headerlink" title="五、 参考文献与版本说明"></a>五、 参考文献与版本说明</h2><ol>
+<li>《周易》经文及《象传》，本卦原文取自：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/wiki/%E5%91%A8%E6%98%93/%E8%92%99">维基文库《周易》本卦页面</a>；并参校<a target="_blank" rel="noopener" href="https://ctext.org/book-of-changes/zh">中国哲学书电子化计划《周易》</a>。</li>
+<li>北宋程颐《程氏易传》（亦称《伊川易传》），本卦参校：<a target="_blank" rel="noopener" href="https://www.taijizhidian.com/chengxu/liushisigua/1537.html">【周易上经】第4卦-蒙卦䷃山水蒙卦（坎下艮上）-[北宋]程颐撰《程氏易传•卷一》</a>。</li>
+<li>北宋邵雍《皇极经世·观物外篇》，旁证原文：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/zh-hans/%E7%9A%87%E6%A5%B5%E7%B6%93%E4%B8%96/%E5%8D%B7%E5%8D%81%E4%B8%89">维基文库《皇极经世》卷十三</a>。</li>
 </ol>
-<p>山下出泉，泉水虽小，终向大海。愿我们在每一个迷茫的阶段，都能保持求知的诚心，果行育德，破茧成蝶。</p>
+<blockquote>
+<p>版本说明：经典原文与程颐文字保留底本中的繁体字、异体字及个别古字；“释义”“现代阅读角度”和“个人感悟”均为现代整理，不冒充古人原话。“邵雍易学旁证”只引用可定位的易学通论，不作逐卦、逐爻的托名断语。</p>
+</blockquote>
 
     </div>
 
@@ -373,7 +473,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E5%85%AD%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初六】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【九二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【六三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【六四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【六五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E4%B9%9D%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上九】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F%EF%BC%9A%E4%BF%9D%E6%8C%81%E7%A9%BA%E6%9D%AF%E5%BF%83%E6%80%81%EF%BC%8C%E6%95%AC%E7%95%8F%E6%9C%AA%E7%9F%A5"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟：保持空杯心态，敬畏未知</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E5%85%AD%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初六】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【九二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【六三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【六四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【六五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E4%B9%9D%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上九】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E4%B8%8E%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E"><span class="nav-number">5.</span> <span class="nav-text">五、 参考文献与版本说明</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -389,7 +489,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -474,6 +574,10 @@
 
 
 
+  
+<script src="/js/local-search.js"></script>
+
+
 
 
 
@@ -502,6 +606,15 @@
 
 <script>
   (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
     var loadingBox = document.getElementById('loading-box');
     var root = document.documentElement;
 
@@ -532,8 +645,9 @@
 
 <script src="/js/latex-tool.js?v=20260805c"></script>
 <script src="/js/translate-tool.js?v=20260805a"></script>
-<script src="/js/hexagram-index.js?v=20260806a"></script>
-<script src="/js/divination-tool.js?v=20260810a"></script>
+<script src="/js/hexagram-post-map.js?v=20260830a"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
 
 </body>
 </html>

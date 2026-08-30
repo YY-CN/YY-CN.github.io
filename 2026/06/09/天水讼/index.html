@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="天与水违行，讼。君子以作事谋始。">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="天与水违行，讼。君子以作事谋始。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-09T02:00:00.000Z">
-<meta property="article:modified_time" content="2026-06-08T16:11:35.608Z">
+<meta property="article:modified_time" content="2026-08-23T19:20:20.192Z">
 <meta property="article:author" content="Hyacinth">
 <meta property="article:tag" content="学习笔记">
 <meta property="article:tag" content="六十四卦">
@@ -127,6 +127,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -166,11 +167,38 @@
     <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -216,10 +244,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-06-09 10:00:00 / 修改时间：00:11:35" itemprop="dateCreated datePublished" datetime="2026-06-09T10:00:00+08:00">2026-06-09</time>
+              <time title="创建时间：2026-06-09 10:00:00" itemprop="dateCreated datePublished" datetime="2026-06-09T10:00:00+08:00">2026-06-09</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-24 03:20:20" itemprop="dateModified" datetime="2026-08-24T03:20:20+08:00">2026-08-24</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -230,7 +264,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>12 分钟</span>
+            </span>
             <div class="post-description">天与水违行，讼。君子以作事谋始。</div>
 
         </div>
@@ -243,45 +291,106 @@
 
       
         <h2 id="一、-经典原文"><a href="#一、-经典原文" class="headerlink" title="一、 经典原文"></a>一、 经典原文</h2><blockquote>
-<p><strong>【卦辞】</strong><br>讼：有孚，窒惕，中吉，终凶。利见大人，不利涉大川。</p>
-<p><strong>【爻辞】</strong><br>初六：不永所事，小有言，终吉。<br>九二：不克讼，归而逋，其邑人三百户，无眚。<br>六三：食旧德，贞厉，终吉。或从王事，无成。<br>九四：不克讼，复即命，渝安贞，吉。<br>九五：讼，元吉。<br>上九：或锡之鞶带，终朝三褫之。</p>
-<p><strong>【大象传】</strong><br>天与水违行，讼；君子以作事谋始。</p>
+<p><strong>【卦辞】</strong><br>訟：有孚，窒，惕，中吉，終凶。利見大人，不利涉大川。</p>
+<p><strong>【爻辞】</strong><br>初六：不永所事，小有言，終吉。<br>九二：不克訟，歸而逋，其邑人三百戶无眚。<br>六三：食舊德，貞厲，終吉。或從王事，无成。<br>九四：不克訟，復即命渝，安貞吉。<br>九五：訟，元吉。<br>上九：或錫之鞶帶，終朝三褫之。</p>
+<p><strong>【大象传】</strong><br>象曰：天與水違行，訟；君子以作事謀始。</p>
 </blockquote>
-<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>在“需卦”的等待与资源积蓄中，因为欲望或利益的分配不均，人们往往容易产生矛盾。于是，我们迎来了第六卦——讼卦。“讼”就是争论、争端、诉讼。这一卦，充满了古人处理人际冲突的高级智慧。</p>
-<p><strong>1. 底层逻辑：君子以作事谋始</strong><br>讼卦的上卦为乾（天），下卦为坎（水）。天总是向上运行，而水总是向下流淌，《象传》称之为“天与水违行”。两者的方向完全背道而驰，这正是产生冲突和诉讼的根源。面对这种注定要产生分歧的局面，君子应该效法什么？“作事谋始”——在事情一开始的时候，就把规矩、契约、利益分配谋划清楚，从源头上避免日后的纠纷。</p>
-<p><strong>2. 止战的智慧：中吉，终凶</strong><br>卦辞“有孚，窒惕，中吉，终凶。利见大人，不利涉大川”道破了争端的残酷本质：</p>
-<ul>
-<li><strong>有孚，窒惕：</strong> 哪怕你完全占理（有孚），在争执中也要感到窒息般的警惕与恐惧（窒惕），绝不可掉以轻心。</li>
-<li><strong>中吉，终凶：</strong> 适可而止、在中途达成和解（中），是吉祥的；非要争个鱼死网破、死磕到底（终），结局一定凶险。因为杀敌一千，自损八百。</li>
-<li><strong>利见大人，不利涉大川：</strong> 发生争执时，最利于请公正权威的长辈或机构（大人）来调解，绝不适宜盲目冒险激进（不利涉大川）。</li>
-</ul>
-<p><strong>3.北宋易学家邵雍解</strong><br>事与愿违，互相争讼；不如退让，以免生灾。<br>得此卦者，身处纠纷、口角或官司之中，人际关系不和。此时切忌争强好胜，宜寻求和解，退一步海阔天空。强行争斗必然带来损失。</p>
-<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初六】"><a href="#【初六】" class="headerlink" title="【初六】"></a>【初六】</h3><p><strong>初六：不永所事，小有言，终吉。</strong><br><strong>象曰：不永所事，讼不可长也。虽小有言，其辩明也。</strong></p>
-<p><strong>释义</strong><br>初六：不让争端持续太久，虽然会有一些流言蜚语和小的责备，但最终吉祥。<br>《象辞》说：不让争端持续，是因为诉讼和争执绝不能长久拖延。虽然受点委屈（小有言），但事情最终会辩明清楚。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，争端刚刚处于萌芽状态。此时最明智的做法是及时打住、不纠缠，吃点小亏也能换来长久的平安。</p>
-<h3 id="【九二】"><a href="#【九二】" class="headerlink" title="【九二】"></a>【九二】</h3><p><strong>九二：不克讼，归而逋，其邑人三百户，无眚。</strong><br><strong>象曰：不克讼，归逋窜也。自下讼上，患至掇也。</strong></p>
-<p><strong>释义</strong><br>九二：打官司无法获胜，于是赶紧回家逃避，他那三百户人家的小镇，没有遭受灾祸。<br>《象辞》说：因为以低下的身份去状告高位的人，灾患是自己招惹来的，及时逃避保全了自己。</p>
-<p><strong>北宋易学家邵雍解</strong><br>平：得此爻者，面临力量悬殊的争斗。硬碰硬必死无疑，此时“认怂”不仅不丢人，反而是一种保全自身和团队的明智之举（无眚，即无灾）。</p>
-<h3 id="【六三】"><a href="#【六三】" class="headerlink" title="【六三】"></a>【六三】</h3><p><strong>六三：食旧德，贞厉，终吉。或从王事，无成。</strong><br><strong>象曰：食旧德，从上吉也。</strong></p>
-<p><strong>释义</strong><br>六三：安享原有的俸禄和基业（旧德），坚守正道以防危险，最终吉祥。如果跟随君王做事，不要争夺功劳。<br>《象辞》说：安守本分，顺从上位者，就能吉祥。</p>
-<p><strong>北宋易学家邵雍解</strong><br>平：得此爻者，不宜去开拓新局面或强出头。在风波中，守住自己原有的基本盘，不争不抢、默默做事，方能避开灾祸。</p>
-<h3 id="【九四】"><a href="#【九四】" class="headerlink" title="【九四】"></a>【九四】</h3><p><strong>九四：不克讼，复即命，渝安贞，吉。</strong><br><strong>象曰：复即命，渝安贞；不失也。</strong></p>
-<p><strong>释义</strong><br>九四：打官司无法获胜，于是回心转意，顺应天命（或理智），改变了争斗的态度，安分守己，吉祥。<br>《象辞》说：回心转意顺应规律，改变态度安守正道，这样就不会有损失了。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，可能一度被冲昏头脑想要争斗，但好在能及时认清现实，悬崖勒马，改变态度化干戈为玉帛，最终得以保全。</p>
-<h3 id="【九五】"><a href="#【九五】" class="headerlink" title="【九五】"></a>【九五】</h3><p><strong>九五：讼，元吉。</strong><br><strong>象曰：讼，元吉，以中正也。</strong></p>
-<p><strong>释义</strong><br>九五：进行诉讼，大吉大利。<br>《象辞》说：诉讼大吉大利，是因为九五居中得正，代表着绝对的公平和正义。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，如果深陷纠纷，代表你的诉求是完全正当的，且能遇到极度公正明理的“法官”或领导来裁决，沉冤昭雪，大吉大利。</p>
-<h3 id="【上九】"><a href="#【上九】" class="headerlink" title="【上九】"></a>【上九】</h3><p><strong>上九：或锡之鞶带，终朝三褫之。</strong><br><strong>象曰：以讼受服，亦不足敬也。</strong></p>
-<p><strong>释义</strong><br>上九：或许因为打赢官司被赐予了华贵的皮带（象征荣誉或利益），但在一个早上就被剥夺了三次。<br>《象辞》说：靠争斗诉讼得来的官服和荣誉，是一件不值得尊敬的事，也是保不住的。</p>
-<p><strong>北宋易学家邵雍解</strong><br>凶：得此爻者，即便在争斗中大获全胜、得到了利益，也会因此结下极深的仇怨。这种靠“撕破脸”得来的战利品极度不稳固，得不偿失。</p>
-<h2 id="四、-个人感悟：不在烂事上纠缠"><a href="#四、-个人感悟：不在烂事上纠缠" class="headerlink" title="四、 个人感悟：不在烂事上纠缠"></a>四、 个人感悟：不在烂事上纠缠</h2><p>写完讼卦的笔记，我感到一种极度冷峻的现实主义扑面而来。我们常常在潜意识里认为，“只要我占理，我就要斗争到底”。但《易经》在这里泼了一盆冷水：<strong>在大多数情况下，打赢一场争吵或官司的代价，远比你最初失去的东西要大得多。</strong></p>
-<p>讼卦给了我三个极具操作性的启发：</p>
-<ol>
-<li><strong>最高级的排雷术是“作事谋始”：</strong> 为什么合伙做生意最后常常反目成仇？为什么恋爱结婚最后往往一地鸡毛？因为很多人觉得一开始谈钱、谈规矩“伤感情”。讼卦提醒我们，先小人后君子，丑话说在前面，才是对契约和关系最负责任的做法。</li>
-<li><strong>懂得“认怂”，是一种高级智慧：</strong> 看看九二和九四这两根阳刚之爻，它们的结局都是“不克讼”（打不赢）。但它们并没有死磕，而是选择了“归而逋”（跑回家）和“渝安贞”（改变态度）。在实力悬殊或纠缠无益的烂事面前，及时认栽、止损离场，保住核心盘（三百户无眚），远比虚荣的面子重要。</li>
-<li><strong>警惕“胜利者的诅咒”：</strong> 上九爻的“终朝三褫之”是最发人深省的一句。靠残酷的内斗争来的利益或位置，你将永远面临别人的虎视眈眈和随时反扑。</li>
+<hr>
+<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>天水讼的现代摘要是：争讼之象，宜和解止争。谋事于始。 这只是帮助进入文本的提要，具体判断仍要回到卦辞、爻位与上下文。</p>
+<p><strong>1. 底层逻辑：争讼之象，宜和解止争</strong></p>
+<p>程颐在释卦开头先从卦序、卦体和上下卦关系说明本卦之所以成立：</p>
+<blockquote>
+<p>訟，《序卦》：飲食必有訟，故受之以訟。人之所需者，飲食。既有所須，爭訟所由起也。訟，所以次需也。為卦乾上坎下，以二象言之：天陽上行，水性就下，其行相違，所以成訟也。以二體言之：上剛下險，剛險相接，能无訟乎？又人内險阻而外剛强，所以訟也。</p>
+</blockquote>
+<p><strong>2. 卦辞与大象</strong></p>
+<p>卦辞给出全卦的基本处境与行动边界；大象则把卦象转化为修身、处事或治理的提示。程颐分别解释为：</p>
+<blockquote>
+<p>訟之道必有其孚實，中无其實，乃是誣妄，凶之道也。卦之中實，為有孚之象。訟者，與人爭辯而待決於人，雖有孚，亦須窒塞未通。不窒則已明，无訟矣。事既未辯，吉凶未可必也，故有畏惕中吉，得中則吉也。終凶，終極其事，則凶也。</p>
+<p>天上水下，相違而行，二體違戾，訟之由也。若上下相順，訟何由興？君子觀象知人情有爭訟之道，故凡所作事，必謀其始。絶訟端於事之始，則訟无由生矣。謀始之義廣矣，若慎交結、明契劵之類是也。</p>
+</blockquote>
+<p><strong>3. 邵雍易学旁证</strong></p>
+<p>邵雍在《皇极经世·观物外篇》中说：</p>
+<blockquote>
+<p>“夫卦，各有性有体，然皆不离乾坤之门。”</p>
+<p>“君子于易，玩象、玩数、玩辞、玩意。”</p>
+</blockquote>
+<p>这两段是邵雍讨论读《易》方法的通论，并非针对天水讼所下的吉凶断语。放在这里作为旁证，是提醒我们同时观察卦象、数位、辞义与整体意旨，不能只截取一句话作孤立判断。</p>
+<hr>
+<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初六】"><a href="#【初六】" class="headerlink" title="【初六】"></a>【初六】</h3><p><strong>初六：不永所事，小有言，終吉。</strong></p>
+<p><strong>象曰：不永所事，訟不可長也。雖小有言，其辯明也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“不永所事，小有言，終吉。”作为这一阶段的核心情境；《小象》又以“不永所事，訟不可長也。雖小有言，其辯明也。”点明观察角度。程颐解释此爻的切入点是：“六以柔弱居下，不能終極其訟者也。故於訟之初，因六之才為之戒，曰：若不長永其事，則雖小有言，終得吉也。蓋訟，非可長之事，以陰柔之才而訟於下，難以吉矣。以上有應援而能不永其事，故雖小有言，終得吉也。有言，災之小者也，不永其事，而不至於凶，乃訟之吉也。”爻辞中出现“吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>六以柔弱居下，不能終極其訟者也。故於訟之初，因六之才為之戒，曰：若不長永其事，則雖小有言，終得吉也。蓋訟，非可長之事，以陰柔之才而訟於下，難以吉矣。以上有應援而能不永其事，故雖小有言，終得吉也。有言，災之小者也，不永其事，而不至於凶，乃訟之吉也。</p>
+<p>六以柔弱而訟於下，其義固不可長永也。永其訟，則不勝而禍難及矣。又於訟之初，即戒訟非可長之事也。</p>
+</blockquote>
+<p>从现代阅读角度看，初爻处在事情开端，适合先辨明基础、条件与时机，不宜把局部迹象过早当成最终结论。</p>
+<h3 id="【九二】"><a href="#【九二】" class="headerlink" title="【九二】"></a>【九二】</h3><p><strong>九二：不克訟，歸而逋，其邑人三百戶无眚。</strong></p>
+<p><strong>象曰：不克訟，歸逋竄也。自下訟上，患至掇也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“不克訟，歸而逋，其邑人三百戶无眚。”作为这一阶段的核心情境；《小象》又以“不克訟，歸逋竄也。自下訟上，患至掇也。”点明观察角度。程颐解释此爻的切入点是：“二五相應之地，而兩剛不相與，相訟者也。九二自外來，以剛處險，為訟之主，乃與五為敵。五以中正處君位，其可敵乎？是為訟而義不克也。若能知其義之不可，退歸而逋避，以寡約自處，則得无過眚也。必逋者，避為敵之地也。三百戸，邑之至小者，若處强大，是猶競也，能无眚乎？眚過也，處不當也，與知惡而為有分也。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>二五相應之地，而兩剛不相與，相訟者也。九二自外來，以剛處險，為訟之主，乃與五為敵。五以中正處君位，其可敵乎？是為訟而義不克也。若能知其義之不可，退歸而逋避，以寡約自處，則得无過眚也。必逋者，避為敵之地也。三百戸，邑之至小者，若處强大，是猶競也，能无眚乎？眚過也，處不當也，與知惡而為有分也。</p>
+<p>義既不敵，故不能訟，而逋竄避去其所也。</p>
+<p>自下訟上，患至掇也。</p>
+<p>自下而訟其上，義乖勢屈，禍患之至，猶拾掇而取之，言易得也。</p>
+</blockquote>
+<p>从现代阅读角度看，二爻进入落实阶段，通常要把行动放回中正、协作与可持续的尺度中衡量。</p>
+<h3 id="【六三】"><a href="#【六三】" class="headerlink" title="【六三】"></a>【六三】</h3><p><strong>六三：食舊德，貞厲，終吉。或從王事，无成。</strong></p>
+<p><strong>象曰：食舊德，從上吉也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“食舊德，貞厲，終吉。或從王事，无成。”作为这一阶段的核心情境；《小象》又以“食舊德，從上吉也。”点明观察角度。程颐解释此爻的切入点是：“三雖居剛而應上，然質本陰柔處險，而介二剛之間，危懼非為訟者也。禄者稱徳而受食，舊徳謂處其素分。貞謂堅固自守，厲終吉，謂雖處危地，能知危懼，則終必獲吉也。守素分而无求則不訟矣。處危謂在險而成乗皆剛，與居訟之時也。”爻辞中出现“吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>三雖居剛而應上，然質本陰柔處險，而介二剛之間，危懼非為訟者也。禄者稱徳而受食，舊徳謂處其素分。貞謂堅固自守，厲終吉，謂雖處危地，能知危懼，則終必獲吉也。守素分而无求則不訟矣。處危謂在險而成乗皆剛，與居訟之時也。</p>
+<p>成乘皆剛：應作｢承乘皆剛｣，意謂六三上下皆陽剛，柔在剛下為承剛（六三承九四），在剛之上為乘剛（六三乘初九）。</p>
+<p>守其素分，雖從上之所為，非由己也。故无成而終得其吉也。</p>
+</blockquote>
+<p>从现代阅读角度看，三爻处在内卦将尽的转换处，进退压力往往同时出现，尤其需要控制冒进与失位的风险。</p>
+<h3 id="【九四】"><a href="#【九四】" class="headerlink" title="【九四】"></a>【九四】</h3><p><strong>九四：不克訟，復即命渝，安貞吉。</strong></p>
+<p><strong>象曰：復即命渝，安貞，不失也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“不克訟，復即命渝，安貞吉。”作为这一阶段的核心情境；《小象》又以“復即命渝，安貞，不失也。”点明观察角度。程颐解释此爻的切入点是：“四以陽剛而居健體，不得中正，本為訟者也。承五履三而應初。五，君也，義不克訟，三居下而柔，不與之訟，初正應而順從，非與訟者也。四雖剛健欲訟，无與對敵，其訟无由而興，故不克訟也。又居柔以應柔，亦為能止之義，既義不克訟，若能克其剛忿欲訟之心，復即就於命。革其心，平其氣，變而為安貞，則吉矣。命謂正理，失正理為方命，故以即命為復也。方不順也，《書》云｢方命圮族｣，孟子云｢方命虐民｣。夫剛健而不中正則躁動，故不安處。非中正，故不貞，不安貞所以好訟也。……”爻辞中出现“吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>四以陽剛而居健體，不得中正，本為訟者也。承五履三而應初。五，君也，義不克訟，三居下而柔，不與之訟，初正應而順從，非與訟者也。四雖剛健欲訟，无與對敵，其訟无由而興，故不克訟也。又居柔以應柔，亦為能止之義，既義不克訟，若能克其剛忿欲訟之心，復即就於命。革其心，平其氣，變而為安貞，則吉矣。命謂正理，失正理為方命，故以即命為復也。方不順也，《書》云｢方命圮族｣，孟子云｢方命虐民｣。夫剛健而不中正則躁動，故不安處。非中正，故不貞，不安貞所以好訟也。若義不克訟而不訟，反就正理，變其不安貞為安貞，則吉矣。</p>
+<p>能如是則為无失矣，所以吉也。</p>
+</blockquote>
+<p>从现代阅读角度看，四爻由内转外，开始接近全局事务与主事位置，行动之前宜先建立信任并审慎辨势。</p>
+<h3 id="【九五】"><a href="#【九五】" class="headerlink" title="【九五】"></a>【九五】</h3><p><strong>九五：訟，元吉。</strong></p>
+<p><strong>象曰：訟，元吉，以中正也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“訟，元吉。”作为这一阶段的核心情境；《小象》又以“訟，元吉，以中正也。”点明观察角度。程颐解释此爻的切入点是：“以中正居尊位，治訟者也。治訟得其中正，所以元吉也。元吉，大吉而盡善也。吉大而不盡善者有矣。”爻辞中出现“元吉、吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>以中正居尊位，治訟者也。治訟得其中正，所以元吉也。元吉，大吉而盡善也。吉大而不盡善者有矣。</p>
+<p>中正之道，何施而不元吉？</p>
+</blockquote>
+<p>从现代阅读角度看，五爻居于全卦关键位置，重点在承担责任、守住中道，并使个人能力真正服务于整体。</p>
+<h3 id="【上九】"><a href="#【上九】" class="headerlink" title="【上九】"></a>【上九】</h3><p><strong>上九：或錫之鞶帶，終朝三褫之。</strong></p>
+<p><strong>象曰：以訟受服，亦不足敬也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“或錫之鞶帶，終朝三褫之。”作为这一阶段的核心情境；《小象》又以“以訟受服，亦不足敬也。”点明观察角度。程颐解释此爻的切入点是：“九以陽居上，剛健之極，又處訟之終，極其訟者也。人之肆其剛强，窮極於訟，取禍喪身，固其理也。設或使之善訟能勝，窮極不已，至於受服命之賞，是亦與人仇爭所獲，其能安保之乎？故終一朝而三見褫奪也。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>九以陽居上，剛健之極，又處訟之終，極其訟者也。人之肆其剛强，窮極於訟，取禍喪身，固其理也。設或使之善訟能勝，窮極不已，至於受服命之賞，是亦與人仇爭所獲，其能安保之乎？故終一朝而三見褫奪也。</p>
+<p>窮極訟事，設使受服命之寵，亦且不足敬，而可賤惡，况又禍患隨至乎。</p>
+</blockquote>
+<p>从现代阅读角度看，上爻表示一卦发展已到极处，最需要防止过度、僵化与不知转圜，为下一阶段留下余地。</p>
+<hr>
+<h2 id="四、-个人感悟"><a href="#四、-个人感悟" class="headerlink" title="四、 个人感悟"></a>四、 个人感悟</h2><p>争讼之象，宜和解止争。谋事于始。 对我来说，天水讼最值得反复体会的，不是把“吉”或“凶”当作固定答案，而是看清一个处境如何随位置、关系与行动方式而变化。六爻从初到上展示了不同阶段：同一原则放在不同位置，结果可能完全不同。</p>
+<p>把它用于今天的学习、工作或关系判断时，我更愿意把卦辞当作问题框架，把爻辞当作阶段提醒：先确认自己身处哪一层，再决定进、退、守、变。这样读《易》，比直接追求一个预言式结论更稳妥。</p>
+<hr>
+<h2 id="五、-参考文献与版本说明"><a href="#五、-参考文献与版本说明" class="headerlink" title="五、 参考文献与版本说明"></a>五、 参考文献与版本说明</h2><ol>
+<li>《周易》经文及《象传》，本卦原文取自：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/wiki/%E5%91%A8%E6%98%93/%E8%A8%9F">维基文库《周易》本卦页面</a>；并参校<a target="_blank" rel="noopener" href="https://ctext.org/book-of-changes/zh">中国哲学书电子化计划《周易》</a>。</li>
+<li>北宋程颐《程氏易传》（亦称《伊川易传》），本卦参校：<a target="_blank" rel="noopener" href="https://www.taijizhidian.com/chengxu/liushisigua/1539.html">【周易上经】第6卦-讼卦䷅天水讼卦（坎下乾上）-[北宋]程颐撰《程氏易传•卷一》</a>。</li>
+<li>北宋邵雍《皇极经世·观物外篇》，旁证原文：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/zh-hans/%E7%9A%87%E6%A5%B5%E7%B6%93%E4%B8%96/%E5%8D%B7%E5%8D%81%E4%B8%89">维基文库《皇极经世》卷十三</a>。</li>
 </ol>
-<p>很多时候，退一步不是懦弱，而是计算过沉没成本后的清醒。人生苦短，“不永所事”，别在烂事上纠缠，把宝贵的精力留给真正值得的人和事吧。</p>
+<blockquote>
+<p>版本说明：经典原文与程颐文字保留底本中的繁体字、异体字及个别古字；“释义”“现代阅读角度”和“个人感悟”均为现代整理，不冒充古人原话。“邵雍易学旁证”只引用可定位的易学通论，不作逐卦、逐爻的托名断语。</p>
+</blockquote>
 
     </div>
 
@@ -367,7 +476,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E5%85%AD%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初六】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【九二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【六三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【九四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【九五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E4%B9%9D%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上九】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F%EF%BC%9A%E4%B8%8D%E5%9C%A8%E7%83%82%E4%BA%8B%E4%B8%8A%E7%BA%A0%E7%BC%A0"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟：不在烂事上纠缠</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E5%85%AD%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初六】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【九二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【六三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【九四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【九五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E4%B9%9D%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上九】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E4%B8%8E%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E"><span class="nav-number">5.</span> <span class="nav-text">五、 参考文献与版本说明</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -383,7 +492,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -468,6 +577,10 @@
 
 
 
+  
+<script src="/js/local-search.js"></script>
+
+
 
 
 
@@ -496,6 +609,15 @@
 
 <script>
   (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
     var loadingBox = document.getElementById('loading-box');
     var root = document.documentElement;
 
@@ -526,8 +648,9 @@
 
 <script src="/js/latex-tool.js?v=20260805c"></script>
 <script src="/js/translate-tool.js?v=20260805a"></script>
-<script src="/js/hexagram-index.js?v=20260806a"></script>
-<script src="/js/divination-tool.js?v=20260810a"></script>
+<script src="/js/hexagram-post-map.js?v=20260830a"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
 
 </body>
 </html>

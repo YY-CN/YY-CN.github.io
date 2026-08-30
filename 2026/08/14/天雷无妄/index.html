@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="天下雷行，物与无妄。君子以茂对时，育万物。">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="天下雷行，物与无妄。君子以茂对时，育万物。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-08-13T16:57:11.000Z">
-<meta property="article:modified_time" content="2026-08-13T17:01:31.335Z">
+<meta property="article:modified_time" content="2026-08-23T19:20:20.223Z">
 <meta property="article:author" content="Hyacinth">
 <meta property="article:tag" content="学习笔记">
 <meta property="article:tag" content="六十四卦">
@@ -127,6 +127,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -166,11 +167,38 @@
     <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -216,10 +244,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-08-14 00:57:11 / 修改时间：01:01:31" itemprop="dateCreated datePublished" datetime="2026-08-14T00:57:11+08:00">2026-08-14</time>
+              <time title="创建时间：2026-08-14 00:57:11" itemprop="dateCreated datePublished" datetime="2026-08-14T00:57:11+08:00">2026-08-14</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-24 03:20:20" itemprop="dateModified" datetime="2026-08-24T03:20:20+08:00">2026-08-24</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -230,7 +264,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
             <div class="post-description">天下雷行，物与无妄。君子以茂对时，育万物。</div>
 
         </div>
@@ -243,40 +291,103 @@
 
       
         <h2 id="一、-经典原文"><a href="#一、-经典原文" class="headerlink" title="一、 经典原文"></a>一、 经典原文</h2><blockquote>
-<p><strong>【卦辞】</strong><br>无妄：元，亨，利，贞。其匪正有眚，不利有攸往。</p>
-<p><strong>【爻辞】</strong><br>初九：无妄，往吉。<br>六二：不耕获，不菑畲，则利有攸往。<br>六三：无妄之灾，或系之牛，行人之得，邑人之灾。<br>九四：可贞，无咎。<br>九五：无妄之疾，勿药有喜。<br>上九：无妄，行有眚，无攸利。</p>
-<p><strong>【大象传】</strong><br>天下雷行，物与无妄；君子以茂对时，育万物。</p>
+<p><strong>【卦辞】</strong><br>无妄：元亨。利貞。其匪正有眚，不利有攸往。</p>
+<p><strong>【爻辞】</strong><br>初九：无妄，往吉。<br>六二：不耕穫，不菑畬，則利有攸往。<br>六三：无妄之災，或系之牛，行人之得，邑人之災。<br>九四：可貞，无咎。<br>九五：无妄之疾，勿藥有喜。<br>上九：无妄，行有眚，无攸利。</p>
+<p><strong>【大象传】</strong><br>象曰：天下雷行，物與无妄；先王以茂對時，育萬物。</p>
 </blockquote>
-<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>走过了“复卦”（第二十四卦）的一阳初生、万物复苏，事物开始进入蓬勃生长的阶段。但生命在成长时，最容易产生不切实际的贪婪与虚妄的念头。于是，我们迎来了第二十五卦——无妄卦。“妄”是虚妄、妄想、不守本分；“无妄”就是不虚伪、不妄为、顺应天道。它教导我们在生机勃勃的世界中，如何保持一颗纯正不欺的本心。</p>
-<p><strong>1. 底层逻辑：天下雷行，茂对时育万物</strong><br>无妄卦的上卦为乾（天），下卦为震（雷&#x2F;动）。《象传》说“天下雷行”，雷霆在苍天之下震动，大自然的运行是极其刚健、真实且毫不掩饰的，万物都不敢有丝毫的虚妄。君子效法这种气象，应当“茂对时，育万物”——也就是顺应四时的天道规律，去努力（茂盛地）孕育和成就万事万物，绝不拔苗助长，绝不逆势而为。</p>
-<p><strong>2. 顺其自然的法则：其匪正有眚</strong><br>卦辞“无妄：元，亨，利，贞”给出了极高的评价，只要保持真诚无妄的本心，就能大吉大利。但紧接着《易经》给出了严厉的警告：“其匪正有眚（shěng），不利有攸往。”如果不守正道、心存妄念而去行动，就必定会有灾祸，不适宜有任何举动。</p>
-<p><strong>3.北宋易学家邵雍解</strong><br>不欺不妄，真实无妄；顺乎自然，福禄安康。<br>得此卦者，正处于不可投机取巧的阶段。此时最忌讳好高骛远、心存侥幸。只要脚踏实地，顺其自然地去做事，必能平安顺遂；若起贪念、走捷径，必定招来意想不到的灾祸。</p>
-<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初九】"><a href="#【初九】" class="headerlink" title="【初九】"></a>【初九】</h3><p><strong>初九：无妄，往吉。</strong><br><strong>象曰：无妄之往，得志也。</strong></p>
-<p><strong>释义</strong><br>初九：不心存妄念，以纯正的初心前去行动，吉祥。<br>《象辞》说：以无妄的态度前去，是因为其心志端正，必能实现。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，做事刚刚起步，心思纯洁，没有沾染功利与套路。凭借这股诚恳踏实的冲劲去办事，必然能得到他人的认可和好运的眷顾。</p>
-<h3 id="【六二】"><a href="#【六二】" class="headerlink" title="【六二】"></a>【六二】</h3><p><strong>六二：不耕获，不菑畲，则利有攸往。</strong><br><strong>象曰：不耕获，未富也。</strong></p>
-<p><strong>释义</strong><br>六二：不在耕种时就贪求收获（不耕获），不在刚开垦荒地时就企望它变成熟田（不菑畲，菑音zī，开荒；畲音shē，熟田）。抱着这种不急功近利的心态前去，是有利的。<br>《象辞》说：不贪求收获，说明不以追求财富和结果为唯一目的（只问耕耘，不问收获）。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，掌握了做事的最高境界——专注过程，看淡结果。在项目或人际交往中，不带着极强的功利心去算计投入产出比。你只管把手头的事情做好，顺其自然，结果往往会给你意外的惊喜。</p>
-<h3 id="【六三】"><a href="#【六三】" class="headerlink" title="【六三】"></a>【六三】</h3><p><strong>六三：无妄之灾，或系之牛，行人之得，邑人之灾。</strong><br><strong>象曰：行人得牛，邑人灾也。</strong></p>
-<p><strong>释义</strong><br>六三：遭遇了意想不到的灾祸（无妄之灾）。就像有人把牛拴在村里，结果被过路的行人顺手牵羊偷走了，同村的人却因此受到牵连，背了黑锅。<br>《象辞》说：行人白捡了牛，同村的人却遭遇了无妄之灾。</p>
-<p><strong>北宋易学家邵雍解</strong><br>凶：得此爻者，运气极差。你明明什么都没做错（没有妄为），却遭遇了“躺枪”或背黑锅（无妄之灾）。此时讲理是没用的，只能破财消灾，调整心态，认清这就是生活中的随机概率事件。</p>
-<h3 id="【九四】"><a href="#【九四】" class="headerlink" title="【九四】"></a>【九四】</h3><p><strong>九四：可贞，无咎。</strong><br><strong>象曰：可贞无咎，固有之也。</strong></p>
-<p><strong>释义</strong><br>九四：能够坚守正道（不被外界的妄念诱惑），没有灾难。<br>《象辞》说：能够坚守正道而没有灾难，是因为九四原本就拥有这种刚正的品德。</p>
-<p><strong>北宋易学家邵雍解</strong><br>平&#x2F;吉：得此爻者，身处名利场或复杂的环境之中，身边可能充满了各种走捷径的诱惑。只要你能稳住心神，不盲从、不贪婪，坚守自己的底线和规矩，就能避开暗藏的雷区。</p>
-<h3 id="【九五】"><a href="#【九五】" class="headerlink" title="【九五】"></a>【九五】</h3><p><strong>九五：无妄之疾，勿药有喜。</strong><br><strong>象曰：无妄之药，不可试也。</strong></p>
-<p><strong>释义</strong><br>九五：没有妄为却生了病，不需要吃药，它自然会痊愈（有喜）。<br>《象辞》说：没有病因却乱吃药，这是绝不能尝试的。</p>
-<p><strong>北宋易学家邵雍解</strong><br>大吉：得此爻者，可能会遇到事业、健康或感情上突如其来的小波折。但此时千万不要惊慌失措、病急乱投医（勿药）。这是系统在自动排毒或自我调节，乱干预反而会把事情搞砸。保持定力，顺其自然，危机很快会自动解除。</p>
-<h3 id="【上九】"><a href="#【上九】" class="headerlink" title="【上九】"></a>【上九】</h3><p><strong>上九：无妄，行有眚，无攸利。</strong><br><strong>象曰：无妄之行，穷之灾也。</strong></p>
-<p><strong>释义</strong><br>上九：虽然没有妄念，但在此时采取行动依然会有灾祸，没有什么好处。<br>《象辞》说：没有妄念却去行动带来灾祸，是因为事物已经发展到了穷尽的尽头。</p>
-<p><strong>北宋易学家邵雍解</strong><br>凶：得此爻者，时机已经彻底不对了。这就好比冬天你非要去种地，虽然你极其勤奋、心无杂念，但因为违背了天时，行动注定会失败。此时宜静不宜动，该放手时必须放手。</p>
-<h2 id="四、-个人感悟：只问耕耘，接受生活的“随机性”"><a href="#四、-个人感悟：只问耕耘，接受生活的“随机性”" class="headerlink" title="四、 个人感悟：只问耕耘，接受生活的“随机性”"></a>四、 个人感悟：只问耕耘，接受生活的“随机性”</h2><p>“无妄之灾”是我们今天最常用来形容倒霉的一个成语，但很多人并不了解它背后深刻的《易经》哲学。无妄卦是一部关于“如何应对得失心”的终极心理学指南。</p>
-<p>读完无妄卦，我得到了三个让人极度释然的底层认知：</p>
-<ol>
-<li><strong>顶级的心流体验：不耕获，不菑畲。</strong> 六二爻把人生的痛苦根源剖析得太透彻了。我们为什么焦虑？因为我们刚种下一颗种子，就天天盯着土面想要收割。无妄卦告诉我们，你只能决定过程的“纯正”（无妄），却无法强求结果（不耕获）。把你那颗极度功利的“预期心”放下，把精力收回到此时此刻的耕耘上，你反而会豁然开朗。</li>
-<li><strong>坦然接受“系统的BUG”（无妄之灾）：</strong> 六三爻的那个故事太扎心了——牛是别人偷的，锅是你背的。你明明没做错任何事，灾祸偏偏砸中了你。这很不公平对吧？但《易经》就是在冷酷地告诉你：这就是真实的世界！世界充满了随机性，不是每一份厄运都必须有一个“你做错了什么”的逻辑因果。遇到无妄之灾，别去钻牛角尖问“凭什么是我”，平静地跨过去，也是一种修行。</li>
-<li><strong>“勿药有喜”的松弛感：</strong> 很多时候，我们的人生陷入低谷、或者生意突然停滞，我们总觉得是自己生病了，于是疯狂地去报课、去折腾、去改变（吃药）。但九五爻说得极好：“无妄之药，不可试也。”有些低谷只是经济周期或自然规律的自我调节，你不去瞎折腾，它自己就能自愈；你一瞎折腾，反而弄巧成拙。</li>
+<hr>
+<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>天雷无妄的现代摘要是：真实无妄，顺其自然。心存不正则灾。 这只是帮助进入文本的提要，具体判断仍要回到卦辞、爻位与上下文。</p>
+<p><strong>1. 底层逻辑：真实无妄，顺其自然</strong></p>
+<p>程颐在释卦开头先从卦序、卦体和上下卦关系说明本卦之所以成立：</p>
+<blockquote>
+<p>无妄，《序卦》：復則不妄矣，故受之以无妄。復者反於道也，既復於道則合正理而无妄，故復之後，受之以无妄也。為卦乾上震下，震動也，動以天為无妄，動以人欲則妄矣，无妄之義大矣哉。</p>
+</blockquote>
+<p><strong>2. 卦辞与大象</strong></p>
+<p>卦辞给出全卦的基本处境与行动边界；大象则把卦象转化为修身、处事或治理的提示。程颐分别解释为：</p>
+<blockquote>
+<p>无妄者至誠也，至誠者天之道也。天之化育萬物，生生不窮，各正其性命，乃无妄也。人能合无妄之道，則所謂與天地合其德也。无妄有大亨之理，君子行无妄之道，則可以致大亨矣。无妄，天之道也，卦言人由无妄之道也。利貞，法无妄之道，利在貞正，失貞正則妄也。雖无邪心，茍不合正理，則妄也，乃邪心也，故有匪正則為過眚。既已无妄，不宜有往，往則妄也。</p>
+<p>雷行於天下，陰陽交和相薄而成聲，於是驚蟄藏振，萌芽發生，萬物其所賦與，洪纖高下，各正其性命，无有差妄。物與，无妄也。先王觀天下，雷行發生，賦與之象，而以茂對天時，養育萬物，使各得其宜，如天與之无妄也。茂，盛也。茂對之為言，猶盛行永言之比。對時，謂順合天時。天道生萬物，各得其性命而不妄。王者體天之道，養育人民，以至昆蟲草木，使各得其宜，乃對時育物之道也。</p>
+</blockquote>
+<p><strong>3. 邵雍易学旁证</strong></p>
+<p>邵雍在《皇极经世·观物外篇》中说：</p>
+<blockquote>
+<p>“夫卦，各有性有体，然皆不离乾坤之门。”</p>
+<p>“君子于易，玩象、玩数、玩辞、玩意。”</p>
+</blockquote>
+<p>这两段是邵雍讨论读《易》方法的通论，并非针对天雷无妄所下的吉凶断语。放在这里作为旁证，是提醒我们同时观察卦象、数位、辞义与整体意旨，不能只截取一句话作孤立判断。</p>
+<hr>
+<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初九】"><a href="#【初九】" class="headerlink" title="【初九】"></a>【初九】</h3><p><strong>初九：无妄，往吉。</strong></p>
+<p><strong>象曰：无妄之往，得志也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“无妄，往吉。”作为这一阶段的核心情境；《小象》又以“无妄之往，得志也。”点明观察角度。程颐解释此爻的切入点是：“九以陽剛為主於內，无妄之象，以剛實變柔而居內，中誠不妄者也，以无妄而往，何所不吉。卦辭言不利有攸往，謂既无妄，不可復有往也。過則妄矣。爻言往吉，謂以无妄之道而行則吉也。”爻辞中出现“吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>九以陽剛為主於內，无妄之象，以剛實變柔而居內，中誠不妄者也，以无妄而往，何所不吉。卦辭言不利有攸往，謂既无妄，不可復有往也。過則妄矣。爻言往吉，謂以无妄之道而行則吉也。</p>
+<p>以无妄而往，无不得其志也。蓋誠之於物，无不能動，以之修身則身正，以之治事則事得，其理以之臨人則人感而化，无所往而不得其志也。</p>
+</blockquote>
+<p>从现代阅读角度看，初爻处在事情开端，适合先辨明基础、条件与时机，不宜把局部迹象过早当成最终结论。</p>
+<h3 id="【六二】"><a href="#【六二】" class="headerlink" title="【六二】"></a>【六二】</h3><p><strong>六二：不耕穫，不菑畬，則利有攸往。</strong></p>
+<p><strong>象曰：不耕穫，未富也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“不耕穫，不菑畬，則利有攸往。”作为这一阶段的核心情境；《小象》又以“不耕穫，未富也。”点明观察角度。程颐解释此爻的切入点是：“凡理之所然者非妄也。人所欲為者，乃妄也，故以耕穫菑畬譬之。六二居中得正，又應五之中正，居動體而柔順。為動能順乎中正，乃无妄者也，故極言无妄之義，耕農之始穫其成終也。田一歲曰菑，三歲曰畬。不耕而穫，不菑而畬，謂不首造其事，因其事理所當然也。首造其事，則是人心所作為，乃妄也。因事之當然，則是順理應物，非妄也。穫與畬是也。蓋耕則必有獲，菑則必有畬，是事理之固然，非心意之所造作也。……”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>凡理之所然者非妄也。人所欲為者，乃妄也，故以耕穫菑畬譬之。六二居中得正，又應五之中正，居動體而柔順。為動能順乎中正，乃无妄者也，故極言无妄之義，耕農之始穫其成終也。田一歲曰菑，三歲曰畬。不耕而穫，不菑而畬，謂不首造其事，因其事理所當然也。首造其事，則是人心所作為，乃妄也。因事之當然，則是順理應物，非妄也。穫與畬是也。蓋耕則必有獲，菑則必有畬，是事理之固然，非心意之所造作也。或曰聖人制作，以利天下者，皆造端也，豈非妄乎？曰：聖人隨時制作，合乎風氣之宜，未嘗先時而開之也，若不待時，則一聖人足以盡為矣，豈待累聖繼作也。時乃事之端，聖人隨時而為也。</p>
+<p>未者，非必之辭。臨卦曰：未順命是也。不耕而穫，不菑而畬，因其事之當然，既耕則必有穫，既菑則必成畬，非必以穫畬之富而為也。其始耕菑，乃設心在於求穫畬，是以其富也。心有欲而為者則妄也。</p>
+</blockquote>
+<p>从现代阅读角度看，二爻进入落实阶段，通常要把行动放回中正、协作与可持续的尺度中衡量。</p>
+<h3 id="【六三】"><a href="#【六三】" class="headerlink" title="【六三】"></a>【六三】</h3><p><strong>六三：无妄之災，或系之牛，行人之得，邑人之災。</strong></p>
+<p><strong>象曰：行人得牛，邑人災也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“无妄之災，或系之牛，行人之得，邑人之災。”作为这一阶段的核心情境；《小象》又以“行人得牛，邑人災也。”点明观察角度。程颐解释此爻的切入点是：“三以陰柔而不中正，是為妄者也。又志應於上，欲也，亦妄也。在无妄之道，為災害也。人之妄動由有欲也，妄動而得，亦必有失，雖使得其所利，其動而妄，失已大矣，況復凶悔隨之乎。知者見妄之得，則知其失，必與稱也，故聖人因六三有妄之象，而發明其理，云无妄之災。或繫之牛，行人之得，邑人之災，言如三之為妄，乃无妄之災害也。設如有得，其失隨至，如或繫之牛。或謂：設，或也。或繫得牛，行人得之以為有得。邑人失牛，乃是災也。借使邑人繫得馬，則行人失馬，乃是災也。言有得，則有失，不足以為得也。……”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>三以陰柔而不中正，是為妄者也。又志應於上，欲也，亦妄也。在无妄之道，為災害也。人之妄動由有欲也，妄動而得，亦必有失，雖使得其所利，其動而妄，失已大矣，況復凶悔隨之乎。知者見妄之得，則知其失，必與稱也，故聖人因六三有妄之象，而發明其理，云无妄之災。或繫之牛，行人之得，邑人之災，言如三之為妄，乃无妄之災害也。設如有得，其失隨至，如或繫之牛。或謂：設，或也。或繫得牛，行人得之以為有得。邑人失牛，乃是災也。借使邑人繫得馬，則行人失馬，乃是災也。言有得，則有失，不足以為得也。行人邑人，但言有得則有失，非以為彼已也，妄得之福，災亦隨之。妄得之得，失亦稱之，固不足以為得也，人能知此，則不為妄動矣。</p>
+<p>行人得牛，乃邑人之災也。有得則有失，何足以為得乎。</p>
+</blockquote>
+<p>从现代阅读角度看，三爻处在内卦将尽的转换处，进退压力往往同时出现，尤其需要控制冒进与失位的风险。</p>
+<h3 id="【九四】"><a href="#【九四】" class="headerlink" title="【九四】"></a>【九四】</h3><p><strong>九四：可貞，无咎。</strong></p>
+<p><strong>象曰：可貞无咎，固有之也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“可貞，无咎。”作为这一阶段的核心情境；《小象》又以“可貞无咎，固有之也。”点明观察角度。程颐解释此爻的切入点是：“四剛陽而居乾體，復无應與，无妄者也。剛而无私，豈有妄乎。可貞固守此，自无咎也。九居陰得為正乎？曰：以陽居乾體，若復處剛，則為過矣。過則妄也，居四无尚剛之志也。可貞與利貞不同。可貞，謂其所處，可貞固守之。利貞，謂利於貞也。”爻辞中出现“无咎”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>四剛陽而居乾體，復无應與，无妄者也。剛而无私，豈有妄乎。可貞固守此，自无咎也。九居陰得為正乎？曰：以陽居乾體，若復處剛，則為過矣。過則妄也，居四无尚剛之志也。可貞與利貞不同。可貞，謂其所處，可貞固守之。利貞，謂利於貞也。</p>
+<p>貞固守之則无咎也。</p>
+</blockquote>
+<p>从现代阅读角度看，四爻由内转外，开始接近全局事务与主事位置，行动之前宜先建立信任并审慎辨势。</p>
+<h3 id="【九五】"><a href="#【九五】" class="headerlink" title="【九五】"></a>【九五】</h3><p><strong>九五：无妄之疾，勿藥有喜。</strong></p>
+<p><strong>象曰：无妄之藥，不可試也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“无妄之疾，勿藥有喜。”作为这一阶段的核心情境；《小象》又以“无妄之藥，不可試也。”点明观察角度。程颐解释此爻的切入点是：“九以中正當尊位，下復以中正順應之，可謂无妄之至者也。其道无以加矣。疾為之病者也。以九五之无妄，如其有疾，勿以藥治，則有喜也。人之有疾，則以藥石攻去其邪，以養其正。若氣體平和，本无疾病，而攻治之，則反害其正矣，故勿藥則有喜也。有喜謂疾自亡也。无妄之所謂疾者，謂若治之，而不治，率之而不從，化之而不革，以妄而為无妄之疾。舜之有苗，周公之管蔡，孔子之叔孫，武叔是也。既已无妄而有疾之者，則當自如。无妄之疾，不足患也。若遂自攻治，乃是渝其无妄，而遷於妄也。……”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>九以中正當尊位，下復以中正順應之，可謂无妄之至者也。其道无以加矣。疾為之病者也。以九五之无妄，如其有疾，勿以藥治，則有喜也。人之有疾，則以藥石攻去其邪，以養其正。若氣體平和，本无疾病，而攻治之，則反害其正矣，故勿藥則有喜也。有喜謂疾自亡也。无妄之所謂疾者，謂若治之，而不治，率之而不從，化之而不革，以妄而為无妄之疾。舜之有苗，周公之管蔡，孔子之叔孫，武叔是也。既已无妄而有疾之者，則當自如。无妄之疾，不足患也。若遂自攻治，乃是渝其无妄，而遷於妄也。五既處无妄之極，故惟戒在動，動則妄矣。</p>
+<p>人之有妄，理必修改，既无妄矣，復藥以治之，是反為妄也。其可用乎，故云不可試也。試，暫用也，猶曰少嘗之也。</p>
+</blockquote>
+<p>从现代阅读角度看，五爻居于全卦关键位置，重点在承担责任、守住中道，并使个人能力真正服务于整体。</p>
+<h3 id="【上九】"><a href="#【上九】" class="headerlink" title="【上九】"></a>【上九】</h3><p><strong>上九：无妄，行有眚，无攸利。</strong></p>
+<p><strong>象曰：无妄之行，窮之災也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“无妄，行有眚，无攸利。”作为这一阶段的核心情境；《小象》又以“无妄之行，窮之災也。”点明观察角度。程颐解释此爻的切入点是：“上九居卦之終，无妄之極者也。極而復行，過於理也，過於理則妄也。故上九而行，則有過眚而无所利矣。”爻辞中出现“无攸利”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>上九居卦之終，无妄之極者也。極而復行，過於理也，過於理則妄也。故上九而行，則有過眚而无所利矣。</p>
+<p>无妄既極，而復加進，乃為妄矣。是窮極而為災害也。</p>
+</blockquote>
+<p>从现代阅读角度看，上爻表示一卦发展已到极处，最需要防止过度、僵化与不知转圜，为下一阶段留下余地。</p>
+<hr>
+<h2 id="四、-个人感悟"><a href="#四、-个人感悟" class="headerlink" title="四、 个人感悟"></a>四、 个人感悟</h2><p>真实无妄，顺其自然。心存不正则灾。 对我来说，天雷无妄最值得反复体会的，不是把“吉”或“凶”当作固定答案，而是看清一个处境如何随位置、关系与行动方式而变化。六爻从初到上展示了不同阶段：同一原则放在不同位置，结果可能完全不同。</p>
+<p>把它用于今天的学习、工作或关系判断时，我更愿意把卦辞当作问题框架，把爻辞当作阶段提醒：先确认自己身处哪一层，再决定进、退、守、变。这样读《易》，比直接追求一个预言式结论更稳妥。</p>
+<hr>
+<h2 id="五、-参考文献与版本说明"><a href="#五、-参考文献与版本说明" class="headerlink" title="五、 参考文献与版本说明"></a>五、 参考文献与版本说明</h2><ol>
+<li>《周易》经文及《象传》，本卦原文取自：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/wiki/%E5%91%A8%E6%98%93/%E6%97%A0%E5%A6%84">维基文库《周易》本卦页面</a>；并参校<a target="_blank" rel="noopener" href="https://ctext.org/book-of-changes/zh">中国哲学书电子化计划《周易》</a>。</li>
+<li>北宋程颐《程氏易传》（亦称《伊川易传》），本卦参校：<a target="_blank" rel="noopener" href="https://www.taijizhidian.com/chengxu/liushisigua/1558.html">【周易上经】第25卦-无妄䷘天雷无妄（震下乾上）-[北宋]程颐撰《程氏易传•卷二》</a>。</li>
+<li>北宋邵雍《皇极经世·观物外篇》，旁证原文：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/zh-hans/%E7%9A%87%E6%A5%B5%E7%B6%93%E4%B8%96/%E5%8D%B7%E5%8D%81%E4%B8%89">维基文库《皇极经世》卷十三</a>。</li>
 </ol>
-<p>天地雷霆，万物生长，它们从不问结果，只是自然而然地活着。在这个充满欲望和算计的时代里，修一种“不欺不妄”的真诚，留一份“勿药有喜”的松弛，足矣。</p>
+<blockquote>
+<p>版本说明：经典原文与程颐文字保留底本中的繁体字、异体字及个别古字；“释义”“现代阅读角度”和“个人感悟”均为现代整理，不冒充古人原话。“邵雍易学旁证”只引用可定位的易学通论，不作逐卦、逐爻的托名断语。</p>
+</blockquote>
 
     </div>
 
@@ -362,7 +473,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E4%B9%9D%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初九】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【六二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【六三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【九四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【九五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E4%B9%9D%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上九】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F%EF%BC%9A%E5%8F%AA%E9%97%AE%E8%80%95%E8%80%98%EF%BC%8C%E6%8E%A5%E5%8F%97%E7%94%9F%E6%B4%BB%E7%9A%84%E2%80%9C%E9%9A%8F%E6%9C%BA%E6%80%A7%E2%80%9D"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟：只问耕耘，接受生活的“随机性”</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E4%B9%9D%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初九】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【六二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【六三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【九四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B9%9D%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【九五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E4%B9%9D%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上九】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E4%B8%8E%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E"><span class="nav-number">5.</span> <span class="nav-text">五、 参考文献与版本说明</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -378,7 +489,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -463,6 +574,10 @@
 
 
 
+  
+<script src="/js/local-search.js"></script>
+
+
 
 
 
@@ -491,6 +606,15 @@
 
 <script>
   (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
     var loadingBox = document.getElementById('loading-box');
     var root = document.documentElement;
 
@@ -521,8 +645,9 @@
 
 <script src="/js/latex-tool.js?v=20260805c"></script>
 <script src="/js/translate-tool.js?v=20260805a"></script>
-<script src="/js/hexagram-index.js?v=20260806a"></script>
-<script src="/js/divination-tool.js?v=20260810a"></script>
+<script src="/js/hexagram-post-map.js?v=20260830a"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
 
 </body>
 </html>

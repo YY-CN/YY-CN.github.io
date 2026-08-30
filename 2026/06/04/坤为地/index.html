@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="地势坤，君子以厚德载物。">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="地势坤，君子以厚德载物。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-04T13:18:35.000Z">
-<meta property="article:modified_time" content="2026-06-04T16:00:37.128Z">
+<meta property="article:modified_time" content="2026-08-23T19:20:20.188Z">
 <meta property="article:author" content="Hyacinth">
 <meta property="article:tag" content="学习笔记">
 <meta property="article:tag" content="六十四卦">
@@ -127,6 +127,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -166,11 +167,38 @@
     <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -224,7 +252,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-06-05 00:00:37" itemprop="dateModified" datetime="2026-06-05T00:00:37+08:00">2026-06-05</time>
+                <time title="修改时间：2026-08-24 03:20:20" itemprop="dateModified" datetime="2026-08-24T03:20:20+08:00">2026-08-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -236,7 +264,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>12 分钟</span>
+            </span>
             <div class="post-description">地势坤，君子以厚德载物。</div>
 
         </div>
@@ -249,44 +291,115 @@
 
       
         <h2 id="一、-经典原文"><a href="#一、-经典原文" class="headerlink" title="一、 经典原文"></a>一、 经典原文</h2><blockquote>
-<p><strong>【卦辞】</strong><br>坤：元，亨，利牝马之贞。君子有攸往，先迷后得主，利。西南得朋，东北丧朋。安贞，吉。</p>
-<p><strong>【爻辞】</strong><br>初六：履霜，坚冰至。<br>六二：直，方，大，不习无不利。<br>六三：含章可贞。或从王事，无成有终。<br>六四：括囊，无咎，无誉。<br>六五：黄裳，元吉。<br>上六：龙战于野，其血玄黄。<br>用六：利永贞。</p>
-<p><strong>【大象传】</strong><br>地势坤，君子以厚德载物。</p>
+<p><strong>【卦辞】</strong><br>坤：元亨。利牝馬之貞。君子有攸往，先迷後得主。利西南得朋，東北喪朋。安貞，吉。</p>
+<p><strong>【爻辞】</strong><br>初六：履霜，堅冰至。<br>六二：直方大，不習无不利。<br>六三：含章，可貞。或從王事，无成有終。<br>六四：括囊，无咎无譽。<br>六五：黃裳，元吉。<br>上六：龍戰于野，其血玄黃。<br>用六：利永貞。</p>
+<p><strong>【大象传】</strong><br>象曰：地勢坤，君子以厚德載物。</p>
 </blockquote>
-<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>读完原文，我们可能会觉得字面意思有些生涩。其实，它的核心全在开头的四个字和结尾的一句话里。</p>
-<p><strong>1. 底层逻辑：厚德载物</strong><br>《象传》里的“地势坤，君子以厚德载物”是坤卦的灵魂，它与乾卦的“自强不息”是《易经》中最著名的两句话。它告诉我们，大地的气势宽厚和顺，君子应该效法大地，以极其深厚的德行来承载和包容万物。</p>
-<p><strong>2. 发展规律：柔顺与包容</strong><br>卦辞中的“牝马（母马）”，是坤卦的最佳象征：温和、柔顺、坚韧且耐力极强。“先迷后得主”意味着，在坤卦的状态下，不要急于冲在前面去领导别人，而是要甘居人后，懂得配合与辅助，找到正确的主心骨，这样反而能获得极大的利益与成功。</p>
-<p>只要我们怀揣着包容柔顺的心，并且<strong>始终坚守正道、脚踏实地</strong>（安贞），事情的发展最终就会迎来吉祥的结果。</p>
-<p><strong>3.北宋易学家邵雍解</strong><br>柔顺和静，宽厚包容；顺势而为，切忌强出头。<br>得此卦者，明察事物的发展规律，踏实努力，则能成功。宜静不宜动，宜顺从不宜主张。</p>
-<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初六】"><a href="#【初六】" class="headerlink" title="【初六】"></a>【初六】</h3><p><strong>初六：履霜，坚冰至。</strong><br><strong>象曰：履霜坚冰，阴始凝也；驯致其道，至坚冰也。</strong></p>
-<p><strong>释义</strong><br>初六：脚下踩到了微霜，就知道坚冰封冻的严冬即将到来。<br>《象辞》说：踩到微霜就知道坚冰将至，说明阴气开始凝结了；按照这个规律发展下去，必然会结成坚冰。这是在教人防微杜渐。</p>
-<p><strong>北宋易学家邵雍解</strong><br>凶：得此爻者，宜谨言慎行，防微杜渐。商人防破财，做官防小人，凡事要有未雨绸缪的意识。</p>
-<h3 id="【六二】"><a href="#【六二】" class="headerlink" title="【六二】"></a>【六二】</h3><p><strong>六二：直，方，大，不习无不利。</strong><br><strong>象曰：六二之动，直以方也；不习无不利，地道光也。</strong></p>
-<p><strong>释义</strong><br>六二：平直、端正、广大。顺应自然，不需要人为地反复修习、造作，也没有什么不利的。<br>《象辞》说：六二爻的变动，是平直而端正的；不刻意修习也无不利，说明大地的法则光辉盛大。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，坦诚待人，顺其自然，多能获得好结果。做人做事只要心底纯正，无需伪装，自然亨通。</p>
-<h3 id="【六三】"><a href="#【六三】" class="headerlink" title="【六三】"></a>【六三】</h3><p><strong>六三：含章可贞。或从王事，无成有终。</strong><br><strong>象曰：含章可贞，以时发也；或从王事，知光大也。</strong></p>
-<p><strong>释义</strong><br>六三：内心蕴藏着美好的才德，坚守正道。如果跟从君王做事，不居功自傲，虽然不把功劳归于自己，但最终会有好的结局。<br>《象辞》说：蕴藏才华坚守正道，要等待合适的时机才展现；辅佐君王做事，智慧必将得到光大。</p>
-<p><strong>北宋易学家邵雍解</strong><br>平：得此爻者，宜低调行事，不露锋芒。在职场中默默奉献，不要抢上司的风头，终能得吉。</p>
-<h3 id="【六四】"><a href="#【六四】" class="headerlink" title="【六四】"></a>【六四】</h3><p><strong>六四：括囊，无咎，无誉。</strong><br><strong>象曰：括囊无咎，慎不害也。</strong></p>
-<p><strong>释义</strong><br>六四：像扎紧口袋一样，不说也不动。这样虽然得不到赞誉，但也不会招来灾难。<br>《象辞》说：扎紧口袋没有灾难，是因为谨慎从事才不会受到伤害。比喻在危机四伏时要明哲保身。</p>
-<p><strong>北宋易学家邵雍解</strong><br>平：得此爻者，宜缄默自守，谨言慎行，退避三舍。处于多事之秋，少说话多做事方可保平安。</p>
-<h3 id="【六五】"><a href="#【六五】" class="headerlink" title="【六五】"></a>【六五】</h3><p><strong>六五：黄裳，元吉。</strong><br><strong>象曰：黄裳元吉，文在中也。</strong></p>
-<p><strong>释义</strong><br>六五：穿着黄色的下衣（黄色在古代是中正之色，裳是下衣代表谦逊），大吉大利。<br>《象辞》说：穿黄色下衣大吉大利，是因为美好的德行蕴藏在心中，外在却十分谦卑。</p>
-<p><strong>北宋易学家邵雍解</strong><br>大吉：得此爻者，谦虚中正，大吉大利。求名求利皆遂意，做官的会受重用，事业能达顶峰。</p>
-<h3 id="【上六】"><a href="#【上六】" class="headerlink" title="【上六】"></a>【上六】</h3><p><strong>上六：龙战于野，其血玄黄。</strong><br><strong>象曰：龙战于野，其道穷也。</strong></p>
-<p><strong>释义</strong><br>上六：群龙在荒野中激烈交战，流出黑黄色的鲜血。<br>《象辞》说：龙在荒野交战，说明阴气极盛，妄图与阳气争夺主导权，必然两败俱伤，说明已经走到穷途末路了。</p>
-<p><strong>北宋易学家邵雍解</strong><br>凶：得此爻者，面临激烈的冲突与竞争，两败俱伤，运势极差。切忌与人争斗，防官非、灾祸。</p>
-<h3 id="【用六】"><a href="#【用六】" class="headerlink" title="【用六】"></a>【用六】</h3><p><strong>用六：利永贞。</strong><br><strong>象曰：用六永贞，以大终也。</strong></p>
-<p><strong>释义</strong><br>用六：永远坚守正道是有利的。<br>《象辞》说：用六的永远坚守正道，说明以此作为伟大的结局。坤卦全阴，只有始终保持柔顺中正的态度，结局才能圆满。</p>
-<p><strong>北宋易学家邵雍解</strong><br>吉：得此爻者，坚守正道，始终如一，方能长久。做事务必从一而终。</p>
-<h2 id="四、-个人感悟：甘当配角，也是一种大智慧"><a href="#四、-个人感悟：甘当配角，也是一种大智慧" class="headerlink" title="四、 个人感悟：甘当配角，也是一种大智慧"></a>四、 个人感悟：甘当配角，也是一种大智慧</h2><p>如果说乾卦教我们的是“当大哥的哲学”（自强、奋斗、领导），那么坤卦教给我们的就是“当二把手的哲学”（配合、包容、承载）。</p>
-<p>在现实生活中，并不是每个人在每个阶段都能“飞龙在天”。很多时候，我们需要扮演坤卦的角色。</p>
-<ul>
-<li>当我们察觉到不利的苗头时，要懂得“履霜坚冰至”的<strong>警惕</strong>；</li>
-<li>当我们身处复杂的职场斗争时，要学会“括囊无咎”的<strong>闭嘴</strong>；</li>
-<li>当我们协助领导或团队完成大项目时，要具备“含章可贞，无成有终”的<strong>格局</strong>（不抢功，懂让利）。</li>
-</ul>
-<p>坤卦告诉我们：柔弱和包容并不是无能，而是一种能够承载万物、长久发展的深厚力量。学会低调做事，厚积薄发，不争锋芒，往往能走得更远。</p>
+<hr>
+<h2 id="二、-卦辞与核心精神"><a href="#二、-卦辞与核心精神" class="headerlink" title="二、 卦辞与核心精神"></a>二、 卦辞与核心精神</h2><p>坤为地的现代摘要是：柔顺包容，厚德载物。宜静守，不宜躁进。 这只是帮助进入文本的提要，具体判断仍要回到卦辞、爻位与上下文。</p>
+<p><strong>1. 底层逻辑：柔顺包容，厚德载物</strong></p>
+<p>程颐在释卦开头先从卦序、卦体和上下卦关系说明本卦之所以成立：</p>
+<blockquote>
+<p>坤，乾之對也。四德同，而貞體則異。乾以剛固為貞，坤則柔順而貞。牝馬柔順而健行，故取其象曰牝馬之貞。</p>
+</blockquote>
+<p><strong>2. 卦辞与大象</strong></p>
+<p>卦辞给出全卦的基本处境与行动边界；大象则把卦象转化为修身、处事或治理的提示。程颐分别解释为：</p>
+<blockquote>
+<p>坤，乾之對也。四德同，而貞體則異。乾以剛固為貞，坤則柔順而貞。牝馬柔順而健行，故取其象曰牝馬之貞。</p>
+<p>坤道之大猶乾也，非聖人孰能體之？地厚而其勢順傾，故取其順厚之象，而云地勢坤也。君子觀坤厚之象，以深厚之德，容載庶物。</p>
+</blockquote>
+<p><strong>3. 邵雍易学旁证</strong></p>
+<p>邵雍在《皇极经世·观物外篇》中说：</p>
+<blockquote>
+<p>“夫卦，各有性有体，然皆不离乾坤之门。”</p>
+<p>“君子于易，玩象、玩数、玩辞、玩意。”</p>
+</blockquote>
+<p>这两段是邵雍讨论读《易》方法的通论，并非针对坤为地所下的吉凶断语。放在这里作为旁证，是提醒我们同时观察卦象、数位、辞义与整体意旨，不能只截取一句话作孤立判断。</p>
+<hr>
+<h2 id="三、-爻辞拆解"><a href="#三、-爻辞拆解" class="headerlink" title="三、 爻辞拆解"></a>三、 爻辞拆解</h2><h3 id="【初六】"><a href="#【初六】" class="headerlink" title="【初六】"></a>【初六】</h3><p><strong>初六：履霜，堅冰至。</strong></p>
+<p><strong>象曰：履霜堅冰，陰始凝也。馴致其道，至堅冰也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“履霜，堅冰至。”作为这一阶段的核心情境；《小象》又以“履霜堅冰，陰始凝也。馴致其道，至堅冰也。”点明观察角度。程颐解释此爻的切入点是：“陰爻稱六，陰之盛也。八則陽生矣，非純盛也。陰始生於下，至微也。聖人於陰之始生，以其將長，則為之戒。陰之始凝而為霜，履霜則當知陰漸盛而至堅冰矣。猶小人始雖甚微，不可使長，長則至於盛也。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>陰爻稱六，陰之盛也。八則陽生矣，非純盛也。陰始生於下，至微也。聖人於陰之始生，以其將長，則為之戒。陰之始凝而為霜，履霜則當知陰漸盛而至堅冰矣。猶小人始雖甚微，不可使長，長則至於盛也。</p>
+<p>陰始凝而為霜，漸盛則至於堅冰。小人雖微，長則漸至於盛，故戒於初。馴謂習，習而至於盛，習因循也。</p>
+</blockquote>
+<p>从现代阅读角度看，初爻处在事情开端，适合先辨明基础、条件与时机，不宜把局部迹象过早当成最终结论。</p>
+<h3 id="【六二】"><a href="#【六二】" class="headerlink" title="【六二】"></a>【六二】</h3><p><strong>六二：直方大，不習无不利。</strong></p>
+<p><strong>象曰：六二之動，直以方也。不習无不利，地道光也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“直方大，不習无不利。”作为这一阶段的核心情境；《小象》又以“六二之動，直以方也。不習无不利，地道光也。”点明观察角度。程颐解释此爻的切入点是：“二，陰位在下，故為坤之主，統言坤道中正在下，地之道也。以直方大三者形容其德用，盡地之道矣。由直方大，故不習而无所不利。不習謂其自然，在坤道則莫之為而為也，在聖人則從容中道也。直方大，孟子所謂至大至剛以直也。在坤體，故以方易剛，猶貞加牝馬也。言氣，則先大。大，氣之體也。於坤，則先直方，由直方而大也。直方大足以盡地道，在人識之耳。乾坤純體，以位相應。二，坤之主，故不取五應，不以君道處五也。乾則二五相應。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>二，陰位在下，故為坤之主，統言坤道中正在下，地之道也。以直方大三者形容其德用，盡地之道矣。由直方大，故不習而无所不利。不習謂其自然，在坤道則莫之為而為也，在聖人則從容中道也。直方大，孟子所謂至大至剛以直也。在坤體，故以方易剛，猶貞加牝馬也。言氣，則先大。大，氣之體也。於坤，則先直方，由直方而大也。直方大足以盡地道，在人識之耳。乾坤純體，以位相應。二，坤之主，故不取五應，不以君道處五也。乾則二五相應。</p>
+<p>承天而動，直以方耳，直方則大矣。直方之義，其大无窮，地道光顯，其功順成。豈習而後利哉？</p>
+</blockquote>
+<p>从现代阅读角度看，二爻进入落实阶段，通常要把行动放回中正、协作与可持续的尺度中衡量。</p>
+<h3 id="【六三】"><a href="#【六三】" class="headerlink" title="【六三】"></a>【六三】</h3><p><strong>六三：含章，可貞。或從王事，无成有終。</strong></p>
+<p><strong>象曰：含章可貞，以時發也。或從王事，知光大也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“含章，可貞。或從王事，无成有終。”作为这一阶段的核心情境；《小象》又以“含章可貞，以時發也。或從王事，知光大也。”点明观察角度。程颐解释此爻的切入点是：“三居下之上，得位者也。為臣之道，當含晦其章美，有善則歸之於君，乃可常而得正。上无忌惡之心，下得柔順之道也。可貞謂可貞固守之，又可以常久而无悔咎也。或從上之事，不敢當其成功，惟奉事以守其終耳。守職以終其事，臣之道也。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>三居下之上，得位者也。為臣之道，當含晦其章美，有善則歸之於君，乃可常而得正。上无忌惡之心，下得柔順之道也。可貞謂可貞固守之，又可以常久而无悔咎也。或從上之事，不敢當其成功，惟奉事以守其終耳。守職以終其事，臣之道也。</p>
+<p>夫子懼人之守文而不達義也，又從而明之，言為臣處下之道，不當有其功善，必含晦其美，乃正而可常；然義所當為者，則以時而發，不有其功耳。不失其宜，乃以時也，非含藏終不為也。含而不為，不盡忠者也。</p>
+<p>或從王事，知光大也。</p>
+<p>《象》只舉上句解義，則并及下文，他卦皆然。或從王事，而能无成有終者，是其知之光大也。唯其知之光大，故能含晦。淺暗之人有善，唯恐人之不知，豈能含章也。</p>
+</blockquote>
+<p>从现代阅读角度看，三爻处在内卦将尽的转换处，进退压力往往同时出现，尤其需要控制冒进与失位的风险。</p>
+<h3 id="【六四】"><a href="#【六四】" class="headerlink" title="【六四】"></a>【六四】</h3><p><strong>六四：括囊，无咎无譽。</strong></p>
+<p><strong>象曰：括囊无咎，慎不害也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“括囊，无咎无譽。”作为这一阶段的核心情境；《小象》又以“括囊无咎，慎不害也。”点明观察角度。程颐解释此爻的切入点是：“四居近五之位，而无相得之義，乃上下閉隔之時。其自處以正，危疑之地也。若晦藏其知，如括結囊口而不露，則可得无咎，不然則有害也。既晦藏，則无譽矣。”爻辞中出现“无咎”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>四居近五之位，而无相得之義，乃上下閉隔之時。其自處以正，危疑之地也。若晦藏其知，如括結囊口而不露，則可得无咎，不然則有害也。既晦藏，則无譽矣。</p>
+<p>能慎如此，則无害也。</p>
+</blockquote>
+<p>从现代阅读角度看，四爻由内转外，开始接近全局事务与主事位置，行动之前宜先建立信任并审慎辨势。</p>
+<h3 id="【六五】"><a href="#【六五】" class="headerlink" title="【六五】"></a>【六五】</h3><p><strong>六五：黃裳，元吉。</strong></p>
+<p><strong>象曰：黃裳元吉，文在中也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“黃裳，元吉。”作为这一阶段的核心情境；《小象》又以“黃裳元吉，文在中也。”点明观察角度。程颐解释此爻的切入点是：“坤雖臣道，五實君位，故為之戒云，黃裳元吉。黃，中色。裳，下服。守中而居下，則元吉，謂守其分也。元，大而善也。爻象唯言守中居下則元吉，不盡發其義也。黃裳既元吉，則居尊為天下大凶可知。後之人未達，則此義晦矣，不得不辨也。五，尊位也。在他卦，六居五，或為柔順，或為文明，或為暗弱；在坤，則為居尊位。陰者臣道也，婦道也。臣居尊位，羿、莽是也，猶可言也。婦居尊位，女媧氏、武氏是也，非常之變，不可言也，故有黃裳之戒而不盡言也。……”爻辞中出现“元吉、吉”等判断语，它们都依附于本爻的时位与行动条件，不宜抽离上下文理解。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>坤雖臣道，五實君位，故為之戒云，黃裳元吉。黃，中色。裳，下服。守中而居下，則元吉，謂守其分也。元，大而善也。爻象唯言守中居下則元吉，不盡發其義也。黃裳既元吉，則居尊為天下大凶可知。後之人未達，則此義晦矣，不得不辨也。五，尊位也。在他卦，六居五，或為柔順，或為文明，或為暗弱；在坤，則為居尊位。陰者臣道也，婦道也。臣居尊位，羿、莽是也，猶可言也。婦居尊位，女媧氏、武氏是也，非常之變，不可言也，故有黃裳之戒而不盡言也。或疑在《革》，湯、武之事猶盡言之，獨於此不言，何也？曰：廢興，理之常也。以陰居尊位，非常之變也。</p>
+<p>黃中之文，在中不過也。內積至美而居下，故為元吉。</p>
+</blockquote>
+<p>从现代阅读角度看，五爻居于全卦关键位置，重点在承担责任、守住中道，并使个人能力真正服务于整体。</p>
+<h3 id="【上六】"><a href="#【上六】" class="headerlink" title="【上六】"></a>【上六】</h3><p><strong>上六：龍戰于野，其血玄黃。</strong></p>
+<p><strong>象曰：龍戰于野，其道窮也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“龍戰于野，其血玄黃。”作为这一阶段的核心情境；《小象》又以“龍戰于野，其道窮也。”点明观察角度。程颐解释此爻的切入点是：“陰從陽者也，然盛極則抗而爭。六既極矣，復進不已，則必戰，故云戰于野。野謂進至於外也。既敵矣，必皆傷，故其血玄黃。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>陰從陽者也，然盛極則抗而爭。六既極矣，復進不已，則必戰，故云戰于野。野謂進至於外也。既敵矣，必皆傷，故其血玄黃。</p>
+<p>陰盛至於窮極，則必爭而傷也。</p>
+</blockquote>
+<p>从现代阅读角度看，上爻表示一卦发展已到极处，最需要防止过度、僵化与不知转圜，为下一阶段留下余地。</p>
+<h3 id="【用六】"><a href="#【用六】" class="headerlink" title="【用六】"></a>【用六】</h3><p><strong>用六：利永貞。</strong></p>
+<p><strong>象曰：用六永貞，以大終也。</strong></p>
+<p><strong>释义</strong></p>
+<p>本爻把“利永貞。”作为这一阶段的核心情境；《小象》又以“用六永貞，以大終也。”点明观察角度。程颐解释此爻的切入点是：“坤之用六，猶乾之用九，用陰之道也。陰道柔而難常，故用六之道，利在常永貞固。”本爻没有脱离语境的单一吉凶词，重点应放在它所描述的处境和行动条件上。</p>
+<p><strong>程颐《伊川易传》</strong></p>
+<blockquote>
+<p>坤之用六，猶乾之用九，用陰之道也。陰道柔而難常，故用六之道，利在常永貞固。</p>
+<p>陰既貞固不足，則不能永終。故用六之道，利在盛大於終，能大於終，乃永貞也。</p>
+</blockquote>
+<p>从现代阅读角度看，“用九”或“用六”从全卦整体变化立论，阅读时不应把它等同于普通的一条爻位。</p>
+<hr>
+<h2 id="四、-个人感悟"><a href="#四、-个人感悟" class="headerlink" title="四、 个人感悟"></a>四、 个人感悟</h2><p>柔顺包容，厚德载物。宜静守，不宜躁进。 对我来说，坤为地最值得反复体会的，不是把“吉”或“凶”当作固定答案，而是看清一个处境如何随位置、关系与行动方式而变化。六爻从初到上展示了不同阶段：同一原则放在不同位置，结果可能完全不同。</p>
+<p>把它用于今天的学习、工作或关系判断时，我更愿意把卦辞当作问题框架，把爻辞当作阶段提醒：先确认自己身处哪一层，再决定进、退、守、变。这样读《易》，比直接追求一个预言式结论更稳妥。</p>
+<hr>
+<h2 id="五、-参考文献与版本说明"><a href="#五、-参考文献与版本说明" class="headerlink" title="五、 参考文献与版本说明"></a>五、 参考文献与版本说明</h2><ol>
+<li>《周易》经文及《象传》，本卦原文取自：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/wiki/%E5%91%A8%E6%98%93/%E5%9D%A4">维基文库《周易》本卦页面</a>；并参校<a target="_blank" rel="noopener" href="https://ctext.org/book-of-changes/zh">中国哲学书电子化计划《周易》</a>。</li>
+<li>北宋程颐《程氏易传》（亦称《伊川易传》），本卦参校：<a target="_blank" rel="noopener" href="https://www.taijizhidian.com/chengxu/liushisigua/1534.html">【周易上经】第2卦-坤卦䷁坤卦为地（坤下坤上）-[北宋]程颐撰《程氏易传•卷一》</a>。</li>
+<li>北宋邵雍《皇极经世·观物外篇》，旁证原文：<a target="_blank" rel="noopener" href="https://zh.wikisource.org/zh-hans/%E7%9A%87%E6%A5%B5%E7%B6%93%E4%B8%96/%E5%8D%B7%E5%8D%81%E4%B8%89">维基文库《皇极经世》卷十三</a>。</li>
+</ol>
+<blockquote>
+<p>版本说明：经典原文与程颐文字保留底本中的繁体字、异体字及个别古字；“释义”“现代阅读角度”和“个人感悟”均为现代整理，不冒充古人原话。“邵雍易学旁证”只引用可定位的易学通论，不作逐卦、逐爻的托名断语。</p>
+</blockquote>
 
     </div>
 
@@ -372,7 +485,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E5%85%AD%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初六】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【六二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【六三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【六四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【六五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E5%85%AD%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上六】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E7%94%A8%E5%85%AD%E3%80%91"><span class="nav-number">3.7.</span> <span class="nav-text">【用六】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F%EF%BC%9A%E7%94%98%E5%BD%93%E9%85%8D%E8%A7%92%EF%BC%8C%E4%B9%9F%E6%98%AF%E4%B8%80%E7%A7%8D%E5%A4%A7%E6%99%BA%E6%85%A7"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟：甘当配角，也是一种大智慧</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%BB%8F%E5%85%B8%E5%8E%9F%E6%96%87"><span class="nav-number">1.</span> <span class="nav-text">一、 经典原文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8D%A6%E8%BE%9E%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%B2%BE%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、 卦辞与核心精神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%88%BB%E8%BE%9E%E6%8B%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">三、 爻辞拆解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%88%9D%E5%85%AD%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【初六】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%8C%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【六二】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%B8%89%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【六三】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E5%9B%9B%E3%80%91"><span class="nav-number">3.4.</span> <span class="nav-text">【六四】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%85%AD%E4%BA%94%E3%80%91"><span class="nav-number">3.5.</span> <span class="nav-text">【六五】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%8A%E5%85%AD%E3%80%91"><span class="nav-number">3.6.</span> <span class="nav-text">【上六】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E7%94%A8%E5%85%AD%E3%80%91"><span class="nav-number">3.7.</span> <span class="nav-text">【用六】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F"><span class="nav-number">4.</span> <span class="nav-text">四、 个人感悟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E4%B8%8E%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E"><span class="nav-number">5.</span> <span class="nav-text">五、 参考文献与版本说明</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -388,7 +501,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -473,6 +586,10 @@
 
 
 
+  
+<script src="/js/local-search.js"></script>
+
+
 
 
 
@@ -501,6 +618,15 @@
 
 <script>
   (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
     var loadingBox = document.getElementById('loading-box');
     var root = document.documentElement;
 
@@ -531,8 +657,9 @@
 
 <script src="/js/latex-tool.js?v=20260805c"></script>
 <script src="/js/translate-tool.js?v=20260805a"></script>
-<script src="/js/hexagram-index.js?v=20260806a"></script>
-<script src="/js/divination-tool.js?v=20260810a"></script>
+<script src="/js/hexagram-post-map.js?v=20260830a"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
 
 </body>
 </html>
