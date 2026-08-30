@@ -1,0 +1,313 @@
+.post-ai-summary {
+  --summary-brown: #9a6545;
+  --summary-brown-deep: #71472f;
+  --summary-ink: #4d4037;
+  --summary-muted: #817268;
+  align-items: flex-start;
+  display: flex;
+  gap: 12px;
+  margin: 21px 0 25px;
+  position: relative;
+}
+
+.post-ai-summary-visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.post-ai-summary-toggle {
+  align-items: center;
+  background: rgba(154, 101, 69, .11);
+  border: 1px solid rgba(154, 101, 69, .2);
+  border-radius: 11px;
+  color: var(--summary-brown);
+  cursor: pointer;
+  display: flex;
+  flex: 0 0 46px;
+  font-size: 20px;
+  height: 46px;
+  justify-content: center;
+  padding: 0;
+  transition: background .18s ease, border-color .18s ease, color .18s ease, transform .18s ease;
+  width: 46px;
+}
+
+.post-ai-summary-toggle:hover,
+.post-ai-summary-toggle[aria-expanded="true"] {
+  background: var(--summary-brown);
+  border-color: var(--summary-brown);
+  color: #fffaf5;
+}
+
+.post-ai-summary-toggle:hover {
+  transform: translateY(-1px);
+}
+
+.post-ai-summary-toggle:focus-visible {
+  box-shadow: 0 0 0 3px rgba(154, 101, 69, .16);
+  outline: 0;
+}
+
+.post-ai-summary-bubble {
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
+  background: rgba(249, 245, 238, .78);
+  border: 1px solid rgba(154, 101, 69, .18);
+  border-radius: 9px;
+  box-shadow: 0 8px 22px rgba(86, 65, 49, .07);
+  flex: 0 1 auto;
+  max-width: calc(100% - 58px);
+  min-width: 0;
+  position: relative;
+  transition: flex-grow .22s ease, width .22s ease;
+}
+
+.post-ai-summary-bubble::before,
+.post-ai-summary-bubble::after {
+  border-style: solid;
+  content: "";
+  height: 0;
+  position: absolute;
+  right: 100%;
+  top: 14px;
+  width: 0;
+}
+
+.post-ai-summary-bubble::before {
+  border-color: transparent rgba(154, 101, 69, .2) transparent transparent;
+  border-width: 8px 10px 8px 0;
+}
+
+.post-ai-summary-bubble::after {
+  border-color: transparent rgba(249, 245, 238, .94) transparent transparent;
+  border-width: 7px 9px 7px 0;
+  margin-top: 1px;
+}
+
+.post-ai-summary-prompt {
+  color: #66584f;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0;
+  padding: 11px 15px;
+}
+
+.post-ai-summary-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows .25s ease, opacity .18s ease;
+}
+
+.post-ai-summary-panel-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.post-ai-summary:not(.is-expanded) .post-ai-summary-panel {
+  display: none;
+}
+
+.post-ai-summary.is-expanded .post-ai-summary-bubble {
+  flex: 1 1 auto;
+}
+
+.post-ai-summary.is-expanded .post-ai-summary-prompt {
+  display: none;
+}
+
+.post-ai-summary.is-expanded .post-ai-summary-panel {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.post-ai-summary.is-expanded .post-ai-summary-panel-inner {
+  padding: 15px 17px 16px;
+}
+
+.post-ai-summary-heading {
+  align-items: flex-start;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.post-ai-summary-heading > div > span {
+  color: var(--summary-brown);
+  display: block;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .13em;
+  margin-bottom: 2px;
+}
+
+.post-ai-summary-heading h2 {
+  border: 0;
+  color: var(--summary-ink);
+  font-family: Georgia, "Noto Serif SC", "Songti SC", serif;
+  font-size: 17px;
+  line-height: 1.3;
+  margin: 0;
+  padding: 0;
+}
+
+.post-ai-summary-heading em {
+  background: rgba(154, 101, 69, .08);
+  border-radius: 999px;
+  color: #8b7769;
+  flex: 0 0 auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 9px;
+  font-style: normal;
+  padding: 4px 8px;
+}
+
+.post-ai-summary-heading em.is-loading {
+  color: #9a6545;
+}
+
+.post-ai-summary-heading em.is-success {
+  background: rgba(111, 134, 100, .11);
+  color: #617557;
+}
+
+.post-ai-summary-heading em.is-error {
+  background: rgba(154, 86, 70, .1);
+  color: #995846;
+}
+
+.post-ai-summary-message {
+  color: var(--summary-muted);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 13px;
+  line-height: 1.85;
+  margin-top: 9px;
+}
+
+.post-ai-summary-message p {
+  margin: 0;
+}
+
+.post-ai-summary-message.is-ready {
+  color: #5f5147;
+  font-size: 14px;
+}
+
+.post-ai-summary-message.is-loading {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+}
+
+.post-ai-summary-message.is-loading i {
+  color: var(--summary-brown);
+}
+
+.post-ai-summary-message.is-error {
+  color: #995846;
+}
+
+.post-ai-summary-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.post-ai-summary-actions button {
+  background: transparent;
+  border: 1px solid rgba(154, 101, 69, .28);
+  border-radius: 7px;
+  color: var(--summary-brown);
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 11px;
+  padding: 7px 11px;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+
+.post-ai-summary-actions button:hover:not(:disabled) {
+  background: var(--summary-brown);
+  border-color: var(--summary-brown);
+  color: #fffaf5;
+}
+
+.post-ai-summary-actions button:disabled {
+  cursor: wait;
+  opacity: .65;
+}
+
+.post-ai-summary-panel-inner > small {
+  color: #9a8c82;
+  display: block;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 9px;
+  line-height: 1.55;
+  margin-top: 10px;
+}
+
+.post-ai-summary-panel-inner > small i {
+  color: #74856a;
+  margin-right: 3px;
+}
+
+@media (max-width: 767px) {
+  .post-ai-summary {
+    gap: 10px;
+    margin: 18px 0 22px;
+  }
+
+  .post-ai-summary-toggle {
+    border-radius: 9px;
+    flex-basis: 40px;
+    font-size: 17px;
+    height: 40px;
+    width: 40px;
+  }
+
+  .post-ai-summary-bubble {
+    max-width: calc(100% - 50px);
+  }
+
+  .post-ai-summary-bubble::before,
+  .post-ai-summary-bubble::after {
+    top: 11px;
+  }
+
+  .post-ai-summary-prompt {
+    font-size: 12px;
+    padding: 9px 12px;
+  }
+
+  .post-ai-summary.is-expanded .post-ai-summary-panel-inner {
+    padding: 13px 14px 14px;
+  }
+
+  .post-ai-summary-heading h2 {
+    font-size: 16px;
+  }
+
+  .post-ai-summary-message.is-ready {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 430px) {
+  .post-ai-summary-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .post-ai-summary-actions button {
+    flex: 1;
+    text-align: center;
+  }
+}
