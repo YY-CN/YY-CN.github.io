@@ -19,10 +19,10 @@
     card.setAttribute('aria-label', 'AI 文章摘要');
     card.innerHTML =
       '<button class="post-ai-summary-toggle" id="post-ai-summary-toggle" type="button" aria-expanded="false" aria-controls="post-ai-summary-panel" title="查看 AI 摘要">' +
-        '<i class="fa fa-robot" aria-hidden="true"></i><span class="post-ai-summary-visually-hidden">查看 AI 摘要</span>' +
+        '<i class="fa fa-feather-alt" aria-hidden="true"></i><span class="post-ai-summary-visually-hidden">查看 AI 摘要</span>' +
       '</button>' +
       '<div class="post-ai-summary-bubble">' +
-        '<p class="post-ai-summary-prompt">点击机器人可以查看本文摘要哦～</p>' +
+        '<p class="post-ai-summary-prompt">点击羽毛笔可以查看本文摘要哦～</p>' +
         '<div class="post-ai-summary-panel" id="post-ai-summary-panel" aria-hidden="true" inert>' +
           '<div class="post-ai-summary-panel-inner">' +
             '<div class="post-ai-summary-heading">' +
