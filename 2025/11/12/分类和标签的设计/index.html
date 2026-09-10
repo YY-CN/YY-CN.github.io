@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#9a6545","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="记录博客文章分类与标签的规划方案，涵盖技术、生活及不同内容主题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文章的分类和标签设计">
+<meta property="og:url" content="https://hyacinth.xin/2025/11/12/%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE%E7%9A%84%E8%AE%BE%E8%AE%A1/index.html">
+<meta property="og:site_name" content="Hyacinth">
+<meta property="og:description" content="记录博客文章分类与标签的规划方案，涵盖技术、生活及不同内容主题。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-11-12T17:30:48.000Z">
+<meta property="article:modified_time" content="2025-11-12T17:30:48.000Z">
+<meta property="article:author" content="Hyacinth">
+<meta property="article:tag" content="杂项">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hyacinth.xin/2025/11/12/%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE%E7%9A%84%E8%AE%BE%E8%AE%A1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<script>
+  // 主题换色：首帧绘制前恢复上次选择的色板，避免闪烁。
+  (function() {
+    try {
+      var palette = localStorage.getItem('hyacinth-theme-color');
+      if (palette) document.documentElement.setAttribute('data-theme-color', palette);
+    } catch (error) {}
+  })();
+</script>
+<script>
+  (function() {
+    var images = [
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Asuna%20Yuuki.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Goto%20Hitori.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Kuronuma%20Sawako.png',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Miyazono%20Kaori.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Azusa.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Miku.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Nino.png',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Rem.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Shiina%20Mahiru.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Takagi.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Yamada%20Ryo.jpg'
+    ];
+    var image = images[Math.floor(Math.random() * images.length)];
+    document.documentElement.classList.add('page-loading');
+    document.documentElement.style.setProperty('--page-background-image', 'url("' + image + '")');
+  })();
+</script>
+<link rel="stylesheet" href="https://fontsapi.zeoseven.com/285/main/result.css">
+<link rel="stylesheet" href="/css/post-summary.css?v=20260831c">
+<link rel="stylesheet" href="/css/theme-colors.css?v=20260910b">
+<link rel="stylesheet" href="/css/daily-hexagram.css?v=20260910a">
+<link rel="stylesheet" href="/css/menu-dropdown.css?v=20260910a">
+
+  <title>文章的分类和标签设计 | Hyacinth</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hyacinth</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-说说">
+
+    <a href="/shuoshuo/" rel="section"><i class="fa fa-comment-dots fa-fw"></i>说说</a>
+
+  </li>
+        <li class="menu-item menu-item-工具">
+
+    <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2025/11/12/%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE%E7%9A%84%E8%AE%BE%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          文章的分类和标签设计
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-11-12 17:30:48" itemprop="dateCreated datePublished" datetime="2025-11-12T17:30:48+00:00">2025-11-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9D%82%E9%A1%B9/" itemprop="url" rel="index"><span itemprop="name">杂项</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>789</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+            <div class="post-description">记录博客文章分类与标签的规划方案，涵盖技术、生活及不同内容主题。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="文章的分类和标签设计"><a href="#文章的分类和标签设计" class="headerlink" title="文章的分类和标签设计"></a>文章的分类和标签设计</h1><h1 id="分类（Categories）"><a href="#分类（Categories）" class="headerlink" title="分类（Categories）"></a>分类（Categories）</h1><h2 id="技术类"><a href="#技术类" class="headerlink" title="技术类"></a><strong>技术类</strong></h2><ul>
+<li>编程语言（programming-languages）</li>
+<li>算法与数据结构（algorithms-and-data-structures）</li>
+<li>计算机系统（computer-systems）</li>
+<li>网络与安全（networks-and-security）</li>
+<li>数据库与数据（databases-and-data）</li>
+<li>人工智能&#x2F;机器学习（machine-learning）</li>
+<li>前端开发（frontend）</li>
+<li>后端与分布式（backend-and-distributed）</li>
+<li>移动与客户端（mobile-and-client）</li>
+<li>运维与DevOps（devops）</li>
+<li>软件工程与工具（software-engineering）</li>
+<li>图形学与多媒体（graphics-and-media）</li>
+<li>人机交互与可用性（hci-and-ux）</li>
+<li>数学基础（math-foundations）</li>
+<li>课程与作业（courses-and-assignments）</li>
+<li>项目与实习（projects-and-internships）</li>
+<li>读书与论文笔记（reading-and-papers）</li>
+<li>比赛与刷题（competitions-and-oj）</li>
+<li>杂项&#x2F;随笔（misc）</li>
+</ul>
+<h2 id="生活类"><a href="#生活类" class="headerlink" title="生活类"></a><strong>生活类</strong></h2><ul>
+<li>生活记录（life-journal）</li>
+<li>旅行与出行（travel）</li>
+<li>美食与烹饪（food-and-cooking）</li>
+<li>阅读与观影（reading-and-watching）</li>
+<li>健康与运动（health-and-fitness）</li>
+<li>理财与职业（money-and-career）</li>
+<li>家居与效率（home-and-productivity）</li>
+<li>审美与创作（aesthetics-and-creative）</li>
+<li>关系与自我（relationships-and-self）</li>
+<li>数码与摄影（gadgets-and-photography）</li>
+<li>游戏与娱乐（games-and-entertainment）</li>
+<li>城市与在地（city-and-local）</li>
+<li>随笔与思考（essays-and-thoughts）</li>
+</ul>
+<h1 id="标签（Tags）"><a href="#标签（Tags）" class="headerlink" title="标签（Tags）"></a>标签（Tags）</h1><h2 id="技术主题-知识点"><a href="#技术主题-知识点" class="headerlink" title="技术主题&#x2F;知识点"></a><strong>技术主题&#x2F;知识点</strong></h2><ul>
+<li>算法&#x2F;数据结构：greedy, dp, graph, union-find, divide-and-conquer, backtracking, string, bitset, array, linked-list, stack, queue, heap, hashmap, segment-tree, trie, b-tree</li>
+<li>系统&#x2F;编译：os, process, thread, lock, scheduler, memory-management, virtual-memory, io, compiler, lexer, parser</li>
+<li>网络：tcp, udp, http, http2, http3, tls, dns, routing</li>
+<li>数据库&#x2F;分布式：sql, transaction, isolation, indexing, query-optimization, replication, sharding, consensus, raft, paxos, cap, eventual-consistency</li>
+<li>前后端&#x2F;DevOps：dom, css, responsive, ssr, csr, isomorphic, rest, grpc, authentication, authorization, middleware, docker, kubernetes, helm, terraform, prometheus, grafana, nginx</li>
+<li>AI&#x2F;ML&#x2F;数学：linear-regression, logistic-regression, svm, cnn, rnn, transformer, attention, lora, fine-tuning, feature-engineering, cross-validation, linear-algebra, calculus, probability, statistics, optimization</li>
+</ul>
+<h2 id="技术栈-生态"><a href="#技术栈-生态" class="headerlink" title="技术栈&#x2F;生态"></a><strong>技术栈&#x2F;生态</strong></h2><ul>
+<li>语言：c, cpp, java, python, go, rust, javascript, typescript, kotlin, swift</li>
+<li>框架&#x2F;库：spring-boot, django, flask, fastapi, express, nest, react, vue, svelte, vite, webpack, redux, zustand</li>
+<li>数据库&#x2F;中间件：mysql, postgresql, sqlite, mongodb, redis, kafka, rabbitmq, elasticsearch</li>
+<li>AI 框架：pytorch, tensorflow, transformers, sklearn, xgboost</li>
+<li>工具：git, github-actions, make, cmake, gdb, valgrind, clang, clang-tidy, eslint, prettier</li>
+</ul>
+<h2 id="技术属性-用途-学业"><a href="#技术属性-用途-学业" class="headerlink" title="技术属性&#x2F;用途&#x2F;学业"></a><strong>技术属性&#x2F;用途&#x2F;学业</strong></h2><ul>
+<li>tutorial, note, cheatsheet, summary, review, walkthrough, from-scratch, cookbook</li>
+<li>draft, wip, production, best-practices</li>
+<li>bugfix, performance, security, testing, refactor, benchmark</li>
+<li>csapp, os-course, db-course, algo-course, compiler-course, assignment, lab, project, exam-review</li>
+<li>crud, ecommerce, chatbot, crawler, recommendation, search, game-dev, finance, bioinformatics</li>
+<li>2025-spring, 2025-fall, reading-notes, paper-impl, reproduce</li>
+</ul>
+<h2 id="生活主题-内容"><a href="#生活主题-内容" class="headerlink" title="生活主题&#x2F;内容"></a><strong>生活主题&#x2F;内容</strong></h2><ul>
+<li>旅行：itinerary, citywalk, road-trip, island, mountain, museum, cafe-hopping</li>
+<li>美食：home-cooking, meal-prep, baking, dessert, coffee, tea, restaurant-review, budget-eats</li>
+<li>阅读&#x2F;影音：book-notes, novel, nonfiction, manga, movie-review, tv-series, playlist</li>
+<li>健康：running, cycling, yoga, hiit, strength, steps, sleep, meal-plan, weight-log</li>
+<li>理财&#x2F;职业：budget, expense-tracking, saving, index-fund, credit-card, negotiation, job-hunt, interview, workflow</li>
+<li>家居&#x2F;效率：declutter, minimalism, home-decor, cleaning, routine, time-blocking, bullet-journal</li>
+<li>审美&#x2F;创作：illustration, watercolor, calligraphy, knitting, diy, poem, photo-essay, short-video</li>
+<li>关系与自我：friendship, family, love, boundaries, mindfulness, therapy-notes, gratitude</li>
+<li>数码与摄影：mobile-photography, street, portrait, lightroom, preset, gear-notes, everyday-carry</li>
+<li>城市与在地：local-festival, neighborhood, park, market, library, hiking-trail</li>
+<li>娱乐：switch, indie-games, boardgames, concert, standup</li>
+</ul>
+<h2 id="生活活动-地点"><a href="#生活活动-地点" class="headerlink" title="生活活动&#x2F;地点"></a><strong>生活活动&#x2F;地点</strong></h2><ul>
+<li>staycation, day-trip, weekend, beach, camping, hot-spring, old-town, art-district</li>
+<li>tokyo, kyoto, taipei, singapore, bangkok（按需扩展你的常去城市）</li>
+</ul>
+<h2 id="生活形式-媒体"><a href="#生活形式-媒体" class="headerlink" title="生活形式&#x2F;媒体"></a><strong>生活形式&#x2F;媒体</strong></h2><ul>
+<li>photo-dump, photo-diary, vlog, reel, longform, listicle, how-to, guide, map, recipe, workflow, template, checklist</li>
+</ul>
+<h2 id="生活情绪-属性-时间系列"><a href="#生活情绪-属性-时间系列" class="headerlink" title="生活情绪&#x2F;属性&#x2F;时间系列"></a><strong>生活情绪&#x2F;属性&#x2F;时间系列</strong></h2><ul>
+<li>cozy, slow-living, productive, frugal, mindful, nostalgia, first-time, beginner-friendly, review, rating-4-5, challenge</li>
+<li>monthly-review, weekly-review, habit-tracker, project-365, reading-challenge-24, 2025-weekly, 2025-monthly, 2025-summer, 2025-autumn</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9D%82%E9%A1%B9/" rel="tag"># 杂项</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/11/12/Git%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5/" rel="prev" title="Git命令速查">
+      <i class="fa fa-chevron-left"></i> Git命令速查
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/11/14/Conda%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5/" rel="next" title="Conda命令速查">
+      Conda命令速查 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E7%9A%84%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.</span> <span class="nav-text">文章的分类和标签设计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E7%B1%BB%EF%BC%88Categories%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">分类（Categories）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E7%B1%BB"><span class="nav-number">2.1.</span> <span class="nav-text">技术类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%B4%BB%E7%B1%BB"><span class="nav-number">2.2.</span> <span class="nav-text">生活类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%EF%BC%88Tags%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">标签（Tags）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E4%B8%BB%E9%A2%98-%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">3.1.</span> <span class="nav-text">技术主题&#x2F;知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E6%A0%88-%E7%94%9F%E6%80%81"><span class="nav-number">3.2.</span> <span class="nav-text">技术栈&#x2F;生态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E5%B1%9E%E6%80%A7-%E7%94%A8%E9%80%94-%E5%AD%A6%E4%B8%9A"><span class="nav-number">3.3.</span> <span class="nav-text">技术属性&#x2F;用途&#x2F;学业</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%B4%BB%E4%B8%BB%E9%A2%98-%E5%86%85%E5%AE%B9"><span class="nav-number">3.4.</span> <span class="nav-text">生活主题&#x2F;内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%B4%BB%E6%B4%BB%E5%8A%A8-%E5%9C%B0%E7%82%B9"><span class="nav-number">3.5.</span> <span class="nav-text">生活活动&#x2F;地点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%B4%BB%E5%BD%A2%E5%BC%8F-%E5%AA%92%E4%BD%93"><span class="nav-number">3.6.</span> <span class="nav-text">生活形式&#x2F;媒体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%B4%BB%E6%83%85%E7%BB%AA-%E5%B1%9E%E6%80%A7-%E6%97%B6%E9%97%B4%E7%B3%BB%E5%88%97"><span class="nav-number">3.7.</span> <span class="nav-text">生活情绪&#x2F;属性&#x2F;时间系列</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hyacinth"
+      src="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
+  <p class="site-author-name" itemprop="name">Hyacinth</p>
+  <div class="site-description" itemprop="description">君子慎独,不欺暗室</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">85</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hyacinth</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/lozad/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+<div id="loading-box">
+  <div class="loading-left-bg"></div>
+  <div class="loading-right-bg"></div>
+  <div class="spinner-box">
+    <div class="configure-border-1"><div class="configure-core"></div></div>
+    <div class="configure-border-2"><div class="configure-core"></div></div>
+    <div class="loading-word">加载中...</div>
+  </div>
+</div>
+
+<canvas id="background-particles" aria-hidden="true"></canvas>
+
+<script>
+  (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
+    var loadingBox = document.getElementById('loading-box');
+    var root = document.documentElement;
+
+    function endLoading() {
+      if (loadingBox.classList.contains('loaded')) return;
+      loadingBox.classList.add('loaded');
+      setTimeout(function() {
+        root.classList.remove('page-loading');
+      }, 500);
+    }
+
+    function initLoading() {
+      root.classList.add('page-loading');
+      loadingBox.classList.remove('loaded');
+    }
+
+    initLoading();
+
+    if (document.readyState === 'complete') {
+      endLoading();
+    } else {
+      window.addEventListener('load', endLoading);
+      document.addEventListener('DOMContentLoaded', endLoading);
+      setTimeout(endLoading, 7000);
+    }
+  })();
+</script>
+
+<script src="/js/latex-tool.js?v=20260805c"></script>
+<script src="/js/translate-tool.js?v=20260805a"></script>
+<script src="/js/hexagram-post-map.js?v=20260910b"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
+<script src="/js/post-summary.js?v=20260831d"></script>
+<script src="/js/background-particles.js?v=20260910a"></script>
+<script src="/js/theme-colors.js?v=20260910b"></script>
+<script src="/js/tab-gaze.js?v=20260910a"></script>
+<script src="/lib/solarlunar/solarlunar.min.js?v=20260910a"></script>
+<script src="/js/daily-hexagram.js?v=20260910a"></script>
+<script src="/js/menu-dropdown.js?v=20260910a"></script>
+
+</body>
+</html>

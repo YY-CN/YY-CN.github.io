@@ -1,0 +1,140 @@
+// 「说说」页面样式。颜色引用 theme-colors.css 的 --tc-* 色板变量，跟随换色。
+
+.shuoshuo-page {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.shuoshuo-hero {
+  margin-bottom: 28px;
+}
+
+.shuoshuo-label {
+  color: var(--tc-sidebar-muted);
+  font-size: 12px;
+  letter-spacing: .22em;
+  margin: 0 0 6px;
+}
+
+.shuoshuo-hero h1 {
+  margin: 0 0 10px;
+}
+
+.shuoshuo-desc {
+  color: var(--tc-sidebar-text);
+  margin: 0 0 16px;
+}
+
+.shuoshuo-stats {
+  display: flex;
+  gap: 32px;
+}
+
+.shuoshuo-stats strong {
+  color: var(--tc-accent);
+  font-size: 22px;
+  margin-right: 6px;
+}
+
+.shuoshuo-stats span {
+  color: var(--tc-sidebar-muted);
+  font-size: 13px;
+}
+
+/* 时间线 */
+.shuoshuo-timeline {
+  border-left: 2px solid var(--tc-glass-border);
+  margin-left: 8px;
+  padding-left: 22px;
+}
+
+.shuoshuo-year {
+  margin: 26px 0 16px;
+  position: relative;
+}
+
+.shuoshuo-year span {
+  background: var(--tc-glass-bg);
+  border: 1px solid var(--tc-glass-border);
+  border-radius: 20px;
+  color: var(--tc-accent);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 3px 14px;
+}
+
+.shuoshuo-card {
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  background-color: var(--tc-glass-bg);
+  border: 1px solid var(--tc-glass-border);
+  border-radius: 10px;
+  box-shadow: 0 3px 14px var(--tc-glass-shadow);
+  margin: 0 0 18px;
+  padding: 14px 18px;
+  position: relative;
+}
+
+.shuoshuo-card::before {
+  background: var(--tc-accent);
+  border: 2px solid var(--tc-body-bg);
+  border-radius: 50%;
+  content: '';
+  height: 8px;
+  left: -28px;
+  position: absolute;
+  top: 20px;
+  width: 8px;
+}
+
+.shuoshuo-content {
+  color: var(--text-color);
+  line-height: 1.9;
+  word-break: break-word;
+}
+
+.shuoshuo-content a {
+  border-bottom: 1px solid var(--tc-accent);
+}
+
+.shuoshuo-figure {
+  margin: 12px 0 4px;
+}
+
+.shuoshuo-figure img {
+  border: 1px solid var(--tc-glass-border);
+  border-radius: 8px;
+  display: block;
+  max-height: 360px;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+.shuoshuo-footer {
+  align-items: center;
+  color: var(--tc-sidebar-muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.shuoshuo-tags {
+  color: var(--tc-accent-hover);
+}
+
+.shuoshuo-status {
+  color: var(--tc-sidebar-muted);
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  .shuoshuo-timeline {
+    padding-left: 16px;
+  }
+
+  .shuoshuo-card::before {
+    left: -23px;
+  }
+}

@@ -1,0 +1,113 @@
+/* 每日一卦卡片（首页 + 侧栏速览）。颜色引用 theme-colors.css 的 --tc-* 色板变量。 */
+
+.daily-hexagram-card {
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  background-color: var(--tc-glass-bg);
+  border: 1px solid var(--tc-glass-border);
+  border-radius: 10px;
+  box-shadow: 0 3px 14px var(--tc-glass-shadow);
+  margin: 20px 0 40px;
+  padding: 18px 22px;
+}
+
+.daily-hexagram-card .dh-kicker {
+  color: var(--tc-sidebar-muted);
+  font-size: 12px;
+  letter-spacing: .08em;
+  margin: 0 0 10px;
+}
+
+.daily-hexagram-card .dh-main {
+  align-items: center;
+  display: flex;
+  gap: 18px;
+}
+
+.daily-hexagram-card .dh-glyph {
+  color: var(--tc-accent);
+  flex: 0 0 auto;
+  font-size: 54px;
+  line-height: 1;
+}
+
+.daily-hexagram-card .dh-info {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.daily-hexagram-card .dh-name {
+  font-size: 1.25em;
+  margin: 0 0 6px;
+}
+
+.daily-hexagram-card .dh-name a {
+  border-bottom: none;
+  color: var(--tc-sidebar-strong);
+}
+
+.daily-hexagram-card .dh-name a:hover {
+  border-bottom: none;
+  color: var(--tc-accent-hover);
+}
+
+.daily-hexagram-card .dh-desc {
+  color: var(--tc-sidebar-text);
+  margin: 0 0 6px;
+}
+
+.daily-hexagram-card .dh-structure {
+  color: var(--tc-sidebar-muted);
+  font-size: 13px;
+  margin: 0;
+}
+
+/* 侧栏速览 */
+.daily-hexagram-mini {
+  background: var(--tc-glass-bg);
+  border: 1px solid var(--tc-glass-border);
+  border-radius: 8px;
+  margin-top: 18px;
+  padding: 10px 12px;
+  text-align: center;
+}
+
+.daily-hexagram-mini .dhm-label {
+  color: var(--tc-sidebar-muted);
+  font-size: 12px;
+  letter-spacing: .08em;
+  margin: 0 0 4px;
+}
+
+.daily-hexagram-mini .dhm-line {
+  font-size: 14px;
+  margin: 0;
+}
+
+.daily-hexagram-mini .dhm-line a {
+  border-bottom: none;
+  color: var(--tc-sidebar-strong);
+}
+
+.daily-hexagram-mini .dhm-line a:hover {
+  border-bottom: none;
+  color: var(--tc-accent-hover);
+}
+
+.daily-hexagram-mini .dhm-glyph {
+  color: var(--tc-accent);
+  font-size: 17px;
+  margin-right: 2px;
+  vertical-align: -1px;
+}
+
+@media (max-width: 767px) {
+  .daily-hexagram-card {
+    margin: 10px 0 24px;
+    padding: 14px 16px;
+  }
+
+  .daily-hexagram-card .dh-glyph {
+    font-size: 42px;
+  }
+}
