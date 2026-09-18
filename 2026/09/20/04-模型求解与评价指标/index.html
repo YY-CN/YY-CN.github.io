@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#9a6545","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="模型求解：解析法、梯度下降、牛顿法；模型评价：MAE&#x2F;MSE&#x2F;RMSE&#x2F;R² 与混淆矩阵、Accuracy&#x2F;Precision&#x2F;Recall&#x2F;F1、ROC&#x2F;AUC。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="04模型求解与评价指标">
+<meta property="og:url" content="https://hyacinth.xin/2026/09/20/04-%E6%A8%A1%E5%9E%8B%E6%B1%82%E8%A7%A3%E4%B8%8E%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/index.html">
+<meta property="og:site_name" content="Hyacinth">
+<meta property="og:description" content="模型求解：解析法、梯度下降、牛顿法；模型评价：MAE&#x2F;MSE&#x2F;RMSE&#x2F;R² 与混淆矩阵、Accuracy&#x2F;Precision&#x2F;Recall&#x2F;F1、ROC&#x2F;AUC。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img015.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img016.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img017.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img018.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img022.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img023.png">
+<meta property="article:published_time" content="2026-09-20T09:00:00.000Z">
+<meta property="article:modified_time" content="2026-09-20T09:00:00.000Z">
+<meta property="article:author" content="Hyacinth">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hyacinth.xin/images/ml/img015.png">
+
+<link rel="canonical" href="https://hyacinth.xin/2026/09/20/04-%E6%A8%A1%E5%9E%8B%E6%B1%82%E8%A7%A3%E4%B8%8E%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<script>
+  // 主题换色：首帧绘制前恢复上次选择的色板，避免闪烁。
+  (function() {
+    try {
+      var palette = localStorage.getItem('hyacinth-theme-color');
+      if (palette) document.documentElement.setAttribute('data-theme-color', palette);
+    } catch (error) {}
+  })();
+</script>
+<script>
+  (function() {
+    var images = [
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Asuna%20Yuuki.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Goto%20Hitori.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Kuronuma%20Sawako.png',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Miyazono%20Kaori.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Azusa.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Miku.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Nino.png',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Rem.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Shiina%20Mahiru.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Takagi.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Yamada%20Ryo.jpg'
+    ];
+    var image = images[Math.floor(Math.random() * images.length)];
+    document.documentElement.classList.add('page-loading');
+    document.documentElement.style.setProperty('--page-background-image', 'url("' + image + '")');
+  })();
+</script>
+<link rel="stylesheet" href="https://fontsapi.zeoseven.com/285/main/result.css">
+<link rel="stylesheet" href="/css/post-summary.css?v=20260831c">
+<link rel="stylesheet" href="/css/theme-colors.css?v=20260910b">
+<link rel="stylesheet" href="/css/daily-hexagram.css?v=20260910a">
+<link rel="stylesheet" href="/css/menu-dropdown.css?v=20260910a">
+
+  <title>04模型求解与评价指标 | Hyacinth</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hyacinth</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-说说">
+
+    <a href="/shuoshuo/" rel="section"><i class="fa fa-comment-dots fa-fw"></i>说说</a>
+
+  </li>
+        <li class="menu-item menu-item-工具">
+
+    <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2026/09/20/04-%E6%A8%A1%E5%9E%8B%E6%B1%82%E8%A7%A3%E4%B8%8E%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          04模型求解与评价指标
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-09-20 09:00:00" itemprop="dateCreated datePublished" datetime="2026-09-20T09:00:00+00:00">2026-09-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>19 分钟</span>
+            </span>
+            <div class="post-description">模型求解：解析法、梯度下降、牛顿法；模型评价：MAE/MSE/RMSE/R² 与混淆矩阵、Accuracy/Precision/Recall/F1、ROC/AUC。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="模型求解与评价指标"><a href="#模型求解与评价指标" class="headerlink" title="模型求解与评价指标"></a>模型求解与评价指标</h1><p>这一篇回答两个问题（原文档标注【重点】）：</p>
+<ol>
+<li><strong>最优模型怎么找出来？</strong>——解析法、梯度下降、牛顿法（求解算法）</li>
+<li><strong>找出来的模型怎么打分？</strong>——回归指标 MAE&#x2F;MSE&#x2F;RMSE&#x2F;R²，分类指标混淆矩阵、Accuracy&#x2F;Precision&#x2F;Recall&#x2F;F1、ROC&#x2F;AUC（性能度量）</li>
+</ol>
+<hr>
+<h1 id="第一部分：模型是怎么求解出来的"><a href="#第一部分：模型是怎么求解出来的" class="headerlink" title="第一部分：模型是怎么求解出来的"></a>第一部分：模型是怎么求解出来的</h1><h2 id="1-求解到底在解什么问题？"><a href="#1-求解到底在解什么问题？" class="headerlink" title="1. 求解到底在解什么问题？"></a>1. 求解到底在解什么问题？</h2><h3 id="30-秒先懂"><a href="#30-秒先懂" class="headerlink" title="30 秒先懂"></a>30 秒先懂</h3><blockquote>
+<p><strong>训练模型 &#x3D; 让「损失函数（含正则化项）」取得最小值。这是一个以参数为未知数的最优化问题，求解路线有两条：解析法（解方程一步到位）和迭代法（下山，一步步逼近）。</strong></p>
+</blockquote>
+<p>为什么需要两条路线？解析法虽好，但要求目标函数可导、且导数方程能解出公式——条件很苛刻。损失函数一旦变复杂、特征维度一高，公式解就不存在或算不动了，这时候只能迭代。</p>
+<hr>
+<h2 id="2-解析法"><a href="#2-解析法" class="headerlink" title="2. 解析法"></a>2. 解析法</h2><h3 id="适用条件与优缺点"><a href="#适用条件与优缺点" class="headerlink" title="适用条件与优缺点"></a>适用条件与优缺点</h3><ul>
+<li><strong>适用条件</strong>：目标函数可导，且导数方程存在解析解；</li>
+<li><strong>优点</strong>：直接、精确、计算高效——一步得到全局最优；</li>
+<li><strong>缺点</strong>：条件苛刻；特征维度大时矩阵求逆的复杂度极高。</li>
+</ul>
+<h3 id="手算一次：一元线性回归的最小二乘解"><a href="#手算一次：一元线性回归的最小二乘解" class="headerlink" title="手算一次：一元线性回归的最小二乘解"></a>手算一次：一元线性回归的最小二乘解</h3><p>一元线性回归的损失函数是平方损失：</p>
+<p>$$J(w, b) &#x3D; \sum_{i&#x3D;1}^{n}\big(y_i - (w x_i + b)\big)^2$$</p>
+<p>分别对 $w$、$b$ 求偏导、令偏导等于 0，解方程组，得到：</p>
+<p>$$w &#x3D; \frac{\sum_{i}(x_i-\bar{x})(y_i-\bar{y})}{\sum_{i}(x_i-\bar{x})^2} \qquad b &#x3D; \bar{y} - w\bar{x}$$</p>
+<p><strong>手算一次</strong>：取 3 个点 $x&#x3D;[1,2,3]$、$y&#x3D;[2,4,6]$：</p>
+<ul>
+<li>均值：$\bar{x}&#x3D;2$，$\bar{y}&#x3D;4$；偏差 $dx&#x3D;[-1,0,1]$，$dy&#x3D;[-2,0,2]$</li>
+<li>$w &#x3D; \dfrac{(-1)(-2)+0+ (1)(2)}{1+0+1} &#x3D; \dfrac{4}{2} &#x3D; 2$</li>
+<li>$b &#x3D; 4 - 2\times2 &#x3D; 0$</li>
+</ul>
+<p>得到 $\hat{y} &#x3D; 2x$——数据本来就在这条线上，解析解一步命中。换成真实的 10 个「学习时长 → 成绩」样本，同一公式算出 $w \approx 2.87$、$b \approx 41.45$，即「每多学 1 小时约提 2.9 分」。</p>
+<h3 id="多元版：正规方程"><a href="#多元版：正规方程" class="headerlink" title="多元版：正规方程"></a>多元版：正规方程</h3><p>把样本堆成矩阵（$X$ 里加一列全 1 与截距相乘），解析解可以写成矩阵形式，即<strong>正规方程</strong>：</p>
+<p>$$w &#x3D; \left(X^\top X\right)^{-1} X^\top y$$</p>
+<p>带 L2 正则化时（岭回归）只是在对角线上加一个 $\lambda I$：</p>
+<p>$$w &#x3D; \left(X^\top X + \lambda I\right)^{-1} X^\top y$$</p>
+<blockquote>
+<p><strong>补充</strong> 两点：① 正规方程的软肋在 $\left(X^\top X\right)^{-1}$ 这一步——求逆的复杂度约为特征维数的三次方，10 个特征毫无压力、1 万个特征就算不动了，且 $X^\top X$ 还可能不可逆，这时候就该迭代法登场；② 区分「数学推导」与「数值实现」：教材的闭式解写作 $(X^\top X)^{-1}X^\top y$，但实际数值计算<strong>不会真的去构造逆矩阵</strong>——sklearn 的 <code>LinearRegression</code> 求解的是同一个最小二乘问题，底层用基于 SVD&#x2F;QR 的最小二乘求解器，数值上远比显式求逆稳定。</p>
+</blockquote>
+<hr>
+<h2 id="3-梯度下降法（Gradient-Descent）"><a href="#3-梯度下降法（Gradient-Descent）" class="headerlink" title="3. 梯度下降法（Gradient Descent）"></a>3. 梯度下降法（Gradient Descent）</h2><h3 id="1-它解决什么问题？"><a href="#1-它解决什么问题？" class="headerlink" title="1. 它解决什么问题？"></a>1. 它解决什么问题？</h3><p>损失函数太复杂、参数维度太高、解析解不存在或算不起——梯度下降用「迭代」代替「解方程」：<strong>先随机取一组参数，然后沿着让损失下降最快的方向一小步一小步更新，直到走到（局部）最低点。</strong> 它是求解无约束优化问题最简单、最经典的方法。</p>
+<h3 id="2-核心直觉"><a href="#2-核心直觉" class="headerlink" title="2. 核心直觉"></a>2. 核心直觉</h3><p>想象蒙着眼睛在山上找最低谷：</p>
+<ul>
+<li>你看不见全局，但能感觉出<strong>脚下的坡往哪边最陡</strong>；</li>
+<li>每次沿最陡的下坡方向迈一小步，反复如此，总能走到某个谷底。</li>
+</ul>
+<p>术语对应：</p>
+<ul>
+<li><strong>梯度方向</strong> &#x3D; 函数值上升最快的方向（最陡上坡）；</li>
+<li><strong>负梯度方向</strong> &#x3D; 函数值下降最快的方向（最陡下坡）；</li>
+<li><strong>学习率 $\eta$</strong> &#x3D; 每一步迈多大。</li>
+</ul>
+<p><img data-src="/images/ml/img015.png" alt="梯度下降：沿负梯度方向在损失曲面上一步步下行"></p>
+<h3 id="3-数学表达-公式"><a href="#3-数学表达-公式" class="headerlink" title="3. 数学表达 &#x2F; 公式"></a>3. 数学表达 &#x2F; 公式</h3><p>参数更新公式（讲超参数时露过一面的那个式子，现在正式认识一遍）：</p>
+<p>$$w_{new} &#x3D; w_{old} - \eta \frac{\partial J}{\partial w}$$</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$J(w)$</td>
+<td>目标函数（损失 + 正则化项），参数的函数</td>
+</tr>
+<tr>
+<td>$\dfrac{\partial J}{\partial w}$</td>
+<td>梯度：当前点上坡最陡的方向和陡峭程度</td>
+</tr>
+<tr>
+<td>$\eta$</td>
+<td>学习率（超参数）：每步走多远</td>
+</tr>
+<tr>
+<td>$w_{new},\ w_{old}$</td>
+<td>更新后 &#x2F; 更新前的参数</td>
+</tr>
+</tbody></table>
+<p><strong>手算一次</strong>。目标函数 $J(x) &#x3D; (x^2 - 2)^2$，它的最小值在 $x &#x3D; \sqrt{2} \approx 1.4142$ 处（$J&#x3D;0$）。梯度：</p>
+<p>$$J’(x) &#x3D; 4x(x^2-2)$$</p>
+<p>取初始值 $x&#x3D;1$、学习率 $\eta&#x3D;0.1$，代入 $x_{new} &#x3D; x - 0.1 \times J’(x)$：</p>
+<table>
+<thead>
+<tr>
+<th>轮次</th>
+<th>$x$</th>
+<th>$J(x)$</th>
+<th>$J’(x)$</th>
+<th>更新</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>1.0000</td>
+<td>1.0000</td>
+<td>$-4$</td>
+<td>$x &#x3D; 1 - 0.1\times(-4) &#x3D; 1.4$</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1.4000</td>
+<td>0.0016</td>
+<td>$-0.224$</td>
+<td>$x &#x3D; 1.4 + 0.0224 &#x3D; 1.4224$</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1.4224</td>
+<td>0.00054</td>
+<td>$+0.132$</td>
+<td>$x &#x3D; 1.4224 - 0.0132 &#x3D; 1.4092$</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1.4092</td>
+<td>0.00020</td>
+<td>$-0.080$</td>
+<td>$x &#x3D; 1.4092 + 0.0080 &#x3D; 1.4172$</td>
+</tr>
+</tbody></table>
+<p>$J$ 从 1 一路跌到万分之二，$x$ 在谷底附近小幅震荡着逼近 $1.4142$——注意「震荡」：因为步长是固定的，越到谷底越容易迈过头，但幅度越来越小。</p>
+<h3 id="4-模型是怎么训练出来的？"><a href="#4-模型是怎么训练出来的？" class="headerlink" title="4. 模型是怎么训练出来的？"></a>4. 模型是怎么训练出来的？</h3><p>梯度下降的完整循环只有四步：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. 初始化参数（随机给一组初值）</span><br><span class="line">        ↓</span><br><span class="line">2. 计算梯度（当前参数下，损失对每个参数的偏导）</span><br><span class="line">        ↓</span><br><span class="line">3. 更新参数（沿负梯度方向走 η 一步）</span><br><span class="line">        ↓</span><br><span class="line">4. 重复 2~3，直到满足停止条件</span><br></pre></td></tr></table></figure>
+
+<p><strong>停止条件</strong>通常是三选一：梯度接近零、达到最大迭代次数、损失值的变化量小于容差 <code>tol</code>。</p>
+<p><strong>学习率 $\eta$ 怎么选</strong>（超参数，只能试）：</p>
+<ul>
+<li>过大：一步跨过最优解。就用上面的例子，把 $\eta$ 从 0.1 改成 1——第一步 $x$ 直接从 1 跳到 5，损失从 1 暴涨到 529，越走越远（发散）；</li>
+<li>过小：收敛极慢，几万轮还没走到；</li>
+<li>经验：从 0.01 &#x2F; 0.1 量级开始试，或交给自适应优化器（Adam、Adagrad 会自动调整步长）。</li>
+</ul>
+<h3 id="5-Python-sklearn-怎么实现？"><a href="#5-Python-sklearn-怎么实现？" class="headerlink" title="5. Python &#x2F; sklearn 怎么实现？"></a>5. Python &#x2F; sklearn 怎么实现？</h3><p>不借助任何库，十几行就能看到梯度下降完整跑起来：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">J</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;目标函数&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> (x**<span class="number">2</span> - <span class="number">2</span>) ** <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gradient</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;梯度&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">4</span> * x**<span class="number">3</span> - <span class="number">8</span> * x</span><br><span class="line"></span><br><span class="line">x = <span class="number">1</span>        <span class="comment"># 初始值</span></span><br><span class="line">alpha = <span class="number">0.1</span>  <span class="comment"># 学习率</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (j := J(x)) &gt; <span class="number">1e-30</span>:   <span class="comment"># 损失足够小就停（:= 海象运算符：赋值的同时参与判断）</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;x=<span class="subst">&#123;x&#125;</span>\tJ=<span class="subst">&#123;j&#125;</span>&quot;</span>)</span><br><span class="line">    grad = gradient(x)       <span class="comment"># ① 求梯度</span></span><br><span class="line">    x = x - alpha * grad     <span class="comment"># ② 沿负梯度更新</span></span><br></pre></td></tr></table></figure>
+
+<p>运行打印的 $x$ 序列正是手算表里那串数字，最终稳定在 $\sqrt{2}$ 附近；把它画出来就是一条在谷底两侧来回衰减的轨迹：</p>
+<p><img data-src="/images/ml/img016.png" alt="梯度下降轨迹：在谷底震荡着逼近最小值"></p>
+<p>实际训练模型时不手写循环，直接用 <code>SGDRegressor</code>（用随机梯度下降解回归）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> SGDRegressor</span><br><span class="line"></span><br><span class="line">model = SGDRegressor(</span><br><span class="line">    loss=<span class="string">&quot;squared_error&quot;</span>,   <span class="comment"># 损失函数，默认均方误差</span></span><br><span class="line">    penalty=<span class="literal">None</span>,           <span class="comment"># 它默认自带 L2 正则化；想要纯最小二乘要显式关掉</span></span><br><span class="line">    fit_intercept=<span class="literal">True</span>,     <span class="comment"># 是否学习偏置 b</span></span><br><span class="line">    learning_rate=<span class="string">&quot;constant&quot;</span>,  <span class="comment"># 学习率策略</span></span><br><span class="line">    eta0=<span class="number">0.1</span>,               <span class="comment"># 初始学习率（超参数）</span></span><br><span class="line">    max_iter=<span class="number">1000</span>,          <span class="comment"># 最大迭代次数（停止条件之一）</span></span><br><span class="line">    tol=<span class="number">1e-8</span>,               <span class="comment"># 损失变化小于它就提前停止</span></span><br><span class="line">)</span><br><span class="line">model.fit(X, y)</span><br><span class="line"><span class="built_in">print</span>(model.coef_, model.intercept_)   <span class="comment"># 学到的参数</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6-三种变体与常见问题"><a href="#6-三种变体与常见问题" class="headerlink" title="6. 三种变体与常见问题"></a>6. 三种变体与常见问题</h3><p>梯度 &#x3D; 用数据算出来的。<strong>一轮更新用多少数据</strong>，衍生出三种变体：</p>
+<table>
+<thead>
+<tr>
+<th>变体</th>
+<th>每次更新用多少数据</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>批量梯度下降</strong> BGD</td>
+<td>全部训练数据</td>
+<td>方向准，稳定收敛</td>
+<td>数据一大，一步更新贵到算不动</td>
+</tr>
+<tr>
+<td><strong>随机梯度下降</strong> SGD</td>
+<td>随机 <strong>1 个</strong>样本</td>
+<td>快，适合大规模数据</td>
+<td>方向噪声大、震荡剧烈，可能难收敛</td>
+</tr>
+<tr>
+<td><strong>小批量梯度下降</strong> MBGD</td>
+<td>一小批（如 32、64 个）</td>
+<td>稳定与速度的平衡</td>
+<td>——</td>
+</tr>
+</tbody></table>
+<p>MBGD 是深度学习时代的事实标准，「batch size &#x3D; 32&#x2F;64」说的就是它。</p>
+<p><strong>两个常见坑</strong>：</p>
+<ol>
+<li><strong>局部极小值与鞍点</strong>：负梯度只保证「往低走」，不保证走到全局最低——可能困在半山腰的小坑（局部最优）或坡度全零的鞍点。缓解：动量（Momentum）、Adam 等优化器、多次随机初始化。</li>
+<li><strong>特征尺度不一时收敛慢</strong>：某特征 0<del>1、另一特征 0</del>10000，损失面的等高线是又扁又斜的椭圆，梯度方向来回弹锯齿。这就是做模型前要<strong>标准化&#x2F;归一化</strong>的另一个原因。</li>
+</ol>
+<hr>
+<h2 id="4-牛顿法与拟牛顿法（了解）"><a href="#4-牛顿法与拟牛顿法（了解）" class="headerlink" title="4. 牛顿法与拟牛顿法（了解）"></a>4. 牛顿法与拟牛顿法（了解）</h2><h3 id="30-秒先懂-1"><a href="#30-秒先懂-1" class="headerlink" title="30 秒先懂"></a>30 秒先懂</h3><blockquote>
+<p><strong>梯度下降只用一阶信息（坡往哪边斜），牛顿法再用上二阶信息（坡度本身变化多快，即曲率），于是每一步该迈多大可以直接算出来——收敛快得多，但每一步也贵得多。</strong></p>
+</blockquote>
+<p>更新公式：</p>
+<p>$$w_{new} &#x3D; w_{old} - H^{-1} \nabla J(w)$$</p>
+<p>其中 $H$ 是<strong>黑塞矩阵</strong>（二阶偏导组成的矩阵），$H^{-1}$ 相当于「按曲率自动缩放过的步长」。</p>
+<p><strong>手算对比</strong>：还是求 $x^2 &#x3D; 2$。牛顿法解方程 $f(x)&#x3D;x^2-2&#x3D;0$ 的迭代式是 $x_{new} &#x3D; x - \dfrac{f(x)}{f’(x)}$：</p>
+<table>
+<thead>
+<tr>
+<th>轮次</th>
+<th>$x$</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>$1 - \dfrac{-1}{2} &#x3D; 1.5$</td>
+</tr>
+<tr>
+<td>2</td>
+<td>$1.5 - \dfrac{0.25}{3} \approx 1.41667$</td>
+</tr>
+<tr>
+<td>3</td>
+<td>$\approx 1.414216$</td>
+</tr>
+</tbody></table>
+<p><strong>3 轮就精确到小数点后 6 位</strong>（$\sqrt2 &#x3D; 1.414214$），而梯度下降 3 轮还在 1.41 附近震荡——这就是二阶信息的威力。</p>
+<p><strong>代价</strong>：$H$ 是 $d \times d$ 矩阵，参数一多，存储和求逆都吃不消，还可能发散。<strong>拟牛顿法</strong>用一个正定矩阵近似 $H^{-1}$（代表算法 BFGS &#x2F; L-BFGS），省掉黑塞矩阵。两者一般用于中小规模的凸优化问题；sklearn 里逻辑回归默认的求解器 <code>lbfgs</code> 就是拟牛顿法。</p>
+<blockquote>
+<p><strong>一句话总结</strong>：解析法是「解方程」，梯度下降是「一阶迭代，慢而通用」，牛顿法是「二阶迭代，快而昂贵」。</p>
+</blockquote>
+<hr>
+<h1 id="第二部分：模型评价指标"><a href="#第二部分：模型评价指标" class="headerlink" title="第二部分：模型评价指标"></a>第二部分：模型评价指标</h1><p>指标是给模型打分的尺子。<strong>同一组预测，用不同的尺子量，结论可能完全不同</strong>——所以先弄清每把尺子量的是什么，再谈公式。</p>
+<hr>
+<h2 id="5-回归模型评价指标"><a href="#5-回归模型评价指标" class="headerlink" title="5. 回归模型评价指标"></a>5. 回归模型评价指标</h2><p>一把尺子为什么不够？因为「误差」可以关心不同侧面：平均偏多少？大误差罚不罚重？误差用什么单位？比「无脑猜平均」好多少？四个指标正好回答四个问题。</p>
+<p>本节全部用同一组预测做手算：</p>
+<p>$$y_{true} &#x3D; [3,\ 5,\ 2] \qquad y_{pred} &#x3D; [2,\ 5,\ 4] \qquad 误差 &#x3D; [1,\ 0,\ -2]$$</p>
+<h3 id="5-1-MAE-平均绝对误差（Mean-Absolute-Error）"><a href="#5-1-MAE-平均绝对误差（Mean-Absolute-Error）" class="headerlink" title="5.1 MAE 平均绝对误差（Mean Absolute Error）"></a>5.1 MAE 平均绝对误差（Mean Absolute Error）</h3><p>$$MAE &#x3D; \frac{1}{n}\sum_{i&#x3D;1}^{n}\vert y_i - \hat{y}_i \vert &#x3D; \frac{1+0+2}{3} &#x3D; 1$$</p>
+<p><strong>直觉</strong>：平均每个预测偏了 1（和目标值同单位，解释最直观）。绝对值不放大误差，因此<strong>对异常值不敏感</strong>——适合数据里有异常值的场景。</p>
+<h3 id="5-2-MSE-均方误差（Mean-Squared-Error）"><a href="#5-2-MSE-均方误差（Mean-Squared-Error）" class="headerlink" title="5.2 MSE 均方误差（Mean Squared Error）"></a>5.2 MSE 均方误差（Mean Squared Error）</h3><p>$$MSE &#x3D; \frac{1}{n}\sum_{i&#x3D;1}^{n}(y_i - \hat{y}_i)^2 &#x3D; \frac{1+0+4}{3} \approx 1.67$$</p>
+<p><strong>直觉</strong>：先平方再平均。偏 2 的样本被平方成 4，一个「大错」抵得上四个「小错」——<strong>对大误差和异常值敏感</strong>。平方让它处处可导、且是凸函数（只有一个全局最低点），解析法和梯度下降都好使，因此它是回归默认的损失函数。</p>
+<h3 id="5-3-RMSE-均方根误差（Root-Mean-Squared-Error）"><a href="#5-3-RMSE-均方根误差（Root-Mean-Squared-Error）" class="headerlink" title="5.3 RMSE 均方根误差（Root Mean Squared Error）"></a>5.3 RMSE 均方根误差（Root Mean Squared Error）</h3><p>$$RMSE &#x3D; \sqrt{MSE} &#x3D; \sqrt{1.67} \approx 1.29$$</p>
+<p><strong>直觉</strong>：就是给 MSE 开个根号，让量纲回到目标值本身——「平均偏了约 1.29」，可以直接和原始数据对话。<strong>注意</strong>（原文档提醒）：一味追求降 RMSE，模型会拼命迁就异常值，反而容易过拟合。</p>
+<h3 id="5-4-R²-决定系数"><a href="#5-4-R²-决定系数" class="headerlink" title="5.4 R² 决定系数"></a>5.4 R² 决定系数</h3><p>$$R^2 &#x3D; 1 - \frac{\sum_{i}(y_i - \hat{y}<em>i)^2}{\sum</em>{i}(y_i - \bar{y})^2}$$</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>分子</td>
+<td>模型残差的平方和（模型犯的总错）</td>
+</tr>
+<tr>
+<td>分母</td>
+<td>「永远预测均值 $\bar{y}$」这个无脑基线犯的总错</td>
+</tr>
+</tbody></table>
+<p><strong>直觉一句话：R² 回答「你比无脑猜平均值好多少」。</strong></p>
+<p><strong>手算一次</strong>：$\bar{y} &#x3D; 10&#x2F;3 \approx 3.33$；分子 $&#x3D; 1+0+4 &#x3D; 5$；分母 $&#x3D; (3-3.33)^2+(5-3.33)^2+(2-3.33)^2 \approx 0.11+2.78+1.78 &#x3D; 4.67$：</p>
+<p>$$R^2 &#x3D; 1 - \frac{5}{4.67} \approx -0.07$$</p>
+<p><strong>负数！</strong> 含义很残酷：这组预测比「永远猜平均值」还要差一点。R² 是唯一会给出负分的常用指标——它拿你和最笨的基线比。换一组好一点的预测 $\hat{y}&#x3D;[2,6,2]$（分子降为 2），$R^2 &#x3D; 1 - 2&#x2F;4.67 \approx 0.57$，即「解释了约 57% 的差异」。</p>
+<table>
+<thead>
+<tr>
+<th>R² 取值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>接近 1</td>
+<td>解释能力强，模型远好于均值基线</td>
+</tr>
+<tr>
+<td>0 左右</td>
+<td>和「永远猜均值」没区别</td>
+</tr>
+<tr>
+<td>负数</td>
+<td>比无脑猜均值还烂</td>
+</tr>
+</tbody></table>
+<h3 id="5-5-怎么选"><a href="#5-5-怎么选" class="headerlink" title="5.5 怎么选"></a>5.5 怎么选</h3><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>推荐</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>常规训练（当损失函数用）</td>
+<td>MSE（可导、好优化）</td>
+</tr>
+<tr>
+<td>数据里有异常值</td>
+<td>MAE（不被极端值带偏）</td>
+</tr>
+<tr>
+<td>要向业务解释「平均偏多少」</td>
+<td>RMSE &#x2F; MAE（量纲一致）</td>
+</tr>
+<tr>
+<td>想知道「比基线好多少」</td>
+<td>R²</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>补充</strong> 实践中常多个指标一起看：MSE 说明优化目标、RMSE 说明误差量级、R² 说明相对水平，互相不冲突。</p>
+</blockquote>
+<hr>
+<h2 id="6-分类模型评价指标"><a href="#6-分类模型评价指标" class="headerlink" title="6. 分类模型评价指标"></a>6. 分类模型评价指标</h2><p>先把整套指标体系挂在一棵树上——分类模型输出的通常是一个<strong>概率</strong>，从概率到「分数」有三条不同的评价路线：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">分类指标</span><br><span class="line">├── 阈值切分后的对错（先按 0.5 之类切成类别再数）</span><br><span class="line">│     Accuracy / Precision / Recall / F1</span><br><span class="line">├── 排序能力（不看切在哪儿，看正类是否排在负类前面）</span><br><span class="line">│     ROC-AUC / PR 曲线与 AP</span><br><span class="line">└── 概率质量（概率本身给得准不准、敢不敢直接用）</span><br><span class="line">      Log Loss / Brier Score / 校准（Calibration）</span><br></pre></td></tr></table></figure>
+
+<p>同一个模型这三种分数完全可以一好一坏：排序很强但概率虚高、准确率高但正类全漏。评价前先想清楚「我要评的是哪一层」，再挑指标。</p>
+<h3 id="6-1-混淆矩阵：一切分类指标的源头"><a href="#6-1-混淆矩阵：一切分类指标的源头" class="headerlink" title="6.1 混淆矩阵：一切分类指标的源头"></a>6.1 混淆矩阵：一切分类指标的源头</h3><p><strong>为什么需要它？</strong> 先看准确率（Accuracy）怎么骗人：1000 人体检，990 个健康、10 个患病。模型无脑输出「全部健康」，准确率高达 **99%**——但一个病人都没抓到，这个模型一文不值。问题出在：Accuracy 把「四种对错」揉成了一个数。混淆矩阵把这四种情况摊开：</p>
+<p><img data-src="/images/ml/img017.png" alt="混淆矩阵：行是真实值，列是预测值"></p>
+<p>四个格子的记法：<strong>第二个字母（P&#x2F;N）是模型说的，第一个字母（T&#x2F;F）是模型说得对不对</strong>：</p>
+<ul>
+<li><strong>TP</strong> 真正例：真是正例，也判成了正例（判对）；</li>
+<li><strong>FN</strong> 假负例：真是正例，却判成了负例（<strong>漏报</strong>，判错）；</li>
+<li><strong>FP</strong> 假正例：真是负例，却判成了正例（<strong>误报</strong>，判错）；</li>
+<li><strong>TN</strong> 真负例：真是负例，也判成了负例（判对）。</li>
+</ul>
+<p><strong>一个例子贯穿本节</strong>：10 个样本，6 只猫、4 只狗；以<strong>猫为正例</strong>。模型判对了 5 只猫、2 只狗：</p>
+<p><img data-src="/images/ml/img018.png" alt="猫狗分类的混淆矩阵"></p>
+<p>即 TP&#x3D;5（真猫判成猫）、FN&#x3D;1（真猫判成狗）、FP&#x3D;2（真狗判成猫）、TN&#x3D;2（真狗判成狗）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> confusion_matrix</span><br><span class="line"></span><br><span class="line">label = [<span class="string">&quot;猫&quot;</span>, <span class="string">&quot;狗&quot;</span>]  <span class="comment"># 标签</span></span><br><span class="line">y_true = [<span class="string">&quot;猫&quot;</span>, <span class="string">&quot;猫&quot;</span>, <span class="string">&quot;猫&quot;</span>, <span class="string">&quot;猫&quot;</span>, <span class="string">&quot;猫&quot;</span>, <span class="string">&quot;猫&quot;</span>, <span class="string">&quot;狗&quot;</span>, <span class="string">&quot;狗&quot;</span>, <span class="string">&quot;狗&quot;</span>, <span class="string">&quot;狗&quot;</span>]</span><br><span class="line">y_pred = [<span class="string">&quot;猫&quot;</span>, <span class="string">&quot;猫&quot;</span>, <span class="string">&quot;狗&quot;</span>, <span class="string">&quot;猫&quot;</span>, <span class="string">&quot;猫&quot;</span>, <span class="string">&quot;猫&quot;</span>, <span class="string">&quot;猫&quot;</span>, <span class="string">&quot;猫&quot;</span>, <span class="string">&quot;狗&quot;</span>, <span class="string">&quot;狗&quot;</span>]</span><br><span class="line"></span><br><span class="line">matrix = confusion_matrix(y_true, y_pred, labels=label)  <span class="comment"># 行=真实，列=预测</span></span><br><span class="line"><span class="built_in">print</span>(matrix)   <span class="comment"># [[5 1]</span></span><br><span class="line">                <span class="comment">#  [2 2]]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6-2-Accuracy-Precision-Recall-F1"><a href="#6-2-Accuracy-Precision-Recall-F1" class="headerlink" title="6.2 Accuracy &#x2F; Precision &#x2F; Recall &#x2F; F1"></a>6.2 Accuracy &#x2F; Precision &#x2F; Recall &#x2F; F1</h3><p><strong>Accuracy 准确率</strong>——整体判对的比例：</p>
+<p>$$Accuracy &#x3D; \frac{TP + TN}{TP + TN + FP + FN} &#x3D; \frac{5+2}{10} &#x3D; 0.7$$</p>
+<p>直觉简单，但回到体检那个例子就失效：正负样本越不平衡，它越接近「无脑报多数类」的分数。</p>
+<p><strong>Precision 精确率（查准率）</strong>——模型喊「正」的时候，有多少把握：</p>
+<p>$$Precision &#x3D; \frac{TP}{TP + FP} &#x3D; \frac{5}{5+2} \approx 0.714$$</p>
+<p>手算含义：模型一共判了 7 个「猫」（TP+FP），其中真猫只有 5 个——<strong>每 7 次喊「猫」约有 5 次是真的</strong>。关注的是「误报」的代价。</p>
+<p><strong>Recall 召回率（查全率）</strong>——真正的正例，被抓住了多少：</p>
+<p>$$Recall &#x3D; \frac{TP}{TP + FN} &#x3D; \frac{5}{5+1} \approx 0.833$$</p>
+<p>手算含义：真猫共 6 只（TP+FN），抓到 5 只——<strong>6 只真猫抓住了 5 只</strong>。关注的是「漏报」的代价。</p>
+<p><strong>Precision 和 Recall 是一对跷跷板</strong>：判正的门槛调高（更谨慎），误报少了 Precision 升，但漏掉的也多了 Recall 降；门槛调低则反过来。按业务代价选边：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>更在乎</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>病症筛查</td>
+<td><strong>Recall</strong></td>
+<td>漏诊（FN）可能致命，误报只是多做一次检查</td>
+</tr>
+<tr>
+<td>垃圾邮件拦截</td>
+<td><strong>Precision</strong></td>
+<td>误删正常邮件（FP）代价高，漏一封垃圾邮件无所谓</td>
+</tr>
+<tr>
+<td>风控拦截欺诈</td>
+<td>视情况</td>
+<td>误冻正常账户 vs 放过欺诈，看哪个更贵</td>
+</tr>
+</tbody></table>
+<p><strong>F1 分数</strong>——把两者按<strong>调和平均</strong>绑成一个数：</p>
+<p>$$F1 &#x3D; \frac{2 \times Precision \times Recall}{Precision + Recall} &#x3D; \frac{2 \times \frac{5}{7} \times \frac{5}{6}}{\frac{5}{7} + \frac{5}{6}} &#x3D; \frac{50&#x2F;42}{65&#x2F;42} &#x3D; \frac{10}{13} \approx 0.769$$</p>
+<p><strong>为什么用调和平均不用算术平均？</strong> 手算一次就明白：若 $Precision&#x3D;1$、$Recall&#x3D;0$，算术平均 &#x3D; 0.5（看起来还行），调和平均 &#x3D; 0（暴露偏科）——调和平均会重罚「一条腿走路」的模型。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> classification_report</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一次生成每个类别的 Precision / Recall / F1 和支持样本数</span></span><br><span class="line">report = classification_report(y_true, y_pred)</span><br><span class="line"><span class="built_in">print</span>(report)</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-3-ROC-曲线与-AUC"><a href="#6-3-ROC-曲线与-AUC" class="headerlink" title="6.3 ROC 曲线与 AUC"></a>6.3 ROC 曲线与 AUC</h3><p><strong>为什么还需要它们？</strong> 上面的指标都有一个隐藏前提：先用某个<strong>阈值</strong>（通常是 0.5）把模型输出的概率切成类别，再数格子。可阈值一换，所有指标跟着变——阈值 0.3 时 Recall 0.95 但 Precision 0.4，阈值 0.8 时反过来。<strong>有没有一个与阈值无关、衡量模型排序能力的指标？</strong> 这就是 ROC 和 AUC。</p>
+<p>先认识两个量：</p>
+<p>$$TPR &#x3D; \frac{TP}{TP+FN} \qquad FPR &#x3D; \frac{FP}{FP+TN}$$</p>
+<ul>
+<li><strong>TPR 真正例率</strong>：真正例中被抓到的比例——其实就是 Recall；</li>
+<li><strong>FPR 假正例率</strong>：真负例中被误伤的比例——<strong>分母是全部真负例</strong>，和 Precision（分母是「预测为正」）完全不同，别混。</li>
+</ul>
+<p><strong>ROC 曲线的画法</strong>：让阈值从高到低扫一遍（比如从 1 扫到 0），每个阈值算出一对 (FPR, TPR)，画成点连成线。直觉：阈值最高时什么都不判正，落在 (0,0)；阈值最低时全判正，落在 (1,1)；曲线越<strong>靠左上角</strong>鼓，说明低误报下也能高召回——模型好；贴着对角线 &#x3D; 等于抛硬币。</p>
+<p><img data-src="/images/ml/img022.png" alt="ROC 曲线：越靠左上越好，对角线是随机猜测"></p>
+<p><strong>手算一次</strong>：8 个样本，模型给每个的「为正的打分」从高到低排列：</p>
+<table>
+<thead>
+<tr>
+<th>样本</th>
+<th>真实标签</th>
+<th>打分</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>1</td>
+<td>0.9</td>
+</tr>
+<tr>
+<td>B</td>
+<td>1</td>
+<td>0.8</td>
+</tr>
+<tr>
+<td>C</td>
+<td>0</td>
+<td>0.7</td>
+</tr>
+<tr>
+<td>D</td>
+<td>1</td>
+<td>0.6</td>
+</tr>
+<tr>
+<td>E</td>
+<td>0</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>F</td>
+<td>0</td>
+<td>0.4</td>
+</tr>
+<tr>
+<td>G</td>
+<td>1</td>
+<td>0.3</td>
+</tr>
+<tr>
+<td>H</td>
+<td>0</td>
+<td>0.2</td>
+</tr>
+</tbody></table>
+<p>共 4 正 4 负。让阈值从 0.9 逐步降到 0.2（打分 ≥ 阈值判为正）：</p>
+<table>
+<thead>
+<tr>
+<th>阈值</th>
+<th>判为正的样本</th>
+<th>TP</th>
+<th>FP</th>
+<th>TPR</th>
+<th>FPR</th>
+<th>坐标点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0.9</td>
+<td>A</td>
+<td>1</td>
+<td>0</td>
+<td>0.25</td>
+<td>0</td>
+<td>(0, 0.25)</td>
+</tr>
+<tr>
+<td>0.8</td>
+<td>A,B</td>
+<td>2</td>
+<td>0</td>
+<td>0.50</td>
+<td>0</td>
+<td>(0, 0.50)</td>
+</tr>
+<tr>
+<td>0.7</td>
+<td>A,B,C</td>
+<td>2</td>
+<td>1</td>
+<td>0.50</td>
+<td>0.25</td>
+<td>(0.25, 0.50)</td>
+</tr>
+<tr>
+<td>0.6</td>
+<td>A,B,C,D</td>
+<td>3</td>
+<td>1</td>
+<td>0.75</td>
+<td>0.25</td>
+<td>(0.25, 0.75)</td>
+</tr>
+<tr>
+<td>0.5</td>
+<td>+E</td>
+<td>3</td>
+<td>2</td>
+<td>0.75</td>
+<td>0.50</td>
+<td>(0.50, 0.75)</td>
+</tr>
+<tr>
+<td>0.4</td>
+<td>+F</td>
+<td>3</td>
+<td>3</td>
+<td>0.75</td>
+<td>0.75</td>
+<td>(0.75, 0.75)</td>
+</tr>
+<tr>
+<td>0.3</td>
+<td>+G</td>
+<td>4</td>
+<td>3</td>
+<td>1.00</td>
+<td>0.75</td>
+<td>(0.75, 1.00)</td>
+</tr>
+<tr>
+<td>0.2</td>
+<td>全部</td>
+<td>4</td>
+<td>4</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>(1, 1)</td>
+</tr>
+</tbody></table>
+<p>把这些点连起来，正是下面这张阶梯图：</p>
+<p><img data-src="/images/ml/img023.png" alt="按阈值表画出的 ROC 阶梯曲线"></p>
+<p><strong>AUC：ROC 曲线下的面积</strong>。手算两种方法，结果应当一致：</p>
+<p>方法一（数格子）：曲线下由四段矩形组成——</p>
+<p>$$AUC &#x3D; 0.25\times0.5 + 0.25\times0.75 + 0.25\times0.75 + 0.25\times1 &#x3D; 0.75$$</p>
+<p>方法二（配对法，更直观）：<strong>随机抽一个正样本和一个负样本，正样本打分更高的概率</strong>。4 正 × 4 负 &#x3D; 16 个配对，逐对检查：0.9 压过 4 个负、0.8 压过 4 个、0.6 压过 3 个（0.5&#x2F;0.4&#x2F;0.2）、0.3 压过 1 个（0.2）——共 12 对，$12&#x2F;16 &#x3D; 0.75$。两种算法完全一致。</p>
+<table>
+<thead>
+<tr>
+<th>AUC</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.0</td>
+<td>完美：所有正样本都排在负样本前面</td>
+</tr>
+<tr>
+<td>0.75</td>
+<td>随机抽一正一负，75% 的概率正样本得分更高</td>
+</tr>
+<tr>
+<td>0.5</td>
+<td>等价于随机猜测</td>
+</tr>
+<tr>
+<td>&lt; 0.5</td>
+<td>比随机猜还差（把预测反过来用反而更好）</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> roc_auc_score</span><br><span class="line"></span><br><span class="line"><span class="comment"># y_true：真实标签（0/1）；y_score：模型给出的正例概率，不是类别！</span></span><br><span class="line">auc = roc_auc_score(y_true, y_score)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>补充</strong> 注意 <code>roc_auc_score</code> 的第二个参数是<strong>正例的概率&#x2F;打分</strong>（<code>predict_proba(X)[:, 1]</code>），传成预测类别会算错。</p>
+</blockquote>
+<h3 id="6-4-PR-曲线与-AP：不平衡数据的另一把尺子"><a href="#6-4-PR-曲线与-AP：不平衡数据的另一把尺子" class="headerlink" title="6.4 PR 曲线与 AP：不平衡数据的另一把尺子"></a>6.4 PR 曲线与 AP：不平衡数据的另一把尺子</h3><p>ROC-AUC 回答的是「随机抽一正一负，正样本排在前面吗」。但<strong>正类极稀少</strong>时（欺诈率 0.1%、患病率 1%），即便 Precision 已经很难看，ROC-AUC 仍可能显得体面——数量庞大的负类把 FPR 稀释了。这时更该看 <strong>PR 曲线</strong>：</p>
+<ul>
+<li>横轴 <strong>Recall</strong>、纵轴 <strong>Precision</strong>——正是 6.2 节那对跷跷板；</li>
+<li>画法与 ROC 类似：阈值从高到低扫一遍，每个阈值算一对 (Recall, Precision)，连成线；</li>
+<li>曲线<strong>越靠右上越好</strong>（高召回的同时保住高精确率）；注意基线不再是 0.5 的对角线，而是「正类占比」的水平线。</li>
+</ul>
+<p><strong>AP（Average Precision，平均精度）</strong>是 PR 曲线的汇总数字，直觉一句话：</p>
+<blockquote>
+<p>从模型认为最可能为正的样本开始往下找，在不断召回正样本的过程中，Precision 保持得有多好。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> precision_recall_curve, average_precision_score</span><br><span class="line"></span><br><span class="line">precision, recall, thresholds = precision_recall_curve(y_true, y_score)</span><br><span class="line">ap = average_precision_score(y_true, y_score)   <span class="comment"># 越接近 1 越好</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>选择口诀</strong>：正负均衡、关心整体排序 → ROC-AUC；正类稀少、关心「抓出来的正类准不准」→ PR 曲线与 AP。</p>
+</blockquote>
+<h3 id="6-5-概率质量指标：概率给得准不准"><a href="#6-5-概率质量指标：概率给得准不准" class="headerlink" title="6.5 概率质量指标：概率给得准不准"></a>6.5 概率质量指标：概率给得准不准</h3><p><code>predict_proba</code> 输出的概率本身也有质量高低，常用两把尺子加一个概念：</p>
+<ul>
+<li><strong>Log Loss（对数损失）</strong>：逻辑回归的训练损失换个身份当指标——对「自信的错误」罚得极重，适合要求概率审慎的场景；</li>
+<li><strong>Brier Score</strong>：$\frac{1}{n}\sum (p_i - y_i)^2$，即「概率 vs 真实标签」的均方误差，0~1 之间、越小越好，比 Log Loss 温和直观；</li>
+<li><strong>校准（Calibration）</strong>：所有预测 0.8 的样本，长期看是否真有约 80% 是正类——概率要拿去做风险定价、期望收益计算，就必须先校准。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> log_loss, brier_score_loss</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(log_loss(y_true, y_score))          <span class="comment"># 越小越好</span></span><br><span class="line"><span class="built_in">print</span>(brier_score_loss(y_true, y_score))  <span class="comment"># 越小越好</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6-6-多分类的平均方式"><a href="#6-6-多分类的平均方式" class="headerlink" title="6.6 多分类的平均方式"></a>6.6 多分类的平均方式</h3><p>多分类下 Precision&#x2F;Recall&#x2F;F1 要先「每个类各算一份」再汇总——汇总方式不同，结论可能明显不同：</p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>逻辑</th>
+<th>适合</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>macro</code></td>
+<td>每个类的分数<strong>简单平均</strong></td>
+<td>关心少数类（少数类与大类同权重）</td>
+</tr>
+<tr>
+<td><code>weighted</code></td>
+<td>按类别样本数<strong>加权平均</strong></td>
+<td>想反映整体、又保留类别差异</td>
+</tr>
+<tr>
+<td><code>micro</code></td>
+<td>汇总所有 TP&#x2F;FP&#x2F;FN 后统一计算</td>
+<td>多标签&#x2F;极度偏斜场景，约等于看整体准确率</td>
+</tr>
+</tbody></table>
+<p><code>classification_report</code> 输出末尾的 <code>macro avg</code> &#x2F; <code>weighted avg</code> 两行就是它们——现在那份报告可以完整看懂了。</p>
+<h3 id="6-7-分类指标选择速查"><a href="#6-7-分类指标选择速查" class="headerlink" title="6.7 分类指标选择速查"></a>6.7 分类指标选择速查</h3><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>首选</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>样本均衡、粗看整体</td>
+<td>Accuracy</td>
+</tr>
+<tr>
+<td>样本极不平衡</td>
+<td>Precision &#x2F; Recall &#x2F; F1（别只看 Accuracy）</td>
+</tr>
+<tr>
+<td>漏报代价大（疾病筛查）</td>
+<td>Recall</td>
+</tr>
+<tr>
+<td>误报代价大（垃圾邮件）</td>
+<td>Precision</td>
+</tr>
+<tr>
+<td>要兼顾查准查全</td>
+<td>F1</td>
+</tr>
+<tr>
+<td>比较模型整体排序能力、与阈值无关</td>
+<td>AUC</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="7-易混淆点"><a href="#7-易混淆点" class="headerlink" title="7. 易混淆点"></a>7. 易混淆点</h2><table>
+<thead>
+<tr>
+<th>易混对</th>
+<th>一句话区分</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>解析法 vs 梯度下降</td>
+<td>解方程一步到位（条件苛刻、维度大算不动）vs 迭代逼近（通用、可能局部最优）</td>
+</tr>
+<tr>
+<td>梯度方向 vs 负梯度方向</td>
+<td>前者上升最快，后者下降最快——更新参数用的是<strong>负</strong>梯度</td>
+</tr>
+<tr>
+<td>梯度下降 vs 牛顿法</td>
+<td>一阶（只用坡度方向）慢而便宜；二阶（再加曲率）快而昂贵</td>
+</tr>
+<tr>
+<td>BGD &#x2F; SGD &#x2F; MBGD</td>
+<td>一次更新用全部 &#x2F; 1 个 &#x2F; 一小批数据；MBGD 是主流</td>
+</tr>
+<tr>
+<td>MSE vs RMSE</td>
+<td>RMSE &#x3D; √MSE，量纲与目标值一致，可以直接和原始数据对话</td>
+</tr>
+<tr>
+<td>MAE vs MSE</td>
+<td>MSE 平方放大了大误差、对异常值敏感；MAE 一视同仁、更鲁棒</td>
+</tr>
+<tr>
+<td>R² &#x3D; 0</td>
+<td>不是「零分」，而是「和永远猜均值一个水平」；负数 &#x3D; 比猜均值还差</td>
+</tr>
+<tr>
+<td>Precision vs Recall</td>
+<td>查准（喊「正」时多有把握）vs 查全（真正例抓住了多少）；分母不同</td>
+</tr>
+<tr>
+<td>TPR vs FPR</td>
+<td>都是「占真实类的比例」：TPR 分母是全部真<strong>正</strong>例，FPR 分母是全部真<strong>负</strong>例</td>
+</tr>
+<tr>
+<td>Accuracy vs AUC</td>
+<td>Accuracy 依赖阈值、怕不平衡；AUC 阈值无关、看排序能力</td>
+</tr>
+<tr>
+<td>ROC-AUC vs AP</td>
+<td>都看排序：均衡数据用 ROC-AUC；正类稀少时 AP（PR 曲线）更有解释力</td>
+</tr>
+<tr>
+<td>混淆矩阵的行和列</td>
+<td>sklearn 默认<strong>行 &#x3D; 真实值，列 &#x3D; 预测值</strong>，读表前先确认方向</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/09/19/03-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/" rel="prev" title="03模型评估与选择">
+      <i class="fa fa-chevron-left"></i> 03模型评估与选择
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/09/20/05-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="next" title="05线性回归">
+      05线性回归 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E6%B1%82%E8%A7%A3%E4%B8%8E%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87"><span class="nav-number">1.</span> <span class="nav-text">模型求解与评价指标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%EF%BC%9A%E6%A8%A1%E5%9E%8B%E6%98%AF%E6%80%8E%E4%B9%88%E6%B1%82%E8%A7%A3%E5%87%BA%E6%9D%A5%E7%9A%84"><span class="nav-number">2.</span> <span class="nav-text">第一部分：模型是怎么求解出来的</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%B1%82%E8%A7%A3%E5%88%B0%E5%BA%95%E5%9C%A8%E8%A7%A3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">1. 求解到底在解什么问题？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#30-%E7%A7%92%E5%85%88%E6%87%82"><span class="nav-number">2.1.1.</span> <span class="nav-text">30 秒先懂</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%A7%A3%E6%9E%90%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">2. 解析法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E6%9D%A1%E4%BB%B6%E4%B8%8E%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">2.2.1.</span> <span class="nav-text">适用条件与优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%8B%E7%AE%97%E4%B8%80%E6%AC%A1%EF%BC%9A%E4%B8%80%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9A%84%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E8%A7%A3"><span class="nav-number">2.2.2.</span> <span class="nav-text">手算一次：一元线性回归的最小二乘解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%85%83%E7%89%88%EF%BC%9A%E6%AD%A3%E8%A7%84%E6%96%B9%E7%A8%8B"><span class="nav-number">2.2.3.</span> <span class="nav-text">多元版：正规方程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95%EF%BC%88Gradient-Descent%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">3. 梯度下降法（Gradient Descent）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%83%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-number">2.3.1.</span> <span class="nav-text">1. 它解决什么问题？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%A0%B8%E5%BF%83%E7%9B%B4%E8%A7%89"><span class="nav-number">2.3.2.</span> <span class="nav-text">2. 核心直觉</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%95%B0%E5%AD%A6%E8%A1%A8%E8%BE%BE-%E5%85%AC%E5%BC%8F"><span class="nav-number">2.3.3.</span> <span class="nav-text">3. 数学表达 &#x2F; 公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%A8%A1%E5%9E%8B%E6%98%AF%E6%80%8E%E4%B9%88%E8%AE%AD%E7%BB%83%E5%87%BA%E6%9D%A5%E7%9A%84%EF%BC%9F"><span class="nav-number">2.3.4.</span> <span class="nav-text">4. 模型是怎么训练出来的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Python-sklearn-%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%EF%BC%9F"><span class="nav-number">2.3.5.</span> <span class="nav-text">5. Python &#x2F; sklearn 怎么实现？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E4%B8%89%E7%A7%8D%E5%8F%98%E4%BD%93%E4%B8%8E%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="nav-number">2.3.6.</span> <span class="nav-text">6. 三种变体与常见问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%89%9B%E9%A1%BF%E6%B3%95%E4%B8%8E%E6%8B%9F%E7%89%9B%E9%A1%BF%E6%B3%95%EF%BC%88%E4%BA%86%E8%A7%A3%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">4. 牛顿法与拟牛顿法（了解）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#30-%E7%A7%92%E5%85%88%E6%87%82-1"><span class="nav-number">2.4.1.</span> <span class="nav-text">30 秒先懂</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%EF%BC%9A%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87"><span class="nav-number">3.</span> <span class="nav-text">第二部分：模型评价指标</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87"><span class="nav-number">3.1.</span> <span class="nav-text">5. 回归模型评价指标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-MAE-%E5%B9%B3%E5%9D%87%E7%BB%9D%E5%AF%B9%E8%AF%AF%E5%B7%AE%EF%BC%88Mean-Absolute-Error%EF%BC%89"><span class="nav-number">3.1.1.</span> <span class="nav-text">5.1 MAE 平均绝对误差（Mean Absolute Error）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-MSE-%E5%9D%87%E6%96%B9%E8%AF%AF%E5%B7%AE%EF%BC%88Mean-Squared-Error%EF%BC%89"><span class="nav-number">3.1.2.</span> <span class="nav-text">5.2 MSE 均方误差（Mean Squared Error）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-RMSE-%E5%9D%87%E6%96%B9%E6%A0%B9%E8%AF%AF%E5%B7%AE%EF%BC%88Root-Mean-Squared-Error%EF%BC%89"><span class="nav-number">3.1.3.</span> <span class="nav-text">5.3 RMSE 均方根误差（Root Mean Squared Error）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-R%C2%B2-%E5%86%B3%E5%AE%9A%E7%B3%BB%E6%95%B0"><span class="nav-number">3.1.4.</span> <span class="nav-text">5.4 R² 决定系数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-%E6%80%8E%E4%B9%88%E9%80%89"><span class="nav-number">3.1.5.</span> <span class="nav-text">5.5 怎么选</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87"><span class="nav-number">3.2.</span> <span class="nav-text">6. 分类模型评价指标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E6%B7%B7%E6%B7%86%E7%9F%A9%E9%98%B5%EF%BC%9A%E4%B8%80%E5%88%87%E5%88%86%E7%B1%BB%E6%8C%87%E6%A0%87%E7%9A%84%E6%BA%90%E5%A4%B4"><span class="nav-number">3.2.1.</span> <span class="nav-text">6.1 混淆矩阵：一切分类指标的源头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-Accuracy-Precision-Recall-F1"><span class="nav-number">3.2.2.</span> <span class="nav-text">6.2 Accuracy &#x2F; Precision &#x2F; Recall &#x2F; F1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-ROC-%E6%9B%B2%E7%BA%BF%E4%B8%8E-AUC"><span class="nav-number">3.2.3.</span> <span class="nav-text">6.3 ROC 曲线与 AUC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-PR-%E6%9B%B2%E7%BA%BF%E4%B8%8E-AP%EF%BC%9A%E4%B8%8D%E5%B9%B3%E8%A1%A1%E6%95%B0%E6%8D%AE%E7%9A%84%E5%8F%A6%E4%B8%80%E6%8A%8A%E5%B0%BA%E5%AD%90"><span class="nav-number">3.2.4.</span> <span class="nav-text">6.4 PR 曲线与 AP：不平衡数据的另一把尺子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-%E6%A6%82%E7%8E%87%E8%B4%A8%E9%87%8F%E6%8C%87%E6%A0%87%EF%BC%9A%E6%A6%82%E7%8E%87%E7%BB%99%E5%BE%97%E5%87%86%E4%B8%8D%E5%87%86"><span class="nav-number">3.2.5.</span> <span class="nav-text">6.5 概率质量指标：概率给得准不准</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-6-%E5%A4%9A%E5%88%86%E7%B1%BB%E7%9A%84%E5%B9%B3%E5%9D%87%E6%96%B9%E5%BC%8F"><span class="nav-number">3.2.6.</span> <span class="nav-text">6.6 多分类的平均方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-%E5%88%86%E7%B1%BB%E6%8C%87%E6%A0%87%E9%80%89%E6%8B%A9%E9%80%9F%E6%9F%A5"><span class="nav-number">3.2.7.</span> <span class="nav-text">6.7 分类指标选择速查</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9"><span class="nav-number">3.3.</span> <span class="nav-text">7. 易混淆点</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hyacinth"
+      src="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
+  <p class="site-author-name" itemprop="name">Hyacinth</p>
+  <div class="site-description" itemprop="description">君子慎独,不欺暗室</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hyacinth</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/lozad/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+<div id="loading-box">
+  <div class="loading-left-bg"></div>
+  <div class="loading-right-bg"></div>
+  <div class="spinner-box">
+    <div class="configure-border-1"><div class="configure-core"></div></div>
+    <div class="configure-border-2"><div class="configure-core"></div></div>
+    <div class="loading-word">加载中...</div>
+  </div>
+</div>
+
+<canvas id="background-particles" aria-hidden="true"></canvas>
+
+<script>
+  (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
+    var loadingBox = document.getElementById('loading-box');
+    var root = document.documentElement;
+
+    function endLoading() {
+      if (loadingBox.classList.contains('loaded')) return;
+      loadingBox.classList.add('loaded');
+      setTimeout(function() {
+        root.classList.remove('page-loading');
+      }, 500);
+    }
+
+    function initLoading() {
+      root.classList.add('page-loading');
+      loadingBox.classList.remove('loaded');
+    }
+
+    initLoading();
+
+    if (document.readyState === 'complete') {
+      endLoading();
+    } else {
+      window.addEventListener('load', endLoading);
+      document.addEventListener('DOMContentLoaded', endLoading);
+      setTimeout(endLoading, 7000);
+    }
+  })();
+</script>
+
+<script src="/js/latex-tool.js?v=20260805c"></script>
+<script src="/js/translate-tool.js?v=20260805a"></script>
+<script src="/js/hexagram-post-map.js?v=20260910b"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
+<script src="/js/post-summary.js?v=20260831d"></script>
+<script src="/js/background-particles.js?v=20260910a"></script>
+<script src="/js/theme-colors.js?v=20260910b"></script>
+<script src="/js/tab-gaze.js?v=20260910a"></script>
+<script src="/lib/solarlunar/solarlunar.min.js?v=20260910a"></script>
+<script src="/js/daily-hexagram.js?v=20260910a"></script>
+<script src="/js/menu-dropdown.js?v=20260910a"></script>
+
+</body>
+</html>

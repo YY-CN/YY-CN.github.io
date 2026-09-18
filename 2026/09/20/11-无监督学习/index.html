@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#9a6545","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="无监督学习：K-means、层次聚类、DBSCAN 三种聚类与轮廓系数等评估指标；SVD 与 PCA 的降维原理。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="11无监督学习">
+<meta property="og:url" content="https://hyacinth.xin/2026/09/20/11-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Hyacinth">
+<meta property="og:description" content="无监督学习：K-means、层次聚类、DBSCAN 三种聚类与轮廓系数等评估指标；SVD 与 PCA 的降维原理。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img067.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img071.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img068.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img069.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img070.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img072.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img073.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img074.png">
+<meta property="article:published_time" content="2026-09-20T21:30:00.000Z">
+<meta property="article:modified_time" content="2026-09-20T21:30:00.000Z">
+<meta property="article:author" content="Hyacinth">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hyacinth.xin/images/ml/img067.png">
+
+<link rel="canonical" href="https://hyacinth.xin/2026/09/20/11-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<script>
+  // 主题换色：首帧绘制前恢复上次选择的色板，避免闪烁。
+  (function() {
+    try {
+      var palette = localStorage.getItem('hyacinth-theme-color');
+      if (palette) document.documentElement.setAttribute('data-theme-color', palette);
+    } catch (error) {}
+  })();
+</script>
+<script>
+  (function() {
+    var images = [
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Asuna%20Yuuki.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Goto%20Hitori.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Kuronuma%20Sawako.png',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Miyazono%20Kaori.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Azusa.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Miku.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Nino.png',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Rem.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Shiina%20Mahiru.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Takagi.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Yamada%20Ryo.jpg'
+    ];
+    var image = images[Math.floor(Math.random() * images.length)];
+    document.documentElement.classList.add('page-loading');
+    document.documentElement.style.setProperty('--page-background-image', 'url("' + image + '")');
+  })();
+</script>
+<link rel="stylesheet" href="https://fontsapi.zeoseven.com/285/main/result.css">
+<link rel="stylesheet" href="/css/post-summary.css?v=20260831c">
+<link rel="stylesheet" href="/css/theme-colors.css?v=20260910b">
+<link rel="stylesheet" href="/css/daily-hexagram.css?v=20260910a">
+<link rel="stylesheet" href="/css/menu-dropdown.css?v=20260910a">
+
+  <title>11无监督学习 | Hyacinth</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hyacinth</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-说说">
+
+    <a href="/shuoshuo/" rel="section"><i class="fa fa-comment-dots fa-fw"></i>说说</a>
+
+  </li>
+        <li class="menu-item menu-item-工具">
+
+    <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2026/09/20/11-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          11无监督学习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-09-20 21:30:00" itemprop="dateCreated datePublished" datetime="2026-09-20T21:30:00+00:00">2026-09-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>10 分钟</span>
+            </span>
+            <div class="post-description">无监督学习：K-means、层次聚类、DBSCAN 三种聚类与轮廓系数等评估指标；SVD 与 PCA 的降维原理。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="无监督学习：聚类与降维"><a href="#无监督学习：聚类与降维" class="headerlink" title="无监督学习：聚类与降维"></a>无监督学习：聚类与降维</h1><h3 id="30-秒先懂"><a href="#30-秒先懂" class="headerlink" title="30 秒先懂"></a>30 秒先懂</h3><blockquote>
+<p><strong>没有标签怎么办？聚类：按「物以类聚」自动把相似样本分成几簇；降维：在尽量少丢信息的前提下压缩特征数量。</strong></p>
+</blockquote>
+<p>这是最后一篇（原文档部分标注【了解】）：聚类介绍三种代表算法与评估指标，降维讲 SVD 与 PCA 的原理及联系。</p>
+<hr>
+<h2 id="1-聚类解决什么问题？"><a href="#1-聚类解决什么问题？" class="headerlink" title="1. 聚类解决什么问题？"></a>1. 聚类解决什么问题？</h2><p>聚类（Clustering）把数据集分成若干个<strong>簇</strong>：同簇样本彼此相似，异簇差异大。<strong>没有标签、没有标准答案</strong>，完全依赖数据自身的结构——最终每个簇代表什么概念，要由人来命名和解释。</p>
+<p>流程三步：① 定义相似性（欧氏距离、余弦相似度等）→ ② 按相似性分组 → ③ 迭代优化，让<strong>簇内相似度最大、簇间差异最大</strong>。</p>
+<p><strong>典型应用</strong>：市场细分（按消费习惯给客户分组）、图像分割（按颜色&#x2F;纹理给像素分组）、异常检测（不属于任何簇的点很可疑）、生物信息（基因表达分组）。</p>
+<hr>
+<h2 id="2-K-means：最常用的聚类算法"><a href="#2-K-means：最常用的聚类算法" class="headerlink" title="2. K-means：最常用的聚类算法"></a>2. K-means：最常用的聚类算法</h2><h3 id="1）它解决什么问题？"><a href="#1）它解决什么问题？" class="headerlink" title="1）它解决什么问题？"></a>1）它解决什么问题？</h3><p>把样本分成 K 个簇，使每个样本到<strong>其所属簇中心</strong>的距离之和最小。K-means 是<strong>硬聚类</strong>：每个样本只属于一个簇。</p>
+<h3 id="2）核心直觉"><a href="#2）核心直觉" class="headerlink" title="2）核心直觉"></a>2）核心直觉</h3><p>在散点图上撒 K 个「吸铁石」（簇中心），每个点被吸向最近的磁石；吸完后磁石挪到自己所吸点的正中央，再吸一轮……直到磁石不再移动：</p>
+<p><img data-src="/images/ml/img067.png" alt="K-means：样本被吸向最近的簇中心"></p>
+<p><strong>手算一次</strong>（一维数据秒懂全流程）。6 个点 $[1, 2, 3, 10, 11, 12]$，取 K&#x3D;2，初始中心随机定为 $c_1 &#x3D; 1$、$c_2 &#x3D; 10$：</p>
+<ul>
+<li><strong>分配</strong>：每个点归最近的中心 → ${1,2,3}$ 归 $c_1$，${10,11,12}$ 归 $c_2$；</li>
+<li><strong>更新</strong>：新中心 &#x3D; 各组均值 → $c_1 &#x3D; 2$，$c_2 &#x3D; 11$；</li>
+<li><strong>再分配</strong>：所有点离新中心的远近关系没变，分组不变 → <strong>收敛，结束</strong>。</li>
+</ul>
+<h3 id="3）数学表达-公式"><a href="#3）数学表达-公式" class="headerlink" title="3）数学表达 &#x2F; 公式"></a>3）数学表达 &#x2F; 公式</h3><p>以欧氏距离平方为距离，损失函数是「每个样本到所属簇中心的距离平方之和」：</p>
+<p>$$J &#x3D; \sum_{i&#x3D;1}^{n} \sum_{k&#x3D;1}^{K} r_{ik} \lVert x_i - \mu_k \rVert^2$$</p>
+<p>其中 $r_{ik} \in {0, 1}$ 表示样本 $i$ 是否属于簇 $k$（指示变量），$\mu_k$ 是第 $k$ 个簇的中心。最小化 J 本质是一个组合优化问题（n 个样本分 K 群的分法是指数级的），现实做法就是上面的迭代：分配（固定中心，最优分组）→ 更新（固定分组，最优中心）交替进行，J 单调下降直至收敛。</p>
+<h3 id="4）K-means-的使用要点"><a href="#4）K-means-的使用要点" class="headerlink" title="4）K-means 的使用要点"></a>4）K-means 的使用要点</h3><ul>
+<li><strong>初始中心敏感</strong>：不同的随机起点可能收敛到不同的局部最优（sklearn 的 <code>n_init</code> 会多跑几次取最优）；</li>
+<li><strong>K 要事先指定</strong>，但实际最合理的 K 未知——用肘部法等指标试出来（见第 3 节）；</li>
+<li><strong>自带假设</strong>：适合「近似球状、尺度相近、密度相近」的簇，且对离群点敏感（均值会被拉偏）；长条、环形、螺旋形是它的软肋——那是 DBSCAN 的主场；</li>
+<li><strong>簇编号没有语义</strong>：<code>cluster 0/1/2</code> 只是算法给的编号——0 不代表「第一类」，换个随机种子编号甚至可能互换；每个簇代表什么，要人来命名；</li>
+<li>数据要先标准化（又是距离的锅，和 KNN 同理）。</li>
+</ul>
+<h3 id="5）Python-sklearn-怎么实现？"><a href="#5）Python-sklearn-怎么实现？" class="headerlink" title="5）Python &#x2F; sklearn 怎么实现？"></a>5）Python &#x2F; sklearn 怎么实现？</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.cluster <span class="keyword">import</span> KMeans</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> make_blobs</span><br><span class="line"></span><br><span class="line">plt.rcParams[<span class="string">&quot;font.sans-serif&quot;</span>] = [<span class="string">&quot;KaiTi&quot;</span>]</span><br><span class="line"></span><br><span class="line">X, _ = make_blobs(n_samples=<span class="number">300</span>, centers=<span class="number">3</span>, cluster_std=<span class="number">2</span>, random_state=<span class="number">42</span>)</span><br><span class="line"></span><br><span class="line">kmeans = KMeans(n_clusters=<span class="number">3</span>, n_init=<span class="number">10</span>)</span><br><span class="line">kmeans.fit(X)                      <span class="comment"># 训练：找簇中心</span></span><br><span class="line">y_kmeans = kmeans.predict(X)       <span class="comment"># 每个点归哪个簇</span></span><br><span class="line">centers = kmeans.cluster_centers_  <span class="comment"># 簇中心坐标</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;簇内平方和 inertia_:&quot;</span>, kmeans.inertia_)   <span class="comment"># 损失函数值</span></span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/images/ml/img071.png" alt="K-means 聚类结果：三簇样本与红色簇中心"></p>
+<hr>
+<h2 id="3-层次聚类与-DBSCAN"><a href="#3-层次聚类与-DBSCAN" class="headerlink" title="3. 层次聚类与 DBSCAN"></a>3. 层次聚类与 DBSCAN</h2><h3 id="3-1-层次聚类（了解）"><a href="#3-1-层次聚类（了解）" class="headerlink" title="3.1 层次聚类（了解）"></a>3.1 层次聚类（了解）</h3><p>假设簇之间存在<strong>层次结构</strong>，分两个方向：</p>
+<ul>
+<li><strong>聚合（自下而上）</strong>：开始每个样本各成一簇，每轮把<strong>相距最近的两个簇</strong>合并，直到满足停止条件（达到簇数阈值等）。「簇与簇的距离」需要先定义——常用 linkage 有 single（最近点对）、complete（最远点对）、average（平均距离）、Ward（合并后方差增量最小），选择不同结果会不同；</li>
+<li><strong>分裂（自上而下）</strong>：开始全体一簇，每轮挑一个簇劈成两个，让子簇内更紧、子簇间更远，如此往复。</li>
+</ul>
+<p>聚合过程的完整合并史可以画成一棵树（树状图）：在任意高度「横切一刀」，就得到该粒度下的聚类结果——<strong>一次计算，所有粒度的分组方案随便挑</strong>，这是它相对 K-means 的独特优势。</p>
+<p><img data-src="/images/ml/img068.png" alt="层次聚类：非凸形状的簇与聚合过程的树状图"></p>
+<h3 id="3-2-密度聚类-DBSCAN（了解）"><a href="#3-2-密度聚类-DBSCAN（了解）" class="headerlink" title="3.2 密度聚类 DBSCAN（了解）"></a>3.2 密度聚类 DBSCAN（了解）</h3><p>K-means 按到中心的距离划界，DBSCAN 按<strong>密度连通</strong>划界——从样本分布的紧密程度定义簇。先认识五个概念（设邻域参数 $\varepsilon$ 和最小点数 MinPts）：</p>
+<p><img data-src="/images/ml/img069.png" alt="DBSCAN：ε-邻域、核心对象与密度可达（图中标注了各概念）"></p>
+<ul>
+<li><strong>ε-邻域</strong>：以样本为中心、半径 $\varepsilon$ 的圆内的样本集合；</li>
+<li><strong>核心对象</strong>：ε-邻域内至少含 MinPts 个样本的「人口密集区」；</li>
+<li><strong>密度直达</strong>：样本在核心对象的邻域内（被它直接辐射到）；</li>
+<li><strong>密度可达</strong>：沿着一串核心对象「接力直达」能到（间接辐射）；</li>
+<li><strong>密度相连</strong>：能从同一个核心对象密度可达的两点。</li>
+</ul>
+<p><strong>簇 &#x3D; 由密度可达关系导出的最大密度相连样本集合</strong>；不属于任何簇的点是<strong>噪声点</strong>（自动识别离群点，聚类副产品）。算法：找出所有核心对象 → 从任一核心对象出发，把所有密度可达的样本收进一个簇 → 直到所有核心对象都被访问过。</p>
+<p>它的杀手锏是<strong>任意形状的簇</strong>——比如下面两组互相缠绕的螺旋线，K-means 这类基于「到簇中心距离」的算法难以处理；DBSCAN 在 $\varepsilon$、MinPts 设置得当时，能够识别这类非凸簇：</p>
+<p><img data-src="/images/ml/img070.png" alt="双螺旋：非凸形状的簇，密度聚类的用武之地"></p>
+<p>代价：$\varepsilon$ 和 MinPts 的选择对结果影响大，且密度差异悬殊的数据集不好处理。</p>
+<hr>
+<h2 id="4-聚类效果好不好怎么评估？（了解）"><a href="#4-聚类效果好不好怎么评估？（了解）" class="headerlink" title="4. 聚类效果好不好怎么评估？（了解）"></a>4. 聚类效果好不好怎么评估？（了解）</h2><p>聚类没有标签，没有「标准答案」可比，只能从<strong>簇内紧凑、簇间分离</strong>两个角度评价。</p>
+<p><strong>轮廓系数（Silhouette Coefficient）</strong>：对每个样本，</p>
+<p>$$s &#x3D; \frac{b - a}{\max(a, b)}$$</p>
+<ul>
+<li>$a$：到<strong>同簇</strong>其他样本的平均距离（内聚度，越小越好）；</li>
+<li>$b$：到<strong>最近其他簇</strong>样本的平均距离（分离度，越大越好）。</li>
+</ul>
+<p>手算：某样本 $a &#x3D; 2$、$b &#x3D; 5$，则 $s &#x3D; (5-2)&#x2F;5 &#x3D; 0.6$。$s$ 越接近 1 聚类越好，接近 0 表示骑在边界上，负数表示大概率分错簇。整体轮廓系数取所有样本的平均。</p>
+<p><strong>簇内平方和（Inertia &#x2F; WCSS）</strong>：所有样本到其簇中心距离平方之和，即 K-means 的损失函数 $J$——越小越紧凑，但 K 越大它必然越小，不能单独拿来选 K。</p>
+<p><strong>肘部法（Elbow Method）</strong>：画出 K 从小到大变化时 WCSS 的曲线——K 超过真实簇数后，收益骤减，曲线出现「手肘」；肘部对应的 K 就是好选择。</p>
+<p><img data-src="/images/ml/img072.png" alt="肘部法：曲线拐点对应的 K 是好选择"></p>
+<p><strong>CH 指数（Calinski-Harabasz）</strong>：簇间离散度与簇内离散度之比（方差比准则），越大越好，且计算快。另外，如果手里恰好有少量<strong>外部真值标签</strong>，还可以用 ARI、NMI 这类「外部指标」对照评分——注意标签只在评估时使用，聚类训练本身仍然不用标签。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> silhouette_score, calinski_harabasz_score</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;簇内平方和：&quot;</span>, kmeans.inertia_)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;轮廓系数：&quot;</span>, silhouette_score(X, y_kmeans))          <span class="comment"># 越接近 1 越好</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;CH 指数：&quot;</span>, calinski_harabasz_score(X, y_kmeans))    <span class="comment"># 越大越好</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="5-降维：SVD-与-PCA"><a href="#5-降维：SVD-与-PCA" class="headerlink" title="5. 降维：SVD 与 PCA"></a>5. 降维：SVD 与 PCA</h2><p>降维解决「特征太多」：在尽量保留信息的前提下压缩维度，用于加速训练、缓解维度灾难、高维可视化。本篇聚焦两块理论基石：<strong>奇异值分解（SVD）</strong>，以及 <strong>SVD 与 PCA 的数学联系</strong>（PCA 的直觉与 sklearn 实操不再重复展开）。</p>
+<h3 id="5-1-奇异值分解（SVD）（了解）"><a href="#5-1-奇异值分解（SVD）（了解）" class="headerlink" title="5.1 奇异值分解（SVD）（了解）"></a>5.1 奇异值分解（SVD）（了解）</h3><p>SVD 是矩阵因子分解方法：<strong>任意</strong>非零实矩阵 $A$（不必是方阵）都能拆成三个矩阵的乘积：</p>
+<p>$$A &#x3D; U \Sigma V^\top$$</p>
+<p><img data-src="/images/ml/img073.png" alt="SVD：任意矩阵分解为 U、Σ、V 的转置"></p>
+<ul>
+<li>$U$：左奇异向量组成的正交矩阵（列向量单位化、两两正交）；</li>
+<li>$\Sigma$：矩形对角阵，对角线上是<strong>从大到小排列的非负奇异值</strong>；</li>
+<li>$V^\top$：右奇异向量的转置（正交矩阵）。</li>
+</ul>
+<p><strong>关键性质：奇异值按从大到小排列</strong>（$\sigma_1 \ge \sigma_2 \ge \cdots$，这是数学保证）；但「下降得快不快」取决于数据本身——<strong>只有当数据具有明显的低秩结构时</strong>（真实图像、用户×物品评分矩阵等常常如此），前几个奇异值才会占绝对大头，截断 SVD 才能用少数分量保留大部分信息；若数据没有低秩结构，奇异值可能下降平缓，强行截断就会丢掉较多信息。截断 SVD 只保留前 k 个奇异值和对应的奇异向量，就能近似重构原矩阵：</p>
+<p>$$A \approx U_k \Sigma_k V_k^\top$$</p>
+<p>这就是「用低秩近似压缩信息」：PCA、潜在语义分析等都是它的应用。文本的 TF-IDF 矩阵这类<strong>大规模稀疏矩阵</strong>常用 <code>TruncatedSVD</code> 做截断分解——PCA 默认要先中心化，而中心化会把稀疏矩阵变成稠密矩阵、内存吃不消；TruncatedSVD 不要求中心化，正好避开这一点。任意实矩阵都存在 SVD（但不唯一）；手算可以通过求 $A^\top A$ 的特征值特征向量得到，过程略（实际应用中从不手算，直接调 <code>np.linalg.svd</code>）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">A = np.array([[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>], [<span class="number">5</span>, <span class="number">6</span>]])   <span class="comment"># 3×2 矩阵，不是方阵也没关系</span></span><br><span class="line">U, S, Vt = np.linalg.svd(A)</span><br><span class="line"><span class="built_in">print</span>(S)          <span class="comment"># 奇异值 [9.53 0.51]——第一个远大于第二个，信息高度集中</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-PCA-与-SVD-的联系"><a href="#5-2-PCA-与-SVD-的联系" class="headerlink" title="5.2 PCA 与 SVD 的联系"></a>5.2 PCA 与 SVD 的联系</h3><p>PCA 做的是同一件事：找到方差最大的正交方向（主成分），把数据投影过去。它的传统解法是<strong>协方差矩阵的特征分解</strong>：</p>
+<ol>
+<li>数据每列<strong>中心化</strong>（减去均值；sklearn 的 PCA 默认会做）得到 $X$，协方差矩阵 $C &#x3D; \frac{1}{n-1}X^\top X$；</li>
+<li>对 $C$ 做特征分解，特征向量 &#x3D; 主成分方向，特征值 &#x3D; 各主成分的方差；</li>
+<li>每个主成分的<strong>方差贡献率</strong> &#x3D; 该特征值 ÷ 全部特征值之和，据此决定保留几个。</li>
+</ol>
+<p>而用 SVD 一步到位：对中心化后的 $X$ 做奇异值分解 $X &#x3D; U\Sigma V^\top$，则</p>
+<p>$$X^\top X &#x3D; V \Sigma^2 V^\top$$</p>
+<p>**右奇异向量 $V$ 就是主成分方向；协方差矩阵的特征值 &#x3D; 奇异值的平方除以 $(n-1)$**，即 $\lambda_i &#x3D; \sigma_i^2&#x2F;(n-1)$——把 $X &#x3D; U\Sigma V^\top$ 代入 $C &#x3D; \frac{1}{n-1}X^\top X$ 即得 $C &#x3D; V\frac{\Sigma^2}{n-1}V^\top$。差一个常数因子不影响主成分的排序与方向；sklearn 的 PCA 底层正是用 SVD 实现（跳过协方差矩阵，数值更稳定、计算更高效），两者的主成分完全一致，只是解法不同。</p>
+<p><img data-src="/images/ml/img074.png" alt="PCA：把数据投影到方差最大的正交方向上"></p>
+<blockquote>
+<p><strong>补充</strong> 无监督方法共同的使用纪律：PCA&#x2F;聚类都没有「标签兜底」，结果好坏要结合业务解释与量化指标（贡献率、轮廓系数）双重验收；缩放、fit 只在训练集等纪律同样适用。</p>
+</blockquote>
+<hr>
+<h2 id="6-易混淆点"><a href="#6-易混淆点" class="headerlink" title="6. 易混淆点"></a>6. 易混淆点</h2><table>
+<thead>
+<tr>
+<th>易混对</th>
+<th>一句话区分</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>分类 vs 聚类</td>
+<td>有标签学边界 vs 无标签找结构；聚类的簇语义要人来命名</td>
+</tr>
+<tr>
+<td>K-means 的 K vs KNN 的 K</td>
+<td>簇心个数 vs 投票邻居数，两码事</td>
+</tr>
+<tr>
+<td>硬聚类 vs 软聚类</td>
+<td>样本只属于一个簇（K-means、层次）vs 可以按概率属于多个簇</td>
+</tr>
+<tr>
+<td>K-means vs DBSCAN</td>
+<td>球形簇、需指定 K vs 任意形状、自动识别噪声但对参数敏感</td>
+</tr>
+<tr>
+<td>聚合 vs 分裂层次聚类</td>
+<td>自下而上逐轮合并最近簇 vs 自上而下逐轮劈开某簇</td>
+</tr>
+<tr>
+<td>WCSS vs 轮廓系数</td>
+<td>前者只看簇内紧凑（K 越大必然越小）；后者同时看簇内紧凑与簇间分离</td>
+</tr>
+<tr>
+<td>奇异值 vs 特征值</td>
+<td>特征值属于方阵的特征分解；奇异值属于任意矩阵的 SVD，且二者在 $X^\top X$ 上满足 $\lambda &#x3D; \sigma^2$</td>
+</tr>
+<tr>
+<td>SVD vs PCA</td>
+<td>同一产物的两条解法：SVD 分解数据矩阵；PCA 分解协方差矩阵——方向一致，SVD 数值更稳</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/09/20/10-SVM%E4%B8%8E%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" rel="prev" title="10SVM与朴素贝叶斯">
+      <i class="fa fa-chevron-left"></i> 10SVM与朴素贝叶斯
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%EF%BC%9A%E8%81%9A%E7%B1%BB%E4%B8%8E%E9%99%8D%E7%BB%B4"><span class="nav-number">1.</span> <span class="nav-text">无监督学习：聚类与降维</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#30-%E7%A7%92%E5%85%88%E6%87%82"><span class="nav-number">1.0.1.</span> <span class="nav-text">30 秒先懂</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%81%9A%E7%B1%BB%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">1. 聚类解决什么问题？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-K-means%EF%BC%9A%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">2. K-means：最常用的聚类算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%EF%BC%89%E5%AE%83%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-number">1.2.1.</span> <span class="nav-text">1）它解决什么问题？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%EF%BC%89%E6%A0%B8%E5%BF%83%E7%9B%B4%E8%A7%89"><span class="nav-number">1.2.2.</span> <span class="nav-text">2）核心直觉</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%EF%BC%89%E6%95%B0%E5%AD%A6%E8%A1%A8%E8%BE%BE-%E5%85%AC%E5%BC%8F"><span class="nav-number">1.2.3.</span> <span class="nav-text">3）数学表达 &#x2F; 公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%EF%BC%89K-means-%E7%9A%84%E4%BD%BF%E7%94%A8%E8%A6%81%E7%82%B9"><span class="nav-number">1.2.4.</span> <span class="nav-text">4）K-means 的使用要点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%EF%BC%89Python-sklearn-%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%EF%BC%9F"><span class="nav-number">1.2.5.</span> <span class="nav-text">5）Python &#x2F; sklearn 怎么实现？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%B1%82%E6%AC%A1%E8%81%9A%E7%B1%BB%E4%B8%8E-DBSCAN"><span class="nav-number">1.3.</span> <span class="nav-text">3. 层次聚类与 DBSCAN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%B1%82%E6%AC%A1%E8%81%9A%E7%B1%BB%EF%BC%88%E4%BA%86%E8%A7%A3%EF%BC%89"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 层次聚类（了解）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E5%AF%86%E5%BA%A6%E8%81%9A%E7%B1%BB-DBSCAN%EF%BC%88%E4%BA%86%E8%A7%A3%EF%BC%89"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 密度聚类 DBSCAN（了解）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E8%81%9A%E7%B1%BB%E6%95%88%E6%9E%9C%E5%A5%BD%E4%B8%8D%E5%A5%BD%E6%80%8E%E4%B9%88%E8%AF%84%E4%BC%B0%EF%BC%9F%EF%BC%88%E4%BA%86%E8%A7%A3%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">4. 聚类效果好不好怎么评估？（了解）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E9%99%8D%E7%BB%B4%EF%BC%9ASVD-%E4%B8%8E-PCA"><span class="nav-number">1.5.</span> <span class="nav-text">5. 降维：SVD 与 PCA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3%EF%BC%88SVD%EF%BC%89%EF%BC%88%E4%BA%86%E8%A7%A3%EF%BC%89"><span class="nav-number">1.5.1.</span> <span class="nav-text">5.1 奇异值分解（SVD）（了解）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-PCA-%E4%B8%8E-SVD-%E7%9A%84%E8%81%94%E7%B3%BB"><span class="nav-number">1.5.2.</span> <span class="nav-text">5.2 PCA 与 SVD 的联系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9"><span class="nav-number">1.6.</span> <span class="nav-text">6. 易混淆点</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hyacinth"
+      src="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
+  <p class="site-author-name" itemprop="name">Hyacinth</p>
+  <div class="site-description" itemprop="description">君子慎独,不欺暗室</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hyacinth</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/lozad/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+<div id="loading-box">
+  <div class="loading-left-bg"></div>
+  <div class="loading-right-bg"></div>
+  <div class="spinner-box">
+    <div class="configure-border-1"><div class="configure-core"></div></div>
+    <div class="configure-border-2"><div class="configure-core"></div></div>
+    <div class="loading-word">加载中...</div>
+  </div>
+</div>
+
+<canvas id="background-particles" aria-hidden="true"></canvas>
+
+<script>
+  (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
+    var loadingBox = document.getElementById('loading-box');
+    var root = document.documentElement;
+
+    function endLoading() {
+      if (loadingBox.classList.contains('loaded')) return;
+      loadingBox.classList.add('loaded');
+      setTimeout(function() {
+        root.classList.remove('page-loading');
+      }, 500);
+    }
+
+    function initLoading() {
+      root.classList.add('page-loading');
+      loadingBox.classList.remove('loaded');
+    }
+
+    initLoading();
+
+    if (document.readyState === 'complete') {
+      endLoading();
+    } else {
+      window.addEventListener('load', endLoading);
+      document.addEventListener('DOMContentLoaded', endLoading);
+      setTimeout(endLoading, 7000);
+    }
+  })();
+</script>
+
+<script src="/js/latex-tool.js?v=20260805c"></script>
+<script src="/js/translate-tool.js?v=20260805a"></script>
+<script src="/js/hexagram-post-map.js?v=20260910b"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
+<script src="/js/post-summary.js?v=20260831d"></script>
+<script src="/js/background-particles.js?v=20260910a"></script>
+<script src="/js/theme-colors.js?v=20260910b"></script>
+<script src="/js/tab-gaze.js?v=20260910a"></script>
+<script src="/lib/solarlunar/solarlunar.min.js?v=20260910a"></script>
+<script src="/js/daily-hexagram.js?v=20260910a"></script>
+<script src="/js/menu-dropdown.js?v=20260910a"></script>
+
+</body>
+</html>

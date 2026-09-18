@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#9a6545","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="整理用神、原神、忌神、飞伏神、旬空、月破、持世等六爻判断规则。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="六爻基础知识二">
+<meta property="og:url" content="https://hyacinth.xin/2026/06/03/%E5%85%AD%E7%88%BB%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%8C/index.html">
+<meta property="og:site_name" content="Hyacinth">
+<meta property="og:description" content="整理用神、原神、忌神、飞伏神、旬空、月破、持世等六爻判断规则。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/%E8%83%BD%E5%90%A6%E4%B8%AD%E6%A0%87%E5%8D%A6.png">
+<meta property="og:image" content="https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/%E8%B5%84%E6%A0%BC%E8%AF%81%E8%83%BD%E5%90%A6%E9%80%9A%E8%BF%87%E4%BE%8B%E5%AD%90.png">
+<meta property="og:image" content="https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/%E6%97%A5%E7%A0%B4%E7%88%BB%E4%BE%8B.png">
+<meta property="og:image" content="https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/%E5%A5%B3%E5%AE%A2%E6%88%B7%E6%B5%8B%E5%A7%BB%E7%BC%98%E4%BE%8B.png">
+<meta property="og:image" content="https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/%E8%BF%9B%E8%B4%A7%E6%98%AF%E5%90%A6%E8%A2%AB%E9%AA%97%E5%8D%A6%E4%BE%8B.png">
+<meta property="og:image" content="https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/%E5%A5%B3%E7%94%9F%E9%97%AE%E5%92%8C%E7%94%B7%E7%94%9F%E8%83%BD%E4%B8%8D%E8%83%BD%E5%9C%A8%E4%B8%80%E8%B5%B7.png">
+<meta property="og:image" content="https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/%E5%AF%B9%E6%96%B9%E4%BC%9A%E4%B8%8D%E4%BC%9A%E7%A7%9F%E8%87%AA%E5%B7%B1%E7%9A%84%E6%88%BF%E5%AD%90.png">
+<meta property="article:published_time" content="2026-06-03T23:51:35.000Z">
+<meta property="article:modified_time" content="2026-06-03T23:51:35.000Z">
+<meta property="article:author" content="Hyacinth">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="六爻">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/%E8%83%BD%E5%90%A6%E4%B8%AD%E6%A0%87%E5%8D%A6.png">
+
+<link rel="canonical" href="https://hyacinth.xin/2026/06/03/%E5%85%AD%E7%88%BB%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%8C/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<script>
+  // 主题换色：首帧绘制前恢复上次选择的色板，避免闪烁。
+  (function() {
+    try {
+      var palette = localStorage.getItem('hyacinth-theme-color');
+      if (palette) document.documentElement.setAttribute('data-theme-color', palette);
+    } catch (error) {}
+  })();
+</script>
+<script>
+  (function() {
+    var images = [
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Asuna%20Yuuki.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Goto%20Hitori.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Kuronuma%20Sawako.png',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Miyazono%20Kaori.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Azusa.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Miku.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Nino.png',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Rem.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Shiina%20Mahiru.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Takagi.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Yamada%20Ryo.jpg'
+    ];
+    var image = images[Math.floor(Math.random() * images.length)];
+    document.documentElement.classList.add('page-loading');
+    document.documentElement.style.setProperty('--page-background-image', 'url("' + image + '")');
+  })();
+</script>
+<link rel="stylesheet" href="https://fontsapi.zeoseven.com/285/main/result.css">
+<link rel="stylesheet" href="/css/post-summary.css?v=20260831c">
+<link rel="stylesheet" href="/css/theme-colors.css?v=20260910b">
+<link rel="stylesheet" href="/css/daily-hexagram.css?v=20260910a">
+<link rel="stylesheet" href="/css/menu-dropdown.css?v=20260910a">
+
+  <title>六爻基础知识二 | Hyacinth</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hyacinth</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-说说">
+
+    <a href="/shuoshuo/" rel="section"><i class="fa fa-comment-dots fa-fw"></i>说说</a>
+
+  </li>
+        <li class="menu-item menu-item-工具">
+
+    <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2026/06/03/%E5%85%AD%E7%88%BB%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          六爻基础知识二
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-06-03 23:51:35" itemprop="dateCreated datePublished" datetime="2026-06-03T23:51:35+00:00">2026-06-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%98%93%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">易学</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>27 分钟</span>
+            </span>
+            <div class="post-description">整理用神、原神、忌神、飞伏神、旬空、月破、持世等六爻判断规则。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="一、用神、原神"><a href="#一、用神、原神" class="headerlink" title="一、用神、原神"></a>一、用神、原神</h2><h4 id="用神"><a href="#用神" class="headerlink" title="用神"></a>用神</h4><p>古人把世界的万事万物都放在这六亲当中，分别是父母，官鬼，妻财，兄弟，子孙他们包含了世界上所有事类。预测不同类型的事情，就要看不同的六亲，那么所看的六亲就称为用神。比如测财就以妻财爻为用神，要看妻财爻的状态。<strong>你来求什么，什么就是“用神”</strong></p>
+<h4 id="原神"><a href="#原神" class="headerlink" title="原神"></a>原神</h4><p>凡是生用神的就叫做原神，是用神力量的源泉。原神也为吉利之神。原神发动更吉，说明所测的事情有能量，可以保持相对长久。如测财，则子孙爻为原神；测官运则财为原神等等。生用神的爻，比如某卦妻财子水为用神，那么金生水，所以申、酉金就是原神。</p>
+<h5 id="用神分类"><a href="#用神分类" class="headerlink" title="用神分类"></a>用神分类</h5><p><strong>父母爻：</strong>测父母、祖父母、师长；与父母同辈或在我父母之上的一切亲人；还有城市、房屋、衣服用具、雨具、舟车和一切保护品、劳动保护用品也以父母爻为用神；还有文书、文件、信件、合同、契约；工作单位等等，其核心原则是一切扶养我、庇护我者。</p>
+<p><strong>官鬼爻：</strong> 求官、求名、升迁调动、升学；以及女测夫、上司、官司都用官鬼神为用神；疑惑、忧虑、疾病、罪犯、天灾人祸都以官鬼神为用神，其核心是一切约束我、限制我者。</p>
+<p><strong>兄弟爻：</strong> 测兄弟姐妹、妻子的兄弟姐妹、姐夫、妹夫、结拜兄弟、知心好友等平辈人之间的命运都以兄弟爻为用神，（包括同族姑表），其核心原则是与我同类者。</p>
+<p><strong>妻财爻：</strong> 妻子以及兄弟的妻子、古代奴卜；金银、钱、粮、货物等，及至天气的晴天等都以妻财爻为用神。核心原则是：一切为我所掌握、控制者。</p>
+<p><strong>子孙爻：</strong> 儿子、孙子、女婿、甥、侄、徒弟、学生；一切小辈以及医生、医药、僧、道、尼；一切家禽家畜和一切忠臣良将者都以子孙爻为用神；还有日月星辰；测天气的晴天也以子孙爻为用神；散忧避祸、辑盗、警察、也以子孙爻为用神。</p>
+<h5 id="用神多现"><a href="#用神多现" class="headerlink" title="用神多现"></a>用神多现</h5><p>1️⃣首先取世、应爻位置上的为用神。</p>
+<p>2️⃣取动爻或者暗动之爻为用神。（用神不在世应上时）。</p>
+<p>3️⃣有异取异常为用神，如临月、临日、月合、日合、月冲、日冲或空亡、入墓的本卦爻为用神。</p>
+<p>4️⃣本卦中没有用神时、取伏神为用神。</p>
+<p><strong>只在本卦中取用神，变卦中没有用神</strong></p>
+<h2 id="二、忌神、仇神"><a href="#二、忌神、仇神" class="headerlink" title="二、忌神、仇神"></a>二、忌神、仇神</h2><h4 id="忌神"><a href="#忌神" class="headerlink" title="忌神"></a>忌神</h4><p>凡卦中克用神者为忌神。忌神是不利于用神的因素，忌神发动，代表事情凶。克用神的爻，妻财子水为用神，那么土克水，所以，辰、戌、丑、未、土就是忌神。</p>
+<h4 id="仇神"><a href="#仇神" class="headerlink" title="仇神"></a>仇神</h4><p>凡是克制原神反生忌神的爻，就为仇神。因仇神不是直接作用在用神身上，而是通过原神和忌神得以间接体现，所以，事情多应在长远。仇神有助纣为虐的象，故多为不吉。克原神的爻，妻财子水为用神，生水的金爻是原，那么，火克金，所以火就是仇神。克原神的爻，妻财子水为用神，生水的金爻是原，那么，火克金，所以火就是仇神。</p>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 24px; font-weight: bold;">例子</span></p>
+<p>天火同人卦，男测升职事业</p>
+<p>忌神     六爻  ━━━━━━━  壬戌   土    子孙（火生土）       应</p>
+<p>原神     五爻  ━━━━━━━  壬申   金    妻财（火克金）</p>
+<p>仇神     四爻  ━━━━━━━  壬午   火    兄弟（火火比和）</p>
+<p>用神     三爻  ━━━━━━━  己亥   水    官鬼（水克火）        世</p>
+<p>忌神     二爻  ━━━  ━━━  己丑   土    子孙（火生土）</p>
+<p>​            初爻  ━━━━━━━  己卯   木    父母（木生火）</p>
+<p>男测升职取官鬼爻为用神，即用神为三爻己亥水，则原神为生用神的爻，为五爻壬申金；忌神为克制用神的爻，为二爻己丑土，六爻壬戌土，二六爻为忌神；仇神为，克制原神反生忌神的爻，即四爻壬午火为仇神。</p>
+<h2 id="三、飞神、伏神"><a href="#三、飞神、伏神" class="headerlink" title="三、飞神、伏神"></a>三、飞神、伏神</h2><p>有时卦中六亲没有完全显现出来，有的卦缺一个六亲，有时缺两个，这个时候古人就发明了“伏神”，伏就是隐藏不现的意思。所以伏神就是隐藏不现的神。藏而不露，并不是不存在，而是暂时藏起来了，在特定的条件满足的时候就可以出现了。</p>
+<p>伏神的找寻，需要用到该主卦所在卦宫的八纯卦，无论哪一宫的八纯卦里都包含有全部的六亲，所以我们可以从八纯卦中找到伏神，直接把八纯卦中找到的那一爻搬过来就行，而伏神潜伏的那一爻便是飞神。</p>
+<p>例：地雷复卦变地水师卦，卦宫为坤，属土，测城市相关的（用神为父母爻属火）。</p>
+<p>​                            主卦（本卦）                                                 变卦                                     八纯卦（坤）</p>
+<p>仇神     六爻  ━━━  ━━━  癸酉   金    子孙                        ━━━  ━━━  癸酉   金    子孙          ━━━  ━━━  癸酉   金</p>
+<p>忌神     五爻  ━━━  ━━━  癸亥   水    妻财                        ━━━  ━━━  癸亥   水    妻财          ━━━  ━━━  癸亥   水</p>
+<p>​            四爻  ━━━  ━━━  癸丑   土    兄弟    应                 ━━━  ━━━  癸丑   土    兄弟          ━━━  ━━━  癸丑   土</p>
+<p>​            三爻  ━━━  ━━━  庚辰   土    兄弟                        ━━━  ━━━  戊午   火    父母           ━━━  ━━━  己卯   木</p>
+<p>原神     二爻  ━━━  ━━━×庚寅   木    官鬼  ⬅️飞神            ━━━━━━━  戊辰   土    兄弟           ━━━  ━━━  己巳   火</p>
+<p>用神     ⬆️伏神：父母乙巳火（伏在二爻下面）</p>
+<p>忌神     初爻  ━━━━━━━○庚子   水    妻财     世                 ━━━  ━━━  戊寅   木    官鬼           ━━━  ━━━  己未   土    </p>
+<p><strong>飞神、伏神：</strong>伏神与飞神之间可以相互作用，飞神无论是静爻还是动爻，都可以生、克、冲、合、墓伏神</p>
+<p><strong>解释：</strong>由于该卦宫属土，则八纯卦为坤卦，找到坤卦中属火的一爻，看它在什么位置（第几爻），例中为第二爻，则对应本卦中的第几爻为飞神，在该爻下面标注伏神，即伏在该爻之下。</p>
+<h2 id="四、爻的种类与作用权限"><a href="#四、爻的种类与作用权限" class="headerlink" title="四、爻的种类与作用权限"></a>四、爻的种类与作用权限</h2><p>在起卦后得出的卦称为本卦，变化后的卦称为变卦。在爻当中分为静爻、动爻、变爻三种。</p>
+<p>例如：地天泰卦变为地山谦卦。</p>
+<p>​                               主卦                                                          变卦</p>
+<p>静爻            子孙癸酉金  ━━━  ━━━　应                        ━━━  ━━━　 子孙癸酉金</p>
+<p>静爻            妻财癸亥水  ━━━  ━━━                               ━━━  ━━━　妻财癸亥水</p>
+<p>静爻            兄弟癸丑土  ━━━  ━━━　                            ━━━  ━━━   兄弟癸丑土</p>
+<p>静爻            兄弟甲辰土  ━━━━━━━　 世                        ━━━━━━━　子孙丙申金                                    </p>
+<p>动爻            官鬼甲寅木  ━━━━━━━ ○　        →              ━━━  ━━━　父母丙午火       变爻</p>
+<p>动爻            妻财甲子水  ━━━━━━━ ○　　     →              ━━━  ━━━　兄弟丙辰土       变爻                   </p>
+<p><strong>动爻：</strong>主卦中标记发动的爻；</p>
+<p><strong>静爻：</strong>主卦中未发动的爻；</p>
+<p><strong>变爻：</strong>变卦中的对应主卦的两个动爻的变爻。</p>
+<h5 id="准则："><a href="#准则：" class="headerlink" title="准则："></a>准则：</h5><p>1️⃣在各爻中，静爻不能对其他任何爻起作用。</p>
+<p>2️⃣动爻可以对其他动爻和静爻进行生克冲合作用。</p>
+<p>3️⃣变爻可以对本位动爻进行生克冲合作用。</p>
+<p>4️⃣变爻没有对本位动爻进行生克冲合作用，就可以对<strong>本卦（主卦）</strong>中的其他爻进行生克冲合作用</p>
+<p>5️⃣生克冲合作用是单向的，例如二爻木克三爻土，但是不存在六爻金克二爻木，即二爻木（动爻）和六爻金没有关系，因为是看生克冲合关系时，只能本爻生克冲合其他爻，不存在其他爻生克冲合本爻。</p>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 24px; font-weight: bold;">例子</span></p>
+<p>​                           主卦（本卦）                                                 变卦                                   </p>
+<p>静爻     六爻  ━━━  ━━━  癸酉   金    子孙                        ━━━  ━━━  癸酉   金    子孙          </p>
+<p>静爻     五爻  ━━━  ━━━  癸亥   水    妻财                        ━━━  ━━━  癸亥   水    妻财       </p>
+<p>静爻     四爻  ━━━  ━━━  癸丑   土    兄弟    应                 ━━━  ━━━  癸丑   土    兄弟         </p>
+<p>静爻     三爻  ━━━  ━━━  庚辰   土    兄弟                         ━━━  ━━━  戊午   火    父母         </p>
+<p>动爻     二爻  ━━━  ━━━×庚寅   木    官鬼  ⬅️飞神            ━━━━━━━  戊辰   土    兄弟         变爻</p>
+<p>​           ⬆️伏神：父母乙巳火（用神）（伏在二爻下面）</p>
+<p>动爻     初爻  ━━━━━━━○庚子   水    妻财     世                 ━━━  ━━━  戊寅   木    官鬼         变爻 </p>
+<p><strong>在理论上各爻的作用权限如下：</strong></p>
+<p>动爻寅木可以克 3 爻辰土，可以克 4 爻丑土，可以合 5 爻亥水。</p>
+<p>动爻子水可以生动爻寅木，可以合 4 爻丑土。</p>
+<p>变爻辰土可以合本卦内 6 爻酉金，可以克 5 爻亥水，可以克初爻子水。</p>
+<p>变爻寅木可以克 3 爻辰土，可以克 4 爻丑土，可以合 5 爻亥水。</p>
+<h2 id="五、动爻与变爻的关系"><a href="#五、动爻与变爻的关系" class="headerlink" title="五、动爻与变爻的关系"></a>五、动爻与变爻的关系</h2><p>动化回头生，动爻发动化出了变爻是本位动爻的，使动爻的力量加强。比如寅木化子水回头生。那么寅就受到了子水的生助，力量感强。</p>
+<p>动化回头克，动爻发动化出的变爻是克制本位动爻的，那么此动爻无用了。凶，是这个爻废了，对应的人事物为凶。自己化坏，虎头蛇尾，自我放弃的意思。比如寅木化出酉金回头克，寅木受到变爻酉金的克制，寅木无用了。</p>
+<p>动画回头克以下几种可以化解：</p>
+<p>1️⃣伏神可以通关化解，必须是动爻下伏神。</p>
+<p>2️⃣日建克了变爻也可以化解。相当于变爻暂时没用了，动爻依然有用。</p>
+<p>3️⃣求测的事情已经发生了，比如已经考完试了来问能不能考上，这种就为已经发生了。</p>
+<p>例男测婚姻：</p>
+<p>​                           主卦（本卦）                                                 变卦                                   </p>
+<p>静爻       ━━━━━━━  丙寅   木    妻财                                ━━━━━━━  丙寅   木    妻财          </p>
+<p>静爻       ━━━  ━━━  丙子   水    子孙        世                     ━━━  ━━━  丙子   水    子孙 </p>
+<p>​              ⬆️伏神：兄弟壬申金      </p>
+<p>静爻       ━━━  ━━━  丙戌   土    父母                                 ━━━  ━━━  丙戌   土    父母         </p>
+<p>动爻       ━━━  ━━━×乙卯   木    妻财                                 ━━━━━━━  丙申   金    兄弟         变爻</p>
+<p>静爻       ━━━  ━━━  乙巳   火    官鬼          应                    ━━━  ━━━  丙午   火    官鬼         </p>
+<p>静爻       ━━━  ━━━  乙未   土    父母                                 ━━━  ━━━  丙辰   土    父母         </p>
+<p>第一步：取用神，此卦为男测婚姻取妻财爻为用，优先取世应，动爻为用神。</p>
+<p>第二步，核心看动爻，用神发动化出回头克，凶断。</p>
+<p>简单的解释是，三爻为用神，用神发动化出变爻申金，反克动爻，这里认为三爻妻财爻代表妻子，用神妻财爻发动反克自己，代表自己不太想和自己生活了，为凶卦。</p>
+<h2 id="六、卦内的吉凶判断"><a href="#六、卦内的吉凶判断" class="headerlink" title="六、卦内的吉凶判断"></a>六、卦内的吉凶判断</h2><p>卦内的吉凶判断核心在于把卦主的问题在卦中进行人、事、物定位，然后看卦内爻之间的生克冲合作用关系即可判断吉凶。</p>
+<p>重点：在问题有多方参与时，不能单一看卦内用神这一个点位，需要进行卦内的人、事、物进行综合定位，然后再根据其中的生克冲合关系来判断吉凶。</p>
+<p>例子：</p>
+<p><img data-src="https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/%E8%83%BD%E5%90%A6%E4%B8%AD%E6%A0%87%E5%8D%A6.png" alt="image-20260524223645428"></p>
+<p>解释：</p>
+<p>1️⃣根据求测问题，分清卦中人事物，这里世爻始终是自己，兄弟爻主竞争，则为竞标者，为竞争对手，应爻为发标单位。</p>
+<p>2️⃣核心看动爻，发标方戌土（六爻）发动化出了巳火（变爻六爻）回头生，使戌土的力量增强，戌土发动生了竞争对手申金（五爻），所以对方中标。</p>
+<p>有一例子问：资格证能否通过</p>
+<p><img data-src="https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/%E8%B5%84%E6%A0%BC%E8%AF%81%E8%83%BD%E5%90%A6%E9%80%9A%E8%BF%87%E4%BE%8B%E5%AD%90.png" alt="image-20260524230202072"></p>
+<p>取父母爻为用神，则用神为初爻巳火，动爻为五爻未土，发动生化申金，变爻申金无法对本位动爻发生作用，从而可以对主卦其他爻发生作用，则主要看对于（世爻，用神）这两个爻的作用，因为我们测的也是这个，由于变爻壬申金合初爻用神丁巳火，则可以通过。（在求测通过，得到这类问题时，生合可以得到，冲克不能得到）</p>
+<h2 id="七、暗动、日破、冲脱"><a href="#七、暗动、日破、冲脱" class="headerlink" title="七、暗动、日破、冲脱"></a>七、暗动、日破、冲脱</h2><p>讲到本节需要知道月建和日建，月建是起卦当月的天干和地支，日建就是起卦当天的天干和地支，在六爻中我们只看地支即可。</p>
+<h4 id="暗动"><a href="#暗动" class="headerlink" title="暗动"></a>暗动</h4><p>暗动是指被日建冲本卦中的静爻，暗动爻只存在主卦，变卦的爻不暗动。<strong>暗动同动爻一样可以生克其他爻，但没有冲合权。</strong>代表事情快，表示私下做事，福来不知，祸来不觉。如旺相暗动的爻来生用神时，收获多，有人暗中相帮。暗动爻克用神时，表示犯小人、有人暗中搞鬼，使绊子，对自己不利。</p>
+<h4 id="日破"><a href="#日破" class="headerlink" title="日破"></a>日破</h4><p>当本卦静爻被日冲时，此爻<strong>被月建所克且卦中没有动爻来生的静爻</strong>，是日破。日破就代表这个爻破碎无用了。</p>
+<p><img data-src="https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/%E6%97%A5%E7%A0%B4%E7%88%BB%E4%BE%8B.png" alt="image-20260524231625232"></p>
+<p>其中五爻的亥水和日建的巳火相冲，则五爻为暗动爻，但是五爻亥水被月建的戌土所克，且两个动爻为寅木，子水，都无法生亥水，则满足日破的两个条件，即五爻为日破爻，破碎无用。</p>
+<h4 id="冲脱"><a href="#冲脱" class="headerlink" title="冲脱"></a>冲脱</h4><p>日冲动爻或者变爻都为冲脱冲散，本位动爻变爻同时无用废了。即日建冲卦中的动爻和变爻，就会导致本位动爻和变爻同时失去作用。例如日建冲了主卦二爻动爻，那么主卦二爻的动爻和对应的变爻同时失去作用，同理，如果没用冲动爻，但是冲了变爻，同样本位动爻变爻都失去作用。（因为同一个位置的爻，在主卦和变卦上面是同一个物或人，被冲会同时冲散）</p>
+<h2 id="八、旬空"><a href="#八、旬空" class="headerlink" title="八、旬空"></a>八、旬空</h2><p>旬空，又叫空亡，即空无，没有，在测感情当中通常代表对方不诚心，虚情假意。是指在天干地支互相组合时，由于天干只有十个，而地支有十二个，当一轮天干从甲到癸组合完时，地支会多出两个，那么这两个地支就叫<strong>旬空</strong>。一旬 10 天，每月有三旬，每一旬第一天就是该旬的名称，如甲子为一旬的第一天，所以，从甲子往后数10天的癸酉为一旬，所以这一旬就叫甲子旬，具体情况如下：</p>
+<p>甲子、乙丑、丙寅、丁卯、戊辰、己巳、庚午、辛未、壬申、 癸酉<strong>（戌亥旬空）</strong></p>
+<p>甲戌，乙亥、丙子、丁丑、戊寅、己卯、庚辰、辛巳、壬午、 癸未<strong>（申酉旬空）</strong></p>
+<p>甲申，乙酉、丙戌、丁亥、戊子、己丑、庚寅、辛卯、壬辰、 癸巳<strong>（午未旬空）</strong></p>
+<p>甲午，乙未、丙申、丁酉、戊戌、己亥、庚子、辛丑、壬寅、 癸卯<strong>（辰巳旬空）</strong></p>
+<p>甲辰，乙巳、丙午、丁未、戊申、己酉、庚戌、辛亥、壬子、 癸丑<strong>（寅卯旬空）</strong></p>
+<p>甲寅，乙卯、丙辰、丁巳、戊午、己未、庚申、辛酉、壬戌、 癸亥<strong>（子丑旬空）</strong></p>
+<p>卦中的爻旬空，就像这个爻在本旬内没有一样，一般来说，是一种不利因素，在少数预测类别中也是有利的。旬空的有十几种不同的情况，为了避免把自己转晕，我们在实际预测中，只要区分是真空还是假空即可。如果是真空，那么这个爻就是彻底空了，等于无用，如果是假空，虽然在当旬内不能发挥作用，出旬、填实或者逢冲一样有用。</p>
+<p>另外，旬空还有一系列其他含义，如在测感情卦中，用神旬空，则多指对方内心不诚，对感情不重视，敷衍等，在测一般事情中，旬空还有不安、焦虑、担心、迷茫、躲避等含义，多以负面信息和不利之事为主。</p>
+<p><strong>例：</strong>一位女客户来测和一个男生能不能在一起</p>
+<p><img data-src="https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/%E5%A5%B3%E5%AE%A2%E6%88%B7%E6%B5%8B%E5%A7%BB%E7%BC%98%E4%BE%8B.png" alt="image-20260524234356486"></p>
+<p>首先女测姻缘，取官鬼爻为用神。用神发动化出了辰土克了世爻，在吉凶判断就是不能在一起。并且卦中只有一个官鬼爻就是寅木，是旬空的。当即就判断是不诚心，虚情假意。当时说卦主很喜欢这个男生，但是这个男生外面还有其他的女孩，嘴巴比较甜，不要被表象迷惑，当时卦主反馈确实很喜欢这个男生，但是对于其他的问题她还是有所怀疑的，毕竟恋爱中的人都有点犯傻，我知道劝不住了，就和卦主说不管怎样你留个心眼，卦中是这样反映的。因为是老客户了，这卦没过多久就反馈了，卦主留了一手闺蜜去帮忙搞定了男生的一个朋友，从对方口中得出对方还有别的女生在一起，只是和卦主玩玩，老海王了。（这里有一些断语涉及一些其他知识，在此卦主要让大家了解旬空在断卦中的作用）</p>
+<h4 id="冲空"><a href="#冲空" class="headerlink" title="冲空"></a>冲空</h4><p>日冲旬空的爻，称为冲空，也叫冲散，破碎无用。冲空有移动的意思。</p>
+<h4 id="伏居空地"><a href="#伏居空地" class="headerlink" title="伏居空地"></a>伏居空地</h4><p>爻伏藏还空亡（伏神），就叫伏居空地，代表事与愿违，凶象。</p>
+<h2 id="九、墓（库）"><a href="#九、墓（库）" class="headerlink" title="九、墓（库）"></a>九、墓（库）</h2><p>墓库代表一切放置或者藏匿人和事物的地方。共辰、未、戌、丑四个土为墓库。如爻入墓无解，在吉凶判断上为凶断。</p>
+<p>辰为水库，戌为火库，丑为金库，未为木库。</p>
+<p>爻也爻分层次，分别为静爻、动爻、变爻、以及月日四个层次，爻入墓可以分为</p>
+<p>以下三种：</p>
+<ol>
+<li>静爻只可以入本卦动爻和月日上的墓。</li>
+<li>动爻可以入本位变爻和月日上的墓。</li>
+<li>变爻只入月日的墓。</li>
+</ol>
+<h4 id="解墓"><a href="#解墓" class="headerlink" title="解墓"></a>解墓</h4><p>解墓有四种方式</p>
+<p>a 墓库被冲，例如：辰为水库，被戌冲，那墓库被冲，辰里面的水，就跑出来了。</p>
+<p>b 冲爻，例如：寅木入了未土的墓库，但是申金冲寅木，这样寅木被冲出来了。</p>
+<p>c 合墓，例如：戌土墓库被月、日或者变爻合了，那墓库也解了。</p>
+<p>d 动化回头合，自解墓。</p>
+<p>注意：解墓时后可以解先，先不能解后，主卦为先，变卦为后，最后为月、日。</p>
+<h2 id="十、动化伏吟、动化反吟（化成冲爻）"><a href="#十、动化伏吟、动化反吟（化成冲爻）" class="headerlink" title="十、动化伏吟、动化反吟（化成冲爻）"></a>十、动化伏吟、动化反吟（化成冲爻）</h2><h3 id="动化伏吟"><a href="#动化伏吟" class="headerlink" title="动化伏吟"></a>动化伏吟</h3><p>比如寅木发动化出了寅木。代表痛苦呻吟，代表担心，对任何事情都不放心，忧心忡忡之象。伏吟又分为内卦伏吟和外卦伏吟还有全卦伏吟三种情况，如在内卦伏吟，内卦为家为内，代表内心的一种忧愁。外卦伏吟是忧心伏于表面上的。全卦伏吟多为担心害怕，从里到外都是担心的状态。</p>
+<p>我们说动爻为因，变爻为果，为结果为最后的状态，伏吟就是不动，努力了还在原地踏步。测事业官运的时候难以发展，难以升迁，代表长久不动的象义。在占病也怕伏吟，代表暂时好不了，是一个长期的，就像病人躺在床上呻吟不舒服。</p>
+<p>伏吟就代表慢，难以改变。</p>
+<p>伏吟逢冲和逢合能化解伏吟。</p>
+<h3 id="动化反吟"><a href="#动化反吟" class="headerlink" title="动化反吟"></a>动化反吟</h3><p>代表事情反复，成而败，败而成，或指反复多次来往某地。</p>
+<p>1️⃣用神动爻化回头冲克之爻，凶险程度较大，多为反复应凶。</p>
+<p>例如卯木发动化出酉金回头冲克。</p>
+<p>2️⃣用神只冲不克，结果不吉，反复不成。</p>
+<p>例如酉金发动化出卯木回头冲但不克。</p>
+<p>3️⃣卦中出现反吟，但与用神无关，这种情况只有反复之象不主吉凶。</p>
+<p>反吟逢地支六合可化解。</p>
+<h2 id="十二、伏神出伏"><a href="#十二、伏神出伏" class="headerlink" title="十二、伏神出伏"></a>十二、伏神出伏</h2><p>伏神要出伏才能有作用，不出伏没有用。能<strong>出伏之后、功能同动爻一样，可以生、克、冲、合主卦中的其它爻</strong>。</p>
+<p>出伏的条件：</p>
+<p>1 只要不是日建克伏神或飞神克伏神、就可以出伏。</p>
+<p>2 飞神克伏神时，有以下特殊情况，伏神可出伏。</p>
+<p>1️⃣飞神旬空。</p>
+<p>2️⃣飞神入日、月墓或者自化变爻入墓。</p>
+<p>3️⃣飞神化绝。</p>
+<p>3️⃣飞神自化回头克。</p>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 24px; font-weight: bold;">例子</span></p>
+<p>在这个老板那里进货会不会被骗：</p>
+<p><img data-src="https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/%E8%BF%9B%E8%B4%A7%E6%98%AF%E5%90%A6%E8%A2%AB%E9%AA%97%E5%8D%A6%E4%BE%8B.png" alt="image-20260525225917540"></p>
+<p>这是一位女客户来测和这个男生能不能在一起：</p>
+<p><img data-src="https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/%E5%A5%B3%E7%94%9F%E9%97%AE%E5%92%8C%E7%94%B7%E7%94%9F%E8%83%BD%E4%B8%8D%E8%83%BD%E5%9C%A8%E4%B8%80%E8%B5%B7.png" alt="image-20260525230053808"></p>
+<p>对方会不会租自己的房子：</p>
+<p><img data-src="https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/%E5%AF%B9%E6%96%B9%E4%BC%9A%E4%B8%8D%E4%BC%9A%E7%A7%9F%E8%87%AA%E5%B7%B1%E7%9A%84%E6%88%BF%E5%AD%90.png" alt="image-20260525230142825"></p>
+<h2 id="十三、月破"><a href="#十三、月破" class="headerlink" title="十三、月破"></a>十三、月破</h2><p>被月令冲之爻，叫月破，不论静爻、动爻、变爻。</p>
+<p>月破代表倒霉的象，代表病、破旧、失去、不完美了，过去发生过不好的事情。</p>
+<p>月破取象用，不主吉凶。</p>
+<h4 id="特殊的土爻"><a href="#特殊的土爻" class="headerlink" title="特殊的土爻"></a>特殊的土爻</h4><ul>
+<li>冲实，当卦中的土爻旬空，这时如果被日建所冲就为冲实，爻有用。</li>
+<li>月破的土静爻再被日建所冲，为暗动。</li>
+</ul>
+<h2 id="十四、持世"><a href="#十四、持世" class="headerlink" title="十四、持世"></a>十四、持世</h2><p>持世，世爻临什么六亲就是什么持世，一般用来取象，不决定吉凶，有时可以用来测来意参考取象用。</p>
+<h4 id="父母持世"><a href="#父母持世" class="headerlink" title="父母持世"></a>父母持世</h4><p>　　测做生意或者农业，父母爻是辛苦劳禄之神，持世主辛劳，求财很费力。如果测文化、教育、通讯、车辆、房产等父母爻代表行业，反而利于父母爻持世。测子女小辈，测畜牧养殖，父母为子孙的忌神，最忌父母爻持世，畜牧难养死伤多，父母持世子难得。父母爻又是文章学术之神，官动财旺利考学。官职考试利于父母爻持世。占自身不论问什么，只要财爻发动，不是得财，而是妻克父母，所以说“占身财动无贤妇。”</p>
+<h4 id="兄弟持世"><a href="#兄弟持世" class="headerlink" title="兄弟持世"></a>兄弟持世</h4><p>　　兄弟克妻破财，兄弟爻持世，最不利求财，属于用神忌神持世。如果官鬼旺相发动克世，更要防灾祸。朱雀临兄弟爻发动，必有口舌之灾。测婚损妻，测财损财。兄弟爻持世，父母爻旺相相生，测寿为吉，兄弟爻持世化官鬼回头克，必有奇灾。测竞标、比赛、竞争利于兄弟爻旺相持世。测子女利于子孙爻持世，测六畜兴旺利于兄弟爻持世。这属于用神的原神持世，说明卦主有生养用神之功，养育有方之象。</p>
+<h4 id="子孙持世"><a href="#子孙持世" class="headerlink" title="子孙持世"></a>子孙持世</h4><p>　子孙为解忧喜庆之神，诸艰难险阻，一遇子孙持世应吉，则百祸消散，福祉降临，此为解危济困第一用神也。子孙持世最喜兄弟发动相生，兄弟相生则福禄悠远，源源不断，子孙持世最怕父母发动，正所谓父动当头克子孙，依然有飞灾横祸，此谓福兮祸所倚。律师、养殖、农业及生意人及技术、艺术类最喜及自由职业者最喜子孙爻持世；但是当官、公职、上班族、升学、求名最怕子孙爻持世。</p>
+<h4 id="妻财持世"><a href="#妻财持世" class="headerlink" title="妻财持世"></a>妻财持世</h4><p>　　财爻持世利求财，但忌兄弟爻动，因兄弟爻是克妻破财之神，财爻持世，喜子孙爻动，因子孙是财爻的原神。但财爻又是父母、学业、文章的忌神，财旺对这些不利，所以“克父丧文风”。</p>
+<p>　　财爻持世，利求谋工作，因财爻是官鬼的用神，但需官财均处旺相，子孙与兄弟不动。财爻持世发动变成兄弟或官鬼者，不论测何事都是凶，轻则破财伤身，重则有身亡之灾。因此是回头克，变鬼是化兄。</p>
+<h4 id="官鬼持世"><a href="#官鬼持世" class="headerlink" title="官鬼持世"></a>官鬼持世</h4><p>　　官爻持世，最不宜占身测病，官鬼是忧患之神，官鬼持世占自身是病不离身，官事缠身，官鬼是耗财之神，官鬼持世谨防破财。但测功名求官谋职最喜官鬼旺而持世。</p>
+<p>　　官鬼持世测自身喜冲，受冲可去掉身边之鬼，但世爻不能太衰，否则连自己也冲掉了。官鬼持世逢墓则凶，如值墓，化墓，入动墓，随鬼入墓。诸爻持世歌诀，是先人总结的简洁方面好用的小技巧，当然了，<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=197325303&content_type=Article&match_order=1&q=%E5%85%AD%E7%88%BB%E9%A2%84%E6%B5%8B&zhida_source=entity">六爻预测</a>不仅于此，还有更加高深的道理在里面，我们可以通过诸爻持世来做引领，抛砖引玉，最终达到六爻预测高级的领域。　</p>
+<h2 id="十五、爻化进退"><a href="#十五、爻化进退" class="headerlink" title="十五、爻化进退"></a>十五、爻化进退</h2><h3 id="动化进：（不决定吉凶）"><a href="#动化进：（不决定吉凶）" class="headerlink" title="动化进：（不决定吉凶）"></a>动化进：（不决定吉凶）</h3><p>吉，能量越来越足，扩大。</p>
+<p>化进：五行相同，地支顺时针前进。分别是寅化卯，申化酉，丑化辰，未化戌.</p>
+<p>象义：测公司规模，越来越大，测发展，前进。</p>
+<p>测病：不好的东西会长大，需要早做打算，早开刀，也代表扩散，肿大。</p>
+<p>测对方：对方化进，越来越强硬</p>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 24px; font-weight: bold;">例子</span></p>
+<p>动爻为寅木，发动后化出了卯木，动爻和变爻的五行属性不变，但是地支从寅顺方向到了卯，这就是动化进。</p>
+<h3 id="动化退：（不决定吉凶）"><a href="#动化退：（不决定吉凶）" class="headerlink" title="动化退：（不决定吉凶）"></a>动化退：（不决定吉凶）</h3><p>凶，能量在减退，力量越来越小。</p>
+<p>化退: 五行相同，地支逆时针后退。分别是卯化寅，酉化申，辰化丑，戌变未。</p>
+<p>对方：后退，返回，后悔；在对自己有利的时候，则需要当机立断，赶紧去做。</p>
+<p>测行人，会回来。</p>
+<p>测病：萎缩，变小；慢慢会调理好。</p>
+<p>测人：衰退，退堂鼓，底气不足，胆子小，没有闯劲。</p>
+<h2 id="十六、月建"><a href="#十六、月建" class="headerlink" title="十六、月建"></a>十六、月建</h2><p>月建就是起卦当月的干支,月建的掌权时间是当月,在当月内卦中所有的爻,</p>
+<p>不论是动爻、变爻、伏神、飞神还是静爻都要受月建冲合生克的影响。月建最大</p>
+<p>作用是决定卦中爻的旺衰，旺衰不决定卦内的吉凶，只决定事情量级的大和小，</p>
+<p>他们关系有以下几种：</p>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">月令导致的旺：</span></p>
+<ol>
+<li>爻值月令旺相（高层次旺相）例卯月、卦中的卯木爻</li>
+<li>月令合卦爻旺相（高层次旺相）辰月、卦中酉金爻</li>
+<li>月令生卦爻旺相卯月的巳、午火爻</li>
+<li>月令扶卦爻旺相即月令与卦爻同五行属性。卯月寅木爻</li>
+</ol>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">月令导致的衰：</span></p>
+<p>1 月令冲卦爻，为月破（高层次的衰败）巳月亥水爻</p>
+<p>2 月令克卦爻为衰 申月卯木爻</p>
+<p>3 爻生月令为休为衰 申月辰土爻</p>
+<p>4 爻克月令为囚为衰 午月亥水爻</p>
+<h2 id="十七、日建"><a href="#十七、日建" class="headerlink" title="十七、日建"></a>十七、日建</h2><p>日建又叫日令、日辰就是起卦当天的干支。</p>
+<p>日建与月建同功同权，同时对卦中任何爻都产生作用。</p>
+<p>日建对卦爻的旺衰影响如下：</p>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">旺</span></p>
+<ol>
+<li>爻值日建旺相，寅日寅木爻（高层次旺相）</li>
+<li>日令合卦中静爻旺相（高层次旺相）辰日酉金爻</li>
+<li>日令生卦爻旺相。午日丑土爻</li>
+<li>日令扶卦爻、即日令与卦爻同一五行属性。午日巳火爻</li>
+</ol>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">平相</span></p>
+<ol>
+<li>爻克日令，为平相不显旺衰。卯日申爻</li>
+<li>爻生日令、为平相不显旺衰。卯日子爻</li>
+</ol>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">衰</span></p>
+<ol>
+<li>日令克卦爻酉日寅木爻</li>
+<li>爻绝于日令显衰败 寅日 酉金爻</li>
+</ol>
+<h2 id="十八、长生十二宫"><a href="#十八、长生十二宫" class="headerlink" title="十八、长生十二宫"></a>十八、长生十二宫</h2><p>长生十二宫是地支的十二种状态，分别是长生、沐浴、冠带、临官、帝旺、衰、病、死、墓、绝、胎、养。寓意着事物从生到灭循环往复的运动规律。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>长生</strong></th>
+<th><strong>沐浴</strong></th>
+<th><strong>冠带</strong></th>
+<th><strong>临官</strong></th>
+<th><strong>帝旺</strong></th>
+<th><strong>衰</strong></th>
+<th><strong>病</strong></th>
+<th><strong>死</strong></th>
+<th><strong>墓</strong></th>
+<th><strong>绝</strong></th>
+<th><strong>胎</strong></th>
+<th><strong>养</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>木</strong></td>
+<td>亥</td>
+<td>子</td>
+<td>丑</td>
+<td>寅</td>
+<td>卯</td>
+<td>辰</td>
+<td>巳</td>
+<td>午</td>
+<td>未</td>
+<td>申</td>
+<td>酉</td>
+<td>戌</td>
+</tr>
+<tr>
+<td><strong>火</strong></td>
+<td>寅</td>
+<td>卯</td>
+<td>辰</td>
+<td>巳</td>
+<td>午</td>
+<td>未</td>
+<td>申</td>
+<td>酉</td>
+<td>戌</td>
+<td>亥</td>
+<td>子</td>
+<td>丑</td>
+</tr>
+<tr>
+<td><strong>金</strong></td>
+<td>巳</td>
+<td>午</td>
+<td>未</td>
+<td>申</td>
+<td>酉</td>
+<td>戌</td>
+<td>亥</td>
+<td>子</td>
+<td>丑</td>
+<td>寅</td>
+<td>卯</td>
+<td>辰</td>
+</tr>
+<tr>
+<td><strong>水、土</strong></td>
+<td>申</td>
+<td>酉</td>
+<td>戌</td>
+<td>亥</td>
+<td>子</td>
+<td>丑</td>
+<td>寅</td>
+<td>卯</td>
+<td>辰</td>
+<td>巳</td>
+<td>午</td>
+<td>未</td>
+</tr>
+</tbody></table>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">长生</span></p>
+<p>万物开始生长，犹如初生的婴儿弱小，源头，事情才开始，也代表 时间比较长久的，家，老家，事情的起点，也有吃饭的意思（小孩吃饭才能生长）， 喜欢。比如：看事业，办公司，表示刚刚起步。</p>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">沐浴</span></p>
+<p>小孩出生的时候，洗去污垢，小儿非常弱，所以要小心翼翼，滋润， 洗涤，桃花，裸体，淫乱，脱衣（洗澡需要脱光），贪恋酒色，好色，败地。 测工作事业的话（脱光了，什么都没有了）。</p>
+<p>测病：联系脱衣服受凉而引起的。如果临玄武，则是可能性病。</p>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">冠带</span></p>
+<p>可以穿衣戴帽，成人礼，可以读书，事情向好方向发展，测病的话， 有肿胀，肿块的状态。打扮，装饰，化妆，物品是包装好的，掩盖，注意自己形 象，高贵，金玉其外，房子上代表装修。</p>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">临官（禄地）</span></p>
+<p>人长大后，开始有自己的事业，当官，工作了，政府部门 上班，有工资拿了。</p>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">帝旺</span></p>
+<p>人已经走到顶峰，事业已经到顶点，高处，强大，得意，测 事业已经是最高峰，无法再上一步。</p>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">衰</span></p>
+<p>衰退，走下坡路，象征人慢慢软弱无力，底气不足，空虚，事业，身体 各方面开始败落。</p>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">病</span></p>
+<p>生病，即将走向灭亡，多灾多难，运气非常不好，人的缺点非常多。</p>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">死</span></p>
+<p>死亡，事情无可挽回，死板，死脑筋，蠢笨，人不变通，太倔，一条路 走到黑，不动，死气沉沉，没有退路，测人关系的时候，人不跟你交流。测财， 代表破财，周转不灵。</p>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">墓（库）</span></p>
+<p>凶，隐蔽，封闭，前途一片迷茫，堵塞，仓库，掩埋，控制， 躲避，昏迷，迷恋，沉迷，黑暗。测升迁，测出门，动不了。不自由，受到别人 控制，自己的事情自己做不了主。测小孩，入迷，痴迷，有特别的嗜好，比如入 迷的打游戏。比如人入财的墓，则是财迷，只认钱不认人。</p>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">绝</span></p>
+<p>凶，全部化为土，一片绝境，绝迹，绝路，断绝，冷酷，消失，没有退 路，背水一战。分手，决裂，心灰意冷，化绝，人状态很不好，濒临绝境。</p>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">胎</span></p>
+<p>新的生命开始孕育，非常非常弱小，事情正在计划酝酿，事情只是有想法，打算，起步，还没有实际操作。胎爻也有怀孕的意思，如果有人问是否怀孕，用神在日的胎地，怀了。还可以代表勾连牵连，受别人牵绊，测病，先天的病。</p>
+<p><span style="background: linear-gradient(to right, #36D1DC, #5B86E5); -webkit-background-clip: text; color: transparent; font-size: 20px; font-weight: bold;">养</span></p>
+<p>胎儿成型，逐渐长大，滋润，养育。在母体里接受营养，休养生息，衣食无忧。还可以代表狐疑，怀疑，人对任何事情不放心。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/%E5%85%AD%E7%88%BB/" rel="tag"># 六爻</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/06/03/%E5%85%AD%E7%88%BB%E8%B5%B7%E5%8D%A6/" rel="prev" title="六爻起卦">
+      <i class="fa fa-chevron-left"></i> 六爻起卦
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/06/03/%E5%85%AD%E4%BA%B2%E5%92%8C%E5%85%AD%E7%A5%9E/" rel="next" title="六亲和六神">
+      六亲和六神 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%94%A8%E7%A5%9E%E3%80%81%E5%8E%9F%E7%A5%9E"><span class="nav-number">1.</span> <span class="nav-text">一、用神、原神</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E7%A5%9E"><span class="nav-number">1.0.1.</span> <span class="nav-text">用神</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%A5%9E"><span class="nav-number">1.0.2.</span> <span class="nav-text">原神</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%A8%E7%A5%9E%E5%88%86%E7%B1%BB"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">用神分类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%A8%E7%A5%9E%E5%A4%9A%E7%8E%B0"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">用神多现</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%BF%8C%E7%A5%9E%E3%80%81%E4%BB%87%E7%A5%9E"><span class="nav-number">2.</span> <span class="nav-text">二、忌神、仇神</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BF%8C%E7%A5%9E"><span class="nav-number">2.0.1.</span> <span class="nav-text">忌神</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%87%E7%A5%9E"><span class="nav-number">2.0.2.</span> <span class="nav-text">仇神</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E9%A3%9E%E7%A5%9E%E3%80%81%E4%BC%8F%E7%A5%9E"><span class="nav-number">3.</span> <span class="nav-text">三、飞神、伏神</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E7%88%BB%E7%9A%84%E7%A7%8D%E7%B1%BB%E4%B8%8E%E4%BD%9C%E7%94%A8%E6%9D%83%E9%99%90"><span class="nav-number">4.</span> <span class="nav-text">四、爻的种类与作用权限</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%87%86%E5%88%99%EF%BC%9A"><span class="nav-number">4.0.0.1.</span> <span class="nav-text">准则：</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%8A%A8%E7%88%BB%E4%B8%8E%E5%8F%98%E7%88%BB%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">5.</span> <span class="nav-text">五、动爻与变爻的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E5%8D%A6%E5%86%85%E7%9A%84%E5%90%89%E5%87%B6%E5%88%A4%E6%96%AD"><span class="nav-number">6.</span> <span class="nav-text">六、卦内的吉凶判断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E6%9A%97%E5%8A%A8%E3%80%81%E6%97%A5%E7%A0%B4%E3%80%81%E5%86%B2%E8%84%B1"><span class="nav-number">7.</span> <span class="nav-text">七、暗动、日破、冲脱</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9A%97%E5%8A%A8"><span class="nav-number">7.0.1.</span> <span class="nav-text">暗动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A5%E7%A0%B4"><span class="nav-number">7.0.2.</span> <span class="nav-text">日破</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%B2%E8%84%B1"><span class="nav-number">7.0.3.</span> <span class="nav-text">冲脱</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E6%97%AC%E7%A9%BA"><span class="nav-number">8.</span> <span class="nav-text">八、旬空</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%B2%E7%A9%BA"><span class="nav-number">8.0.1.</span> <span class="nav-text">冲空</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%8F%E5%B1%85%E7%A9%BA%E5%9C%B0"><span class="nav-number">8.0.2.</span> <span class="nav-text">伏居空地</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%9D%E3%80%81%E5%A2%93%EF%BC%88%E5%BA%93%EF%BC%89"><span class="nav-number">9.</span> <span class="nav-text">九、墓（库）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%A2%93"><span class="nav-number">9.0.1.</span> <span class="nav-text">解墓</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E3%80%81%E5%8A%A8%E5%8C%96%E4%BC%8F%E5%90%9F%E3%80%81%E5%8A%A8%E5%8C%96%E5%8F%8D%E5%90%9F%EF%BC%88%E5%8C%96%E6%88%90%E5%86%B2%E7%88%BB%EF%BC%89"><span class="nav-number">10.</span> <span class="nav-text">十、动化伏吟、动化反吟（化成冲爻）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E5%8C%96%E4%BC%8F%E5%90%9F"><span class="nav-number">10.1.</span> <span class="nav-text">动化伏吟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E5%8C%96%E5%8F%8D%E5%90%9F"><span class="nav-number">10.2.</span> <span class="nav-text">动化反吟</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%BA%8C%E3%80%81%E4%BC%8F%E7%A5%9E%E5%87%BA%E4%BC%8F"><span class="nav-number">11.</span> <span class="nav-text">十二、伏神出伏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%B8%89%E3%80%81%E6%9C%88%E7%A0%B4"><span class="nav-number">12.</span> <span class="nav-text">十三、月破</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E7%9A%84%E5%9C%9F%E7%88%BB"><span class="nav-number">12.0.1.</span> <span class="nav-text">特殊的土爻</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E5%9B%9B%E3%80%81%E6%8C%81%E4%B8%96"><span class="nav-number">13.</span> <span class="nav-text">十四、持世</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%88%B6%E6%AF%8D%E6%8C%81%E4%B8%96"><span class="nav-number">13.0.1.</span> <span class="nav-text">父母持世</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%84%E5%BC%9F%E6%8C%81%E4%B8%96"><span class="nav-number">13.0.2.</span> <span class="nav-text">兄弟持世</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%90%E5%AD%99%E6%8C%81%E4%B8%96"><span class="nav-number">13.0.3.</span> <span class="nav-text">子孙持世</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%BB%E8%B4%A2%E6%8C%81%E4%B8%96"><span class="nav-number">13.0.4.</span> <span class="nav-text">妻财持世</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%98%E9%AC%BC%E6%8C%81%E4%B8%96"><span class="nav-number">13.0.5.</span> <span class="nav-text">官鬼持世</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%BA%94%E3%80%81%E7%88%BB%E5%8C%96%E8%BF%9B%E9%80%80"><span class="nav-number">14.</span> <span class="nav-text">十五、爻化进退</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E5%8C%96%E8%BF%9B%EF%BC%9A%EF%BC%88%E4%B8%8D%E5%86%B3%E5%AE%9A%E5%90%89%E5%87%B6%EF%BC%89"><span class="nav-number">14.1.</span> <span class="nav-text">动化进：（不决定吉凶）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E5%8C%96%E9%80%80%EF%BC%9A%EF%BC%88%E4%B8%8D%E5%86%B3%E5%AE%9A%E5%90%89%E5%87%B6%EF%BC%89"><span class="nav-number">14.2.</span> <span class="nav-text">动化退：（不决定吉凶）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E5%85%AD%E3%80%81%E6%9C%88%E5%BB%BA"><span class="nav-number">15.</span> <span class="nav-text">十六、月建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%B8%83%E3%80%81%E6%97%A5%E5%BB%BA"><span class="nav-number">16.</span> <span class="nav-text">十七、日建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E5%85%AB%E3%80%81%E9%95%BF%E7%94%9F%E5%8D%81%E4%BA%8C%E5%AE%AB"><span class="nav-number">17.</span> <span class="nav-text">十八、长生十二宫</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hyacinth"
+      src="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
+  <p class="site-author-name" itemprop="name">Hyacinth</p>
+  <div class="site-description" itemprop="description">君子慎独,不欺暗室</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hyacinth</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/lozad/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+<div id="loading-box">
+  <div class="loading-left-bg"></div>
+  <div class="loading-right-bg"></div>
+  <div class="spinner-box">
+    <div class="configure-border-1"><div class="configure-core"></div></div>
+    <div class="configure-border-2"><div class="configure-core"></div></div>
+    <div class="loading-word">加载中...</div>
+  </div>
+</div>
+
+<canvas id="background-particles" aria-hidden="true"></canvas>
+
+<script>
+  (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
+    var loadingBox = document.getElementById('loading-box');
+    var root = document.documentElement;
+
+    function endLoading() {
+      if (loadingBox.classList.contains('loaded')) return;
+      loadingBox.classList.add('loaded');
+      setTimeout(function() {
+        root.classList.remove('page-loading');
+      }, 500);
+    }
+
+    function initLoading() {
+      root.classList.add('page-loading');
+      loadingBox.classList.remove('loaded');
+    }
+
+    initLoading();
+
+    if (document.readyState === 'complete') {
+      endLoading();
+    } else {
+      window.addEventListener('load', endLoading);
+      document.addEventListener('DOMContentLoaded', endLoading);
+      setTimeout(endLoading, 7000);
+    }
+  })();
+</script>
+
+<script src="/js/latex-tool.js?v=20260805c"></script>
+<script src="/js/translate-tool.js?v=20260805a"></script>
+<script src="/js/hexagram-post-map.js?v=20260910b"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
+<script src="/js/post-summary.js?v=20260831d"></script>
+<script src="/js/background-particles.js?v=20260910a"></script>
+<script src="/js/theme-colors.js?v=20260910b"></script>
+<script src="/js/tab-gaze.js?v=20260910a"></script>
+<script src="/lib/solarlunar/solarlunar.min.js?v=20260910a"></script>
+<script src="/js/daily-hexagram.js?v=20260910a"></script>
+<script src="/js/menu-dropdown.js?v=20260910a"></script>
+
+</body>
+</html>

@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#9a6545","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="SVM：找间隔最大的超平面——支持向量、硬间隔、软间隔与核函数；朴素贝叶斯：贝叶斯定理 + 条件独立假设，拉普拉斯平滑。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10SVM与朴素贝叶斯">
+<meta property="og:url" content="https://hyacinth.xin/2026/09/20/10-SVM%E4%B8%8E%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/index.html">
+<meta property="og:site_name" content="Hyacinth">
+<meta property="og:description" content="SVM：找间隔最大的超平面——支持向量、硬间隔、软间隔与核函数；朴素贝叶斯：贝叶斯定理 + 条件独立假设，拉普拉斯平滑。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img055.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img056.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img059.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img060.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img061.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img062.png">
+<meta property="article:published_time" content="2026-09-20T20:00:00.000Z">
+<meta property="article:modified_time" content="2026-09-20T20:00:00.000Z">
+<meta property="article:author" content="Hyacinth">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hyacinth.xin/images/ml/img055.png">
+
+<link rel="canonical" href="https://hyacinth.xin/2026/09/20/10-SVM%E4%B8%8E%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<script>
+  // 主题换色：首帧绘制前恢复上次选择的色板，避免闪烁。
+  (function() {
+    try {
+      var palette = localStorage.getItem('hyacinth-theme-color');
+      if (palette) document.documentElement.setAttribute('data-theme-color', palette);
+    } catch (error) {}
+  })();
+</script>
+<script>
+  (function() {
+    var images = [
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Asuna%20Yuuki.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Goto%20Hitori.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Kuronuma%20Sawako.png',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Miyazono%20Kaori.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Azusa.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Miku.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Nino.png',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Rem.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Shiina%20Mahiru.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Takagi.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Yamada%20Ryo.jpg'
+    ];
+    var image = images[Math.floor(Math.random() * images.length)];
+    document.documentElement.classList.add('page-loading');
+    document.documentElement.style.setProperty('--page-background-image', 'url("' + image + '")');
+  })();
+</script>
+<link rel="stylesheet" href="https://fontsapi.zeoseven.com/285/main/result.css">
+<link rel="stylesheet" href="/css/post-summary.css?v=20260831c">
+<link rel="stylesheet" href="/css/theme-colors.css?v=20260910b">
+<link rel="stylesheet" href="/css/daily-hexagram.css?v=20260910a">
+<link rel="stylesheet" href="/css/menu-dropdown.css?v=20260910a">
+
+  <title>10SVM与朴素贝叶斯 | Hyacinth</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hyacinth</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-说说">
+
+    <a href="/shuoshuo/" rel="section"><i class="fa fa-comment-dots fa-fw"></i>说说</a>
+
+  </li>
+        <li class="menu-item menu-item-工具">
+
+    <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2026/09/20/10-SVM%E4%B8%8E%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          10SVM与朴素贝叶斯
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-09-20 20:00:00" itemprop="dateCreated datePublished" datetime="2026-09-20T20:00:00+00:00">2026-09-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>9 分钟</span>
+            </span>
+            <div class="post-description">SVM：找间隔最大的超平面——支持向量、硬间隔、软间隔与核函数；朴素贝叶斯：贝叶斯定理 + 条件独立假设，拉普拉斯平滑。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="SVM-与朴素贝叶斯"><a href="#SVM-与朴素贝叶斯" class="headerlink" title="SVM 与朴素贝叶斯"></a>SVM 与朴素贝叶斯</h1><h3 id="30-秒先懂"><a href="#30-秒先懂" class="headerlink" title="30 秒先懂"></a>30 秒先懂</h3><blockquote>
+<p><strong>SVM：在两类样本之间修一条「最宽的马路」，马路中线就是分类边界，离得最近的几个点（支持向量）说了算。朴素贝叶斯：用贝叶斯定理反推「看到这些特征，最可能是哪一类」，并天真地假设特征之间相互独立。</strong></p>
+</blockquote>
+<p>两者都是原文档标注【了解】的经典算法：前者代表「几何视角」做分类，后者代表「概率视角」做分类，对照着学正好互补。</p>
+<hr>
+<h1 id="第一部分：支持向量机（SVM）"><a href="#第一部分：支持向量机（SVM）" class="headerlink" title="第一部分：支持向量机（SVM）"></a>第一部分：支持向量机（SVM）</h1><h2 id="1-它解决什么问题？"><a href="#1-它解决什么问题？" class="headerlink" title="1. 它解决什么问题？"></a>1. 它解决什么问题？</h2><p>SVM（Support Vector Machine）是一个二分类模型：找一个<strong>超平面</strong>（二维是直线、三维是平面）把两类分开。可分开两类的直线往往有无数条，SVM 的标准与众不同——<strong>找间隔最大的那一条</strong>：</p>
+<p><img data-src="/images/ml/img055.png" alt="SVM：在两类之间找间隔最大的超平面"></p>
+<h2 id="2-核心直觉"><a href="#2-核心直觉" class="headerlink" title="2. 核心直觉"></a>2. 核心直觉</h2><p><strong>直觉一：修一条最宽的马路。</strong> 两类样本像马路两侧的房子，SVM 不但要把马路修在中间，还要让马路<strong>越宽越好</strong>——离两边都尽量远。为什么宽更好？宽马路两边留的缓冲大，新样本（测试数据）稍微偏一点也不会压线——<strong>泛化能力强</strong>。</p>
+<p><strong>直觉二：只有「路边的房子」说了算。</strong> 离超平面最近的几个样本叫<strong>支持向量</strong>——它们决定了马路的位置和方向；远处的样本再怎么增删，边界纹丝不动。</p>
+<p><img data-src="/images/ml/img056.png" alt="硬间隔：距离超平面最近的样本点就是支持向量"></p>
+<h2 id="3-数学表达-公式"><a href="#3-数学表达-公式" class="headerlink" title="3. 数学表达 &#x2F; 公式"></a>3. 数学表达 &#x2F; 公式</h2><h3 id="3-1-超平面与点到它的距离"><a href="#3-1-超平面与点到它的距离" class="headerlink" title="3.1 超平面与点到它的距离"></a>3.1 超平面与点到它的距离</h3><p>样本空间中的超平面：$w^\top x + b &#x3D; 0$，其中 $w$ 是法向量（决定方向），$b$ 是位移项（决定离原点多远）。任一点 $x$ 到超平面的距离：</p>
+<p>$$d &#x3D; \frac{\vert w^\top x + b \vert}{\lVert w \rVert}$$</p>
+<p>这就是立体几何里「点到平面的距离公式」，分母 $\lVert w \rVert$ 是权重的模长。</p>
+<h3 id="3-2-硬间隔：约束下的最大化"><a href="#3-2-硬间隔：约束下的最大化" class="headerlink" title="3.2 硬间隔：约束下的最大化"></a>3.2 硬间隔：约束下的最大化</h3><p>把超平面记作 $w^\top x + b &#x3D; 0$，要求所有样本都被正确分类：</p>
+<p>$$y_i(w^\top x_i + b) \ge 1$$</p>
+<p>（正样本算出来 $\ge 1$、负样本 $\le -1$，符号天然区分两类。）缩放 $(w, b)$ 不改变超平面本身，所以不妨把最近的点（支持向量）的取值归一化为恰好等于 1。此时两类支持向量之间的<strong>间隔</strong>为：</p>
+<p>$$\text{margin} &#x3D; \frac{2}{\lVert w \rVert}$$</p>
+<p><strong>「间隔最大」就等价于 $\lVert w \rVert$ 最小</strong>，SVM 的基本型出炉：</p>
+<p>$$\min_{w, b} ; \frac{1}{2}\lVert w \rVert^2 \quad \text{s.t.} \quad y_i(w^\top x_i + b) \ge 1$$</p>
+<p>这是一个凸优化问题（二次目标 + 线性约束），常用拉格朗日乘子法转成对偶问题求解。</p>
+<p><strong>手算一次</strong>。经典二维小例：正类样本 $(3,3)、(4,3)$，负类样本 $(1,1)、(0,0)$。最优解为 $w &#x3D; (0.5,\ 0.5)$，$b &#x3D; -2$。逐点验证约束 $y_i(w^\top x_i + b) \ge 1$：</p>
+<table>
+<thead>
+<tr>
+<th>样本</th>
+<th>$w^\top x + b$</th>
+<th>是否满足</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$(3,3)$ 正</td>
+<td>$1.5+1.5-2 &#x3D; 1$</td>
+<td>✅ 恰好 &#x3D; 1（支持向量）</td>
+</tr>
+<tr>
+<td>$(4,3)$ 正</td>
+<td>$2+1.5-2 &#x3D; 1.5$</td>
+<td>✅ 大于 1</td>
+</tr>
+<tr>
+<td>$(1,1)$ 负</td>
+<td>$0.5+0.5-2 &#x3D; -1$</td>
+<td>✅ 乘 $y&#x3D;-1$ 后 $&#x3D;1$（支持向量）</td>
+</tr>
+<tr>
+<td>$(0,0)$ 负</td>
+<td>$-2$</td>
+<td>✅ 乘 $y&#x3D;-1$ 后 $&#x3D;2$</td>
+</tr>
+</tbody></table>
+<p>间隔 $&#x3D; \dfrac{2}{\lVert w \rVert} &#x3D; \dfrac{2}{\sqrt{0.25+0.25}} &#x3D; 2\sqrt{2} \approx 2.83$。注意支持向量只有 $(3,3)$ 和 $(1,1)$ 两个——把 $(4,3)$ 或 $(0,0)$ 删掉，边界不变。</p>
+<h3 id="3-3-软间隔：现实数据没有这么乖"><a href="#3-3-软间隔：现实数据没有这么乖" class="headerlink" title="3.3 软间隔：现实数据没有这么乖"></a>3.3 软间隔：现实数据没有这么乖</h3><p>硬间隔假设两类能被完美分开——现实数据常有少数「捣乱分子」，硬把它们分开反而学到了噪声。<strong>软间隔</strong>引入松弛变量 $\xi_i \ge 0$，允许个别样本越线：</p>
+<p>$$y_i(w^\top x_i + b) \ge 1 - \xi_i$$</p>
+<p>同时在目标函数里为每个 $\xi_i$ 付罚金：</p>
+<p>$$\min_{w, b, \xi} ; \frac{1}{2}\lVert w \rVert^2 + C\sum_{i&#x3D;1}^{n}\xi_i$$</p>
+<p>惩罚系数 $C$ 是超参数，控制「宽马路」与「零越线」的权衡：</p>
+<p><img data-src="/images/ml/img059.png" alt="软间隔：允许个别样本越线或进入缓冲带"></p>
+<ul>
+<li><strong>C 大</strong>：对越线零容忍 → 边界被个别样本带偏 → 过拟合风险；</li>
+<li><strong>C 小</strong>：宽马路优先、容忍错分 → 欠拟合风险。</li>
+</ul>
+<h3 id="3-4-核函数：切不开就升维"><a href="#3-4-核函数：切不开就升维" class="headerlink" title="3.4 核函数：切不开就升维"></a>3.4 核函数：切不开就升维</h3><p>如果数据在当前空间压根线性不可分呢？</p>
+<p><img data-src="/images/ml/img060.png" alt="非线性数据：一条直线怎么都分不开"></p>
+<p>SVM 的杀手锏：<strong>把数据映射到更高维的空间，让它们在高维里线性可分</strong>，在高维里继续修马路：</p>
+<p><img data-src="/images/ml/img061.png" alt="核技巧：映射到高维特征空间后线性可分"></p>
+<p><img data-src="/images/ml/img062.png" alt="核技巧：映射到高维特征空间后线性可分（续）"></p>
+<p>妙处在于：整个求解过程只需要「两个样本的内积」，而这个内积<strong>不必真的去高维算</strong>——用一个函数（核函数）在低维直接算出来，这就是<strong>核技巧</strong>。常用核函数：</p>
+<table>
+<thead>
+<tr>
+<th>核函数</th>
+<th>公式</th>
+<th>适用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>线性核</td>
+<td>$K(x_i, x_j) &#x3D; x_i^\top x_j$</td>
+<td>本来就近似线性可分、特征很多</td>
+</tr>
+<tr>
+<td>多项式核</td>
+<td>$K(x_i, x_j) &#x3D; (\gamma, x_i^\top x_j + r)^q$</td>
+<td>需要适度非线性</td>
+</tr>
+<tr>
+<td>高斯核（RBF）</td>
+<td>$K(x_i, x_j) &#x3D; \exp(-\gamma \lVert x_i - x_j \rVert^2)$</td>
+<td>通用性最强、默认首选</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>补充</strong> 核函数是 SVM 最大的变数：选错了等于把数据映射到一个不合适的空间，性能可能反而变差。实践中通常先试 RBF，把 $\gamma$ 和 $C$ 交给网格搜索。</p>
+</blockquote>
+<h2 id="5-Python-sklearn-怎么实现？（补充）"><a href="#5-Python-sklearn-怎么实现？（补充）" class="headerlink" title="5. Python &#x2F; sklearn 怎么实现？（补充）"></a>5. Python &#x2F; sklearn 怎么实现？（补充）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVC</span><br><span class="line"></span><br><span class="line">svm = SVC(</span><br><span class="line">    kernel=<span class="string">&quot;rbf&quot;</span>,   <span class="comment"># &quot;linear&quot; / &quot;poly&quot; / &quot;rbf&quot;（默认）</span></span><br><span class="line">    C=<span class="number">1.0</span>,          <span class="comment"># 越小间隔越宽、容忍越多错分</span></span><br><span class="line">    gamma=<span class="string">&quot;scale&quot;</span>,  <span class="comment"># RBF 核的半径参数，越大边界越弯</span></span><br><span class="line">)</span><br><span class="line">svm.fit(x_train, y_train)     <span class="comment"># 注意：SVM 对特征尺度敏感，先标准化</span></span><br><span class="line"><span class="built_in">print</span>(svm.score(x_test, y_test))</span><br><span class="line"><span class="built_in">print</span>(svm.support_vectors_.shape)   <span class="comment"># 支持向量的个数</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>两个关键超参数的二维理解</strong>：<code>C</code> 管「要不要在乎训练错分」——C 大逼近硬间隔、边界容易被个别样本带偏；<code>gamma</code> 管「每个样本的影响半径」——gamma 大影响范围窄、边界更弯更碎。RBF 核下两者通常一起交给网格搜索。</p>
+<p><strong>工程提示</strong>：样本量上万、特征上万（高维文本）时用 <code>LinearSVC</code>（线性核的专用快实现，比通用 SVC 快得多）；<code>SVC(probability=True)</code> 可以输出概率，但那是训练后额外校准得到的、训练成本明显增加；另外支持向量太多时存储同样可观——「支持向量机」并不自动内存友好。</p>
+<p><strong>优缺点</strong>：优点——间隔最大化带来强泛化、核技巧处理非线性、只依赖支持向量（内存友好）；缺点——大数据集训练慢、对缺失和尺度敏感、多分类要拆解、调参（C、γ）依赖经验。</p>
+<hr>
+<h1 id="第二部分：朴素贝叶斯"><a href="#第二部分：朴素贝叶斯" class="headerlink" title="第二部分：朴素贝叶斯"></a>第二部分：朴素贝叶斯</h1><h2 id="6-它解决什么问题？"><a href="#6-它解决什么问题？" class="headerlink" title="6. 它解决什么问题？"></a>6. 它解决什么问题？</h2><p>朴素贝叶斯（Naive Bayes）是<strong>概率视角</strong>的分类器：直接算「给定这些特征，属于每个类别的概率各是多少」，选概率最大的类别。垃圾邮件识别是它的成名场景，情感分析、文本分类至今常用。</p>
+<h2 id="7-核心直觉"><a href="#7-核心直觉" class="headerlink" title="7. 核心直觉"></a>7. 核心直觉</h2><p><strong>直觉一：贝叶斯定理是「反着推」。</strong> 我们容易统计的是「垃圾邮件里出现『免费』的概率」（原因 → 结果），但预测时想要的是「出现『免费』，它是垃圾邮件的概率」（结果 → 原因）。贝叶斯定理就是这座桥：</p>
+<p>$$P(Y \mid X) &#x3D; \frac{P(X \mid Y), P(Y)}{P(X)}$$</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>名字</th>
+<th>在垃圾邮件例子中</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$P(Y\mid X)$</td>
+<td><strong>后验概率</strong>（要算的目标）</td>
+<td>邮件含「免费」时，是垃圾邮件的概率</td>
+</tr>
+<tr>
+<td>$P(X\mid Y)$</td>
+<td><strong>条件概率</strong>（容易从数据统计）</td>
+<td>垃圾邮件中含「免费」的概率</td>
+</tr>
+<tr>
+<td>$P(Y)$</td>
+<td><strong>先验概率</strong></td>
+<td>随机一封邮件是垃圾邮件的概率</td>
+</tr>
+<tr>
+<td>$P(X)$</td>
+<td>证据</td>
+<td>邮件含「免费」的概率（对各类相同）</td>
+</tr>
+</tbody></table>
+<p><strong>手算一次</strong>：已知 $P(\text{垃圾}) &#x3D; 0.3$，$P(\text{免费}\mid\text{垃圾}) &#x3D; 0.4$，$P(\text{免费}\mid\text{正常}) &#x3D; 0.05$。先算证据：</p>
+<p>$$P(\text{免费}) &#x3D; 0.3 \times 0.4 + 0.7 \times 0.05 &#x3D; 0.155$$</p>
+<p>$$P(\text{垃圾}\mid\text{免费}) &#x3D; \frac{0.3 \times 0.4}{0.155} \approx 0.774$$</p>
+<p>「免费」一词把垃圾邮件的概率从先验的 30% 拉到 77%——这就是贝叶斯更新。</p>
+<p><strong>直觉二：「朴素」在哪？</strong> 邮件有一堆词（免费、中奖、链接……），完整的贝叶斯要算这些词的<strong>联合概率</strong>——词与词显然有关联，根本算不过来。朴素贝叶斯大胆假设：<strong>给定类别，所有特征相互独立</strong>。于是联合概率退化为连乘：</p>
+<p>$$P(x_1, \dots, x_d \mid Y &#x3D; c) &#x3D; \prod_{j&#x3D;1}^{d} P(x_j \mid Y &#x3D; c)$$</p>
+<p>假设当然不真实（「免费」和「中奖」常常一起出现），但<strong>我们不需要概率多准，只需要各类别相对大小排对序</strong>——朴素贝叶斯在文本分类上长期表现优秀，就是「假设错了、结论不差」的著名案例。</p>
+<h2 id="8-数学表达-公式"><a href="#8-数学表达-公式" class="headerlink" title="8. 数学表达 &#x2F; 公式"></a>8. 数学表达 &#x2F; 公式</h2><p><strong>学习过程</strong> &#x3D; 从训练数据数出两类概率（极大似然估计）：</p>
+<ul>
+<li>先验：$P(Y &#x3D; c_k) &#x3D; \dfrac{\text{第 } k \text{ 类样本数}}{\text{总样本数}}$；</li>
+<li>条件概率：$P(x_j &#x3D; a \mid Y &#x3D; c_k) &#x3D; \dfrac{\text{第 } k \text{ 类中 } x_j &#x3D; a \text{ 的样本数}}{\text{第 } k \text{ 类样本数}}$。</li>
+</ul>
+<p><strong>分类过程</strong>：对每个类别计算（分子的）后验，取最大：</p>
+<p>$$\hat{y} &#x3D; \arg\max_{c_k}; P(Y &#x3D; c_k) \prod_{j&#x3D;1}^{d} P(x_j \mid Y &#x3D; c_k)$$</p>
+<p><strong>零概率灾难与拉普拉斯平滑</strong>。极大似然估计有个坑：如果「免费」在训练集的 10 封垃圾邮件里<strong>一次都没出现过</strong>，估计出 $P(\text{免费}\mid\text{垃圾}) &#x3D; 0$——而连乘里只要有一个 0，整个后验就归零，其他特征的信息全被抹掉。<strong>贝叶斯估计（拉普拉斯平滑）</strong>在分子分母上各加一点：</p>
+<p>$$P_\lambda(x_j &#x3D; a \mid Y &#x3D; c_k) &#x3D; \frac{\text{计数} + \lambda}{\text{总数} + \lambda \cdot K}$$</p>
+<p>$\lambda &#x3D; 1$ 时称拉普拉斯平滑（$K$ 为该特征的取值数）。手算：$P &#x3D; \dfrac{0 + 1}{10 + 2 \times 1} &#x3D; \dfrac{1}{12} \approx 0.083$——从「绝对不可能」变成「很少见」，乘积不再归零，且样本量大时平滑对估计几乎无影响。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.naive_bayes <span class="keyword">import</span> GaussianNB, MultinomialNB, BernoulliNB, ComplementNB</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按特征的数据分布选版本：</span></span><br><span class="line">nb = GaussianNB()     <span class="comment"># 连续特征，各类内近似高斯分布</span></span><br><span class="line">nb = MultinomialNB()  <span class="comment"># 词频 / 计数特征（文本分类常用）</span></span><br><span class="line">nb = BernoulliNB()    <span class="comment"># 0/1「词是否出现」类二元特征</span></span><br><span class="line">nb = ComplementNB()   <span class="comment"># MultinomialNB 的改进版，类别不平衡的文本任务常更好</span></span><br><span class="line">nb.fit(x_train, y_train)</span><br><span class="line"><span class="built_in">print</span>(nb.score(x_test, y_test))</span><br><span class="line"><span class="built_in">print</span>(nb.predict_proba(x_test[:<span class="number">3</span>]))   <span class="comment"># 各类别的后验概率</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>补充</strong> 实际计算时，概率连乘都用<strong>对数概率求和</strong>代替（$\log(ab) &#x3D; \log a + \log b$）——几十上百个小于 1 的概率直接相乘会数值下溢变成 0，取对数后就是普通加法，稳定得多。</p>
+</blockquote>
+<p><strong>优缺点</strong>：优点——训练和预测都快、小数据可用、天然支持多分类；缺点——独立性假设过强（特征相关时吃亏）、输出概率未经校准、平滑参数需要留意。</p>
+<hr>
+<h2 id="9-易混淆点"><a href="#9-易混淆点" class="headerlink" title="9. 易混淆点"></a>9. 易混淆点</h2><table>
+<thead>
+<tr>
+<th>易混对</th>
+<th>一句话区分</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>支持向量 vs 普通样本</td>
+<td>支持向量是离边界最近、恰好「踩线」的样本，只有它们决定超平面；删普通样本边界不变</td>
+</tr>
+<tr>
+<td>硬间隔 vs 软间隔</td>
+<td>前者要求全部分对（数据必须线性可分）；后者用松弛变量 + 惩罚 C 容忍个别越线</td>
+</tr>
+<tr>
+<td>惩罚 C 的方向</td>
+<td>C 大 → 逼近硬间隔、边界易被带偏；C 小 → 马路宽、容忍错分</td>
+</tr>
+<tr>
+<td>核函数 vs 直接升维</td>
+<td>核技巧不在高维里真的算，用核函数在低维「代算」内积，省掉了升维</td>
+</tr>
+<tr>
+<td>先验 vs 后验</td>
+<td>先验是「开看数据前」的 P(Y)；后验是「看完特征 X 后」的 P(Y|X)</td>
+</tr>
+<tr>
+<td>朴素贝叶斯的「朴素」</td>
+<td>指条件独立假设天真，不是指算法性能差——文本分类里它长期是强基线</td>
+</tr>
+<tr>
+<td>极大似然 vs 拉普拉斯平滑</td>
+<td>前者直接数比例（可能数出 0）；后者分子加 λ 分母加 λK，防止零概率灾难</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/09/20/09-%E5%86%B3%E7%AD%96%E6%A0%91%E4%B8%8E%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/" rel="prev" title="09决策树与集成学习">
+      <i class="fa fa-chevron-left"></i> 09决策树与集成学习
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/09/20/11-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="next" title="11无监督学习">
+      11无监督学习 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SVM-%E4%B8%8E%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF"><span class="nav-number">1.</span> <span class="nav-text">SVM 与朴素贝叶斯</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#30-%E7%A7%92%E5%85%88%E6%87%82"><span class="nav-number">1.0.1.</span> <span class="nav-text">30 秒先懂</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%EF%BC%9A%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA%EF%BC%88SVM%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">第一部分：支持向量机（SVM）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AE%83%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">1. 它解决什么问题？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%A0%B8%E5%BF%83%E7%9B%B4%E8%A7%89"><span class="nav-number">2.2.</span> <span class="nav-text">2. 核心直觉</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%95%B0%E5%AD%A6%E8%A1%A8%E8%BE%BE-%E5%85%AC%E5%BC%8F"><span class="nav-number">2.3.</span> <span class="nav-text">3. 数学表达 &#x2F; 公式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E8%B6%85%E5%B9%B3%E9%9D%A2%E4%B8%8E%E7%82%B9%E5%88%B0%E5%AE%83%E7%9A%84%E8%B7%9D%E7%A6%BB"><span class="nav-number">2.3.1.</span> <span class="nav-text">3.1 超平面与点到它的距离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E7%A1%AC%E9%97%B4%E9%9A%94%EF%BC%9A%E7%BA%A6%E6%9D%9F%E4%B8%8B%E7%9A%84%E6%9C%80%E5%A4%A7%E5%8C%96"><span class="nav-number">2.3.2.</span> <span class="nav-text">3.2 硬间隔：约束下的最大化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E8%BD%AF%E9%97%B4%E9%9A%94%EF%BC%9A%E7%8E%B0%E5%AE%9E%E6%95%B0%E6%8D%AE%E6%B2%A1%E6%9C%89%E8%BF%99%E4%B9%88%E4%B9%96"><span class="nav-number">2.3.3.</span> <span class="nav-text">3.3 软间隔：现实数据没有这么乖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E6%A0%B8%E5%87%BD%E6%95%B0%EF%BC%9A%E5%88%87%E4%B8%8D%E5%BC%80%E5%B0%B1%E5%8D%87%E7%BB%B4"><span class="nav-number">2.3.4.</span> <span class="nav-text">3.4 核函数：切不开就升维</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Python-sklearn-%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%EF%BC%9F%EF%BC%88%E8%A1%A5%E5%85%85%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">5. Python &#x2F; sklearn 怎么实现？（补充）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF"><span class="nav-number">3.</span> <span class="nav-text">第二部分：朴素贝叶斯</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%AE%83%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-number">3.1.</span> <span class="nav-text">6. 它解决什么问题？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E6%A0%B8%E5%BF%83%E7%9B%B4%E8%A7%89"><span class="nav-number">3.2.</span> <span class="nav-text">7. 核心直觉</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E6%95%B0%E5%AD%A6%E8%A1%A8%E8%BE%BE-%E5%85%AC%E5%BC%8F"><span class="nav-number">3.3.</span> <span class="nav-text">8. 数学表达 &#x2F; 公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9"><span class="nav-number">3.4.</span> <span class="nav-text">9. 易混淆点</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hyacinth"
+      src="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
+  <p class="site-author-name" itemprop="name">Hyacinth</p>
+  <div class="site-description" itemprop="description">君子慎独,不欺暗室</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hyacinth</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/lozad/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+<div id="loading-box">
+  <div class="loading-left-bg"></div>
+  <div class="loading-right-bg"></div>
+  <div class="spinner-box">
+    <div class="configure-border-1"><div class="configure-core"></div></div>
+    <div class="configure-border-2"><div class="configure-core"></div></div>
+    <div class="loading-word">加载中...</div>
+  </div>
+</div>
+
+<canvas id="background-particles" aria-hidden="true"></canvas>
+
+<script>
+  (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
+    var loadingBox = document.getElementById('loading-box');
+    var root = document.documentElement;
+
+    function endLoading() {
+      if (loadingBox.classList.contains('loaded')) return;
+      loadingBox.classList.add('loaded');
+      setTimeout(function() {
+        root.classList.remove('page-loading');
+      }, 500);
+    }
+
+    function initLoading() {
+      root.classList.add('page-loading');
+      loadingBox.classList.remove('loaded');
+    }
+
+    initLoading();
+
+    if (document.readyState === 'complete') {
+      endLoading();
+    } else {
+      window.addEventListener('load', endLoading);
+      document.addEventListener('DOMContentLoaded', endLoading);
+      setTimeout(endLoading, 7000);
+    }
+  })();
+</script>
+
+<script src="/js/latex-tool.js?v=20260805c"></script>
+<script src="/js/translate-tool.js?v=20260805a"></script>
+<script src="/js/hexagram-post-map.js?v=20260910b"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
+<script src="/js/post-summary.js?v=20260831d"></script>
+<script src="/js/background-particles.js?v=20260910a"></script>
+<script src="/js/theme-colors.js?v=20260910b"></script>
+<script src="/js/tab-gaze.js?v=20260910a"></script>
+<script src="/lib/solarlunar/solarlunar.min.js?v=20260910a"></script>
+<script src="/js/daily-hexagram.js?v=20260910a"></script>
+<script src="/js/menu-dropdown.js?v=20260910a"></script>
+
+</body>
+</html>

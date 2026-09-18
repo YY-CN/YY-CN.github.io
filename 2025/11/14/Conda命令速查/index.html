@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#9a6545","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="汇总 Conda 环境、包、渠道、CUDA 配置以及常见排错命令。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Conda命令速查">
+<meta property="og:url" content="https://hyacinth.xin/2025/11/14/Conda%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5/index.html">
+<meta property="og:site_name" content="Hyacinth">
+<meta property="og:description" content="汇总 Conda 环境、包、渠道、CUDA 配置以及常见排错命令。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-11-14T11:56:27.000Z">
+<meta property="article:modified_time" content="2025-11-14T11:56:27.000Z">
+<meta property="article:author" content="Hyacinth">
+<meta property="article:tag" content="杂项">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hyacinth.xin/2025/11/14/Conda%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<script>
+  // 主题换色：首帧绘制前恢复上次选择的色板，避免闪烁。
+  (function() {
+    try {
+      var palette = localStorage.getItem('hyacinth-theme-color');
+      if (palette) document.documentElement.setAttribute('data-theme-color', palette);
+    } catch (error) {}
+  })();
+</script>
+<script>
+  (function() {
+    var images = [
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Asuna%20Yuuki.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Goto%20Hitori.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Kuronuma%20Sawako.png',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Miyazono%20Kaori.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Azusa.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Miku.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Nino.png',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Rem.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Shiina%20Mahiru.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Takagi.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Yamada%20Ryo.jpg'
+    ];
+    var image = images[Math.floor(Math.random() * images.length)];
+    document.documentElement.classList.add('page-loading');
+    document.documentElement.style.setProperty('--page-background-image', 'url("' + image + '")');
+  })();
+</script>
+<link rel="stylesheet" href="https://fontsapi.zeoseven.com/285/main/result.css">
+<link rel="stylesheet" href="/css/post-summary.css?v=20260831c">
+<link rel="stylesheet" href="/css/theme-colors.css?v=20260910b">
+<link rel="stylesheet" href="/css/daily-hexagram.css?v=20260910a">
+<link rel="stylesheet" href="/css/menu-dropdown.css?v=20260910a">
+
+  <title>Conda命令速查 | Hyacinth</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hyacinth</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-说说">
+
+    <a href="/shuoshuo/" rel="section"><i class="fa fa-comment-dots fa-fw"></i>说说</a>
+
+  </li>
+        <li class="menu-item menu-item-工具">
+
+    <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2025/11/14/Conda%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Conda命令速查
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-11-14 11:56:27" itemprop="dateCreated datePublished" datetime="2025-11-14T11:56:27+00:00">2025-11-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9D%82%E9%A1%B9/" itemprop="url" rel="index"><span itemprop="name">杂项</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>310</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+            <div class="post-description">汇总 Conda 环境、包、渠道、CUDA 配置以及常见排错命令。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Conda-命令速查"><a href="#Conda-命令速查" class="headerlink" title="Conda 命令速查"></a>Conda 命令速查</h1><p>适用平台：Windows &#x2F; macOS &#x2F; Linux（PowerShell、bash、zsh 等）。</p>
+<hr>
+<h2 id="1-基础与自检"><a href="#1-基础与自检" class="headerlink" title="1. 基础与自检"></a>1. 基础与自检</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conda --version                 <span class="comment"># 查看 conda 版本</span></span><br><span class="line">conda info                      <span class="comment"># 运行环境与配置概览</span></span><br><span class="line">conda config --show             <span class="comment"># 展示所有配置项</span></span><br><span class="line">conda config --show-sources     <span class="comment"># 配置文件来源（.condarc 位置）</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>初始化 shell（只需一次）</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 任选或多选：bash / zsh / fish / powershell / cmd.exe</span></span><br><span class="line">conda init bash</span><br><span class="line">conda init zsh</span><br><span class="line">conda init fish</span><br><span class="line">conda init powershell</span><br><span class="line">conda init cmd.exe</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>看到 “No action taken.” 说明已初始化；<strong>重开终端</strong>即可。</p>
+</blockquote>
+<h2 id="2-环境（env）管理"><a href="#2-环境（env）管理" class="headerlink" title="2. 环境（env）管理"></a>2. 环境（env）管理</h2><h3 id="2-1-创建-激活-删除"><a href="#2-1-创建-激活-删除" class="headerlink" title="2.1 创建 &#x2F; 激活 &#x2F; 删除"></a>2.1 创建 &#x2F; 激活 &#x2F; 删除</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conda create -n myenv python=3.10        <span class="comment"># 新建环境并指定 Python 版本</span></span><br><span class="line">conda activate myenv                     <span class="comment"># 激活</span></span><br><span class="line">conda deactivate                         <span class="comment"># 退出当前环境</span></span><br><span class="line">conda <span class="built_in">env</span> remove -n myenv                <span class="comment"># 删除环境</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>按路径创建（无需命名）</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda create -p /abs/path/to/env python=3.11</span><br><span class="line">conda activate /abs/path/to/env</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-查看-复制-“重命名”（变通）"><a href="#2-2-查看-复制-“重命名”（变通）" class="headerlink" title="2.2 查看 &#x2F; 复制 &#x2F; “重命名”（变通）"></a>2.2 查看 &#x2F; 复制 &#x2F; “重命名”（变通）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conda <span class="built_in">env</span> list                           <span class="comment"># 列出全部环境</span></span><br><span class="line">conda list                               <span class="comment"># 查看当前环境已装包</span></span><br><span class="line">conda create -n newenv --<span class="built_in">clone</span> oldenv    <span class="comment"># 克隆环境（等价复制）</span></span><br><span class="line"><span class="comment"># “重命名”做法：clone 新名 -&gt; 测试 -&gt; 删除旧名</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-导出-复现（YAML-explicit）"><a href="#2-3-导出-复现（YAML-explicit）" class="headerlink" title="2.3 导出 &#x2F; 复现（YAML &#x2F; explicit）"></a>2.3 导出 &#x2F; 复现（YAML &#x2F; explicit）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 常用：仅记录手动安装的包（更简洁、便于跨平台）</span></span><br><span class="line">conda <span class="built_in">env</span> <span class="built_in">export</span> --from-history &gt; env.yaml</span><br><span class="line"></span><br><span class="line"><span class="comment"># 完整：含解算后所有具体版本（可更精确复现）</span></span><br><span class="line">conda <span class="built_in">env</span> <span class="built_in">export</span> &gt; env_full.yaml</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用 YAML 复现</span></span><br><span class="line">conda <span class="built_in">env</span> create -f env.yaml             <span class="comment"># 新建</span></span><br><span class="line">conda <span class="built_in">env</span> update  -f env.yaml            <span class="comment"># 覆盖更新到当前环境</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 完全可复现（explicit 方案）</span></span><br><span class="line">conda list --explicit &gt; spec.txt</span><br><span class="line">conda create --name newenv --file spec.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-环境变量（持久化到某个-env）"><a href="#2-4-环境变量（持久化到某个-env）" class="headerlink" title="2.4 环境变量（持久化到某个 env）"></a>2.4 环境变量（持久化到某个 env）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda <span class="built_in">env</span> config vars <span class="built_in">set</span> KEY1=VALUE1 KEY2=VALUE2 -n myenv</span><br><span class="line">conda <span class="built_in">env</span> config vars list -n myenv</span><br><span class="line">conda <span class="built_in">env</span> config vars <span class="built_in">unset</span> KEY1 KEY2 -n myenv</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-包（package）管理"><a href="#3-包（package）管理" class="headerlink" title="3. 包（package）管理"></a>3. 包（package）管理</h2><h3 id="3-1-安装-升级-卸载"><a href="#3-1-安装-升级-卸载" class="headerlink" title="3.1 安装 &#x2F; 升级 &#x2F; 卸载"></a>3.1 安装 &#x2F; 升级 &#x2F; 卸载</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">conda search numpy                           <span class="comment"># 搜索包</span></span><br><span class="line">conda install numpy=1.26                     <span class="comment"># 指定版本</span></span><br><span class="line">conda install scipy pandas -c conda-forge    <span class="comment"># 指定渠道安装多个包</span></span><br><span class="line">conda update numpy                           <span class="comment"># 升级单个包</span></span><br><span class="line">conda update --all                           <span class="comment"># 升级环境里所有包（慎用）</span></span><br><span class="line">conda remove pandas                          <span class="comment"># 卸载</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>离线安装（.conda &#x2F; .tar.bz2）</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install --offline /path/to/pkg.conda</span><br></pre></td></tr></table></figure>
+
+<p><strong>固定&#x2F;禁止升级某些包（pin）</strong>：在环境的 <code>conda-meta/pinned</code> 写入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pytorch 2.3.*</span><br><span class="line">numpy ==1.26.4</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-与-pip-共存（推荐顺序）"><a href="#3-2-与-pip-共存（推荐顺序）" class="headerlink" title="3.2 与 pip 共存（推荐顺序）"></a>3.2 与 pip 共存（推荐顺序）</h3><ul>
+<li>先 <code>conda install ...</code>，再 <code>pip install ...</code></li>
+<li>导出环境时常用 <code>--from-history</code>，避免把 pip 的解算结果写死</li>
+</ul>
+<p><strong>示例</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda install pytorch torchvision -c pytorch -c nvidia</span><br><span class="line">pip install some_pkg_not_in_conda</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-渠道（channel）与配置"><a href="#4-渠道（channel）与配置" class="headerlink" title="4. 渠道（channel）与配置"></a>4. 渠道（channel）与配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels conda-forge           <span class="comment"># 添加渠道</span></span><br><span class="line">conda config --remove channels conda-forge        <span class="comment"># 移除渠道</span></span><br><span class="line">conda config --<span class="built_in">set</span> channel_priority strict        <span class="comment"># 严格优先级（推荐）</span></span><br><span class="line">conda config --show channels                      <span class="comment"># 查看当前渠道顺序</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>常用全局设置</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda config --<span class="built_in">set</span> auto_activate_base <span class="literal">false</span>       <span class="comment"># 禁止启动时自动激活 base</span></span><br><span class="line">conda config --<span class="built_in">set</span> notify_outdated_conda <span class="literal">false</span>    <span class="comment"># 关闭过期提示（可选）</span></span><br><span class="line">conda config --<span class="built_in">set</span> default_channels <span class="string">&quot;https://repo.anaconda.com/pkgs/main,https://repo.anaconda.com/pkgs/r&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="5-清理与排错"><a href="#5-清理与排错" class="headerlink" title="5. 清理与排错"></a>5. 清理与排错</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">conda clean --all -y            <span class="comment"># 清理索引/包缓存/解压缓存（释放磁盘）</span></span><br><span class="line">conda clean --packages -y       <span class="comment"># 仅清理未被引用的包</span></span><br><span class="line">conda update conda              <span class="comment"># 升级 conda 自身</span></span><br><span class="line">conda info --envs               <span class="comment"># 环境路径是否异常/重复</span></span><br><span class="line">conda config --show-sources     <span class="comment"># 检查 .condarc 来源是否冲突</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>快速自检</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda run -n myenv python -V    <span class="comment"># 不激活环境，直接在 myenv 里跑命令</span></span><br><span class="line"><span class="built_in">which</span> conda                     <span class="comment"># (Unix) 定位 conda 路径</span></span><br><span class="line"><span class="built_in">where</span> conda                     <span class="comment"># (Windows) 定位 conda 路径</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="6-与-CUDA-PyTorch-的常见组合"><a href="#6-与-CUDA-PyTorch-的常见组合" class="headerlink" title="6. 与 CUDA &#x2F; PyTorch 的常见组合"></a>6. 与 CUDA &#x2F; PyTorch 的常见组合</h2><blockquote>
+<p>多数官方 PyTorch 包<strong>自带 CUDA 运行时</strong>，只要求 <strong>NVIDIA 驱动足够新</strong>。优先使用官网向导生成命令。</p>
+</blockquote>
+<p><strong>conda 安装示例</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># CUDA 11.8 版本的 PyTorch 2.3.x</span></span><br><span class="line">conda install pytorch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 \</span><br><span class="line">  pytorch-cuda=11.8 -c pytorch -c nvidia</span><br><span class="line"></span><br><span class="line"><span class="comment"># CUDA 12.1 版本的 PyTorch 2.3.x</span></span><br><span class="line">conda install pytorch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 \</span><br><span class="line">  pytorch-cuda=12.1 -c pytorch -c nvidia</span><br></pre></td></tr></table></figure>
+
+<p><strong>pip（可在 conda 环境内使用）</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 带 CUDA 的索引（示例，按需替换 cu118/cu126/cu128）</span></span><br><span class="line">pip install torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1 \</span><br><span class="line">  --index-url https://download.pytorch.org/whl/cu118</span><br><span class="line"></span><br><span class="line"><span class="comment"># 仅 CPU</span></span><br><span class="line">pip install torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1 \</span><br><span class="line">  --index-url https://download.pytorch.org/whl/cpu</span><br></pre></td></tr></table></figure>
+
+<p><strong>安装后校验</strong>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="built_in">print</span>(torch.__version__, torch.version.cuda, torch.cuda.is_available())</span><br><span class="line"><span class="built_in">print</span>(torch.cuda.get_device_name(<span class="number">0</span>) <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">&quot;CPU only&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-常见工作流模板"><a href="#7-常见工作流模板" class="headerlink" title="7. 常见工作流模板"></a>7. 常见工作流模板</h2><p><strong>A. 新项目从 0 开始</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">conda create -n proj python=3.11</span><br><span class="line">conda activate proj</span><br><span class="line">conda config --<span class="built_in">env</span> --<span class="built_in">set</span> channel_priority strict</span><br><span class="line">conda install -c conda-forge numpy pandas matplotlib</span><br><span class="line">pip install black ruff</span><br><span class="line">conda <span class="built_in">env</span> <span class="built_in">export</span> --from-history &gt; env.yaml</span><br></pre></td></tr></table></figure>
+
+<p><strong>B. 团队复现环境</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;repo&gt;</span><br><span class="line">conda <span class="built_in">env</span> create -f env.yaml</span><br><span class="line">conda activate &lt;env_name_from_yaml&gt;</span><br><span class="line">pip install -r requirements.txt   <span class="comment"># 若项目还提供了此文件</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>C. 清理磁盘</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda clean --all -y</span><br></pre></td></tr></table></figure>
+
+<p><strong>建议</strong>：</p>
+<ul>
+<li>保持 <code>channel_priority strict</code>；</li>
+<li>新环境尽量用 <code>--from-history</code> 导出；</li>
+<li>先 conda 后 pip，减少解算冲突。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9D%82%E9%A1%B9/" rel="tag"># 杂项</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/11/12/%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE%E7%9A%84%E8%AE%BE%E8%AE%A1/" rel="prev" title="文章的分类和标签设计">
+      <i class="fa fa-chevron-left"></i> 文章的分类和标签设计
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/04/30/vscode%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/" rel="next" title="vscode远程连接AutoDL">
+      vscode远程连接AutoDL <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Conda-%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5"><span class="nav-number">1.</span> <span class="nav-text">Conda 命令速查</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%9F%BA%E7%A1%80%E4%B8%8E%E8%87%AA%E6%A3%80"><span class="nav-number">1.1.</span> <span class="nav-text">1. 基础与自检</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%8E%AF%E5%A2%83%EF%BC%88env%EF%BC%89%E7%AE%A1%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">2. 环境（env）管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%88%9B%E5%BB%BA-%E6%BF%80%E6%B4%BB-%E5%88%A0%E9%99%A4"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 创建 &#x2F; 激活 &#x2F; 删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%9F%A5%E7%9C%8B-%E5%A4%8D%E5%88%B6-%E2%80%9C%E9%87%8D%E5%91%BD%E5%90%8D%E2%80%9D%EF%BC%88%E5%8F%98%E9%80%9A%EF%BC%89"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 查看 &#x2F; 复制 &#x2F; “重命名”（变通）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E5%AF%BC%E5%87%BA-%E5%A4%8D%E7%8E%B0%EF%BC%88YAML-explicit%EF%BC%89"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 导出 &#x2F; 复现（YAML &#x2F; explicit）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%EF%BC%88%E6%8C%81%E4%B9%85%E5%8C%96%E5%88%B0%E6%9F%90%E4%B8%AA-env%EF%BC%89"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4 环境变量（持久化到某个 env）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%8C%85%EF%BC%88package%EF%BC%89%E7%AE%A1%E7%90%86"><span class="nav-number">1.3.</span> <span class="nav-text">3. 包（package）管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%AE%89%E8%A3%85-%E5%8D%87%E7%BA%A7-%E5%8D%B8%E8%BD%BD"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 安装 &#x2F; 升级 &#x2F; 卸载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E4%B8%8E-pip-%E5%85%B1%E5%AD%98%EF%BC%88%E6%8E%A8%E8%8D%90%E9%A1%BA%E5%BA%8F%EF%BC%89"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 与 pip 共存（推荐顺序）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%B8%A0%E9%81%93%EF%BC%88channel%EF%BC%89%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="nav-number">1.4.</span> <span class="nav-text">4. 渠道（channel）与配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%B8%85%E7%90%86%E4%B8%8E%E6%8E%92%E9%94%99"><span class="nav-number">1.5.</span> <span class="nav-text">5. 清理与排错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E4%B8%8E-CUDA-PyTorch-%E7%9A%84%E5%B8%B8%E8%A7%81%E7%BB%84%E5%90%88"><span class="nav-number">1.6.</span> <span class="nav-text">6. 与 CUDA &#x2F; PyTorch 的常见组合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%B8%B8%E8%A7%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E6%A8%A1%E6%9D%BF"><span class="nav-number">1.7.</span> <span class="nav-text">7. 常见工作流模板</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hyacinth"
+      src="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
+  <p class="site-author-name" itemprop="name">Hyacinth</p>
+  <div class="site-description" itemprop="description">君子慎独,不欺暗室</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hyacinth</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/lozad/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+<div id="loading-box">
+  <div class="loading-left-bg"></div>
+  <div class="loading-right-bg"></div>
+  <div class="spinner-box">
+    <div class="configure-border-1"><div class="configure-core"></div></div>
+    <div class="configure-border-2"><div class="configure-core"></div></div>
+    <div class="loading-word">加载中...</div>
+  </div>
+</div>
+
+<canvas id="background-particles" aria-hidden="true"></canvas>
+
+<script>
+  (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
+    var loadingBox = document.getElementById('loading-box');
+    var root = document.documentElement;
+
+    function endLoading() {
+      if (loadingBox.classList.contains('loaded')) return;
+      loadingBox.classList.add('loaded');
+      setTimeout(function() {
+        root.classList.remove('page-loading');
+      }, 500);
+    }
+
+    function initLoading() {
+      root.classList.add('page-loading');
+      loadingBox.classList.remove('loaded');
+    }
+
+    initLoading();
+
+    if (document.readyState === 'complete') {
+      endLoading();
+    } else {
+      window.addEventListener('load', endLoading);
+      document.addEventListener('DOMContentLoaded', endLoading);
+      setTimeout(endLoading, 7000);
+    }
+  })();
+</script>
+
+<script src="/js/latex-tool.js?v=20260805c"></script>
+<script src="/js/translate-tool.js?v=20260805a"></script>
+<script src="/js/hexagram-post-map.js?v=20260910b"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
+<script src="/js/post-summary.js?v=20260831d"></script>
+<script src="/js/background-particles.js?v=20260910a"></script>
+<script src="/js/theme-colors.js?v=20260910b"></script>
+<script src="/js/tab-gaze.js?v=20260910a"></script>
+<script src="/lib/solarlunar/solarlunar.min.js?v=20260910a"></script>
+<script src="/js/daily-hexagram.js?v=20260910a"></script>
+<script src="/js/menu-dropdown.js?v=20260910a"></script>
+
+</body>
+</html>
