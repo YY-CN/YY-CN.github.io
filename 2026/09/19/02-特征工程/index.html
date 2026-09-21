@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#9a6545","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="特征工程四件套：特征选择、特征转换、特征构造、特征降维，附低方差过滤、相关系数法与 PCA 实操。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="02特征工程">
+<meta property="og:url" content="https://hyacinth.xin/2026/09/19/02-%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Hyacinth">
+<meta property="og:description" content="特征工程四件套：特征选择、特征转换、特征构造、特征降维，附低方差过滤、相关系数法与 PCA 实操。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img006.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img007.png">
+<meta property="article:published_time" content="2026-09-19T22:30:00.000Z">
+<meta property="article:modified_time" content="2026-09-19T22:30:00.000Z">
+<meta property="article:author" content="Hyacinth">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hyacinth.xin/images/ml/img006.png">
+
+<link rel="canonical" href="https://hyacinth.xin/2026/09/19/02-%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<script>
+  // 主题换色：首帧绘制前恢复上次选择的色板，避免闪烁。
+  (function() {
+    try {
+      var palette = localStorage.getItem('hyacinth-theme-color');
+      if (palette) document.documentElement.setAttribute('data-theme-color', palette);
+    } catch (error) {}
+  })();
+</script>
+<script>
+  (function() {
+    var images = [
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Asuna%20Yuuki.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Goto%20Hitori.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Kuronuma%20Sawako.png',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Miyazono%20Kaori.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Azusa.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Miku.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Nino.png',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Rem.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Shiina%20Mahiru.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Takagi.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Yamada%20Ryo.jpg'
+    ];
+    var image = images[Math.floor(Math.random() * images.length)];
+    document.documentElement.classList.add('page-loading');
+    document.documentElement.style.setProperty('--page-background-image', 'url("' + image + '")');
+  })();
+</script>
+<link rel="stylesheet" href="https://fontsapi.zeoseven.com/285/main/result.css">
+<link rel="stylesheet" href="/css/post-summary.css?v=20260831c">
+<link rel="stylesheet" href="/css/theme-colors.css?v=20260910b">
+<link rel="stylesheet" href="/css/daily-hexagram.css?v=20260910a">
+<link rel="stylesheet" href="/css/menu-dropdown.css?v=20260911a">
+
+  <title>02特征工程 | Hyacinth</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hyacinth</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-说说">
+
+    <a href="/shuoshuo/" rel="section"><i class="fa fa-comment-dots fa-fw"></i>说说</a>
+
+  </li>
+        <li class="menu-item menu-item-工具">
+
+    <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2026/09/19/02-%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          02特征工程
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-09-19 22:30:00" itemprop="dateCreated datePublished" datetime="2026-09-19T22:30:00+00:00">2026-09-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>19 分钟</span>
+            </span>
+            <div class="post-description">特征工程四件套：特征选择、特征转换、特征构造、特征降维，附低方差过滤、相关系数法与 PCA 实操。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="特征工程"><a href="#特征工程" class="headerlink" title="特征工程"></a>特征工程</h1><h2 id="1-什么是特征工程"><a href="#1-什么是特征工程" class="headerlink" title="1. 什么是特征工程"></a>1. 什么是特征工程</h2><p>特征工程（Feature Engineering）是机器学习过程中非常重要的一步：<strong>通过对原始数据的处理、转换和构造，生成新的特征或选择有效的特征，从而提高模型的性能。</strong></p>
+<blockquote>
+<p><strong>补充</strong> 业界流传很广的一句话：「数据和特征决定了机器学习的上限，而模型和算法只是在逼近这个上限。」同一个模型，喂进去的特征质量不同，效果可能天差地别。</p>
+</blockquote>
+<p>两个关键认识：</p>
+<ol>
+<li><strong>特征工程是一个迭代过程。</strong> 不是「做完就结束」的一个步骤，而是「训练 → 看结果 → 回头改特征 → 再训练」的循环，需要大量数据分析和领域知识。</li>
+<li><strong>特征工程取决于具体情境。</strong> 特征如何编码，由所用模型类型、特征与输出之间的关系、要解决的问题共同决定；文本、图像、表格数据各有各的套路，没有万能配方。</li>
+</ol>
+<hr>
+<h2 id="2-特征工程的四块内容"><a href="#2-特征工程的四块内容" class="headerlink" title="2. 特征工程的四块内容"></a>2. 特征工程的四块内容</h2><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>一句话</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>特征选择</strong></td>
+<td>从原有特征里挑出有用的</td>
+<td>剔除与标签几乎无关的列</td>
+</tr>
+<tr>
+<td><strong>特征转换</strong></td>
+<td>把特征变成更适合模型输入的形式</td>
+<td>标准化、One-Hot 编码、对数变换</td>
+</tr>
+<tr>
+<td><strong>特征构造</strong></td>
+<td>由已有特征创造新特征</td>
+<td>年龄 × 收入、时间窗口均值</td>
+</tr>
+<tr>
+<td><strong>特征降维</strong></td>
+<td>压缩特征数量，尽量不丢信息</td>
+<td>PCA 把 100 维压到 10 维</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>易混</strong> 特征选择是「<strong>挑列</strong>」——不创建新特征、不改变数据结构；特征降维是「<strong>造新列</strong>」——新特征是原特征的（线性）组合，原来的列没了。</p>
+</blockquote>
+<hr>
+<h2 id="3-特征选择"><a href="#3-特征选择" class="headerlink" title="3. 特征选择"></a>3. 特征选择</h2><h3 id="3-1-为什么要筛选特征"><a href="#3-1-为什么要筛选特征" class="headerlink" title="3.1 为什么要筛选特征"></a>3.1 为什么要筛选特征</h3><ul>
+<li><strong>无关特征</strong>：某个特征取值变化很小、几乎所有样本都一样，它和预测结果基本无关。</li>
+<li><strong>冗余特征</strong>：几个特征相关性很高，包含重复信息。</li>
+<li><strong>维度灾难</strong>（Curse of Dimensionality）：特征数量过多时，样本在高维空间里变得极度稀疏，基于距离的算法（KNN、K-means、SVM）会失效，模型的参数量上升，过拟合风险也随之增大。</li>
+</ul>
+<p>筛选特征的好处：降低模型复杂度、加速训练、减少过拟合风险、增强可解释性。</p>
+<h3 id="3-2-三大方法"><a href="#3-2-三大方法" class="headerlink" title="3.2 三大方法"></a>3.2 三大方法</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>思路</th>
+<th>典型代表</th>
+<th>速度</th>
+<th>与模型的关系</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>过滤法</strong>（Filter）</td>
+<td>先用统计指标给特征打分，选分高的，与模型无关</td>
+<td>低方差过滤、相关系数、卡方检验、互信息</td>
+<td>快</td>
+<td>无关，可独立先跑</td>
+</tr>
+<tr>
+<td><strong>包裹法</strong>（Wrapper）</td>
+<td>把不同的特征子集喂给模型试跑，按模型表现选</td>
+<td>递归特征消除（RFE）</td>
+<td>慢</td>
+<td>强依赖所选模型</td>
+</tr>
+<tr>
+<td><strong>嵌入法</strong>（Embedded）</td>
+<td>模型训练时「顺手」完成特征选择</td>
+<td>L1 正则化、决策树的特征重要性</td>
+<td>中</td>
+<td>选择机制内置在模型里</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>补充</strong> 实战中常见的组合拳：特征非常多时，先用过滤法（如相关系数）快速粗筛，再用嵌入法（如 L1 或树模型重要性）精选。包裹法一个代表是 RFE：反复训练模型、每次删掉最不重要的特征，直到剩下目标数量。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> RFE</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"></span><br><span class="line"><span class="comment"># 递归特征消除：反复训练逻辑回归，每次剔除最不重要的特征，留下 5 个</span></span><br><span class="line">rfe = RFE(estimator=LogisticRegression(), n_features_to_select=<span class="number">5</span>)</span><br><span class="line">X_selected = rfe.fit_transform(X, y)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="4-特征转换"><a href="#4-特征转换" class="headerlink" title="4. 特征转换"></a>4. 特征转换</h2><h3 id="4-1-归一化（Normalization）"><a href="#4-1-归一化（Normalization）" class="headerlink" title="4.1 归一化（Normalization）"></a>4.1 归一化（Normalization）</h3><p>把特征按比例缩放到一个固定范围（默认 $[0, 1]$）：</p>
+<p>$$x’ &#x3D; \frac{x - x_{min}}{x_{max} - x_{min}}$$</p>
+<p>这个公式不用背，它只是在回答一个问题：<strong>这个数在本列的最小值和最大值之间排多靠上？</strong> 越接近最小值结果越接近 0，越接近最大值越接近 1。</p>
+<p><strong>手算一次</strong>：某列特征取值为 <code>[1, 2, 4, 6]</code>，则 $x_{min}&#x3D;1$、$x_{max}&#x3D;6$（极差 &#x3D; 5）：</p>
+<table>
+<thead>
+<tr>
+<th>原值</th>
+<th>计算</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>(1−1)&#x2F;5</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>(2−1)&#x2F;5</td>
+<td>0.2</td>
+</tr>
+<tr>
+<td>6</td>
+<td>(6−1)&#x2F;5</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<p>「6 被变成 1」没有任何魔法——它只是本列最大的数，被放到了区间的最右端。</p>
+<p><strong>目的</strong>：消除量纲差异（身高用米、体重用千克，尺度差几个数量级），让所有特征站在同一起跑线，也加速梯度下降类算法的收敛。</p>
+<p><strong>适用</strong>：数据分布有明显边界（如图像像素 0~255、词频）、模型对输入范围敏感（KNN、SVM、神经网络）。</p>
+<p><strong>缺点</strong>：对异常值敏感——一个极端值会把其他样本全部压扁到很窄的区间。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler</span><br><span class="line"></span><br><span class="line">X = [[<span class="number">2</span>, <span class="number">1</span>], [<span class="number">3</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">4</span>], [<span class="number">2</span>, <span class="number">6</span>]]</span><br><span class="line"><span class="comment"># 默认缩放到 [0, 1]；也可用 feature_range 指定区间，例如 (-1, 1)</span></span><br><span class="line">X_norm = MinMaxScaler(feature_range=(-<span class="number">1</span>, <span class="number">1</span>)).fit_transform(X)</span><br><span class="line"><span class="built_in">print</span>(X_norm)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-标准化（Standardization）"><a href="#4-2-标准化（Standardization）" class="headerlink" title="4.2 标准化（Standardization）"></a>4.2 标准化（Standardization）</h3><p>把特征调整为<strong>均值为 0、标准差为 1</strong> 的分布（z-score）：</p>
+<p>$$x’ &#x3D; \frac{x - \mu}{\sigma}$$</p>
+<p>其中 $\mu$ 是均值，$\sigma$ 是标准差。</p>
+<p>这个公式也先不要背。它其实在回答：</p>
+<blockquote>
+<p><strong>当前这个数，比平均值高（或低）几个标准差？</strong></p>
+</blockquote>
+<p><strong>手算一次</strong>：某列特征为 <code>[10, 20, 30]</code>：</p>
+<ul>
+<li>均值：$\mu &#x3D; 20$</li>
+<li>标准差：$\sigma \approx 8.16$（每个数与均值之差平方后取平均，再开根号）</li>
+<li>对 30：$x’ &#x3D; \dfrac{30 - 20}{8.16} \approx 1.225$</li>
+</ul>
+<p>含义不是「30 神秘地变成了 1.225」，而是：<strong>30 比这列数据的平均水平高出约 1.225 个标准差</strong>。标准化不改变数据的相对位置，只是换了一把更统一的「尺子」。</p>
+<p><strong>目的</strong>：统一特征尺度、改善梯度优化的收敛条件、让正则化惩罚对各特征公平、让基于距离&#x2F;内积的计算更合理。</p>
+<blockquote>
+<p><strong>澄清一个常见误解</strong>：标准化<strong>不会</strong>把数据变成正态分布——z-score 不改变分布形状，偏态的标准化后仍然偏态；线性回归、逻辑回归也并不要求特征服从正态分布（「误差近似正态」说的是<strong>误差项</strong>，不是特征）。另外，均值和标准差本身会被异常值拉偏，所以标准化<strong>并不真正鲁棒</strong>——异常值严重时请改用 RobustScaler。</p>
+</blockquote>
+<p><strong>适用</strong>：大多数场景下标准化是更通用的默认选择（分布未知、存在轻微异常值时尤其合适）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"></span><br><span class="line">X = [[<span class="number">2</span>, <span class="number">1</span>], [<span class="number">3</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">4</span>], [<span class="number">2</span>, <span class="number">6</span>]]</span><br><span class="line">X_std = StandardScaler().fit_transform(X)</span><br><span class="line"><span class="built_in">print</span>(X_std)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-归一化-vs-标准化怎么选"><a href="#4-3-归一化-vs-标准化怎么选" class="headerlink" title="4.3 归一化 vs 标准化怎么选"></a>4.3 归一化 vs 标准化怎么选</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>归一化</th>
+<th>标准化</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>公式</td>
+<td>min-max 缩放</td>
+<td>z-score</td>
+</tr>
+<tr>
+<td>结果</td>
+<td>固定在 $[0,1]$（或指定区间）</td>
+<td>无固定范围，均值 0、标准差 1</td>
+</tr>
+<tr>
+<td>异常值</td>
+<td>敏感</td>
+<td>仍会拉偏均值&#x2F;标准差（重异常值场景用 RobustScaler）</td>
+</tr>
+<tr>
+<td>适用</td>
+<td>有明确边界的数据；需要固定输入范围</td>
+<td>分布未知&#x2F;近似正态；默认首选</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>补充</strong> 三条经验：</p>
+<ol>
+<li><strong>树模型（决策树、随机森林）不需要缩放</strong>——它们按特征值排序找分裂点，单调变换不改变排序结果。</li>
+<li><strong>需要缩放的是「看距离&#x2F;看数值大小」的模型</strong>——KNN、K-means、SVM、神经网络、带梯度下降的线性模型。</li>
+<li>异常值很多时可以用 <strong>RobustScaler</strong>（用中位数和四分位距缩放），抗异常值能力更强。</li>
+</ol>
+</blockquote>
+<blockquote>
+<p><strong>🔴 数据泄漏（面试高频）</strong> 缩放器的 <code>fit</code> 只能在<strong>训练集</strong>上做，再用它去 <code>transform</code> 训练集和测试集。把测试集的信息掺进 <code>fit</code>（比如用全局最小最大值缩放），测试集就不再「未见」，评估结果会虚高。</p>
+</blockquote>
+<p>这三行代码最重要的不是背下来，而是弄清楚两个方法各自在做什么。</p>
+<p><strong><code>fit(X_train)</code> 内部</strong>——只学习、不转换：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">读取训练数据</span><br><span class="line">        ↓</span><br><span class="line">逐列计算均值 μ、标准差 σ</span><br><span class="line">        ↓</span><br><span class="line">把 μ、σ 保存进 scaler 对象（属性 mean_、scale_）</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>transform(X)</code> 内部</strong>——只转换、不学习：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">取出保存的 μ、σ（固定不动）</span><br><span class="line">        ↓</span><br><span class="line">对每个数执行 x&#x27; = (x − μ) / σ</span><br><span class="line">        ↓</span><br><span class="line">返回转换后的数据</span><br></pre></td></tr></table></figure>
+
+<p>所以代码应该这样写：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scaler = StandardScaler()</span><br><span class="line">x_train = scaler.fit_transform(x_train)  <span class="comment"># = fit + transform：学 μσ，并转换训练集</span></span><br><span class="line">x_test = scaler.transform(x_test)        <span class="comment"># 只用训练集的 μσ 转换测试集</span></span><br></pre></td></tr></table></figure>
+
+<p><code>fit_transform(X)</code> 等价于先 <code>fit(X)</code> 再 <code>transform(X)</code>，是训练集的便捷写法。如果对测试集写了 <code>fit_transform(x_test)</code>，测试集自己的一套 μ、σ 就混进了训练流程——这就是<strong>数据泄漏（Data Leakage）</strong>。记住口诀：<strong>fit 只在训练集，transform 走遍天下</strong>。</p>
+<h3 id="4-4-对数变换"><a href="#4-4-对数变换" class="headerlink" title="4.4 对数变换"></a>4.4 对数变换</h3><p>对<strong>右偏分布</strong>（少数极端大值把分布的右尾拉得很长，如收入、价格、销量）取对数，把右尾压缩，使分布更接近正态：</p>
+<p>$$x’ &#x3D; \log(x)$$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">salary = np.array([<span class="number">3000</span>, <span class="number">5000</span>, <span class="number">8000</span>, <span class="number">20000</span>, <span class="number">100000</span>])</span><br><span class="line"><span class="built_in">print</span>(np.log1p(salary))  <span class="comment"># log(1+x)，加 1 是为了避免 log(0)</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>补充</strong> 对数变换还会把<strong>乘法关系变成加法关系</strong>：$\log(ab) &#x3D; \log a + \log b$，对线性模型更友好。</p>
+</blockquote>
+<h3 id="4-5-类别变量的编码"><a href="#4-5-类别变量的编码" class="headerlink" title="4.5 类别变量的编码"></a>4.5 类别变量的编码</h3><p>模型只能吃数字，类别变量（城市、颜色、学历）必须先编码。但直接用整数编号会出问题：「红色&#x2F;绿色&#x2F;蓝色」编码成 0&#x2F;1&#x2F;2 后，模型会误以为 2 比 1「大」、1 和 2 的距离比 1 和 0 近——而颜色之间并没有这种大小关系。</p>
+<table>
+<thead>
+<tr>
+<th>编码方法</th>
+<th>做法</th>
+<th>适用</th>
+<th>风险 &#x2F; 代价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>独热编码</strong>（One-Hot）</td>
+<td>每个类别生成一列 0&#x2F;1</td>
+<td><strong>无序</strong>类别（城市、颜色）</td>
+<td>类别很多时维度爆炸</td>
+</tr>
+<tr>
+<td><strong>标签编码</strong>（Label Encoding）</td>
+<td>类别 → 整数</td>
+<td><strong>有序</strong>类别（学历：小学 &lt; 中学 &lt; 大学）</td>
+<td>用在无序类别会引入虚假的大小关系</td>
+</tr>
+<tr>
+<td><strong>目标编码</strong>（Target Encoding）</td>
+<td>类别 → 该类别对应标签的均值</td>
+<td>高基数（类别极多）+ 有监督任务</td>
+<td>必须在交叉验证内部做，否则泄漏标签信息</td>
+</tr>
+<tr>
+<td><strong>频率编码</strong>（Frequency Encoding）</td>
+<td>类别 → 该类别出现频率</td>
+<td>高基数</td>
+<td>频率相同的不同类别无法区分</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> OneHotEncoder, OrdinalEncoder</span><br><span class="line"></span><br><span class="line"><span class="comment"># One-Hot：无序类别</span></span><br><span class="line">ohe = OneHotEncoder(sparse_output=<span class="literal">False</span>)  <span class="comment"># sklearn &gt;= 1.2 用 sparse_output，旧版本用 sparse</span></span><br><span class="line">X_ohe = ohe.fit_transform([[<span class="string">&quot;北京&quot;</span>], [<span class="string">&quot;上海&quot;</span>], [<span class="string">&quot;北京&quot;</span>], [<span class="string">&quot;广州&quot;</span>]])</span><br><span class="line"></span><br><span class="line"><span class="comment"># pandas 一行实现 One-Hot</span></span><br><span class="line">df = pd.get_dummies(df, columns=[<span class="string">&quot;城市&quot;</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 标签编码：有序类别用 OrdinalEncoder（用于特征 X）</span></span><br><span class="line">edu = [[<span class="string">&quot;小学&quot;</span>], [<span class="string">&quot;高中&quot;</span>], [<span class="string">&quot;本科&quot;</span>], [<span class="string">&quot;研究生&quot;</span>]]</span><br><span class="line">encoder = OrdinalEncoder(categories=[[<span class="string">&quot;小学&quot;</span>, <span class="string">&quot;高中&quot;</span>, <span class="string">&quot;本科&quot;</span>, <span class="string">&quot;研究生&quot;</span>]])  <span class="comment"># 显式指定顺序</span></span><br><span class="line"><span class="built_in">print</span>(encoder.fit_transform(edu))</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>补充</strong> 几个细节：</p>
+<ol>
+<li>sklearn 里 <code>LabelEncoder</code> 是给<strong>标签 y</strong> 用的；特征 X 的有序编码用 <code>OrdinalEncoder</code>。</li>
+<li>One-Hot 把 k 个类别编成 k 列后，这 k 列完全线性相关（和恒为 1），对线性模型会造成多重共线性——设 <code>drop=&quot;first&quot;</code> 删掉第一列即可打破。</li>
+<li><strong>编码器的 fit 在做什么</strong>：扫描训练集该列，把出现过的类别记成一份名单（存在 <code>categories_</code> 属性里）；<code>transform</code> 只按这份名单生成 0&#x2F;1 列。这同样是「fit 只在训练集」——测试集若出现名单之外的新类别，默认直接报错，设 <code>handle_unknown=&quot;ignore&quot;</code> 可以把未知类别整行编为全 0。</li>
+</ol>
+</blockquote>
+<h3 id="4-6-把纪律落成工程：Pipeline"><a href="#4-6-把纪律落成工程：Pipeline" class="headerlink" title="4.6 把纪律落成工程：Pipeline"></a>4.6 把纪律落成工程：Pipeline</h3><p>「fit 只在训练集、transform 走遍天下」这条纪律，靠人肉执行迟早会漏。sklearn 的 <strong>Pipeline（管道）</strong>把所有预处理步骤和模型串成一条流水线，从结构上杜绝遗忘：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> Pipeline</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"></span><br><span class="line">pipe = Pipeline([</span><br><span class="line">    (<span class="string">&quot;prep&quot;</span>, StandardScaler()),          <span class="comment"># 第一步：预处理</span></span><br><span class="line">    (<span class="string">&quot;model&quot;</span>, LogisticRegression()),     <span class="comment"># 第二步：模型</span></span><br><span class="line">])</span><br><span class="line">pipe.fit(x_train, y_train)   <span class="comment"># 内部依次执行 scaler.fit/transform + model.fit</span></span><br><span class="line">pipe.predict(x_test)         <span class="comment"># 自动用训练时保存的统计量 transform，想忘都忘不掉</span></span><br></pre></td></tr></table></figure>
+
+<p>它一次解决四件事：① 接入交叉验证&#x2F;网格搜索时，<strong>每一折内部自动重新 fit 预处理</strong>（防泄漏）；② 新样本预测不会忘记 transform；③ 保存模型时预处理器和模型一起走；④ 网格搜索可用 <code>&quot;model__C&quot;</code> 这种「步骤名__参数名」统一调参。</p>
+<hr>
+<h2 id="5-特征构造"><a href="#5-特征构造" class="headerlink" title="5. 特征构造"></a>5. 特征构造</h2><p>特征构造是<strong>基于现有特征创造新的、更有代表性的特征</strong>，最能体现领域知识的一步。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>做法</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>交互特征</strong></td>
+<td>两个特征组合（乘积、和、差、比率）</td>
+<td>年龄 × 收入，可能比单独两项更能反映消费能力</td>
+</tr>
+<tr>
+<td><strong>统计特征</strong></td>
+<td>从时间窗口中提取统计量</td>
+<td>最近 7 天消费的均值 &#x2F; 最大值 &#x2F; 标准差</td>
+</tr>
+<tr>
+<td><strong>日期时间特征</strong></td>
+<td>从日期中拆出信息</td>
+<td>星期几、月份、季度、是否节假日、月初&#x2F;月末</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">df[<span class="string">&quot;年龄x收入&quot;</span>] = df[<span class="string">&quot;年龄&quot;</span>] * df[<span class="string">&quot;收入&quot;</span>]                    <span class="comment"># 交互特征</span></span><br><span class="line">df[<span class="string">&quot;近7天消费均值&quot;</span>] = df.groupby(<span class="string">&quot;用户ID&quot;</span>)[<span class="string">&quot;消费&quot;</span>].transform(<span class="string">&quot;mean&quot;</span>)  <span class="comment"># 统计特征</span></span><br><span class="line">dt = pd.to_datetime(df[<span class="string">&quot;注册时间&quot;</span>])</span><br><span class="line">df[<span class="string">&quot;注册月份&quot;</span>] = dt.dt.month                                 <span class="comment"># 日期特征</span></span><br><span class="line">df[<span class="string">&quot;是否周末&quot;</span>] = (dt.dt.dayofweek &gt;= <span class="number">5</span>).astype(<span class="built_in">int</span>)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>警告</strong> 构造统计特征有一个隐藏大坑——<strong>未来泄漏</strong>：上面 <code>transform(&quot;mean&quot;)</code> 用的是用户<strong>全时段</strong>的消费均值；如果任务是预测某个月之后的行为，这个均值里就混进了「未来」。时间&#x2F;行为数据的窗口统计，必须保证每个样本只能使用<strong>预测时点之前</strong>的信息。</p>
+</blockquote>
+<blockquote>
+<p><strong>补充</strong> 在 Kaggle 等数据竞赛中，特征构造往往是拉开差距的关键；而「星期几」这类周期特征，进阶做法是用 sin&#x2F;cos 编码成两个特征，让模型理解「周日和周一其实相邻」。</p>
+</blockquote>
+<hr>
+<h2 id="6-特征降维总览"><a href="#6-特征降维总览" class="headerlink" title="6. 特征降维总览"></a>6. 特征降维总览</h2><p>特征太多会带来计算复杂和过拟合风险。降维的目标：<strong>在尽量保留信息的前提下减少特征数量</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>监督？</th>
+<th>线性&#x2F;非线性</th>
+<th>典型用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>PCA</strong> 主成分分析</td>
+<td>无监督</td>
+<td>线性</td>
+<td>通用降维、去相关、压缩、可视化</td>
+</tr>
+<tr>
+<td><strong>LDA</strong> 线性判别分析</td>
+<td>有监督</td>
+<td>线性</td>
+<td>降维同时有利于分类（最大化类间距离&#x2F;类内距离）</td>
+</tr>
+<tr>
+<td><strong>t-SNE</strong></td>
+<td>无监督</td>
+<td>非线性</td>
+<td>高维数据<strong>可视化</strong>（压到 2&#x2F;3 维看分布）</td>
+</tr>
+<tr>
+<td><strong>AutoEncoder</strong> 自编码器</td>
+<td>无监督</td>
+<td>非线性</td>
+<td>复杂结构数据（图像）的特征学习</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>补充</strong> t-SNE 基本只用于可视化：它对新高维样本没有通用的投影方式（transform 能力弱），且不保持全局距离，不要拿它的输出当特征训练模型。</p>
+</blockquote>
+<hr>
+<h2 id="7-常用方法实操"><a href="#7-常用方法实操" class="headerlink" title="7. 常用方法实操"></a>7. 常用方法实操</h2><h3 id="7-1-低方差过滤法（过滤法）"><a href="#7-1-低方差过滤法（过滤法）" class="headerlink" title="7.1 低方差过滤法（过滤法）"></a>7.1 低方差过滤法（过滤法）</h3><p><strong>原理</strong>：方差衡量一组数值的离散程度。某特征方差接近 0，说明所有样本取值几乎一样——它不携带区分样本的信息，可以直接删掉。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> VarianceThreshold</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除方差低于 0.01 的特征</span></span><br><span class="line">var_thresh = VarianceThreshold(threshold=<span class="number">0.01</span>)</span><br><span class="line">X_filtered = var_thresh.fit_transform(X)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>补充</strong> 注意量纲问题：方差的大小和量纲直接相关（「年收入」的方差天然比「性别」大几个数量级），拿统一阈值去卡不同量纲的特征并不公平。更严谨的做法是先标准化、再做低方差过滤。另外，<strong>低方差 ≠ 一定没价值</strong>：一个几乎全为 0、只在罕见关键事件（如「发生过事故」）时取 1 的特征方差很低，却可能极有预测力——低方差过滤只是无监督的粗筛启发式，动手删除前最好过一遍业务判断。</p>
+</blockquote>
+<h3 id="7-2-相关系数法（过滤法）"><a href="#7-2-相关系数法（过滤法）" class="headerlink" title="7.2 相关系数法（过滤法）"></a>7.2 相关系数法（过滤法）</h3><p><strong>原理</strong>：用相关系数衡量特征与标签的关联程度——</p>
+<ul>
+<li>特征与<strong>标签</strong>相关性高 → 该特征有信息量，保留；</li>
+<li>特征与<strong>标签</strong>几乎不相关 → 候选剔除；</li>
+<li>特征<strong>之间</strong>相关性极高 → 冗余，二选一。</li>
+</ul>
+<h4 id="皮尔逊相关系数（Pearson）"><a href="#皮尔逊相关系数（Pearson）" class="headerlink" title="皮尔逊相关系数（Pearson）"></a>皮尔逊相关系数（Pearson）</h4><p>衡量两个变量的<strong>线性</strong>相关性，取值 $[-1, 1]$：</p>
+<p>$$r &#x3D; \frac{\sum_{i&#x3D;1}^{n}(x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\sum_{i&#x3D;1}^{n}(x_i-\bar{x})^2}\sqrt{\sum_{i&#x3D;1}^{n}(y_i-\bar{y})^2}}$$</p>
+<ul>
+<li>$r \to 1$：正相关（x 增大 y 随之增大）；</li>
+<li>$r \to -1$：负相关；</li>
+<li>$r \to 0$：无线性关系（<strong>不代表没有关系</strong>——可能存在非线性关系）。</li>
+</ul>
+<p>以广告投放数据集（TV&#x2F;Radio&#x2F;Newspaper 投入与 Sales 销售额）为例，计算各特征与标签的皮尔逊相关系数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">advertising = pd.read_csv(<span class="string">&quot;data/advertising.csv&quot;</span>)</span><br><span class="line">advertising.drop(advertising.columns[<span class="number">0</span>], axis=<span class="number">1</span>, inplace=<span class="literal">True</span>)  <span class="comment"># 丢弃 ID 列</span></span><br><span class="line">advertising.dropna(inplace=<span class="literal">True</span>)</span><br><span class="line">X = advertising.drop(<span class="string">&quot;Sales&quot;</span>, axis=<span class="number">1</span>)</span><br><span class="line">y = advertising[<span class="string">&quot;Sales&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 各特征与标签的相关系数</span></span><br><span class="line"><span class="built_in">print</span>(X.corrwith(y, method=<span class="string">&quot;pearson&quot;</span>))</span><br><span class="line"><span class="comment"># TV           0.782224</span></span><br><span class="line"><span class="comment"># Radio        0.576223</span></span><br><span class="line"><span class="comment"># Newspaper    0.228299</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 相关矩阵 + 热力图（同时观察特征之间是否冗余）</span></span><br><span class="line">corr_matrix = advertising.corr(method=<span class="string">&quot;pearson&quot;</span>)</span><br><span class="line">sns.heatmap(corr_matrix, annot=<span class="literal">True</span>, cmap=<span class="string">&quot;coolwarm&quot;</span>, fmt=<span class="string">&quot;.2f&quot;</span>)</span><br><span class="line">plt.title(<span class="string">&quot;Feature Correlation Matrix&quot;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/images/ml/img006.png" alt="广告数据集相关系数热力图"></p>
+<p>从热力图读出两个结论：TV（0.78）、Radio（0.58）与 Sales 相关性高，是重要特征；Newspaper（0.23）相关性低，是剔除候选。特征之间（如 Radio 与 Newspaper 的 0.35）相关性都不算高，没有明显冗余。</p>
+<h4 id="斯皮尔曼相关系数（Spearman）"><a href="#斯皮尔曼相关系数（Spearman）" class="headerlink" title="斯皮尔曼相关系数（Spearman）"></a>斯皮尔曼相关系数（Spearman）</h4><p>定义是「<strong>等级变量之间的皮尔逊相关系数</strong>」：先把数值换成排名，再算相关性。衡量的是<strong>单调关系</strong>（一个变量增大，另一个是否总是增大&#x2F;减小），<strong>不要求线性</strong>。</p>
+<p>$$r_s &#x3D; 1 - \frac{6\sum_{i&#x3D;1}^{n}d_i^2}{n(n^2-1)}$$</p>
+<p>其中 $d_i$ 是两个变量的<strong>排名之差</strong>，$n$ 是样本数。（这个简化公式在没有并列排名时最直接成立；有并列时，更一般的定义是「对两个排名序列计算皮尔逊相关」——pandas 的 <code>method=&quot;spearman&quot;</code> 正是这么实现的。）</p>
+<p><strong>适用</strong>：非线性但单调的关系、数据不满足正态分布、有序数据（等级评分）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每周学习时长</span></span><br><span class="line">X = pd.DataFrame([[<span class="number">5</span>], [<span class="number">8</span>], [<span class="number">10</span>], [<span class="number">12</span>], [<span class="number">15</span>], [<span class="number">3</span>], [<span class="number">7</span>], [<span class="number">9</span>], [<span class="number">14</span>], [<span class="number">6</span>]])</span><br><span class="line"><span class="comment"># 数学考试成绩</span></span><br><span class="line">y = pd.Series([<span class="number">55</span>, <span class="number">65</span>, <span class="number">70</span>, <span class="number">75</span>, <span class="number">85</span>, <span class="number">50</span>, <span class="number">60</span>, <span class="number">72</span>, <span class="number">80</span>, <span class="number">58</span>])</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(X.corrwith(y, method=<span class="string">&quot;spearman&quot;</span>))</span><br><span class="line"><span class="comment"># 0.987879</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="两者对比"><a href="#两者对比" class="headerlink" title="两者对比"></a>两者对比</h4><table>
+<thead>
+<tr>
+<th></th>
+<th>皮尔逊</th>
+<th>斯皮尔曼</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>衡量什么</td>
+<td>线性相关</td>
+<td>单调相关</td>
+</tr>
+<tr>
+<td>对数据的要求</td>
+<td>连续、近似正态</td>
+<td>无要求（用排名）</td>
+</tr>
+<tr>
+<td>异常值</td>
+<td>敏感（用原始值计算）</td>
+<td>更鲁棒（排名抹平极端值）</td>
+</tr>
+<tr>
+<td>单调但非线性的关系（如 $y&#x3D;x^2$，x&gt;0）</td>
+<td>低估甚至看不见</td>
+<td>能捕捉</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>提醒</strong> 相关系数只适合做<strong>初步筛查</strong>：单变量相关低不代表特征没用——它可能与其他特征交互后才发挥作用，可能是非线性关系（斯皮尔曼能抓单调、也抓不住 U 形），也可能是「与标签相关、但被其他特征稀释」。不要仅凭相关系数给特征判死刑。</p>
+</blockquote>
+<hr>
+<h2 id="8-主成分分析（PCA）"><a href="#8-主成分分析（PCA）" class="headerlink" title="8. 主成分分析（PCA）"></a>8. 主成分分析（PCA）</h2><h3 id="1-它解决什么问题？"><a href="#1-它解决什么问题？" class="headerlink" title="1. 它解决什么问题？"></a>1. 它解决什么问题？</h3><p>特征维度太高时：训练慢、维度灾难、无法画图观察。<strong>特征选择</strong>的办法是「挑列」，会直接丢掉整列原始信息；<strong>PCA</strong> 给出另一种思路——把 n 个相关的原始特征<strong>压缩成 k 个互不相关的新特征</strong>（$k &lt; n$），每个新特征都是原特征的线性组合，并尽可能保留原数据的信息。</p>
+<p>典型用途：降维加速训练、高维数据可视化（压到 2&#x2F;3 维）、去除特征间的多重共线性、压缩去噪。PCA 是<strong>无监督</strong>方法，全程不需要标签。</p>
+<h3 id="2-核心直觉"><a href="#2-核心直觉" class="headerlink" title="2. 核心直觉"></a>2. 核心直觉</h3><p>把二维数据点云想象成一个<strong>斜着的椭圆</strong>：</p>
+<ul>
+<li>沿椭圆<strong>长轴</strong>方向，数据散得很开（方差大）——这个方向上样本差异明显，携带的信息多；</li>
+<li>沿<strong>短轴</strong>方向，数据挤成一团（方差小）——这个方向上样本差不多，信息少。</li>
+</ul>
+<p>PCA 做的事就是<strong>旋转坐标系</strong>：让第一根新坐标轴（第一主成分）对准长轴方向，第二根对准次长轴……然后只保留前 k 根轴。丢掉的都是「数据挤成一团」的方向，因此信息损失最小。</p>
+<p>核心假设一句话：<strong>方差 &#x3D; 信息。</strong></p>
+<p><img data-src="/images/ml/img007.png" alt="PCA：3 维数据投影到 2 维"></p>
+<p>上图中，三维数据点云其实躺在一个斜平面附近——用 PC1、PC2 两根新轴（左图）重新表达后，三维问题变成了二维问题（右图），几乎不丢信息。</p>
+<p>保留多少个主成分？看<strong>方差贡献率</strong>：常用经验是让前 k 个主成分的累计贡献率达到 85%~95%。</p>
+<h3 id="3-数学表达-公式"><a href="#3-数学表达-公式" class="headerlink" title="3. 数学表达 &#x2F; 公式"></a>3. 数学表达 &#x2F; 公式</h3><p>设样本矩阵 $X \in \mathbb{R}^{n \times d}$（n 个样本、d 个特征），PCA 的求解流程：</p>
+<p><strong>第 0 步：中心化。</strong> 每个特征减去自己的均值，使每列均值为 0：</p>
+<p>$$x_j \leftarrow x_j - \mu_j$$</p>
+<p><strong>第 1 步：求协方差矩阵。</strong> 描述特征两两之间的线性关系：</p>
+<p>$$C &#x3D; \frac{1}{n-1} X^\top X \in \mathbb{R}^{d \times d}$$</p>
+<p><strong>第 2 步：找方差最大的投影方向。</strong> 把数据投影到单位向量 $w$ 上（新特征 $y &#x3D; Xw$），投影后的方差为 $w^\top C w$。第一主成分就是求解：</p>
+<p>$$\max_{w} ; w^\top C w \quad \text{s.t.} \quad w^\top w &#x3D; 1$$</p>
+<p><strong>第 3 步：拉格朗日乘子法。</strong> 构造 $L(w) &#x3D; w^\top C w - \lambda(w^\top w - 1)$，对 $w$ 求导令其为零，得到：</p>
+<p>$$Cw &#x3D; \lambda w$$</p>
+<p>这正是<strong>特征方程</strong>：最优投影方向 $w$ 是协方差矩阵 $C$ 的<strong>特征向量</strong>，对应的方差就是<strong>特征值</strong> $\lambda$。</p>
+<p><strong>第 4 步：排序与投影。</strong> 把特征值从大到小排序，取前 k 个特征向量拼成投影矩阵 $W \in \mathbb{R}^{d \times k}$，降维结果为：</p>
+<p>$$X’ &#x3D; XW \in \mathbb{R}^{n \times k}$$</p>
+<p>第 i 个主成分的<strong>方差贡献率</strong>：</p>
+<p>$$\eta_i &#x3D; \frac{\lambda_i}{\sum_{j&#x3D;1}^{d}\lambda_j}$$</p>
+<p><strong>一句话结论：PCA 的解 &#x3D; 协方差矩阵的特征分解；特征值 &#x3D; 各主成分的方差，特征向量 &#x3D; 各主成分的方向。</strong></p>
+<blockquote>
+<p><strong>补充</strong> sklearn 底层实际用奇异值分解（SVD）实现 PCA，不显式构造协方差矩阵，数值计算更稳定，数学结果与特征分解等价。</p>
+</blockquote>
+<h3 id="4-模型是怎么训练出来的？"><a href="#4-模型是怎么训练出来的？" class="headerlink" title="4. 模型是怎么训练出来的？"></a>4. 模型是怎么训练出来的？</h3><p>PCA 严格意义上没有「训练」，只有 <code>fit</code>——从数据中<strong>估计</strong>出降维所需的一切：</p>
+<ol>
+<li>计算每个特征的均值（用于中心化）；</li>
+<li>中心化后求协方差矩阵；</li>
+<li>特征分解（或 SVD），得到全部特征向量与特征值；</li>
+<li>按特征值从大到小排序，保留前 k 个特征向量；</li>
+<li>把均值和投影方向存下来。</li>
+</ol>
+<p><code>fit</code> 之后模型里保存的关键属性：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>mean_</code></td>
+<td>每个特征的均值（transform 时要先减掉）</td>
+</tr>
+<tr>
+<td><code>components_</code></td>
+<td>k 个主成分的方向（每行一个）</td>
+</tr>
+<tr>
+<td><code>explained_variance_ratio_</code></td>
+<td>每个主成分的方差贡献率</td>
+</tr>
+</tbody></table>
+<p><code>transform</code> 则是纯计算：<strong>减均值、乘投影矩阵</strong>，把样本从 d 维坐标系搬到 k 维新坐标系。</p>
+<blockquote>
+<p><strong>🔴 和缩放器同样的纪律</strong>：<code>fit</code> 只能在训练集上做，测试集用 <code>transform</code>。主成分方向必须只反映训练数据的结构。</p>
+</blockquote>
+<p>主成分个数 k 是<strong>超参数</strong>，无法通过训练学出来，常用确定方法：累计贡献率达到阈值（如 0.95）、配合交叉验证看下游模型表现。</p>
+<h3 id="5-Python-sklearn-怎么实现？"><a href="#5-Python-sklearn-怎么实现？" class="headerlink" title="5. Python &#x2F; sklearn 怎么实现？"></a>5. Python &#x2F; sklearn 怎么实现？</h3><p><code>n_components</code> 参数的两种用法：<strong>整数</strong> &#x3D; 保留的维度个数；<strong>小数（0~1）</strong> &#x3D; 希望保留的信息比例，sklearn 自动选最少的维度数。</p>
+<p>下面构造一组带噪声的三维相关数据，用 PCA 压到二维（上面那张前后对比图就是这段代码的输出）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"></span><br><span class="line">n_samples = <span class="number">1000</span></span><br><span class="line">component1 = np.random.normal(<span class="number">0</span>, <span class="number">1</span>, n_samples)    <span class="comment"># 第 1 个主成分方向</span></span><br><span class="line">component2 = np.random.normal(<span class="number">0</span>, <span class="number">0.2</span>, n_samples)  <span class="comment"># 第 2 个主成分方向</span></span><br><span class="line">noise = np.random.normal(<span class="number">0</span>, <span class="number">0.1</span>, n_samples)       <span class="comment"># 噪声（方差很小）</span></span><br><span class="line">X = np.vstack([component1 - component2,</span><br><span class="line">               component1 + component2,</span><br><span class="line">               component2 + noise]).T             <span class="comment"># 构造三维相关数据</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># PCA 之前先标准化（重要！）</span></span><br><span class="line">X_std = StandardScaler().fit_transform(X)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 降到 2 维</span></span><br><span class="line">pca = PCA(n_components=<span class="number">2</span>)</span><br><span class="line">X_pca = pca.fit_transform(X_std)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;各主成分方差贡献率:&quot;</span>, pca.explained_variance_ratio_)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;累计贡献率:&quot;</span>, pca.explained_variance_ratio_.<span class="built_in">sum</span>())</span><br></pre></td></tr></table></figure>
+
+<p>按信息比例保留的写法（更常用）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 自动选择「保留 95% 信息」所需的最少维度</span></span><br><span class="line">pca = PCA(n_components=<span class="number">0.95</span>)</span><br><span class="line">X_pca = pca.fit_transform(X_std)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;保留的维度数:&quot;</span>, pca.n_components_)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>补充</strong> <code>pca.inverse_transform(X_pca)</code> 可以把数据投影回原空间做「近似还原」——被丢掉维度的信息找不回来了，只能得到近似值，这正好可以用来做数据压缩与去噪。</p>
+</blockquote>
+<h3 id="6-优缺点与注意事项"><a href="#6-优缺点与注意事项" class="headerlink" title="6. 优缺点与注意事项"></a>6. 优缺点与注意事项</h3><p><strong>优点</strong>：消除特征间相关性、降低计算量、缓解过拟合、便于可视化。</p>
+<p><strong>缺点与注意</strong>：</p>
+<ol>
+<li><strong>可解释性变差</strong>：主成分是所有原始特征的抽象组合，「第一主成分」没有业务含义。</li>
+<li><strong>只捕捉线性结构</strong>：数据在弯曲的流形上时效果差，需换 t-SNE、自编码器等非线性方法。</li>
+<li><strong>方差大 ≠ 对预测有用</strong>：PCA 是无监督的，它保证「保留方差」，不保证「保留判别力」——与标签相关但方差小的方向可能被丢掉。有监督场景下可以对比「PCA + 模型」与「原始特征 + 模型」的表现再决定用不用。</li>
+<li><strong>量纲差异大时通常先标准化</strong>：不缩放的话，量纲大的特征会独占几乎所有方差；但 PCA 在数学上强制要求的只是<strong>中心化</strong>（sklearn 默认已做）——若各特征同单位、且原始方差本身携带业务信息，也可以不缩放。</li>
+</ol>
+<hr>
+<h2 id="9-易混淆点"><a href="#9-易混淆点" class="headerlink" title="9. 易混淆点"></a>9. 易混淆点</h2><table>
+<thead>
+<tr>
+<th>易混对</th>
+<th>一句话区分</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>特征选择 vs 特征降维</td>
+<td>选择 &#x3D; 挑列，不产生新特征；降维 &#x3D; 造新列（原特征的组合）</td>
+</tr>
+<tr>
+<td>归一化 vs 标准化</td>
+<td>归一化压到固定区间、怕异常值；标准化变均值 0 方差 1、更通用</td>
+</tr>
+<tr>
+<td>皮尔逊 vs 斯皮尔曼</td>
+<td>皮尔逊看线性；斯皮尔曼看单调（先转排名），更抗异常值</td>
+</tr>
+<tr>
+<td>One-Hot vs 标签编码</td>
+<td>无序类别用 One-Hot；有序类别才能用整数编码</td>
+</tr>
+<tr>
+<td>LabelEncoder vs OrdinalEncoder</td>
+<td>前者编码标签 y，后者编码特征 X</td>
+</tr>
+<tr>
+<td>fit &#x2F; transform 用法</td>
+<td>所有「学统计量」的转换器（Scaler、PCA、编码器）都只在训练集 fit，防数据泄漏</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/09/19/01-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A0%B8%E5%BF%83%E6%9C%AF%E8%AF%AD/" rel="prev" title="01机器学习核心术语">
+      <i class="fa fa-chevron-left"></i> 01机器学习核心术语
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/09/19/03-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/" rel="next" title="03模型评估与选择">
+      03模型评估与选择 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">特征工程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">1. 什么是特征工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%9B%9B%E5%9D%97%E5%86%85%E5%AE%B9"><span class="nav-number">1.2.</span> <span class="nav-text">2. 特征工程的四块内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9"><span class="nav-number">1.3.</span> <span class="nav-text">3. 特征选择</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%AD%9B%E9%80%89%E7%89%B9%E5%BE%81"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 为什么要筛选特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E4%B8%89%E5%A4%A7%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 三大方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%89%B9%E5%BE%81%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.4.</span> <span class="nav-text">4. 特征转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E5%BD%92%E4%B8%80%E5%8C%96%EF%BC%88Normalization%EF%BC%89"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1 归一化（Normalization）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E6%A0%87%E5%87%86%E5%8C%96%EF%BC%88Standardization%EF%BC%89"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2 标准化（Standardization）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E5%BD%92%E4%B8%80%E5%8C%96-vs-%E6%A0%87%E5%87%86%E5%8C%96%E6%80%8E%E4%B9%88%E9%80%89"><span class="nav-number">1.4.3.</span> <span class="nav-text">4.3 归一化 vs 标准化怎么选</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-%E5%AF%B9%E6%95%B0%E5%8F%98%E6%8D%A2"><span class="nav-number">1.4.4.</span> <span class="nav-text">4.4 对数变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-%E7%B1%BB%E5%88%AB%E5%8F%98%E9%87%8F%E7%9A%84%E7%BC%96%E7%A0%81"><span class="nav-number">1.4.5.</span> <span class="nav-text">4.5 类别变量的编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-%E6%8A%8A%E7%BA%AA%E5%BE%8B%E8%90%BD%E6%88%90%E5%B7%A5%E7%A8%8B%EF%BC%9APipeline"><span class="nav-number">1.4.6.</span> <span class="nav-text">4.6 把纪律落成工程：Pipeline</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E7%89%B9%E5%BE%81%E6%9E%84%E9%80%A0"><span class="nav-number">1.5.</span> <span class="nav-text">5. 特征构造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E7%89%B9%E5%BE%81%E9%99%8D%E7%BB%B4%E6%80%BB%E8%A7%88"><span class="nav-number">1.6.</span> <span class="nav-text">6. 特征降维总览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E5%AE%9E%E6%93%8D"><span class="nav-number">1.7.</span> <span class="nav-text">7. 常用方法实操</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-%E4%BD%8E%E6%96%B9%E5%B7%AE%E8%BF%87%E6%BB%A4%E6%B3%95%EF%BC%88%E8%BF%87%E6%BB%A4%E6%B3%95%EF%BC%89"><span class="nav-number">1.7.1.</span> <span class="nav-text">7.1 低方差过滤法（过滤法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0%E6%B3%95%EF%BC%88%E8%BF%87%E6%BB%A4%E6%B3%95%EF%BC%89"><span class="nav-number">1.7.2.</span> <span class="nav-text">7.2 相关系数法（过滤法）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9A%AE%E5%B0%94%E9%80%8A%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0%EF%BC%88Pearson%EF%BC%89"><span class="nav-number">1.7.2.1.</span> <span class="nav-text">皮尔逊相关系数（Pearson）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%AF%E7%9A%AE%E5%B0%94%E6%9B%BC%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0%EF%BC%88Spearman%EF%BC%89"><span class="nav-number">1.7.2.2.</span> <span class="nav-text">斯皮尔曼相关系数（Spearman）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%A4%E8%80%85%E5%AF%B9%E6%AF%94"><span class="nav-number">1.7.2.3.</span> <span class="nav-text">两者对比</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90%EF%BC%88PCA%EF%BC%89"><span class="nav-number">1.8.</span> <span class="nav-text">8. 主成分分析（PCA）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%83%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-number">1.8.1.</span> <span class="nav-text">1. 它解决什么问题？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%A0%B8%E5%BF%83%E7%9B%B4%E8%A7%89"><span class="nav-number">1.8.2.</span> <span class="nav-text">2. 核心直觉</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%95%B0%E5%AD%A6%E8%A1%A8%E8%BE%BE-%E5%85%AC%E5%BC%8F"><span class="nav-number">1.8.3.</span> <span class="nav-text">3. 数学表达 &#x2F; 公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%A8%A1%E5%9E%8B%E6%98%AF%E6%80%8E%E4%B9%88%E8%AE%AD%E7%BB%83%E5%87%BA%E6%9D%A5%E7%9A%84%EF%BC%9F"><span class="nav-number">1.8.4.</span> <span class="nav-text">4. 模型是怎么训练出来的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Python-sklearn-%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%EF%BC%9F"><span class="nav-number">1.8.5.</span> <span class="nav-text">5. Python &#x2F; sklearn 怎么实现？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E4%BC%98%E7%BC%BA%E7%82%B9%E4%B8%8E%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.8.6.</span> <span class="nav-text">6. 优缺点与注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9"><span class="nav-number">1.9.</span> <span class="nav-text">9. 易混淆点</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hyacinth"
+      src="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
+  <p class="site-author-name" itemprop="name">Hyacinth</p>
+  <div class="site-description" itemprop="description">君子慎独,不欺暗室</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hyacinth</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/lozad/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+<div id="loading-box">
+  <div class="loading-left-bg"></div>
+  <div class="loading-right-bg"></div>
+  <div class="spinner-box">
+    <div class="configure-border-1"><div class="configure-core"></div></div>
+    <div class="configure-border-2"><div class="configure-core"></div></div>
+    <div class="loading-word">加载中...</div>
+  </div>
+</div>
+
+<canvas id="background-particles" aria-hidden="true"></canvas>
+
+<script>
+  (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
+    var loadingBox = document.getElementById('loading-box');
+    var root = document.documentElement;
+
+    function endLoading() {
+      if (loadingBox.classList.contains('loaded')) return;
+      loadingBox.classList.add('loaded');
+      setTimeout(function() {
+        root.classList.remove('page-loading');
+      }, 500);
+    }
+
+    function initLoading() {
+      root.classList.add('page-loading');
+      loadingBox.classList.remove('loaded');
+    }
+
+    initLoading();
+
+    if (document.readyState === 'complete') {
+      endLoading();
+    } else {
+      window.addEventListener('load', endLoading);
+      document.addEventListener('DOMContentLoaded', endLoading);
+      setTimeout(endLoading, 7000);
+    }
+  })();
+</script>
+
+<script src="/js/latex-tool.js?v=20260805c"></script>
+<script src="/js/translate-tool.js?v=20260805a"></script>
+<script src="/js/hexagram-post-map.js?v=20260910b"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
+<script src="/js/post-summary.js?v=20260831d"></script>
+<script src="/js/background-particles.js?v=20260910a"></script>
+<script src="/js/theme-colors.js?v=20260910b"></script>
+<script src="/js/tab-gaze.js?v=20260910a"></script>
+<script src="/lib/solarlunar/solarlunar.min.js?v=20260910a"></script>
+<script src="/js/daily-hexagram.js?v=20260910a"></script>
+<script src="/js/menu-dropdown.js?v=20260910a"></script>
+
+</body>
+</html>

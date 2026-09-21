@@ -1,0 +1,105 @@
+/* 「文章」下拉菜单。颜色引用 theme-colors.css 的 --tc-* 色板变量。 */
+
+.menu-item-posts {
+  position: relative;
+}
+
+.menu-posts-toggle {
+  cursor: pointer;
+}
+
+.menu-item-posts .menu-caret {
+  font-size: 14px;
+  margin-left: 3px;
+  transition: transform .2s ease;
+}
+
+.menu-item-posts.is-open .menu-caret {
+  transform: rotate(180deg);
+}
+
+/* 桌面：悬停在父项上即展开 */
+.menu-posts-dropdown {
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  background: var(--tc-panel-bg);
+  border: 1px solid var(--tc-glass-border);
+  border-radius: 10px;
+  box-shadow: 0 6px 24px var(--tc-glass-shadow);
+  display: none;
+  left: 50%;
+  list-style: none;
+  margin: 0;
+  min-width: 132px;
+  padding: 6px;
+  position: absolute;
+  top: calc(100% + 8px);
+  transform: translateX(-50%);
+  z-index: 1100;
+}
+
+.menu-item-posts.is-open .menu-posts-dropdown {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .menu-item-posts:hover .menu-posts-dropdown {
+    display: block;
+  }
+
+  /* 悬停桥：父项与面板之间的空隙不至于让面板消失 */
+  .menu-posts-dropdown::before {
+    content: '';
+    height: 10px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: -10px;
+  }
+}
+
+/* 子项默认透明。必须带 #menu 提高优先级：NexT 的 .menu-item-active a
+   是后代选择器，父项「文章」激活时会把背景泼给面板内全部子项。 */
+#menu .menu-posts-dropdown .menu-item a {
+  background: transparent;
+  border-bottom: none;
+  border-radius: 7px;
+  color: var(--tc-sidebar-text);
+  display: block;
+  padding: 8px 16px;
+  white-space: nowrap;
+}
+
+#menu .menu-posts-dropdown .menu-item a:hover {
+  background: var(--tc-glass-bg);
+  color: var(--tc-accent-hover);
+}
+
+#menu .menu-posts-dropdown .menu-item.menu-item-active a {
+  background: var(--tc-glass-bg);
+  color: var(--tc-accent);
+  font-weight: 600;
+}
+
+/* 移动端：竖排菜单里改为原地展开 */
+@media (max-width: 767px) {
+  .menu-posts-dropdown {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    display: none;
+    left: auto;
+    min-width: 0;
+    padding: 0 0 4px 24px;
+    position: static;
+    transform: none;
+  }
+
+  .menu-item-posts.is-open .menu-posts-dropdown {
+    display: block;
+  }
+
+  .menu-posts-dropdown .menu-item a {
+    padding: 8px 10px;
+  }
+}

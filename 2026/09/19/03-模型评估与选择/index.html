@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#9a6545","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="机器学习三要素、建模流程、损失函数、经验误差与泛化误差、欠拟合与过拟合、正则化、交叉验证。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="03模型评估与选择">
+<meta property="og:url" content="https://hyacinth.xin/2026/09/19/03-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/index.html">
+<meta property="og:site_name" content="Hyacinth">
+<meta property="og:description" content="机器学习三要素、建模流程、损失函数、经验误差与泛化误差、欠拟合与过拟合、正则化、交叉验证。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img005.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img008.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img009.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img010.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img011.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img012.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img013.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img014.png">
+<meta property="article:published_time" content="2026-09-19T23:40:00.000Z">
+<meta property="article:modified_time" content="2026-09-19T23:40:00.000Z">
+<meta property="article:author" content="Hyacinth">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hyacinth.xin/images/ml/img005.png">
+
+<link rel="canonical" href="https://hyacinth.xin/2026/09/19/03-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<script>
+  // 主题换色：首帧绘制前恢复上次选择的色板，避免闪烁。
+  (function() {
+    try {
+      var palette = localStorage.getItem('hyacinth-theme-color');
+      if (palette) document.documentElement.setAttribute('data-theme-color', palette);
+    } catch (error) {}
+  })();
+</script>
+<script>
+  (function() {
+    var images = [
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Asuna%20Yuuki.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Goto%20Hitori.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Kuronuma%20Sawako.png',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Miyazono%20Kaori.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Azusa.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Miku.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Nino.png',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Rem.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Shiina%20Mahiru.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Takagi.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Yamada%20Ryo.jpg'
+    ];
+    var image = images[Math.floor(Math.random() * images.length)];
+    document.documentElement.classList.add('page-loading');
+    document.documentElement.style.setProperty('--page-background-image', 'url("' + image + '")');
+  })();
+</script>
+<link rel="stylesheet" href="https://fontsapi.zeoseven.com/285/main/result.css">
+<link rel="stylesheet" href="/css/post-summary.css?v=20260831c">
+<link rel="stylesheet" href="/css/theme-colors.css?v=20260910b">
+<link rel="stylesheet" href="/css/daily-hexagram.css?v=20260910a">
+<link rel="stylesheet" href="/css/menu-dropdown.css?v=20260911a">
+
+  <title>03模型评估与选择 | Hyacinth</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hyacinth</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-说说">
+
+    <a href="/shuoshuo/" rel="section"><i class="fa fa-comment-dots fa-fw"></i>说说</a>
+
+  </li>
+        <li class="menu-item menu-item-工具">
+
+    <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2026/09/19/03-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          03模型评估与选择
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-09-19 23:40:00" itemprop="dateCreated datePublished" datetime="2026-09-19T23:40:00+00:00">2026-09-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>19 分钟</span>
+            </span>
+            <div class="post-description">机器学习三要素、建模流程、损失函数、经验误差与泛化误差、欠拟合与过拟合、正则化、交叉验证。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="模型评估与选择"><a href="#模型评估与选择" class="headerlink" title="模型评估与选择"></a>模型评估与选择</h1><p>整章回答一个问题：<strong>怎么判断一个模型好不好，以及怎么把最好的那个选出来？</strong>（原文档标注【重点】）</p>
+<hr>
+<h2 id="1-机器学习三要素"><a href="#1-机器学习三要素" class="headerlink" title="1. 机器学习三要素"></a>1. 机器学习三要素</h2><p>原文档把一切机器学习方法概括为：</p>
+<p>$$\text{机器学习方法} &#x3D; \text{模型} + \text{策略} + \text{算法}$$</p>
+<table>
+<thead>
+<tr>
+<th>要素</th>
+<th>回答的问题</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>模型</strong>（Model）</td>
+<td>用什么形式的函数去描述数据规律？</td>
+<td>线性函数、决策树、神经网络</td>
+</tr>
+<tr>
+<td><strong>策略</strong>（Strategy）</td>
+<td>用什么标准判断模型「好」？</td>
+<td>损失函数、经验风险最小化</td>
+</tr>
+<tr>
+<td><strong>算法</strong>（Algorithm）</td>
+<td>用什么方法找到那个最优模型？</td>
+<td>最小二乘、梯度下降、牛顿法</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>补充</strong> 分析任何机器学习问题都可以用这个「三连问」拆解：模型是什么形式？优化目标（策略）是什么？用什么算法求解？本章讲的损失函数与正则化属于<strong>策略</strong>，后面单独一篇的梯度下降属于<strong>算法</strong>。</p>
+</blockquote>
+<hr>
+<h2 id="2-建模全流程"><a href="#2-建模全流程" class="headerlink" title="2. 建模全流程"></a>2. 建模全流程</h2><p>以监督学习为例，一次完整的建模过程如下：</p>
+<p><img data-src="/images/ml/img005.png" alt="机器学习建模流程"></p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>做什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1. 收集数据</td>
+<td>收集用于训练和测试的数据集，确保数据能代表实际问题</td>
+</tr>
+<tr>
+<td>2. 数据清洗</td>
+<td>去除脏数据、缺失值、不可用的数据</td>
+</tr>
+<tr>
+<td>3. 特征工程</td>
+<td>对数据做转换和格式化，使其适合模型训练</td>
+</tr>
+<tr>
+<td>4. 选择算法</td>
+<td>按任务类型（分类&#x2F;回归&#x2F;聚类等）和数据特点选算法</td>
+</tr>
+<tr>
+<td>5. 模型训练</td>
+<td>用训练集训练模型，让模型从数据中学习规律</td>
+</tr>
+<tr>
+<td>6. 模型评估</td>
+<td>用<strong>验证集 &#x2F; 交叉验证</strong>评估性能，判断是否达到预期目标</td>
+</tr>
+<tr>
+<td>7. 模型优化</td>
+<td>基于验证结果继续调优（调参、换特征、换算法），回到第 3 步循环</td>
+</tr>
+<tr>
+<td>8. 最终测试</td>
+<td>方案定稿、用全部训练数据重新拟合后，测试集<strong>只出场这一次</strong></td>
+</tr>
+<tr>
+<td>9. 模型部署</td>
+<td>部署到生产环境并持续监控表现</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>补充</strong> 两个要点：① 这条流程是<strong>闭环</strong>而不是单行道——第 6 步验证不达标，回到第 3 步换特征、第 4 步换算法，反复迭代，这正是「特征工程是迭代过程」的含义；② <strong>闭环里转的必须是验证集&#x2F;交叉验证，测试集绝不参与迭代</strong>——它一旦影响了调参或特征选择，就不再是独立测试集，最终成绩会虚高。「选模型」和「最终评估」是两件事：前者在训练数据内部（Train ↔ 验证）反复进行，后者只发生一次。</p>
+</blockquote>
+<hr>
+<h2 id="3-损失函数：衡量「一次预测」的好坏"><a href="#3-损失函数：衡量「一次预测」的好坏" class="headerlink" title="3. 损失函数：衡量「一次预测」的好坏"></a>3. 损失函数：衡量「一次预测」的好坏</h2><p>对监督学习，模型就是一个<strong>决策函数</strong> $f$：输入 $X$，输出预测 $f(X)$；真实值记为 $Y$。两者之间会有偏差，<strong>损失函数</strong>（Loss Function）就是度量这个偏差的函数，记作：</p>
+<p>$$L(Y, f(X))$$</p>
+<p>三条基本性质：损失函数是 $Y$ 和 $f(X)$ 的<strong>非负</strong>实值函数；损失越小，预测越好；损失函数是我们定义「什么是好模型」的地方（策略）。</p>
+<h3 id="3-1-四种常见损失函数"><a href="#3-1-四种常见损失函数" class="headerlink" title="3.1 四种常见损失函数"></a>3.1 四种常见损失函数</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>公式</th>
+<th>常用于</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>0-1 损失</strong></td>
+<td>$L(Y,f(X))&#x3D;\begin{cases}0, &amp; Y&#x3D;f(X) \ 1, &amp; Y\neq f(X)\end{cases}$</td>
+<td>分类</td>
+<td>只看对错、不看错多少；不连续、不可导，实际很少直接做优化目标</td>
+</tr>
+<tr>
+<td><strong>平方损失</strong></td>
+<td>$L(Y,f(X))&#x3D;(Y-f(X))^2$</td>
+<td>回归</td>
+<td>放大大误差；处处可导、求解方便；对异常值敏感</td>
+</tr>
+<tr>
+<td><strong>绝对损失</strong></td>
+<td>$L(Y,f(X))&#x3D;\vert Y-f(X)\vert$</td>
+<td>回归</td>
+<td>对异常值更鲁棒；在零点不可导</td>
+</tr>
+<tr>
+<td><strong>对数似然损失</strong></td>
+<td>$L(Y,P(Y\vert X))&#x3D;-\log P(Y\vert X)$</td>
+<td>概率分类</td>
+<td>惩罚「自信的错误」——把正确类概率压得越低，罚得越重</td>
+</tr>
+</tbody></table>
+<p><strong>手算一次</strong>：模型对某个样本给出预测：真实值 $Y&#x3D;3$，预测值 $f(X)&#x3D;2$：</p>
+<ul>
+<li>平方损失：$(3-2)^2 &#x3D; 1$</li>
+<li>绝对损失：$\vert 3-2\vert &#x3D; 1$</li>
+<li>0-1 损失：$3 \neq 2$，记 1</li>
+</ul>
+<p>同样是「偏了 1」这个事实，不同损失函数给出的数值不同——<strong>损失函数就是我们自己对「坏」下的定义</strong>，定义不同，模型学出来的样子也不同。</p>
+<blockquote>
+<p><strong>补充</strong> 三个术语辨析：<strong>损失函数</strong>针对单个样本；<strong>代价&#x2F;成本函数</strong>（Cost Function）通常是全体样本损失的平均；<strong>目标函数</strong>（Objective Function）是最终要优化的东西（代价函数 + 正则化项等）。很多文献混用这三个词，看到时要按上下文判断。</p>
+</blockquote>
+<hr>
+<h2 id="4-经验误差与泛化误差"><a href="#4-经验误差与泛化误差" class="headerlink" title="4. 经验误差与泛化误差"></a>4. 经验误差与泛化误差</h2><p>把损失在<strong>一个数据集上取平均</strong>，就得到评估整个模型的误差。</p>
+<p><strong>训练集</strong>上的平均误差称为<strong>训练误差</strong>，也叫<strong>经验误差</strong>（Empirical Error）或<strong>经验风险</strong>（Empirical Risk）：</p>
+<p>$$R_{emp}(f) &#x3D; \frac{1}{n}\sum_{i&#x3D;1}^{n} L\big(y_i, f(x_i)\big)$$</p>
+<p><strong>手算一次</strong>：3 个样本，真实值 $y &#x3D; [3, 5, 2]$，模型预测 $\hat{y} &#x3D; [2, 5, 4]$：</p>
+<table>
+<thead>
+<tr>
+<th>样本</th>
+<th>真实</th>
+<th>预测</th>
+<th>平方损失</th>
+<th>绝对损失</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>5</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+<td>4</td>
+<td>4</td>
+<td>2</td>
+</tr>
+</tbody></table>
+<p>取平方损失，经验误差 &#x3D; $(1+0+4)&#x2F;3 \approx 1.67$（这就是均方误差 MSE）；取绝对损失 &#x3D; $3&#x2F;3 &#x3D; 1$（平均绝对误差 MAE）。经验误差不是新东西，只是「每个样本的损失加起来除以 n」——但换一种损失函数，同一个模型的「分数」就不一样。</p>
+<p><strong>测试集</strong>上的平均误差称为<strong>测试误差</strong>，也常被叫做<strong>泛化误差</strong>（Generalization Error）。</p>
+<p><strong>经验风险最小化</strong>（Empirical Risk Minimization，ERM）：让经验误差最小的模型就当作最优模型——这是最常用的模型评估策略。</p>
+<blockquote>
+<p><strong>补充</strong> 一个根本矛盾：我们真正关心的是模型对<strong>未见数据</strong>的泛化能力，但训练时能直接看到的只有经验误差。测试误差只是泛化误差的一个近似估计（严格的教材里，泛化误差指模型对全体未知数据的期望误差）。整个「模型评估与选择」这一章，本质上都是在弥补这个信息差——下一节的过拟合就是这个矛盾的直接后果。</p>
+</blockquote>
+<hr>
+<h2 id="5-欠拟合与过拟合"><a href="#5-欠拟合与过拟合" class="headerlink" title="5. 欠拟合与过拟合"></a>5. 欠拟合与过拟合</h2><h3 id="30-秒先懂"><a href="#30-秒先懂" class="headerlink" title="30 秒先懂"></a>30 秒先懂</h3><blockquote>
+<p><strong>欠拟合 &#x3D; 没学会（训练集都考不好）；过拟合 &#x3D; 背题（训练集满分，换套题就崩）。</strong></p>
+</blockquote>
+<p><strong>拟合</strong>（Fitting）指模型在训练数据上学习规律并生成预测的过程。理想情况：既准确捕捉训练数据的模式，又在没见过的新数据上表现良好——即具有良好的<strong>泛化能力</strong>。</p>
+<p>三种状态一眼看懂（同一批数据，三种模型）：</p>
+<p><img data-src="/images/ml/img008.png" alt="恰好拟合：平滑曲线抓住趋势"></p>
+<p><img data-src="/images/ml/img009.png" alt="欠拟合：直线抓不住弯曲的趋势"></p>
+<p><img data-src="/images/ml/img010.png" alt="过拟合：曲线绕过每一个点，连噪声也学了"></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>训练集表现</th>
+<th>测试集表现</th>
+<th>本质</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>欠拟合</strong>（Underfitting）</td>
+<td>差</td>
+<td>差</td>
+<td>模型过于简单，<strong>高偏差</strong></td>
+</tr>
+<tr>
+<td><strong>过拟合</strong>（Overfitting）</td>
+<td>很好</td>
+<td>明显变差</td>
+<td>模型过于复杂，<strong>高方差</strong>——把训练样本自身的噪声、细节当成了普遍规律</td>
+</tr>
+</tbody></table>
+<p><strong>根本原因</strong>：模型复杂度与数据规律不匹配，导致测试误差（泛化误差）偏大。看误差随模型复杂度变化的经典曲线：</p>
+<p><img data-src="/images/ml/img011.png" alt="训练误差与测试误差随模型复杂度变化"></p>
+<ul>
+<li><strong>左侧（欠拟合区）</strong>：复杂度太低，训练误差和测试误差都很高；</li>
+<li><strong>中间谷底</strong>：复杂度适中，训练误差和测试误差都低——我们要选的模型就在这里；</li>
+<li><strong>右侧（过拟合区）</strong>：复杂度继续升高，训练误差一路下降，测试误差反而回升——模型开始「背题」。</li>
+</ul>
+<h3 id="5-1-产生原因与解决办法"><a href="#5-1-产生原因与解决办法" class="headerlink" title="5.1 产生原因与解决办法"></a>5.1 产生原因与解决办法</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>常见原因</th>
+<th>解决办法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>欠拟合</strong></td>
+<td>模型复杂度不足；特征不足或选择不当；训练迭代次数太少；正则化强度过大</td>
+<td>增加模型复杂度；增加&#x2F;改进特征；增加训练时间；减小正则化强度</td>
+</tr>
+<tr>
+<td><strong>过拟合</strong></td>
+<td>模型复杂度过高（参数太多）；训练数据太少；特征太多；训练时间过长</td>
+<td>减小模型复杂度&#x2F;降维；增加数据或数据增强；正则化（L1&#x2F;L2）；交叉验证；早停（验证损失不再下降时停止训练）</td>
+</tr>
+</tbody></table>
+<h3 id="5-2-代码演示：用多项式拟合看三种状态"><a href="#5-2-代码演示：用多项式拟合看三种状态" class="headerlink" title="5.2 代码演示：用多项式拟合看三种状态"></a>5.2 代码演示：用多项式拟合看三种状态</h3><p>用 $n$ 次多项式在正弦数据上做线性回归：次数 1（太简单）、5（合适）、20（太复杂）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error</span><br><span class="line"></span><br><span class="line">plt.rcParams[<span class="string">&quot;font.sans-serif&quot;</span>] = [<span class="string">&quot;KaiTi&quot;</span>]   <span class="comment"># 中文显示（Windows）</span></span><br><span class="line">plt.rcParams[<span class="string">&quot;axes.unicode_minus&quot;</span>] = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">polynomial</span>(<span class="params">x, degree</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;构造多项式特征，返回 [x^1, x^2, ..., x^degree]&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> np.hstack([x ** i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, degree + <span class="number">1</span>)])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成带噪声的正弦数据</span></span><br><span class="line">X = np.linspace(-<span class="number">3</span>, <span class="number">3</span>, <span class="number">300</span>).reshape(-<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">y = np.sin(X) + np.random.uniform(-<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">300</span>).reshape(-<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(<span class="number">1</span>, <span class="number">3</span>, figsize=(<span class="number">15</span>, <span class="number">4</span>))</span><br><span class="line"><span class="keyword">for</span> a <span class="keyword">in</span> ax:</span><br><span class="line">    a.plot(X, y, <span class="string">&quot;yo&quot;</span>)</span><br><span class="line"></span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">0.2</span>, random_state=<span class="number">42</span>)</span><br><span class="line">model = LinearRegression()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, degree <span class="keyword">in</span> <span class="built_in">enumerate</span>([<span class="number">1</span>, <span class="number">5</span>, <span class="number">20</span>]):</span><br><span class="line">    xtr, xte = polynomial(x_train, degree), polynomial(x_test, degree)</span><br><span class="line">    model.fit(xtr, y_train)</span><br><span class="line">    y_pred = model.predict(xte)</span><br><span class="line">    ax[i].plot(X, model.predict(polynomial(X, degree)), <span class="string">&quot;k&quot;</span>)</span><br><span class="line">    ax[i].text(-<span class="number">3</span>, <span class="number">1</span>,    <span class="string">f&quot;测试集均方误差：<span class="subst">&#123;mean_squared_error(y_test, y_pred):<span class="number">.4</span>f&#125;</span>&quot;</span>)</span><br><span class="line">    ax[i].text(-<span class="number">3</span>, <span class="number">1.3</span>,  <span class="string">f&quot;训练集均方误差：<span class="subst">&#123;mean_squared_error(y_train, model.predict(xtr)):<span class="number">.4</span>f&#125;</span>&quot;</span>)</span><br><span class="line">    ax[i].set_title(<span class="string">f&quot;degree = <span class="subst">&#123;degree&#125;</span>&quot;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/images/ml/img012.png" alt="多项式 1 次 / 5 次 / 20 次拟合结果"></p>
+<p>读图（对照误差曲线的三个区域）：</p>
+<table>
+<thead>
+<tr>
+<th>次数</th>
+<th>训练 MSE</th>
+<th>测试 MSE</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>0.2442</td>
+<td>0.2853</td>
+<td>两者都高 → <strong>欠拟合</strong></td>
+</tr>
+<tr>
+<td>5</td>
+<td>0.0812</td>
+<td>0.0789</td>
+<td>两者都低 → <strong>恰好拟合</strong></td>
+</tr>
+<tr>
+<td>20</td>
+<td><strong>0.0772</strong>（更低！）</td>
+<td>0.0810（反弹）</td>
+<td><strong>过拟合</strong></td>
+</tr>
+</tbody></table>
+<p>注意 20 次的训练误差是三者最低的——<strong>过拟合的模型在训练集上永远「更好」</strong>，所以绝不能只拿训练误差来选模型。</p>
+<hr>
+<h2 id="6-正则化（Regularization）"><a href="#6-正则化（Regularization）" class="headerlink" title="6. 正则化（Regularization）"></a>6. 正则化（Regularization）</h2><h3 id="1-它解决什么问题？"><a href="#1-它解决什么问题？" class="headerlink" title="1. 它解决什么问题？"></a>1. 它解决什么问题？</h3><p>过拟合的直接原因是模型太复杂、参数太大（比如 20 次多项式里出现 ±5 的巨大系数去「硬拐弯」）。<strong>正则化</strong>在损失函数里加一个<strong>惩罚项</strong>，专门惩罚过大的参数，从而限制模型复杂度、抑制过拟合、提高泛化能力。</p>
+<p>加入正则化后，评估策略从「经验风险最小化」升级为<strong>结构风险最小化</strong>（Structural Risk Minimization，SRM）：</p>
+<p>$$\underbrace{\frac{1}{n}\sum_{i&#x3D;1}^{n} L\big(y_i, f(x_i)\big)}<em>{\text{经验风险：拟合数据}} + \underbrace{\lambda R(w)}</em>{\text{正则化项：限制复杂度}}$$</p>
+<p>前一项负责「学得好」，后一项负责「别学歪」，两者相互平衡。</p>
+<h3 id="2-核心直觉"><a href="#2-核心直觉" class="headerlink" title="2. 核心直觉"></a>2. 核心直觉</h3><ul>
+<li>模型参数越大，曲线越「任性」——为了穿过每一个训练点可以剧烈扭曲。正则化项就像一根<strong>缰绳</strong>：参数想变大，就必须付出损失变大的代价。</li>
+<li><strong>L1 正则化</strong>：把部分参数一路推到 <strong>0</strong>——模型自动「丢弃」不重要的特征，得到<strong>稀疏模型</strong>，顺带完成了特征选择。回归任务里使用 L1 &#x3D; <strong>Lasso 回归</strong>。</li>
+<li><strong>L2 正则化</strong>：把所有参数整体<strong>缩小</strong>、但不压到 0——曲线变得更平滑。回归任务里使用 L2 &#x3D; <strong>Ridge &#x2F; 岭回归</strong>。</li>
+<li>$\lambda$（正则化系数）是<strong>超参数</strong>：$\lambda$ 越大缰绳越紧，模型越简单，可能欠拟合；$\lambda$ 越小约束越弱，可能过拟合。它不能被训练学习，只能手动设置或验证选择。</li>
+</ul>
+<blockquote>
+<p><strong>补充</strong> 几何直觉：把「损失最小」和「参数范围小」画在同一个坐标系里，L1 的可行域是一个<strong>菱形</strong>（角在坐标轴上），最优解容易恰好落在角点——某个参数正好为 0，产生稀疏；L2 的可行域是<strong>圆形</strong>（处处光滑），最优解一般不在轴上，所有参数都被缩小但非零。</p>
+</blockquote>
+<h3 id="3-数学表达-公式"><a href="#3-数学表达-公式" class="headerlink" title="3. 数学表达 &#x2F; 公式"></a>3. 数学表达 &#x2F; 公式</h3><p>三种正则化的损失函数（以平方损失为基础）：</p>
+<p><strong>L1 正则化（Lasso）</strong>——参数绝对值之和：</p>
+<p>$$J(w) &#x3D; \frac{1}{n}\sum_{i&#x3D;1}^{n}\big(y_i - f(x_i; w)\big)^2 + \lambda\sum_{j}\vert w_j \vert$$</p>
+<p><strong>L2 正则化（Ridge）</strong>——参数平方之和：</p>
+<p>$$J(w) &#x3D; \frac{1}{n}\sum_{i&#x3D;1}^{n}\big(y_i - f(x_i; w)\big)^2 + \lambda\sum_{j} w_j^2$$</p>
+<p><strong>ElasticNet（弹性网络）</strong>——两者按比例结合，$r$ 决定 L1 与 L2 的权重：</p>
+<p>$$J(w) &#x3D; \frac{1}{n}\sum_{i&#x3D;1}^{n}\big(y_i - f(x_i; w)\big)^2 + \lambda\left(r\sum_{j}\vert w_j\vert + \frac{1-r}{2}\sum_{j} w_j^2\right)$$</p>
+<p><strong>为什么 L1 产生稀疏、L2 只是缩小？</strong> 先看两者对参数的「推力」（正则化项的导数）：</p>
+<p>$$\frac{\partial}{\partial w_j}\lambda\vert w_j\vert &#x3D; \lambda \operatorname{sign}(w_j) \qquad \frac{\partial}{\partial w_j}\lambda w_j^2 &#x3D; 2\lambda w_j$$</p>
+<p><strong>手算一次</strong>：取 $\lambda &#x3D; 0.1$，看一个已经很小的参数 $w_j &#x3D; 0.1$ 受到的推力：</p>
+<ul>
+<li>L1：$\lambda\operatorname{sign}(0.1) &#x3D; 0.1$ —— 哪怕参数只剩 0.1，推力仍是整整 0.1，不随参数变小而衰减；</li>
+<li>L2：$2\lambda w_j &#x3D; 2 \times 0.1 \times 0.1 &#x3D; 0.02$ —— 推力随参数变小而变小，参数「快到 0 了」却始终差一口气。</li>
+</ul>
+<p><strong>严格地说，稀疏性的根源不是「被固定推力推过 0」</strong>：$\vert w\vert$ 在 $w &#x3D; 0$ 处有一个尖角（不可导点），而这类尖角恰好是最容易成为最优解的位置——最优解倾向于直接落在坐标轴上，对应的系数就<strong>精确等于 0</strong>。普通梯度下降处理不了这个尖角，实际求解 L1 用的是<strong>坐标下降</strong>配合「软阈值」操作，能把系数精确压成 0（sklearn 的 Lasso 正是坐标下降）。</p>
+<blockquote>
+<p><strong>一句话总结</strong>：L2 的推力正比于参数、越接近 0 越温柔，所以只是收缩；L1 推力恒定、且在 0 处有尖角，最优解容易「站上坐标轴」，于是产生精确的零系数。记住「L1 → 稀疏、L2 → 收缩」的直觉即可，数学机制是尖角 + 坐标下降的软阈值，而不是「一步推过 0」。</p>
+</blockquote>
+<h3 id="4-模型是怎么训练出来的？"><a href="#4-模型是怎么训练出来的？" class="headerlink" title="4. 模型是怎么训练出来的？"></a>4. 模型是怎么训练出来的？</h3><p>训练流程本身不变——还是求解一个最优化问题，只是目标函数换成了结构风险：</p>
+<ol>
+<li>定义带正则化项的损失函数（选 L1 &#x2F; L2 &#x2F; ElasticNet，定 $\lambda$）；</li>
+<li>用求解算法（梯度下降、坐标下降或解析法）最小化它；</li>
+<li>$\lambda$ 不参与梯度更新——它是超参数，靠验证集或交叉验证挑选。</li>
+</ol>
+<p>两个求解细节：</p>
+<ul>
+<li><strong>岭回归有解析解</strong>。对 L2 正则化的线性回归，令梯度为零可解得：</li>
+</ul>
+<p>$$w &#x3D; \left(X^\top X + \lambda I\right)^{-1} X^\top y$$</p>
+<p>  对角矩阵 $\lambda I$ 像一条「山岭」抬在对角线上——这正是「岭回归」名字的由来；同时它让原本不可逆的 $X^\top X$ 变得可逆，数值上更稳定。</p>
+<ul>
+<li><strong>L1 不可导</strong>（绝对值在 0 点是尖角），不能直接用普通梯度下降，实际用<strong>次梯度下降</strong>或<strong>坐标下降法</strong>求解（sklearn 的 Lasso 默认就是坐标下降）。</li>
+</ul>
+<h3 id="5-Python-sklearn-怎么实现？"><a href="#5-Python-sklearn-怎么实现？" class="headerlink" title="5. Python &#x2F; sklearn 怎么实现？"></a>5. Python &#x2F; sklearn 怎么实现？</h3><p>核心 API 只有三行：<code>Lasso(alpha=λ)</code>、<code>Ridge(alpha=λ)</code>、<code>ElasticNet(alpha=λ, l1_ratio=r)</code>。把 20 次多项式过拟合的例子拿来对比——不使用正则化、L1、L2 各拟合一次：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression, Lasso, Ridge</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error</span><br><span class="line"></span><br><span class="line">plt.rcParams[<span class="string">&quot;font.sans-serif&quot;</span>] = [<span class="string">&quot;KaiTi&quot;</span>]</span><br><span class="line">plt.rcParams[<span class="string">&quot;axes.unicode_minus&quot;</span>] = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">polynomial</span>(<span class="params">x, degree</span>):</span><br><span class="line">    <span class="keyword">return</span> np.hstack([x ** i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, degree + <span class="number">1</span>)])</span><br><span class="line"></span><br><span class="line">X = np.linspace(-<span class="number">3</span>, <span class="number">3</span>, <span class="number">300</span>).reshape(-<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">y = np.sin(X) + np.random.uniform(-<span class="number">0.5</span>, <span class="number">0.5</span>, X.size).reshape(-<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(<span class="number">2</span>, <span class="number">3</span>, figsize=(<span class="number">15</span>, <span class="number">8</span>))</span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">0.2</span>, random_state=<span class="number">42</span>)</span><br><span class="line">xtr, xte = polynomial(x_train, <span class="number">20</span>), polynomial(x_test, <span class="number">20</span>)   <span class="comment"># 统一用 20 次多项式（过拟合配置）</span></span><br><span class="line"></span><br><span class="line">models = [</span><br><span class="line">    (<span class="string">&quot;无正则化&quot;</span>, LinearRegression(), ax[:, <span class="number">0</span>]),</span><br><span class="line">    (<span class="string">&quot;Lasso回归&quot;</span>, Lasso(alpha=<span class="number">0.01</span>, max_iter=<span class="number">10000</span>), ax[:, <span class="number">1</span>]),</span><br><span class="line">    (<span class="string">&quot;岭回归&quot;</span>,   Ridge(alpha=<span class="number">1</span>),                     ax[:, <span class="number">2</span>]),</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> name, m, axs <span class="keyword">in</span> models:</span><br><span class="line">    m.fit(xtr, y_train)</span><br><span class="line">    y_pred = m.predict(xte)</span><br><span class="line">    axs[<span class="number">0</span>].plot(X, y, <span class="string">&quot;yo&quot;</span>)</span><br><span class="line">    axs[<span class="number">0</span>].plot(X, m.predict(polynomial(X, <span class="number">20</span>)), <span class="string">&quot;r&quot;</span>)</span><br><span class="line">    axs[<span class="number">0</span>].set_title(<span class="string">f&quot;<span class="subst">&#123;name&#125;</span> 测试集MSE：<span class="subst">&#123;mean_squared_error(y_test, y_pred):<span class="number">.4</span>f&#125;</span>&quot;</span>)</span><br><span class="line">    axs[<span class="number">1</span>].bar(np.arange(<span class="number">20</span>), np.ravel(m.coef_))   <span class="comment"># 20 个系数的大小</span></span><br><span class="line">    axs[<span class="number">1</span>].set_title(<span class="string">f&quot;<span class="subst">&#123;name&#125;</span> 系数&quot;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/images/ml/img013.png" alt="无正则化 / L1 / L2 拟合曲线与系数对比"></p>
+<p>读图（对比三组系数柱状图）：</p>
+<ul>
+<li><strong>无正则化</strong>：系数最大到 ±5，曲线在两端剧烈扭曲——典型过拟合；</li>
+<li><strong>Lasso（L1）</strong>：大部分系数被压成 <strong>0</strong>（只留低次项）——稀疏化，等价于自动做了特征选择；</li>
+<li><strong>Ridge（L2）</strong>：所有系数都被<strong>整体缩小</strong>但没有 0——曲线平滑；</li>
+<li>三者的测试集 MSE（0.0924 &#x2F; 0.0899 &#x2F; 0.0884）都低于无正则化时的过拟合水平。</li>
+</ul>
+<blockquote>
+<p><strong>补充</strong> 训练后模型对象里保存了什么：<code>coef_</code> 是学到的系数（Lasso 里一部分恰好是 0，Ridge 里都不为 0 但整体变小）、<code>intercept_</code> 是截距；而 <code>alpha</code> 是我们自己传进去的超参数，不会因训练而改变。另外 sklearn 默认<strong>不惩罚截距</strong>——截距只是把拟合线整体平移，不影响模型复杂度。</p>
+</blockquote>
+<blockquote>
+<p><strong>补充</strong> $\lambda$ 不用手工试：sklearn 提供 <code>LassoCV</code>、<code>RidgeCV</code>，内部自动做交叉验证挑最优 <code>alpha</code>。</p>
+</blockquote>
+<h3 id="6-优缺点与注意事项"><a href="#6-优缺点与注意事项" class="headerlink" title="6. 优缺点与注意事项"></a>6. 优缺点与注意事项</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>L1（Lasso）</th>
+<th>L2（Ridge）</th>
+<th>ElasticNet</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>系数</td>
+<td>部分归零（稀疏）</td>
+<td>整体缩小、非零</td>
+<td>折中</td>
+</tr>
+<tr>
+<td>特征选择</td>
+<td>✅ 自带</td>
+<td>❌</td>
+<td>部分</td>
+</tr>
+<tr>
+<td>共线特征</td>
+<td>倾向随机保留其一，解不稳定</td>
+<td>稳定（共线特征共享权重）</td>
+<td>较稳定</td>
+</tr>
+<tr>
+<td>适用</td>
+<td>特征多、想要稀疏模型</td>
+<td>默认首选</td>
+<td>特征多 + 特征间相关</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>补充</strong> 两条易错点：正则化前<strong>先标准化</strong>——惩罚项对所有系数一视同仁，而量纲大的特征天然系数小，不标准化会让惩罚不公平；$\lambda$ 不是越大越好——正则化压的是「无意义的扭动」，压过头就把真实规律也压没了（欠拟合）。</p>
+</blockquote>
+<blockquote>
+<p><strong>一句话总结</strong>：正则化 &#x3D; 在「拟合数据」的得分之外，额外给「参数太大」扣分；L1 把不重要的参数扣到 0，L2 把所有参数按比例缩小。</p>
+</blockquote>
+<hr>
+<h2 id="7-交叉验证（Cross-Validation）"><a href="#7-交叉验证（Cross-Validation）" class="headerlink" title="7. 交叉验证（Cross-Validation）"></a>7. 交叉验证（Cross-Validation）</h2><h3 id="1-它解决什么问题？-1"><a href="#1-它解决什么问题？-1" class="headerlink" title="1. 它解决什么问题？"></a>1. 它解决什么问题？</h3><p>评估模型需要把数据划分成训练&#x2F;验证两部分，但<strong>单次划分有偶然性</strong>：划分得「巧」，分数虚高；划分得「差」，分数虚低。数据量小时，验证集更小，这种波动更严重。交叉验证通过<strong>多次轮流划分、取平均</strong>，更可靠地估计模型在未知数据上的表现，也能避免因单次划分不合理而误判模型（误判过拟合&#x2F;欠拟合）。</p>
+<h3 id="2-核心直觉-1"><a href="#2-核心直觉-1" class="headerlink" title="2. 核心直觉"></a>2. 核心直觉</h3><p>一句话：<strong>让每个样本都轮到自己当一次「考题」。</strong></p>
+<p>把数据分成 k 份，做 k 轮实验——每轮换一份当验证集、其余当训练集，最后把 k 轮成绩取平均。某个模型「运气好」也许在一份数据上占便宜，但很难在 k 份数据上全占便宜——平均之后，运气成分被抵消。</p>
+<p><img data-src="/images/ml/img014.png" alt="10 折交叉验证示意图"></p>
+<h3 id="3-数学表达-公式-1"><a href="#3-数学表达-公式-1" class="headerlink" title="3. 数学表达 &#x2F; 公式"></a>3. 数学表达 &#x2F; 公式</h3><p>把数据集 $D$ 均匀分为 k 份 $D_1, D_2, \dots, D_k$（称为 k「折」），第 i 轮用 $D_i$ 做验证、其余 k−1 折做训练，得到该轮得分 $s_i$。交叉验证的最终评估结果：</p>
+<p>$$\text{CV score} &#x3D; \frac{1}{k}\sum_{i&#x3D;1}^{k} s_i$$</p>
+<p><strong>手算一次</strong>：5 折交叉验证，每折的准确率分别是：</p>
+<p>$$s &#x3D; [0.80,\ 0.90,\ 0.70,\ 0.85,\ 0.75]$$</p>
+<p>$$\text{CV score} &#x3D; \frac{0.80 + 0.90 + 0.70 + 0.85 + 0.75}{5} &#x3D; 0.80$$</p>
+<p>如果只做一次 Hold-Out，恰好抽到第 2 折当验证集会得到 0.90 的虚高分数，抽到第 3 折则得到 0.70 的低估。取平均之后，<strong>运气被抹平，剩下的是模型真实水平的估计</strong>。而且 0.70 ~ 0.90 的波动本身就是信息：波动大，说明模型表现对数据划分敏感、不够稳。</p>
+<p><strong>留一法</strong>（Leave-One-Out，LOO）是 k 折的极端形式：k &#x3D; n（n 为样本数），每次只留 1 个样本验证。它的特点是：每轮训练几乎用上全部样本，估计的<strong>偏差</strong>通常较小；但 n 轮的训练集高度重叠，估计的<strong>方差</strong>可能反而偏大，加上要训练 n 个模型、计算成本极高——LOO 是「训练数据利用率极高的极端 k 折」，并不是普遍意义上「最可靠」的方案。</p>
+<h3 id="4-模型是怎么训练出来的？-1"><a href="#4-模型是怎么训练出来的？-1" class="headerlink" title="4. 模型是怎么训练出来的？"></a>4. 模型是怎么训练出来的？</h3><p>一个容易误解的点：<strong>交叉验证本身训练不出最终模型</strong>。</p>
+<ul>
+<li>每一轮都用该轮的 k−1 折数据<strong>从头训练一个全新模型</strong>（模型之间互不相干，没有权重继承）；</li>
+<li>这 k 个「临时模型」的唯一使命是<strong>报分数</strong>，用完即弃；</li>
+<li>交叉验证的产出是<strong>对「这套配置」（算法 + 超参数）的可靠评估</strong>，用于比较和选型；</li>
+<li>选定配置后，再用<strong>全部训练数据</strong>重新训练一次，得到最终模型；测试集只在最后碰一次。</li>
+</ul>
+<h3 id="5-Python-sklearn-怎么实现？-1"><a href="#5-Python-sklearn-怎么实现？-1" class="headerlink" title="5. Python &#x2F; sklearn 怎么实现？"></a>5. Python &#x2F; sklearn 怎么实现？</h3><p>最常用的是 <code>cross_val_score</code>（一行完成 k 折训练 + 评估）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> make_classification</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_score, KFold</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"></span><br><span class="line">X, y = make_classification(n_samples=<span class="number">1000</span>, n_features=<span class="number">20</span>, random_state=<span class="number">100</span>)</span><br><span class="line">model = LogisticRegression(max_iter=<span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5 折交叉验证：cv=5 表示把数据分 5 份轮流验证</span></span><br><span class="line">scores = cross_val_score(model, X, y, cv=<span class="number">5</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;每折得分：&quot;</span>, scores)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;平均得分：%.4f ± %.4f&quot;</span> % (scores.mean(), scores.std()))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 需要控制划分细节（如打乱顺序）时，显式传入 KFold 对象</span></span><br><span class="line">kf = KFold(n_splits=<span class="number">5</span>, shuffle=<span class="literal">True</span>, random_state=<span class="number">100</span>)</span><br><span class="line">scores = cross_val_score(model, X, y, cv=kf)</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>cross_val_score(model, X, y, cv=5)</code> 内部</strong>：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">把数据均匀切成 5 折</span><br><span class="line">        ↓</span><br><span class="line">第 1 轮：clone 一个全新模型 → 用折 2~5 训练 → 在折 1 上验证 → 得分 s1</span><br><span class="line">第 2 轮：再 clone 一个全新模型 → 用折 1、3~5 训练 → 在折 2 上验证 → 得分 s2</span><br><span class="line">        ↓ ……（共 5 轮）</span><br><span class="line">        ↓</span><br><span class="line">返回得分数组 [s1, ..., s5]</span><br></pre></td></tr></table></figure>
+
+<p>三个关键点：每一轮都是 <code>clone</code> 出的<strong>全新模型</strong>，参数从零开始、互不继承；返回的是<strong>每折的分数</strong>而不是模型；它<strong>不返回任何可用的最终模型</strong>——最终模型要用全部训练数据重新 <code>fit</code>。</p>
+<blockquote>
+<p><strong>补充</strong> 网格搜索（GridSearchCV）把「遍历超参数组合」作为外层循环、「交叉验证」作为内层评估，是超参数调优的标准姿势：每个候选参数都得到一个可靠的平均分，选最好的那个。</p>
+</blockquote>
+<h3 id="6-三种方式对比与注意事项"><a href="#6-三种方式对比与注意事项" class="headerlink" title="6. 三种方式对比与注意事项"></a>6. 三种方式对比与注意事项</h3><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>做法</th>
+<th>优点</th>
+<th>缺点</th>
+<th>适用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>简单交叉验证（Hold-Out）</td>
+<td>一次性划分（如 70% &#x2F; 30%）</td>
+<td>快、简单</td>
+<td>受单次划分影响大</td>
+<td>数据量大、快速实验</td>
+</tr>
+<tr>
+<td>k 折交叉验证</td>
+<td>k 轮轮流验证取平均</td>
+<td>充分利用数据、结果稳定</td>
+<td>计算量 ×k</td>
+<td>最常用，k 常取 5 或 10</td>
+</tr>
+<tr>
+<td>留一法（LOO）</td>
+<td>每次只留 1 个样本</td>
+<td>数据利用率高、偏差小</td>
+<td>各折高度重叠、方差可能偏大；训练 n 个模型</td>
+<td>很小的数据集</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>补充</strong> 三条实践要点：</p>
+<ol>
+<li><strong>分类任务用分层 k 折</strong>（<code>StratifiedKFold</code>）：每折的正负样本比例与整体一致，避免某折恰好几乎没有正类。</li>
+<li><strong>k 的选择</strong>是「可靠性与计算量」的权衡：k 越大训练次数越多、每折训练集越大，结果越稳但越慢；5 和 10 是经验默认值。</li>
+<li><strong>防泄漏</strong>：标准化、特征选择等「学统计量」的操作必须发生在每一折的训练部分内部（sklearn 用 <code>Pipeline</code> 把预处理和模型打包后交给 <code>cross_val_score</code>，可自动保证这一点）。</li>
+<li><strong>分组数据用 GroupKFold</strong>：同一个用户&#x2F;患者&#x2F;设备的多条样本不能被拆进训练折和验证折两侧，否则模型可能只是在「认出这个人」——按组切分保证同组样本只出现在一侧（分层版有 <code>StratifiedGroupKFold</code>）。</li>
+<li><strong>时间序列不能随机打乱切折</strong>：预测未来必须「用过去训练、在未来上验证」，用 <code>TimeSeriesSplit</code> 按时间顺序切分。</li>
+<li><strong>数据少又想「调参 + 报告泛化性能」时用嵌套交叉验证</strong>：外层 CV 只负责最终评估、内层 CV 只负责调参——两层各司其职，避免调参反复看同一批验证数据带来的乐观偏差。</li>
+</ol>
+</blockquote>
+<blockquote>
+<p><strong>一句话总结</strong>：交叉验证 &#x3D; 让每个样本轮流当一次考题、k 次成绩取平均，用计算量换一个不被运气左右的评估结果。</p>
+</blockquote>
+<hr>
+<h2 id="8-易混淆点"><a href="#8-易混淆点" class="headerlink" title="8. 易混淆点"></a>8. 易混淆点</h2><table>
+<thead>
+<tr>
+<th>易混对</th>
+<th>一句话区分</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>损失函数 vs 经验误差 vs 泛化误差</td>
+<td>损失针对<strong>单个样本</strong>；经验误差是训练集平均；泛化（测试）误差是测试集平均，才是我们真正关心的</td>
+</tr>
+<tr>
+<td>欠拟合 vs 过拟合</td>
+<td>前者训练&#x2F;测试都差（高偏差）；后者训练好测试差（高方差）</td>
+</tr>
+<tr>
+<td>L1 vs L2</td>
+<td>L1 推参数归零 → 稀疏 + 特征选择；L2 整体缩小 → 平滑稳定，默认首选</td>
+</tr>
+<tr>
+<td>ERM vs SRM</td>
+<td>ERM 只最小化经验风险；SRM &#x3D; 经验风险 + 正则化项，在拟合与复杂度间折中</td>
+</tr>
+<tr>
+<td>交叉验证 vs 直接留测试集调参</td>
+<td>调参决策只能用验证数据；测试集只许最后碰一次，否则评估虚高</td>
+</tr>
+<tr>
+<td>早停 vs 正则化</td>
+<td>都是抗过拟合手段：早停限制「训练时长」，正则化限制「参数大小」</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/09/19/02-%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/" rel="prev" title="02特征工程">
+      <i class="fa fa-chevron-left"></i> 02特征工程
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/09/20/04-%E6%A8%A1%E5%9E%8B%E6%B1%82%E8%A7%A3%E4%B8%8E%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/" rel="next" title="04模型求解与评价指标">
+      04模型求解与评价指标 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9"><span class="nav-number">1.</span> <span class="nav-text">模型评估与选择</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%89%E8%A6%81%E7%B4%A0"><span class="nav-number">1.1.</span> <span class="nav-text">1. 机器学习三要素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%BB%BA%E6%A8%A1%E5%85%A8%E6%B5%81%E7%A8%8B"><span class="nav-number">1.2.</span> <span class="nav-text">2. 建模全流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%EF%BC%9A%E8%A1%A1%E9%87%8F%E3%80%8C%E4%B8%80%E6%AC%A1%E9%A2%84%E6%B5%8B%E3%80%8D%E7%9A%84%E5%A5%BD%E5%9D%8F"><span class="nav-number">1.3.</span> <span class="nav-text">3. 损失函数：衡量「一次预测」的好坏</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%9B%9B%E7%A7%8D%E5%B8%B8%E8%A7%81%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 四种常见损失函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%BB%8F%E9%AA%8C%E8%AF%AF%E5%B7%AE%E4%B8%8E%E6%B3%9B%E5%8C%96%E8%AF%AF%E5%B7%AE"><span class="nav-number">1.4.</span> <span class="nav-text">4. 经验误差与泛化误差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%AC%A0%E6%8B%9F%E5%90%88%E4%B8%8E%E8%BF%87%E6%8B%9F%E5%90%88"><span class="nav-number">1.5.</span> <span class="nav-text">5. 欠拟合与过拟合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#30-%E7%A7%92%E5%85%88%E6%87%82"><span class="nav-number">1.5.1.</span> <span class="nav-text">30 秒先懂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E4%BA%A7%E7%94%9F%E5%8E%9F%E5%9B%A0%E4%B8%8E%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="nav-number">1.5.2.</span> <span class="nav-text">5.1 产生原因与解决办法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E4%BB%A3%E7%A0%81%E6%BC%94%E7%A4%BA%EF%BC%9A%E7%94%A8%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%8B%9F%E5%90%88%E7%9C%8B%E4%B8%89%E7%A7%8D%E7%8A%B6%E6%80%81"><span class="nav-number">1.5.3.</span> <span class="nav-text">5.2 代码演示：用多项式拟合看三种状态</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E6%AD%A3%E5%88%99%E5%8C%96%EF%BC%88Regularization%EF%BC%89"><span class="nav-number">1.6.</span> <span class="nav-text">6. 正则化（Regularization）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%83%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-number">1.6.1.</span> <span class="nav-text">1. 它解决什么问题？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%A0%B8%E5%BF%83%E7%9B%B4%E8%A7%89"><span class="nav-number">1.6.2.</span> <span class="nav-text">2. 核心直觉</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%95%B0%E5%AD%A6%E8%A1%A8%E8%BE%BE-%E5%85%AC%E5%BC%8F"><span class="nav-number">1.6.3.</span> <span class="nav-text">3. 数学表达 &#x2F; 公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%A8%A1%E5%9E%8B%E6%98%AF%E6%80%8E%E4%B9%88%E8%AE%AD%E7%BB%83%E5%87%BA%E6%9D%A5%E7%9A%84%EF%BC%9F"><span class="nav-number">1.6.4.</span> <span class="nav-text">4. 模型是怎么训练出来的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Python-sklearn-%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%EF%BC%9F"><span class="nav-number">1.6.5.</span> <span class="nav-text">5. Python &#x2F; sklearn 怎么实现？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E4%BC%98%E7%BC%BA%E7%82%B9%E4%B8%8E%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.6.6.</span> <span class="nav-text">6. 优缺点与注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%EF%BC%88Cross-Validation%EF%BC%89"><span class="nav-number">1.7.</span> <span class="nav-text">7. 交叉验证（Cross-Validation）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%83%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F-1"><span class="nav-number">1.7.1.</span> <span class="nav-text">1. 它解决什么问题？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%A0%B8%E5%BF%83%E7%9B%B4%E8%A7%89-1"><span class="nav-number">1.7.2.</span> <span class="nav-text">2. 核心直觉</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%95%B0%E5%AD%A6%E8%A1%A8%E8%BE%BE-%E5%85%AC%E5%BC%8F-1"><span class="nav-number">1.7.3.</span> <span class="nav-text">3. 数学表达 &#x2F; 公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%A8%A1%E5%9E%8B%E6%98%AF%E6%80%8E%E4%B9%88%E8%AE%AD%E7%BB%83%E5%87%BA%E6%9D%A5%E7%9A%84%EF%BC%9F-1"><span class="nav-number">1.7.4.</span> <span class="nav-text">4. 模型是怎么训练出来的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Python-sklearn-%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%EF%BC%9F-1"><span class="nav-number">1.7.5.</span> <span class="nav-text">5. Python &#x2F; sklearn 怎么实现？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%AF%94%E4%B8%8E%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.7.6.</span> <span class="nav-text">6. 三种方式对比与注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9"><span class="nav-number">1.8.</span> <span class="nav-text">8. 易混淆点</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hyacinth"
+      src="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
+  <p class="site-author-name" itemprop="name">Hyacinth</p>
+  <div class="site-description" itemprop="description">君子慎独,不欺暗室</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hyacinth</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/lozad/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+<div id="loading-box">
+  <div class="loading-left-bg"></div>
+  <div class="loading-right-bg"></div>
+  <div class="spinner-box">
+    <div class="configure-border-1"><div class="configure-core"></div></div>
+    <div class="configure-border-2"><div class="configure-core"></div></div>
+    <div class="loading-word">加载中...</div>
+  </div>
+</div>
+
+<canvas id="background-particles" aria-hidden="true"></canvas>
+
+<script>
+  (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
+    var loadingBox = document.getElementById('loading-box');
+    var root = document.documentElement;
+
+    function endLoading() {
+      if (loadingBox.classList.contains('loaded')) return;
+      loadingBox.classList.add('loaded');
+      setTimeout(function() {
+        root.classList.remove('page-loading');
+      }, 500);
+    }
+
+    function initLoading() {
+      root.classList.add('page-loading');
+      loadingBox.classList.remove('loaded');
+    }
+
+    initLoading();
+
+    if (document.readyState === 'complete') {
+      endLoading();
+    } else {
+      window.addEventListener('load', endLoading);
+      document.addEventListener('DOMContentLoaded', endLoading);
+      setTimeout(endLoading, 7000);
+    }
+  })();
+</script>
+
+<script src="/js/latex-tool.js?v=20260805c"></script>
+<script src="/js/translate-tool.js?v=20260805a"></script>
+<script src="/js/hexagram-post-map.js?v=20260910b"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
+<script src="/js/post-summary.js?v=20260831d"></script>
+<script src="/js/background-particles.js?v=20260910a"></script>
+<script src="/js/theme-colors.js?v=20260910b"></script>
+<script src="/js/tab-gaze.js?v=20260910a"></script>
+<script src="/lib/solarlunar/solarlunar.min.js?v=20260910a"></script>
+<script src="/js/daily-hexagram.js?v=20260910a"></script>
+<script src="/js/menu-dropdown.js?v=20260910a"></script>
+
+</body>
+</html>

@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#9a6545","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="感知机：手调参数实现与门、与非门、或门，XOR 为什么一条线切不开，多层感知机如何破局——通往神经网络的第一课。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="08感知机">
+<meta property="og:url" content="https://hyacinth.xin/2026/09/20/08-%E6%84%9F%E7%9F%A5%E6%9C%BA/index.html">
+<meta property="og:site_name" content="Hyacinth">
+<meta property="og:description" content="感知机：手调参数实现与门、与非门、或门，XOR 为什么一条线切不开，多层感知机如何破局——通往神经网络的第一课。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img041.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img046.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img047.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img048.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img049.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img050.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img052.png">
+<meta property="article:published_time" content="2026-09-20T17:00:00.000Z">
+<meta property="article:modified_time" content="2026-09-20T17:00:00.000Z">
+<meta property="article:author" content="Hyacinth">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hyacinth.xin/images/ml/img041.png">
+
+<link rel="canonical" href="https://hyacinth.xin/2026/09/20/08-%E6%84%9F%E7%9F%A5%E6%9C%BA/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<script>
+  // 主题换色：首帧绘制前恢复上次选择的色板，避免闪烁。
+  (function() {
+    try {
+      var palette = localStorage.getItem('hyacinth-theme-color');
+      if (palette) document.documentElement.setAttribute('data-theme-color', palette);
+    } catch (error) {}
+  })();
+</script>
+<script>
+  (function() {
+    var images = [
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Asuna%20Yuuki.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Goto%20Hitori.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Kuronuma%20Sawako.png',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Miyazono%20Kaori.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Azusa.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Miku.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Nino.png',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Rem.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Shiina%20Mahiru.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Takagi.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Yamada%20Ryo.jpg'
+    ];
+    var image = images[Math.floor(Math.random() * images.length)];
+    document.documentElement.classList.add('page-loading');
+    document.documentElement.style.setProperty('--page-background-image', 'url("' + image + '")');
+  })();
+</script>
+<link rel="stylesheet" href="https://fontsapi.zeoseven.com/285/main/result.css">
+<link rel="stylesheet" href="/css/post-summary.css?v=20260831c">
+<link rel="stylesheet" href="/css/theme-colors.css?v=20260910b">
+<link rel="stylesheet" href="/css/daily-hexagram.css?v=20260910a">
+<link rel="stylesheet" href="/css/menu-dropdown.css?v=20260911a">
+
+  <title>08感知机 | Hyacinth</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hyacinth</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-说说">
+
+    <a href="/shuoshuo/" rel="section"><i class="fa fa-comment-dots fa-fw"></i>说说</a>
+
+  </li>
+        <li class="menu-item menu-item-工具">
+
+    <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2026/09/20/08-%E6%84%9F%E7%9F%A5%E6%9C%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          08感知机
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-09-20 17:00:00" itemprop="dateCreated datePublished" datetime="2026-09-20T17:00:00+00:00">2026-09-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>9 分钟</span>
+            </span>
+            <div class="post-description">感知机：手调参数实现与门、与非门、或门，XOR 为什么一条线切不开，多层感知机如何破局——通往神经网络的第一课。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="感知机（Perceptron）"><a href="#感知机（Perceptron）" class="headerlink" title="感知机（Perceptron）"></a>感知机（Perceptron）</h1><h3 id="30-秒先懂"><a href="#30-秒先懂" class="headerlink" title="30 秒先懂"></a>30 秒先懂</h3><blockquote>
+<p><strong>感知机：接收多个输入信号，加权求和后与阈值比较，超过就输出 1（神经元被激活），否则输出 0——一个最简单的二分类器，也是神经网络的「细胞」。</strong></p>
+</blockquote>
+<p>这一篇不训练任何模型，而是<strong>亲手给参数</strong>，让感知机学会与门、与非门、或门；然后撞上它天生做不到的事（异或门），再亲眼看着「叠加层」如何破局。整个过程就是神经网络的迷你预演。</p>
+<hr>
+<h2 id="1-它解决什么问题？"><a href="#1-它解决什么问题？" class="headerlink" title="1. 它解决什么问题？"></a>1. 它解决什么问题？</h2><p>感知机是一个<strong>二分类模型</strong>：接收多个输入信号，输出一个只有 0、1 两种取值的信号。下图是一个接收两个输入的感知机：</p>
+<p><img data-src="/images/ml/img041.png" alt="两个输入的感知机：x₁、x₂ 乘以权重后送往神经元，超过阈值则输出 1"></p>
+<ul>
+<li>$x_1, x_2$：输入信号；$y$：输出信号（0 或 1）；</li>
+<li>$w_1, w_2$：<strong>权重</strong>，控制每个信号的重要性——权重越大，对应输入话语权越大；</li>
+<li>○ 是<strong>神经元</strong>（节点）：把传来的信号加权求和，总和超过某个<strong>界限值（阈值）</strong>就输出 1，称为<strong>神经元被激活</strong>。</li>
+</ul>
+<p>它能解决一大类「按条件判断」的问题。本篇用三个经典问题检验它：<strong>与门、与非门、或门</strong>——数字电路的基本零件，也是「能不能被一条线分开」的试金石。</p>
+<hr>
+<h2 id="2-核心直觉"><a href="#2-核心直觉" class="headerlink" title="2. 核心直觉"></a>2. 核心直觉</h2><p><strong>直觉一：感知机是一场「加权投票 + 及格线」。</strong> 每个输入是一张选票，权重是票的分量，加权和是总票数；阈值是及格线——过线输出 1（激活），不过线输出 0。</p>
+<p><strong>直觉二：权重和偏置分工不同。</strong></p>
+<ul>
+<li><strong>权重 $w$<strong>：控制每个输入信号</strong>有多重要</strong>；</li>
+<li><strong>偏置 $b$<strong>：调整神经元</strong>被激活的难易程度</strong>——$b$ 越大越容易被激活（门槛越低）。</li>
+</ul>
+<p><strong>直觉三：单层感知机 &#x3D; 一条直线切空间。</strong> 加权和大于 0 的区域和小于 0 的区域，被直线 $w_1x_1 + w_2x_2 + b &#x3D; 0$ 一分为二——一边输出 1，一边输出 0。这个「只能切直线」的性质，决定了它后天的一切能耐与不能耐。</p>
+<hr>
+<h2 id="3-数学表达-公式"><a href="#3-数学表达-公式" class="headerlink" title="3. 数学表达 &#x2F; 公式"></a>3. 数学表达 &#x2F; 公式</h2><p>把「加权总和超过阈值 θ 就输出 1」写成式子：</p>
+<p>$$y &#x3D; \begin{cases} 1, &amp; w_1 x_1 + w_2 x_2 \ge \theta \ 0, &amp; w_1 x_1 + w_2 x_2 &lt; \theta \end{cases}$$</p>
+<p>把 $\theta$ 移到左边（令 $b &#x3D; -\theta$），得到更常用的形式：</p>
+<p>$$y &#x3D; \begin{cases} 1, &amp; w_1 x_1 + w_2 x_2 + b \ge 0 \ 0, &amp; w_1 x_1 + w_2 x_2 + b &lt; 0 \end{cases}$$</p>
+<p>$b$ 就是偏置。注意 $b$ 和 $w_1, w_2$ 的地位不同：$w$ 乘在输入上，$b$ 是常驻的「底分」。</p>
+<p><strong>手算一次：用 $(w_1, w_2, b) &#x3D; (0.5, 0.5, -0.7)$ 实现与门</strong>（两个输入都是 1 才输出 1）：</p>
+<table>
+<thead>
+<tr>
+<th>$x_1$</th>
+<th>$x_2$</th>
+<th>加权和 $0.5x_1 + 0.5x_2 - 0.7$</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td>$-0.7$</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>$-0.2$</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>$-0.2$</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>$+0.3$</td>
+<td><strong>1</strong></td>
+</tr>
+</tbody></table>
+<p>四个输入全部符合与门真值表。直觉核对：只有两个「1」的票加在一起（$0.5+0.5&#x3D;1.0$）才能越过及格线 $0.7$——与门要的就是这种「全票通过」。</p>
+<table>
+<thead>
+<tr>
+<th>$x_1$</th>
+<th>$x_2$</th>
+<th>与门</th>
+<th>与非门</th>
+<th>或门</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td><strong>0</strong></td>
+<td>1</td>
+</tr>
+</tbody></table>
+<p>与非门（NAND）就是把与门的输出整个反过来——<strong>参数只需全部取反</strong>：$(-0.5, -0.5, 0.7)$。或门（OR）只要求「有一票就过」：$(0.5, 0.5, -0.2)$——及格线从 0.7 降到 0.2，单张 0.5 的票加上偏置就能过线。</p>
+<hr>
+<h2 id="4-模型是怎么训练出来的？"><a href="#4-模型是怎么训练出来的？" class="headerlink" title="4. 模型是怎么训练出来的？"></a>4. 模型是怎么训练出来的？</h2><p>本篇为了让每个参数的含义看得见摸得着，先采用<strong>手工配置</strong>：满足与门真值表的参数<strong>有无穷多组</strong>——$(0.5, 0.5, -0.7)$ 可以，$(0.7, 0.6, -0.9)$ 也可以，人工挑一组即可。与非门、或门同理，三组参数放在一起看：</p>
+<table>
+<thead>
+<tr>
+<th>门</th>
+<th>$w_1$</th>
+<th>$w_2$</th>
+<th>$b$</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>与门 AND</td>
+<td>0.5</td>
+<td>0.5</td>
+<td>−0.7</td>
+</tr>
+<tr>
+<td>与非门 NAND</td>
+<td>−0.5</td>
+<td>−0.5</td>
+<td>0.7</td>
+</tr>
+<tr>
+<td>或门 OR</td>
+<td>0.5</td>
+<td>0.5</td>
+<td>−0.2</td>
+</tr>
+</tbody></table>
+<h3 id="4-1-真正的感知机学习算法"><a href="#4-1-真正的感知机学习算法" class="headerlink" title="4.1 真正的感知机学习算法"></a>4.1 真正的感知机学习算法</h3><p>手工配置只是教学手段——感知机作为机器学习算法，自有它的训练规则。设学习率为 $\eta$，<strong>每遇到一个被错分的样本，就修正一次参数</strong>：</p>
+<p>$$w \leftarrow w + \eta,(y - \hat{y}),x \qquad b \leftarrow b + \eta,(y - \hat{y})$$</p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>$y - \hat{y}$</th>
+<th>修正动作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>真实 1，预测 0（漏报正类）</td>
+<td>$+1$</td>
+<td>$w$ 向该样本的 $x$ 方向挪一步——把边界往「把这个点划进正类」推</td>
+</tr>
+<tr>
+<td>真实 0，预测 1（误报）</td>
+<td>$-1$</td>
+<td>反方向推——把边界挪离这个负样本</td>
+</tr>
+<tr>
+<td>预测正确</td>
+<td>$0$</td>
+<td>参数不动</td>
+</tr>
+</tbody></table>
+<p><strong>手算一次</strong>：设当前 $w &#x3D; (0.2, -0.4)$、$b &#x3D; 0$、$\eta &#x3D; 0.1$。来一个正样本 $(3, 4)$：加权和 $&#x3D; 0.2\times3 + (-0.4)\times4 + 0 &#x3D; -1.0 &lt; 0$，预测 $\hat{y} &#x3D; 0$——错分。修正：</p>
+<p>$$w &#x3D; (0.2,\ -0.4) + 0.1 \times 1 \times (3,\ 4) &#x3D; (0.5,\ 0.0) \qquad b &#x3D; 0 + 0.1 &#x3D; 0.1$$</p>
+<p>边界被朝这个正样本的方向拉动了一步。反复遍历训练集、遇错就修，直到（数据允许的话）不再有错分样本。三点说明：</p>
+<ol>
+<li><strong>收敛定理</strong>：若数据<strong>线性可分</strong>，感知机学习算法在有限步内必能找到一个分开两类的超平面；若数据线性不可分（XOR），修正会永远震荡下去——这正预告了下一节的结论；</li>
+<li><strong>它不是梯度下降</strong>：阶跃函数非 0 即 1、几乎没有梯度可用——感知机规则是「错误驱动的修正」，不是「对激活函数求导」；</li>
+<li><strong>预测正确就不更新</strong>——参数只在犯错时移动，错了才学。</li>
+</ol>
+<p>带着这条规则再看下一节：XOR 不是「学习算法没学好」，而是<strong>单层感知机这个模型类根本表达不了 XOR</strong>——无论怎么学、学多久，一条直线都切不开那四个点。</p>
+<blockquote>
+<p><strong>补充</strong> 三个门的结构完全相同，<strong>唯一的区别是参数取值</strong>。这暗示了一件了不起的事：感知机是「同一台机器，换参数换人格」——既然参数能决定行为，那么「让机器自动找参数」（训练）就是理所当然的下一步，这正是神经网络的学习要干的事。</p>
+</blockquote>
+<hr>
+<h2 id="5-Python-sklearn-怎么实现？"><a href="#5-Python-sklearn-怎么实现？" class="headerlink" title="5. Python &#x2F; sklearn 怎么实现？"></a>5. Python &#x2F; sklearn 怎么实现？</h2><p>先按直觉的「阈值版」实现与门：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">AND</span>(<span class="params">x1, x2</span>):</span><br><span class="line">    w1, w2, theta = <span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">0.7</span></span><br><span class="line">    res = x1 * w1 + x2 * w2</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span> <span class="keyword">if</span> res &lt;= theta <span class="keyword">else</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(AND(<span class="number">0</span>, <span class="number">0</span>))  <span class="comment"># 0</span></span><br><span class="line"><span class="built_in">print</span>(AND(<span class="number">1</span>, <span class="number">0</span>))  <span class="comment"># 0</span></span><br><span class="line"><span class="built_in">print</span>(AND(<span class="number">0</span>, <span class="number">1</span>))  <span class="comment"># 0</span></span><br><span class="line"><span class="built_in">print</span>(AND(<span class="number">1</span>, <span class="number">1</span>))  <span class="comment"># 1</span></span><br></pre></td></tr></table></figure>
+
+<p>换成「权重 + 偏置」形式，并用 NumPy 向量化（与非门、或门只差参数）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">AND</span>(<span class="params">x1, x2</span>):</span><br><span class="line">    x = np.array([x1, x2])</span><br><span class="line">    w = np.array([<span class="number">0.5</span>, <span class="number">0.5</span>])   <span class="comment"># 权重：信号的重要性</span></span><br><span class="line">    b = -<span class="number">0.7</span>                   <span class="comment"># 偏置：激活的难易程度</span></span><br><span class="line">    tmp = np.<span class="built_in">sum</span>(w * x) + b</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span> <span class="keyword">if</span> tmp &lt;= <span class="number">0</span> <span class="keyword">else</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">NAND</span>(<span class="params">x1, x2</span>):</span><br><span class="line">    x = np.array([x1, x2])</span><br><span class="line">    w = np.array([-<span class="number">0.5</span>, -<span class="number">0.5</span>]) <span class="comment"># 与门参数全部取反</span></span><br><span class="line">    b = <span class="number">0.7</span></span><br><span class="line">    tmp = np.<span class="built_in">sum</span>(w * x) + b</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span> <span class="keyword">if</span> tmp &lt;= <span class="number">0</span> <span class="keyword">else</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">OR</span>(<span class="params">x1, x2</span>):</span><br><span class="line">    x = np.array([x1, x2])</span><br><span class="line">    w = np.array([<span class="number">0.5</span>, <span class="number">0.5</span>])</span><br><span class="line">    b = -<span class="number">0.2</span>                   <span class="comment"># 及格线降低：有一票就激活</span></span><br><span class="line">    tmp = np.<span class="built_in">sum</span>(w * x) + b</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span> <span class="keyword">if</span> tmp &lt;= <span class="number">0</span> <span class="keyword">else</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="6-感知机的局限：异或门（XOR）"><a href="#6-感知机的局限：异或门（XOR）" class="headerlink" title="6. 感知机的局限：异或门（XOR）"></a>6. 感知机的局限：异或门（XOR）</h2><p><strong>异或门</strong>：两个输入<strong>不一样</strong>时输出 1，一样则输出 0：</p>
+<table>
+<thead>
+<tr>
+<th>$x_1$</th>
+<th>$x_2$</th>
+<th>异或门 XOR</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td><strong>1</strong></td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td><strong>1</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<p>试着沿用上面的套路——你会发现<strong>无论怎么调参数都配不出来</strong>。为什么？画出几何图就明白了。</p>
+<p>或门把平面切成两个半空间（直线一侧输出 1，另一侧输出 0）：</p>
+<p><img data-src="/images/ml/img046.png" alt="或门：一条直线把「输出1」和「输出0」分开"></p>
+<p>把异或门的四个点画到坐标上：<code>(0,0)</code> 和 <code>(1,1)</code> 是 0，<code>(1,0)</code> 和 <code>(0,1)</code> 是 1——<strong>两类点对角交错，任何一条直线都无法把它们分开</strong>：</p>
+<p><img data-src="/images/ml/img047.png" alt="XOR：一条直线怎么都切不开"></p>
+<p>但把「直线」这个限制去掉就可以——用一条弯曲的线就能圈出 1 的区域：</p>
+<p><img data-src="/images/ml/img048.png" alt="曲线可以分开 XOR，但单层感知机只会直线"></p>
+<p><strong>结论</strong>：单层感知机只能表示<strong>由一条直线划分的空间（线性空间）</strong>；曲线划分的非线性空间它无能为力。而 XOR 恰好是一个非线性问题——不是参数没调好，是模型的表达能力到顶了。</p>
+<hr>
+<h2 id="7-多层感知机：叠加层破局"><a href="#7-多层感知机：叠加层破局" class="headerlink" title="7. 多层感知机：叠加层破局"></a>7. 多层感知机：叠加层破局</h2><p>单层不行，<strong>叠两层呢？</strong> 把已造好的零件组合起来——与非门、或门先各来一个，输出再接一个与门：</p>
+<p><img data-src="/images/ml/img049.png" alt="与门、与非门、或门的门电路符号"></p>
+<p><img data-src="/images/ml/img050.png" alt="用 NAND + OR + AND 组合出 XOR"></p>
+<p>验证真值表：</p>
+<table>
+<thead>
+<tr>
+<th>$x_1$</th>
+<th>$x_2$</th>
+<th>$s_1 &#x3D; \text{NAND}$</th>
+<th>$s_2 &#x3D; \text{OR}$</th>
+<th>$y &#x3D; \text{AND}(s_1, s_2)$</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td><strong>0</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td><strong>1</strong></td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td><strong>1</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td><strong>0</strong></td>
+</tr>
+</tbody></table>
+<p>完全符合异或门。代码上，XOR 只是三个已有函数的组合：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">XOR</span>(<span class="params">x1, x2</span>):</span><br><span class="line">    s1 = NAND(x1, x2)</span><br><span class="line">    s2 = OR(x1, x2)</span><br><span class="line">    <span class="keyword">return</span> AND(s1, s2)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(XOR(<span class="number">0</span>, <span class="number">0</span>))  <span class="comment"># 0</span></span><br><span class="line"><span class="built_in">print</span>(XOR(<span class="number">1</span>, <span class="number">0</span>))  <span class="comment"># 1</span></span><br><span class="line"><span class="built_in">print</span>(XOR(<span class="number">0</span>, <span class="number">1</span>))  <span class="comment"># 1</span></span><br><span class="line"><span class="built_in">print</span>(XOR(<span class="number">1</span>, <span class="number">1</span>))  <span class="comment"># 0</span></span><br></pre></td></tr></table></figure>
+
+<p>用感知机的画法表示这个结构——信号分三层流动：</p>
+<p><img data-src="/images/ml/img052.png" alt="多层感知机：第 0 层接收输入，第 1 层加工，第 2 层输出"></p>
+<ul>
+<li><strong>第 0 层</strong>（输入层）的两个神经元接收输入，发给第 1 层；</li>
+<li><strong>第 1 层</strong>（隐藏层）的两个神经元加工后再发给第 2 层；</li>
+<li><strong>第 2 层</strong>（输出层）给出最终结果。</li>
+</ul>
+<p><strong>两层各自只画直线，接力起来却能画出曲线围出的非线性空间</strong>——这就是「叠加层」的威力。 neurons（神经元）的个数不变、每个单元依旧简单，但层数让表达能力发生了质变。</p>
+<hr>
+<h2 id="8-从感知机到神经网络"><a href="#8-从感知机到神经网络" class="headerlink" title="8. 从感知机到神经网络"></a>8. 从感知机到神经网络</h2><p>把本篇的收获连成一句话：</p>
+<blockquote>
+<p>感知机 &#x3D; 加权求和 + 阈值激活；<strong>单层只会线性切分，多层叠加就能表示远比直线复杂的非线性关系</strong>——带非线性激活、足够宽的前馈网络，在一定条件下可以任意精度逼近连续函数（但「能表示」不等于「训练一定能找到那组参数」）。</p>
+</blockquote>
+<p>从这个起点再往前走半步，就是神经网络：</p>
+<ol>
+<li>把「阶跃激活」（非 0 即 1）换成平滑的激活函数（如 sigmoid、ReLU），输出从「是&#x2F;否」变成连续值，梯度才能流动；</li>
+<li>把「手工配参数」换成「用损失函数 + 反向传播自动学参数」；</li>
+<li>把层数和神经元数加厚——深度学习。</li>
+</ol>
+<p>感知机是一切神经网络的原点：它简单到可以在一页纸里讲清楚，又完整地埋着「层」「权重」「偏置」「激活」这四个核心概念。</p>
+<hr>
+<h2 id="9-易混淆点"><a href="#9-易混淆点" class="headerlink" title="9. 易混淆点"></a>9. 易混淆点</h2><table>
+<thead>
+<tr>
+<th>易混对</th>
+<th>一句话区分</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>权重 vs 偏置</td>
+<td>权重管「每个输入多重要」；偏置管「激活多容易」，是常驻的底分</td>
+</tr>
+<tr>
+<td>感知机 vs 逻辑回归</td>
+<td>都是线性边界；激活函数一个是阶跃（0&#x2F;1），一个是 sigmoid（概率）</td>
+</tr>
+<tr>
+<td>单层 vs 多层感知机</td>
+<td>单层只能线性切分；两层叠加即可表示非线性（XOR 的解法）</td>
+</tr>
+<tr>
+<td>与非门 vs 与门取反</td>
+<td>同一件事：参数全部取反即可，结构与与门完全相同</td>
+</tr>
+<tr>
+<td>线性可分 vs 非线性可分</td>
+<td>一条直线能分开 &#x3D; 线性可分（与门&#x2F;或门）；对角交错分不开 &#x3D; 非线性（XOR）</td>
+</tr>
+<tr>
+<td>层数 vs 神经元个数</td>
+<td>决定表达能力质变的是「层数」；单层加再多神经元仍是一条直线切分</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/09/20/07-KNN/" rel="prev" title="07KNN">
+      <i class="fa fa-chevron-left"></i> 07KNN
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/09/20/09-%E5%86%B3%E7%AD%96%E6%A0%91%E4%B8%8E%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/" rel="next" title="09决策树与集成学习">
+      09决策树与集成学习 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%84%9F%E7%9F%A5%E6%9C%BA%EF%BC%88Perceptron%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">感知机（Perceptron）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#30-%E7%A7%92%E5%85%88%E6%87%82"><span class="nav-number">1.0.1.</span> <span class="nav-text">30 秒先懂</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AE%83%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">1. 它解决什么问题？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%A0%B8%E5%BF%83%E7%9B%B4%E8%A7%89"><span class="nav-number">1.2.</span> <span class="nav-text">2. 核心直觉</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%95%B0%E5%AD%A6%E8%A1%A8%E8%BE%BE-%E5%85%AC%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">3. 数学表达 &#x2F; 公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%A8%A1%E5%9E%8B%E6%98%AF%E6%80%8E%E4%B9%88%E8%AE%AD%E7%BB%83%E5%87%BA%E6%9D%A5%E7%9A%84%EF%BC%9F"><span class="nav-number">1.4.</span> <span class="nav-text">4. 模型是怎么训练出来的？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E7%9C%9F%E6%AD%A3%E7%9A%84%E6%84%9F%E7%9F%A5%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1 真正的感知机学习算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Python-sklearn-%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%EF%BC%9F"><span class="nav-number">1.5.</span> <span class="nav-text">5. Python &#x2F; sklearn 怎么实现？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E6%84%9F%E7%9F%A5%E6%9C%BA%E7%9A%84%E5%B1%80%E9%99%90%EF%BC%9A%E5%BC%82%E6%88%96%E9%97%A8%EF%BC%88XOR%EF%BC%89"><span class="nav-number">1.6.</span> <span class="nav-text">6. 感知机的局限：异或门（XOR）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%A4%9A%E5%B1%82%E6%84%9F%E7%9F%A5%E6%9C%BA%EF%BC%9A%E5%8F%A0%E5%8A%A0%E5%B1%82%E7%A0%B4%E5%B1%80"><span class="nav-number">1.7.</span> <span class="nav-text">7. 多层感知机：叠加层破局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E4%BB%8E%E6%84%9F%E7%9F%A5%E6%9C%BA%E5%88%B0%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">1.8.</span> <span class="nav-text">8. 从感知机到神经网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9"><span class="nav-number">1.9.</span> <span class="nav-text">9. 易混淆点</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hyacinth"
+      src="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
+  <p class="site-author-name" itemprop="name">Hyacinth</p>
+  <div class="site-description" itemprop="description">君子慎独,不欺暗室</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hyacinth</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/lozad/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+<div id="loading-box">
+  <div class="loading-left-bg"></div>
+  <div class="loading-right-bg"></div>
+  <div class="spinner-box">
+    <div class="configure-border-1"><div class="configure-core"></div></div>
+    <div class="configure-border-2"><div class="configure-core"></div></div>
+    <div class="loading-word">加载中...</div>
+  </div>
+</div>
+
+<canvas id="background-particles" aria-hidden="true"></canvas>
+
+<script>
+  (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
+    var loadingBox = document.getElementById('loading-box');
+    var root = document.documentElement;
+
+    function endLoading() {
+      if (loadingBox.classList.contains('loaded')) return;
+      loadingBox.classList.add('loaded');
+      setTimeout(function() {
+        root.classList.remove('page-loading');
+      }, 500);
+    }
+
+    function initLoading() {
+      root.classList.add('page-loading');
+      loadingBox.classList.remove('loaded');
+    }
+
+    initLoading();
+
+    if (document.readyState === 'complete') {
+      endLoading();
+    } else {
+      window.addEventListener('load', endLoading);
+      document.addEventListener('DOMContentLoaded', endLoading);
+      setTimeout(endLoading, 7000);
+    }
+  })();
+</script>
+
+<script src="/js/latex-tool.js?v=20260805c"></script>
+<script src="/js/translate-tool.js?v=20260805a"></script>
+<script src="/js/hexagram-post-map.js?v=20260910b"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
+<script src="/js/post-summary.js?v=20260831d"></script>
+<script src="/js/background-particles.js?v=20260910a"></script>
+<script src="/js/theme-colors.js?v=20260910b"></script>
+<script src="/js/tab-gaze.js?v=20260910a"></script>
+<script src="/lib/solarlunar/solarlunar.min.js?v=20260910a"></script>
+<script src="/js/daily-hexagram.js?v=20260910a"></script>
+<script src="/js/menu-dropdown.js?v=20260910a"></script>
+
+</body>
+</html>

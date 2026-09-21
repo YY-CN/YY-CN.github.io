@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#9a6545","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="KNN：物以类聚的惰性学习——四种距离度量、特征缩放的实战意义、One-Hot 与距离对称性，心脏病案例（Pipeline + 网格搜索全流程）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="07KNN">
+<meta property="og:url" content="https://hyacinth.xin/2026/09/20/07-KNN/index.html">
+<meta property="og:site_name" content="Hyacinth">
+<meta property="og:description" content="KNN：物以类聚的惰性学习——四种距离度量、特征缩放的实战意义、One-Hot 与距离对称性，心脏病案例（Pipeline + 网格搜索全流程）。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img024.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img025.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img026.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img027.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img028.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img029.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img030.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img031.png">
+<meta property="article:published_time" content="2026-09-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-09-20T16:00:00.000Z">
+<meta property="article:author" content="Hyacinth">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hyacinth.xin/images/ml/img024.png">
+
+<link rel="canonical" href="https://hyacinth.xin/2026/09/20/07-KNN/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<script>
+  // 主题换色：首帧绘制前恢复上次选择的色板，避免闪烁。
+  (function() {
+    try {
+      var palette = localStorage.getItem('hyacinth-theme-color');
+      if (palette) document.documentElement.setAttribute('data-theme-color', palette);
+    } catch (error) {}
+  })();
+</script>
+<script>
+  (function() {
+    var images = [
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Asuna%20Yuuki.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Goto%20Hitori.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Kuronuma%20Sawako.png',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Miyazono%20Kaori.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Azusa.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Miku.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Nino.png',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Rem.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Shiina%20Mahiru.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Takagi.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Yamada%20Ryo.jpg'
+    ];
+    var image = images[Math.floor(Math.random() * images.length)];
+    document.documentElement.classList.add('page-loading');
+    document.documentElement.style.setProperty('--page-background-image', 'url("' + image + '")');
+  })();
+</script>
+<link rel="stylesheet" href="https://fontsapi.zeoseven.com/285/main/result.css">
+<link rel="stylesheet" href="/css/post-summary.css?v=20260831c">
+<link rel="stylesheet" href="/css/theme-colors.css?v=20260910b">
+<link rel="stylesheet" href="/css/daily-hexagram.css?v=20260910a">
+<link rel="stylesheet" href="/css/menu-dropdown.css?v=20260911a">
+
+  <title>07KNN | Hyacinth</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hyacinth</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-说说">
+
+    <a href="/shuoshuo/" rel="section"><i class="fa fa-comment-dots fa-fw"></i>说说</a>
+
+  </li>
+        <li class="menu-item menu-item-工具">
+
+    <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2026/09/20/07-KNN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          07KNN
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-09-20 16:00:00" itemprop="dateCreated datePublished" datetime="2026-09-20T16:00:00+00:00">2026-09-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
+            <div class="post-description">KNN：物以类聚的惰性学习——四种距离度量、特征缩放的实战意义、One-Hot 与距离对称性，心脏病案例（Pipeline + 网格搜索全流程）。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="KNN（K-近邻）"><a href="#KNN（K-近邻）" class="headerlink" title="KNN（K 近邻）"></a>KNN（K 近邻）</h1><h3 id="30-秒先懂"><a href="#30-秒先懂" class="headerlink" title="30 秒先懂"></a>30 秒先懂</h3><blockquote>
+<p><strong>KNN（K-Nearest Neighbors，K 近邻）：要判断一个新样本的类别，就看离它最近的 K 个邻居里谁是多数派——物以类聚。</strong></p>
+</blockquote>
+<p>它和前面两个模型思路完全不同：不假设任何函数形式、不训练任何参数，是理解「机器学习不只有『拟合一条线』」的最佳样本。这一篇还会第一次正式用上 <strong>Pipeline</strong>——把预处理和模型绑在一起，一次性解决数据泄漏、CV 内预处理、模型保存三件事。</p>
+<hr>
+<h2 id="1-它解决什么问题？"><a href="#1-它解决什么问题？" class="headerlink" title="1. 它解决什么问题？"></a>1. 它解决什么问题？</h2><p>既有<strong>分类</strong>（邻居投票）也有<strong>回归</strong>（邻居平均），都属于监督学习。核心思想一句话：</p>
+<blockquote>
+<p>给定一个新样本，计算它与训练集中<strong>所有</strong>样本的距离，找出最近的 K 个，用这 K 个邻居的类别（或数值）来预测它。</p>
+</blockquote>
+<p>和线性&#x2F;逻辑回归相比，KNN 的特别之处在于<strong>对数据没有任何假设</strong>——不要求关系是线性的，决策边界可以弯出任意形状，数据长什么样就学成什么样。</p>
+<p><strong>典型场景</strong>：推荐系统里「找和你行为最相似的 K 个用户」、异常检测（离所有簇都很远的点可疑）、小数据集上的快速基线模型。</p>
+<hr>
+<h2 id="2-核心直觉"><a href="#2-核心直觉" class="headerlink" title="2. 核心直觉"></a>2. 核心直觉</h2><p><strong>直觉一：近朱者赤。</strong> 下图中黑色是新样本，三个颜色是三个类——不需要任何公式，肉眼就能判断它属于蓝色：因为离它最近的邻居几乎都是蓝色的。</p>
+<p><img data-src="/images/ml/img024.png" alt="KNN：新样本（黑）与其最近的 K 个邻居"></p>
+<p><strong>走一遍完整流程（手算）</strong>。二维平面上有 5 个样本：正类三个 <code>(2,2)、(4,2)、(3,4)</code>，负类两个 <code>(8,8)、(7,9)</code>。新样本 <code>x = (3,3)</code>，用欧氏距离，取 K&#x3D;3：</p>
+<table>
+<thead>
+<tr>
+<th>邻居</th>
+<th>距离计算</th>
+<th>距离</th>
+<th>排名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>(3,4) 正</td>
+<td>$\sqrt{0+1}$</td>
+<td>1.00</td>
+<td>①</td>
+</tr>
+<tr>
+<td>(2,2) 正</td>
+<td>$\sqrt{1+1}$</td>
+<td>1.41</td>
+<td>②</td>
+</tr>
+<tr>
+<td>(4,2) 正</td>
+<td>$\sqrt{1+1}$</td>
+<td>1.41</td>
+<td>③</td>
+</tr>
+<tr>
+<td>(8,8) 负</td>
+<td>$\sqrt{25+25}$</td>
+<td>7.07</td>
+<td>④</td>
+</tr>
+<tr>
+<td>(7,9) 负</td>
+<td>$\sqrt{16+36}$</td>
+<td>7.21</td>
+<td>⑤</td>
+</tr>
+</tbody></table>
+<p>最近 3 个邻居全是正类 → <strong>3 票对 0 票，判为正类</strong>。预测做完了：算距离、排序、投票——这就是 KNN 的全部。</p>
+<p><strong>直觉二：K 是「视野范围」的旋钮。</strong></p>
+<table>
+<thead>
+<tr>
+<th>K 取值</th>
+<th>行为</th>
+<th>风险</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>K &#x3D; 1</td>
+<td>只看最近 1 个邻居，边界弯弯曲曲</td>
+<td>对噪声极度敏感 → <strong>过拟合</strong></td>
+</tr>
+<tr>
+<td>K &#x3D; 全部样本</td>
+<td>所有人投票，永远预测多数类</td>
+<td>完全忽略局部特征 → <strong>欠拟合</strong></td>
+</tr>
+<tr>
+<td>适中的 K（如 5~15）</td>
+<td>平滑又保留局部结构</td>
+<td>通常最好，K 是超参数</td>
+</tr>
+</tbody></table>
+<p>K 过小 &#x3D; 过拟合、K 过大 &#x3D; 欠拟合——这对概念在 KNN 的 K 上第一次有了具体的旋钮。二分类任务常从<strong>奇数 K</strong> 开始试（偶数 K 更容易平票），但这只是经验，不是硬规定。</p>
+<hr>
+<h2 id="3-数学表达-公式"><a href="#3-数学表达-公式" class="headerlink" title="3. 数学表达 &#x2F; 公式"></a>3. 数学表达 &#x2F; 公式</h2><h3 id="3-1-投票与平均"><a href="#3-1-投票与平均" class="headerlink" title="3.1 投票与平均"></a>3.1 投票与平均</h3><p><strong>分类</strong>：K 个邻居多数表决：</p>
+<p>$$\hat{y} &#x3D; \operatorname*{arg,max}<em>{c} \sum</em>{i \in N_K(x)} \mathbb{1}(y_i &#x3D; c)$$</p>
+<p>含义：统计 K 个邻居 $N_K(x)$ 中每个类别 $c$ 出现的票数，取票数最多的类别。（$\mathbb{1}$ 是指示函数，邻居属于类别 $c$ 时取 1。）</p>
+<p><strong>回归</strong>：不做投票，直接取 K 个邻居标签的<strong>平均值</strong>。</p>
+<blockquote>
+<p><strong>补充</strong> 进阶版是<strong>加权投票</strong>：离得越近的邻居票越重（权重常取距离的倒数）——远处邻居「只见其声」，近处邻居「一锤定音」。sklearn 里 <code>weights=&quot;distance&quot;</code> 即是；类别不平衡时它也比等权投票更稳。</p>
+</blockquote>
+<h3 id="3-2-四种距离度量"><a href="#3-2-四种距离度量" class="headerlink" title="3.2 四种距离度量"></a>3.2 四种距离度量</h3><p>距离是 KNN 的命根子——「最近」全靠它定义。</p>
+<p><strong>欧氏距离</strong>（直线距离，最常用）——两点间线段的长度：</p>
+<p>$$d(x, y) &#x3D; \sqrt{\textstyle\sum_{i&#x3D;1}^{n}(x_i - y_i)^2}$$</p>
+<p><img data-src="/images/ml/img025.png" alt="欧氏距离：两点间线段"></p>
+<p>手算：$(1,2)$ 与 $(4,6)$：$\sqrt{(1-4)^2+(2-6)^2} &#x3D; \sqrt{9+16} &#x3D; 5$（正好是勾股定理的 3-4-5 三角形）。</p>
+<p><strong>曼哈顿距离</strong>（城市街区距离）——各坐标差绝对值之和：</p>
+<p>$$d(x, y) &#x3D; \textstyle\sum_{i&#x3D;1}^{n}\vert x_i - y_i \vert$$</p>
+<p><img data-src="/images/ml/img026.png" alt="曼哈顿距离：横平竖直走格子"></p>
+<p>手算：$\vert 1-4\vert + \vert 2-6\vert &#x3D; 3 + 4 &#x3D; 7$。名字来自纽约曼哈顿：街道是规则网格，车只能横开竖开不能穿楼，行驶距离就是「横向差 + 纵向差」：</p>
+<p><img data-src="/images/ml/img027.png" alt="曼哈顿的网格状街道"></p>
+<p><strong>切比雪夫距离</strong>——各坐标差绝对值的<strong>最大值</strong>：</p>
+<p>$$d(x, y) &#x3D; \max_i \vert x_i - y_i \vert$$</p>
+<p><img data-src="/images/ml/img028.png" alt="切比雪夫距离：只看差得最远的那个维度"></p>
+<p>手算：$\max(\vert 1-4\vert, \vert 2-6\vert) &#x3D; \max(3, 4) &#x3D; 4$。类比国际象棋：国王横、竖、斜都能走，从一格到另一格的<strong>最少步数</strong>就是两格坐标差的较大值——下图中国王到每个格子的数字就是切比雪夫距离：</p>
+<p><img data-src="/images/ml/img029.png" alt="国际象棋：国王的最少步数 = 切比雪夫距离"></p>
+<p><strong>闵可夫斯基距离</strong>——前三种的统一公式，$p$ 是可调参数：</p>
+<p>$$d(x, y) &#x3D; \left(\textstyle\sum_{i&#x3D;1}^{n}\vert x_i - y_i \vert^p\right)^{1&#x2F;p}$$</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>退化为</th>
+<th>记忆</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$p &#x3D; 1$</td>
+<td>曼哈顿距离</td>
+<td>一次方：各维度一视同仁累加</td>
+</tr>
+<tr>
+<td>$p &#x3D; 2$</td>
+<td>欧氏距离</td>
+<td>平方：大差异被放大</td>
+</tr>
+<tr>
+<td>$p \to \infty$</td>
+<td>切比雪夫距离</td>
+<td>只剩最大的那个差异</td>
+</tr>
+</tbody></table>
+<p>$p$ 越小，对多个维度的差异越敏感；$p$ 越大，越只看最大的维度差异。sklearn 默认用的就是闵可夫斯基距离且 $p&#x3D;2$（即欧氏距离）。</p>
+<blockquote>
+<p><strong>补充</strong> 怎么选：连续数值特征、无特殊结构 → 欧氏（默认）；特征是「路径&#x2F;计数」类、想避免大值被平方放大 → 曼哈顿；只关心「最差的那一项」→ 切比雪夫。连续特征与类别特征混合时，简单欧氏距离未必合理（可了解 Hamming、Gower 距离）。拿不准就用默认欧氏，把精力留给调 K。</p>
+</blockquote>
+<hr>
+<h2 id="4-模型是怎么训练出来的？"><a href="#4-模型是怎么训练出来的？" class="headerlink" title="4. 模型是怎么训练出来的？"></a>4. 模型是怎么训练出来的？</h2><p><strong>答案可能出乎意料：KNN 没有「训练」过程。</strong></p>
+<p><code>fit(X, y)</code> 做的事情只有一件——<strong>把训练数据存下来（并建立索引结构）</strong>。没有参数要学、没有梯度要算、没有损失要优化。真正的计算全部发生在 <code>predict</code> 时：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">predict(新样本)</span><br><span class="line">        ↓</span><br><span class="line">① 计算新样本与训练集中每一个样本的距离</span><br><span class="line">        ↓</span><br><span class="line">② 按距离排序，取出最近的 K 个邻居</span><br><span class="line">        ↓</span><br><span class="line">③ 分类：投票 / 回归：平均</span><br><span class="line">        ↓</span><br><span class="line">返回预测结果</span><br></pre></td></tr></table></figure>
+
+<p>这类「把计算从训练挪到预测」的模型叫<strong>懒惰学习</strong>（Lazy Learning）；线性回归那类「训练时算完、预测时只做乘加」的叫<strong>急切学习</strong>（Eager Learning）。代价挪了个位置：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>训练</th>
+<th>预测</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>急切（线性回归）</td>
+<td>慢（解方程&#x2F;迭代）</td>
+<td>极快（一次乘加）</td>
+</tr>
+<tr>
+<td>懒惰（KNN）</td>
+<td>极快（存数据&#x2F;建索引）</td>
+<td>慢（和全训练集算距离）</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>补充</strong> 两点工程常识：① sklearn 的 KNN 用 KD 树、Ball 树等索引加速「找最近邻居」，因此**新增训练样本后通常需要重新 <code>fit</code>**（重建索引），它并不是严格意义的在线增量模型；② 特征维度很高（成百上千维）时这些索引会退化——高维空间里所有点彼此距离都差不多远，「最近」失去意义（维度灾难对 KNN 的精准打击）。</p>
+</blockquote>
+<hr>
+<h2 id="5-Python-sklearn-怎么实现？"><a href="#5-Python-sklearn-怎么实现？" class="headerlink" title="5. Python &#x2F; sklearn 怎么实现？"></a>5. Python &#x2F; sklearn 怎么实现？</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier, KNeighborsRegressor</span><br><span class="line"></span><br><span class="line"><span class="comment"># 分类</span></span><br><span class="line">knn = KNeighborsClassifier(n_neighbors=<span class="number">2</span>)   <span class="comment"># K = 2</span></span><br><span class="line">X = [[<span class="number">2</span>, <span class="number">1</span>], [<span class="number">3</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">4</span>], [<span class="number">2</span>, <span class="number">6</span>]]</span><br><span class="line">y = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>]</span><br><span class="line">knn.fit(X, y)                               <span class="comment"># 只是把数据存起来</span></span><br><span class="line">knn.predict([[<span class="number">4</span>, <span class="number">9</span>]])                       <span class="comment"># 预测时才真正计算</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 回归：把分类器换成回归器，其余完全一样</span></span><br><span class="line">knn_reg = KNeighborsRegressor(n_neighbors=<span class="number">2</span>)</span><br><span class="line">y_reg = [<span class="number">0.5</span>, <span class="number">0.33</span>, <span class="number">4</span>, <span class="number">3</span>]</span><br><span class="line">knn_reg.fit(X, y_reg)</span><br><span class="line">knn_reg.predict([[<span class="number">4</span>, <span class="number">9</span>]])                   <span class="comment"># K 个邻居标签的平均值</span></span><br></pre></td></tr></table></figure>
+
+<p>常用参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+<th>默认</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>n_neighbors</code></td>
+<td>K 值（最重要的超参数）</td>
+<td>5</td>
+</tr>
+<tr>
+<td><code>weights</code></td>
+<td>投票权重：<code>uniform</code> 等权 &#x2F; <code>distance</code> 距离倒数加权</td>
+<td>uniform</td>
+</tr>
+<tr>
+<td><code>metric</code> &#x2F; <code>p</code></td>
+<td>距离度量：默认闵可夫斯基 <code>p=2</code>（欧氏）</td>
+<td>minkowski, p&#x3D;2</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="6-KNN-上场前，必须先做特征缩放"><a href="#6-KNN-上场前，必须先做特征缩放" class="headerlink" title="6. KNN 上场前，必须先做特征缩放"></a>6. KNN 上场前，必须先做特征缩放</h2><p><strong>为什么 KNN 对特征尺度极度敏感？</strong> 因为距离是各维度差直接相加的——量纲大的特征会一个人霸占整个距离，其他特征形同虚设。</p>
+<p><strong>手算一次</strong>。三个客户：A（25 岁，月收入 3 万）、B（28 岁，月收入 3.1 万）、C（26 岁，月收入 8 万），算欧氏距离的平方（收入以「千元」计）：</p>
+<p>$$d^2(A, B) &#x3D; \underbrace{(25-28)^2}<em>{\text{年龄}&#x3D;9} + \underbrace{(30-31)^2}</em>{\text{收入}&#x3D;1} &#x3D; 10$$</p>
+<p>$$d^2(A, C) &#x3D; \underbrace{(25-26)^2}<em>{\text{年龄}&#x3D;1} + \underbrace{(30-80)^2}</em>{\text{收入}&#x3D;2500} &#x3D; 2501$$</p>
+<p>收入项的贡献是年龄项的几百倍——找「最近邻居」时年龄几乎不起作用。而且这不是造数据：收入 3 万<del>8 万、年龄 20</del>80，收入项天然比年龄项大三个数量级。<strong>解法就是缩放</strong>：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>归一化 MinMaxScaler</th>
+<th>标准化 StandardScaler</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>做法</td>
+<td>压到固定区间（默认 [0,1]）</td>
+<td>均值 0、标准差 1</td>
+</tr>
+<tr>
+<td>对异常值</td>
+<td>敏感</td>
+<td>仍会被拉偏（极端时用 RobustScaler）</td>
+</tr>
+<tr>
+<td>缩放后效果</td>
+<td>每个特征对距离的贡献被拉回同一量级</td>
+<td>同左</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler, StandardScaler</span><br><span class="line"></span><br><span class="line">X_norm = MinMaxScaler().fit_transform(X)      <span class="comment"># 归一化</span></span><br><span class="line">X_std  = StandardScaler().fit_transform(X)    <span class="comment"># 标准化</span></span><br><span class="line"><span class="comment"># 缩放器 fit 只在训练集，transform 测试集（防数据泄漏）</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>一句话总结</strong>：逻辑回归要不要缩放看优化效率，KNN 要不要缩放是<strong>生死问题</strong>——不缩放，距离就是量纲最大的那个特征的独角戏。</p>
+</blockquote>
+<hr>
+<h2 id="7-正式认识-Pipeline：把预处理和模型绑在一起"><a href="#7-正式认识-Pipeline：把预处理和模型绑在一起" class="headerlink" title="7. 正式认识 Pipeline：把预处理和模型绑在一起"></a>7. 正式认识 Pipeline：把预处理和模型绑在一起</h2><p>在做案例前，先解决一个所有模型都会踩的坑。目前我们的习惯写法是：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x_train = preprocessor.fit_transform(x_train)   <span class="comment"># ① 先对整个训练集做预处理</span></span><br><span class="line">model.fit(x_train, y_train)                     <span class="comment"># ② 再训练模型</span></span><br></pre></td></tr></table></figure>
+
+<p>①② 分开写有三个隐患：</p>
+<ol>
+<li><strong>预处理学到的统计量（均值、类别名单）来自整个训练集</strong>——一旦后面接交叉验证&#x2F;网格搜索，每一折验证折的信息其实已经泄漏进了预处理；</li>
+<li>预测新样本时容易<strong>忘记 transform</strong>（拿原始 0~255 像素去喂在归一化数据上训练的模型，预测必然出错）；</li>
+<li>保存模型时容易<strong>只存了模型、忘了预处理器</strong>。</li>
+</ol>
+<p>解法是 sklearn 的 <strong>Pipeline（管道）</strong>：把所有步骤串成一条流水线，<code>fit</code> 时从前往后依次执行，<code>predict</code> 时自动复用前面步骤学到的统计量：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> Pipeline</span><br><span class="line"></span><br><span class="line">pipe = Pipeline([</span><br><span class="line">    (<span class="string">&quot;prep&quot;</span>, StandardScaler()),          <span class="comment"># 步骤一：预处理</span></span><br><span class="line">    (<span class="string">&quot;knn&quot;</span>, KNeighborsClassifier()),     <span class="comment"># 步骤二：模型</span></span><br><span class="line">])</span><br><span class="line">pipe.fit(x_train, y_train)    <span class="comment"># 内部：scaler.fit → transform → knn.fit</span></span><br><span class="line">pipe.predict(x_test)          <span class="comment"># 内部：自动用训练时的 scaler.transform，想忘都忘不掉</span></span><br><span class="line">joblib.dump(pipe, <span class="string">&quot;model.joblib&quot;</span>)   <span class="comment"># 保存时预处理器和模型一起走</span></span><br></pre></td></tr></table></figure>
+
+<p>后面网格搜索一节会看到它最大的价值：<strong>接进 GridSearchCV 后，交叉验证的每一折都会只在该折的训练部分重新 fit 预处理器</strong>——泄漏问题从结构上被消灭。</p>
+<hr>
+<h2 id="8-完整案例：心脏病预测"><a href="#8-完整案例：心脏病预测" class="headerlink" title="8. 完整案例：心脏病预测"></a>8. 完整案例：心脏病预测</h2><p><strong>任务</strong>：1025 条病人体检记录、13 个特征（年龄、性别、胸痛类型、静息血压、胆固醇、空腹血糖、静息心电图、最大心率、心绞痛、ST 下降、ST 斜率、主血管数量、地中海贫血），预测是否患有心脏病。</p>
+<p>加载后的数据长这样：</p>
+<p><img data-src="/images/ml/img030.png" alt="数据集加载结果"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler, OneHotEncoder</span><br><span class="line"><span class="keyword">from</span> sklearn.compose <span class="keyword">import</span> ColumnTransformer</span><br><span class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> Pipeline</span><br><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 加载与划分（stratify 保持正负样本比例一致）</span></span><br><span class="line">heart = pd.read_csv(<span class="string">&quot;data/heart_disease.csv&quot;</span>)</span><br><span class="line">heart.dropna(inplace=<span class="literal">True</span>)</span><br><span class="line">X = heart.drop(<span class="string">&quot;是否患有心脏病&quot;</span>, axis=<span class="number">1</span>)</span><br><span class="line">y = heart[<span class="string">&quot;是否患有心脏病&quot;</span>]</span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(</span><br><span class="line">    X, y, test_size=<span class="number">0.3</span>, random_state=<span class="number">100</span>, stratify=y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 三类特征三种处理，打包成列转换器</span></span><br><span class="line">preprocessor = ColumnTransformer(transformers=[</span><br><span class="line">    (<span class="string">&quot;num&quot;</span>, StandardScaler(),</span><br><span class="line">     [<span class="string">&quot;年龄&quot;</span>, <span class="string">&quot;静息血压&quot;</span>, <span class="string">&quot;胆固醇&quot;</span>, <span class="string">&quot;最大心率&quot;</span>, <span class="string">&quot;运动后的ST下降&quot;</span>, <span class="string">&quot;主血管数量&quot;</span>]),</span><br><span class="line">    (<span class="string">&quot;cat&quot;</span>, OneHotEncoder(handle_unknown=<span class="string">&quot;ignore&quot;</span>),   <span class="comment"># 注意：不 drop 第一列！原因见下节</span></span><br><span class="line">     [<span class="string">&quot;胸痛类型&quot;</span>, <span class="string">&quot;静息心电图结果&quot;</span>, <span class="string">&quot;峰值ST段的斜率&quot;</span>, <span class="string">&quot;地中海贫血&quot;</span>]),</span><br><span class="line">    (<span class="string">&quot;binary&quot;</span>, <span class="string">&quot;passthrough&quot;</span>,</span><br><span class="line">     [<span class="string">&quot;性别&quot;</span>, <span class="string">&quot;空腹血糖&quot;</span>, <span class="string">&quot;运动性心绞痛&quot;</span>]),</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 预处理 + KNN 串成 Pipeline</span></span><br><span class="line">pipe = Pipeline([</span><br><span class="line">    (<span class="string">&quot;prep&quot;</span>, preprocessor),</span><br><span class="line">    (<span class="string">&quot;knn&quot;</span>, KNeighborsClassifier(n_neighbors=<span class="number">3</span>)),</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 训练与评估：fit/predict 直接吃原始特征，预处理自动完成</span></span><br><span class="line">pipe.fit(x_train, y_train)</span><br><span class="line"><span class="built_in">print</span>(pipe.score(x_test, y_test))</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-1-类别特征为什么必须独热编码"><a href="#8-1-类别特征为什么必须独热编码" class="headerlink" title="8.1 类别特征为什么必须独热编码"></a>8.1 类别特征为什么必须独热编码</h3><p>胸痛类型取值 0&#x2F;1&#x2F;2&#x2F;3，是四个<strong>没有大小关系</strong>的类别。若直接喂给 KNN，距离计算会得出「类型 1 和类型 2 的差异 &#x3D; 类型 1 和类型 3 的差异的一半」这种荒谬结论——编码方式决定了距离，距离决定了 KNN 的一切。独热编码把每个类别变成一列 0&#x2F;1：</p>
+<p><img data-src="/images/ml/img031.png" alt="胸痛类型的独热编码（图中为 drop 首列后的 3 列形式）"></p>
+<h3 id="8-2-关键细节：KNN-的独热编码不要-drop-”first”"><a href="#8-2-关键细节：KNN-的独热编码不要-drop-”first”" class="headerlink" title="8.2 关键细节：KNN 的独热编码不要 drop&#x3D;”first”"></a>8.2 关键细节：KNN 的独热编码不要 drop&#x3D;”first”</h3><p>线性模型里用 <code>drop=&quot;first&quot;</code> 防多重共线性是常见做法。<strong>但对 KNN 这类基于距离的模型，drop 第一列是错误的</strong>——它会破坏类别之间的距离对称性。</p>
+<p><strong>手算一次</strong>。某特征有 A&#x2F;B&#x2F;C 三类。完整独热编码：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A = [1, 0, 0]      B = [0, 1, 0]      C = [0, 0, 1]</span><br></pre></td></tr></table></figure>
+
+<p>三类两两之间的欧氏距离**全部等于 $\sqrt{2}$**——完全对称，模型认为三个类别平等。</p>
+<p>如果 drop 掉 A 列：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A = [0, 0]      B = [1, 0]      C = [0, 1]</span><br></pre></td></tr></table></figure>
+
+<p>$$d(A,B) &#x3D; 1 \qquad d(A,C) &#x3D; 1 \qquad d(B,C) &#x3D; \sqrt{2}$$</p>
+<p><strong>本来平等的三个类别，被人为制造出了不同距离</strong>（B 和 C 被推远了）。KNN 的预测全靠距离，这种失真是实质性的。所以规则是：</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>独热编码建议</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>线性&#x2F;逻辑回归等</td>
+<td>可以 <code>drop=&quot;first&quot;</code></td>
+<td>防完全共线性，让系数可解</td>
+</tr>
+<tr>
+<td>KNN、K-means 等距离模型</td>
+<td><strong>保留完整编码</strong> + <code>handle_unknown=&quot;ignore&quot;</code></td>
+<td>保持类别间距离对称</td>
+</tr>
+</tbody></table>
+<p><code>handle_unknown=&quot;ignore&quot;</code> 的作用：预测时遇到训练集没见过的类别不报错，整行编为全 0（恰好是「基准类别」的编码，语义自洽）。</p>
+<h3 id="8-3-模型的保存与加载"><a href="#8-3-模型的保存与加载" class="headerlink" title="8.3 模型的保存与加载"></a>8.3 模型的保存与加载</h3><p>有了 Pipeline，保存变得非常省心——<strong>预处理器和模型一起保存</strong>，新样本直接丢原始特征即可：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> joblib</span><br><span class="line"></span><br><span class="line">joblib.dump(pipe, <span class="string">&quot;knn_heart_disease.joblib&quot;</span>)    <span class="comment"># 预处理器 + KNN 一起保存</span></span><br><span class="line">pipe_loaded = joblib.load(<span class="string">&quot;knn_heart_disease.joblib&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新病人原始 13 项体检数据，不需要自己做任何预处理</span></span><br><span class="line">y_pred = pipe_loaded.predict(x_test[<span class="number">10</span>:<span class="number">11</span>])</span><br><span class="line"><span class="built_in">print</span>(y_test.iloc[<span class="number">10</span>], y_pred)                   <span class="comment"># 真实值 vs 预测值</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>易错</strong> 如果只保存 <code>knn</code>，新样本预测时就必须手动复刻整条预处理链（同一个 StandardScaler 的均值、同一个 OneHotEncoder 的类别名单）——少一步或用错统计量，预测就是错的。<strong>要存就存整条 Pipeline</strong>。</p>
+</blockquote>
+<hr>
+<h2 id="9-超参数调优：网格搜索-Pipeline"><a href="#9-超参数调优：网格搜索-Pipeline" class="headerlink" title="9. 超参数调优：网格搜索 + Pipeline"></a>9. 超参数调优：网格搜索 + Pipeline</h2><p><strong>问题来了</strong>：K 取 3 是拍脑袋的。取 5 会不会更好？——手动一个个试既低效，又容易在单一划分上「调到过拟合」。<strong>网格搜索（Grid Search）+ 交叉验证</strong>是标准解法：外层遍历参数组合，内层交叉验证评估。</p>
+<p>这里正是 Pipeline 的高光时刻。如果先把整个训练集 fit 好预处理器、再交给 GridSearchCV，那么每一折的验证数据其实已经参与了缩放器的均值&#x2F;类别名单的计算——<strong>交叉验证内部的数据泄漏</strong>，调出来的分数虚高。把 Pipeline 整体交给 GridSearchCV，每一折就会自动「在该折训练部分重新 fit 预处理器」：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV</span><br><span class="line"></span><br><span class="line">param_grid = &#123;<span class="string">&quot;knn__n_neighbors&quot;</span>: <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>))&#125;   <span class="comment"># 步骤名__参数名</span></span><br><span class="line"></span><br><span class="line">search = GridSearchCV(</span><br><span class="line">    pipe,                   <span class="comment"># 整条管道一起调参</span></span><br><span class="line">    param_grid=param_grid,</span><br><span class="line">    cv=<span class="number">5</span>,                   <span class="comment"># 5 折交叉验证</span></span><br><span class="line">)</span><br><span class="line">search.fit(x_train, y_train)   <span class="comment"># 9 个 K × 5 折 = 45 次训练，全部在这一步发生</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(search.best_params_)      <span class="comment"># 最优 K</span></span><br><span class="line"><span class="built_in">print</span>(search.best_score_)       <span class="comment"># 该 K 的交叉验证平均分</span></span><br><span class="line"><span class="built_in">print</span>(search.score(x_test, y_test))   <span class="comment"># 最终评估仍以测试集为准</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>参数名里的 <code>knn__</code> 是 Pipeline 步骤名和参数名的连接写法（<code>步骤名__参数名</code>）；</li>
+<li>每一折内部自动完成：该折训练部分 fit 预处理器 → transform → fit KNN → 在验证部分评估；</li>
+<li>K&#x3D;1~9、5 折共 45 次训练——贵，但换来的结论可靠。</li>
+</ul>
+<blockquote>
+<p><strong>易错</strong> <code>best_score_</code> 是<strong>交叉验证的分数</strong>，用来选参数；模型最终的真实水平，必须用<strong>没参与过任何调参决策的测试集</strong>再评一次——测试集从头到尾只许出场这一次。</p>
+</blockquote>
+<hr>
+<h2 id="10-优缺点与适用场景"><a href="#10-优缺点与适用场景" class="headerlink" title="10. 优缺点与适用场景"></a>10. 优缺点与适用场景</h2><p><strong>优点</strong>：</p>
+<ul>
+<li>简单直观，几乎零学习成本；</li>
+<li>无参数训练过程，实现成本低；</li>
+<li>决策边界可以任意弯曲，不假设任何数据分布。</li>
+</ul>
+<p><strong>缺点与对策</strong>：</p>
+<ul>
+<li><strong>预测慢</strong>：每个样本都要和全训练集算距离——KD 树加速或换急切模型；</li>
+<li><strong>维度灾难</strong>：高维下距离失效——先降维或特征选择；</li>
+<li><strong>对噪声敏感</strong>（K 小时）——调大 K 或用 <code>weights=&quot;distance&quot;</code>；</li>
+<li><strong>必须缩放特征</strong>、要存全部训练数据（内存开销）；</li>
+<li><strong>类别不平衡时投票偏向多数类</strong>——调 K、用距离加权、必要时重采样，评估换 Recall&#x2F;F1 视角。</li>
+</ul>
+<p><strong>适用</strong>：中小规模、低维、需要快速基线或「相似度」本身就有业务含义的场景。</p>
+<hr>
+<h2 id="11-易混淆点"><a href="#11-易混淆点" class="headerlink" title="11. 易混淆点"></a>11. 易混淆点</h2><table>
+<thead>
+<tr>
+<th>易混对</th>
+<th>一句话区分</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>KNN 的 K vs K-means 的 K</td>
+<td>前者是投票时数几个邻居；后者是聚类算法 K-means 的簇心个数，两个 K 互不相干</td>
+</tr>
+<tr>
+<td>惰性学习 vs 急切学习</td>
+<td>KNN 训练快预测慢（存数据）；线性模型训练慢预测快（解参数）</td>
+</tr>
+<tr>
+<td>K 过小 vs K 过大</td>
+<td>过拟合（边界弯曲、跟噪声走）vs 欠拟合（一律预测多数类）</td>
+</tr>
+<tr>
+<td>独热编码 drop vs 不 drop</td>
+<td>线性模型可 drop 防共线；距离模型（KNN&#x2F;K-means）保留完整编码保距离对称</td>
+</tr>
+<tr>
+<td>提前 fit 预处理器 vs 放进 Pipeline</td>
+<td>前者会让验证折信息泄漏进均值&#x2F;类别名单；Pipeline 让每折内部重新 fit</td>
+</tr>
+<tr>
+<td>等权 vs 加权投票</td>
+<td><code>uniform</code> 一人一票；<code>distance</code> 近邻话语权大，K 大时更稳</td>
+</tr>
+<tr>
+<td>best_score_ vs 测试集分数</td>
+<td>前者选参数用（交叉验证平均分），后者才是最终成绩；测试集只出场一次</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/09/20/06-%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/" rel="prev" title="06逻辑回归">
+      <i class="fa fa-chevron-left"></i> 06逻辑回归
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/09/20/08-%E6%84%9F%E7%9F%A5%E6%9C%BA/" rel="next" title="08感知机">
+      08感知机 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#KNN%EF%BC%88K-%E8%BF%91%E9%82%BB%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">KNN（K 近邻）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#30-%E7%A7%92%E5%85%88%E6%87%82"><span class="nav-number">1.0.1.</span> <span class="nav-text">30 秒先懂</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AE%83%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">1. 它解决什么问题？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%A0%B8%E5%BF%83%E7%9B%B4%E8%A7%89"><span class="nav-number">1.2.</span> <span class="nav-text">2. 核心直觉</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%95%B0%E5%AD%A6%E8%A1%A8%E8%BE%BE-%E5%85%AC%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">3. 数学表达 &#x2F; 公式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E6%8A%95%E7%A5%A8%E4%B8%8E%E5%B9%B3%E5%9D%87"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 投票与平均</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E5%9B%9B%E7%A7%8D%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 四种距离度量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%A8%A1%E5%9E%8B%E6%98%AF%E6%80%8E%E4%B9%88%E8%AE%AD%E7%BB%83%E5%87%BA%E6%9D%A5%E7%9A%84%EF%BC%9F"><span class="nav-number">1.4.</span> <span class="nav-text">4. 模型是怎么训练出来的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Python-sklearn-%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%EF%BC%9F"><span class="nav-number">1.5.</span> <span class="nav-text">5. Python &#x2F; sklearn 怎么实现？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-KNN-%E4%B8%8A%E5%9C%BA%E5%89%8D%EF%BC%8C%E5%BF%85%E9%A1%BB%E5%85%88%E5%81%9A%E7%89%B9%E5%BE%81%E7%BC%A9%E6%94%BE"><span class="nav-number">1.6.</span> <span class="nav-text">6. KNN 上场前，必须先做特征缩放</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E6%AD%A3%E5%BC%8F%E8%AE%A4%E8%AF%86-Pipeline%EF%BC%9A%E6%8A%8A%E9%A2%84%E5%A4%84%E7%90%86%E5%92%8C%E6%A8%A1%E5%9E%8B%E7%BB%91%E5%9C%A8%E4%B8%80%E8%B5%B7"><span class="nav-number">1.7.</span> <span class="nav-text">7. 正式认识 Pipeline：把预处理和模型绑在一起</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E5%AE%8C%E6%95%B4%E6%A1%88%E4%BE%8B%EF%BC%9A%E5%BF%83%E8%84%8F%E7%97%85%E9%A2%84%E6%B5%8B"><span class="nav-number">1.8.</span> <span class="nav-text">8. 完整案例：心脏病预测</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-%E7%B1%BB%E5%88%AB%E7%89%B9%E5%BE%81%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BF%85%E9%A1%BB%E7%8B%AC%E7%83%AD%E7%BC%96%E7%A0%81"><span class="nav-number">1.8.1.</span> <span class="nav-text">8.1 类别特征为什么必须独热编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-%E5%85%B3%E9%94%AE%E7%BB%86%E8%8A%82%EF%BC%9AKNN-%E7%9A%84%E7%8B%AC%E7%83%AD%E7%BC%96%E7%A0%81%E4%B8%8D%E8%A6%81-drop-%E2%80%9Dfirst%E2%80%9D"><span class="nav-number">1.8.2.</span> <span class="nav-text">8.2 关键细节：KNN 的独热编码不要 drop&#x3D;”first”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3-%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%8A%A0%E8%BD%BD"><span class="nav-number">1.8.3.</span> <span class="nav-text">8.3 模型的保存与加载</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E8%B6%85%E5%8F%82%E6%95%B0%E8%B0%83%E4%BC%98%EF%BC%9A%E7%BD%91%E6%A0%BC%E6%90%9C%E7%B4%A2-Pipeline"><span class="nav-number">1.9.</span> <span class="nav-text">9. 超参数调优：网格搜索 + Pipeline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-%E4%BC%98%E7%BC%BA%E7%82%B9%E4%B8%8E%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.10.</span> <span class="nav-text">10. 优缺点与适用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9"><span class="nav-number">1.11.</span> <span class="nav-text">11. 易混淆点</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hyacinth"
+      src="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
+  <p class="site-author-name" itemprop="name">Hyacinth</p>
+  <div class="site-description" itemprop="description">君子慎独,不欺暗室</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hyacinth</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/lozad/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+<div id="loading-box">
+  <div class="loading-left-bg"></div>
+  <div class="loading-right-bg"></div>
+  <div class="spinner-box">
+    <div class="configure-border-1"><div class="configure-core"></div></div>
+    <div class="configure-border-2"><div class="configure-core"></div></div>
+    <div class="loading-word">加载中...</div>
+  </div>
+</div>
+
+<canvas id="background-particles" aria-hidden="true"></canvas>
+
+<script>
+  (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
+    var loadingBox = document.getElementById('loading-box');
+    var root = document.documentElement;
+
+    function endLoading() {
+      if (loadingBox.classList.contains('loaded')) return;
+      loadingBox.classList.add('loaded');
+      setTimeout(function() {
+        root.classList.remove('page-loading');
+      }, 500);
+    }
+
+    function initLoading() {
+      root.classList.add('page-loading');
+      loadingBox.classList.remove('loaded');
+    }
+
+    initLoading();
+
+    if (document.readyState === 'complete') {
+      endLoading();
+    } else {
+      window.addEventListener('load', endLoading);
+      document.addEventListener('DOMContentLoaded', endLoading);
+      setTimeout(endLoading, 7000);
+    }
+  })();
+</script>
+
+<script src="/js/latex-tool.js?v=20260805c"></script>
+<script src="/js/translate-tool.js?v=20260805a"></script>
+<script src="/js/hexagram-post-map.js?v=20260910b"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
+<script src="/js/post-summary.js?v=20260831d"></script>
+<script src="/js/background-particles.js?v=20260910a"></script>
+<script src="/js/theme-colors.js?v=20260910b"></script>
+<script src="/js/tab-gaze.js?v=20260910a"></script>
+<script src="/lib/solarlunar/solarlunar.min.js?v=20260910a"></script>
+<script src="/js/daily-hexagram.js?v=20260910a"></script>
+<script src="/js/menu-dropdown.js?v=20260910a"></script>
+
+</body>
+</html>

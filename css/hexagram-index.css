@@ -1,0 +1,188 @@
+.hexagram-index-page {
+  --hx-ink: #463a31;
+  --hx-muted: #7c6f64;
+  --hx-brown: #9a6545;
+  --hx-brown-deep: #74462e;
+  --hx-card: rgba(255, 255, 255, .64);
+  --hx-line: rgba(126, 91, 65, .18);
+  color: var(--hx-ink);
+  left: 50%;
+  margin: 8px 0 44px;
+  max-width: none;
+  position: relative;
+  transform: translateX(-50%);
+  width: min(1180px, calc(100vw - 64px));
+}
+
+.hexagram-index-page * {
+  box-sizing: border-box;
+}
+
+.hexagram-index-hero {
+  margin: 0 auto 31px;
+  max-width: 720px;
+  padding: 32px 20px 0;
+  text-align: center;
+}
+
+.hexagram-index-kicker {
+  color: var(--hx-brown);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .15em;
+  margin: 0 0 12px;
+}
+
+.hexagram-index-kicker i {
+  margin-right: 6px;
+}
+
+.hexagram-index-hero h1,
+.hexagram-card-name {
+  color: var(--hx-ink);
+  font-family: Georgia, "Noto Serif SC", serif;
+}
+
+.hexagram-index-hero h1 {
+  font-size: clamp(30px, 5vw, 42px);
+  letter-spacing: .07em;
+  line-height: 1.2;
+  margin: 0 0 12px;
+}
+
+.hexagram-index-hero > p {
+  color: var(--hx-muted);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 14px;
+  line-height: 1.85;
+  margin: 0;
+}
+
+.hexagram-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(127px, 1fr));
+}
+
+.hexagram-card {
+  align-items: center;
+  background: var(--hx-card);
+  border: 1px solid var(--hx-line);
+  border-radius: 10px;
+  color: var(--hx-ink);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 183px;
+  overflow: hidden;
+  padding: 18px 8px 13px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+}
+
+.hexagram-card.is-published {
+  box-shadow: 0 5px 15px rgba(91, 72, 54, .045);
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.hexagram-card.is-published:hover {
+  background: rgba(255, 253, 249, .92);
+  border-color: rgba(154, 101, 69, .48);
+  box-shadow: 0 10px 20px rgba(91, 72, 54, .12);
+  transform: translateY(-2px);
+}
+
+.hexagram-card.is-pending {
+  background: rgba(250, 248, 244, .42);
+  border-color: rgba(126, 91, 65, .13);
+  border-style: dashed;
+  color: #877a70;
+}
+
+.hexagram-card-number {
+  color: #aa9586;
+  font-family: Georgia, serif;
+  font-size: 11px;
+  left: 10px;
+  position: absolute;
+  top: 9px;
+}
+
+.hexagram-symbol {
+  color: #55443a;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 2px 0 12px;
+  width: 46px;
+}
+
+.hexagram-card.is-published .hexagram-symbol {
+  color: var(--hx-brown-deep);
+}
+
+.hexagram-line {
+  background: currentColor;
+  display: block;
+  height: 3px;
+  width: 100%;
+}
+
+.hexagram-line.is-yin {
+  background: linear-gradient(to right, currentColor 0, currentColor 40%, transparent 40%, transparent 60%, currentColor 60%, currentColor 100%);
+}
+
+.hexagram-card-name {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.hexagram-card-trigrams,
+.hexagram-card-state {
+  color: #89796e;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.hexagram-card-trigrams {
+  margin-top: 4px;
+}
+
+.hexagram-card-state {
+  letter-spacing: .02em;
+  margin-top: 9px;
+}
+
+@media (max-width: 767px) {
+  .hexagram-index-page {
+    left: auto;
+    margin: 0 auto 36px;
+    transform: none;
+    width: auto;
+  }
+
+  .hexagram-index-hero {
+    margin-bottom: 23px;
+    padding: 25px 5px 0;
+  }
+
+  .hexagram-grid {
+    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(116px, 1fr));
+  }
+
+  .hexagram-card {
+    min-height: 169px;
+  }
+}
+
+@media (max-width: 430px) {
+  .hexagram-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

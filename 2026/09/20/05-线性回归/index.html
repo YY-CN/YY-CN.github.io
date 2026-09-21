@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#9a6545","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="线性回归：从一条直线看懂模型、损失与求解——最小二乘、正规方程、梯度下降，附广告投放效果预测完整案例。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="05线性回归">
+<meta property="og:url" content="https://hyacinth.xin/2026/09/20/05-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/index.html">
+<meta property="og:site_name" content="Hyacinth">
+<meta property="og:description" content="线性回归：从一条直线看懂模型、损失与求解——最小二乘、正规方程、梯度下降，附广告投放效果预测完整案例。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img033.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img034.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img036.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img037.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img035.png">
+<meta property="article:published_time" content="2026-09-20T11:00:00.000Z">
+<meta property="article:modified_time" content="2026-09-20T11:00:00.000Z">
+<meta property="article:author" content="Hyacinth">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hyacinth.xin/images/ml/img033.png">
+
+<link rel="canonical" href="https://hyacinth.xin/2026/09/20/05-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<script>
+  // 主题换色：首帧绘制前恢复上次选择的色板，避免闪烁。
+  (function() {
+    try {
+      var palette = localStorage.getItem('hyacinth-theme-color');
+      if (palette) document.documentElement.setAttribute('data-theme-color', palette);
+    } catch (error) {}
+  })();
+</script>
+<script>
+  (function() {
+    var images = [
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Asuna%20Yuuki.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Goto%20Hitori.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Kuronuma%20Sawako.png',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Miyazono%20Kaori.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Azusa.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Miku.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Nino.png',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Rem.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Shiina%20Mahiru.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Takagi.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Yamada%20Ryo.jpg'
+    ];
+    var image = images[Math.floor(Math.random() * images.length)];
+    document.documentElement.classList.add('page-loading');
+    document.documentElement.style.setProperty('--page-background-image', 'url("' + image + '")');
+  })();
+</script>
+<link rel="stylesheet" href="https://fontsapi.zeoseven.com/285/main/result.css">
+<link rel="stylesheet" href="/css/post-summary.css?v=20260831c">
+<link rel="stylesheet" href="/css/theme-colors.css?v=20260910b">
+<link rel="stylesheet" href="/css/daily-hexagram.css?v=20260910a">
+<link rel="stylesheet" href="/css/menu-dropdown.css?v=20260911a">
+
+  <title>05线性回归 | Hyacinth</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hyacinth</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-说说">
+
+    <a href="/shuoshuo/" rel="section"><i class="fa fa-comment-dots fa-fw"></i>说说</a>
+
+  </li>
+        <li class="menu-item menu-item-工具">
+
+    <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2026/09/20/05-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          05线性回归
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-09-20 11:00:00" itemprop="dateCreated datePublished" datetime="2026-09-20T11:00:00+00:00">2026-09-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>11 分钟</span>
+            </span>
+            <div class="post-description">线性回归：从一条直线看懂模型、损失与求解——最小二乘、正规方程、梯度下降，附广告投放效果预测完整案例。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h1><h3 id="30-秒先懂"><a href="#30-秒先懂" class="headerlink" title="30 秒先懂"></a>30 秒先懂</h3><blockquote>
+<p><strong>线性回归：假设目标值和特征之间近似是一条直线（或高维超平面）的关系，然后找出「总体偏差最小」的那条线，用它做预测。</strong></p>
+</blockquote>
+<p>它是第一个正式的模型，也是把「模型 → 损失函数 → 求解算法」这套框架完整走一遍的最佳练手对象——后面所有模型，都是这套框架的变奏。</p>
+<hr>
+<h2 id="1-它解决什么问题？"><a href="#1-它解决什么问题？" class="headerlink" title="1. 它解决什么问题？"></a>1. 它解决什么问题？</h2><p>给你一群学生的「每周学习时长」和「数学成绩」，想知道：<strong>学得更久，成绩大概能提多少？某个学 11 小时的学生，成绩大概多少分？</strong></p>
+<p>这是<strong>回归</strong>任务：预测一个连续数值（成绩、房价、销售额）。线性回归的答案是：先用一条直线描述「时长 → 成绩」的趋势，再用直线算出任何时长的预测分。</p>
+<p>模型的数学形式：</p>
+<p>$$\hat{y} &#x3D; w_1 x_1 + w_2 x_2 + \cdots + w_d x_d + b$$</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$x_1 \cdots x_d$</td>
+<td>$d$ 个特征（输入）</td>
+</tr>
+<tr>
+<td>$w_1 \cdots w_d$</td>
+<td>系数（参数）：每个特征影响多大</td>
+</tr>
+<tr>
+<td>$b$</td>
+<td>截距（参数）：所有特征为 0 时的基准值</td>
+</tr>
+<tr>
+<td>$\hat{y}$</td>
+<td>模型的预测值（带帽子表示「预测」，区别于真实 $y$）</td>
+</tr>
+</tbody></table>
+<p>只有一个特征时叫<strong>一元线性回归</strong>（平面上找一条直线），多个特征叫<strong>多元线性回归</strong>（高维空间里找一个平面&#x2F;超平面）：</p>
+<p><img data-src="/images/ml/img033.png" alt="一元线性回归：散点拟合一条直线"></p>
+<p><img data-src="/images/ml/img034.png" alt="多元线性回归：散点拟合一个平面"></p>
+<blockquote>
+<p><strong>补充</strong> 「线性」的准确含义是<strong>对参数线性</strong>，不是「画出来必须是一条直线」。比如 $\hat{y} &#x3D; w_1 x + w_2 x^2 + b$——它对 $x$ 是一条抛物线，但对参数 $(w_1, w_2, b)$ 仍是线性组合，所以仍属于线性模型。「多项式回归」就是给特征造平方项、交叉项后再做线性回归：曲线来自特征的变换，模型本身还是线性的。</p>
+</blockquote>
+<p><strong>典型应用场景</strong>：GDP 预测（投资、消费、出口 → 增速）、广告效果评估（各渠道投入 → 销售额）、药物剂量研究（剂量 → 生理指标）、产品质量控制（温度、压力 → 强度）、气候建模（排放量 → 气温）。</p>
+<blockquote>
+<p><strong>补充</strong> 线性回归适合「关系大体是线性的、要解释每个因素的影响」的场景。关系明显是弯曲的（比如剂量过大会中毒、效果掉头向下）时，直线描述不了，需要非线性的模型。</p>
+</blockquote>
+<hr>
+<h2 id="2-核心直觉"><a href="#2-核心直觉" class="headerlink" title="2. 核心直觉"></a>2. 核心直觉</h2><p><strong>直觉一：拉一根橡皮筋。</strong> 把点撒在图上，线性回归就是在点云里拉一根有弹性的直线，让它「总体上」从点群中间穿过去——<strong>不追求穿过每一个点</strong>（那是死记硬背每个样本），只追求离所有点整体最近。</p>
+<p><strong>直觉二：系数是旋钮。</strong> 学出 $\hat{y} &#x3D; 2.87x + 41.45$ 后，模型就完全可解释：$x$（学习时长）每多 1 小时，预测成绩加 2.87 分；不学习时的基准分是 41.45。每个 $w$ 就是一个「特征旋钮」，拧多少、往哪拧，一目了然——这就是线性回归可解释性的来源。</p>
+<p><strong>直觉三：「最好的一条线」&#x3D; 竖直偏差平方和最小。</strong> 预测线和真实点之间有一段段竖直的差距（下图红线段），叫<strong>残差</strong>——「最好」指的是让所有残差的<strong>平方和</strong>最小：</p>
+<p><img data-src="/images/ml/img036.png" alt="残差：真实点到预测线的竖直距离"></p>
+<blockquote>
+<p><strong>补充</strong> 为什么量「竖直距离」而不是「垂直距离」？因为我们只关心<strong>预测 y 时错了多少</strong>——x 是已知条件不算误差。竖直残差恰好是 $y_i - \hat{y}_i$，平方求和就是下一节的损失函数。</p>
+</blockquote>
+<hr>
+<h2 id="3-数学表达-公式"><a href="#3-数学表达-公式" class="headerlink" title="3. 数学表达 &#x2F; 公式"></a>3. 数学表达 &#x2F; 公式</h2><h3 id="3-1-损失函数：均方误差（MSE）"><a href="#3-1-损失函数：均方误差（MSE）" class="headerlink" title="3.1 损失函数：均方误差（MSE）"></a>3.1 损失函数：均方误差（MSE）</h3><p>把「总体偏差最小」写成公式——对 n 个样本，损失函数取均方误差：</p>
+<p>$$J(w, b) &#x3D; \frac{1}{n}\sum_{i&#x3D;1}^{n}\big(y_i - \hat{y}<em>i\big)^2 &#x3D; \frac{1}{n}\sum</em>{i&#x3D;1}^{n}\big(y_i - (w x_i + b)\big)^2$$</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$y_i$</td>
+<td>第 $i$ 个样本的真实值</td>
+</tr>
+<tr>
+<td>$\hat{y}_i &#x3D; w x_i + b$</td>
+<td>第 $i$ 个样本的预测值</td>
+</tr>
+<tr>
+<td>$n$</td>
+<td>样本个数</td>
+</tr>
+</tbody></table>
+<p>基于均方误差最小化来求解的方法叫<strong>最小二乘法</strong>——几何上就是「让所有样本到直线的竖直距离（欧氏距离）平方之和最小」。</p>
+<p><strong>为什么用平方？</strong> 三条理由：① 处处可导，方便求梯度；② 是凸函数——只有一个碗底，找到的最小值必是全局最优；③ 平方会放大离群的大误差，让模型优先修正明显的错配（代价是对异常值敏感）。若异常值太多，可以换绝对误差（MAE）当损失，只是零点不可导、求解麻烦些。</p>
+<h3 id="3-2-手算一次：3-个点拟一条线"><a href="#3-2-手算一次：3-个点拟一条线" class="headerlink" title="3.2 手算一次：3 个点拟一条线"></a>3.2 手算一次：3 个点拟一条线</h3><p>最小化 $J(w,b)$ 有公式解（下节推导）。先直接用结论感受一下——最小二乘解为：</p>
+<p>$$w &#x3D; \frac{\sum_{i}(x_i-\bar{x})(y_i-\bar{y})}{\sum_{i}(x_i-\bar{x})^2} \qquad b &#x3D; \bar{y} - w\bar{x}$$</p>
+<p>取 $x&#x3D;[1,2,3]$、$y&#x3D;[3,5,7]$：</p>
+<ul>
+<li>均值：$\bar{x}&#x3D;2$，$\bar{y}&#x3D;5$；偏差 $dx&#x3D;[-1,0,1]$，$dy&#x3D;[-2,0,2]$</li>
+<li>$w &#x3D; \dfrac{(-1)(-2)+0+(1)(2)}{1+0+1} &#x3D; \dfrac{4}{2} &#x3D; 2$</li>
+<li>$b &#x3D; 5 - 2\times2 &#x3D; 1$</li>
+</ul>
+<p>得到 $\hat{y} &#x3D; 2x + 1$。代回去检验：预测值 $[3,5,7]$ 与真实值完全一致，损失 $J&#x3D;0$——数据本来就在这条直线上，解析解一步命中。</p>
+<h3 id="3-3-为什么平方损失「名正言顺」（了解）"><a href="#3-3-为什么平方损失「名正言顺」（了解）" class="headerlink" title="3.3 为什么平方损失「名正言顺」（了解）"></a>3.3 为什么平方损失「名正言顺」（了解）</h3><p>一个统计学上的背书：假设真实关系是 $y &#x3D; wx + b + \varepsilon$，其中噪声 $\varepsilon$ 服从均值为 0 的<strong>正态分布</strong>（测量误差大多如此）。那么每个 $y_i$ 就服从以 $wx_i+b$ 为中心的正态分布，全体样本的<strong>似然函数</strong>（「这组参数下，看到手头数据的概率」）是：</p>
+<p>$$L &#x3D; \prod_{i&#x3D;1}^{n} \frac{1}{\sqrt{2\pi\sigma^2}} \exp!\left(-\frac{(y_i - f(x_i))^2}{2\sigma^2}\right)$$</p>
+<p>取对数（连乘变连加），最大化对数似然时，唯一随 $w,b$ 变化的项是 $-\frac{1}{2\sigma^2}\sum(y_i - f(x_i))^2$——<strong>最大化它等价于最小化平方和</strong>。</p>
+<p>结论：<strong>只要误差近似正态分布，最小二乘就是统计学意义上的最优估计（极大似然估计）</strong>。这解释了为什么平方损失是回归的默认选择，而不是随手拍的。</p>
+<hr>
+<h2 id="4-模型是怎么训练出来的？"><a href="#4-模型是怎么训练出来的？" class="headerlink" title="4. 模型是怎么训练出来的？"></a>4. 模型是怎么训练出来的？</h2><p>「训练」就是最小化 $J(w,b)$。三条路线，殊途同归（损失是凸的，最优解唯一）：</p>
+<h3 id="4-1-路线一：解析解"><a href="#4-1-路线一：解析解" class="headerlink" title="4.1 路线一：解析解"></a>4.1 路线一：解析解</h3><p>对 $J(w,b)$ 分别求偏导、令导数为 0、解方程组，就得到 3.2 节用过的公式。拿贯穿全课程的真实数据走一遍——10 个「每周学习时长 → 数学成绩」样本：</p>
+<ul>
+<li>$x &#x3D; [5,8,10,12,15,3,7,9,14,6]$，均值 $\bar{x}&#x3D;8.9$</li>
+<li>$y &#x3D; [55,65,70,75,85,50,60,72,80,58]$，均值 $\bar{y}&#x3D;67$</li>
+<li>算两个求和：$\sum dx,dy &#x3D; 393.0$，$\sum dx^2 &#x3D; 136.9$</li>
+<li>$w &#x3D; 393.0 &#x2F; 136.9 \approx 2.87$，$b &#x3D; 67 - 2.87\times8.9 \approx 41.45$</li>
+</ul>
+<p>得到 $\hat{y} &#x3D; 2.87x + 41.45$：每多学 1 小时约提 2.9 分。</p>
+<h3 id="4-2-路线二：正规方程（矩阵版解析解）"><a href="#4-2-路线二：正规方程（矩阵版解析解）" class="headerlink" title="4.2 路线二：正规方程（矩阵版解析解）"></a>4.2 路线二：正规方程（矩阵版解析解）</h3><p>多元时把公式写成矩阵形式。给 $X$ 补一列全 1（与截距相乘），最优参数一步算出：</p>
+<p>$$w &#x3D; \left(X^\top X\right)^{-1} X^\top y$$</p>
+<p>前提是 $X^\top X$ 可逆（满秩）。特征不多时它又快又准；特征上万时求逆的代价约为维数的三次方，就轮到路线三。</p>
+<h3 id="4-3-路线三：梯度下降"><a href="#4-3-路线三：梯度下降" class="headerlink" title="4.3 路线三：梯度下降"></a>4.3 路线三：梯度下降</h3><p>解析解算不动时，用迭代逼近。先把 MSE 对参数的梯度写出来（对矩阵形式 $J &#x3D; \frac{1}{n}|Xw - y|^2$ 用链式法则）：</p>
+<p>$$\nabla J &#x3D; \frac{2}{n} X^\top (Xw - y)$$</p>
+<p>直觉核对：$(Xw - y)$ 是残差向量——「预测比真实低的地方，梯度就把参数往上推」，合理。完整代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">J</span>(<span class="params">beta</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;目标函数：均方误差&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> np.<span class="built_in">sum</span>((X @ beta - y) ** <span class="number">2</span>, axis=<span class="number">0</span>).reshape(-<span class="number">1</span>, <span class="number">1</span>) / n</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gradient</span>(<span class="params">beta</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;梯度：2/n * X^T (Xβ - y)&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> X.T @ (X @ beta - y) / n * <span class="number">2</span></span><br><span class="line"></span><br><span class="line">X = np.array([[<span class="number">5</span>], [<span class="number">8</span>], [<span class="number">10</span>], [<span class="number">12</span>], [<span class="number">15</span>], [<span class="number">3</span>], [<span class="number">7</span>], [<span class="number">9</span>], [<span class="number">14</span>], [<span class="number">6</span>]])   <span class="comment"># 学习时长</span></span><br><span class="line">y = np.array([[<span class="number">55</span>], [<span class="number">65</span>], [<span class="number">70</span>], [<span class="number">75</span>], [<span class="number">85</span>], [<span class="number">50</span>], [<span class="number">60</span>], [<span class="number">72</span>], [<span class="number">80</span>], [<span class="number">58</span>]])  <span class="comment"># 成绩</span></span><br><span class="line">n = X.shape[<span class="number">0</span>]</span><br><span class="line">X = np.hstack([np.ones((n, <span class="number">1</span>)), X])   <span class="comment"># 补一列全 1：beta = [b, w]</span></span><br><span class="line">beta = np.array([[<span class="number">1</span>], [<span class="number">1</span>]])           <span class="comment"># 初始化 b=1, w=1</span></span><br><span class="line">alpha = <span class="number">1e-2</span>                          <span class="comment"># 学习率</span></span><br><span class="line">epoch = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (j := J(beta)) &gt; <span class="number">1e-10</span> <span class="keyword">and</span> (epoch := epoch + <span class="number">1</span>) &lt;= <span class="number">10000</span>:</span><br><span class="line">    grad = gradient(beta)</span><br><span class="line">    <span class="keyword">if</span> epoch % <span class="number">1000</span> == <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;epoch=<span class="subst">&#123;epoch&#125;</span>\tbeta=<span class="subst">&#123;beta.reshape(-<span class="number">1</span>)&#125;</span>\tJ=<span class="subst">&#123;j.reshape(-<span class="number">1</span>)&#125;</span>&quot;</span>)</span><br><span class="line">    beta = beta - alpha * grad        <span class="comment"># 沿负梯度更新</span></span><br></pre></td></tr></table></figure>
+
+<p>迭代收敛后 <code>beta</code> 稳定在 $[41.45,\ 2.87]$——与解析解一致，互为验证。把 $(b, w)$ 平面上的损失等高线和下降轨迹画出来：</p>
+<p><img data-src="/images/ml/img037.png" alt="梯度下降在等高线上的轨迹：前期特征尺度不一导致锯齿，后期收敛"></p>
+<p>注意轨迹<strong>前期疯狂锯齿</strong>：两个特征尺度悬殊（时长 3~15，截距列恒为 1），等高线又扁又斜，负梯度方向来回横跳——这正是「训练前要做特征缩放」的直观证据。</p>
+<h3 id="4-4-三条路线怎么选"><a href="#4-4-三条路线怎么选" class="headerlink" title="4.4 三条路线怎么选"></a>4.4 三条路线怎么选</h3><table>
+<thead>
+<tr>
+<th>路线</th>
+<th>适用</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>解析解 &#x2F; 正规方程</td>
+<td>特征数不多（几百上千以内）</td>
+<td>一步到位、精确；求逆贵</td>
+</tr>
+<tr>
+<td>梯度下降</td>
+<td>特征多、数据大</td>
+<td>通用可扩展；要调学习率</td>
+</tr>
+<tr>
+<td>线性回归专属好消息</td>
+<td>——</td>
+<td>MSE 对参数是凸函数，<strong>没有局部极小的担忧</strong>；但凸性不等于「一定收敛到位」——学习率过大仍会发散、特征尺度悬殊仍会收敛极慢、停止条件太松仍会欠收敛</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="5-Python-sklearn-怎么实现？"><a href="#5-Python-sklearn-怎么实现？" class="headerlink" title="5. Python &#x2F; sklearn 怎么实现？"></a>5. Python &#x2F; sklearn 怎么实现？</h2><h3 id="5-1-最小例子：学习时长-→-成绩"><a href="#5-1-最小例子：学习时长-→-成绩" class="headerlink" title="5.1 最小例子：学习时长 → 成绩"></a>5.1 最小例子：学习时长 → 成绩</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自变量：每周学习时长</span></span><br><span class="line">X = [[<span class="number">5</span>], [<span class="number">8</span>], [<span class="number">10</span>], [<span class="number">12</span>], [<span class="number">15</span>], [<span class="number">3</span>], [<span class="number">7</span>], [<span class="number">9</span>], [<span class="number">14</span>], [<span class="number">6</span>]]</span><br><span class="line"><span class="comment"># 因变量：数学考试成绩</span></span><br><span class="line">y = [<span class="number">55</span>, <span class="number">65</span>, <span class="number">70</span>, <span class="number">75</span>, <span class="number">85</span>, <span class="number">50</span>, <span class="number">60</span>, <span class="number">72</span>, <span class="number">80</span>, <span class="number">58</span>]</span><br><span class="line"></span><br><span class="line">model = LinearRegression()      <span class="comment"># 最小二乘回归：概念上是正规方程，数值实现走 SVD/QR 求解器</span></span><br><span class="line">model.fit(X, y)                 <span class="comment"># 训练：解出最优 w 和 b</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(model.coef_)              <span class="comment"># [2.87]  → 每多学 1 小时约提 2.87 分</span></span><br><span class="line"><span class="built_in">print</span>(model.intercept_)         <span class="comment"># 41.45   → 基准分</span></span><br><span class="line"><span class="built_in">print</span>(model.predict([[<span class="number">11</span>]]))    <span class="comment"># [73.03] → 学 11 小时预测约 73 分</span></span><br></pre></td></tr></table></figure>
+
+<p><code>predict([[11]])</code> 的内部只有一行算术：$2.87 \times 11 + 41.45 \approx 73.03$——下图里那个红色的点就是它：</p>
+<p><img data-src="/images/ml/img035.png" alt="拟合直线与预测点（红：学 11 小时 → 约 73 分）"></p>
+<p><strong><code>fit</code> &#x2F; <code>predict</code> 内部</strong>（线性回归版）：</p>
+<ul>
+<li><code>fit(X, y)</code>：用解析解解出 $w$、$b$，存进 <code>coef_</code> 和 <code>intercept_</code>；</li>
+<li><code>predict(X)</code>：取出参数，计算 <code>X @ coef_ + intercept_</code>，参数不再变化。</li>
+</ul>
+<p>注意 <code>LinearRegression</code> 不是转换器，没有 <code>transform</code>——它不改变数据，只产出参数。</p>
+<h3 id="5-2-想用梯度下降时"><a href="#5-2-想用梯度下降时" class="headerlink" title="5.2 想用梯度下降时"></a>5.2 想用梯度下降时</h3><p>同一个模型换一个求解器而已：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> SGDRegressor</span><br><span class="line"></span><br><span class="line">model = SGDRegressor(loss=<span class="string">&quot;squared_error&quot;</span>,</span><br><span class="line">                     penalty=<span class="literal">None</span>,        <span class="comment"># 重要：它默认自带 L2 正则化，</span></span><br><span class="line">                     eta0=<span class="number">0.01</span>,           <span class="comment"># 不关掉的话，优化的就不是纯最小二乘了</span></span><br><span class="line">                     max_iter=<span class="number">1000</span>, tol=<span class="number">1e-8</span>)</span><br><span class="line">model.fit(X_scaled, y)                    <span class="comment"># 记得先做特征缩放</span></span><br><span class="line"><span class="comment"># coef_ / intercept_ 含义不变，此时数值才与解析解接近</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>易错</strong> <code>SGDRegressor</code> 默认自带 L2 正则化（<code>penalty=&quot;l2&quot;</code>），优化目标与普通最小二乘<strong>并不完全相同</strong>——想用它复现「梯度下降版 OLS」，必须显式 <code>penalty=None</code> 并先缩放特征；否则「两条路线殊途同归」的说法就不成立了。</p>
+</blockquote>
+<hr>
+<h2 id="6-完整案例：广告投放效果预测"><a href="#6-完整案例：广告投放效果预测" class="headerlink" title="6. 完整案例：广告投放效果预测"></a>6. 完整案例：广告投放效果预测</h2><p><strong>任务</strong>：广告主在 TV &#x2F; Radio &#x2F; Newspaper 三个渠道投钱，预测能带来多少销售额（Sales）。数据集来自 Kaggle 的 Advertising 数据集。</p>
+<table>
+<thead>
+<tr>
+<th>列</th>
+<th>含义</th>
+<th>单位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TV &#x2F; Radio &#x2F; Newspaper</td>
+<td>各渠道投放金额</td>
+<td>千元</td>
+</tr>
+<tr>
+<td>Sales</td>
+<td>销售额</td>
+<td>百万元</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression, SGDRegressor</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 加载与清洗</span></span><br><span class="line">advertising = pd.read_csv(<span class="string">&quot;data/advertising.csv&quot;</span>)</span><br><span class="line">advertising.drop(advertising.columns[<span class="number">0</span>], axis=<span class="number">1</span>, inplace=<span class="literal">True</span>)  <span class="comment"># 丢弃 ID 列</span></span><br><span class="line">advertising.dropna(inplace=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 划分特征与标签、训练集与测试集</span></span><br><span class="line">X = advertising.drop(<span class="string">&quot;Sales&quot;</span>, axis=<span class="number">1</span>)</span><br><span class="line">y = advertising[<span class="string">&quot;Sales&quot;</span>]</span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(</span><br><span class="line">    X, y, test_size=<span class="number">0.3</span>, random_state=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 标准化：fit 只在训练集</span></span><br><span class="line">preprocessor = StandardScaler()</span><br><span class="line">x_train = preprocessor.fit_transform(x_train)</span><br><span class="line">x_test = preprocessor.transform(x_test)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 两条路线各训一个模型</span></span><br><span class="line">normal_equation = LinearRegression()      <span class="comment"># 路线一：解析解</span></span><br><span class="line">normal_equation.fit(x_train, y_train)</span><br><span class="line">gradient_descent = SGDRegressor()         <span class="comment"># 路线二：梯度下降</span></span><br><span class="line">gradient_descent.fit(x_train, y_train)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. 用 MSE 评估</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;系数（解析解）:&quot;</span>, normal_equation.coef_)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;系数（梯度下降）:&quot;</span>, gradient_descent.coef_)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;解析解 MSE:&quot;</span>, mean_squared_error(y_test, normal_equation.predict(x_test)))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;梯度下降 MSE:&quot;</span>, mean_squared_error(y_test, gradient_descent.predict(x_test)))</span><br></pre></td></tr></table></figure>
+
+<p><strong>怎么读结果</strong>：</p>
+<ol>
+<li><strong>两条路线的系数和 MSE 应当非常接近</strong>——凸损失只有一个碗底，只要都收敛，就该殊途同归；</li>
+<li><strong>标准化后系数便于横向比较</strong>：同一把尺子下，哪个渠道的 $|w|$ 大，说明该渠道与销售额的线性关联更强——结论通常是 TV 最大、Radio 次之、Newspaper 最小。严谨地说这只是「参考性的相对重要性」：它仍受共线性、编码方式影响，且是相关性而非因果效应；</li>
+<li>拿到模型后，给一组新投放方案就能 <code>predict</code> 出预期销售额，用于预算分配。</li>
+</ol>
+<hr>
+<h2 id="7-优缺点与适用场景"><a href="#7-优缺点与适用场景" class="headerlink" title="7. 优缺点与适用场景"></a>7. 优缺点与适用场景</h2><p><strong>优点</strong>：</p>
+<ul>
+<li>简单、训练快，系数可解释（每个特征的影响一目了然）；</li>
+<li>损失是凸函数，全局最优有保证；</li>
+<li>有解析解，小数据上一步到位。</li>
+</ul>
+<p><strong>缺点与对策</strong>：</p>
+<ul>
+<li>只能刻画<strong>线性关系</strong>——关系弯曲时拟合不足；</li>
+<li><strong>对异常值敏感</strong>（平方放大）——可换 MAE 或先处理离群点；</li>
+<li>特征<strong>多重共线性</strong>（特征间高度相关）时系数估计不稳定——加 L2 正则化（岭回归）；</li>
+<li>特征很多时容易过拟合——加 L1&#x2F;L2 正则化（Lasso &#x2F; Ridge）。</li>
+</ul>
+<blockquote>
+<p><strong>补充</strong> 经典线性回归的几条假设：① 特征与目标的关系对<strong>参数</strong>线性；② 误差均值为 0、相互独立且方差相同（同方差）；③ 「误差服从正态分布」主要影响统计推断（置信区间、显著性检验），做点预测时并不是必须满足的条件。</p>
+</blockquote>
+<hr>
+<h2 id="8-易混淆点"><a href="#8-易混淆点" class="headerlink" title="8. 易混淆点"></a>8. 易混淆点</h2><table>
+<thead>
+<tr>
+<th>易混对</th>
+<th>一句话区分</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>一元 vs 多元线性回归</td>
+<td>特征只有 1 个 vs 多个；几何上是找直线 vs 找超平面</td>
+</tr>
+<tr>
+<td>MSE 当损失 vs 当指标</td>
+<td>同一个公式两个角色：训练时是<strong>最小化的目标</strong>，评估时是<strong>打分的尺子</strong></td>
+</tr>
+<tr>
+<td>LinearRegression vs SGDRegressor</td>
+<td>同一个模型、不同求解器：前者解析解，后者梯度下降，凸损失下结果应一致</td>
+</tr>
+<tr>
+<td>标准化前 vs 后的系数</td>
+<td>量纲不同不可直接比大小；标准化后才能拿 $</td>
+</tr>
+<tr>
+<td>相关关系 vs 因果关系</td>
+<td>回归系数只说明「同涨同跌的相关性」，不代表「因为 x 才有 y」——比如冰淇淋销量与溺水人数正相关，锅是夏天</td>
+</tr>
+<tr>
+<td>fit_intercept 的取舍</td>
+<td>特征全为 0 时目标值本身有意义（如基准分）就保留截距；数据已中心化时可去掉</td>
+</tr>
+<tr>
+<td>残差 vs 误差</td>
+<td>残差是样本上「真实 − 预测」的可计算量；误差是理论上的随机噪声，只能假设不能观测</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/09/20/04-%E6%A8%A1%E5%9E%8B%E6%B1%82%E8%A7%A3%E4%B8%8E%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/" rel="prev" title="04模型求解与评价指标">
+      <i class="fa fa-chevron-left"></i> 04模型求解与评价指标
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/09/20/06-%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/" rel="next" title="06逻辑回归">
+      06逻辑回归 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="nav-number">1.</span> <span class="nav-text">线性回归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#30-%E7%A7%92%E5%85%88%E6%87%82"><span class="nav-number">1.0.1.</span> <span class="nav-text">30 秒先懂</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AE%83%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">1. 它解决什么问题？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%A0%B8%E5%BF%83%E7%9B%B4%E8%A7%89"><span class="nav-number">1.2.</span> <span class="nav-text">2. 核心直觉</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%95%B0%E5%AD%A6%E8%A1%A8%E8%BE%BE-%E5%85%AC%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">3. 数学表达 &#x2F; 公式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%EF%BC%9A%E5%9D%87%E6%96%B9%E8%AF%AF%E5%B7%AE%EF%BC%88MSE%EF%BC%89"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 损失函数：均方误差（MSE）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E6%89%8B%E7%AE%97%E4%B8%80%E6%AC%A1%EF%BC%9A3-%E4%B8%AA%E7%82%B9%E6%8B%9F%E4%B8%80%E6%9D%A1%E7%BA%BF"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 手算一次：3 个点拟一条线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%B9%B3%E6%96%B9%E6%8D%9F%E5%A4%B1%E3%80%8C%E5%90%8D%E6%AD%A3%E8%A8%80%E9%A1%BA%E3%80%8D%EF%BC%88%E4%BA%86%E8%A7%A3%EF%BC%89"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 为什么平方损失「名正言顺」（了解）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%A8%A1%E5%9E%8B%E6%98%AF%E6%80%8E%E4%B9%88%E8%AE%AD%E7%BB%83%E5%87%BA%E6%9D%A5%E7%9A%84%EF%BC%9F"><span class="nav-number">1.4.</span> <span class="nav-text">4. 模型是怎么训练出来的？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E8%B7%AF%E7%BA%BF%E4%B8%80%EF%BC%9A%E8%A7%A3%E6%9E%90%E8%A7%A3"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1 路线一：解析解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E8%B7%AF%E7%BA%BF%E4%BA%8C%EF%BC%9A%E6%AD%A3%E8%A7%84%E6%96%B9%E7%A8%8B%EF%BC%88%E7%9F%A9%E9%98%B5%E7%89%88%E8%A7%A3%E6%9E%90%E8%A7%A3%EF%BC%89"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2 路线二：正规方程（矩阵版解析解）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E8%B7%AF%E7%BA%BF%E4%B8%89%EF%BC%9A%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D"><span class="nav-number">1.4.3.</span> <span class="nav-text">4.3 路线三：梯度下降</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-%E4%B8%89%E6%9D%A1%E8%B7%AF%E7%BA%BF%E6%80%8E%E4%B9%88%E9%80%89"><span class="nav-number">1.4.4.</span> <span class="nav-text">4.4 三条路线怎么选</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Python-sklearn-%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%EF%BC%9F"><span class="nav-number">1.5.</span> <span class="nav-text">5. Python &#x2F; sklearn 怎么实现？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E6%9C%80%E5%B0%8F%E4%BE%8B%E5%AD%90%EF%BC%9A%E5%AD%A6%E4%B9%A0%E6%97%B6%E9%95%BF-%E2%86%92-%E6%88%90%E7%BB%A9"><span class="nav-number">1.5.1.</span> <span class="nav-text">5.1 最小例子：学习时长 → 成绩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E6%83%B3%E7%94%A8%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%97%B6"><span class="nav-number">1.5.2.</span> <span class="nav-text">5.2 想用梯度下降时</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%AE%8C%E6%95%B4%E6%A1%88%E4%BE%8B%EF%BC%9A%E5%B9%BF%E5%91%8A%E6%8A%95%E6%94%BE%E6%95%88%E6%9E%9C%E9%A2%84%E6%B5%8B"><span class="nav-number">1.6.</span> <span class="nav-text">6. 完整案例：广告投放效果预测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E4%BC%98%E7%BC%BA%E7%82%B9%E4%B8%8E%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.7.</span> <span class="nav-text">7. 优缺点与适用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9"><span class="nav-number">1.8.</span> <span class="nav-text">8. 易混淆点</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hyacinth"
+      src="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
+  <p class="site-author-name" itemprop="name">Hyacinth</p>
+  <div class="site-description" itemprop="description">君子慎独,不欺暗室</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hyacinth</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/lozad/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+<div id="loading-box">
+  <div class="loading-left-bg"></div>
+  <div class="loading-right-bg"></div>
+  <div class="spinner-box">
+    <div class="configure-border-1"><div class="configure-core"></div></div>
+    <div class="configure-border-2"><div class="configure-core"></div></div>
+    <div class="loading-word">加载中...</div>
+  </div>
+</div>
+
+<canvas id="background-particles" aria-hidden="true"></canvas>
+
+<script>
+  (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
+    var loadingBox = document.getElementById('loading-box');
+    var root = document.documentElement;
+
+    function endLoading() {
+      if (loadingBox.classList.contains('loaded')) return;
+      loadingBox.classList.add('loaded');
+      setTimeout(function() {
+        root.classList.remove('page-loading');
+      }, 500);
+    }
+
+    function initLoading() {
+      root.classList.add('page-loading');
+      loadingBox.classList.remove('loaded');
+    }
+
+    initLoading();
+
+    if (document.readyState === 'complete') {
+      endLoading();
+    } else {
+      window.addEventListener('load', endLoading);
+      document.addEventListener('DOMContentLoaded', endLoading);
+      setTimeout(endLoading, 7000);
+    }
+  })();
+</script>
+
+<script src="/js/latex-tool.js?v=20260805c"></script>
+<script src="/js/translate-tool.js?v=20260805a"></script>
+<script src="/js/hexagram-post-map.js?v=20260910b"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
+<script src="/js/post-summary.js?v=20260831d"></script>
+<script src="/js/background-particles.js?v=20260910a"></script>
+<script src="/js/theme-colors.js?v=20260910b"></script>
+<script src="/js/tab-gaze.js?v=20260910a"></script>
+<script src="/lib/solarlunar/solarlunar.min.js?v=20260910a"></script>
+<script src="/js/daily-hexagram.js?v=20260910a"></script>
+<script src="/js/menu-dropdown.js?v=20260910a"></script>
+
+</body>
+</html>

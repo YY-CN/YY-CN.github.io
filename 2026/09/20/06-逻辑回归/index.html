@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hyacinth.xin","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#9a6545","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="逻辑回归：sigmoid 如何把线性模型变成分类器，log-odds 才是它真正「回归」的对象，对数损失的由来，OvR 与 Softmax 多分类，双案例实战。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="06逻辑回归">
+<meta property="og:url" content="https://hyacinth.xin/2026/09/20/06-%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/index.html">
+<meta property="og:site_name" content="Hyacinth">
+<meta property="og:description" content="逻辑回归：sigmoid 如何把线性模型变成分类器，log-odds 才是它真正「回归」的对象，对数损失的由来，OvR 与 Softmax 多分类，双案例实战。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img038.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img039.png">
+<meta property="og:image" content="https://hyacinth.xin/images/ml/img040.png">
+<meta property="article:published_time" content="2026-09-20T14:00:00.000Z">
+<meta property="article:modified_time" content="2026-09-20T14:00:00.000Z">
+<meta property="article:author" content="Hyacinth">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hyacinth.xin/images/ml/img038.png">
+
+<link rel="canonical" href="https://hyacinth.xin/2026/09/20/06-%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<script>
+  // 主题换色：首帧绘制前恢复上次选择的色板，避免闪烁。
+  (function() {
+    try {
+      var palette = localStorage.getItem('hyacinth-theme-color');
+      if (palette) document.documentElement.setAttribute('data-theme-color', palette);
+    } catch (error) {}
+  })();
+</script>
+<script>
+  (function() {
+    var images = [
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Asuna%20Yuuki.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Goto%20Hitori.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Kuronuma%20Sawako.png',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Miyazono%20Kaori.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Azusa.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Miku.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Nakano%20Nino.png',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Rem.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Shiina%20Mahiru.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Takagi.jpg',
+      'https://hyacinth-img-1319733500.cos.ap-guangzhou.myqcloud.com/backgrounds/Yamada%20Ryo.jpg'
+    ];
+    var image = images[Math.floor(Math.random() * images.length)];
+    document.documentElement.classList.add('page-loading');
+    document.documentElement.style.setProperty('--page-background-image', 'url("' + image + '")');
+  })();
+</script>
+<link rel="stylesheet" href="https://fontsapi.zeoseven.com/285/main/result.css">
+<link rel="stylesheet" href="/css/post-summary.css?v=20260831c">
+<link rel="stylesheet" href="/css/theme-colors.css?v=20260910b">
+<link rel="stylesheet" href="/css/daily-hexagram.css?v=20260910a">
+<link rel="stylesheet" href="/css/menu-dropdown.css?v=20260911a">
+
+  <title>06逻辑回归 | Hyacinth</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hyacinth</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-说说">
+
+    <a href="/shuoshuo/" rel="section"><i class="fa fa-comment-dots fa-fw"></i>说说</a>
+
+  </li>
+        <li class="menu-item menu-item-工具">
+
+    <a href="/tools/" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hyacinth.xin/2026/09/20/06-%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
+      <meta itemprop="name" content="Hyacinth">
+      <meta itemprop="description" content="君子慎独,不欺暗室">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hyacinth">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          06逻辑回归
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-09-20 14:00:00" itemprop="dateCreated datePublished" datetime="2026-09-20T14:00:00+00:00">2026-09-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>12 分钟</span>
+            </span>
+            <div class="post-description">逻辑回归：sigmoid 如何把线性模型变成分类器，log-odds 才是它真正「回归」的对象，对数损失的由来，OvR 与 Softmax 多分类，双案例实战。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h1><h3 id="30-秒先懂"><a href="#30-秒先懂" class="headerlink" title="30 秒先懂"></a>30 秒先懂</h3><blockquote>
+<p><strong>逻辑回归名字里带「回归」，干的是分类的活：它对「正类几率（odds）的对数」建立线性回归，再经 sigmoid 翻译成概率，超过阈值判正类。</strong></p>
+</blockquote>
+<p>它是二分类的默认起点模型——和线性回归共用「模型 + 损失 + 求解」的整套框架，只换了两块积木：输出端加一个 sigmoid，损失函数从 MSE 换成对数损失。</p>
+<hr>
+<h2 id="1-它解决什么问题？"><a href="#1-它解决什么问题？" class="headerlink" title="1. 它解决什么问题？"></a>1. 它解决什么问题？</h2><p>任务：预测样本<strong>属于某个类别的概率</strong>——邮件是不是垃圾邮件、交易是不是欺诈、病人是否患病。</p>
+<p><strong>为什么不能直接拿线性回归做分类？</strong> 线性回归的输出 $wx + b$ 是 $(-\infty, +\infty)$ 上的任何数，而分类标签只有 0 和 1：</p>
+<ol>
+<li>输出 3.7、-2.4 这样的数，没法解释成「属于正类的概率」（概率必须在 0~1）；</li>
+<li>更糟的是拟合方向错乱：一个离群正样本会把直线猛地往上拽，把本来分对了的负样本压过界——分类任务里 MSE 的「最小化竖直偏差」根本不是我们想要的。</li>
+</ol>
+<p>解决方式出奇地简单：**在输出后面接一个 sigmoid 函数，把任意实数压到 (0, 1)**：</p>
+<p>$$P(y&#x3D;1 \mid x) &#x3D; \sigma(w^\top x + b), \qquad \sigma(z) &#x3D; \frac{1}{1 + e^{-z}}$$</p>
+<p>输出一个概率 $p$，再和阈值（默认 0.5）比较：$p &gt; 0.5$ 判正类，否则判负类。</p>
+<p><strong>典型应用场景</strong>：信用评分（违约&#x2F;不违约）、欺诈检测、垃圾邮件识别、广告点击预测、医学诊断、情感分析（正面&#x2F;负面）。</p>
+<hr>
+<h2 id="2-核心直觉"><a href="#2-核心直觉" class="headerlink" title="2. 核心直觉"></a>2. 核心直觉</h2><p><strong>直觉一：sigmoid 是个「概率翻译器」。</strong> 线性部分 $z &#x3D; w^\top x + b$ 先算出一个<strong>证据分数</strong>——分数越高，说明特征越支持「这是正类」；sigmoid 再把分数翻译成概率。它的形状是 S 形曲线：</p>
+<p><img data-src="/images/ml/img038.png" alt="sigmoid 函数：任意实数压入 (0,1)，(0, 0.5) 是中心"></p>
+<p>读图三要点：$z &#x3D; 0$ 时输出恰好 0.5；$z$ 越大越接近 1、越负越接近 0，但<strong>永远到不了</strong> 0 或 1；整个函数单调递增——证据越足，概率越大，从不回头。</p>
+<p><strong>手算一次</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>$z$</th>
+<th>$\sigma(z)$</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$-2$</td>
+<td>$\dfrac{1}{1+e^{2}} \approx 0.12$</td>
+<td>证据强烈指向负类</td>
+</tr>
+<tr>
+<td>$0$</td>
+<td>$0.5$</td>
+<td>五五开</td>
+</tr>
+<tr>
+<td>$+2$</td>
+<td>$\dfrac{1}{1+e^{-2}} \approx 0.88$</td>
+<td>证据强烈指向正类</td>
+</tr>
+</tbody></table>
+<p><strong>直觉二：决策边界是一条直线。</strong> 概率等于 0.5 的位置恰好是 $z &#x3D; 0$，也就是 $w^\top x + b &#x3D; 0$——在特征空间里这是一条直线（超平面）。所以逻辑回归本质上是<strong>线性分类器</strong>：sigmoid 只负责「报概率」，划分世界的仍然是那条线性边界。</p>
+<hr>
+<h2 id="3-数学表达-公式"><a href="#3-数学表达-公式" class="headerlink" title="3. 数学表达 &#x2F; 公式"></a>3. 数学表达 &#x2F; 公式</h2><h3 id="3-1-sigmoid-及其导数"><a href="#3-1-sigmoid-及其导数" class="headerlink" title="3.1 sigmoid 及其导数"></a>3.1 sigmoid 及其导数</h3><p>$$\sigma(z) &#x3D; \frac{1}{1 + e^{-z}} \qquad \sigma’(z) &#x3D; \sigma(z)\big(1 - \sigma(z)\big)$$</p>
+<p>导数用函数自身表达——算过 $\sigma(z)$，导数就是一次乘法。这个性质让梯度计算非常便宜，也是它在神经网络里长期当激活函数的原因。</p>
+<h3 id="3-2-关键视角：逻辑回归真正「回归」的是-log-odds"><a href="#3-2-关键视角：逻辑回归真正「回归」的是-log-odds" class="headerlink" title="3.2 关键视角：逻辑回归真正「回归」的是 log-odds"></a>3.2 关键视角：逻辑回归真正「回归」的是 log-odds</h3><p>这是理解「为什么它叫逻辑<strong>回归</strong>」的钥匙。把 $p &#x3D; \sigma(z)$ 反解出来：</p>
+<p>$$p &#x3D; \frac{1}{1+e^{-z}} ;;\Rightarrow;; \frac{p}{1-p} &#x3D; e^{z} ;;\Rightarrow;; \ln\frac{p}{1-p} &#x3D; w^\top x + b$$</p>
+<p>逐个认识新符号：</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>名字</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\dfrac{p}{1-p}$</td>
+<td><strong>几率（odds）</strong></td>
+<td>正类概率是负类概率的多少倍。$p&#x3D;0.8$ 时 odds &#x3D; 4，「是正类的把握是不是正类的 4 倍」</td>
+</tr>
+<tr>
+<td>$\ln\dfrac{p}{1-p}$</td>
+<td><strong>对数几率（log-odds &#x2F; logit）</strong></td>
+<td>几率取对数，把 (0,1) 上的概率映到 $(-\infty,+\infty)$</td>
+</tr>
+</tbody></table>
+<p>所以逻辑回归的准确读法是：<strong>特征与「正类几率的对数」之间存在线性关系</strong>——这是一个如假包换的回归模型，回归的对象是 log-odds，只不过预测时再经 sigmoid 翻译回概率。名字里的「回归」由此而来。</p>
+<p>系数也因此有了精确的解读：<strong>特征 $x_j$ 每增加 1 个单位，正类几率变为原来的 $e^{w_j}$ 倍</strong>。</p>
+<p><strong>手算一次</strong>：某特征系数 $w_j &#x3D; 0.7$，则 $e^{0.7} \approx 2$——该特征每加 1 个单位，正类的几率大约翻倍（注意是几率翻倍，不是概率翻倍：$p$ 从 0.33 → 0.5 只涨 0.17，但从 0.8 → 0.89 只涨 0.09——概率越接近 1，同样「几率翻倍」带来的概率涨幅越小，这正是 sigmoid 曲线越来越平的原因）。</p>
+<h3 id="3-3-损失函数：对数损失（二元交叉熵）"><a href="#3-3-损失函数：对数损失（二元交叉熵）" class="headerlink" title="3.3 损失函数：对数损失（二元交叉熵）"></a>3.3 损失函数：对数损失（二元交叉熵）</h3><p><strong>为什么不能用 MSE？</strong> 除了「分类误差不该量竖直距离」，还有个数学硬伤：MSE 套上 sigmoid 后<strong>不是凸函数</strong>——碗底有好几个，梯度下降可能卡在半山腰。得换一个既是概率自洽、又是凸的损失。</p>
+<p>对数损失（Log Loss，即二元交叉熵）对单个样本定义为：</p>
+<p>$$L(y, p) &#x3D; -\big[, y \ln p + (1 - y)\ln(1 - p) ,\big]$$</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$y$</td>
+<td>真实标签（0 或 1）</td>
+</tr>
+<tr>
+<td>$p$</td>
+<td>模型给出的正类概率 $\sigma(z)$</td>
+</tr>
+</tbody></table>
+<p>它其实是「两种情况合一」：$y&#x3D;1$ 时只剩 $-\ln p$，$y&#x3D;0$ 时只剩 $-\ln(1-p)$。<strong>直觉：只看你真实属于的那一类的概率给得够不够高，给得越低罚得越狠。</strong></p>
+<p><strong>手算一次</strong>（设真实标签 $y &#x3D; 1$，看模型在不同 $p$ 下的损失）：</p>
+<table>
+<thead>
+<tr>
+<th>模型输出 $p$</th>
+<th>损失 $-\ln p$</th>
+<th>解读</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0.9</td>
+<td>0.105</td>
+<td>自信且正确，轻罚</td>
+</tr>
+<tr>
+<td>0.5</td>
+<td>0.693</td>
+<td>瞎猜，中等罚</td>
+</tr>
+<tr>
+<td>0.1</td>
+<td>2.303</td>
+<td>自信地犯错，重罚</td>
+</tr>
+<tr>
+<td>0.01</td>
+<td>4.605</td>
+<td>极度自信地犯错，罚到肉疼</td>
+</tr>
+</tbody></table>
+<p>对比 MSE 同场景最多罚 1 分左右（$(1-0.01)^2 \approx 0.98$），对数损失对「自信的错误」零容忍——这正是分类需要的性质。</p>
+<p><strong>它从哪来？极大似然。</strong> 全体样本的似然是「每个真实类别被模型赋予的概率」连乘：</p>
+<p>$$L(w, b) &#x3D; \prod_{i&#x3D;1}^{n} p_i^{,y_i},(1-p_i)^{,1-y_i}$$</p>
+<p>取对数变连加，再取负号变成「越小越好」，就得到了上面的对数损失——<strong>最小化交叉熵 &#x3D; 最大化似然</strong>，和线性回归里「最小二乘 &#x3D; 极大似然」如出一辙。</p>
+<h3 id="3-4-梯度（了解）"><a href="#3-4-梯度（了解）" class="headerlink" title="3.4 梯度（了解）"></a>3.4 梯度（了解）</h3><p>对对数损失求梯度，结果干净得出人意料：</p>
+<p>$$\nabla &#x3D; \frac{1}{n} X^\top \big(\sigma(Xw) - y\big)$$</p>
+<p>和线性回归的梯度 $\frac{1}{n}X^\top(Xw - y)$ <strong>形式完全相同</strong>——只是「残差」换成了「预测概率与真实标签之差」。之所以能化简成这样，靠的正是 $\sigma’(z) &#x3D; \sigma(1-\sigma)$ 这个性质。好消息：对数损失 + sigmoid 组合是<strong>凸函数</strong>，梯度下降找到的必然是全局最优。</p>
+<hr>
+<h2 id="4-模型是怎么训练出来的？"><a href="#4-模型是怎么训练出来的？" class="headerlink" title="4. 模型是怎么训练出来的？"></a>4. 模型是怎么训练出来的？</h2><p>框架与线性回归完全一致：初始化参数 → 按负梯度迭代更新 → 收敛。区别只有损失函数换了，而 sklearn 里连迭代器都不用你操心——选个求解器即可：</p>
+<table>
+<thead>
+<tr>
+<th>solver</th>
+<th>原理</th>
+<th>适用</th>
+<th>支持正则化</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>lbfgs</code>（默认）</td>
+<td>拟牛顿法</td>
+<td>中小数据，首选</td>
+<td>仅 L2</td>
+</tr>
+<tr>
+<td><code>newton-cg</code></td>
+<td>牛顿法</td>
+<td>中小数据</td>
+<td>仅 L2</td>
+</tr>
+<tr>
+<td><code>liblinear</code></td>
+<td>坐标下降</td>
+<td>小数据集</td>
+<td>L1 + L2</td>
+</tr>
+<tr>
+<td><code>sag</code></td>
+<td>随机平均梯度</td>
+<td>大数据集</td>
+<td>仅 L2</td>
+</tr>
+<tr>
+<td><code>saga</code></td>
+<td>改进的随机梯度</td>
+<td>大数据集</td>
+<td>L1 + L2 + ElasticNet</td>
+</tr>
+</tbody></table>
+<p>正则化相关的三个参数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">model = LogisticRegression(</span><br><span class="line">    solver=<span class="string">&quot;lbfgs&quot;</span>,          <span class="comment"># 求解器</span></span><br><span class="line">    penalty=<span class="string">&quot;l2&quot;</span>,            <span class="comment"># 正则化类型：l1 / l2 / elasticnet</span></span><br><span class="line">    C=<span class="number">1.0</span>,                   <span class="comment"># 正则化强度的倒数：C 越小，惩罚越强</span></span><br><span class="line">    class_weight=<span class="string">&quot;balanced&quot;</span>, <span class="comment"># 类别权重自动平衡，让模型更关注少数类</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>易错</strong> <code>C</code> 的方向和 Lasso&#x2F;Ridge 的 <code>alpha</code> <strong>正好相反</strong>：<code>alpha</code> 越大惩罚越强，<code>C</code> 越大惩罚越弱。<code>class_weight=&quot;balanced&quot;</code> 用于类别不平衡（如欺诈检测），等效于把少数类的错误罚得更重。</p>
+</blockquote>
+<p>训练完成后模型对象里保存了：<code>coef_</code>（各特征的系数，解读见 3.2 的 $e^{w_j}$ 倍规律）、<code>intercept_</code>（截距）。预测时有两种姿势：</p>
+<ul>
+<li><code>predict(X)</code>：内部先算 $\sigma(z)$，再按阈值 0.5 切成类别，返回 0&#x2F;1；</li>
+<li><code>predict_proba(X)</code>：<strong>不切阈值</strong>，直接返回每个样本的 $[P(y&#x3D;0),\ P(y&#x3D;1)]$，形状 (n, 2)、两列之和为 1——做阈值调整、画 ROC 时用它。</li>
+</ul>
+<blockquote>
+<p><strong>补充</strong> <code>predict_proba</code> 给出的是「模型估计的概率」，不保证校准良好：所有预测 0.8 的样本里，未必真有约 80% 是正类。需要可靠概率（如风险定价）时要另行做概率校准，初学阶段记住这句话即可。</p>
+</blockquote>
+<hr>
+<h2 id="5-Python-sklearn-怎么实现？"><a href="#5-Python-sklearn-怎么实现？" class="headerlink" title="5. Python &#x2F; sklearn 怎么实现？"></a>5. Python &#x2F; sklearn 怎么实现？</h2><p>用 6 个样本的最小例子过一遍接口：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"></span><br><span class="line">X = [[<span class="number">1</span>], [<span class="number">2</span>], [<span class="number">3</span>], [<span class="number">4</span>], [<span class="number">5</span>], [<span class="number">6</span>]]   <span class="comment"># 特征：每周学习时长</span></span><br><span class="line">y = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>]               <span class="comment"># 标签：是否及格</span></span><br><span class="line"></span><br><span class="line">model = LogisticRegression()</span><br><span class="line">model.fit(X, y)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(model.predict_proba([[<span class="number">3.5</span>]]))  <span class="comment"># [[P(否), P(是)]]，两列之和为 1，此时约 0.5 上下</span></span><br><span class="line"><span class="built_in">print</span>(model.predict([[<span class="number">3.5</span>]]))        <span class="comment"># 按阈值 0.5 切成类别</span></span><br><span class="line"><span class="built_in">print</span>(model.coef_, model.intercept_) <span class="comment"># 学到的参数</span></span><br></pre></td></tr></table></figure>
+
+<p>真实任务的特征不会只有一个，下面进入两个完整案例。两个案例都使用 <strong>Pipeline</strong> 把预处理和模型绑在一起——好处（防泄漏、防漏步骤、保存完整）在 KNN 一篇已经详细演示过，这里直接采用。</p>
+<hr>
+<h2 id="6-案例一：心脏病预测（二分类）"><a href="#6-案例一：心脏病预测（二分类）" class="headerlink" title="6. 案例一：心脏病预测（二分类）"></a>6. 案例一：心脏病预测（二分类）</h2><p><strong>任务</strong>：用 13 项体检指标（年龄、性别、胸痛类型、静息血压、胆固醇、空腹血糖、静息心电图、最大心率、运动性心绞痛、ST 下降、ST 斜率、主血管数量、地中海贫血）预测是否患有心脏病。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler, OneHotEncoder</span><br><span class="line"><span class="keyword">from</span> sklearn.compose <span class="keyword">import</span> ColumnTransformer</span><br><span class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> Pipeline</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 加载与划分（stratify=y 保持正负样本比例一致）</span></span><br><span class="line">heart = pd.read_csv(<span class="string">&quot;data/heart_disease.csv&quot;</span>)</span><br><span class="line">heart.dropna(inplace=<span class="literal">True</span>)</span><br><span class="line">X = heart.drop(<span class="string">&quot;是否患有心脏病&quot;</span>, axis=<span class="number">1</span>)</span><br><span class="line">y = heart[<span class="string">&quot;是否患有心脏病&quot;</span>]</span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(</span><br><span class="line">    X, y, test_size=<span class="number">0.3</span>, random_state=<span class="number">100</span>, stratify=y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 三类特征三种处理，打包成列转换器</span></span><br><span class="line">preprocessor = ColumnTransformer(transformers=[</span><br><span class="line">    (<span class="string">&quot;num&quot;</span>, StandardScaler(),                    <span class="comment"># 数值型：标准化</span></span><br><span class="line">     [<span class="string">&quot;年龄&quot;</span>, <span class="string">&quot;静息血压&quot;</span>, <span class="string">&quot;胆固醇&quot;</span>, <span class="string">&quot;最大心率&quot;</span>, <span class="string">&quot;运动后的ST下降&quot;</span>, <span class="string">&quot;主血管数量&quot;</span>]),</span><br><span class="line">    (<span class="string">&quot;cat&quot;</span>, OneHotEncoder(handle_unknown=<span class="string">&quot;ignore&quot;</span>),   <span class="comment"># 类别型：完整独热编码</span></span><br><span class="line">     [<span class="string">&quot;胸痛类型&quot;</span>, <span class="string">&quot;静息心电图结果&quot;</span>, <span class="string">&quot;峰值ST段的斜率&quot;</span>, <span class="string">&quot;地中海贫血&quot;</span>]),</span><br><span class="line">    (<span class="string">&quot;binary&quot;</span>, <span class="string">&quot;passthrough&quot;</span>,                    <span class="comment"># 二元特征：保持原样</span></span><br><span class="line">     [<span class="string">&quot;性别&quot;</span>, <span class="string">&quot;空腹血糖&quot;</span>, <span class="string">&quot;运动性心绞痛&quot;</span>]),</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 预处理 + 逻辑回归串成 Pipeline</span></span><br><span class="line">pipe = Pipeline([</span><br><span class="line">    (<span class="string">&quot;prep&quot;</span>, preprocessor),</span><br><span class="line">    (<span class="string">&quot;model&quot;</span>, LogisticRegression(max_iter=<span class="number">1000</span>)),</span><br><span class="line">])</span><br><span class="line">pipe.fit(x_train, y_train)</span><br><span class="line"><span class="built_in">print</span>(pipe.score(x_test, y_test))   <span class="comment"># 准确率</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>怎么读结果</strong>：</p>
+<ul>
+<li><code>score</code> 返回的是准确率。想看漏诊情况，要换 Recall（查全率）视角——医疗场景漏诊代价远高于误报；</li>
+<li>胸痛类型这类<strong>无序类别</strong>必须独热编码：若直接用 0&#x2F;1&#x2F;2&#x2F;3，模型会误以为「类型 3 比类型 1 大 3 倍」，而类别之间并没有大小关系。这里保留了完整独热编码（不 drop 首列）：逻辑回归虽可 drop 防共线，但配合正则化时不 drop 更省心，两做法都合理；</li>
+<li>学完系数后按 3.2 的方式解读：某个特征的 $w$ 每加 1（标准化后的一单位），患病几率变为 $e^{w}$ 倍。</li>
+</ul>
+<hr>
+<h2 id="7-多分类：OvR-与-Softmax"><a href="#7-多分类：OvR-与-Softmax" class="headerlink" title="7. 多分类：OvR 与 Softmax"></a>7. 多分类：OvR 与 Softmax</h2><p>逻辑回归天生是二分类器，扩展到多分类有两条路。</p>
+<h3 id="7-1-一对多（OvR，One-vs-Rest）"><a href="#7-1-一对多（OvR，One-vs-Rest）" class="headerlink" title="7.1 一对多（OvR，One-vs-Rest）"></a>7.1 一对多（OvR，One-vs-Rest）</h3><p><strong>做法</strong>：C 个类别就训练 <strong>C 个独立的二分类器</strong>，第 c 个分类器把「类别 c」当正类、其余全部当负类。预测时让所有分类器各报一个概率，取最高者。</p>
+<p><strong>手算一次</strong>：3 分类（猫&#x2F;狗&#x2F;鸟），三个分类器对同一个样本分别输出「是我这一类的概率」：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">猫分类器：0.2    狗分类器：0.7    鸟分类器：0.3</span><br><span class="line">                        ↓ 取最大</span><br><span class="line">                       判为「狗」</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>优点：简单直观，类别不多时很好用；</li>
+<li>缺点：C 大时训练 C 个模型开销大；每个分类器见到的正负样本比例悬殊。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.multiclass <span class="keyword">import</span> OneVsRestClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"></span><br><span class="line">ovr_model = OneVsRestClassifier(LogisticRegression())   <span class="comment"># 明确要用 OvR 时的推荐写法</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="7-2-Softmax-回归（多项逻辑回归）"><a href="#7-2-Softmax-回归（多项逻辑回归）" class="headerlink" title="7.2 Softmax 回归（多项逻辑回归）"></a>7.2 Softmax 回归（多项逻辑回归）</h3><p><strong>做法</strong>：只训练<strong>一个</strong>模型，给它 C 组系数、一次算出 C 个分数 $z_1 \dots z_C$，再用 softmax 函数把 C 个分数归一化成概率分布：</p>
+<p>$$P(y &#x3D; c \mid x) &#x3D; \frac{e^{z_c}}{\sum_{k&#x3D;1}^{C} e^{z_k}}$$</p>
+<p><strong>手算一次</strong>：3 类的分数 $z &#x3D; [2,\ 1,\ 0.5]$：</p>
+<ul>
+<li>各自取指数：$e^2 &#x3D; 7.39$，$e^1 &#x3D; 2.72$，$e^{0.5} &#x3D; 1.65$，总和 $&#x3D; 11.76$</li>
+<li>归一化：$[0.63,\ 0.23,\ 0.14]$——和恰好为 1</li>
+</ul>
+<p>指数的作用是<strong>放大差距</strong>：分数领先一点的类，概率被拉开一大截。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>OvR</th>
+<th>Softmax</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>模型数量</td>
+<td>C 个</td>
+<td>1 个</td>
+</tr>
+<tr>
+<td>类别间关系</td>
+<td>各自为政</td>
+<td>一次性输出互斥的概率分布</td>
+</tr>
+<tr>
+<td>计算量</td>
+<td>类别多时训练慢</td>
+<td>每次预测要对所有类求指数</td>
+</tr>
+<tr>
+<td>结果一致性</td>
+<td>可能多个分类器概率接近</td>
+<td>更一致</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">model = LogisticRegression()   <span class="comment"># 多分类问题上，支持 multinomial 的求解器会自动优化</span></span><br><span class="line">                               <span class="comment"># softmax 损失——直接用默认写法即可</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>版本提示</strong> 旧版 sklearn 需要手动写 <code>multi_class=&quot;ovr&quot;</code> &#x2F; <code>&quot;multinomial&quot;</code> 来切换两种策略，该参数在新版本中已弃用：多分类默认由支持 multinomial 的求解器直接优化 softmax 损失；确需 OvR 时用 <code>OneVsRestClassifier</code> 包一层。博客代码建议固定 sklearn 版本，以写作时的官方文档为准。</p>
+</blockquote>
+<blockquote>
+<p><strong>补充</strong> Softmax 的配套损失是「多类交叉熵」：$-\ln P(y&#x3D;c\mid x)$，即只看真实类那一路的概率给得高不高——和对数损失是同一个思想的多分类版。</p>
+</blockquote>
+<hr>
+<h2 id="8-案例二：手写数字识别（10-分类）"><a href="#8-案例二：手写数字识别（10-分类）" class="headerlink" title="8. 案例二：手写数字识别（10 分类）"></a>8. 案例二：手写数字识别（10 分类）</h2><p><strong>任务</strong>：识别手写数字 0<del>9。Digit Recognizer 数据集：每张图 28×28 像素，展平成 784 个灰度值（0</del>255），train.csv 第一列是标签：</p>
+<p><img data-src="/images/ml/img039.png" alt="784 个像素的展平编号"></p>
+<p><img data-src="/images/ml/img040.png" alt="一个手写数字样本"></p>
+<p>784 个特征 + 10 个类别——正好用 Softmax 多分类。这次把归一化和模型放进同一条 Pipeline，后面会看到这样做的直接好处：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler</span><br><span class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> Pipeline</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 加载，先画一个样本看看</span></span><br><span class="line">digit = pd.read_csv(<span class="string">&quot;data/train.csv&quot;</span>)</span><br><span class="line">plt.imshow(digit.iloc[<span class="number">10</span>, <span class="number">1</span>:].values.reshape(<span class="number">28</span>, <span class="number">28</span>), cmap=<span class="string">&quot;gray&quot;</span>)</span><br><span class="line">plt.show()                          <span class="comment"># 784 列像素 reshape 回 28×28</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 划分（stratify 保证 10 个数字的比例在训练/测试集一致）</span></span><br><span class="line">X = digit.drop(<span class="string">&quot;label&quot;</span>, axis=<span class="number">1</span>)</span><br><span class="line">y = digit[<span class="string">&quot;label&quot;</span>]</span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(</span><br><span class="line">    X, y, test_size=<span class="number">0.3</span>, random_state=<span class="number">100</span>, stratify=y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 归一化（像素 0~255 边界明确，归一化合适）+ Softmax 逻辑回归，串成 Pipeline</span></span><br><span class="line">pipe = Pipeline([</span><br><span class="line">    (<span class="string">&quot;prep&quot;</span>, MinMaxScaler()),</span><br><span class="line">    (<span class="string">&quot;model&quot;</span>, LogisticRegression(max_iter=<span class="number">500</span>)),</span><br><span class="line">])</span><br><span class="line">pipe.fit(x_train, y_train)</span><br><span class="line"><span class="built_in">print</span>(pipe.score(x_test, y_test))   <span class="comment"># 准确率通常在 90% 以上</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 对单个新样本做预测——原始像素直接进 Pipeline，归一化自动完成</span></span><br><span class="line">sample = digit.iloc[<span class="number">123</span>, <span class="number">1</span>:].values.reshape(<span class="number">1</span>, -<span class="number">1</span>)</span><br><span class="line">plt.imshow(sample.reshape(<span class="number">28</span>, <span class="number">28</span>), cmap=<span class="string">&quot;gray&quot;</span>)</span><br><span class="line">plt.show()</span><br><span class="line"><span class="built_in">print</span>(pipe.predict(sample))         <span class="comment"># 无需手动 transform，想忘都忘不掉</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>怎么读结果</strong>：一个 200 多年前的数学工具（最小二乘）+ 一个线性模型，在 784 维的手写数字上就能拿到 90% 以上的准确率——线性模型的下限决定了它永远是第一个该试的基线。而 Pipeline 的价值在最后一步显形：新样本<strong>直接</strong>进 <code>pipe.predict</code>，归一化自动完成——如果模型和缩放器分开保存，这一步极容易漏掉 <code>transform</code>，拿原始 0<del>255 像素去喂在 0</del>1 数据上训练的模型，预测必然出错。</p>
+<hr>
+<h2 id="9-优缺点与适用场景"><a href="#9-优缺点与适用场景" class="headerlink" title="9. 优缺点与适用场景"></a>9. 优缺点与适用场景</h2><p><strong>优点</strong>：</p>
+<ul>
+<li>直接输出概率，方便按业务调整阈值和代价；</li>
+<li>系数可解释（$e^{w_j}$ 的几率倍数解读）；</li>
+<li>损失是凸函数，训练稳定、全局最优有保证；</li>
+<li>训练快，是工业界二分类的默认基线。</li>
+</ul>
+<p><strong>缺点与对策</strong>：</p>
+<ul>
+<li><strong>决策边界是线性的</strong>——特征和类别之间是非线性关系时拟合不动；对策：特征工程（交叉、多项式特征）或换非线性模型；</li>
+<li>特征很多时容易过拟合——默认 L2 正则化，必要时换 L1 做特征选择；</li>
+<li>类别极不平衡时只看准确率会误判——用 <code>class_weight=&quot;balanced&quot;</code>、换 Recall&#x2F;F1 视角。</li>
+</ul>
+<hr>
+<h2 id="10-易混淆点"><a href="#10-易混淆点" class="headerlink" title="10. 易混淆点"></a>10. 易混淆点</h2><table>
+<thead>
+<tr>
+<th>易混对</th>
+<th>一句话区分</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>逻辑回归 vs 线性回归</td>
+<td>前者分类（输出概率），后者回归（输出数值）；共用「线性 + 求解」框架，换的是输出函数和损失</td>
+</tr>
+<tr>
+<td>「线性」的对象</td>
+<td>逻辑回归对 <strong>log-odds</strong> 线性，不是对概率线性——这正是它叫回归的原因</td>
+</tr>
+<tr>
+<td>sigmoid vs 决策边界</td>
+<td>sigmoid 是输出空间的概率曲线；决策边界是特征空间里 $w^\top x + b &#x3D; 0$ 的直线——逻辑回归是<strong>线性</strong>分类器</td>
+</tr>
+<tr>
+<td>MSE vs 对数损失</td>
+<td>分类任务用对数损失：概率自洽、凸、重罚自信的错误；sigmoid + MSE 非凸且语义错位</td>
+</tr>
+<tr>
+<td>predict vs predict_proba</td>
+<td>前者返回阈值切好的类别，后者返回原始概率——调阈值、画 ROC 必须用后者</td>
+</tr>
+<tr>
+<td>概率 vs 校准概率</td>
+<td><code>predict_proba</code> 的输出是模型估计的概率，不保证「预测 0.8 的样本里真有 80% 为正」</td>
+</tr>
+<tr>
+<td>C vs alpha</td>
+<td>都是正则化参数但方向相反：alpha 越大罚越强，C 越大罚越<strong>弱</strong></td>
+</tr>
+<tr>
+<td>OvR vs Softmax</td>
+<td>C 个二分类器各报各的概率 vs 一个模型输出互斥的概率分布</td>
+</tr>
+<tr>
+<td>阈值 0.5</td>
+<td>默认值不是铁律——类别不平衡或代价敏感时，按业务调阈值（配合 ROC&#x2F;精确率召回率权衡）</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/09/20/05-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="prev" title="05线性回归">
+      <i class="fa fa-chevron-left"></i> 05线性回归
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/09/20/07-KNN/" rel="next" title="07KNN">
+      07KNN <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92"><span class="nav-number">1.</span> <span class="nav-text">逻辑回归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#30-%E7%A7%92%E5%85%88%E6%87%82"><span class="nav-number">1.0.1.</span> <span class="nav-text">30 秒先懂</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AE%83%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">1. 它解决什么问题？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%A0%B8%E5%BF%83%E7%9B%B4%E8%A7%89"><span class="nav-number">1.2.</span> <span class="nav-text">2. 核心直觉</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%95%B0%E5%AD%A6%E8%A1%A8%E8%BE%BE-%E5%85%AC%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">3. 数学表达 &#x2F; 公式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-sigmoid-%E5%8F%8A%E5%85%B6%E5%AF%BC%E6%95%B0"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 sigmoid 及其导数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E5%85%B3%E9%94%AE%E8%A7%86%E8%A7%92%EF%BC%9A%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E7%9C%9F%E6%AD%A3%E3%80%8C%E5%9B%9E%E5%BD%92%E3%80%8D%E7%9A%84%E6%98%AF-log-odds"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 关键视角：逻辑回归真正「回归」的是 log-odds</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%EF%BC%9A%E5%AF%B9%E6%95%B0%E6%8D%9F%E5%A4%B1%EF%BC%88%E4%BA%8C%E5%85%83%E4%BA%A4%E5%8F%89%E7%86%B5%EF%BC%89"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 损失函数：对数损失（二元交叉熵）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E6%A2%AF%E5%BA%A6%EF%BC%88%E4%BA%86%E8%A7%A3%EF%BC%89"><span class="nav-number">1.3.4.</span> <span class="nav-text">3.4 梯度（了解）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%A8%A1%E5%9E%8B%E6%98%AF%E6%80%8E%E4%B9%88%E8%AE%AD%E7%BB%83%E5%87%BA%E6%9D%A5%E7%9A%84%EF%BC%9F"><span class="nav-number">1.4.</span> <span class="nav-text">4. 模型是怎么训练出来的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Python-sklearn-%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%EF%BC%9F"><span class="nav-number">1.5.</span> <span class="nav-text">5. Python &#x2F; sklearn 怎么实现？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E6%A1%88%E4%BE%8B%E4%B8%80%EF%BC%9A%E5%BF%83%E8%84%8F%E7%97%85%E9%A2%84%E6%B5%8B%EF%BC%88%E4%BA%8C%E5%88%86%E7%B1%BB%EF%BC%89"><span class="nav-number">1.6.</span> <span class="nav-text">6. 案例一：心脏病预测（二分类）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%A4%9A%E5%88%86%E7%B1%BB%EF%BC%9AOvR-%E4%B8%8E-Softmax"><span class="nav-number">1.7.</span> <span class="nav-text">7. 多分类：OvR 与 Softmax</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-%E4%B8%80%E5%AF%B9%E5%A4%9A%EF%BC%88OvR%EF%BC%8COne-vs-Rest%EF%BC%89"><span class="nav-number">1.7.1.</span> <span class="nav-text">7.1 一对多（OvR，One-vs-Rest）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-Softmax-%E5%9B%9E%E5%BD%92%EF%BC%88%E5%A4%9A%E9%A1%B9%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%EF%BC%89"><span class="nav-number">1.7.2.</span> <span class="nav-text">7.2 Softmax 回归（多项逻辑回归）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E6%A1%88%E4%BE%8B%E4%BA%8C%EF%BC%9A%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB%EF%BC%8810-%E5%88%86%E7%B1%BB%EF%BC%89"><span class="nav-number">1.8.</span> <span class="nav-text">8. 案例二：手写数字识别（10 分类）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E4%BC%98%E7%BC%BA%E7%82%B9%E4%B8%8E%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.9.</span> <span class="nav-text">9. 优缺点与适用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-%E6%98%93%E6%B7%B7%E6%B7%86%E7%82%B9"><span class="nav-number">1.10.</span> <span class="nav-text">10. 易混淆点</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hyacinth"
+      src="http://q.qlogo.cn/headimg_dl?dst_uin=3622407536&spec=640&img_type=jpg">
+  <p class="site-author-name" itemprop="name">Hyacinth</p>
+  <div class="site-description" itemprop="description">君子慎独,不欺暗室</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hyacinth</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/lozad/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+<div id="loading-box">
+  <div class="loading-left-bg"></div>
+  <div class="loading-right-bg"></div>
+  <div class="spinner-box">
+    <div class="configure-border-1"><div class="configure-core"></div></div>
+    <div class="configure-border-2"><div class="configure-core"></div></div>
+    <div class="loading-word">加载中...</div>
+  </div>
+</div>
+
+<canvas id="background-particles" aria-hidden="true"></canvas>
+
+<script>
+  (function() {
+    // NexT places the search overlay inside the header. The header's
+    // backdrop-filter creates a containing block for fixed descendants,
+    // which would make the popup's percentage height relative to the header.
+    // Move the overlay to body so it always uses the full viewport.
+    var searchOverlay = document.querySelector('.search-pop-overlay');
+    if (searchOverlay && searchOverlay.parentNode !== document.body) {
+      document.body.appendChild(searchOverlay);
+    }
+
+    var loadingBox = document.getElementById('loading-box');
+    var root = document.documentElement;
+
+    function endLoading() {
+      if (loadingBox.classList.contains('loaded')) return;
+      loadingBox.classList.add('loaded');
+      setTimeout(function() {
+        root.classList.remove('page-loading');
+      }, 500);
+    }
+
+    function initLoading() {
+      root.classList.add('page-loading');
+      loadingBox.classList.remove('loaded');
+    }
+
+    initLoading();
+
+    if (document.readyState === 'complete') {
+      endLoading();
+    } else {
+      window.addEventListener('load', endLoading);
+      document.addEventListener('DOMContentLoaded', endLoading);
+      setTimeout(endLoading, 7000);
+    }
+  })();
+</script>
+
+<script src="/js/latex-tool.js?v=20260805c"></script>
+<script src="/js/translate-tool.js?v=20260805a"></script>
+<script src="/js/hexagram-post-map.js?v=20260910b"></script>
+<script src="/js/hexagram-index.js?v=20260824b"></script>
+<script src="/js/divination-tool.js?v=20260830a"></script>
+<script src="/js/post-summary.js?v=20260831d"></script>
+<script src="/js/background-particles.js?v=20260910a"></script>
+<script src="/js/theme-colors.js?v=20260910b"></script>
+<script src="/js/tab-gaze.js?v=20260910a"></script>
+<script src="/lib/solarlunar/solarlunar.min.js?v=20260910a"></script>
+<script src="/js/daily-hexagram.js?v=20260910a"></script>
+<script src="/js/menu-dropdown.js?v=20260910a"></script>
+
+</body>
+</html>
